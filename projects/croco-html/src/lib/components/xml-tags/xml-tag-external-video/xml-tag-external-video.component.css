@@ -1,0 +1,15 @@
+@media only screen and (min-width: 769px) {
+    .y-video {
+        width: 640px;
+        height: 360px;
+        margin: 0 auto;
+    }
+}
+
+@media only screen and (max-width: 768px)  {
+    .y-video {
+        width: 560px;
+        height: 315px;
+        margin: 0 auto;
+    }
+}
