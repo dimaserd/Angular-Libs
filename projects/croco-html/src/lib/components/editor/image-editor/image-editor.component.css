@@ -1,0 +1,7 @@
+.error-block{
+    background-color: rgb(243 35 35);
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+    padding: 10px;
+}

@@ -1,0 +1,44 @@
+<div class="">
+    <div class="row" *ngFor="let item of data">
+        <div *ngIf="item.type === 'text'">
+            <croco-html-xml-tag-text-view [item]="item"></croco-html-xml-tag-text-view>
+        </div>
+        <div *ngIf="item.type === 'image'" class="red" style="margin-top: 10px;" >
+            <h4>Данный тег больше больше не поддерживается</h4>
+            <span>
+                Вмето этого переименуйте тег image на file-image
+            </span>
+        </div>
+        <div *ngIf="item.type === 'html-raw'" [innerHTML]="item.data.innerHTML">
+        </div>
+        <div *ngIf="item.type === 'h1' || item.type === 'h2' || item.type === 'h3' || item.type === 'h4' || item.type === 'h5' || item.type === 'h6'">
+            <croco-html-xml-tag-header-text-view [item]="item"></croco-html-xml-tag-header-text-view>
+        </div>
+        <div *ngIf="item.type === 'file-image'">
+            <img class="mx-auto d-block img-fluid" [src]="item.data.src"/>
+        </div>
+        <div *ngIf="item.type === 'table'">
+    
+            <croco-html-xml-tag-html-view *ngIf="item.validationResult.isSucceeded" [html]="item.bootstrapHtml">
+            </croco-html-xml-tag-html-view>
+             
+            <app-tutor-baseapiresponse-banner 
+                *ngIf="item.validationResult && !item.validationResult.isSucceeded" 
+                [message]="item.validationResult.message">
+            </app-tutor-baseapiresponse-banner>
+        </div>
+    
+        <div *ngIf="item.type === 'rich-text'">
+            <croco-html-xml-tag-text-view [richTextData]="item"></croco-html-xml-tag-text-view>
+        </div>
+        <div *ngIf="item.type === 'external-video'">
+            <croco-html-xml-tag-external-video [data]="item"></croco-html-xml-tag-external-video>
+        </div>
+        <div *ngIf="item.type === 'unsupported-tag'" class="red" style="margin-top: 10px;" >
+            <h4>Данный тег не поддерживается</h4>
+            <span>
+                {{item.data.tagString}}
+            </span>
+        </div>
+    </div>
+</div>

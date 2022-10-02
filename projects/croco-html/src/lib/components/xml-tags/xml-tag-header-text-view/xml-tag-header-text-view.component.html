@@ -1,0 +1,25 @@
+<div *ngIf="item.data.validationResult.isSucceeded && item.data.horizontalAlignment === 'left'" style="text-align: left;">
+    <span *ngIf="item.data.html.length === 0 || !item.data.html">&nbsp;</span>
+    <croco-html-xml-tag-header-inner-text-view *ngIf="item.data.html.length > 0"  [item]="item">
+    </croco-html-xml-tag-header-inner-text-view>
+</div>
+
+<div *ngIf="item.data.validationResult.isSucceeded && item.data.horizontalAlignment === 'right'" style="text-align: right;">
+    <span *ngIf="item.data.html.length === 0 || !item.data.html">&nbsp;</span>
+    <croco-html-xml-tag-header-inner-text-view *ngIf="item.data.html.length > 0"  [item]="item">
+    </croco-html-xml-tag-header-inner-text-view>
+</div>
+
+<div *ngIf="item.data.validationResult.isSucceeded && item.data.horizontalAlignment === 'center'" style="text-align: center;">
+    <span *ngIf="item.data.html.length === 0 || !item.data.html">&nbsp;</span>
+
+    <croco-html-xml-tag-header-inner-text-view *ngIf="item.data.html.length > 0"  [item]="item">
+    </croco-html-xml-tag-header-inner-text-view>
+</div>
+
+<div *ngIf="!item.data.validationResult.isSucceeded" class="red" style="margin-top: 10px;" >
+    <h4>Допущена ошибка в теге &lt;text&gt;</h4>
+    <span>
+        {{item.data.validationResult.message}}
+    </span>
+</div>

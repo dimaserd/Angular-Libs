@@ -1,0 +1,39 @@
+<mat-tab-group>
+  <mat-tab label="Визуальный редактор">
+
+    <div style="height: 20px;"></div>
+
+    <croco-visual-editor #visualEditor
+      [useHtmlRaw]="useHtmlRaw"
+      [html]="html"
+      (onHtmlChanged)="onHtmlChangedHandler($event)"
+      (rendered)="visualEditorRenderedHandler()">
+    </croco-visual-editor>
+
+    <div style="height: 20px;"></div>
+
+  </mat-tab>
+
+  <mat-tab label="Разметка">
+    <div style="height: 10px;"></div>
+    <form *ngIf="visualEditorRendered" [formGroup]="myForm">
+      <mat-form-field class="w-100">
+        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="1"
+          placeholder="Исходный код" formControlName="html" [(ngModel)]="html"
+          (ngModelChange)="textAreaModelChangedHandler()"></textarea>
+      </mat-form-field>
+    </form>
+
+    <button (click)="copyMarkUp()" 
+      mat-raised-button color="primary">
+      Копировать разметку
+    </button>
+  </mat-tab>
+  <mat-tab label="Результат">
+    <mat-card>
+      <croco-html-xml-tag-view [data]="html | topreview">
+      </croco-html-xml-tag-view>
+    </mat-card>
+  </mat-tab>
+</mat-tab-group>

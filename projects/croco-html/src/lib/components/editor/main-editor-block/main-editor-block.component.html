@@ -1,0 +1,41 @@
+<div>
+  <div>
+    <div *ngIf="textTags.includes(tag.tagDescription.tag)">
+      <croco-html-text-editor (onTagUpdated)="tagUpdatedHandler($event)" [tag]="tag">
+      </croco-html-text-editor>
+    </div>
+
+    <div *ngIf="tag.tagDescription.tag === 'file-image'"> 
+      <croco-html-image-editor (onTagUpdated)="tagUpdatedHandler($event)" [tag]="tag">
+      </croco-html-image-editor>
+    </div>
+
+    <div *ngIf="tag.tagDescription.tag === 'external-video'">
+      <croco-html-external-video-block (onTagUpdated)="tagUpdatedHandler($event)" [tag]="tag">
+      </croco-html-external-video-block>
+    </div>
+
+    <div *ngIf="tag.tagDescription.tag === 'html-raw'">
+      <croco-html-html-raw-editor (onTagUpdated)="tagUpdatedHandler($event)" [tag]="tag">
+      </croco-html-html-raw-editor>
+    </div>
+
+  </div>
+
+  <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-end align-self-center">
+      <div>
+        <button *ngIf="tag.presentOrEdit" (click)="tag.presentOrEdit = false" mat-icon-button>
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button *ngIf="!tag.presentOrEdit" (click)="save()" mat-icon-button>
+          <mat-icon>save</mat-icon>
+        </button>
+        <button (click)="deleteItem()" mat-icon-button color="warn">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>

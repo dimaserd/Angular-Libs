@@ -1,0 +1,39 @@
+<form [formGroup]="form">
+    <div class="form-group">
+        <label for="fileName">{{labelText}}</label>
+        <ng-select [(ngModel)]="fileId" (ngModelChange)="onModelChanged($event)"
+                   [items]="files"
+                   #select
+                   bindLabel="fileName"
+                   (search)="onSearchChanged($event)"
+                   [loading]="loading"
+                   [loadingText]="'Загружаю файлы'"
+                   dropdownPosition="auto"
+                   bindValue="fileId"
+                   labelForId="fileName"
+                   placeholder="Выбрать файл"
+                   [virtualScroll]="true"
+                   formControlName="fileName">
+            <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+                <div>
+                    <img class="mx-auto d-block img-fluid" [src]="getSrc(item.fileId)"/>
+                </div>
+                <div>
+                    <span class="h5">Файл: </span>
+                    <span class="h5" [ngOptionHighlight]="search"><b>{{item.fileName}}</b></span>
+                </div>
+                <div>
+                    <small>
+                        <span>
+                            Идентификатор файла: <b>{{item.fileId}}</b>
+                        </span>
+                    </small>
+                </div>
+            </ng-template>
+        </ng-select>
+    </div>
+</form>
+
+<div>
+    Идентификатор файла: {{fileId}}
+</div>

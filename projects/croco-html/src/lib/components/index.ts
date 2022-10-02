@@ -1,0 +1,5 @@
+export * from './add-files-btn/add-files-btn.component'
+export * from './editor/'
+export * from './file-id-select/file-id-select.component'
+export * from './upload-files-btn/upload-files-btn.component'
+export * from './xml-tags'

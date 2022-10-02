@@ -1,0 +1,2 @@
+<button [hidden]="hidden" mat-raised-button color="primary" (click)="filesInput.click()">{{btnText}}</button>
+<input [hidden]="true" [accept]="extAccepts" [multiple]="isMultiple" type="file" #filesInput (change)="handleFileInput($event.target.files)" />
