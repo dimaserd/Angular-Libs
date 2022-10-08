@@ -2,15 +2,14 @@
   "name": "croco-html",
   "version": "0.0.1",
   "peerDependencies": {
-    "@angular/common": "^12.1.0",
-    "@angular/core": "^12.1.0",
-    "@angular/material": "~12.2.0",
-    "@angular/cdk": "^14.2.3",
-    "angular-draggable-droppable": "^7.0.0",
-    "ngx-clipboard": "^12.3.1",
-    "@ng-select/ng-select": "^7.0.2"
+    "@angular/common": ">=13.3.11",
+    "@angular/core": ">=13.3.11",
+    "@angular/material": ">=13.3.9",
+    "@angular/cdk": ">=13.3.9",
+    "ngx-clipboard": ">=15.1.0",
+    "@ng-select/ng-select": ">=9.0.2"
   },
   "dependencies": {
-    "tslib": "^2.2.0"
+    "tslib": ">=2.2.0"
   }
 }
