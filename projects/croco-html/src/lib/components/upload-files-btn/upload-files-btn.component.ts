@@ -7,7 +7,7 @@ export interface FilePostingStarted {
 }
 
 @Component({
-  selector: 'app-upload-files-btn',
+  selector: 'croco-app-upload-files-btn',
   templateUrl: './upload-files-btn.component.html',
   styleUrls: ['./upload-files-btn.component.css']
 })
