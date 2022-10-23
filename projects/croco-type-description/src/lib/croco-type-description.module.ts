@@ -5,19 +5,21 @@ import { TypeDecriptionClassComponent } from './components/type-decription-class
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatOptionModule } from '@angular/material/core';
 import {RouterModule} from '@angular/router'
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatSelectModule } from '@angular/material/select';
 
 const COMPONENTS = [TypeDecriptionComponent, TypeDecriptionClassComponent]
 
-const MATERIAL_MODULES = [MatSnackBarModule, MatFormFieldModule, MatExpansionModule, MatOptionModule, MatButtonModule, MatInputModule]
+const MATERIAL_MODULES = [MatSnackBarModule, MatFormFieldModule, MatExpansionModule, MatOptionModule, MatButtonModule, MatInputModule, MatListModule, MatSelectModule, ]
 
 @NgModule({
-  imports: [...MATERIAL_MODULES, CommonModule, ReactiveFormsModule, RouterModule.forChild([{
+  imports: [...MATERIAL_MODULES, CommonModule, ReactiveFormsModule, FormsModule, RouterModule.forChild([{
     path: '',
     component: TypeDecriptionComponent
   }])],
