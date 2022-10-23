@@ -7,13 +7,17 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatOptionModule } from '@angular/material/core';
+import {RouterModule} from '@angular/router'
 
 const COMPONENTS = [TypeDecriptionComponent, TypeDecriptionClassComponent]
 
 const MATERIAL_MODULES = [MatSnackBarModule, MatFormFieldModule, MatExpansionModule, MatOptionModule]
 
 @NgModule({
-  imports: [...MATERIAL_MODULES, ReactiveFormsModule,],
+  imports: [...MATERIAL_MODULES, ReactiveFormsModule, RouterModule.forChild([{
+    path: '',
+    component: TypeDecriptionComponent
+  }])],
   exports: COMPONENTS,
   declarations: COMPONENTS,
 })
