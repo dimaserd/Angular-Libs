@@ -1,0 +1,49 @@
+<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      {{type.typeDisplayFullName}}
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <div>
+    <p>Ялвяется примитивным типом: {{type.isPrimitive}}</p>
+    <p>Поддерживает nullable: {{type.isNullable}}</p>
+    <p>Является классом (составной тип): {{type.isClass}}</p>
+  </div>
+
+  <div *ngIf="type.isClass">
+    <h5>Свойства класса</h5>
+    <mat-nav-list>
+      <div *ngFor="let prop of propNameAndLinks">
+        <h6 mat-list-item>
+          {{prop.propertyName}} : <a
+            [routerLink]="['/type-description', prop.displayFullTypeNameReference]">{{prop.displayFullTypeName}}</a>
+        </h6>
+      </div>
+    </mat-nav-list>
+  </div>
+</mat-expansion-panel>
+
+<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Кодогенерация
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+
+  <form [formGroup]="myForm">
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Язык для кодогенерации</mat-label>
+      <mat-select [(ngModel)]="codeGenerationType" formControlName="type" (selectionChange)="typeChanged($event)">
+        <mat-option value="TypeScript">TypeScript</mat-option>
+        <mat-option value="Dart">Dart</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+
+  <mat-form-field class="w-100">
+    <textarea cdkTextareaAutosize matInput>{{codeGenerationResult}}</textarea>
+  </mat-form-field>
+
+  <button (click)="copyCode()" mat-raised-button color="primary">Скопировать код</button>
+
+</mat-expansion-panel>
