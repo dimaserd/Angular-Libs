@@ -9,6 +9,8 @@
 
 # dependencies
 /node_modules
+/projects/croco-html/node_modules
+/projects/croco-type-description/node_modules
 
 # profiling files
 chrome-profiler-events*.json
