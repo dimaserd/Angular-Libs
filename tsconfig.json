@@ -7,6 +7,10 @@
       "croco-html": [
         "dist/croco-html/croco-html",
         "dist/croco-html"
+      ],
+      "croco-type-description": [
+        "dist/croco-type-description/croco-type-description",
+        "dist/croco-type-description"
       ]
     },
     "outDir": "./dist/out-tsc",
