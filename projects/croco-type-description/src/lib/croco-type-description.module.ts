@@ -9,10 +9,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatOptionModule } from '@angular/material/core';
 import {RouterModule} from '@angular/router'
 import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
 const COMPONENTS = [TypeDecriptionComponent, TypeDecriptionClassComponent]
 
-const MATERIAL_MODULES = [MatSnackBarModule, MatFormFieldModule, MatExpansionModule, MatOptionModule]
+const MATERIAL_MODULES = [MatSnackBarModule, MatFormFieldModule, MatExpansionModule, MatOptionModule, MatButtonModule, MatInputModule]
 
 @NgModule({
   imports: [...MATERIAL_MODULES, CommonModule, ReactiveFormsModule, RouterModule.forChild([{
