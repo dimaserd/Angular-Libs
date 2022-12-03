@@ -22,7 +22,7 @@ export interface SimpleTextTagData {
 
 export class TextSimpleMethods {
 
-    static supportedTags = ["sup", "sub", "strong", "b", "i"];
+    static supportedTags = ["sup", "sub", "strong", "b", "i", "u"];
 
     static ExtractTextTag(elem: HTMLElement): SimpleTextTag {
         var hAlignValue = elem.getAttribute("h-align") ?? "left" as any;

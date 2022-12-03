@@ -8,7 +8,7 @@ export class DartFromJsonMethodGenerator {
         wholeModel: CrocoTypeDescriptionResult): string {
 
             var result = `\tfactory ${dartTypeName}.fromJson(Map<String, dynamic> json) =>\n`;
-        result += `\tnew ${dartTypeName}(\n`;
+        result += `\t ${dartTypeName}(\n`;
 
         for (let i = 0; i < propNames.length; i++) {
 
