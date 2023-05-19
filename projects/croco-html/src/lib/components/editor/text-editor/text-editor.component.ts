@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { HtmlBodyTag } from '../../../models/models';
 
 @Component({
@@ -9,8 +9,8 @@ import { HtmlBodyTag } from '../../../models/models';
 })
 export class TextEditorComponent implements OnInit {
 
-  myForm = new FormGroup({
-    "innerHtml": new FormControl()
+  myForm = new UntypedFormGroup({
+    "innerHtml": new UntypedFormControl()
   });
 
   @Input()

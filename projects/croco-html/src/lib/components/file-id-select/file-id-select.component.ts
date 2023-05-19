@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { ImageMethods } from '../../extensions/ImageMethods';
 import { FileNameAndIdModel, FilesQueryService } from '../../services/files-query.service';
 
@@ -25,14 +25,14 @@ export class FileIdSelectComponent implements OnInit, OnChanges {
 
     loading = false;
 
-    form: FormGroup;
+    form: UntypedFormGroup;
     files: FileNameAndIdModel[] = [];
 
     @Output()
     onFileIdChanged = new EventEmitter<number>();
 
     constructor(
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private _fileService: FilesQueryService) {
         this.form = this.fb.group({
             fileName: '',
