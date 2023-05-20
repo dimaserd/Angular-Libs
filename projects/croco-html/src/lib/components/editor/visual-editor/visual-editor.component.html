@@ -20,20 +20,20 @@
                         </svg>
                     </div>
                     <div>
-                        <mat-chip-list aria-label="Tag display value">
-                            <mat-chip color="primary" selected>{{tag.tagDescription.displayValue}}</mat-chip>
-                        </mat-chip-list>
+                        <mat-chip-listbox aria-label="Tag display value">
+                            <mat-chip-option color="primary" selected>{{tag.tagDescription.displayValue}}</mat-chip-option>
+                        </mat-chip-listbox>
                     </div>
                 </div>
-    
+
                 <div style="height: 15px;"></div>
-    
-                <croco-html-main-editor-block [tag]="tag" 
+
+                <croco-html-main-editor-block [tag]="tag"
                     (onTagSaved)="onTagSavedHandler($event)"
                     (onTagRemoved)="onTagRemovedHandler(i)">
                 </croco-html-main-editor-block>
             </mat-card>
-    
+
             <div style="height: 10px;">
             </div>
         </div>
@@ -70,7 +70,7 @@
     <mat-card>
         <div class="row d-flex align-items-center">
             <div class="col-12">
-                <croco-add-files-btn 
+                <croco-add-files-btn
                     (filesTagsReady)="filesTagsReadyHandler($event)"
                     (postFilesStarted)="postFilesStartedEventHandler($event)"
                     class="w-100">
