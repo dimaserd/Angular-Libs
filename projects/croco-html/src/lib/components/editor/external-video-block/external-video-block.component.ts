@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ExternalVideoTagData, ExternalVideoSupportedTypes } from '../../../extensions/VideoMethods';
 import { HtmlBodyTag } from '../../../models/models';
 
@@ -16,8 +16,8 @@ export class ExternalVideoBlockComponent implements OnInit {
   @Output()
   onTagUpdated = new EventEmitter<HtmlBodyTag>();
 
-  myForm = new FormGroup({
-    youtubeLink: new FormControl()
+  myForm = new UntypedFormGroup({
+    youtubeLink: new UntypedFormControl()
   });
 
   defaultLink = "https://youtu.be/jzBneaWSswY";

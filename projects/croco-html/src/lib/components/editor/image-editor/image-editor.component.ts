@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ImageMethods, FileImageTagDataConsts } from '../../../extensions/ImageMethods';
 import { HtmlBodyTag } from '../../../models/models';
 
@@ -16,8 +16,8 @@ export class ImageEditorComponent implements OnInit {
   @Input()
   tag: HtmlBodyTag;
 
-  myForm = new FormGroup({
-    fileId:new FormControl()
+  myForm = new UntypedFormGroup({
+    fileId:new UntypedFormControl()
   });
 
   onErrorHandler(){

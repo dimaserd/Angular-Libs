@@ -1,6 +1,6 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl } from '@angular/forms';
 import { BodyTagsExtensions } from '../../../extensions/BodyTagsExtensions';
 import { HtmlRawTagDataConsts } from '../../../extensions/HtmlRawTagDataConsts';
 import { FileImageTagDataConsts } from '../../../extensions/ImageMethods';
@@ -51,8 +51,8 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   @Input()
   showMarkUp = true;
 
-  myForm = new FormGroup({
-    "html": new FormControl(),
+  myForm = new UntypedFormGroup({
+    "html": new UntypedFormControl(),
   });
 
   tags: TagItem[] = [];

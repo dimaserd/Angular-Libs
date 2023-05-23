@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { MatSelectChange } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ClipboardService } from 'ngx-clipboard';
@@ -26,8 +26,8 @@ export class TypeDecriptionClassComponent implements OnInit {
   constructor(private _clipboardService: ClipboardService, private _snackBar: MatSnackBar) {}
 
   codeGenerationType: string = "TypeScript";
-  myForm = new FormGroup({
-    "type": new FormControl(),
+  myForm = new UntypedFormGroup({
+    "type": new UntypedFormControl(),
   });
 
   ngOnInit() {
