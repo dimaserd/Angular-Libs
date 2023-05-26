@@ -9,9 +9,6 @@ import { HtmlBodyTag } from '../../../models/models';
 })
 export class TextEditorComponent implements OnInit {
 
-  myForm = new UntypedFormGroup({
-    "innerHtml": new UntypedFormControl()
-  });
 
   @Input()
   tag: HtmlBodyTag;
