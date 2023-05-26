@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { ImageMethods, FileImageTagDataConsts } from '../../../extensions/ImageMethods';
 import { HtmlBodyTag } from '../../../models/models';
 

@@ -27,13 +27,12 @@
 
     <div style="height: 10px;">
     </div>
-    <form [formGroup]="myForm">
+    <div>
         <mat-form-field class="w-100">
             <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
                 cdkAutosizeMinRows="1"
                 placeholder="Внутренняя разметка текстового тега"
-                formControlName="innerHtml"
                 [(ngModel)]="tag.innerHtml"></textarea>
         </mat-form-field>
-    </form>
+    </div>
 </div>

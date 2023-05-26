@@ -12,16 +12,15 @@
 
 <div *ngIf="!tag.presentOrEdit">
     <div>
-        <form [formGroup]="myForm">
+        <div>
             <mat-form-field class="w-100">
                 <input matInput placeholder="Ссылка на YouTube"
                     new-autocomplete="off"
                     autocomplete="off"
-                    formControlName="youtubeLink"
                     [(ngModel)]="data.youtubeLink"
                     (ngModelChange)="linkChanged()">
             </mat-form-field>
-        </form>
+        </div>
     </div>
 </div>
 
