@@ -25,13 +25,13 @@
       </mat-form-field>
     </form>
 
-    <button (click)="copyMarkUp()" 
+    <button (click)="copyMarkUp()"
       mat-raised-button color="primary">
       Копировать разметку
     </button>
   </mat-tab>
   <mat-tab label="Результат">
-    <mat-card>
+    <mat-card class="mat-card">
       <croco-html-xml-tag-view [data]="html | topreview">
       </croco-html-xml-tag-view>
     </mat-card>
