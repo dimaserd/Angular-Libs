@@ -16,10 +16,6 @@ export class ImageEditorComponent implements OnInit {
   @Input()
   tag: HtmlBodyTag;
 
-  myForm = new UntypedFormGroup({
-    fileId:new UntypedFormControl()
-  });
-
   onErrorHandler(){
     this.hasImageError = true;
   }

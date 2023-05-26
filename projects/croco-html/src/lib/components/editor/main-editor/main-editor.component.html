@@ -16,14 +16,14 @@
 
   <mat-tab label="Разметка">
     <div style="height: 10px;"></div>
-    <form *ngIf="visualEditorRendered" [formGroup]="myForm">
+    <div *ngIf="visualEditorRendered" [formGroup]="myForm">
       <mat-form-field class="w-100">
         <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
           cdkAutosizeMinRows="1"
-          placeholder="Исходный код" formControlName="html" [(ngModel)]="html"
+          placeholder="Исходный код" [(ngModel)]="html"
           (ngModelChange)="textAreaModelChangedHandler()"></textarea>
       </mat-form-field>
-    </form>
+    </div>
 
     <button (click)="copyMarkUp()"
       mat-raised-button color="primary">

@@ -1,5 +1,4 @@
 import { AfterContentChecked, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ClipboardService } from 'ngx-clipboard';
 import { VisualEditorComponent } from '../visual-editor/visual-editor.component';
@@ -20,10 +19,6 @@ export class MainEditorComponent implements OnInit, AfterContentChecked {
 
   @Input()
   useHtmlRaw = false;
-
-  myForm = new UntypedFormGroup({
-    "html": new UntypedFormControl(),
-  });
 
   @Input()
   @Output()

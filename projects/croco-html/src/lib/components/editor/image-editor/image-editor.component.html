@@ -41,14 +41,13 @@
     </div>
 
     <div [hidden]="searchOrEdit !== 'edit'">
-        <form [formGroup]="myForm">
+        <div>
             <mat-form-field class="w-100">
                 <input matInput placeholder="Идентификатор файла" new-autocomplete="off" autocomplete="off"
-                    formControlName="fileId" 
                     type="number"
                     [(ngModel)]="tag.attributes['file-id']"
                     (ngModelChange)="removeImageError()">
             </mat-form-field>
-        </form>
+        </div>
     </div>
 </div>
