@@ -1,4 +1,4 @@
-<form [formGroup]="form">
+<div>
     <div class="form-group">
         <label for="fileName">{{labelText}}</label>
         <ng-select [(ngModel)]="fileId" (ngModelChange)="onModelChanged($event)"
@@ -12,8 +12,7 @@
                    bindValue="fileId"
                    labelForId="fileName"
                    placeholder="Выбрать файл"
-                   [virtualScroll]="true"
-                   formControlName="fileName">
+                   [virtualScroll]="true">
             <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
                 <div>
                     <img class="mx-auto d-block img-fluid" [src]="getSrc(item.fileId)"/>
@@ -32,7 +31,7 @@
             </ng-template>
         </ng-select>
     </div>
-</form>
+</div>
 
 <div>
     Идентификатор файла: {{fileId}}

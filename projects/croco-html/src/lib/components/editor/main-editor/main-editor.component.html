@@ -16,7 +16,7 @@
 
   <mat-tab label="Разметка">
     <div style="height: 10px;"></div>
-    <div *ngIf="visualEditorRendered" [formGroup]="myForm">
+    <div *ngIf="visualEditorRendered">
       <mat-form-field class="w-100">
         <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
           cdkAutosizeMinRows="1"
