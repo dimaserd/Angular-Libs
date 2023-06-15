@@ -11,6 +11,7 @@ import { VisualEditorComponent } from '../visual-editor/visual-editor.component'
 export class MainEditorComponent implements OnInit, AfterContentChecked {
 
   visualEditorRendered = false;
+  
   @ViewChild("visualEditor")
   visualEditor!: VisualEditorComponent;
 
@@ -56,7 +57,7 @@ export class MainEditorComponent implements OnInit, AfterContentChecked {
   }
 
   copyMarkUp() {
-    this._snackBar.open("Разметка таблицы скопирована в буфер обмена", "Закрыть", { duration: 1500 });
+    this._snackBar.open("Разметка скопирована в буфер обмена", "Закрыть", { duration: 1500 });
     this._clipboardService.copy(this.html);
   }
 
