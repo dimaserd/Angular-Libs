@@ -4,6 +4,9 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
+      "croco-generic-app-logic": [
+        "dist/croco-generic-app-logic"
+      ],
       "croco-html": [
         "dist/croco-html/croco-html",
         "dist/croco-html"
