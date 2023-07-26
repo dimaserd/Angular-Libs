@@ -32,8 +32,10 @@
   </mat-tab>
   <mat-tab label="Результат">
     <mat-card style="padding: 2px;" class="mat-card">
-      <croco-html-xml-tag-view [data]="html | topreview">
-      </croco-html-xml-tag-view>
+      <mat-card-content>
+        <croco-html-xml-tag-view [data]="html | topreview">
+        </croco-html-xml-tag-view>
+      </mat-card-content>
     </mat-card>
   </mat-tab>
 </mat-tab-group>
