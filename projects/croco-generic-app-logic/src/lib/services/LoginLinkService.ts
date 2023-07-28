@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject } from '@angular/core';
 import { Injectable } from '@angular/core';
-import { CreateLoginLinkFromAuthenticationRequest, CreateLoginLinkResult } from '../models';
+import { CreateLoginLinkFromAuthenticationRequest, CreateLoginLinkResult } from '../models/models';
 
 @Injectable({
   providedIn: 'root',

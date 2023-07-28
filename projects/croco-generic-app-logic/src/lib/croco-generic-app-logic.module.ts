@@ -1,14 +1,11 @@
 import { NgModule } from '@angular/core';
-import { LoginLinkService } from './services/LoginLinkService';
 
 @NgModule({
-  declarations: [
-    LoginLinkService
+  declarations: [    
   ],
   imports: [
   ],
   exports: [
-    LoginLinkService
   ]
 })
 export class CrocoGenericAppLogicModule { }

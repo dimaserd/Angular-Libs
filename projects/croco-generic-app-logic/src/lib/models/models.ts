@@ -9,3 +9,8 @@ export interface CreateLoginLinkResult {
     linkId: string;
     password: string;
 }
+
+export interface BaseApiResponse {
+    isSucceeded: boolean;
+    message: string;
+}
