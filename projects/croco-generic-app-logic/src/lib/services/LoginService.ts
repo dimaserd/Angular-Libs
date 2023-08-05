@@ -28,6 +28,7 @@ export class LoginService {
   loginByEmail(data: LoginModel): Observable<LoginResultModel> {
     return this.loginByEmailApi(data).pipe(tap(res => {
       if(res.succeeded){
+        this.clearLoginDataCache();
         this.getLoginData().subscribe();
       }
     }));
@@ -36,6 +37,7 @@ export class LoginService {
   loginByEmailOrPhoneNumber(data: LoginByEmailOrPhoneNumber): Observable<LoginResultModel> {
     return this.loginByEmailOrPhoneNumberApi(data).pipe(tap(res => {
       if(res.succeeded){
+        this.clearLoginDataCache();
         this.getLoginData().subscribe();
       }
     }));
@@ -60,6 +62,7 @@ export class LoginService {
       .post<BaseApiResponse>(this.baseUrl + 'api/Account/LogOut', {})
       .pipe(tap(res => {
         if(res.isSucceeded){
+          this.clearLoginDataCache();
           this.getLoginData().subscribe();
         }
       }));
@@ -80,4 +83,3 @@ export class LoginService {
       .get<CurrentLoginData>(this.baseUrl + 'api/Account/User');
   }
 }
-
