@@ -9,15 +9,15 @@ Run `ng generate component component-name --project croco-generic-app-logic` to 
 
 ## Build
 
-Run `ng build croco-generic-app-logic` to build the project. The build artifacts will be stored in the `dist/` directory.
+Run `ng build tutor-logic` to build the project. The build artifacts will be stored in the `dist/` directory.
 
 ## Publishing
 
-After building your library with `ng build croco-generic-app-logic`, go to the dist folder `cd dist/croco-generic-app-logic` and run `npm publish`.
+After building your library with `ng build tutor-logic`, go to the dist folder `cd dist/tutor-logic` and run `npm publish`.
 
 ## Running unit tests
 
-Run `ng test croco-generic-app-logic` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Run `ng test tutor-logic` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
 ## Further help
 

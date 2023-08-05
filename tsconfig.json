@@ -14,6 +14,10 @@
       "croco-type-description": [
         "dist/croco-type-description/croco-type-description",
         "dist/croco-type-description"
+      ],
+      "tutor-logic": [
+        "dist/tutor-logic/tutor-logic",
+        "dist/tutor-logic"
       ]
     },
     "outDir": "./dist/out-tsc",
