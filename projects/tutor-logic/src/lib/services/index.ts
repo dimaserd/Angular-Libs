@@ -9,3 +9,4 @@ export { StudentTestSolutionStartService } from './StudentTestSolutionStartServi
 export { OpenApiQuestionLikeService, OpenApiTestSolutionService } from './open-api'
 export { StudentTestSolutionService } from './StudentTestSolutionService'
 export { StudentTestSolutionQueryService } from './StudentTestSolutionQueryService'
+export { StudentGroupTestRelationQueryService } from './StudentGroupTestRelationQueryService'

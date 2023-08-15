@@ -1,8 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { OpenApiExtensions, OpenApiUrlProvider } from "../extensions";
-import { StudentTestGroupRelationDetailedModel } from "./StudentQueryService";
-
+import { StudentTestGroupRelationDetailedModel } from "../models";
 
 @Injectable({
     providedIn: 'root',
