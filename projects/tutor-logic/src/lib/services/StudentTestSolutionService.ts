@@ -28,3 +28,5 @@ export class StudentTestSolutionService {
         return this._httpClient.post<GenericBaseApiResponse<StudentTestSolutionDataModel>>(this.baseControllerUrl + "Finish", model);
     }
 }
+
+

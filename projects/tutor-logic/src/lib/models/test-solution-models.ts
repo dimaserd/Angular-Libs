@@ -1,4 +1,5 @@
 export interface SearchStudentTestSolutions {
+    isFinished: boolean | null;
     studentId: string; 
     count: number | null; 
     offSet: number; 
@@ -58,6 +59,7 @@ export interface StartTestSolutionByTestId {
 }
 
 export interface SearchMyTestSolutions {
+    isFinished: boolean | null;
     testId: string; 
     count: number | null; 
     offSet: number; 
