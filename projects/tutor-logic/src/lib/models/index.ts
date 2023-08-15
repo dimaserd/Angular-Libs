@@ -46,3 +46,4 @@ export
     SaveQuestionPointsValidation,
     QuestionInSolutionIdModel,
 } from './solution-validation-models'
+export { SearchQuestionsByLikes } from './question-like-models'
