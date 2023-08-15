@@ -1,4 +1,4 @@
-import { AfterContentChecked, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterContentChecked, AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ClipboardService } from 'ngx-clipboard';
 import { VisualEditorComponent } from '../visual-editor/visual-editor.component';
@@ -8,12 +8,12 @@ import { VisualEditorComponent } from '../visual-editor/visual-editor.component'
   templateUrl: './main-editor.component.html',
   styleUrls: ['./main-editor.component.css']
 })
-export class MainEditorComponent implements OnInit, AfterContentChecked {
+export class MainEditorComponent implements OnInit, AfterContentChecked, AfterViewInit {
 
   visualEditorRendered = false;
   
-  @ViewChild("visualEditor")
-  visualEditor!: VisualEditorComponent;
+  @ViewChild("visualEditor", { static: true })
+  visualEditor: VisualEditorComponent;
 
   @Input()
   showMarkUp = true;
@@ -31,6 +31,10 @@ export class MainEditorComponent implements OnInit, AfterContentChecked {
   constructor(private _clipboardService: ClipboardService,
     private _snackBar: MatSnackBar,
     private _cdref: ChangeDetectorRef) { }
+  
+  ngAfterViewInit(): void {
+    this.recalculateBodyTags();
+  }
 
   ngAfterContentChecked(): void {
     this._cdref.detectChanges();
@@ -62,6 +66,6 @@ export class MainEditorComponent implements OnInit, AfterContentChecked {
   }
 
   ngOnInit(): void {
+    this.visualEditor.recalculateBodyTags();
   }
-
 }

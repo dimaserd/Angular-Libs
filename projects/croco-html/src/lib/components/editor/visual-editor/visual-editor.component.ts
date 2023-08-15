@@ -1,41 +1,13 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { BodyTagsExtensions } from '../../../extensions/BodyTagsExtensions';
-import { HtmlRawTagDataConsts } from '../../../extensions/HtmlRawTagDataConsts';
 import { FileImageTagDataConsts } from '../../../extensions/ImageMethods';
 import { TextMethods } from '../../../extensions/TextMethods';
 import { ExternalVideoTagDataConsts, ExternalVideoSupportedTypes } from '../../../extensions/VideoMethods';
 import { XmlExtensions } from '../../../extensions/XmlExtensions';
 import { TagItem, HtmlBodyTag } from '../../../models/models';
 import { FilePostingStarted } from '../../upload-files-btn/upload-files-btn.component';
-
-export class DefaultTags{
-  static tags:TagItem[] = [
-    { tag: FileImageTagDataConsts.TagName, displayValue: 'Изображение' },
-    { tag: ExternalVideoTagDataConsts.TagName, displayValue: 'Внешнее видео Youtube' },
-    { tag: 'text', displayValue: 'Текст' },
-    { tag: 'h1', displayValue: 'Заголовок 1 уровня' },
-    { tag: 'h2', displayValue: 'Заголовок 2 уровня' },
-    { tag: 'h3', displayValue: 'Заголовок 3 уровня' },
-    { tag: 'h4', displayValue: 'Заголовок 4 уровня' },
-    { tag: 'h5', displayValue: 'Заголовок 5 уровня' },
-    { tag: 'h6', displayValue: 'Заголовок 6 уровня' },
-  ];
-
-  static htmlRawTag:TagItem = {
-    tag: HtmlRawTagDataConsts.TagName, displayValue: 'Html разметка'
-  }
-
-  static getTags(useHtmlRaw:boolean):TagItem[]{
-    var result = [...DefaultTags.tags];
-
-    if(useHtmlRaw){
-      result.push(DefaultTags.htmlRawTag);
-    }
-
-    return result;
-  }
-}
+import { DefaultTags } from './DefaultTags';
 
 @Component({
   selector: 'croco-visual-editor',
