@@ -40,3 +40,13 @@ export interface SearchStudentsInGroup {
     count: number | null; 
     offSet: number; 
 }
+
+export interface StudentTestGroupRelationDetailedModel {
+    studentGroupId: string; 
+    testId: string; 
+    canCheckSingleQuestion: boolean; 
+    html: string;
+    showHtml: boolean;
+    testName: string;
+    testDescription: string;
+}
