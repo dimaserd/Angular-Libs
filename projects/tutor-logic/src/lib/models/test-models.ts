@@ -12,15 +12,6 @@ export interface EditTest {
     isGlobal: boolean; 
 }
 
-export interface StudentGroupSimpleModel {
-  id: string; 
-  name: string; 
-  studentCount: number; 
-  isDeleting: boolean; 
-  useHtmlForName: boolean; 
-  nameHtml: string; 
-}
-
 export interface TestSearchModel {
   q: string; 
   subjectIds: Array<string>; 

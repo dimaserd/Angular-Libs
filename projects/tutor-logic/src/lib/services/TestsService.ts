@@ -2,8 +2,8 @@ import { HttpClient } from "@angular/common/http";
 import { Inject } from "@angular/core";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { BaseApiResponse, GetListResult } from "../models";
-import { TestSearchModel, StudentGroupSimpleModel, CreateTest, EditTest } from "../models/test-models";
+import { BaseApiResponse, GetListResult, StudentGroupSimpleModel } from "../models";
+import { TestSearchModel, CreateTest, EditTest } from "../models/test-models";
 
 @Injectable({
     providedIn: 'root',
