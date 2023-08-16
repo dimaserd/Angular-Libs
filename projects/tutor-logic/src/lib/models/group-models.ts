@@ -50,3 +50,27 @@ export interface StudentTestGroupRelationDetailedModel {
     testName: string;
     testDescription: string;
 }
+
+export interface SearchStudentGroupsByStudentRequest {
+    studentId: string; 
+    q: string; 
+    count: number | null; 
+    offSet: number; 
+}
+
+export interface StudentGroupWithCourseProgressModel {
+    groupId: string; 
+    groupName: string; 
+    groupUseHtmlForName: boolean; 
+    groupNameHtml: string; 
+    isBlocked: boolean; 
+    shouldBlockOnUtc: Date | null; 
+    courseProgress: StudentGroupCourseProgressSimpleModel; 
+}
+
+
+export interface StudentGroupCourseProgressSimpleModel {
+    totalWeight: number; 
+    currentProgress: number; 
+    progressPercents: number; 
+}

@@ -12,7 +12,10 @@ export
     StudentGroupDetailedModel, 
     StudentInGroupSimpleModel, 
     SearchStudentsInGroup, 
-    StudentTestGroupRelationDetailedModel 
+    StudentTestGroupRelationDetailedModel,
+    SearchStudentGroupsByStudentRequest,
+    StudentGroupWithCourseProgressModel,
+    StudentGroupCourseProgressSimpleModel
 } from './group-models'
 export { GetToGroupByCodeRequest, GetToGroupByCodeResponse } from './group-enter-models'
 export { OpenApiServerOptions } from './open-api-models'
