@@ -1,3 +1,5 @@
+import { CourseThemeItemModel } from "./course-models";
+
 export interface SearchStudentTestSolutions {
     isFinished: boolean | null;
     studentId: string; 
@@ -12,6 +14,7 @@ export interface TestSolutionCourseData {
     courseThemeName: string; 
     courseName: string; 
     courseId: string; 
+    nextItem: CourseThemeItemModel; 
 }
 
 export enum TestQuestionType {
