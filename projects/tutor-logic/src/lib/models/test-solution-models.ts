@@ -10,6 +10,7 @@ export interface SearchStudentTestSolutions {
 export interface TestSolutionCourseData {
     solutionId: string; 
     courseThemeItemId: string; 
+    courseThemeItemIndex: number; 
     courseThemeId: string; 
     courseThemeName: string; 
     courseName: string; 
