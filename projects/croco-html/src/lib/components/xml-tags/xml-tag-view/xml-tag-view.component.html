@@ -3,12 +3,6 @@
         <div *ngIf="item.type === 'text'">
             <croco-html-xml-tag-text-view [item]="item"></croco-html-xml-tag-text-view>
         </div>
-        <div *ngIf="item.type === 'image'" class="red" style="margin-top: 10px;" >
-            <h4>Данный тег больше больше не поддерживается</h4>
-            <span>
-                Вмето этого переименуйте тег image на file-image
-            </span>
-        </div>
         <div *ngIf="item.type === 'html-raw'" [innerHTML]="item.data.innerHTML">
         </div>
         <div *ngIf="item.type === 'h1' || item.type === 'h2' || item.type === 'h3' || item.type === 'h4' || item.type === 'h5' || item.type === 'h6'">
