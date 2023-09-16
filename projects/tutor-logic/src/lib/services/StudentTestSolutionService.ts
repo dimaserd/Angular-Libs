@@ -12,12 +12,12 @@ export class StudentTestSolutionService {
         this.baseControllerUrl = baseUrl + 'api/tutor/test-solution/';
     }
 
-    checkSolutionAnswer(model: SolutionWithAnswerModel) {
-        return this._httpClient.post<GenericBaseApiResponse<QuestionAnswerWithResult>>(this.baseControllerUrl + `CheckSolutionAnswer`, model);
+    checkAnswer(model: SolutionWithAnswerModel) {
+        return this._httpClient.post<GenericBaseApiResponse<QuestionAnswerWithResult>>(this.baseControllerUrl + `check-answer`, model);
     }
 
     finishSolution(model: SolutionWithAnswersModel): Observable<GenericBaseApiResponse<StudentTestSolutionDataModel>> {
-        return this._httpClient.post<GenericBaseApiResponse<StudentTestSolutionDataModel>>(this.baseControllerUrl + "Finish", model);
+        return this._httpClient.post<GenericBaseApiResponse<StudentTestSolutionDataModel>>(this.baseControllerUrl + "finish", model);
     }
 }
 
