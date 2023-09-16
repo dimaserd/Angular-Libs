@@ -25,7 +25,7 @@ export class ImageEditorComponent implements OnInit {
   constructor() { }
 
   getSrc(){
-    return ImageMethods.buildUrl(this.tag.attributes[FileImageTagDataConsts.FileIdAttrName]);
+    return ImageMethods.buildUrl(this.tag.attributes[FileImageTagDataConsts.FileIdAttrName], { useCustomDomain: false, domain: ""});
   }
 
   hasFileId(){

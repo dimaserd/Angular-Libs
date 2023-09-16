@@ -8,7 +8,6 @@ import { HtmlBodyTag } from '../models/models';
 export class ToHtmlBodyTagsPipe implements PipeTransform {
     
     transform(value: string): HtmlBodyTag[] {
-        return BodyTagsExtensions.getBodyTags(value);
-    }
-    
+        return BodyTagsExtensions.getBodyTags(value, {useCustomDomain: false, domain: ""});
+    }   
 }

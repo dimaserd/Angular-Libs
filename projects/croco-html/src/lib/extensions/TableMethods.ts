@@ -1,6 +1,6 @@
 import { AngularMaterialTableMethods } from './AngularMaterialTableMethods';
 import { BootstrapTableMethods } from './BootstrapTableMethods';
-import { HtmlExtractionMethods } from './HtmlExtractionMethods';
+import { HtmlExtractionMethods, HtmlExtractionOptions } from './HtmlExtractionMethods';
 import { InterfaceBlock } from "./InterfaceBlock";
 import { TextSimpleMethods } from './TextSimpleMethods';
 
@@ -45,10 +45,10 @@ export class TableTypes{
 
 export class TableMethods {
 
-    static getTableFromHtmlTag(tableTag: HTMLTableElement) {
+    static getTableFromHtmlTag(tableTag: HTMLTableElement, options: HtmlExtractionOptions) {
         let tableData : TableData = {
             header: TableMethods.getHeader(tableTag),
-            rows: TableMethods.getTableRows(tableTag)
+            rows: TableMethods.getTableRows(tableTag, options)
         };
 
         var result = {
@@ -129,7 +129,7 @@ export class TableMethods {
         };
     }
 
-    static getTableRows(tableTag: HTMLTableElement): Array<TableRowData> {
+    static getTableRows(tableTag: HTMLTableElement, options: HtmlExtractionOptions): Array<TableRowData> {
         let tBody = tableTag.tBodies.item(0);
 
         let rows: TableRowData[] = [];
@@ -142,7 +142,7 @@ export class TableMethods {
             for (let j = 0; j < iElement.children.length; j++) {
                 const jElement = iElement.children.item(j) as HTMLElement;
 
-                let children = HtmlExtractionMethods.transformHtmlElementToBlocks(jElement);
+                let children = HtmlExtractionMethods.transformHtmlElementToBlocks(jElement, options);
 
                 if(children.length === 0){
                     var textTag = document.createElement("p");

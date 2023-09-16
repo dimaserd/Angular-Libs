@@ -135,7 +135,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   }
 
   recalculateBodyTags(){
-    this.bodyTags = BodyTagsExtensions.getBodyTags(this.html);
+    this.bodyTags = BodyTagsExtensions.getBodyTags(this.html, {useCustomDomain: false, domain: ""});
   }
 
   ngOnInit(): void {

@@ -38,7 +38,7 @@ export class FileIdSelectComponent implements OnInit, OnChanges {
     }
 
     getSrc(fileId: number){
-        return ImageMethods.buildSmallUrl(fileId);
+        return ImageMethods.buildSmallUrl(fileId, { useCustomDomain: false, domain: "" });
     }
 
     ngOnInit(): void {

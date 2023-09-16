@@ -1,5 +1,5 @@
 import { HtmlBodyTag } from "../models/models";
-import { HtmlExtractionMethods } from "./HtmlExtractionMethods";
+import { HtmlExtractionMethods, HtmlExtractionOptions } from "./HtmlExtractionMethods";
 import { InterfaceBlock } from "./InterfaceBlock";
 import { HtmlRawTagDataConsts } from "./HtmlRawTagDataConsts";
 import { FileImageTagData, FileImageTagDataConsts } from "./ImageMethods";
@@ -66,8 +66,8 @@ export class BodyTagsExtensions {
         return `<${FileImageTagDataConsts.TagName} ${attrStr}></${FileImageTagDataConsts.TagName}>`;
     }
 
-    static getBodyTags(html:string){
-        let result = HtmlExtractionMethods.transformHtmlStringToBlocks(html);
+    static getBodyTags(html:string, options: HtmlExtractionOptions){
+        let result = HtmlExtractionMethods.transformHtmlStringToBlocks(html, options);
         return result.map(x => BodyTagsExtensions.toBodyTag(x));
     }
 

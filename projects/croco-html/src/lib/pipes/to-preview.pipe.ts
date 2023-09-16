@@ -7,6 +7,9 @@ import { InterfaceBlock } from "../extensions/InterfaceBlock";
 })
 export class ToPreviewPipe implements PipeTransform {
   transform(value: string): InterfaceBlock[] {
-    return HtmlExtractionMethods.transformHtmlStringToBlocks(value);
+    return HtmlExtractionMethods.transformHtmlStringToBlocks(value, {
+      useCustomDomain: false,
+      domain: ""
+    });
   }
 }

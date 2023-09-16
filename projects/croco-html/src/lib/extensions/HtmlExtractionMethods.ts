@@ -5,8 +5,12 @@ import { TextMethods } from "./TextMethods";
 import { GenericTextTag, TextSimpleMethods } from "./TextSimpleMethods";
 import { ExternalVideoTagDataConsts, VideoMethods } from "./VideoMethods";
 
-export class HtmlExtractionMethods {
+export interface HtmlExtractionOptions{
+  useCustomDomain: boolean;
+  domain: string;
+}
 
+export class HtmlExtractionMethods {
 
   static ExtractHeaderTag(elem: HTMLElement, tagName: string): GenericTextTag {
 
@@ -17,26 +21,26 @@ export class HtmlExtractionMethods {
   }
 
   static Extractors = {
-    ["TEXT"]: (elem: HTMLElement) => TextSimpleMethods.ExtractTextTag(elem),
-    ["FILE-IMAGE"]: (elem: HTMLElement) => ImageMethods.ExtractImage(elem),
-    ["TABLE"]: (elem: HTMLElement) => TableMethods.getTableFromHtmlTag(elem as HTMLTableElement),
-    ["RICH-TEXT"]: (elem: HTMLElement) => TextMethods.ExtractRichTextData(elem),
-    ["HTML-RAW"]: (elem: HTMLElement) => ({
+    ["TEXT"]: (elem: HTMLElement, options: HtmlExtractionOptions) => TextSimpleMethods.ExtractTextTag(elem),
+    ["FILE-IMAGE"]: (elem: HTMLElement, options: HtmlExtractionOptions) => ImageMethods.ExtractImage(elem, options),
+    ["TABLE"]: (elem: HTMLElement, options: HtmlExtractionOptions) => TableMethods.getTableFromHtmlTag(elem as HTMLTableElement, options),
+    ["RICH-TEXT"]: (elem: HTMLElement, options: HtmlExtractionOptions) => TextMethods.ExtractRichTextData(elem),
+    ["HTML-RAW"]: (elem: HTMLElement, options: HtmlExtractionOptions) => ({
       type: "html-raw",
       data: {
         innerHTML: elem.innerHTML
       }
     }),
-    ["H1"]: (elem: HTMLElement) => HtmlExtractionMethods.ExtractHeaderTag(elem, "h1"),
-    ["H2"]: (elem: HTMLElement) => HtmlExtractionMethods.ExtractHeaderTag(elem, "h2"),
-    ["H3"]: (elem: HTMLElement) => HtmlExtractionMethods.ExtractHeaderTag(elem, "h3"),
-    ["H4"]: (elem: HTMLElement) => HtmlExtractionMethods.ExtractHeaderTag(elem, "h4"),
-    ["H5"]: (elem: HTMLElement) => HtmlExtractionMethods.ExtractHeaderTag(elem, "h5"),
-    ["H6"]: (elem: HTMLElement) => HtmlExtractionMethods.ExtractHeaderTag(elem, "h6"),
-    [ExternalVideoTagDataConsts.TagName.toUpperCase()]: (elem: HTMLElement) => VideoMethods.ExtractExternalVideoTag(elem)
+    ["H1"]: (elem: HTMLElement, options: HtmlExtractionOptions) => HtmlExtractionMethods.ExtractHeaderTag(elem, "h1"),
+    ["H2"]: (elem: HTMLElement, options: HtmlExtractionOptions) => HtmlExtractionMethods.ExtractHeaderTag(elem, "h2"),
+    ["H3"]: (elem: HTMLElement, options: HtmlExtractionOptions) => HtmlExtractionMethods.ExtractHeaderTag(elem, "h3"),
+    ["H4"]: (elem: HTMLElement, options: HtmlExtractionOptions) => HtmlExtractionMethods.ExtractHeaderTag(elem, "h4"),
+    ["H5"]: (elem: HTMLElement, options: HtmlExtractionOptions) => HtmlExtractionMethods.ExtractHeaderTag(elem, "h5"),
+    ["H6"]: (elem: HTMLElement, options: HtmlExtractionOptions) => HtmlExtractionMethods.ExtractHeaderTag(elem, "h6"),
+    [ExternalVideoTagDataConsts.TagName.toUpperCase()]: (elem: HTMLElement, options: HtmlExtractionOptions) => VideoMethods.ExtractExternalVideoTag(elem)
   };
 
-  static transformHtmlElementToBlocks(element: HTMLElement): InterfaceBlock[] {
+  static transformHtmlElementToBlocks(element: HTMLElement, options: HtmlExtractionOptions): InterfaceBlock[] {
     var data: InterfaceBlock[] = [];
 
     for (let i = 0; i < element.children.length; i++) {
@@ -52,7 +56,7 @@ export class HtmlExtractionMethods {
       }
       else {
         var extractor = HtmlExtractionMethods.Extractors[elem.tagName];
-        var result = extractor(elem);
+        var result = extractor(elem, options);
         data.push(result);
       }
     }
@@ -60,7 +64,7 @@ export class HtmlExtractionMethods {
     return data;
   }
 
-  static transformHtmlStringToBlocks(value: string): InterfaceBlock[] {
+  static transformHtmlStringToBlocks(value: string, options: HtmlExtractionOptions): InterfaceBlock[] {
 
     if (value === undefined) {
       return [];
@@ -73,6 +77,6 @@ export class HtmlExtractionMethods {
     var div = document.createElement("div");
     div.innerHTML = value;
 
-    return this.transformHtmlElementToBlocks(div);
+    return this.transformHtmlElementToBlocks(div, options);
   }
 }
