@@ -45,9 +45,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatBadgeModule } from '@angular/material/badge';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import { RichTextToHtmlPipe, TagToSpanPipe, ToHtmlBodyTagsPipe, ToPreviewPipe } from "./pipes";
+import { RichTextToHtmlPipe, TagToSpanPipe, ToHtmlBodyTagsPipe, ToPreviewHtmlPipe, ToPreviewPipe } from "./pipes";
 import { UploadFilesBtnComponent } from "./components";
-
 
 export const EditorComponents = [
     MainEditorComponent,
@@ -77,6 +76,7 @@ export const CrocoPipes = [
   TagToSpanPipe,
   ToPreviewPipe,
   ToHtmlBodyTagsPipe,
+  ToPreviewHtmlPipe
 ]
 
 export const CrocoHtmlDeclarations = [
