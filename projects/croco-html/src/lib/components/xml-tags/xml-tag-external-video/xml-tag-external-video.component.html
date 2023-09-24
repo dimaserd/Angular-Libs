@@ -1,8 +1,3 @@
 <div class="d-flex justify-content-center">
-    <div *ngIf="widgetUrl" class="y-video">
-        <iframe width="100%" height="100%" [src]="widgetUrl"
-            title="YouTube video player" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen></iframe>
-    </div>
+  <youtube-player height="100%" width="100%" class="y-video" *ngIf="videoId" [videoId]="videoId"></youtube-player>
 </div>
