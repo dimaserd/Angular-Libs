@@ -1,59 +1,48 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { InterfaceBlock } from "../../../extensions/InterfaceBlock";
-import { ExternalVideoTagData } from '../../../extensions/VideoMethods';
+import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {DomSanitizer} from '@angular/platform-browser';
+import {InterfaceBlock} from "../../../extensions/InterfaceBlock";
+import {ExternalVideoTagData} from '../../../extensions';
 
 @Component({
   selector: 'croco-html-xml-tag-external-video',
   templateUrl: './xml-tag-external-video.component.html',
-  styleUrls: ['./xml-tag-external-video.component.css']
+  styleUrls: ['./xml-tag-external-video.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class XmlTagExternalVideoComponent implements OnInit {
+  @Input() public set data(value: InterfaceBlock) {
+    this.tagData = value.data;
+  };
 
-  @Input()
-  data: InterfaceBlock;
+  @Input() public set tagData(value: ExternalVideoTagData) {
+    this.videoId = this.getYouTubeId(value.link);
+  };
 
-  @Input()
-  tagData: ExternalVideoTagData;
-
-  widgetUrl: SafeResourceUrl;
-
-  getYouTubeId(youtubeLink:string){
-
-    //https://www.youtube.com/watch?v=l3KfbfkxJOU
-    if(youtubeLink.includes("watch?v=")){
-      var url = new URL(youtubeLink);
-      return url.searchParams.get("v");
-    }
-
-    //https://youtu.be/jzBneaWSswY
-    let bits = youtubeLink.split('/')
-    return bits[bits.length - 1];
-  }
-
-  getWidgetLink(youtubeLink:string){
-
-    let id = this.getYouTubeId(youtubeLink);
-
-    let result = `https://www.youtube.com/embed/${id}?controls=0`;
-
-    this.widgetUrl = this._domSanitizer.bypassSecurityTrustResourceUrl(result);
-    return result;
-  }
-
-
+  public videoId?: string;
 
   constructor(private _domSanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
-    if(this.data != null){
-      this.tagData = this.data.data as ExternalVideoTagData;
+    const youtubeIframeApiUrl = 'https://www.youtube.com/iframe_api';
+    if (!document.querySelector(`script[src="${youtubeIframeApiUrl}"]`)) {
+      // This code loads the IFrame Player API code asynchronously, according to the instructions at
+      // https://developers.google.com/youtube/iframe_api_reference#Getting_Started
+      const tag = document.createElement('script');
+      tag.setAttribute('src', youtubeIframeApiUrl);
+      document.body.appendChild(tag);
     }
-
-    let youtubeWidgetLink = this.getWidgetLink(this.tagData.link);
-    this.widgetUrl = this._domSanitizer.bypassSecurityTrustResourceUrl(youtubeWidgetLink);
   }
 
+  private getYouTubeId(youtubeLink:string): string {
 
+    //https://www.youtube.com/watch?v=l3KfbfkxJOU
+    if(youtubeLink.includes("watch?v=")){
+      const url = new URL(youtubeLink);
+      return url.searchParams.get("v");
+    }
 
+    //https://youtu.be/jzBneaWSswY
+    const bits = youtubeLink.split('/')
+    return bits[bits.length - 1];
+  }
 }
