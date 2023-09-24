@@ -1,6 +1,6 @@
 {
   "name": "croco-html",
-  "version": "0.2.11",
+  "version": "0.2.12",
   "peerDependencies": {
     "@angular/common": ">=15.0.0",
     "@angular/youtube-player": "^15.2.9",
