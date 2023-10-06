@@ -37,6 +37,8 @@ export interface StudentInGroupSimpleModel {
 export interface SearchStudentsInGroup {
     groupId: string; 
     q: string; 
+    hasIndividualPaymentPlans: boolean | null; 
+    isBlocked: boolean | null; 
     count: number | null; 
     offSet: number; 
 }
