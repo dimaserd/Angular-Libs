@@ -32,7 +32,9 @@ export class ExternalVideoBlockComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.linkChanged();
+    if (!this.tag?.attributes?.['link']) {
+      this.linkChanged();
+    }
 
     this.tagData = this.tag.attributes as ExternalVideoTagData;
     this.data.youtubeLink = this.tagData.link;
