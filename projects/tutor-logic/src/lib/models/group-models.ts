@@ -19,12 +19,16 @@ export interface StudentGroupDetailedModel {
     id: string; 
     name: string; 
     enterCode: string; 
+    useCourse: boolean; 
     studentCount: number; 
-    solutionsCount: number;
-    isDeleting: boolean;
+    solutionsCount: number; 
+    isDeleting: boolean; 
     useHtmlForName: boolean; 
     nameHtml: string; 
-    useCourse: boolean;
+    useSchedule: boolean; 
+    scheduleHtml: string; 
+    useMaterials: boolean; 
+    materialsHtml: string; 
 }
 
 export interface StudentInGroupSimpleModel {
