@@ -1,181 +1,183 @@
 import { CourseThemeItemModel } from "./course-models";
+import { QuestionValidationSourceType } from "./solution-validation-models";
 
 export interface SearchStudentTestSolutions {
     isFinished: boolean | null;
-    studentId: string; 
-    count: number | null; 
-    offSet: number; 
+    studentId: string;
+    count: number | null;
+    offSet: number;
 }
 
 export interface TestSolutionCourseData {
-    solutionId: string; 
-    courseThemeItemId: string; 
-    courseThemeItemIndex: number; 
-    courseThemeId: string; 
-    courseThemeName: string; 
-    courseName: string; 
-    courseId: string; 
-    nextItem: CourseThemeItemModel; 
+    solutionId: string;
+    courseThemeItemId: string;
+    courseThemeItemIndex: number;
+    courseThemeId: string;
+    courseThemeName: string;
+    courseName: string;
+    courseId: string;
+    nextItem: CourseThemeItemModel;
 }
 
 export enum TestQuestionType {
-	SelectRightAnswerOrAnswers = <any> 'SelectRightAnswerOrAnswers',
-	TypeRightAnswer = <any> 'TypeRightAnswer',
-	DetailedAnswer = <any> 'DetailedAnswer',
-	TypeAnswerWithErrors = <any> 'TypeAnswerWithErrors'
+    SelectRightAnswerOrAnswers = <any>'SelectRightAnswerOrAnswers',
+    TypeRightAnswer = <any>'TypeRightAnswer',
+    DetailedAnswer = <any>'DetailedAnswer',
+    TypeAnswerWithErrors = <any>'TypeAnswerWithErrors'
 }
 
 export interface SolutionWithAnswerModel {
-    solutionId: string; 
-    answer: QuestionAnswer; 
+    solutionId: string;
+    answer: QuestionAnswer;
 }
 
 export interface StudentTestSolutionWithChatInfo {
-    solution: StudentTestSolutionSimpleModel; 
-    systemValidation: TestSolutionSystemValidationModel; 
-    unreadMessagesCount: number; 
+    solution: StudentTestSolutionSimpleModel;
+    systemValidation: TestSolutionSystemValidationModel;
+    unreadMessagesCount: number;
 }
 
 export interface TestSolutionSystemValidationModel {
-    studentTotalPoints: number; 
-    maxTotalPoints: number; 
-    questionsCount: number; 
-    validatedQuestionsCount: number; 
-    hasRightAnswerQuestionsCount: number; 
+    studentTotalPoints: number;
+    maxTotalPoints: number;
+    questionsCount: number;
+    validatedQuestionsCount: number;
+    hasRightAnswerQuestionsCount: number;
 }
 
 export interface StartSolutionFromDirectory {
-    workSpaceId: string; 
-    directoryId: string; 
-    useFilter: boolean; 
+    workSpaceId: string;
+    directoryId: string;
+    useFilter: boolean;
     canCheckSingleQuestion: boolean;
-    filter: QuestionsFilter; 
+    filter: QuestionsFilter;
 }
 
 export interface QuestionsFilter {
-    types: Array<TestQuestionType>; 
+    types: Array<TestQuestionType>;
 }
 
 export interface StartTestSolutionByTestId {
-    testId: string; 
-    studentGroupId: string; 
+    testId: string;
+    studentGroupId: string;
     canCheckSingleQuestion: boolean;
 }
 
 export interface SearchMyTestSolutions {
     isFinished: boolean | null;
-    testId: string; 
-    count: number | null; 
-    offSet: number; 
+    testId: string;
+    count: number | null;
+    offSet: number;
 }
 
 export interface StudentTestSolutionSimpleModel {
-    id: string; 
-    testName: string; 
-    testId: string; 
-    isFinished: boolean; 
-    startedOnUtc: Date; 
-    finishedOnUtc: Date | null; 
+    id: string;
+    testName: string;
+    testId: string;
+    isFinished: boolean;
+    startedOnUtc: Date;
+    finishedOnUtc: Date | null;
 }
 
 export enum AnswerValidationResultType {
-   NeedToCheckByYourSelf = <any> 'NeedToCheckByYourSelf',
-   NotCorrectAnswer = <any> 'NotCorrectAnswer',
-   PartiallyCorrectAnswer = <any> 'PartiallyCorrectAnswer',
-   CorrectAnswer = <any> 'CorrectAnswer'
+    NeedToCheckByYourSelf = <any>'NeedToCheckByYourSelf',
+    NotCorrectAnswer = <any>'NotCorrectAnswer',
+    PartiallyCorrectAnswer = <any>'PartiallyCorrectAnswer',
+    CorrectAnswer = <any>'CorrectAnswer'
 }
 
 export interface SolutionWithAnswersModel {
-    solutionId: string; 
-    answers: Array<QuestionAnswer>; 
+    solutionId: string;
+    answers: Array<QuestionAnswer>;
 }
 
 export interface StudentTestSolutionModel {
     studentId: string;
-    solutionId: string; 
+    solutionId: string;
     studentGroupId: string;
     hasCuratorValidation: boolean;
     canCheckSingleQuestion: boolean;
-    startedOnUtc: Date; 
-    finishedOnUtc: Date | null; 
-    isFinished: boolean; 
+    startedOnUtc: Date;
+    finishedOnUtc: Date | null;
+    isFinished: boolean;
     solution: StudentTestSolutionDataModel;
-    test: TestModel; 
+    test: TestModel;
 }
 
 
 export interface StudentTestSolutionDataModel {
-    answers: Array<QuestionAnswerWithResult>; 
+    answers: Array<QuestionAnswerWithResult>;
 }
 
 export interface TestModel {
-    name: string; 
-    description: string; 
-    questions: Array<TestQuestionModel>; 
+    name: string;
+    description: string;
+    questions: Array<TestQuestionModel>;
 }
 
 export interface TestQuestionModel {
-    id: string; 
-    title: string; 
-    titleBodyMarkUp: string; 
-    helpBodyMarkUp: string; 
-    answerExplanationMarkUp: string; 
-    titleBodyMarkUpMobile: string; 
-    helpBodyMarkUpMobile: string; 
-    answerExplanationMarkUpMobile: string; 
-    type: TestQuestionType; 
-    selectRightAnswerOrAnswersData: SelectRightAnswerOrAnswersQuestionData; 
-    typeRightAnswerQuestionData: TypeRightAnswerQuestionData; 
-    typeAnswerWithErrorsData: TypeAnswerWithErrorsQuestionData; 
+    id: string;
+    title: string;
+    titleBodyMarkUp: string;
+    helpBodyMarkUp: string;
+    answerExplanationMarkUp: string;
+    titleBodyMarkUpMobile: string;
+    helpBodyMarkUpMobile: string;
+    answerExplanationMarkUpMobile: string;
+    type: TestQuestionType;
+    selectRightAnswerOrAnswersData: SelectRightAnswerOrAnswersQuestionData;
+    typeRightAnswerQuestionData: TypeRightAnswerQuestionData;
+    typeAnswerWithErrorsData: TypeAnswerWithErrorsQuestionData;
 }
 
 export interface TypeAnswerWithErrorsQuestionData {
-    rightAnswer: string; 
+    rightAnswer: string;
 }
 
 
 export interface TestWithActiveSolutionModel {
-    testId: string; 
-    activeSolutionId: string; 
-    test: TestModel; 
+    testId: string;
+    activeSolutionId: string;
+    test: TestModel;
 }
 
 export interface QuestionAnswer {
-    questionId: string; 
-    answerOrAnswers: string; 
+    questionId: string;
+    answerOrAnswers: string;
 }
 
 export interface QuestionAnswerWithResult {
-    isChecked: boolean; 
-    questionId: string; 
-    answerOrAnswers: string; 
-    pointsValidation: QuestionPointsValidationModel; 
-    resultType: AnswerValidationResultType; 
+    isChecked: boolean;
+    questionId: string;
+    answerOrAnswers: string;
+    pointsValidation: QuestionPointsValidationModel;
+    resultType: AnswerValidationResultType;
 }
 
-
 export interface QuestionPointsValidationModel {
-    answerPoints: number; 
-    questionTotalPoints: number; 
-    description: string; 
-    isValidated: boolean; 
+    answerPoints: number;
+    questionTotalPoints: number;
+    description: string;
+    isValidated: boolean;
+    sourceType: QuestionValidationSourceType;
+    validatorId: string;
 }
 
 
 export interface SelectRightAnswerOrAnswersQuestionData {
-    selectRightAnswerTitle: string; 
-    rightAnswersCount: number; 
-    answers: Array<Answer>; 
+    selectRightAnswerTitle: string;
+    rightAnswersCount: number;
+    answers: Array<Answer>;
 }
 
 
 export interface Answer {
-    text: string; 
-    isRightAnswer: boolean; 
+    text: string;
+    isRightAnswer: boolean;
 }
 
 
 export interface TypeRightAnswerQuestionData {
-    caseInSensitive:boolean;
-    rightAnswers: Array<string>; 
+    caseInSensitive: boolean;
+    rightAnswers: Array<string>;
 }
