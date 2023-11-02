@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
-import { BaseApiResponse, QuestionInSolutionIdModel, SaveQuestionPointsValidation, TestQuestionWithModifiers, TestSolutionWithPointsValidation } from "../models";
+import { BaseApiResponse, GenericBaseApiResponse, QuestionAnswerWithResult, QuestionInSolutionIdModel, SaveQuestionPointsValidation, TestQuestionWithModifiers, TestSolutionWithPointsValidation } from "../models";
 
 @Injectable({
     providedIn: 'root',
@@ -26,10 +26,10 @@ export class TestSolutionResultService {
     }
 
     public saveQuestionResult(model: SaveQuestionPointsValidation) {
-        return this._httpClient.post<BaseApiResponse>(this.baseControllerUrl + `question/validation/save`, model);
+        return this._httpClient.post<GenericBaseApiResponse<QuestionAnswerWithResult>>(this.baseControllerUrl + `question/validation/save`, model);
     }
 
     public removeQuestionResult(model: QuestionInSolutionIdModel) {
-        return this._httpClient.post<BaseApiResponse>(this.baseControllerUrl + `question/validation/remove`, model);
+        return this._httpClient.post<GenericBaseApiResponse<QuestionAnswerWithResult>>(this.baseControllerUrl + `question/validation/remove`, model);
     }
 }
