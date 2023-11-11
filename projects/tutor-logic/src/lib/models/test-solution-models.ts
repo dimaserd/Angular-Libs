@@ -155,12 +155,14 @@ export interface QuestionAnswerWithResult {
 }
 
 export interface QuestionPointsValidationModel {
-    answerPoints: number;
-    questionTotalPoints: number;
-    description: string;
-    isValidated: boolean;
-    sourceType: QuestionValidationSourceType;
-    validatorId: string;
+    errorOccured: boolean; 
+    inProccess: boolean; 
+    answerPoints: number; 
+    questionTotalPoints: number; 
+    description: string; 
+    isValidated: boolean; 
+    sourceType: QuestionValidationSourceType; 
+    validatorId: string; 
 }
 
 
