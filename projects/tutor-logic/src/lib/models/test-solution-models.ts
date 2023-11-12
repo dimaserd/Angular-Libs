@@ -83,7 +83,8 @@ export enum AnswerValidationResultType {
     NeedToCheckByYourSelf = <any>'NeedToCheckByYourSelf',
     NotCorrectAnswer = <any>'NotCorrectAnswer',
     PartiallyCorrectAnswer = <any>'PartiallyCorrectAnswer',
-    CorrectAnswer = <any>'CorrectAnswer'
+    CorrectAnswer = <any>'CorrectAnswer',
+    InProccess = <any>'InProccess'
 }
 
 export interface SolutionWithAnswersModel {
