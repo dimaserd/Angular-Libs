@@ -1,4 +1,4 @@
-import { AnswerValidationResultType } from "./test-solution-models";
+import { AnswerValidationResultType, QuestionPointsValidationModel } from "./test-solution-models";
 
 export interface TestSolutionWithPointsValidation {
     solutionId: string; 
@@ -9,18 +9,13 @@ export interface TestSolutionWithPointsValidation {
     maxTotalPoints: number; 
     questionsCount: number; 
     validatedQuestionsCount: number; 
+    inProccessQuestionsCount: number; 
     hasRightAnswerQuestionsCount: number; 
 }
 
 export interface TestQuestionWithPointsValidation {
     questionId: string; 
-    answerPoints: number; 
-    questionTotalPoints: number; 
-    description: string; 
-    isValidated: boolean; 
-    resultType: AnswerValidationResultType; 
-    sourceType: QuestionValidationSourceType; 
-    validatorId: string; 
+    pointsValidation: QuestionPointsValidationModel;
 }
 
 export enum QuestionValidationSourceType {
