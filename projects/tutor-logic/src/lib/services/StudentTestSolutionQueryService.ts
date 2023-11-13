@@ -2,6 +2,10 @@ import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
 import { GenericBaseApiResponse, GetListResult, SearchMyTestSolutions, StudentTestSolutionDataModel, StudentTestSolutionWithChatInfo, TestWithActiveSolutionModel } from "../models";
 
+/**
+Методы контроллера Tutor.Api.Controllers.TestSolutions.StudentTestSolutionQueryController
+BasePath = api/tutor/test-solution/query/mine
+*/
 @Injectable({ providedIn: 'root' })
 export class StudentTestSolutionQueryService {
     baseControllerUrl: string;

@@ -107,6 +107,10 @@ export interface StudentTestSolutionModel {
 
 
 export interface StudentTestSolutionDataModel {
+    /**
+     * Есть ли вопросы, которые находятся в процессе расчёта результата
+    */
+    hasAnswersInProccess: boolean;
     answers: Array<QuestionAnswerWithResult>;
 }
 
