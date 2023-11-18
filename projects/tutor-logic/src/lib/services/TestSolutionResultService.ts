@@ -2,6 +2,10 @@ import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
 import { BaseApiResponse, GenericBaseApiResponse, QuestionAnswerWithResult, QuestionInSolutionIdModel, SaveQuestionPointsValidation, TestQuestionWithModifiers, TestSolutionWithPointsValidation } from "../models";
 
+/**
+Методы контроллера Tutor.Api.Controllers.TestSolutions.TestSolutionResultController
+BasePath = api/tutor/test-solution-result
+*/
 @Injectable({
     providedIn: 'root',
 })
@@ -21,8 +25,12 @@ export class TestSolutionResultService {
         return this._httpClient.get<TestSolutionWithPointsValidation>(this.baseControllerUrl + `points/${solutionId}`);
     }
 
-    public createPointsResult(solutionId: string) {
+    public create(solutionId: string) {
         return this._httpClient.post<BaseApiResponse>(this.baseControllerUrl + `create/${solutionId}`, {});
+    }
+
+    public recalculate(solutionId: string) {
+        return this._httpClient.post<BaseApiResponse>(this.baseControllerUrl + `recalculate/${solutionId}`, {});
     }
 
     public saveQuestionResult(model: SaveQuestionPointsValidation) {
