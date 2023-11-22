@@ -3,7 +3,6 @@ import { QuestionAnswerWithResult } from "./test-solution-models";
 export interface TestSolutionWithPointsValidation {
     solutionId: string; 
     hasPointsResult: boolean; 
-    noPointsValidation: boolean; 
     questions: Array<QuestionAnswerWithResult>; 
     studentTotalPoints: number; 
     maxTotalPoints: number; 
