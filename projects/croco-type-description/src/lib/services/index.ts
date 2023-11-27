@@ -1,0 +1,1 @@
+export { CrocoTypeDescriptor } from './CrocoTypeDescriptor'
