@@ -1,9 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { CrocoTypeDescriptionResult, CrocoTypeDescription } from '../../models';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
+import { CrocoTypeDescriptor } from '../../services/CrocoTypeDescriptor';
 
 @Component({
   selector: 'croco-type-decription',
@@ -13,20 +13,16 @@ import { Title } from '@angular/platform-browser';
 export class TypeDecriptionComponent implements OnInit {
 
   typeDisplayFullName: string;
-  http:HttpClient;
-  baseUrl: string;
   result: CrocoTypeDescriptionResult = null;
 
   constructor(
     private _titleService: Title,
     private route: ActivatedRoute,
     private _snackBar: MatSnackBar,
-    http: HttpClient, @Inject('BASE_URL') baseUrl: string
+    private readonly _descriptor: CrocoTypeDescriptor
   )
   {
     this._titleService.setTitle("Описания типов");
-    this.http = http;
-    this.baseUrl = baseUrl;
   }
 
   openSnackBar() {
@@ -40,18 +36,18 @@ export class TypeDecriptionComponent implements OnInit {
       return;
     }
 
-    this.http.post<CrocoTypeDescriptionResult>(this.baseUrl + `Documentation/Type?typeName=${this.typeDisplayFullName}`, {})
-    .subscribe(res => {
-        if(res === null){
-          this.openSnackBar();
-          this.result = null;
-          this.types = [];
-          return;
-        }
+    this._descriptor.getTypeDescription(this.typeDisplayFullName)
+      .subscribe(res => {
+          if(res === null){
+            this.openSnackBar();
+            this.result = null;
+            this.types = [];
+            return;
+          }
 
-        this.result = res;
-        this.types = res.types.filter(x => x.typeDisplayFullName === res.typeDisplayFullName);
-    });
+          this.result = res;
+          this.types = res.types.filter(x => x.typeDisplayFullName === res.typeDisplayFullName);
+      });
   }
 
   types: CrocoTypeDescription[];
