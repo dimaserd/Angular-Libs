@@ -7,8 +7,6 @@ import { CrocoEnumTypeDescription, CrocoTypeDescriptionResult } from "../models"
     providedIn: 'root',
 })
 export class CrocoTypeDescriptor {
-    baseControllerUrl: string;
-
     constructor(private readonly _httpClient: HttpClient,
         @Inject('BASE_URL') private readonly _baseUrl: string) {
     }
