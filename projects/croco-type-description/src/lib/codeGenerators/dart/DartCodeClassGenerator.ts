@@ -109,6 +109,4 @@ export class DartCodeClassGenerator{
     static GetTypeDisplayName(data:CrocoTypeDescription){
         return DartTypeMapper.GetPropertyTypeDartName(data);
     }
-
-
 }

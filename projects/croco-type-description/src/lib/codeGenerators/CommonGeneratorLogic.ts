@@ -14,5 +14,4 @@ export class CommonGeneratorLogic{
     public static isSimple(type: string):boolean{
         return this.simpleTypes.indexOf(type) >= 0;
     }
-
 }
