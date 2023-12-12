@@ -33,7 +33,7 @@ export class AddFilesBtnComponent implements OnInit {
 
     let fileTags:HtmlBodyTag[] = [];
 
-    for(let i=0; i < this.fileIds.length; i++){
+    for(let i= 0; i < this.fileIds.length; i++){
       let fileTag: HtmlBodyTag = {
         presentOrEdit: true,
         tagDescription: {
