@@ -5,7 +5,7 @@ import { BaseApiResponseWithFilesIds } from '../../services/file-upload.service'
 import { FilePostingStarted, UploadFilesBtnComponent } from '../upload-files-btn/upload-files-btn.component';
 
 @Component({
-  selector: 'croco-add-files-btn',
+  selector: 'croco-html-add-files-btn',
   templateUrl: './add-files-btn.component.html',
   styleUrls: ['./add-files-btn.component.css']
 })
