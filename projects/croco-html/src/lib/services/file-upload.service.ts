@@ -1,6 +1,6 @@
 import { HttpClient, HttpEvent, HttpEventType, HttpResponse, HttpUploadProgressEvent } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { EMPTY, Observable, throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { filter, switchMap } from 'rxjs/operators';
 
 export interface BaseApiResponse {
@@ -105,7 +105,7 @@ export class FileUploadService {
     );
   }
 
-  private uploadFileWithProgress(file: File, createLocalCopiesNow = false): Observable<UploadFileWithProgressEvent> {
+  public uploadFileWithProgress(file: File, createLocalCopiesNow = false): Observable<UploadFileWithProgressEvent> {
     let uploadingLoaded: number;
     let uploadingTotal: number;
     return this.postFile(file, createLocalCopiesNow, true).pipe(
