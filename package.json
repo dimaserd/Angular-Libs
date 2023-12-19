@@ -25,7 +25,8 @@
     "ngx-clipboard": "^15.1.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
-    "zone.js": "~0.11.4"
+    "zone.js": "~0.11.4",
+    "croco-generic-app-logic": "0.0.6"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^15.2.8",

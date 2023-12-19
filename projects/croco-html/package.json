@@ -8,7 +8,8 @@
     "@angular/material": ">=15.0.0",
     "@angular/cdk": ">=15.0.0",
     "ngx-clipboard": ">=15.1.0",
-    "@ng-select/ng-select": ">=8.3.0"
+    "@ng-select/ng-select": ">=8.3.0",
+    "croco-generic-app-logic": "0.0.6"
   },
   "dependencies": {
     "tslib": ">=2.2.0"
