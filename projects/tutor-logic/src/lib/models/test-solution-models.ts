@@ -20,10 +20,10 @@ export interface TestSolutionCourseData {
 }
 
 export enum TestQuestionType {
-    SelectRightAnswerOrAnswers = <any>'SelectRightAnswerOrAnswers',
-    TypeRightAnswer = <any>'TypeRightAnswer',
-    DetailedAnswer = <any>'DetailedAnswer',
-    TypeAnswerWithErrors = <any>'TypeAnswerWithErrors'
+    SelectRightAnswerOrAnswers = 'SelectRightAnswerOrAnswers',
+    TypeRightAnswer = 'TypeRightAnswer',
+    DetailedAnswer = 'DetailedAnswer',
+    TypeAnswerWithErrors = 'TypeAnswerWithErrors'
 }
 
 export interface SolutionWithAnswerModel {
