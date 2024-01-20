@@ -10,3 +10,4 @@ export { OpenApiQuestionLikeService, OpenApiTestSolutionService } from './open-a
 export { StudentTestSolutionService } from './StudentTestSolutionService'
 export { StudentTestSolutionQueryService } from './StudentTestSolutionQueryService'
 export { StudentGroupTestRelationQueryService } from './StudentGroupTestRelationQueryService'
+export { CuratorMessageTemplateService } from './CuratorMessageTemplateService'
