@@ -13,9 +13,9 @@ export interface TestSolutionWithPointsValidation {
 }
 
 export enum QuestionValidationSourceType {
-	System = <any> 'System',
-	Student = <any> 'Student',
-	Curator = <any> 'Curator'
+	System = 'System',
+	Student = 'Student',
+	Curator = 'Curator'
 }
 
 export interface TestQuestionWithModifiers {

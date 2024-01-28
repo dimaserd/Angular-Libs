@@ -36,8 +36,8 @@ export interface CourseThemeItemModel {
 
 
 export enum CourseThemeItemType {
-   JustHtml = <any> 'JustHtml',
-   Test = <any> 'Test'
+   JustHtml = 'JustHtml',
+   Test = 'Test'
 }
 
 export interface CourseThemeItemTestModel {

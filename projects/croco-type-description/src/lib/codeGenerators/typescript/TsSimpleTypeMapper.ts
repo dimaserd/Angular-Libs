@@ -8,7 +8,7 @@ export class TsSimpleTypeMapper {
         .set("Decimal", "number")
         .set("Double", "number")
         .set("Boolean", "boolean")
-        .set("DateTime", "Date")
+        .set("DateTime", "string")
         .set("Guid", "string");
 
     static GetPropertyType(typeDescription: CrocoTypeDescription): string {
@@ -34,6 +34,7 @@ export class TsSimpleTypeMapper {
         if(isNullable){
             result += " | null";
         }
+
         return result;
     }
 

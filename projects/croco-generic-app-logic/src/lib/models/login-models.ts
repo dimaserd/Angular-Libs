@@ -13,32 +13,34 @@ export interface LoginViaLinkResult {
 }
 
 export enum LoginViaLinkError {
-    ModelNotValid = <any>'ModelNotValid',
-    ActionExecution = <any>'ActionExecution',
-    NoLoginData = <any>'NoLoginData',
-    AuthenticationError = <any>'AuthenticationError'
+    ModelNotValid = 'ModelNotValid',
+    ActionExecution = 'ActionExecution',
+    NoLoginData = 'NoLoginData',
+    AuthenticationError = 'AuthenticationError'
 }
 
 export enum LinkActivationError {
-    ModelValidation = <any>'ModelValidation',
-    LinkNotFound = <any>'LinkNotFound',
-    AlreadyExecuted = <any>'AlreadyExecuted',
-    DateExpired = <any>'DateExpired',
-    WrongPassword = <any>'WrongPassword',
-    DatabaseError = <any>'DatabaseError'
+    ModelValidation = 'ModelValidation',
+    LinkNotFound = 'LinkNotFound',
+    AlreadyExecuted = 'AlreadyExecuted',
+    DateExpired = 'DateExpired',
+    WrongPassword = 'WrongPassword',
+    DatabaseError = 'DatabaseError'
 }
 
 export interface CurrentLoginData {
-    isAuthenticated: boolean;
+    isAuthenticated: boolean; 
     userId: string;
     email: string;
     roles: Array<string>;
-    avatarFileId: number | null;
-    name: string;
-    surname: string;
-    patronymic: string;
-    noEmail: boolean;
-    noPhoneNumber: boolean;
+    avatarFileId: number | null; 
+    name: string; 
+    surname: string; 
+    patronymic: string; 
+    noEmail: boolean; 
+    phoneNumber: string; 
+    noPhoneNumber: boolean; 
+    applicationId: string; 
 }
 
 export interface LoginModel {
@@ -64,11 +66,11 @@ export interface LoginResultModel {
 }
 
 export enum LoginErrorType {
-    Error = <any>'Error',
-    ModelNotValid = <any>'ModelNotValid',
-    AlreadyAuthenticated = <any>'AlreadyAuthenticated',
-    UnSuccessfulAttempt = <any>'UnSuccessfulAttempt',
-    EmailNotConfirmed = <any>'EmailNotConfirmed',
-    UserDeactivated = <any>'UserDeactivated'
+    Error = 'Error',
+    ModelNotValid = 'ModelNotValid',
+    AlreadyAuthenticated = 'AlreadyAuthenticated',
+    UnSuccessfulAttempt = 'UnSuccessfulAttempt',
+    EmailNotConfirmed = 'EmailNotConfirmed',
+    UserDeactivated = 'UserDeactivated'
 }
 

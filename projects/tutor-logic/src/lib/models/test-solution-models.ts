@@ -80,11 +80,11 @@ export interface StudentTestSolutionSimpleModel {
 }
 
 export enum AnswerValidationResultType {
-    NeedToCheckByYourSelf = <any>'NeedToCheckByYourSelf',
-    NotCorrectAnswer = <any>'NotCorrectAnswer',
-    PartiallyCorrectAnswer = <any>'PartiallyCorrectAnswer',
-    CorrectAnswer = <any>'CorrectAnswer',
-    InProccess = <any>'InProccess'
+    NeedToCheckByYourSelf = 'NeedToCheckByYourSelf',
+    NotCorrectAnswer = 'NotCorrectAnswer',
+    PartiallyCorrectAnswer = 'PartiallyCorrectAnswer',
+    CorrectAnswer = 'CorrectAnswer',
+    InProccess = 'InProccess'
 }
 
 export interface SolutionWithAnswersModel {
