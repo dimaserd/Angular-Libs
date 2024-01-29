@@ -75,8 +75,8 @@ export interface StudentTestSolutionSimpleModel {
     testName: string;
     testId: string;
     isFinished: boolean;
-    startedOnUtc: Date;
-    finishedOnUtc: Date | null;
+    startedOnUtc: string; /* Date */
+    finishedOnUtc: string | null; /* Date */
 }
 
 export enum AnswerValidationResultType {
@@ -98,8 +98,8 @@ export interface StudentTestSolutionModel {
     studentGroupId: string;
     hasCuratorValidation: boolean;
     canCheckSingleQuestion: boolean;
-    startedOnUtc: Date;
-    finishedOnUtc: Date | null;
+    startedOnUtc: string; /* Date */
+    finishedOnUtc: string | null; /* Date */
     isFinished: boolean;
     solution: StudentTestSolutionDataModel;
     test: TestModel;

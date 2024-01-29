@@ -71,7 +71,7 @@ export interface StudentGroupWithCourseProgressModel {
     groupNameHtml: string;
     useCourse: boolean;
     isBlocked: boolean;
-    shouldBlockOnUtc: Date | null;
+    shouldBlockOnUtc: string | null; /* Date */
     courseProgress: StudentGroupCourseProgressSimpleModel;
 }
 
