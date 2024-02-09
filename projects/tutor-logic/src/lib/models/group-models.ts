@@ -20,7 +20,7 @@ export interface StudentGroupDetailedModel {
     name: string;
     enterCode: string;
     useCourse: boolean;
-    studentCount: number;
+    studentsCount: number;
     solutionsCount: number;
     isDeleting: boolean;
     useHtmlForName: boolean;
