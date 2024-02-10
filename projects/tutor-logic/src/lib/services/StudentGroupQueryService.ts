@@ -5,6 +5,9 @@ import { Observable } from "rxjs";
 import { GetListResult, StudentGroupSimpleModel } from "../models";
 import { SearchStudentGroups, StudentGroupDetailedModel, SearchStudentsInGroup, StudentInGroupSimpleModel, SearchStudentGroupsByStudentRequest, StudentGroupWithCourseProgressModel } from "../models/group-models";
 
+/**
+* Методы контроллера StudentGroupQueryController
+*/
 @Injectable({
     providedIn: 'root',
 })

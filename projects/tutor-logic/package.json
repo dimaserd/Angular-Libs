@@ -1,6 +1,6 @@
 {
   "name": "tutor-logic",
-  "version": "0.0.34",
+  "version": "0.0.35",
   "peerDependencies": {
     "@angular/common": "^15.2.0",
     "@angular/core": "^15.2.0"

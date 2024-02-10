@@ -27,6 +27,7 @@ export interface StudentGroupDetailedModel {
     nameHtml: string;
     useSchedule: boolean;
     scheduleHtml: string;
+    scheduleId: string;
     useMaterials: boolean;
     materialsHtml: string;
 }
