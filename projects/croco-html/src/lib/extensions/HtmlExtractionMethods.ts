@@ -66,7 +66,7 @@ export class HtmlExtractionMethods {
 
   static transformHtmlStringToBlocks(value: string, options: HtmlExtractionOptions): InterfaceBlock[] {
 
-    if (value === undefined) {
+    if (value === undefined || value === null) {
       return [];
     }
 
