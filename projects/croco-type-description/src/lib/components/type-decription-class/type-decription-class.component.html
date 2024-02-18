@@ -31,7 +31,7 @@
   </mat-expansion-panel-header>
 
   <form [formGroup]="myForm">
-    <mat-form-field appearance="fill" class="w-100">
+    <mat-form-field appearance="outline" class="w-100">
       <mat-label>Язык для кодогенерации</mat-label>
       <mat-select [(ngModel)]="codeGenerationType" formControlName="type" (selectionChange)="typeChanged($event)">
         <mat-option value="TypeScript">TypeScript</mat-option>
