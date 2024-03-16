@@ -13,3 +13,6 @@ export { StudentGroupTestRelationQueryService } from './StudentGroupTestRelation
 export { CuratorMessageTemplateService } from './CuratorMessageTemplateService'
 export { CourseDeadlineWarningService } from './CourseDeadlineWarningService'
 export { CourseThemeItemTestRestrictionService } from './CourseThemeItemTestRestrictionService'
+export { SubjectMenuService } from './SubjectMenuService'
+export { SubjectQueryService } from './SubjectQueryService'
+export { SubjectsService } from './SubjectsService'
