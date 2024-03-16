@@ -39,6 +39,7 @@ export interface StudentTestSolutionWithChatInfo {
 
 export interface TestSolutionSystemValidationModel {
     studentTotalPoints: number;
+    studentProgressPercents: number;
     maxTotalPoints: number;
     questionsCount: number;
     validatedQuestionsCount: number;
