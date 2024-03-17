@@ -1,0 +1,8 @@
+<mat-form-field style="width: 100%" appearance="outline">
+  <mat-label>{{ interfaceBlock.labelText }}</mat-label>
+  <mat-select multiple [formControl]="valueControl">
+    <mat-option *ngFor="let item of interfaceBlock.dropDownData.selectList" [value]="item.value">{{
+      item.text
+    }}</mat-option>
+  </mat-select>
+</mat-form-field>

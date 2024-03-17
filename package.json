@@ -5,7 +5,9 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:croco-generic-interface-components": "ng build croco-generic-interface-components",
     "watch": "ng build croco-html --watch --configuration development",
+    "watch:croco-generic-interface-components": "ng build croco-generic-interface-components --watch --configuration development",
     "test": "ng test"
   },
   "private": true,
@@ -22,6 +24,7 @@
     "@angular/router": "^15.2.9",
     "@angular/youtube-player": "^15.2.9",
     "@ng-select/ng-select": "^10.0.4",
+    "croco-type-description": "^0.4.1",
     "ngx-clipboard": "^15.1.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",

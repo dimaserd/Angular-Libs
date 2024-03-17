@@ -1,0 +1,12 @@
+<div class="interface-wrapper">
+  <button (click)="addInterface()">Add Interface {{ interfaceBlock.labelText }}</button>
+  <div>
+    <ng-container *ngFor="let interface of interfaces; let i = index">
+      <div *ngIf="interface">
+        <span>{{ interfaceBlock.labelText }}</span>
+        <button (click)="editInterface(i)">Edit</button>
+        <button (click)="deleteInterface(i)">Delete</button>
+      </div>
+    </ng-container>
+  </div>
+</div>

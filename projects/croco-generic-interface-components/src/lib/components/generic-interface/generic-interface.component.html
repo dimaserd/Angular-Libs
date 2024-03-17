@@ -1,0 +1,8 @@
+<div *ngIf="form" [formGroup]="form">
+  <div *ngFor="let element of interface.interface.blocks">
+    <app-generic-interface-block-switcher
+      [formControl]="form.controls[element.propertyName]"
+      [interfaceBlock]="element"
+    ></app-generic-interface-block-switcher>
+  </div>
+</div>
