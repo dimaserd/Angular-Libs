@@ -4,6 +4,10 @@ import {ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup} from '@angula
 import {CreateValueService} from "../../services/create-value.service";
 import {MatButtonModule} from "@angular/material/button";
 import {NgForOf, NgIf} from "@angular/common";
+import {
+  GenericInterfaceBlockSwitcherComponent
+} from "../generic-interface-block-switcher/generic-interface-block-switcher.component";
+import {A11yModule} from "@angular/cdk/a11y";
 
 export interface ModalOutput {
   value: string;
@@ -20,7 +24,9 @@ export interface ModalOutput {
     MatButtonModule,
     NgIf,
     NgForOf,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    GenericInterfaceBlockSwitcherComponent,
+    A11yModule
   ]
 })
 export class GenericInterfaceModalComponent implements OnInit {
