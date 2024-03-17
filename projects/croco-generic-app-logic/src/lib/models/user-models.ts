@@ -26,6 +26,8 @@ export interface RegisterModel {
     patronymic: string;
     phoneNumber: string;
     password: string;
+    noEmail: boolean,
+    noPhoneNumber: boolean
 }
 
 export interface RegisterAndSignInResult {
