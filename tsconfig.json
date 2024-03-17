@@ -7,6 +7,9 @@
       "croco-generic-app-logic": [
         "dist/croco-generic-app-logic"
       ],
+      "croco-generic-interface-components": [
+        "dist/croco-generic-interface-components"
+      ],
       "croco-html": [
         "dist/croco-html/croco-html",
         "dist/croco-html"

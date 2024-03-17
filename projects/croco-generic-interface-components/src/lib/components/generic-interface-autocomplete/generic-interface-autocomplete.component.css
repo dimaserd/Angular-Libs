@@ -1,0 +1,51 @@
+.label-for-autocomplete {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.label-for-autocomplete ::ng-deep.ng-select-container {
+  height: 59px;
+  padding-top: 0.75em;
+  border: unset;
+  border-radius: 4px 4px 0 0;
+  border-bottom: 1px solid transparent;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: #8b8b8b;
+  background-color: rgba(0, 0, 0, 0.04);
+  box-sizing: border-box;
+}
+
+.label-for-autocomplete ::ng-deep.ng-select-container:hover {
+  border-bottom-width: 2px;
+  border-bottom-color: #121212;
+}
+
+.label-for-autocomplete ::ng-deep.ng-select.ng-select-focused:not(.ng-select-opened) > .ng-select-container {
+  background-color: rgba(0, 0, 0, 0.04);
+  border-bottom-width: 2px;
+  border-bottom-color: #121212;
+  box-shadow: unset;
+}
+
+.label-for-autocomplete ::ng-deep.ng-select {
+  margin-bottom: 1.34375em;
+}
+
+.label-for-autocomplete ::ng-deep.ng-arrow-wrapper {
+  top: 17px;
+  right: 6px;
+  position: absolute;
+}
+
+.label-for-autocomplete ::ng-deep.ng-arrow-wrapper .ng-arrow {
+  border-top-color: #6e6e6e;
+}
+
+.label-for-autocomplete ::ng-deep.ng-arrow-wrapper .ng-arrow:hover {
+  border-top-color: #6e6e6e;
+}
+
+.label-for-autocomplete ::ng-deep.ng-select.ng-select-single .ng-select-container .ng-value-container .ng-input {
+  top: calc(5px + 0.75em);
+}

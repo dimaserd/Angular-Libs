@@ -1,0 +1,17 @@
+<label class="label-for-autocomplete"
+  >{{ interfaceBlock.labelText }}
+  <br />
+  <ng-select
+    bindLabel="text"
+    appendTo="body"
+    [formControl]="valueControl"
+    [multiple]="true"
+    [clearable]="false"
+    [loading]="loading"
+    [compareWith]="compare"
+    [items]="autoCompleteOptions"
+    (close)="close()"
+    (search)="search($event)"
+  >
+  </ng-select>
+</label>

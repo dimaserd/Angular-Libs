@@ -1,0 +1,11 @@
+<mat-form-field style="width: 100%" [hidden]="hidden">
+  <mat-label>{{ interfaceBlock.labelText }}</mat-label>
+  <input
+    type="{{ inputType }}"
+    matInput
+    autocomplete="new-password"
+    ngDefaultControl
+    [attr.step]="step"
+    [formControl]="valueControl"
+  />
+</mat-form-field>

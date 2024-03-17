@@ -1,0 +1,13 @@
+<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      {{ interfaceBlock.labelText }}
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <div *ngIf="valueGroup" [formGroup]="valueGroup">
+    <div *ngFor="let element of interfaceBlock.innerGenericInterface.blocks">
+      <app-generic-interface-block-switcher formControlName="{{ element.propertyName }}" [interfaceBlock]="element">
+      </app-generic-interface-block-switcher>
+    </div>
+  </div>
+</mat-expansion-panel>
