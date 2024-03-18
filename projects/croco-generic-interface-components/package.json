@@ -1,5 +1,5 @@
 {
-  "name": "croco-generic-interface-components",
+  "name": "croco-generic-interface",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^15.2.0",
