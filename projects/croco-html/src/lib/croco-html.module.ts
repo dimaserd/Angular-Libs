@@ -7,7 +7,7 @@ import { YouTubePlayerModule } from "@angular/youtube-player";
 
 @NgModule({
     declarations: [
-      ...CrocoHtmlDeclarations
+      ...CrocoHtmlDeclarations,
     ],
     exports: [
       ...CrocoHtmlDeclarations,
