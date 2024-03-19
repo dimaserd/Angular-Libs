@@ -19,6 +19,5 @@ export class HtmlRawViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.safeHtml = this._sanitizer.bypassSecurityTrustHtml(this.rawHtml);
-    this.isInitialized = true;
   }
 }
