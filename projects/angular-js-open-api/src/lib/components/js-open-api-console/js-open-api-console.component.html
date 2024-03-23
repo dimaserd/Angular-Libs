@@ -1,0 +1,14 @@
+<mat-form-field class="w-100">
+    <textarea 
+        (input)="script = $event.target.value" 
+        matInput
+        cdkTextareaAutosize
+        placeholder="Пишите свой js код здесь...">{{script}}</textarea>
+</mat-form-field>
+
+<button (click)="executeScript()" mat-raised-button color="primary">Выполнить скрипт</button>
+
+<div *ngIf="result">
+    <croco-js-open-api-script-result [scriptResult]="result">
+    </croco-js-open-api-script-result>
+</div>

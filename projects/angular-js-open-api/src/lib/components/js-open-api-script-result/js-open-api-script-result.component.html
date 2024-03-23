@@ -1,0 +1,43 @@
+<mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Результат выполнения
+      </mat-panel-title>
+      <mat-panel-description>
+        {{message}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div>
+        <h6>Успешно выполнено: {{scriptResult.isSucceeded}}</h6>
+        <div *ngIf="scriptResult.errorMessage">
+          <h6>Ошибка: {{scriptResult.errorMessage}}</h6>
+        </div>
+        
+    </div>
+
+    <div *ngIf="scriptResult">
+        <div>
+            <h6>Начало выполнения: {{scriptResult.startedOnUtc}}</h6>
+            <h6>Конец выполнения: {{scriptResult.finishedOnUtc}}</h6>
+        </div>
+        <div>
+            <h5>Залоггированные переменные. Вызовы console.log()</h5>
+            <div>
+               <croco-js-open-api-logged-variable *ngFor="let log of scriptResult.consoleLogs" [log]="log">
+               </croco-js-open-api-logged-variable>
+            </div>
+        </div>
+
+        <div style="height: 30px;">
+
+        </div>
+
+        <div>
+          <h5>Логи времени выполнения</h5>
+          <div>
+             <app-js-open-api-execution-log *ngFor="let log of scriptResult.executionLogs" [log]="log"></app-js-open-api-execution-log>
+          </div>
+      </div>
+    </div>
+</mat-expansion-panel>

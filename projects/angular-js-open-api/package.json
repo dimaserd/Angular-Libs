@@ -1,0 +1,13 @@
+{
+  "name": "angular-js-open-api",
+  "version": "0.1.6",
+  "peerDependencies": {
+    "@angular/common": ">=15.2.9",
+    "@angular/core": ">=15.2.9",
+    "@angular/material": ">=15.2.9",
+    "ngx-clipboard": ">=13.3.11"
+  },
+  "dependencies": {
+    "tslib": ">=2.3.0"
+  }
+}

@@ -1,0 +1,19 @@
+<mat-tab-group>
+  <mat-tab label="OPEN-API">
+    <div style="margin: 2px;">
+      <croco-js-worker-expansion-panel *ngFor="let element of workers" (onGetScript)="onGetScriptHandler($event)" [worker]="element">
+      </croco-js-worker-expansion-panel>
+    </div>
+  </mat-tab>
+  <mat-tab label="Консоль">
+    <div style="margin: 2px;">
+      <croco-js-open-api-console></croco-js-open-api-console>
+    </div>
+  </mat-tab>
+  <mat-tab label="Удаленные открытые API">
+    <div style="margin: 2px;">
+      <croco-js-open-api-remote-docs (onGetScript)="onGetScriptHandler($event)">
+      </croco-js-open-api-remote-docs>
+    </div>
+  </mat-tab>
+</mat-tab-group>

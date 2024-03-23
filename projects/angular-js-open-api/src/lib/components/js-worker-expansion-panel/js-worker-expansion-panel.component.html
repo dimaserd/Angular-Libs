@@ -1,0 +1,20 @@
+<mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{worker.name}}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{worker.description}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div>
+      <h6>Методы</h6>
+      <croco-js-worker-method *ngFor="let element of worker.methods"
+       (onGetScript)="onGetScriptHandler($event)" 
+       [method]="element" 
+       [workerName]="worker.name" 
+       [remoteName]="remoteName">
+      </croco-js-worker-method>
+    </div>
+</mat-expansion-panel>

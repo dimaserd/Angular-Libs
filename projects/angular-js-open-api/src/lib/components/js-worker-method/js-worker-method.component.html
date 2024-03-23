@@ -1,0 +1,41 @@
+<mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{method.methodName}}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{method.description}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div>
+      <h6>Подробнее о методе</h6>
+      <p>Название: {{method.methodName}}</p>
+      <p>Описание: {{method.description}}</p>
+      <div>
+        <span><strong>Входные параметры: </strong></span>
+        <mat-nav-list>
+            <span *ngFor="let parameter of method.parameters; let i = index;">
+              {{method.parameterDescriptions[i]}} <br/>
+              <a [routerLink]="['/type-description', parameter.typeDisplayFullName]" mat-list-item href="..."> {{ parameter.typeDisplayFullName }} 
+              </a>
+            </span>
+         </mat-nav-list>
+      </div>
+      <div>
+        <span><strong>Возвращаемый параметр:</strong></span>
+        <mat-nav-list>
+          <span *ngIf="method.response">
+            {{method.resultDescription}} <br/>
+            <a [routerLink]="['/type-description', method.response.typeDisplayFullName]" mat-list-item href="...">{{method.response.typeDisplayFullName }} </a>
+          </span>
+         </mat-nav-list>
+      </div>
+    </div>
+    <div style="height: 20px;">
+
+    </div>
+    <div>
+      <button mat-stroked-button color="primary" (click)="getScript()" >Попробовать</button>
+    </div>
+</mat-expansion-panel>

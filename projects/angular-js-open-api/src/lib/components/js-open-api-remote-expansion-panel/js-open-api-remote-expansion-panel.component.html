@@ -1,0 +1,21 @@
+<mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <strong>{{remoteDoc.description.name}}</strong> &nbsp; <a href="{{remoteDoc.description.hostUrl}}" target="blank">[{{remoteDoc.description.hostUrl}}]</a>
+      </mat-panel-title>
+      <mat-panel-description>
+        {{remoteDoc.description.description}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div *ngIf="remoteDoc.docs">
+      <h6>Js Сервисы</h6>
+      <div>
+        <croco-js-worker-expansion-panel 
+            *ngFor="let worker of remoteDoc.docs.workers" 
+            (onGetScript)="onGetScriptHandler($event)"
+            [worker]="worker" [remoteName]="remoteDoc.description.name">
+          </croco-js-worker-expansion-panel>
+      </div>
+    </div>
+</mat-expansion-panel>

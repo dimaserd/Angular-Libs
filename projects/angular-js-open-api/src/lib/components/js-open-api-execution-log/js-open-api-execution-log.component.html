@@ -1,0 +1,21 @@
+<mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Лог {{log.loggedOnUtc}}
+      </mat-panel-title>
+      <mat-panel-description>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    
+    <h6>Название события: {{log.eventIdName}}</h6>
+
+    <div *ngIf="viewModel.dataJson" >
+      <h6>Лог Json</h6>
+      <pre>
+        {{viewModel.dataJsonShort}}
+      </pre>
+    </div>
+    
+    <button *ngIf="viewModel.dataJson" (click)="copyDataJson()" mat-raised-button color="primary">Скопировать лог</button>
+</mat-expansion-panel>
