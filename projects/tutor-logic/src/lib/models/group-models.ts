@@ -62,6 +62,7 @@ export interface StudentTestGroupRelationDetailedModel {
 export interface SearchStudentGroupsByStudentRequest {
     studentId: string;
     q: string;
+    iconSetId: string | null;
     count: number | null;
     offSet: number;
 }
