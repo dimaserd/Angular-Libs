@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { GenericBaseApiResponse } from "tutor-logic";
+import { GenericBaseApiResponse } from "../models";
 import { BaseApiResponse, ClientModel, EditClient } from "../models";
 
 @Injectable({ providedIn: 'root' })
