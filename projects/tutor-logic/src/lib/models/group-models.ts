@@ -1,3 +1,4 @@
+import { IconSimpleModel } from "./icon-models";
 import { StudentSimpleModel } from "./student-models";
 
 export interface SearchStudentGroups {
@@ -61,6 +62,7 @@ export interface StudentTestGroupRelationDetailedModel {
 export interface SearchStudentGroupsByStudentRequest {
     studentId: string;
     q: string;
+    iconSetId: string | null;
     count: number | null;
     offSet: number;
 }
@@ -72,8 +74,9 @@ export interface StudentGroupWithCourseProgressModel {
     groupNameHtml: string;
     useCourse: boolean;
     isBlocked: boolean;
-    shouldBlockOnUtc: string | null; /* Date */
+    shouldBlockOnUtc: string | null;
     courseProgress: StudentGroupCourseProgressSimpleModel;
+    icon: IconSimpleModel;
 }
 
 export interface StudentGroupCourseProgressSimpleModel {

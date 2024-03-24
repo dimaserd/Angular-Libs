@@ -1,3 +1,5 @@
+import { IconSimpleModel } from "./icon-models";
+
 export interface SubjectMenu {
   root: SubjectMenuItem;
 }
@@ -48,4 +50,11 @@ export interface ChangeSubjectConfiguration {
 
 export interface OrderSubjectsRequest {
   ids: Array<string>;
+}
+
+export interface SubjectWithIconModel {
+  id: string; 
+  name: string; 
+  alias: string; 
+  icon: IconSimpleModel; 
 }
