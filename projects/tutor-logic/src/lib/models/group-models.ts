@@ -1,3 +1,4 @@
+import { IconSimpleModel } from "./icon-models";
 import { StudentSimpleModel } from "./student-models";
 
 export interface SearchStudentGroups {
@@ -72,8 +73,9 @@ export interface StudentGroupWithCourseProgressModel {
     groupNameHtml: string;
     useCourse: boolean;
     isBlocked: boolean;
-    shouldBlockOnUtc: string | null; /* Date */
+    shouldBlockOnUtc: string | null;
     courseProgress: StudentGroupCourseProgressSimpleModel;
+    icon: IconSimpleModel;
 }
 
 export interface StudentGroupCourseProgressSimpleModel {

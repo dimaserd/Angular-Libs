@@ -3,7 +3,8 @@ import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
   SubjectCountsModel,
-  SubjectModel
+  SubjectModel,
+  SubjectWithIconModel
 } from '../models/subject.models';
 
 /**
@@ -34,8 +35,8 @@ export class SubjectQueryService {
     return this._httpClient.get<SubjectModel[]>(this.baseControllerUrl + `GetAll/Cached`);
   }
 
-  public get(id: string): Observable<SubjectCountsModel> {
-    return this._httpClient.get<SubjectCountsModel>(this.baseControllerUrl + `GetById?id=${id}`);
+  public getAllWithIconsCached(iconSetId: string): Observable<SubjectWithIconModel[]> {
+    return this._httpClient.get<SubjectWithIconModel[]>(this.baseControllerUrl + `GetAll/with-icons/Cached?iconSetId=${iconSetId}`);
   }
 
   public getByAliasOrId(id: string): Observable<SubjectCountsModel> {
