@@ -22,22 +22,22 @@ export class CourseThemeItemTestRestrictionStudentService {
         private http: HttpClient,
         @Inject('BASE_URL') baseUrl: string
     ) {
-        this.baseControllerUrl = baseUrl + 'api/tutor/course-theme-item/test-restriction/';
+        this.baseControllerUrl = baseUrl + 'api/tutor/course-theme-item/test-restriction/student/';
     }
 
     updateForStudent(model: CourseItemStudentTestRestrictionModel) {
-        return this.http.post<BaseApiResponse>(this.baseControllerUrl + `student/update`, model);
+        return this.http.post<BaseApiResponse>(this.baseControllerUrl + `update`, model);
     }
 
     getStudentRestriction(model: GetCourseThemeItemStudentTestRestrictionRequest) {
-        return this.http.post<TestRestrictionValidationResult>(this.baseControllerUrl + `student/query/get-validated-item-restriction`, model);
+        return this.http.post<TestRestrictionValidationResult>(this.baseControllerUrl + `query/get-validated-item-restriction`, model);
     }
 
     getStudentRestrictionWithDeadLineWarning(model: GetCourseThemeItemStudentTestRestrictionRequest) {
-        return this.http.post<TestRestrictionValidationWithDeadLineWarningResult>(this.baseControllerUrl + `student/query/get-validated-item-restriction-with-deadline-warning`, model);
+        return this.http.post<TestRestrictionValidationWithDeadLineWarningResult>(this.baseControllerUrl + `query/get-validated-item-restriction-with-deadline-warning`, model);
     }
 
     searchStudents(model: SearchStudentThemeItemTestRestrictionsRequest) {
-        return this.http.post<GetListResult<ThemeItemTestStudentRestrictionModel>>(this.baseControllerUrl + 'student/query/search', model);
+        return this.http.post<GetListResult<ThemeItemTestStudentRestrictionModel>>(this.baseControllerUrl + 'query/search', model);
     }
 }
