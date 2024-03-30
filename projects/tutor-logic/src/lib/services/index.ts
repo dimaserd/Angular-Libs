@@ -16,3 +16,4 @@ export { CourseThemeItemTestRestrictionService } from './CourseThemeItemTestRest
 export { SubjectMenuService } from './SubjectMenuService'
 export { SubjectQueryService } from './SubjectQueryService'
 export { SubjectsService } from './SubjectsService'
+export { CourseThemeItemTestRestrictionStudentService } from './CourseThemeItemTestRestrictionStudentService'
