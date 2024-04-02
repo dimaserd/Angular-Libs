@@ -48,6 +48,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { RichTextToHtmlPipe, TagToSpanPipe, ToHtmlBodyTagsPipe, ToPreviewHtmlPipe, ToPreviewPipe } from "./pipes";
 import { UploadFilesBtnComponent } from "./components";
 import { HtmlRawViewComponent } from "./components/xml-tags/html-raw-view/html-raw-view.component";
+import { HtmlViewComponent } from "./components/html-view/html-view.component";
 
 export const EditorComponents = [
     MainEditorComponent,
@@ -83,6 +84,7 @@ export const CrocoPipes = [
 
 export const CrocoHtmlDeclarations = [
     UploadFilesBtnComponent,
+    HtmlViewComponent,
     ...XmlComponents,
     ...EditorComponents,
     ...CrocoPipes

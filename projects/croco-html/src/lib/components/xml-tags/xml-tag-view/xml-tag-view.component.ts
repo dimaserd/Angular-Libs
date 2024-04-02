@@ -12,6 +12,7 @@ export class XmlTagViewComponent {
   @Input()
   data:InterfaceBlock[] = [];
 
-  constructor() { }
+  constructor() {
+  }
 
 }
