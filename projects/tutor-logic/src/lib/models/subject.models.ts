@@ -25,14 +25,14 @@ export interface SubjectModel {
 }
 
 export interface CreateSubject {
-  name: string; 
-  alias: string; 
+  name: string;
+  alias: string;
 }
 
 export interface UpdateSubjectRequest {
   id: string;
-  name: string; 
-  alias: string; 
+  name: string;
+  alias: string;
 }
 
 export interface SubjectCountsModel {
@@ -53,8 +53,20 @@ export interface OrderSubjectsRequest {
 }
 
 export interface SubjectWithIconModel {
-  id: string; 
-  name: string; 
-  alias: string; 
-  icon: IconSimpleModel; 
+  id: string;
+  name: string;
+  alias: string;
+  icon: IconSimpleModel;
+}
+
+export interface SubjectForStudentDetailedViewModel {
+  icon: IconSimpleModel;
+  subject: SubjectModel;
+  menu: SubjectMenu;
+  globalTests: Array<SubjectTestSimpleModel>;
+}
+
+export interface SubjectTestSimpleModel {
+  id: string;
+  name: string;
 }

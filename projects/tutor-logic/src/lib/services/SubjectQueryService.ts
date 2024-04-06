@@ -47,3 +47,4 @@ export class SubjectQueryService {
     return this._httpClient.get<SubjectCountsModel>(this.baseControllerUrl + `GetByAliasOrId/Cached?idOrAlias=${idOrAlias}`);
   }
 }
+
