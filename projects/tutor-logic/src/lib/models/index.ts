@@ -1,4 +1,3 @@
-
 export * from './models';
 export * from './test-models'
 export * from './setting-models';
@@ -14,3 +13,4 @@ export * from './curator-models'
 export * from './test-restriction-models'
 export * from './subject.models'
 export * from './icon-models'
+export * from './course-test-models'
