@@ -17,7 +17,7 @@ export interface ModalOutput {
 @Component({
   selector: 'app-generic-interface-modal',
   templateUrl: './generic-interface-modal.component.html',
-  styleUrls: ['./generic-interface-modal.component.css'],
+  styleUrls: ['./generic-interface-modal.component.scss'],
   standalone: true,
   imports: [
     MatDialogModule,

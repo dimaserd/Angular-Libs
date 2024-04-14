@@ -9,7 +9,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 @Component({
   selector: 'app-generic-interface-date-picker',
   templateUrl: './generic-interface-date-picker.component.html',
-  styleUrls: ['./generic-interface-date-picker.component.css'],
+  styleUrls: ['./generic-interface-date-picker.component.scss'],
   standalone: true,
   providers: [
     {
