@@ -9,3 +9,7 @@ export interface HtmlBodyTag {
     attributes: Object;
     presentOrEdit: boolean;
 }
+export interface AngularMaterialTableData {
+  displayedColumns: string[];
+  data: object[];
+}

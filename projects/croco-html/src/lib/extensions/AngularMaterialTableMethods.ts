@@ -1,8 +1,6 @@
 import { BaseApiResponse, TableData, TableRowData } from './TableMethods';
-export interface AngularMaterialTableData {
-    displayedColumns: string[];
-    data: object[];
-}
+import {AngularMaterialTableData} from "../models/models";
+
 
 export class AngularMaterialTableMethods {
     static getAngularMaterialTableData(columns: string[], rows: TableRowData[]): AngularMaterialTableData {

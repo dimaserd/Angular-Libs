@@ -62,7 +62,7 @@ export class GenericInterfaceForClassComponent implements OnInit, OnDestroy, Con
   }
 
   ngAfterViewInit() {
-    timer().subscribe(() => {
+    timer(0).subscribe(() => {
       if (this.onChange) {
         this.onChange(this.value);
       }
