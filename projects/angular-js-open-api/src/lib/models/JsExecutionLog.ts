@@ -1,5 +1,5 @@
 export interface JsExecutionLog {
-    loggedOnUtc: Date;
+    loggedOnUtc: string;
     eventIdName: string;
     message: string;
     dataJson: string;

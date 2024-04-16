@@ -55,7 +55,7 @@ export interface TestRestrictionValidationWithDeadLineWarningResult {
 export interface CourseThemeItemStudentDeadlineWarningModel {
     themeItemId: string;
     courseThemeId: string;
-    deadLine: Date;
+    deadLine: string;
     warningMessage: string;
 }
 
@@ -69,8 +69,7 @@ export interface CourseThemeIdWithDeadlineWarnings {
     deadlines: Array<DeadLineWithWarningMessage>;
 }
 
-
 export interface DeadLineWithWarningMessage {
-    deadLine: Date;
+    deadLine: string;
     warningMessage: string;
 }

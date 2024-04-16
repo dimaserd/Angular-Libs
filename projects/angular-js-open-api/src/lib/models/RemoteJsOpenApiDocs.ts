@@ -5,7 +5,7 @@ import { RemoteJsOpenApi } from "./RemoteJsOpenApi";
 export interface RemoteJsOpenApiDocs {
     description: RemoteJsOpenApi;
     docs: JsOpenApiDocs;
-    docsReceivedOnUtc: Date;
+    docsReceivedOnUtc: string;
     isDocsReceived: boolean;
     receivingException: ExcepionData;
 }

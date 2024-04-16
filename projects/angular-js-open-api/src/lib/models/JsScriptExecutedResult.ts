@@ -7,8 +7,8 @@ export interface JsScriptExecutedResult {
     script: string; 
     isSucceeded: boolean; 
     errorMessage: string; 
-    startedOnUtc: Date | null; 
-    finishedOnUtc: Date | null; 
+    startedOnUtc: string | null; 
+    finishedOnUtc: string | null; 
     consoleLogs: Array<JsLogggedVariables>; 
     executionLogs: Array<JsExecutionLog>; 
     exceptionData: ExcepionData; 

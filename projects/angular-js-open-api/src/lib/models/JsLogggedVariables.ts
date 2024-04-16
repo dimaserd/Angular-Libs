@@ -1,6 +1,6 @@
 import { JsSerializedVariable } from "./JsSerializedVariable";
 
 export interface JsLogggedVariables {
-    loggedOnUtc: Date;
+    loggedOnUtc: string;
     serializedVariables: Array<JsSerializedVariable>;
 }

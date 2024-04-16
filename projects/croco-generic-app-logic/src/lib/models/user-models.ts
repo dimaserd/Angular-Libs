@@ -12,7 +12,7 @@ export interface ChangePasswordByToken {
 
 export interface EditClient {
     name: string;
-    birthDate: Date | null;
+    birthDate: string | null;
     surname: string;
     patronymic: string;
     sex: boolean | null;
@@ -78,8 +78,8 @@ export interface UserSearch {
 }
 
 export interface DateTimeRange {
-    min: Date | null;
-    max: Date | null;
+    min: string | null;
+    max: string | null;
 }
 
 export interface RegisterModel {
@@ -94,8 +94,8 @@ export interface RegisterModel {
 export interface ClientModel {
     id: string;
     name: string;
-    birthDate: Date | null;
-    registrationDate: Date;
+    birthDate: string | null;
+    registrationDate: string;
     surname: string;
     patronymic: string;
     sex: boolean | null;
@@ -108,7 +108,7 @@ export interface EditApplicationUser {
     id: string;
     name: string;
     email: string;
-    birthDate: Date | null;
+    birthDate: string | null;
     surname: string;
     patronymic: string;
     sex: boolean | null;
