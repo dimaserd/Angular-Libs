@@ -1,5 +1,6 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { InterfaceBlock } from "../../../extensions/InterfaceBlock";
+import { ITagViewOptions } from '../../../models/models';
 
 @Component({
   selector: 'croco-html-xml-tag-view',
@@ -23,9 +24,4 @@ export class XmlTagViewComponent {
   constructor() {
   }
 
-}
-
-export interface ITagViewOptions {
-  useCustomImageUrlRenderer: boolean;
-  renderImageUrl(fileId: number, sizeType: string): string;
 }

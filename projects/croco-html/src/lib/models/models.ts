@@ -13,3 +13,8 @@ export interface AngularMaterialTableData {
   displayedColumns: string[];
   data: object[];
 }
+
+export interface ITagViewOptions {
+  useCustomImageUrlRenderer: boolean;
+  renderImageUrl(fileId: number, sizeType: string): string;
+}

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { InterfaceBlock } from '../../../extensions/InterfaceBlock';
-import { ITagViewOptions } from '../xml-tag-view/xml-tag-view.component';
 import { FileImageTagData } from '../../../extensions';
+import { ITagViewOptions } from '../../../models/models';
 
 @Component({
   selector: 'croco-html-file-image-tag-view',

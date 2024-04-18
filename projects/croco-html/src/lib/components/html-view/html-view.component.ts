@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ITagViewOptions } from '../xml-tags';
+import { ITagViewOptions } from '../../models/models';
 
 @Component({
   selector: 'croco-html-view',
