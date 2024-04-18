@@ -46,7 +46,7 @@ import { MatTreeModule } from '@angular/material/tree';
 import { MatBadgeModule } from '@angular/material/badge';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { RichTextToHtmlPipe, TagToSpanPipe, ToHtmlBodyTagsPipe, ToPreviewHtmlPipe, ToPreviewPipe } from "./pipes";
-import { UploadFilesBtnComponent } from "./components";
+import { FileImageTagViewComponent, UploadFilesBtnComponent } from "./components";
 import { HtmlRawViewComponent } from "./components/xml-tags/html-raw-view/html-raw-view.component";
 import { HtmlViewComponent } from "./components/html-view/html-view.component";
 
@@ -71,7 +71,8 @@ export const XmlComponents = [
     XmlTagHeaderTextViewComponent,
     XmlTagHeaderInnerTextViewComponent,
     XmlTagExternalVideoComponent,
-    HtmlRawViewComponent
+    HtmlRawViewComponent,
+    FileImageTagViewComponent
 ];
 
 export const CrocoPipes = [
