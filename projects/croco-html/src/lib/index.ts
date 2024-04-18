@@ -72,7 +72,8 @@ export const XmlComponents = [
     XmlTagHeaderInnerTextViewComponent,
     XmlTagExternalVideoComponent,
     HtmlRawViewComponent,
-    FileImageTagViewComponent
+    FileImageTagViewComponent,
+    HtmlViewComponent
 ];
 
 export const CrocoPipes = [
