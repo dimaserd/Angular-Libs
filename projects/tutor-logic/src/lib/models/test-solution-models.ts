@@ -161,16 +161,15 @@ export interface QuestionAnswerWithResult {
 }
 
 export interface QuestionPointsValidationModel {
-    errorOccured: boolean; 
-    inProccess: boolean; 
-    answerPoints: number; 
-    questionTotalPoints: number; 
-    description: string; 
-    isValidated: boolean; 
-    sourceType: QuestionValidationSourceType; 
-    validatorId: string; 
+    errorOccured: boolean;
+    inProccess: boolean;
+    answerPoints: number;
+    questionTotalPoints: number;
+    description: string;
+    isValidated: boolean;
+    sourceType: QuestionValidationSourceType;
+    validatorId: string;
 }
-
 
 export interface SelectRightAnswerOrAnswersQuestionData {
     selectRightAnswerTitle: string;
@@ -178,14 +177,43 @@ export interface SelectRightAnswerOrAnswersQuestionData {
     answers: Array<Answer>;
 }
 
-
 export interface Answer {
     text: string;
     isRightAnswer: boolean;
 }
 
-
 export interface TypeRightAnswerQuestionData {
     caseInSensitive: boolean;
     rightAnswers: Array<string>;
+}
+
+export interface StudentTestSolutionDetailedModel {
+    solutionId: string;
+    hasAnswersInProccess: boolean;
+    hasCuratorValidation: boolean;
+    canCheckSingleQuestion: boolean;
+    studentGroupId: string;
+    studentId: string;
+    startedOnUtc: Date;
+    finishedOnUtc: Date | null;
+    isFinished: boolean;
+    test: StudentTestSolutionDetailedTestModel;
+    cdnOptions: S3CdnPublicOptions;
+}
+
+export interface StudentTestSolutionDetailedTestModel {
+    name: string;
+    description: string;
+    questions: Array<StudentTestSolutionDetailedTestQuestion>;
+}
+
+export interface StudentTestSolutionDetailedTestQuestion {
+    question: TestQuestionModel;
+    answerWithValidation: QuestionAnswerWithResult;
+    isQuestionLikedByStudent: boolean;
+}
+
+export interface S3CdnPublicOptions {
+    useCdn: boolean;
+    imageUrlFormat: string;
 }
