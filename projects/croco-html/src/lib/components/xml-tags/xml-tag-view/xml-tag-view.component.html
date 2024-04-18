@@ -11,7 +11,7 @@
             <croco-html-xml-tag-header-text-view [item]="item"></croco-html-xml-tag-header-text-view>
         </div>
         <div *ngIf="item.type === 'file-image'">
-            <img class="mx-auto d-block img-fluid" [src]="item.data.src"/>
+            <croco-html-file-image-tag-view [item]="item" [viewOptions]="viewOptions"></croco-html-file-image-tag-view>
         </div>
         <div *ngIf="item.type === 'table'">
     

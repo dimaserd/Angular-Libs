@@ -94,10 +94,10 @@ export class BodyTagsExtensions {
 
             let fileData = data.data as FileImageTagData;
 
-            let atts = {};
+            let attrs = {};
 
-            if(fileData.fileId){
-                atts[FileImageTagDataConsts.FileIdAttrName] = fileData.fileId;
+            if(fileData.fileId) {
+                attrs[FileImageTagDataConsts.FileIdAttrName] = fileData.fileId;
             }
 
             return {
@@ -106,7 +106,7 @@ export class BodyTagsExtensions {
                     tag: FileImageTagDataConsts.TagName,
                     displayValue: BodyTagsExtensions.getDescription(data.type)
                 },
-                attributes: atts,
+                attributes: attrs,
                 innerHtml: ""
             };
         }

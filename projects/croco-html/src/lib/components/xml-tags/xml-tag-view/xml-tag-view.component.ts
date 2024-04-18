@@ -10,9 +10,22 @@ import { InterfaceBlock } from "../../../extensions/InterfaceBlock";
 export class XmlTagViewComponent {
 
   @Input()
+  viewOptions: ITagViewOptions = {
+    useCustomImageUrlRenderer: false,
+    renderImageUrl(fileId, sizeType) {
+      return "";
+    },
+  }
+
+  @Input()
   data:InterfaceBlock[] = [];
 
   constructor() {
   }
 
+}
+
+export interface ITagViewOptions {
+  useCustomImageUrlRenderer: boolean;
+  renderImageUrl(fileId: number, sizeType: string): string;
 }
