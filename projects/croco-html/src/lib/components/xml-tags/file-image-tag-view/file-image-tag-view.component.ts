@@ -31,7 +31,8 @@ export class FileImageTagViewComponent implements OnInit {
       ? this.viewOptions.renderImageUrl(data.fileId, 'Medium')
       : data.src;
 
-      console.log("FileImageTagViewComponent.ngOnInit", data, this.viewOptions, this.imageSrc);
-
+    if (!this.imageSrc) {
+      this.imageSrc = data.src;
+    }
   }
 }
