@@ -1,3 +1,3 @@
-<div class="d-flex justify-content-center">
-  <youtube-player height="100%" width="100%" class="y-video" *ngIf="videoId" [videoId]="videoId"></youtube-player>
+<div #playerContainer class="d-flex justify-content-center y-video">
+  <youtube-player [height]="playerHeight()" [width]="playerWidth()" *ngIf="videoId" [videoId]="videoId"></youtube-player>
 </div>
