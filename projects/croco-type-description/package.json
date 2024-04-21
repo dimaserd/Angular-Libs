@@ -1,11 +1,11 @@
 {
   "name": "croco-type-description",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "peerDependencies": {
     "@angular/common": "^17.3.4",
     "@angular/core": "^17.3.4",
     "@angular/material": "^17.3.4",
-    "ngx-clipboard": ">=15.1.0"
+    "ngx-clipboard": "^16.0.0"
   },
   "dependencies": {
     "tslib": "^2.2.0"
