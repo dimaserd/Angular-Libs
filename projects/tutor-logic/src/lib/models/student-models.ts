@@ -1,16 +1,4 @@
-
 export interface StudentSimpleModel {
-    id: string; 
-    surname: string; 
-    name: string; 
-    email: string; 
-    phoneNumber: string; 
-    telegramUserName: string; 
-    telegramUserId: number | null; 
-    isDeleting: boolean; 
-}
-
-export interface StudentModel {
     id: string; 
     email: string; 
     name: string; 
