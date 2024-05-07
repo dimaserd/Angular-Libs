@@ -20,3 +20,4 @@ export { CourseThemeItemTestRestrictionStudentService } from './CourseThemeItemT
 export { StudentSubjectViewService } from './StudentSubjectViewService'
 export { StudentCourseViewService } from './StudentCourseViewService'
 export { TestSolutionDetailedQueryService } from './TestSolutionDetailedQueryService'
+export { CourseLandingPageQueryService } from './CourseLandingPageQueryService'

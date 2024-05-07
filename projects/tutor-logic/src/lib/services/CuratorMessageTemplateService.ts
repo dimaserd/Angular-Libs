@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { BaseApiResponse, GetListResult } from '../models';
 import { CreateOrUpdateCuratorMessageTemplate, DeleteCuratorMessageTemplate, SearchCuratorMessageTemplates, CuratorMessageTemplateModel } from '../models/curator-models';
 
-
 @Injectable({
   providedIn: 'root',
 })
