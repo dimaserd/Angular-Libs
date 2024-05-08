@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { CourseLandingPageDataModel } from '../models';
+import { CourseLandingPageDataModel, SearchCourseLandingPageRequest } from '../models';
 
 /**
  * Предоставляет методы для работы с лендинг страницами для курса
@@ -20,6 +20,20 @@ export class CourseLandingPageQueryService {
     this._baseUrl = baseUrl + 'api/tutor/course-landing-page/query/';
   }
 
+  /**
+   * Поиск лендинг страниц
+   * @param model 
+   * @returns 
+   */
+  search(model: SearchCourseLandingPageRequest) {
+    return this._httpClient.post<CourseLandingPageDataModel>(`${this._baseUrl}search`, model);
+  }
+
+  /**
+   * Получить лендинг страницу по идентификатору
+   * @param id 
+   * @returns 
+   */
   getById(id: string) {
 
     let params: HttpParams = new HttpParams();
