@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { CourseLandingPageDataModel, CourseLandingPageSimpleModel, SearchCourseLandingPageRequest } from '../models';
+import { CourseLandingPageDetailedModel, CourseLandingPageSimpleModel, SearchCourseLandingPageRequest } from '../models';
 import { GetListResult } from 'croco-generic-app-logic';
 
 /**
@@ -40,7 +40,7 @@ export class CourseLandingPageQueryService {
     let params: HttpParams = new HttpParams();
     params.set('id', id);
 
-    return this._httpClient.get<CourseLandingPageDataModel>(`${this._baseUrl}get-by-id`, { params: params });
+    return this._httpClient.get<CourseLandingPageDetailedModel>(`${this._baseUrl}get-by-id`, { params: params });
   }
 
   getByIdCached(id: string) {
@@ -48,6 +48,6 @@ export class CourseLandingPageQueryService {
     let params: HttpParams = new HttpParams();
     params.set('id', id);
 
-    return this._httpClient.get<CourseLandingPageDataModel>(`${this._baseUrl}get-by-id/cached`, { params: params });
+    return this._httpClient.get<CourseLandingPageDetailedModel>(`${this._baseUrl}get-by-id/cached`, { params: params });
   }
 }
