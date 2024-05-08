@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { CourseLandingPageDataModel, SearchCourseLandingPageRequest } from '../models';
+import { CourseLandingPageDataModel, CourseLandingPageSimpleModel, SearchCourseLandingPageRequest } from '../models';
+import { GetListResult } from 'croco-generic-app-logic';
 
 /**
  * Предоставляет методы для работы с лендинг страницами для курса
@@ -26,7 +27,7 @@ export class CourseLandingPageQueryService {
    * @returns 
    */
   search(model: SearchCourseLandingPageRequest) {
-    return this._httpClient.post<CourseLandingPageDataModel>(`${this._baseUrl}search`, model);
+    return this._httpClient.post<GetListResult<CourseLandingPageSimpleModel>>(`${this._baseUrl}search`, model);
   }
 
   /**
