@@ -8,18 +8,17 @@ export interface SearchStudentGroups {
 }
 
 export interface StudentGroupSimpleModel {
-    id: string; 
-    alias: string; 
-    name: string; 
-    isDeleting: boolean; 
-    useHtmlForName: boolean; 
-    nameHtml: string; 
+    id: string;
+    alias: string;
+    name: string;
+    isDeleting: boolean;
+    useHtmlForName: boolean;
+    nameHtml: string;
 }
 
 export interface StudentGroupDetailedModel {
     id: string;
     name: string;
-    studentGroupId: string;
     alias: string;
     enterCode: string;
     useCourse: boolean;

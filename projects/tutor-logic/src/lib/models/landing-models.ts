@@ -13,6 +13,7 @@ export interface SearchCourseLandingPageRequest {
 export interface CourseLandingPageDetailedModel {
     id: string;
     name: string;
+    studentGroupId: string;
     description: string;
     dataJson: string;
     dataType: string;
