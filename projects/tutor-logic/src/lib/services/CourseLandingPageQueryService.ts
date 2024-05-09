@@ -36,18 +36,10 @@ export class CourseLandingPageQueryService {
    * @returns 
    */
   getById(id: string) {
-
-    let params: HttpParams = new HttpParams();
-    params.set('id', id);
-
-    return this._httpClient.get<CourseLandingPageDetailedModel>(`${this._baseUrl}get-by-id`, { params: params });
+    return this._httpClient.get<CourseLandingPageDetailedModel>(`${this._baseUrl}get-by-id?id=${id}`);
   }
 
   getByIdCached(id: string) {
-
-    let params: HttpParams = new HttpParams();
-    params.set('id', id);
-
-    return this._httpClient.get<CourseLandingPageDetailedModel>(`${this._baseUrl}get-by-id/cached`, { params: params });
+    return this._httpClient.get<CourseLandingPageDetailedModel>(`${this._baseUrl}get-by-id/cached?id=${id}`);
   }
 }
