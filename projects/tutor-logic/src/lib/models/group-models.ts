@@ -19,6 +19,7 @@ export interface StudentGroupSimpleModel {
 export interface StudentGroupDetailedModel {
     id: string;
     name: string;
+    studentGroupId: string;
     alias: string;
     enterCode: string;
     useCourse: boolean;
