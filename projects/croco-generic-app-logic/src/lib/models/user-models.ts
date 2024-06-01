@@ -115,3 +115,18 @@ export interface EditApplicationUser {
     objectJson: string;
     phoneNumber: string;
 }
+
+/**
+ * Модель для изменения пароля
+ */
+export interface ChangeUserPasswordModel {
+    /**
+     * Старый пароль
+     */
+    oldPassword: string;
+
+    /**
+     * Новый пароль
+     */
+    newPassword: string;
+}
