@@ -4,9 +4,8 @@ export interface ForgotPasswordModel {
     email: string;
 }
 
-export interface ChangePasswordByToken {
-    userId: string;
-    token: string;
+export interface ChangePasswordByTokenRequest {
+    requestId: string;
     newPassword: string;
 }
 

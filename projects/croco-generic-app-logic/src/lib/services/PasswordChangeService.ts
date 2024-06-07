@@ -1,8 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { BaseApiResponse, ChangeUserPasswordModel } from "../models";
-import { ChangePasswordByToken, ForgotPasswordModel } from "../models";
+import { BaseApiResponse, ChangePasswordByTokenRequest, ChangeUserPasswordModel } from "../models";
+import { ForgotPasswordModel } from "../models";
 
 /**
  * Сервис для изменения пароля
@@ -33,7 +33,7 @@ export class PasswordChangeService {
      * @param data 
      * @returns 
      */
-    public changePasswordByToken(data: ChangePasswordByToken): Observable<BaseApiResponse> {
+    public changePasswordByToken(data: ChangePasswordByTokenRequest): Observable<BaseApiResponse> {
         return this._httpClient.post<BaseApiResponse>(this._baseControllerUrl + '/forgot/change', data);
     }
 
