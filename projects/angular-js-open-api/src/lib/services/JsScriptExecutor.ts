@@ -7,16 +7,19 @@ import { JsOpenApiDocs, JsScriptExecutedResult, RemoteJsOpenApiDocs } from "../m
 })
 export class JsScriptExecutor{
     
+    private _baseUrl = "";
+
     constructor(private _httpClient: HttpClient,
-         @Inject('BASE_URL') private _url: string){
+         @Inject('BASE_URL') private _url: string) {
+        this._baseUrl = `${_url}api/admin/js-open-api`;
     }
 
     public getDocs(){
-        return this._httpClient.get<JsOpenApiDocs>(this._url + 'JsOpenApi/GetDocs');
+        return this._httpClient.get<JsOpenApiDocs>(`${this._baseUrl}/GetDocs`);
     }
 
     public getRemoteDocs(){
-        return this._httpClient.get<RemoteJsOpenApiDocs[]>(this._url + 'JsOpenApi/GetRemoteDocs', {})
+        return this._httpClient.get<RemoteJsOpenApiDocs[]>(`${this._baseUrl}/GetRemoteDocs`, {})
     }
 
     public ExecuteScript(script: string) {
@@ -25,6 +28,6 @@ export class JsScriptExecutor{
             script: script
         };
         
-        return this._httpClient.post<JsScriptExecutedResult>(this._url + "JsOpenApi/Execute", data);
+        return this._httpClient.post<JsScriptExecutedResult>(`${this._baseUrl}/Execute`, data);
     }
 }
