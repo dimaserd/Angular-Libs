@@ -31,4 +31,5 @@ export interface CourseLandingPageBlockModel {
     description: string;
     dataJson: string;
     dataType: string;
+    isVisible: boolean;
 }
