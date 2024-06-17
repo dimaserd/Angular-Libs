@@ -4,6 +4,8 @@ export interface CourseLandingPageSimpleModel {
     id: string;
     name: string;
     description: string;
+    groupId: string;
+    groupName: string;
 }
 
 export interface SearchCourseLandingPageRequest {
