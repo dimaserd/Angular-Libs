@@ -7,6 +7,7 @@ export interface MenuItem {
     title: string;
     link: string;
     visibleCheckName: string;
+    visibleCheckNames: string[];
     icon: IconWithSourceType;
     children: Array<MenuItem>;
 }
