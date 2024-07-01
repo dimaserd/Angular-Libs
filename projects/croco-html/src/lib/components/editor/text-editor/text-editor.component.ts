@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { HtmlBodyTag } from '../../../models/models';
 
 @Component({
@@ -8,7 +7,6 @@ import { HtmlBodyTag } from '../../../models/models';
   styleUrls: ['./text-editor.component.css']
 })
 export class TextEditorComponent implements OnInit {
-
 
   @Input()
   tag: HtmlBodyTag;

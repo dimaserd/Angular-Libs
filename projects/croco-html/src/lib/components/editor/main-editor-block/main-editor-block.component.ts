@@ -22,7 +22,7 @@ export class MainEditorBlockComponent implements OnInit {
 
   constructor() { }
 
-  tagUpdatedHandler(tag:HtmlBodyTag):void{
+  tagUpdatedHandler(tag:HtmlBodyTag): void{
   }
 
   save(){

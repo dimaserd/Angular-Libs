@@ -1,14 +1,9 @@
 <div [hidden]="true">
-    <croco-app-upload-files-btn #fakeBtn 
-        (onFilesUploaded)="filesUploadedHandler($event)" 
-        [btnText]="'Добавить изображения'"
-        [createLocalCopiesNow]="true"
-        (postFilesStarted)="postFilesStartedEventHandler($event)" 
-        [extAccepts]="'image/*'"></croco-app-upload-files-btn>
+    <croco-app-upload-files-btn #fakeBtn (onFilesUploaded)="filesUploadedHandler($event)"
+        [btnText]="'Добавить изображения'" [createLocalCopiesNow]="true"
+        (postFilesStarted)="postFilesStartedEventHandler($event)" [extAccepts]="'image/*'"></croco-app-upload-files-btn>
 </div>
 
 <div>
-    <button class="w-100" 
-        (click)="handleClick()"
-        mat-stroked-button>Добавить изображения</button>
+    <button class="w-100" (click)="handleClick()" mat-stroked-button>Добавить изображения</button>
 </div>
