@@ -17,4 +17,9 @@ export class TutorRoles {
      * Студент (ученик) - проходит курсы, решает тесты, просматривает материалы.
      */
     static readonly student: string = 'Tutor.Student';
+
+    /**
+     * Пользователь, который может вносить вопросы
+     */
+    static readonly testAuthor: string = 'Tutor.TestAuthor';
 }
