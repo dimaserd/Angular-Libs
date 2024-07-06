@@ -1,5 +1,14 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component, ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
 import { BodyTagsExtensions } from '../../../extensions/BodyTagsExtensions';
 import { FileImageTagDataConsts } from '../../../extensions/ImageMethods';
 import { TextMethods } from '../../../extensions/TextMethods';
@@ -8,6 +17,7 @@ import { XmlExtensions } from '../../../extensions/XmlExtensions';
 import { TagItem, HtmlBodyTag } from '../../../models/models';
 import { FilePostingStarted } from '../../upload-files-btn/upload-files-btn.component';
 import { DefaultTags } from './DefaultTags';
+import {AlignmentsData, EAlignments} from "./DefaultAligments";
 
 @Component({
   selector: 'croco-visual-editor',
@@ -15,9 +25,17 @@ import { DefaultTags } from './DefaultTags';
   styleUrls: ['./visual-editor.component.css']
 })
 export class VisualEditorComponent implements OnInit, AfterViewInit {
+  @ViewChild('textArea') textArea: ElementRef;
 
   isLoading = false;
   loadingText = "Идёт загрузка";
+  isActiveAddText = false;
+  text = '';
+
+  alignment = EAlignments.Left;
+  textTag = DefaultTags.tags[2].tag;
+  textTagOptions = DefaultTags.tags
+  alignmentOptions = AlignmentsData
 
   @Input()
   showMarkUp = true;
@@ -54,6 +72,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   rendered = new EventEmitter<boolean>();
 
   bodyTags: HtmlBodyTag[] = [];
+  saveBodyTags: HtmlBodyTag[] = [];
 
   constructor(
     private _cdref: ChangeDetectorRef) { }
@@ -74,7 +93,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     let innerHtml = "";
 
     if(TextMethods.textTags.includes(tagDescription.tag)){
-      attrs["h-align"] = "left";
+      attrs["h-align"] =  EAlignments.Left;
       innerHtml = "Введите ваш текст";
     }
     else if(tagDescription.tag == ExternalVideoTagDataConsts.TagName){
@@ -94,6 +113,51 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
 
     this.recalculateHtml();
   }
+
+  addText(): void {
+    this.isActiveAddText = !this.isActiveAddText;
+    this.saveBodyTags =  JSON.parse(JSON.stringify(this.bodyTags));
+    if (this.isActiveAddText) {
+      setTimeout(()=> {
+        this.textArea.nativeElement.focus();
+      })
+    }
+    this.resetTextStyle();
+  }
+
+  closeText(): void {
+    this.isActiveAddText = !this.isActiveAddText;
+    this.bodyTags = JSON.parse(JSON.stringify(this.saveBodyTags));
+    this.resetTextStyle();
+  }
+
+  resetTextStyle(): void {
+    this.text = '';
+    this.alignment =  EAlignments.Left;
+    this.textTag = DefaultTags.tags[2].tag;
+  }
+
+  modelChanged() {
+    let lines = this.text.split('\n');
+    this.bodyTags = JSON.parse(JSON.stringify(this.saveBodyTags));
+    let tagDescription = this.tags
+      .find(x => x.tag === this.textTag);
+
+    for (let i = 0; i < lines.length; i++) {
+      if (lines[i].length > 0) {
+        this.bodyTags.push({
+          tagDescription,
+          innerHtml: lines[i],
+          attributes: {
+            "h-align":`${this.alignment}`
+          },
+          presentOrEdit: true
+        });
+        this.recalculateHtml();
+      }
+    }
+  }
+
 
   postFilesStartedEventHandler(model:FilePostingStarted){
     this.loadingText = "Файлы загружаются на сервер";
