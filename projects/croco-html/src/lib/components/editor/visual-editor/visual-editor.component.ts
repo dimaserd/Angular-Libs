@@ -19,7 +19,23 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   isLoading = false;
   loadingText = "Идёт загрузка";
   isActiveAddText = false;
+  alignment = 'left';
   text = '';
+  textTag = 'text';
+  textTagOptions = [
+    { value: 'text', text: 'Простой текст' },
+    { value: 'h1', text: 'Заголовок 1 уровня' },
+    { value: 'h2', text: 'Заголовок 2 уровня' },
+    { value: 'h3', text: 'Заголовок 3 уровня' },
+    { value: 'h4', text: 'Заголовок 4 уровня' },
+    { value: 'h5', text: 'Заголовок 5 уровня' },
+    { value: 'h6', text: 'Заголовок 6 уровня' },
+  ];
+  alignmentOptions = [
+    { value: 'left', text: 'Слева' },
+    { value: 'center', text: 'По центру' },
+    { value: 'right', text: 'Справа' },
+  ];
 
   @Input()
   showMarkUp = true;
@@ -95,18 +111,32 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
       presentOrEdit: true
     });
 
-    this.recalculateBodyTags();
+    this.recalculateHtml();
   }
+
   addText(): void {
     this.isActiveAddText = !this.isActiveAddText;
-    this.saveBodyTags =  this.isActiveAddText ? JSON.parse(JSON.stringify(this.bodyTags)) : []
+    this.saveBodyTags =  JSON.parse(JSON.stringify(this.bodyTags));
+    this.resetTextStyle();
+  }
+
+  closeText(): void {
+    this.isActiveAddText = !this.isActiveAddText;
+    this.bodyTags = JSON.parse(JSON.stringify(this.saveBodyTags));
+    this.resetTextStyle();
+  }
+
+  resetTextStyle(): void {
+    this.text = '';
+    this.alignment = 'left';
+    this.textTag = 'text';
   }
 
   modelChanged() {
     let lines = this.text.split('\n');
     this.bodyTags = JSON.parse(JSON.stringify(this.saveBodyTags));
     let tagDescription = this.tags
-      .find(x => x.tag === 'text');
+      .find(x => x.tag === this.textTag);
 
     for (let i = 0; i < lines.length; i++) {
       if (lines[i].length > 0) {
@@ -114,15 +144,13 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
           tagDescription,
           innerHtml: lines[i],
           attributes: {
-            "h-align": "left"
+            "h-align":`${this.alignment}`
           },
           presentOrEdit: true
         });
         this.recalculateHtml();
       }
-
     }
-
   }
 
 

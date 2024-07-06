@@ -13,7 +13,8 @@
           <button (click)="addText()" class="w-100" mat-stroked-button *ngIf="!isActiveAddText">
             Добавить текст
           </button>
-          <mat-form-field class="w-100" *ngIf="isActiveAddText">
+          <ng-container *ngIf="isActiveAddText">
+            <mat-form-field class="w-100" >
             <textarea
               #autosize="cdkTextareaAutosize"
               matInput
@@ -24,10 +25,34 @@
               [(ngModel)]="text"
               (ngModelChange)="modelChanged()"
             ></textarea>
-          </mat-form-field>
-          <button (click)="addText()" class="w-100" mat-stroked-button *ngIf="isActiveAddText">
-            Закрыть
-          </button>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Тег для текста</mat-label>
+              <mat-select [(ngModel)]="textTag" (ngModelChange)="modelChanged()">
+                <mat-option *ngFor="let option of textTagOptions" value="{{ option.value }}">
+                  {{ option.text }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Горизонтальное выравнивание</mat-label>
+              <mat-select [(ngModel)]="alignment" (ngModelChange)="modelChanged()">
+                <mat-option *ngFor="let option of alignmentOptions" value="{{ option.value }}">
+                  {{ option.text }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </ng-container>
+          <div class="d-flex flex-nowrap justify-content-end w-100">
+            <button (click)="addText()" class="w-20" style="margin-right: 10px" mat-flat-button color="primary" *ngIf="isActiveAddText">
+              Добавить
+            </button>
+            <button (click)="closeText()" class="w-20" mat-flat-button color="warn"  *ngIf="isActiveAddText">
+              Отменить
+            </button>
+          </div>
+
         </div>
       </div>
     </mat-card-content>
