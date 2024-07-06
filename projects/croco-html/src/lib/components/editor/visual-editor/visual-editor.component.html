@@ -5,7 +5,34 @@
     </div>
     <div style="height: 10px;"></div>
 </div>
+<div [hidden]="isLoading">
+  <mat-card style="margin: 2px;" class="mat-card">
+    <mat-card-content>
+      <div class="row d-flex align-items-center">
+        <div class="col-12">
+          <button (click)="addText()" class="w-100" mat-stroked-button *ngIf="!isActiveAddText">
+            Добавить текст
+          </button>
+          <mat-form-field class="w-100" *ngIf="isActiveAddText">
+            <textarea
+              #autosize="cdkTextareaAutosize"
+              matInput
+              cdkTextareaAutosize
+              cdkAutosizeMinRows="1"
+              cdkAutosizeMaxRows="5"
+              placeholder="Текст"
+              [(ngModel)]="text"
+              (ngModelChange)="modelChanged()"
+            ></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
 
+  <div style="height: 10px;">
+  </div>
+</div>
 <div [hidden]="isLoading">
     <div cdkDropList (cdkDropListDropped)="drop($event)">
         <div *ngFor="let tag of bodyTags; let i = index" cdkDrag>
@@ -21,10 +48,9 @@
                             </svg>
                         </div>
                         <div>
-                            <mat-chip-listbox aria-label="Tag display value">
-                                <mat-chip-option color="primary"
-                                    selected>{{tag.tagDescription.displayValue}}</mat-chip-option>
-                            </mat-chip-listbox>
+                          <div class="badge">
+                            {{tag.tagDescription.displayValue}}
+                          </div>
                         </div>
                     </div>
 

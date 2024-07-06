@@ -18,6 +18,8 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
 
   isLoading = false;
   loadingText = "Идёт загрузка";
+  isActiveAddText = false;
+  text = '';
 
   @Input()
   showMarkUp = true;
@@ -54,6 +56,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   rendered = new EventEmitter<boolean>();
 
   bodyTags: HtmlBodyTag[] = [];
+  saveBodyTags: HtmlBodyTag[] = [];
 
   constructor(
     private _cdref: ChangeDetectorRef) { }
@@ -92,8 +95,33 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
       presentOrEdit: true
     });
 
-    this.recalculateHtml();
+    this.recalculateBodyTags();
   }
+  addText(): void {
+    this.isActiveAddText = !this.isActiveAddText;
+    this.saveBodyTags =  JSON.parse(JSON.stringify(this.bodyTags));
+  }
+
+  modelChanged() {
+    let lines = this.text.split('\n');
+    this.bodyTags = JSON.parse(JSON.stringify(this.saveBodyTags));
+    let tagDescription = this.tags
+      .find(x => x.tag === 'text');
+
+    for (let i = 0; i < lines.length; i++) {
+      this.bodyTags.push({
+        tagDescription,
+        innerHtml: lines[i],
+        attributes: {
+          "h-align": "left"
+        },
+        presentOrEdit: true
+      });
+      this.recalculateHtml();
+    }
+
+  }
+
 
   postFilesStartedEventHandler(model:FilePostingStarted){
     this.loadingText = "Файлы загружаются на сервер";
