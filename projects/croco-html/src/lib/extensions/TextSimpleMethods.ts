@@ -1,4 +1,5 @@
 import { BaseApiResponse } from "./TableMethods";
+import {EAlignments} from "../components/editor/visual-editor/DefaultAligments";
 
 export const TextTag = "text";
 
@@ -25,7 +26,7 @@ export class TextSimpleMethods {
     static supportedTags = ["sup", "sub", "strong", "b", "i", "u"];
 
     static ExtractTextTag(elem: HTMLElement): SimpleTextTag {
-        var hAlignValue = elem.getAttribute("h-align") ?? "left" as any;
+        var hAlignValue = elem.getAttribute("h-align") ?? EAlignments.Left as any;
 
         var data: SimpleTextTagData = {
             textTagName: elem.tagName.toLowerCase(),
@@ -50,7 +51,7 @@ export class TextSimpleMethods {
             result.data.html = '';
         }
 
-        var alignmentVals = ["left", "right", "center"];
+        var alignmentVals = [EAlignments.Left, EAlignments.Right, EAlignments.Center];
 
         if (alignmentVals.indexOf(hAlignValue) < 0) {
 

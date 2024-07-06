@@ -17,6 +17,7 @@ import { XmlExtensions } from '../../../extensions/XmlExtensions';
 import { TagItem, HtmlBodyTag } from '../../../models/models';
 import { FilePostingStarted } from '../../upload-files-btn/upload-files-btn.component';
 import { DefaultTags } from './DefaultTags';
+import {AlignmentsData, EAlignments} from "./DefaultAligments";
 
 @Component({
   selector: 'croco-visual-editor',
@@ -31,14 +32,10 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   isActiveAddText = false;
   text = '';
 
-  alignment = 'left';
-  textTag = 'text';
+  alignment = EAlignments.Left;
+  textTag = DefaultTags.tags[2].tag;
   textTagOptions = DefaultTags.tags
-  alignmentOptions = [
-    { value: 'left', text: 'Слева' },
-    { value: 'center', text: 'По центру' },
-    { value: 'right', text: 'Справа' },
-  ];
+  alignmentOptions = AlignmentsData
 
   @Input()
   showMarkUp = true;
@@ -96,7 +93,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     let innerHtml = "";
 
     if(TextMethods.textTags.includes(tagDescription.tag)){
-      attrs["h-align"] = "left";
+      attrs["h-align"] =  EAlignments.Left;
       innerHtml = "Введите ваш текст";
     }
     else if(tagDescription.tag == ExternalVideoTagDataConsts.TagName){
@@ -120,9 +117,11 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   addText(): void {
     this.isActiveAddText = !this.isActiveAddText;
     this.saveBodyTags =  JSON.parse(JSON.stringify(this.bodyTags));
-    setTimeout(()=> {
-      this.textArea.nativeElement.focus();
-    })
+    if (this.isActiveAddText) {
+      setTimeout(()=> {
+        this.textArea.nativeElement.focus();
+      })
+    }
     this.resetTextStyle();
   }
 
@@ -134,8 +133,8 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
 
   resetTextStyle(): void {
     this.text = '';
-    this.alignment = 'left';
-    this.textTag = 'text';
+    this.alignment =  EAlignments.Left;
+    this.textTag = DefaultTags.tags[2].tag;
   }
 
   modelChanged() {
