@@ -1,5 +1,14 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component, ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
 import { BodyTagsExtensions } from '../../../extensions/BodyTagsExtensions';
 import { FileImageTagDataConsts } from '../../../extensions/ImageMethods';
 import { TextMethods } from '../../../extensions/TextMethods';
@@ -15,22 +24,16 @@ import { DefaultTags } from './DefaultTags';
   styleUrls: ['./visual-editor.component.css']
 })
 export class VisualEditorComponent implements OnInit, AfterViewInit {
+  @ViewChild('textArea') textArea: ElementRef;
 
   isLoading = false;
   loadingText = "Идёт загрузка";
   isActiveAddText = false;
-  alignment = 'left';
   text = '';
+
+  alignment = 'left';
   textTag = 'text';
-  textTagOptions = [
-    { value: 'text', text: 'Простой текст' },
-    { value: 'h1', text: 'Заголовок 1 уровня' },
-    { value: 'h2', text: 'Заголовок 2 уровня' },
-    { value: 'h3', text: 'Заголовок 3 уровня' },
-    { value: 'h4', text: 'Заголовок 4 уровня' },
-    { value: 'h5', text: 'Заголовок 5 уровня' },
-    { value: 'h6', text: 'Заголовок 6 уровня' },
-  ];
+  textTagOptions = DefaultTags.tags
   alignmentOptions = [
     { value: 'left', text: 'Слева' },
     { value: 'center', text: 'По центру' },
@@ -117,6 +120,9 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   addText(): void {
     this.isActiveAddText = !this.isActiveAddText;
     this.saveBodyTags =  JSON.parse(JSON.stringify(this.bodyTags));
+    setTimeout(()=> {
+      this.textArea.nativeElement.focus();
+    })
     this.resetTextStyle();
   }
 
