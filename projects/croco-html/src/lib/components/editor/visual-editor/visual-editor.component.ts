@@ -99,7 +99,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   }
   addText(): void {
     this.isActiveAddText = !this.isActiveAddText;
-    this.saveBodyTags =  JSON.parse(JSON.stringify(this.bodyTags));
+    this.saveBodyTags =  this.isActiveAddText ? JSON.parse(JSON.stringify(this.bodyTags)) : []
   }
 
   modelChanged() {
@@ -109,15 +109,18 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
       .find(x => x.tag === 'text');
 
     for (let i = 0; i < lines.length; i++) {
-      this.bodyTags.push({
-        tagDescription,
-        innerHtml: lines[i],
-        attributes: {
-          "h-align": "left"
-        },
-        presentOrEdit: true
-      });
-      this.recalculateHtml();
+      if (lines[i].length > 0) {
+        this.bodyTags.push({
+          tagDescription,
+          innerHtml: lines[i],
+          attributes: {
+            "h-align": "left"
+          },
+          presentOrEdit: true
+        });
+        this.recalculateHtml();
+      }
+
     }
 
   }

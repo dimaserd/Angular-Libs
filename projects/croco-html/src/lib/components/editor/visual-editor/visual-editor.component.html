@@ -25,6 +25,9 @@
               (ngModelChange)="modelChanged()"
             ></textarea>
           </mat-form-field>
+          <button (click)="addText()" class="w-100" mat-stroked-button *ngIf="isActiveAddText">
+            Закрыть
+          </button>
         </div>
       </div>
     </mat-card-content>
