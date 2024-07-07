@@ -4,9 +4,8 @@ import { ExternalVideoTagDataConsts } from '../../../extensions/VideoMethods';
 import { TagItem } from '../../../models/models';
 
 export class DefaultTags {
-  static tags: TagItem[] = [
-    { tag: FileImageTagDataConsts.TagName, displayValue: 'Изображение' },
-    { tag: ExternalVideoTagDataConsts.TagName, displayValue: 'Внешнее видео Youtube' },
+
+  static textTags: TagItem[] = [
     { tag: 'text', displayValue: 'Текст' },
     { tag: 'h1', displayValue: 'Заголовок 1 уровня' },
     { tag: 'h2', displayValue: 'Заголовок 2 уровня' },
@@ -14,6 +13,12 @@ export class DefaultTags {
     { tag: 'h4', displayValue: 'Заголовок 4 уровня' },
     { tag: 'h5', displayValue: 'Заголовок 5 уровня' },
     { tag: 'h6', displayValue: 'Заголовок 6 уровня' },
+  ]
+
+  static tags: TagItem[] = [
+    { tag: FileImageTagDataConsts.TagName, displayValue: 'Изображение' },
+    { tag: ExternalVideoTagDataConsts.TagName, displayValue: 'Внешнее видео Youtube' },
+    ...DefaultTags.textTags
   ];
 
   static htmlRawTag: TagItem = {

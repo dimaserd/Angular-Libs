@@ -33,8 +33,8 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   text = '';
 
   alignment = EAlignments.Left;
-  textTag = DefaultTags.tags[2].tag;
-  textTagOptions = DefaultTags.tags
+  textTag = DefaultTags.textTags[0].tag;
+  textTagOptions = DefaultTags.textTags
   alignmentOptions = AlignmentsData
 
   @Input()
@@ -134,7 +134,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   resetTextStyle(): void {
     this.text = '';
     this.alignment =  EAlignments.Left;
-    this.textTag = DefaultTags.tags[2].tag;
+    this.textTag = DefaultTags.textTags[0].tag;
   }
 
   modelChanged() {
