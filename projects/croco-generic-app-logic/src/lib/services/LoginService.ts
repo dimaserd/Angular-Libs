@@ -3,8 +3,7 @@ import { Inject } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { concatMap, tap } from 'rxjs/operators';
-import { CurrentLoginData, LoginModel, LoginResultModel, LoginByEmailOrPhoneNumber, LoginViaLinkRequest, LoginViaLinkResult } from '../models/login-models';
-import { BaseApiResponse } from '../models/models';
+import { CurrentLoginData, LoginModel, LoginResultModel, LoginByEmailOrPhoneNumber, LoginViaLinkRequest, LoginViaLinkResult, LogoutResponse, LogoutErrorType } from '../models/login-models';
 
 @Injectable({
   providedIn: 'root',
@@ -57,11 +56,11 @@ export class LoginService {
       .post<LoginResultModel>(this.baseUrl + 'api/Account/Login', data)
   }
 
-  logOut(): Observable<BaseApiResponse> {
+  logOut(): Observable<LogoutResponse> {
     return this._httpClient
-      .post<BaseApiResponse>(this.baseUrl + 'api/Account/LogOut', {})
+      .post<LogoutResponse>(this.baseUrl + 'api/Account/LogOut', {})
       .pipe(tap(res => {
-        if(res.isSucceeded){
+        if(res.succeeded || (!res.succeeded && res.errorType === LogoutErrorType.NotAuthenticated)) {
           this.clearLoginDataCache();
           this.getLoginData().subscribe();
         }

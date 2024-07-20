@@ -1,3 +1,15 @@
+export interface LogoutResponse {
+    succeeded: boolean;
+    errorMessage: string;
+    errorType: LogoutErrorType;
+}
+
+export enum LogoutErrorType {
+    NotAuthenticated = 'NotAuthenticated',
+    SignoutError = 'SignoutError'
+}
+
+
 export interface LoginViaLinkRequest {
     loginId: string;
     password: string;
@@ -29,18 +41,18 @@ export enum LinkActivationError {
 }
 
 export interface CurrentLoginData {
-    isAuthenticated: boolean; 
+    isAuthenticated: boolean;
     userId: string;
     email: string;
     roles: Array<string>;
-    avatarFileId: number | null; 
-    name: string; 
-    surname: string; 
-    patronymic: string; 
-    noEmail: boolean; 
-    phoneNumber: string; 
-    noPhoneNumber: boolean; 
-    applicationId: string; 
+    avatarFileId: number | null;
+    name: string;
+    surname: string;
+    patronymic: string;
+    noEmail: boolean;
+    phoneNumber: string;
+    noPhoneNumber: boolean;
+    applicationId: string;
 }
 
 export interface LoginModel {
