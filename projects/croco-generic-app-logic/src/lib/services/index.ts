@@ -1,6 +1,7 @@
 export {LoginLinkService} from './LoginLinkService'
 export {LoginService} from './LoginService'
 export {FileUploadService} from './FileUploadService'
+export {FilesQueryService} from './FilesQueryService'
 export {MenuService} from './MenuService'
 export {UserService} from './UserService'
 export {ClientService} from './ClientService'
