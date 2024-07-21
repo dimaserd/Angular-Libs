@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { ITagViewOptions } from '../../models/models';
 
 @Component({
   selector: 'croco-html-view',
@@ -9,12 +8,4 @@ import { ITagViewOptions } from '../../models/models';
 export class HtmlViewComponent {
   @Input()
   html: string = "<body></body>";
-
-  @Input()
-  viewOptions: ITagViewOptions = {
-    useCustomImageUrlRenderer: false,
-    renderImageUrl(fileId, sizeType) {
-      return "";
-    },
-  }
 }
