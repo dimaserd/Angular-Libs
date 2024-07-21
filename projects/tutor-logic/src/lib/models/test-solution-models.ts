@@ -199,7 +199,6 @@ export interface StudentTestSolutionDetailedModel {
     finishedOnUtc: Date | null;
     isFinished: boolean;
     test: StudentTestSolutionDetailedTestModel;
-    cdnOptions: S3CdnPublicOptions;
 }
 
 export interface StudentTestSolutionDetailedTestModel {
@@ -212,9 +211,4 @@ export interface StudentTestSolutionDetailedTestQuestion {
     question: TestQuestionModel;
     answerWithValidation: QuestionAnswerWithResult;
     isQuestionLikedByStudent: boolean;
-}
-
-export interface S3CdnPublicOptions {
-    useCdn: boolean;
-    imageUrlFormat: string;
 }
