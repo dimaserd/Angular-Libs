@@ -138,6 +138,7 @@ export interface TestQuestionModel {
 
 export interface TypeAnswerWithErrorsQuestionData {
     rightAnswer: string;
+    ignoreTextOrder: boolean;
 }
 
 

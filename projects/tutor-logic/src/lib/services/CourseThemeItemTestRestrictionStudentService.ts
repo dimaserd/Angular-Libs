@@ -11,7 +11,6 @@ import { CourseItemStudentTestRestrictionModel, GetCourseThemeItemStudentTestRes
  *
  * базовый путь = api/tutor/course-theme-item/test-restriction/student
  */
-
 @Injectable({
     providedIn: 'root',
 })
