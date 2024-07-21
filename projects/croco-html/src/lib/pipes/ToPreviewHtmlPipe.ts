@@ -1,12 +1,17 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import { HtmlExtractionMethods, HtmlExtractionOptions } from '../extensions/HtmlExtractionMethods';
+import { Inject, Pipe, PipeTransform } from '@angular/core';
+import { HtmlExtractionMethods, CrocoHtmlOptions } from '../extensions/HtmlExtractionMethods';
 import { InterfaceBlock } from "../extensions/InterfaceBlock";
+import { CrocoHtmlOptionsToken } from '../consts';
 
 @Pipe({
   name: 'topreviewhtml'
 })
 export class ToPreviewHtmlPipe implements PipeTransform {
-  transform(value: string, options: HtmlExtractionOptions): InterfaceBlock[] {
-    return HtmlExtractionMethods.transformHtmlStringToBlocks(value, options);
+
+  constructor(@Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions) {
+  }
+
+  transform(value: string): InterfaceBlock[] {
+    return HtmlExtractionMethods.transformHtmlStringToBlocks(value, this._options);
   }
 }

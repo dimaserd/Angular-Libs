@@ -5,9 +5,8 @@ import { TextMethods } from "./TextMethods";
 import { GenericTextTag, TextSimpleMethods } from "./TextSimpleMethods";
 import { ExternalVideoTagDataConsts, VideoMethods } from "./VideoMethods";
 
-export interface HtmlExtractionOptions{
-  useCustomDomain: boolean;
-  domain: string;
+export interface CrocoHtmlOptions {
+  publicImageResizedUrlFormat: string;
 }
 
 export class HtmlExtractionMethods {
@@ -21,26 +20,26 @@ export class HtmlExtractionMethods {
   }
 
   static Extractors = {
-    ["TEXT"]: (elem: HTMLElement, options: HtmlExtractionOptions) => TextSimpleMethods.ExtractTextTag(elem),
-    ["FILE-IMAGE"]: (elem: HTMLElement, options: HtmlExtractionOptions) => ImageMethods.ExtractImage(elem, options),
-    ["TABLE"]: (elem: HTMLElement, options: HtmlExtractionOptions) => TableMethods.getTableFromHtmlTag(elem as HTMLTableElement, options),
-    ["RICH-TEXT"]: (elem: HTMLElement, options: HtmlExtractionOptions) => TextMethods.ExtractRichTextData(elem),
-    ["HTML-RAW"]: (elem: HTMLElement, options: HtmlExtractionOptions) => ({
+    ["TEXT"]: (elem: HTMLElement, options: CrocoHtmlOptions) => TextSimpleMethods.ExtractTextTag(elem),
+    ["FILE-IMAGE"]: (elem: HTMLElement, options: CrocoHtmlOptions) => ImageMethods.ExtractImage(elem, options),
+    ["TABLE"]: (elem: HTMLElement, options: CrocoHtmlOptions) => TableMethods.getTableFromHtmlTag(elem as HTMLTableElement, options),
+    ["RICH-TEXT"]: (elem: HTMLElement, options: CrocoHtmlOptions) => TextMethods.ExtractRichTextData(elem),
+    ["HTML-RAW"]: (elem: HTMLElement, options: CrocoHtmlOptions) => ({
       type: "html-raw",
       data: {
         innerHTML: elem.innerHTML
       }
     }),
-    ["H1"]: (elem: HTMLElement, options: HtmlExtractionOptions) => HtmlExtractionMethods.ExtractHeaderTag(elem, "h1"),
-    ["H2"]: (elem: HTMLElement, options: HtmlExtractionOptions) => HtmlExtractionMethods.ExtractHeaderTag(elem, "h2"),
-    ["H3"]: (elem: HTMLElement, options: HtmlExtractionOptions) => HtmlExtractionMethods.ExtractHeaderTag(elem, "h3"),
-    ["H4"]: (elem: HTMLElement, options: HtmlExtractionOptions) => HtmlExtractionMethods.ExtractHeaderTag(elem, "h4"),
-    ["H5"]: (elem: HTMLElement, options: HtmlExtractionOptions) => HtmlExtractionMethods.ExtractHeaderTag(elem, "h5"),
-    ["H6"]: (elem: HTMLElement, options: HtmlExtractionOptions) => HtmlExtractionMethods.ExtractHeaderTag(elem, "h6"),
-    [ExternalVideoTagDataConsts.TagName.toUpperCase()]: (elem: HTMLElement, options: HtmlExtractionOptions) => VideoMethods.ExtractExternalVideoTag(elem)
+    ["H1"]: (elem: HTMLElement, options: CrocoHtmlOptions) => HtmlExtractionMethods.ExtractHeaderTag(elem, "h1"),
+    ["H2"]: (elem: HTMLElement, options: CrocoHtmlOptions) => HtmlExtractionMethods.ExtractHeaderTag(elem, "h2"),
+    ["H3"]: (elem: HTMLElement, options: CrocoHtmlOptions) => HtmlExtractionMethods.ExtractHeaderTag(elem, "h3"),
+    ["H4"]: (elem: HTMLElement, options: CrocoHtmlOptions) => HtmlExtractionMethods.ExtractHeaderTag(elem, "h4"),
+    ["H5"]: (elem: HTMLElement, options: CrocoHtmlOptions) => HtmlExtractionMethods.ExtractHeaderTag(elem, "h5"),
+    ["H6"]: (elem: HTMLElement, options: CrocoHtmlOptions) => HtmlExtractionMethods.ExtractHeaderTag(elem, "h6"),
+    [ExternalVideoTagDataConsts.TagName.toUpperCase()]: (elem: HTMLElement, options: CrocoHtmlOptions) => VideoMethods.ExtractExternalVideoTag(elem)
   };
 
-  static transformHtmlElementToBlocks(element: HTMLElement, options: HtmlExtractionOptions): InterfaceBlock[] {
+  static transformHtmlElementToBlocks(element: HTMLElement, options: CrocoHtmlOptions): InterfaceBlock[] {
     var data: InterfaceBlock[] = [];
 
     for (let i = 0; i < element.children.length; i++) {
@@ -64,7 +63,7 @@ export class HtmlExtractionMethods {
     return data;
   }
 
-  static transformHtmlStringToBlocks(value: string, options: HtmlExtractionOptions): InterfaceBlock[] {
+  static transformHtmlStringToBlocks(value: string, options: CrocoHtmlOptions): InterfaceBlock[] {
 
     if (value === undefined || value === null) {
       return [];

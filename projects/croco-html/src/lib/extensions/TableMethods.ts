@@ -1,6 +1,6 @@
 import { AngularMaterialTableMethods } from './AngularMaterialTableMethods';
 import { BootstrapTableMethods } from './BootstrapTableMethods';
-import { HtmlExtractionMethods, HtmlExtractionOptions } from './HtmlExtractionMethods';
+import { CrocoHtmlOptions, HtmlExtractionMethods } from './HtmlExtractionMethods';
 import { InterfaceBlock } from "./InterfaceBlock";
 import { TextSimpleMethods } from './TextSimpleMethods';
 
@@ -45,7 +45,7 @@ export class TableTypes{
 
 export class TableMethods {
 
-    static getTableFromHtmlTag(tableTag: HTMLTableElement, options: HtmlExtractionOptions) {
+    static getTableFromHtmlTag(tableTag: HTMLTableElement, options: CrocoHtmlOptions) {
         let tableData : TableData = {
             header: TableMethods.getHeader(tableTag),
             rows: TableMethods.getTableRows(tableTag, options)
@@ -129,7 +129,7 @@ export class TableMethods {
         };
     }
 
-    static getTableRows(tableTag: HTMLTableElement, options: HtmlExtractionOptions): Array<TableRowData> {
+    static getTableRows(tableTag: HTMLTableElement, options: CrocoHtmlOptions): Array<TableRowData> {
         let tBody = tableTag.tBodies.item(0);
 
         let rows: TableRowData[] = [];

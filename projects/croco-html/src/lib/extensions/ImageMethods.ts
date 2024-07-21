@@ -1,4 +1,4 @@
-import { HtmlExtractionOptions } from "./HtmlExtractionMethods";
+import { CrocoHtmlOptions } from "./HtmlExtractionMethods";
 
 export class FileImageTagDataConsts {
     static TagName = "file-image";
@@ -17,30 +17,24 @@ export interface FileImageTagData{
 
 export class ImageMethods {
 
-    public static buildUrl(fileId: number, options: HtmlExtractionOptions):string{
+    public static buildUrl(fileId: number, sizeType: string, options: CrocoHtmlOptions):string{
         
-        var baseUrl = `/FileCopies/Images/Medium/${fileId}.jpg`;
-
-        if (!options.useCustomDomain){
-            return baseUrl;
-        }
-        
-        return `${options.domain}${baseUrl}`;
+        return options.publicImageResizedUrlFormat
+            .replace("{sizeType}", sizeType)
+            .replace("{fileId}", fileId.toString());
     }
 
-    public static buildSmallUrl(fileId: number, options: HtmlExtractionOptions):string{
-        var baseUrl = `/FileCopies/Images/Small/${fileId}.jpg`;
-
-        if (!options.useCustomDomain){
-            return baseUrl;
-        }
-        
-        return `${options.domain}${baseUrl}`;
+    public static buildSmallUrl(fileId: number, options: CrocoHtmlOptions):string{
+        return ImageMethods.buildUrl(fileId, "Small", options);
     }
 
-    public static ExtractImage(elem: HTMLElement, options: HtmlExtractionOptions): FileImageTag {
+    public static buildMediumUrl(fileId: number, options: CrocoHtmlOptions):string{
+        return ImageMethods.buildUrl(fileId, "Medium", options);
+    }
+
+    public static ExtractImage(elem: HTMLElement, options: CrocoHtmlOptions): FileImageTag {
         let fileId = +elem.getAttribute(FileImageTagDataConsts.FileIdAttrName);
-        let src = ImageMethods.buildUrl(fileId, options);
+        let src = ImageMethods.buildMediumUrl(fileId, options);
         return {
             type: FileImageTagDataConsts.TagName,
             data: {

@@ -1,6 +1,8 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ImageMethods } from '../../extensions/ImageMethods';
 import { FileNameAndIdModel, FilesQueryService } from '../../services/files-query.service';
+import { CrocoHtmlOptionsToken } from '../../consts';
+import { CrocoHtmlOptions } from '../../extensions/HtmlExtractionMethods';
 
 export interface SearchQuestionsFormData{
     q: string;
@@ -30,7 +32,9 @@ export class FileIdSelectComponent implements OnInit, OnChanges {
     onFileIdChanged = new EventEmitter<number>();
 
     constructor(
-        private _fileService: FilesQueryService) {
+        private readonly _fileService: FilesQueryService,
+        @Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions
+    ) {
     }
 
     onModelChanged(fileId: number){
@@ -38,7 +42,7 @@ export class FileIdSelectComponent implements OnInit, OnChanges {
     }
 
     getSrc(fileId: number){
-        return ImageMethods.buildSmallUrl(fileId, { useCustomDomain: false, domain: "" });
+        return ImageMethods.buildSmallUrl(fileId, this._options);
     }
 
     ngOnInit(): void {

@@ -1,5 +1,5 @@
 import { HtmlBodyTag } from "../models/models";
-import { HtmlExtractionMethods, HtmlExtractionOptions } from "./HtmlExtractionMethods";
+import { HtmlExtractionMethods, CrocoHtmlOptions } from "./HtmlExtractionMethods";
 import { InterfaceBlock } from "./InterfaceBlock";
 import { HtmlRawTagDataConsts } from "./HtmlRawTagDataConsts";
 import { FileImageTagData, FileImageTagDataConsts } from "./ImageMethods";
@@ -66,7 +66,7 @@ export class BodyTagsExtensions {
         return `<${FileImageTagDataConsts.TagName} ${attrStr}></${FileImageTagDataConsts.TagName}>`;
     }
 
-    static getBodyTags(html:string, options: HtmlExtractionOptions){
+    static getBodyTags(html:string, options: CrocoHtmlOptions){
         let result = HtmlExtractionMethods.transformHtmlStringToBlocks(html, options);
         return result.map(x => BodyTagsExtensions.toBodyTag(x));
     }

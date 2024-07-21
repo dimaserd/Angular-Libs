@@ -4,6 +4,7 @@ import {
   ChangeDetectorRef,
   Component, ElementRef,
   EventEmitter,
+  Inject,
   Input,
   OnInit,
   Output,
@@ -17,7 +18,9 @@ import { XmlExtensions } from '../../../extensions/XmlExtensions';
 import { TagItem, HtmlBodyTag } from '../../../models/models';
 import { FilePostingStarted } from '../../upload-files-btn/upload-files-btn.component';
 import { DefaultTags } from './DefaultTags';
-import {AlignmentsData, EAlignments} from "./DefaultAligments";
+import { AlignmentsData, EAlignments } from "./DefaultAligments";
+import { CrocoHtmlOptionsToken } from '../../../consts';
+import { CrocoHtmlOptions } from '../../../extensions/HtmlExtractionMethods';
 
 @Component({
   selector: 'croco-visual-editor',
@@ -51,16 +54,16 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   @Output()
   html: string = "";
 
-  isHtmlSet(){
+  isHtmlSet() {
     return this.html.startsWith("<body>");
   }
 
-  clearHtml(){
+  clearHtml() {
     this.html = "";
     this.recalculateBodyTags();
   }
 
-  getHtml(){
+  getHtml() {
     this.recalculateHtml();
     return this.html;
   }
@@ -75,7 +78,8 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   saveBodyTags: HtmlBodyTag[] = [];
 
   constructor(
-    private _cdref: ChangeDetectorRef) { }
+    private readonly _cdref: ChangeDetectorRef,
+    @Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions) { }
 
   ngAfterViewInit(): void {
     this.rendered.emit(true);
@@ -92,15 +96,15 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     let attrs = {};
     let innerHtml = "";
 
-    if(TextMethods.textTags.includes(tagDescription.tag)){
-      attrs["h-align"] =  EAlignments.Left;
+    if (TextMethods.textTags.includes(tagDescription.tag)) {
+      attrs["h-align"] = EAlignments.Left;
       innerHtml = "Введите ваш текст";
     }
-    else if(tagDescription.tag == ExternalVideoTagDataConsts.TagName){
+    else if (tagDescription.tag == ExternalVideoTagDataConsts.TagName) {
       attrs[ExternalVideoTagDataConsts.VideoTypeAttrName] = ExternalVideoSupportedTypes.Youtube;
       attrs[ExternalVideoTagDataConsts.LinkAttrName] = null;
     }
-    else{
+    else {
       attrs[FileImageTagDataConsts.FileIdAttrName] = null;
     }
 
@@ -116,9 +120,9 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
 
   addText(): void {
     this.isActiveAddText = !this.isActiveAddText;
-    this.saveBodyTags =  JSON.parse(JSON.stringify(this.bodyTags));
+    this.saveBodyTags = JSON.parse(JSON.stringify(this.bodyTags));
     if (this.isActiveAddText) {
-      setTimeout(()=> {
+      setTimeout(() => {
         this.textArea.nativeElement.focus();
       })
     }
@@ -133,7 +137,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
 
   resetTextStyle(): void {
     this.text = '';
-    this.alignment =  EAlignments.Left;
+    this.alignment = EAlignments.Left;
     this.textTag = DefaultTags.textTags[0].tag;
   }
 
@@ -149,7 +153,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
           tagDescription,
           innerHtml: lines[i],
           attributes: {
-            "h-align":`${this.alignment}`
+            "h-align": `${this.alignment}`
           },
           presentOrEdit: true
         });
@@ -159,18 +163,18 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   }
 
 
-  postFilesStartedEventHandler(model:FilePostingStarted){
+  postFilesStartedEventHandler(model: FilePostingStarted) {
     this.loadingText = "Файлы загружаются на сервер";
     this.isLoading = true;
   }
 
-  addTagCustom(tag: HtmlBodyTag){
+  addTagCustom(tag: HtmlBodyTag) {
     this.bodyTags.push(tag);
     this.recalculateHtml();
   }
 
-  filesTagsReadyHandler(tags: HtmlBodyTag[]){
-    for(let i = 0; i < tags.length; i++){
+  filesTagsReadyHandler(tags: HtmlBodyTag[]) {
+    for (let i = 0; i < tags.length; i++) {
       this.bodyTags.push(tags[i]);
     }
     this.recalculateHtml();
@@ -183,23 +187,23 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     this.recalculateHtml();
   }
 
-  onTagSavedHandler(tag: HtmlBodyTag){
+  onTagSavedHandler(tag: HtmlBodyTag) {
     this.recalculateHtml();
   }
 
-  onTagRemovedHandler(index: number){
+  onTagRemovedHandler(index: number) {
     this.bodyTags.splice(index, 1);
     this.recalculateHtml();
   }
 
-  recalculateHtml(){
+  recalculateHtml() {
     let result = BodyTagsExtensions.toHtml(this.bodyTags);
     this.html = XmlExtensions.formatXml("<body>" + result + "</body>");
     this.onHtmlChanged.emit(this.html);
   }
 
-  recalculateBodyTags(){
-    this.bodyTags = BodyTagsExtensions.getBodyTags(this.html, {useCustomDomain: false, domain: ""});
+  recalculateBodyTags() {
+    this.bodyTags = BodyTagsExtensions.getBodyTags(this.html, this._options);
   }
 
   ngOnInit(): void {
