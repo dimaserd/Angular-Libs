@@ -1,6 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { OpenApiExtensions, OpenApiUrlProvider } from "../../extensions";
+import { Inject, Injectable } from "@angular/core";
 import { StudentTestSolutionModel } from "../../models";
 
 @Injectable({
@@ -8,15 +7,16 @@ import { StudentTestSolutionModel } from "../../models";
 })
 export class OpenApiTestSolutionService {
     
-    getBaseUrl(){
-        return OpenApiExtensions.buildOpenApiUrl(this._urlProvider, 'api/tutor/open-api/test-soluton/');
-    }
+    private readonly _baseUrl: string = "";
 
-    constructor(private _httpClient: HttpClient,
-        private _urlProvider: OpenApiUrlProvider) {
+    constructor(
+        private readonly _httpClient: HttpClient,
+        @Inject('BASE_URL') baseUrl: string,
+    ) {
+        this._baseUrl = `${this._baseUrl}api/tutor/open-api/test-soluton`;
     }
 
     public getById(id: string) {
-        return this._httpClient.get<StudentTestSolutionModel>(this.getBaseUrl() + id);
+        return this._httpClient.get<StudentTestSolutionModel>(`${this._baseUrl}/${id}`);
     }
 }

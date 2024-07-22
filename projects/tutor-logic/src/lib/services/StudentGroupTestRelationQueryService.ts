@@ -1,6 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { OpenApiExtensions, OpenApiUrlProvider } from "../extensions";
+import { Inject, Injectable } from "@angular/core";
 import { StudentTestGroupRelationDetailedModel } from "../models";
 
 @Injectable({
@@ -9,14 +8,19 @@ import { StudentTestGroupRelationDetailedModel } from "../models";
 export class StudentGroupTestRelationQueryService {
 
     getBaseUrl() {
-        return OpenApiExtensions.buildOpenApiUrl(this._baseUrlProvider, 'api/tutor/student-group/tests/');
+        return `${this._baseUrl}api/tutor/student-group/tests`;
     }
 
-    constructor(private _httpClient: HttpClient,
-        private _baseUrlProvider: OpenApiUrlProvider) {
+    private readonly _baseUrl: string = "";
+
+    constructor(
+        private readonly _httpClient: HttpClient,
+        @Inject('BASE_URL') baseUrl: string,
+    ) {
+        this._baseUrl = baseUrl;
     }
 
     getById(studentGroupId: string, testId: string) {
-        return this._httpClient.get<StudentTestGroupRelationDetailedModel>(this.getBaseUrl() + `getById/${testId}/${studentGroupId}`);
+        return this._httpClient.get<StudentTestGroupRelationDetailedModel>(`${this.getBaseUrl()}/getById/${testId}/${studentGroupId}`);
     }
 }

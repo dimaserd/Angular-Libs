@@ -4,7 +4,6 @@ export * from './setting-models';
 export * from './student-models'
 export * from './group-models'
 export * from './group-enter-models'
-export * from './open-api-models'
 export * from './test-solution-models'
 export * from './solution-validation-models'
 export * from './question-like-models'

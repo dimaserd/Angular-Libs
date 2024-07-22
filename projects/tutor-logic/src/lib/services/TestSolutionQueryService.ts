@@ -1,6 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { OpenApiExtensions, OpenApiUrlProvider } from "../extensions";
+import { Inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { SearchStudentTestSolutions, GetListResult, TestSolutionCourseData, StudentTestSolutionWithChatInfo, StudentTestSolutionModel } from "../models";
 
@@ -9,23 +8,24 @@ import { SearchStudentTestSolutions, GetListResult, TestSolutionCourseData, Stud
 })
 export class TestSolutionQueryService {
 
-    getBaseUrl() {
-        return OpenApiExtensions.buildOpenApiUrl(this._urlProvider, 'api/tutor/test-solution/query/');
-    }
+    private readonly _baseUrl: string = "";
 
-    constructor(private _httpClient: HttpClient,
-        private _urlProvider: OpenApiUrlProvider) {
+    constructor(
+        private readonly _httpClient: HttpClient,
+        @Inject('BASE_URL') baseUrl: string,
+    ) {
+        this._baseUrl = `${baseUrl}api/tutor/test-solution/query`;
     }
 
     public searchByStudent(model: SearchStudentTestSolutions): Observable<GetListResult<StudentTestSolutionWithChatInfo>> {
-        return this._httpClient.post<GetListResult<StudentTestSolutionWithChatInfo>>(this.getBaseUrl() + "Search/By/Student", model);
+        return this._httpClient.post<GetListResult<StudentTestSolutionWithChatInfo>>(`${this._baseUrl}/Search/By/Student`, model);
     }
 
     public getCourseData(id: string): Observable<TestSolutionCourseData> {
-        return this._httpClient.get<TestSolutionCourseData>(this.getBaseUrl() + `Get/By/Id/${id}/course-data`);
+        return this._httpClient.get<TestSolutionCourseData>(`${this._baseUrl}/Get/By/Id/${id}/course-data`);
     }
 
     public getSolutionById(id: string): Observable<StudentTestSolutionModel> {
-        return this._httpClient.get<StudentTestSolutionModel>(this.getBaseUrl() + `Get/By/Id/${id}`);
+        return this._httpClient.get<StudentTestSolutionModel>(`${this._baseUrl}/Get/By/Id/${id}`);
     }
 }

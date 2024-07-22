@@ -1,6 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { OpenApiExtensions, OpenApiUrlProvider } from "../../extensions";
+import { Inject, Injectable } from "@angular/core";
 import { GetListResult, SearchQuestionsByLikes, TestQuestionModel } from "../../models";
 
 @Injectable({
@@ -8,15 +7,16 @@ import { GetListResult, SearchQuestionsByLikes, TestQuestionModel } from "../../
 })
 export class OpenApiQuestionLikeService {
     
-    getBaseUrl(){
-        return OpenApiExtensions.buildOpenApiUrl(this._urlProvider, 'api/tutor/open-api/question-like/');
-    }
+    private readonly _baseUrl: string = "";
 
-    constructor(private _httpClient: HttpClient,
-        private _urlProvider: OpenApiUrlProvider) {
+    constructor(
+        private readonly _httpClient: HttpClient,
+        @Inject('BASE_URL') baseUrl: string,
+    ) {
+        this._baseUrl = `${baseUrl}api/tutor/open-api/question-like`;
     }
 
     public search(model: SearchQuestionsByLikes) {
-        return this._httpClient.post<GetListResult<TestQuestionModel>>(this.getBaseUrl() + 'search', model);
+        return this._httpClient.post<GetListResult<TestQuestionModel>>(`${this._baseUrl}/search`, model);
     }
 }
