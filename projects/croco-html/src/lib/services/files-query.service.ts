@@ -2,17 +2,17 @@ import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 
-export interface GetListResult<T>{
+export interface GetListResult<T> {
 
-  /*
-  Сколько всего записей
-   */
-  totalCount:number;
+    /*
+    Сколько всего записей
+     */
+    totalCount: number;
 
-  /*
-  Текущий список
-   */
-  list:Array<T>;
+    /*
+    Текущий список
+     */
+    list: Array<T>;
 }
 
 export interface DbFileNoDataWithRelations {
@@ -30,11 +30,24 @@ export interface FileRelationModel {
 }
 
 export interface SearchFiles {
-    fileName: string;
     q: string;
+    fileName: string;
+    applicationId: string;
+    fileTypes: Array<FileType>;
     count: number | null;
     offSet: number;
 }
+
+export enum FileType {
+    Undefined = 'Undefined',
+    Unknown = 'Unknown',
+    Image = 'Image',
+    Audio = 'Audio',
+    Video = 'Video',
+    Document = 'Document',
+    Archive = 'Archive'
+}
+
 
 export interface GetListSearchModel {
     count: number | null;
@@ -49,24 +62,24 @@ export interface FileNameAndIdModel {
 @Injectable({
     providedIn: 'root'
 })
-export class FilesQueryService{
+export class FilesQueryService {
 
     _baseControllerUrl: string;
 
     constructor(private _httpClient: HttpClient,
         @Inject('BASE_URL') baseUrl: string) {
-        this._baseControllerUrl = baseUrl + 'Api/Files/';
+        this._baseControllerUrl = `${baseUrl}Api/Files`;
     }
 
-    public getFilesWithRelations(model: SearchFiles):Observable<GetListResult<DbFileNoDataWithRelations>>{
+    public getFilesWithRelations(model: SearchFiles): Observable<GetListResult<DbFileNoDataWithRelations>> {
         return this._httpClient.post<GetListResult<DbFileNoDataWithRelations>>(
-            this._baseControllerUrl + `GetFiles/WithRelations`, model
+            this._baseControllerUrl + `/GetFiles/WithRelations`, model
         );
     }
 
-    public getFiles(model: SearchFiles):Observable<GetListResult<FileNameAndIdModel>>{
+    public getFiles(model: SearchFiles): Observable<GetListResult<FileNameAndIdModel>> {
         return this._httpClient.post<GetListResult<FileNameAndIdModel>>(
-            this._baseControllerUrl + `GetFiles`, model
+            this._baseControllerUrl + `/GetFiles`, model
         );
     }
 }

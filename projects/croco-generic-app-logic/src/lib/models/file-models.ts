@@ -19,19 +19,13 @@ export interface FileRelationModel {
 }
 
 export interface SearchFiles {
-    fileName: string;
     q: string;
+    fileName: string;
+    applicationId: string;
+    fileTypes: Array<FileType>;
     count: number | null;
     offSet: number;
 }
-
-export interface FileSimpleModel {
-    fileId: number;
-    fileName: string;
-    type: FileType;
-    downloadUrl: string;
-}
-
 
 export enum FileType {
     Undefined = 'Undefined',
@@ -41,4 +35,11 @@ export enum FileType {
     Video = 'Video',
     Document = 'Document',
     Archive = 'Archive'
+}
+
+export interface FileSimpleModel {
+    fileId: number;
+    fileName: string;
+    type: FileType;
+    downloadUrl: string;
 }

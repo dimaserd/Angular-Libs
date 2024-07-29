@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ImageMethods } from '../../extensions/ImageMethods';
-import { FileNameAndIdModel, FilesQueryService } from '../../services/files-query.service';
+import { FileNameAndIdModel, FilesQueryService, FileType } from '../../services/files-query.service';
 import { CrocoHtmlOptionsToken } from '../../consts';
 import { CrocoHtmlOptions } from '../../extensions/HtmlExtractionMethods';
 
-export interface SearchQuestionsFormData{
+export interface SearchQuestionsFormData {
     q: string;
 }
 
@@ -37,11 +37,11 @@ export class FileIdSelectComponent implements OnInit, OnChanges {
     ) {
     }
 
-    onModelChanged(fileId: number){
+    onModelChanged(fileId: number) {
         this.onFileIdChanged.emit(fileId);
     }
 
-    getSrc(fileId: number){
+    getSrc(fileId: number) {
         return ImageMethods.buildSmallUrl(fileId, this._options);
     }
 
@@ -55,6 +55,8 @@ export class FileIdSelectComponent implements OnInit, OnChanges {
             count: 10,
             offSet: 0,
             fileName: null,
+            fileTypes: [FileType.Image],
+            applicationId: null,
             q: this.q
         }).subscribe(data => {
             this.files = [...data.list];
@@ -62,7 +64,7 @@ export class FileIdSelectComponent implements OnInit, OnChanges {
         });
     }
 
-    onSearchChanged(q: {term: string, items:object[]}){
+    onSearchChanged(q: { term: string, items: object[] }) {
         this.q = q.term;
         this.loadFiles();
     }
