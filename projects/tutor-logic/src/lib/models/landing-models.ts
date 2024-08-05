@@ -24,6 +24,17 @@ export interface CourseLandingPageDetailedModel {
     dataType: string;
     blocks: Array<CourseLandingPageBlockModel>;
     paymentPlans: Array<StudentGroupPaymentPlanSimpleModel>;
+    pageData: LandingPageData;
+}
+
+export interface LandingPageData {
+    title: string;
+    navigationItems: Array<LandingPageNavigationItem>;
+}
+
+export interface LandingPageNavigationItem {
+    id: string;
+    name: string;
 }
 
 export interface CourseLandingPageBlockModel {
