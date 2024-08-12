@@ -12,3 +12,8 @@ export interface ChangeQuestionLike {
      */
     hasLike: boolean;
 }
+
+export interface QuestionIdWithLike {
+    questionId: string;
+    hasLike: boolean;
+}
