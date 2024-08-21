@@ -1,4 +1,5 @@
 import { CourseThemeItemModel } from "./course-models";
+import { TestQuestionModel, TestQuestionType } from "./question-models";
 import { QuestionValidationSourceType } from "./solution-validation-models";
 
 export interface SearchStudentTestSolutions {
@@ -19,16 +20,14 @@ export interface TestSolutionCourseData {
     nextItem: CourseThemeItemModel;
 }
 
-export enum TestQuestionType {
-    SelectRightAnswerOrAnswers = 'SelectRightAnswerOrAnswers',
-    TypeRightAnswer = 'TypeRightAnswer',
-    DetailedAnswer = 'DetailedAnswer',
-    TypeAnswerWithErrors = 'TypeAnswerWithErrors'
-}
-
 export interface SolutionWithAnswerModel {
     solutionId: string;
     answer: QuestionAnswer;
+}
+
+export interface QuestionAnswer {
+    questionId: string;
+    answerOrAnswers: string;
 }
 
 export interface StudentTestSolutionWithChatInfo {
@@ -121,37 +120,12 @@ export interface TestModel {
     questions: Array<TestQuestionModel>;
 }
 
-export interface TestQuestionModel {
-    id: string;
-    title: string;
-    titleBodyMarkUp: string;
-    helpBodyMarkUp: string;
-    answerExplanationMarkUp: string;
-    titleBodyMarkUpMobile: string;
-    helpBodyMarkUpMobile: string;
-    answerExplanationMarkUpMobile: string;
-    type: TestQuestionType;
-    selectRightAnswerOrAnswersData: SelectRightAnswerOrAnswersQuestionData;
-    typeRightAnswerQuestionData: TypeRightAnswerQuestionData;
-    typeAnswerWithErrorsData: TypeAnswerWithErrorsQuestionData;
-}
-
-export interface TypeAnswerWithErrorsQuestionData {
-    rightAnswer: string;
-    ignoreTextOrder: boolean;
-}
-
-
 export interface TestWithActiveSolutionModel {
     testId: string;
     activeSolutionId: string;
     test: TestModel;
 }
 
-export interface QuestionAnswer {
-    questionId: string;
-    answerOrAnswers: string;
-}
 
 export interface QuestionAnswerWithResult {
     isChecked: boolean;
@@ -170,22 +144,6 @@ export interface QuestionPointsValidationModel {
     isValidated: boolean;
     sourceType: QuestionValidationSourceType;
     validatorId: string;
-}
-
-export interface SelectRightAnswerOrAnswersQuestionData {
-    selectRightAnswerTitle: string;
-    rightAnswersCount: number;
-    answers: Array<Answer>;
-}
-
-export interface Answer {
-    text: string;
-    isRightAnswer: boolean;
-}
-
-export interface TypeRightAnswerQuestionData {
-    caseInSensitive: boolean;
-    rightAnswers: Array<string>;
 }
 
 export interface StudentTestSolutionDetailedModel {
