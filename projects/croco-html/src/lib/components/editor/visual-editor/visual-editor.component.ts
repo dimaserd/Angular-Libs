@@ -10,11 +10,14 @@ import {
   Output,
   ViewChild
 } from '@angular/core';
-import { BodyTagsExtensions } from '../../../extensions/BodyTagsExtensions';
-import { FileImageTagDataConsts } from '../../../extensions/ImageMethods';
-import { TextMethods } from '../../../extensions/TextMethods';
-import { ExternalVideoTagDataConsts, ExternalVideoSupportedTypes } from '../../../extensions/VideoMethods';
-import { XmlExtensions } from '../../../extensions/XmlExtensions';
+import { BodyTagsExtensions } from '../../../extensions';
+import { FileImageTagDataConsts } from '../../../extensions';
+import { TextMethods } from '../../../extensions';
+import {
+  ExternalVideoTagDataConsts,
+  ExternalVideoVideoPlayers
+} from '../../../extensions';
+import { XmlExtensions } from '../../../extensions';
 import { TagItem, HtmlBodyTag } from '../../../models/models';
 import { FilePostingStarted } from '../../upload-files-btn/upload-files-btn.component';
 import { DefaultTags } from './DefaultTags';
@@ -44,8 +47,11 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   showMarkUp = true;
 
   tags: TagItem[] = [];
-
+  videoPlayers = ExternalVideoVideoPlayers
   selectedValue: string;
+  selectedVideoPlayer: string;
+  protected readonly ExternalVideoTagDataConsts = ExternalVideoTagDataConsts;
+
 
   @Input()
   useHtmlRaw = false;
@@ -101,13 +107,12 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
       innerHtml = "Введите ваш текст";
     }
     else if (tagDescription.tag == ExternalVideoTagDataConsts.TagName) {
-      attrs[ExternalVideoTagDataConsts.VideoTypeAttrName] = ExternalVideoSupportedTypes.Youtube;
+      attrs[ExternalVideoTagDataConsts.VideoTypeAttrName] = this.selectedVideoPlayer;
       attrs[ExternalVideoTagDataConsts.LinkAttrName] = null;
     }
     else {
       attrs[FileImageTagDataConsts.FileIdAttrName] = null;
     }
-
     this.bodyTags.push({
       tagDescription,
       innerHtml,
@@ -211,5 +216,6 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
 
     this.tags = DefaultTags.getTags(this.useHtmlRaw);
     this.selectedValue = this.tags[0].tag;
+    this.selectedValue = this.videoPlayers[0].type;
   }
 }

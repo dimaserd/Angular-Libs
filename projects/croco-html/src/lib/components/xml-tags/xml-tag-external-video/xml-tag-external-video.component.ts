@@ -25,7 +25,13 @@ export class XmlTagExternalVideoComponent implements OnInit {
   };
 
   @Input() public set tagData(value: ExternalVideoTagData) {
-    this.videoId = this.getYouTubeId(value.link);
+    if(value.link && value.link !== 'null') {
+      this.videoId = this.getYouTubeId(value.link);
+    }
+    else {
+      this.videoId = this.getYouTubeId(this.defaultLink);
+    }
+
   };
   @ViewChild('playerContainer', {static: true}) public playerContainerRef?: ElementRef<HTMLElement>;
 
@@ -33,7 +39,7 @@ export class XmlTagExternalVideoComponent implements OnInit {
 
   public playerWidth = signal(NaN);
   public playerHeight = signal(NaN);
-
+  public defaultLink = "https://youtu.be/jzBneaWSswY";
 
   constructor(private destroyRef :DestroyRef) { }
 

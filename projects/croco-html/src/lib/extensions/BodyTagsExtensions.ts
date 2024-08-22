@@ -19,7 +19,7 @@ export class BodyTagsExtensions {
             "h5": "Заголовок 5 уровня",
             "h6": "Заголовок 6 уровня",
             [FileImageTagDataConsts.TagName]: "Изображение",
-            [ExternalVideoTagDataConsts.TagName]: "Внешнее видео YouTube",
+            [ExternalVideoTagDataConsts.TagName]: "Внешнее видео",
             [HtmlRawTagDataConsts.TagName]: "Html разметка"
         };
 
@@ -117,7 +117,7 @@ export class BodyTagsExtensions {
             return {
                 presentOrEdit: true,
                 tagDescription: {
-                    tag: ExternalVideoTagDataConsts.TagName,
+                    tag: data.type,
                     displayValue: BodyTagsExtensions.getDescription(data.type)
                 },
                 attributes: fileData,

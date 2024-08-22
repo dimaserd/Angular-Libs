@@ -4,6 +4,9 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgSelectModule } from "@ng-select/ng-select";
 import { CrocoHtmlDeclarations, MaterialModules } from ".";
 import { YouTubePlayerModule } from "@angular/youtube-player";
+import {
+    VkVideoPlayerComponent
+} from "./components/editor/external-video-block/vk-video-player/vk-video-player.component";
 
 @NgModule({
     declarations: [
@@ -12,13 +15,14 @@ import { YouTubePlayerModule } from "@angular/youtube-player";
     exports: [
       ...CrocoHtmlDeclarations,
     ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    NgSelectModule,
-    ...MaterialModules,
-    YouTubePlayerModule
-  ]
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NgSelectModule,
+        ...MaterialModules,
+        YouTubePlayerModule,
+        VkVideoPlayerComponent
+    ]
 })
 export class CrocoHtmlModule { }
