@@ -1,7 +1,14 @@
 <div *ngIf="tag.presentOrEdit">
 
     <div>
-        Ссылка на {{tagData.type === ExternalVideoSupportedTypes.VkVideo ? 'Vk Video' : 'YouTube' }}: {{tagData.link}}
+      @switch (tagData.type) {
+        @case (ExternalVideoSupportedTypes.VkVideo) {
+          Ссылка на Vk Video: {{tagData.link}}
+        }
+        @case (ExternalVideoSupportedTypes.Youtube) {
+          Ссылка на YouTube: {{tagData.link}}
+        }
+      }
     </div>
 
     <div style="height: 10px;"></div>
