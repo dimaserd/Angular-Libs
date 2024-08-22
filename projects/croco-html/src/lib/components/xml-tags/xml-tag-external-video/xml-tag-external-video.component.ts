@@ -30,7 +30,11 @@ export class XmlTagExternalVideoComponent implements OnInit {
       link: value.link
     }
 
-    if(this._block.type === ExternalVideoSupportedTypes.VkVideo) return
+    if(this._block.type === ExternalVideoSupportedTypes.VkVideo)
+    {
+      return
+    }
+
     this.videoId = this.getYouTubeId(this._block.link);
   };
   @ViewChild('playerContainer', {static: true}) public playerContainerRef?: ElementRef<HTMLElement>;
@@ -48,7 +52,10 @@ export class XmlTagExternalVideoComponent implements OnInit {
   constructor(private destroyRef :DestroyRef) { }
 
   ngOnInit(): void {
-    if(this._block.type === ExternalVideoSupportedTypes.VkVideo) return
+    if(this._block.type === ExternalVideoSupportedTypes.VkVideo)
+    {
+      return
+    }
 
     const youtubeIframeApiUrl = 'https://www.youtube.com/iframe_api';
     if (!document.querySelector(`script[src="${youtubeIframeApiUrl}"]`)) {

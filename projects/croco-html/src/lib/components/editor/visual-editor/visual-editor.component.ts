@@ -218,6 +218,6 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
 
     this.tags = DefaultTags.getTags(this.useHtmlRaw);
     this.selectedValue = this.tags[0].tag;
-    this.selectedValue = this.videoPlayers[0].type;
+    this.selectedVideoPlayer = this.videoPlayers[0].type;
   }
 }

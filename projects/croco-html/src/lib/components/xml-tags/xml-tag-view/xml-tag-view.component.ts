@@ -1,6 +1,6 @@
 import {Component, Input, ViewEncapsulation} from '@angular/core';
 import { InterfaceBlock } from "../../../extensions/InterfaceBlock";
-import {ExternalVideoSupportedTypes} from "../../../extensions";
+import {ETypeTagConstant} from "../../../extensions/TypeTagConstant";
 
 @Component({
   selector: 'croco-html-xml-tag-view',
@@ -13,5 +13,5 @@ export class XmlTagViewComponent {
   @Input()
   data:InterfaceBlock[] = [];
 
-  protected readonly ExternalVideoSupportedTypes = ExternalVideoSupportedTypes;
+  protected readonly ETypeTagConstant = ETypeTagConstant;
 }
