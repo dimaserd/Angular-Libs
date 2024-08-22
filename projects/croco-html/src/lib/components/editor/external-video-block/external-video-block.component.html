@@ -13,15 +13,7 @@
 
     <div style="height: 10px;"></div>
 
-  @switch (tagData.type) {
-    @case (ExternalVideoSupportedTypes.VkVideo) {
-      <vk-video-player [link]="tagData.link"></vk-video-player>
-    }
-    @case (ExternalVideoSupportedTypes.Youtube) {
-      <croco-html-xml-tag-external-video [tagData]="tagData">
-      </croco-html-xml-tag-external-video>
-    }
-  }
+  <croco-html-xml-tag-external-video [tagData]="tagData"></croco-html-xml-tag-external-video>
 
 </div>
 

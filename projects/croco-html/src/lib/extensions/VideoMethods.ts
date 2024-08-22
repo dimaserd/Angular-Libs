@@ -6,10 +6,10 @@ export class ExternalVideoTagDataConsts {
 
 export class ExternalVideoSupportedTypes{
     static Youtube = "youtube"
-    static VkVideo = "vkVideo"
+    static VkVideo = "vk-video"
 }
 
-export const ExternalVideoVideoPlayers = [
+export const ExternalVideoPlayers = [
   {
     type: ExternalVideoSupportedTypes.Youtube,
     displayValue: 'Внешнее видео Youtube',

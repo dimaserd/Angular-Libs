@@ -11,15 +11,9 @@ import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 export class VkVideoPlayerComponent{
 
   @Input() set link(link: string) {
-    if(link && link !== 'null') {
-      this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(link);
-    }
-    else {
-      this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.defaultLink);
-    }
+    this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(link);
   }
   public safeUrl: SafeResourceUrl;
-  public defaultLink = "https://vk.com/video_ext.php?oid=-22822305&id=456241864&hd=2";
 
   constructor(private sanitizer: DomSanitizer) {}
 }

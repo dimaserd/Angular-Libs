@@ -10,12 +10,12 @@ import {
   Output,
   ViewChild
 } from '@angular/core';
-import { BodyTagsExtensions } from '../../../extensions';
+import {BodyTagsExtensions, ExternalVideoSupportedTypes} from '../../../extensions';
 import { FileImageTagDataConsts } from '../../../extensions';
 import { TextMethods } from '../../../extensions';
 import {
   ExternalVideoTagDataConsts,
-  ExternalVideoVideoPlayers
+  ExternalVideoPlayers
 } from '../../../extensions';
 import { XmlExtensions } from '../../../extensions';
 import { TagItem, HtmlBodyTag } from '../../../models/models';
@@ -25,6 +25,8 @@ import { AlignmentsData, EAlignments } from "./DefaultAligments";
 import { CrocoHtmlOptionsToken } from '../../../consts';
 import { CrocoHtmlOptions } from '../../../extensions/HtmlExtractionMethods';
 
+export const defaultLinkYouTube = "https://youtu.be/jzBneaWSswY";
+export const defaultLinkVk = "https://vk.com/video_ext.php?oid=-22822305&id=456241864&hd=2";
 @Component({
   selector: 'croco-visual-editor',
   templateUrl: './visual-editor.component.html',
@@ -47,11 +49,10 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   showMarkUp = true;
 
   tags: TagItem[] = [];
-  videoPlayers = ExternalVideoVideoPlayers
+  videoPlayers = ExternalVideoPlayers
   selectedValue: string;
   selectedVideoPlayer: string;
   protected readonly ExternalVideoTagDataConsts = ExternalVideoTagDataConsts;
-
 
   @Input()
   useHtmlRaw = false;
@@ -108,7 +109,8 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     }
     else if (tagDescription.tag == ExternalVideoTagDataConsts.TagName) {
       attrs[ExternalVideoTagDataConsts.VideoTypeAttrName] = this.selectedVideoPlayer;
-      attrs[ExternalVideoTagDataConsts.LinkAttrName] = null;
+      attrs[ExternalVideoTagDataConsts.LinkAttrName] = this.selectedVideoPlayer === ExternalVideoSupportedTypes.VkVideo ? defaultLinkVk : defaultLinkYouTube;
+
     }
     else {
       attrs[FileImageTagDataConsts.FileIdAttrName] = null;

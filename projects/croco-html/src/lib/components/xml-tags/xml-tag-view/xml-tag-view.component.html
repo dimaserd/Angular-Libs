@@ -28,16 +28,7 @@
             <croco-html-xml-tag-text-view [richTextData]="item"></croco-html-xml-tag-text-view>
         </div>
         <div *ngIf="item.type === 'external-video'">
-
-          @switch (item.data.type) {
-            @case (ExternalVideoSupportedTypes.VkVideo) {
-              <vk-video-player [link]="item.data.link"></vk-video-player>
-            }
-            @case (ExternalVideoSupportedTypes.Youtube) {
-              <croco-html-xml-tag-external-video [data]="item"></croco-html-xml-tag-external-video>
-            }
-          }
-
+          <croco-html-xml-tag-external-video [data]="item"></croco-html-xml-tag-external-video>
         </div>
         <div *ngIf="item.type === 'unsupported-tag'" class="red" style="margin-top: 10px;" >
             <h4>Данный тег не поддерживается</h4>
