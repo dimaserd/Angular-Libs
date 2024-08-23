@@ -12,11 +12,11 @@ export class ExternalVideoSupportedTypes{
 export const ExternalVideoPlayers = [
   {
     type: ExternalVideoSupportedTypes.Youtube,
-    displayValue: 'Внешнее видео Youtube',
+    displayValue: 'Youtube',
   },
   {
     type: ExternalVideoSupportedTypes.VkVideo,
-    displayValue: 'Внешнее видео Vk Video',
+    displayValue: 'Vk Video',
   }
 ]
 

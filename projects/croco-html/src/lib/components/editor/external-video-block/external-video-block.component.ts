@@ -31,4 +31,8 @@ export class ExternalVideoBlockComponent implements OnInit {
     this.tagData.link = (this.tag.attributes as ExternalVideoTagData).type === ExternalVideoSupportedTypes.VkVideo ? this.defaultVkLink : this.defaultYoutubeLink;
     this.tagData.type = (this.tag.attributes as ExternalVideoTagData).type
   }
+
+  linkChanged(){
+    this.tag.attributes = this.tagData;
+  }
 }
