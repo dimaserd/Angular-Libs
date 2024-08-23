@@ -1,38 +1,46 @@
-<div *ngIf="tag.presentOrEdit">
+@if (tag.presentOrEdit) {
+  <div>
     <div style="height: 10px;">
     </div>
+    @if (tag.attributes['h-align'] === 'left') {
+      <div style="text-align: left;" [innerHtml]="getInnerHtml()">
+      </div>
+    }
+    @if (tag.attributes['h-align'] === 'right') {
+      <div style="text-align: right;" [innerHtml]="getInnerHtml()">
+      </div>
+    }
+    @if (tag.attributes['h-align'] === 'center') {
+      <div style="text-align: center;" [innerHtml]="getInnerHtml()">
+      </div>
+    }
+  </div>
+}
 
-    <div style="text-align: left;" *ngIf="tag.attributes['h-align'] === 'left'" [innerHtml]="getInnerHtml()">
-    </div>
-    <div style="text-align: right;" *ngIf="tag.attributes['h-align'] === 'right'" [innerHtml]="getInnerHtml()">
-    </div>
-    <div style="text-align: center;" *ngIf="tag.attributes['h-align'] === 'center'" [innerHtml]="getInnerHtml()">
-    </div>
-</div>
-
-<div *ngIf="!tag.presentOrEdit">
+@if (!tag.presentOrEdit) {
+  <div>
     <div style="overflow-x: auto;">
-        <mat-button-toggle-group [(ngModel)]="tag.attributes['h-align']">
-            <mat-button-toggle value="center">
-                По центру <mat-icon>format_align_center</mat-icon>
-            </mat-button-toggle>
-            <mat-button-toggle value="left">
-                Слева <mat-icon>format_align_left</mat-icon>
-            </mat-button-toggle>
-            <mat-button-toggle value="right">
-                Справа <mat-icon> format_align_right</mat-icon>
-            </mat-button-toggle>
-        </mat-button-toggle-group>
+      <mat-button-toggle-group [(ngModel)]="tag.attributes['h-align']">
+        <mat-button-toggle value="center">
+          По центру <mat-icon>format_align_center</mat-icon>
+        </mat-button-toggle>
+        <mat-button-toggle value="left">
+          Слева <mat-icon>format_align_left</mat-icon>
+        </mat-button-toggle>
+        <mat-button-toggle value="right">
+          Справа <mat-icon> format_align_right</mat-icon>
+        </mat-button-toggle>
+      </mat-button-toggle-group>
     </div>
-
     <div style="height: 10px;">
     </div>
     <div>
-        <mat-form-field class="w-100">
-            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
-                cdkAutosizeMinRows="1"
-                placeholder="Внутренняя разметка текстового тега"
-                [(ngModel)]="tag.innerHtml"></textarea>
-        </mat-form-field>
+      <mat-form-field class="w-100">
+        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="1"
+          placeholder="Внутренняя разметка текстового тега"
+        [(ngModel)]="tag.innerHtml"></textarea>
+      </mat-form-field>
     </div>
-</div>
+  </div>
+}

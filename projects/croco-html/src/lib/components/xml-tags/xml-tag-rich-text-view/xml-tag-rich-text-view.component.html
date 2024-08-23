@@ -1,2 +1,4 @@
-<div *ngIf="richTextData" [innerHtml]="richTextData | richTextToHtml">
-</div>
+@if (richTextData) {
+  <div [innerHtml]="richTextData | richTextToHtml">
+  </div>
+}

@@ -1,53 +1,56 @@
 <div>
-    <div style="height: 10px;">
-    </div>
-    
-    <div *ngIf="hasImageError" class="error-block">
-        Изображение не найдено по указанному идентификатору, возможно файл не существует или отсутствует на сервере.
-    </div>
+  <div style="height: 10px;">
+  </div>
 
-    <div *ngIf="hasFileId() && !hasImageError">
-        <img class="mx-auto d-block img-fluid" [src]="getSrc()" (error)="onErrorHandler()"/>
+  @if (hasImageError) {
+    <div class="error-block">
+      Изображение не найдено по указанному идентификатору, возможно файл не существует или отсутствует на сервере.
     </div>
+  }
 
-    <div *ngIf="!hasFileId()">
-        <h5>[Изображение не выбрано]</h5>
+  @if (hasFileId() && !hasImageError) {
+    <div>
+      <img class="mx-auto d-block img-fluid" [src]="getSrc()" (error)="onErrorHandler()"/>
     </div>
+  }
+
+  @if (!hasFileId()) {
+    <div>
+      <h5>[Изображение не выбрано]</h5>
+    </div>
+  }
 </div>
 
-<div *ngIf="!tag.presentOrEdit">
+@if (!tag.presentOrEdit) {
+  <div>
     <div style="height: 10px;"></div>
-
     <div style="overflow-x:auto;">
-        <mat-button-toggle-group [(ngModel)]="searchOrEdit">
-            <mat-button-toggle value="search">
-                Искать файл <mat-icon>search</mat-icon>
-            </mat-button-toggle>
-            <mat-button-toggle value="edit">
-                Указать по идентификатору <mat-icon>settings</mat-icon>
-            </mat-button-toggle>
-        </mat-button-toggle-group>
+      <mat-button-toggle-group [(ngModel)]="searchOrEdit">
+        <mat-button-toggle value="search">
+          Искать файл <mat-icon>search</mat-icon>
+        </mat-button-toggle>
+        <mat-button-toggle value="edit">
+          Указать по идентификатору <mat-icon>settings</mat-icon>
+        </mat-button-toggle>
+      </mat-button-toggle-group>
     </div>
-    
-
     <div style="height: 10px;"></div>
-
     <div [hidden]="searchOrEdit !== 'search'">
-        <croco-html-file-id-select
-         [labelText]="'Выбрать файл'"
-         [(fileId)]="tag.attributes['file-id']"
-         (onFileIdChanged)="onFileIdChanged($event)">
-        </croco-html-file-id-select>
+      <croco-html-file-id-select
+        [labelText]="'Выбрать файл'"
+        [(fileId)]="tag.attributes['file-id']"
+        (onFileIdChanged)="onFileIdChanged($event)">
+      </croco-html-file-id-select>
     </div>
-
     <div [hidden]="searchOrEdit !== 'edit'">
-        <div>
-            <mat-form-field class="w-100">
-                <input matInput placeholder="Идентификатор файла" new-autocomplete="off" autocomplete="off"
-                    type="number"
-                    [(ngModel)]="tag.attributes['file-id']"
-                    (ngModelChange)="removeImageError()">
-            </mat-form-field>
-        </div>
+      <div>
+        <mat-form-field class="w-100">
+          <input matInput placeholder="Идентификатор файла" new-autocomplete="off" autocomplete="off"
+            type="number"
+            [(ngModel)]="tag.attributes['file-id']"
+            (ngModelChange)="removeImageError()">
+        </mat-form-field>
+      </div>
     </div>
-</div>
+  </div>
+}

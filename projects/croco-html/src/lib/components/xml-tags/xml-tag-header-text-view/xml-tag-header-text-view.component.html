@@ -1,25 +1,44 @@
-<div *ngIf="item.data.validationResult.isSucceeded && item.data.horizontalAlignment === 'left'" style="text-align: left;">
-    <span *ngIf="item.data.html.length === 0 || !item.data.html">&nbsp;</span>
-    <croco-html-xml-tag-header-inner-text-view *ngIf="item.data.html.length > 0"  [item]="item">
-    </croco-html-xml-tag-header-inner-text-view>
-</div>
+@if (item.data.validationResult.isSucceeded && item.data.horizontalAlignment === 'left') {
+  <div style="text-align: left;">
+    @if (item.data.html.length === 0 || !item.data.html) {
+      <span>&nbsp;</span>
+    }
+    @if (item.data.html.length > 0) {
+      <croco-html-xml-tag-header-inner-text-view  [item]="item">
+      </croco-html-xml-tag-header-inner-text-view>
+    }
+  </div>
+}
 
-<div *ngIf="item.data.validationResult.isSucceeded && item.data.horizontalAlignment === 'right'" style="text-align: right;">
-    <span *ngIf="item.data.html.length === 0 || !item.data.html">&nbsp;</span>
-    <croco-html-xml-tag-header-inner-text-view *ngIf="item.data.html.length > 0"  [item]="item">
-    </croco-html-xml-tag-header-inner-text-view>
-</div>
+@if (item.data.validationResult.isSucceeded && item.data.horizontalAlignment === 'right') {
+  <div style="text-align: right;">
+    @if (item.data.html.length === 0 || !item.data.html) {
+      <span>&nbsp;</span>
+    }
+    @if (item.data.html.length > 0) {
+      <croco-html-xml-tag-header-inner-text-view  [item]="item">
+      </croco-html-xml-tag-header-inner-text-view>
+    }
+  </div>
+}
 
-<div *ngIf="item.data.validationResult.isSucceeded && item.data.horizontalAlignment === 'center'" style="text-align: center;">
-    <span *ngIf="item.data.html.length === 0 || !item.data.html">&nbsp;</span>
+@if (item.data.validationResult.isSucceeded && item.data.horizontalAlignment === 'center') {
+  <div style="text-align: center;">
+    @if (item.data.html.length === 0 || !item.data.html) {
+      <span>&nbsp;</span>
+    }
+    @if (item.data.html.length > 0) {
+      <croco-html-xml-tag-header-inner-text-view  [item]="item">
+      </croco-html-xml-tag-header-inner-text-view>
+    }
+  </div>
+}
 
-    <croco-html-xml-tag-header-inner-text-view *ngIf="item.data.html.length > 0"  [item]="item">
-    </croco-html-xml-tag-header-inner-text-view>
-</div>
-
-<div *ngIf="!item.data.validationResult.isSucceeded" class="red" style="margin-top: 10px;" >
+@if (!item.data.validationResult.isSucceeded) {
+  <div class="red" style="margin-top: 10px;" >
     <h4>Допущена ошибка в теге &lt;text&gt;</h4>
     <span>
-        {{item.data.validationResult.message}}
+      {{item.data.validationResult.message}}
     </span>
-</div>
+  </div>
+}

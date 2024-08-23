@@ -1,17 +1,21 @@
-<div *ngIf="tag.presentOrEdit">
+@if (tag.presentOrEdit) {
+  <div>
     <div [innerHTML]="tag.innerHtml"></div>
-</div>
+  </div>
+}
 
-<div *ngIf="!tag.presentOrEdit">
+@if (!tag.presentOrEdit) {
+  <div>
     <div style="height: 10px;">
     </div>
     <div>
-        <mat-form-field class="w-100">
-            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
-                cdkAutosizeMinRows="1"
-                placeholder="Внутренняя разметка тега"
-                [(ngModel)]="tag.innerHtml"></textarea>
-        </mat-form-field>
+      <mat-form-field class="w-100">
+        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="1"
+          placeholder="Внутренняя разметка тега"
+        [(ngModel)]="tag.innerHtml"></textarea>
+      </mat-form-field>
     </div>
-</div>
+  </div>
+}
 

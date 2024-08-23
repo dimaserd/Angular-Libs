@@ -49,7 +49,8 @@ export class XmlTagExternalVideoComponent implements OnInit {
   public playerHeight = signal(NaN);
   protected readonly ExternalVideoSupportedTypes = ExternalVideoSupportedTypes;
 
-  constructor(private destroyRef :DestroyRef) { }
+  constructor(private destroyRef :DestroyRef) {
+  }
 
   ngOnInit(): void {
     if(this._block.type === ExternalVideoSupportedTypes.VkVideo)
