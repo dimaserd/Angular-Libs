@@ -8,7 +8,7 @@ import {
   ViewChild
 } from '@angular/core';
 import {InterfaceBlock} from "../../../extensions/InterfaceBlock";
-import {ExternalVideoTagData} from '../../../extensions';
+import {ExternalVideoSupportedTypes, ExternalVideoTagData} from '../../../extensions';
 import {resizeObservable} from "./resize-observable";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {distinctUntilChanged, map} from "rxjs";
@@ -25,19 +25,38 @@ export class XmlTagExternalVideoComponent implements OnInit {
   };
 
   @Input() public set tagData(value: ExternalVideoTagData) {
-    this.videoId = this.getYouTubeId(value.link);
+    this._block = {
+      type: value.type,
+      link: value.link
+    }
+
+    if(this._block.type === ExternalVideoSupportedTypes.VkVideo)
+    {
+      return
+    }
+
+    this.videoId = this.getYouTubeId(this._block.link);
   };
   @ViewChild('playerContainer', {static: true}) public playerContainerRef?: ElementRef<HTMLElement>;
 
   public videoId?: string;
+  public _block: ExternalVideoTagData = {
+    type: '',
+    link: ''
+  }
 
   public playerWidth = signal(NaN);
   public playerHeight = signal(NaN);
-
+  protected readonly ExternalVideoSupportedTypes = ExternalVideoSupportedTypes;
 
   constructor(private destroyRef :DestroyRef) { }
 
   ngOnInit(): void {
+    if(this._block.type === ExternalVideoSupportedTypes.VkVideo)
+    {
+      return
+    }
+
     const youtubeIframeApiUrl = 'https://www.youtube.com/iframe_api';
     if (!document.querySelector(`script[src="${youtubeIframeApiUrl}"]`)) {
       // This code loads the IFrame Player API code asynchronously, according to the instructions at

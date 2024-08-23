@@ -1,13 +1,20 @@
 <div *ngIf="tag.presentOrEdit">
-    
+
     <div>
-        Ссылка на YouTube: {{data.youtubeLink}}
+      @switch (tagData.type) {
+        @case (ExternalVideoSupportedTypes.VkVideo) {
+          Ссылка на Vk Video: {{tagData.link}}
+        }
+        @case (ExternalVideoSupportedTypes.Youtube) {
+          Ссылка на YouTube: {{tagData.link}}
+        }
+      }
     </div>
 
     <div style="height: 10px;"></div>
 
-    <croco-html-xml-tag-external-video [tagData]="tagData">
-    </croco-html-xml-tag-external-video>
+  <croco-html-xml-tag-external-video [tagData]="tagData"></croco-html-xml-tag-external-video>
+
 </div>
 
 <div *ngIf="!tag.presentOrEdit">
@@ -15,12 +22,9 @@
         <div>
             <mat-form-field class="w-100">
                 <input matInput placeholder="Ссылка на YouTube"
-                    new-autocomplete="off"
                     autocomplete="off"
-                    [(ngModel)]="data.youtubeLink"
-                    (ngModelChange)="linkChanged()">
+                    [(ngModel)]="tagData.link">
             </mat-form-field>
         </div>
     </div>
 </div>
-

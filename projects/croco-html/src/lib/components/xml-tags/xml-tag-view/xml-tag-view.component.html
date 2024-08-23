@@ -1,40 +1,61 @@
 <div>
-    <div class="row" *ngFor="let item of data">
-        <div *ngIf="item.type === 'text'">
-            <croco-html-xml-tag-text-view [item]="item"></croco-html-xml-tag-text-view>
+  @for (item of data; track item.type) {
+    <div class="row">
+      @if (item.type === ETypeTagConstant.Text) {
+        <div>
+          <croco-html-xml-tag-text-view [item]="item"></croco-html-xml-tag-text-view>
         </div>
-        <div *ngIf="item.type === 'html-raw'">
-            <croco-html-raw-view [rawHtml]="item.data.innerHTML">
-            </croco-html-raw-view>
+      }
+      @if (item.type === 'html-raw') {
+        <div>
+          <croco-html-raw-view [rawHtml]="item.data.innerHTML">
+          </croco-html-raw-view>
         </div>
-        <div *ngIf="item.type === 'h1' || item.type === 'h2' || item.type === 'h3' || item.type === 'h4' || item.type === 'h5' || item.type === 'h6'">
-            <croco-html-xml-tag-header-text-view [item]="item"></croco-html-xml-tag-header-text-view>
+      }
+
+      @if (item.type === ETypeTagConstant.H1 || item.type === ETypeTagConstant.H2 || item.type === ETypeTagConstant.H3 || item.type === ETypeTagConstant.H4 || item.type === ETypeTagConstant.H5 || item.type === ETypeTagConstant.H6) {
+        <div >
+          <croco-html-xml-tag-header-text-view [item]="item"></croco-html-xml-tag-header-text-view>
         </div>
-        <div *ngIf="item.type === 'file-image'">
-            <croco-html-file-image-tag-view [item]="item" [viewOptions]="viewOptions"></croco-html-file-image-tag-view>
+      }
+
+      @if (item.type === ETypeTagConstant.FileImage) {
+        <div >
+          <croco-html-file-image-tag-view [item]="item" ></croco-html-file-image-tag-view>
         </div>
-        <div *ngIf="item.type === 'table'">
-    
-            <croco-html-xml-tag-html-view *ngIf="item.validationResult.isSucceeded" [html]="item.bootstrapHtml">
+      }
+
+      @if (item.type === ETypeTagConstant.Table) {
+        <div >
+
+          @if (item.data) {
+            <croco-html-xml-tag-html-view [html]="item.data">
             </croco-html-xml-tag-html-view>
-             
-            <app-tutor-baseapiresponse-banner 
-                *ngIf="item.validationResult && !item.validationResult.isSucceeded" 
-                [message]="item.validationResult.message">
-            </app-tutor-baseapiresponse-banner>
+          }
+
         </div>
-    
-        <div *ngIf="item.type === 'rich-text'">
-            <croco-html-xml-tag-text-view [richTextData]="item"></croco-html-xml-tag-text-view>
+      }
+
+      @if (item.type === ETypeTagConstant.RichText) {
+        <div >
+          <croco-html-xml-tag-text-view></croco-html-xml-tag-text-view>
         </div>
-        <div *ngIf="item.type === 'external-video'">
-            <croco-html-xml-tag-external-video [data]="item"></croco-html-xml-tag-external-video>
+      }
+
+      @if (item.type === ETypeTagConstant.ExternalVideo) {
+        <div >
+          <croco-html-xml-tag-external-video [data]="item"></croco-html-xml-tag-external-video>
         </div>
-        <div *ngIf="item.type === 'unsupported-tag'" class="red" style="margin-top: 10px;" >
-            <h4>Данный тег не поддерживается</h4>
-            <span>
+      }
+
+      @if (item.type === ETypeTagConstant.UnsupportedTag) {
+        <div class="red" style="margin-top: 10px;" >
+          <h4>Данный тег не поддерживается</h4>
+          <span>
                 {{item.data.tagString}}
             </span>
         </div>
+      }
     </div>
+  }
 </div>

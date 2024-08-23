@@ -1,5 +1,6 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import {Component, Input, ViewEncapsulation} from '@angular/core';
 import { InterfaceBlock } from "../../../extensions/InterfaceBlock";
+import {ETypeTagConstant} from "../../../extensions/TypeTagConstant";
 
 @Component({
   selector: 'croco-html-xml-tag-view',
@@ -12,7 +13,5 @@ export class XmlTagViewComponent {
   @Input()
   data:InterfaceBlock[] = [];
 
-  constructor() {
-  }
-
+  protected readonly ETypeTagConstant = ETypeTagConstant;
 }

@@ -17,7 +17,7 @@ export class DefaultTags {
 
   static tags: TagItem[] = [
     { tag: FileImageTagDataConsts.TagName, displayValue: 'Изображение' },
-    { tag: ExternalVideoTagDataConsts.TagName, displayValue: 'Внешнее видео Youtube' },
+    { tag: ExternalVideoTagDataConsts.TagName, displayValue: 'Внешнее видео' },
     ...DefaultTags.textTags
   ];
 

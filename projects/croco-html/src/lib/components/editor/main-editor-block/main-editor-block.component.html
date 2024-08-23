@@ -5,7 +5,7 @@
       </croco-html-text-editor>
     </div>
 
-    <div *ngIf="tag.tagDescription.tag === 'file-image'"> 
+    <div *ngIf="tag.tagDescription.tag === 'file-image'">
       <croco-html-image-editor (onTagUpdated)="tagUpdatedHandler($event)" [tag]="tag">
       </croco-html-image-editor>
     </div>
