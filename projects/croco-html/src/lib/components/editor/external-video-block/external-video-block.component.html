@@ -23,7 +23,8 @@
             <mat-form-field class="w-100">
                 <input matInput placeholder="Ссылка на YouTube"
                     autocomplete="off"
-                    [(ngModel)]="tagData.link">
+                    [(ngModel)]="tagData.link"
+                    (ngModelChange)="linkChanged()">
             </mat-form-field>
         </div>
     </div>
