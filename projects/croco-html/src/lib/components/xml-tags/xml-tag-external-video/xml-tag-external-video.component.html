@@ -4,7 +4,9 @@
   }
   @case (ExternalVideoSupportedTypes.Youtube) {
     <div #playerContainer class="d-flex justify-content-center y-video">
-      <youtube-player [height]="playerHeight()" [width]="playerWidth()" *ngIf="videoId" [videoId]="videoId"></youtube-player>
+      @if (videoId) {
+        <youtube-player [height]="playerHeight()" [width]="playerWidth()" [videoId]="videoId"></youtube-player>
+      }
     </div>
   }
 }

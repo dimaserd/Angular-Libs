@@ -3,13 +3,14 @@ import { HtmlExtractionMethods, CrocoHtmlOptions } from "./HtmlExtractionMethods
 import { InterfaceBlock } from "./InterfaceBlock";
 import { HtmlRawTagDataConsts } from "./HtmlRawTagDataConsts";
 import { FileImageTagData, FileImageTagDataConsts } from "./ImageMethods";
-import { TextMethods } from "./TextMethods";
+import { TextTags } from "./TextMethods";
 import { SimpleTextTagData } from "./TextSimpleMethods";
 import { ExternalVideoTagDataConsts } from "./VideoMethods";
+import { Tags } from "./Tags";
 
 export class BodyTagsExtensions {
 
-    static getDescription(tagName: string){
+    static getDescription(tagName: string) {
         var descriptions = {
             "text": "Текст",
             "h1": "Заголовок 1 уровня",
@@ -26,57 +27,57 @@ export class BodyTagsExtensions {
         return descriptions[tagName];
     }
 
-    static toHtml(bodyTags: HtmlBodyTag[]): string{
+    static toHtml(bodyTags: HtmlBodyTag[]): string {
         let htmls = bodyTags.map(x => {
-            if(TextMethods.textTags.includes(x.tagDescription.tag)){
-              return `<${x.tagDescription.tag} h-align="${x.attributes['h-align']}">${x.innerHtml}</${x.tagDescription.tag}>`;
+            if (TextTags.allTextTags.includes(x.tagDescription.tag)) {
+                return `<${x.tagDescription.tag} h-align="${x.attributes['h-align']}">${x.innerHtml}</${x.tagDescription.tag}>`;
             }
 
-            if(x.tagDescription.tag === ExternalVideoTagDataConsts.TagName){
+            if (x.tagDescription.tag === ExternalVideoTagDataConsts.TagName) {
                 return `<${x.tagDescription.tag} type="${x.attributes['type']}" link="${x.attributes['link']}">${x.innerHtml}</${x.tagDescription.tag}>`
             }
 
-            if(x.tagDescription.tag === "html-raw"){
+            if (x.tagDescription.tag === "html-raw") {
                 return `<${x.tagDescription.tag}>${x.innerHtml}</${x.tagDescription.tag}>`
             }
 
             return BodyTagsExtensions.imageTagToHtml(x);
-          });
+        });
 
-          let result = "";
+        let result = "";
 
-          for (let index = 0; index < htmls.length; index++) {
+        for (let index = 0; index < htmls.length; index++) {
             const element = htmls[index];
 
             result += element;
-          }
+        }
 
-          return result;
+        return result;
     }
 
-    static imageTagToHtml(imageTag: HtmlBodyTag){
+    static imageTagToHtml(imageTag: HtmlBodyTag) {
 
         var attrStr = "";
 
         var attrValue = imageTag.attributes[FileImageTagDataConsts.FileIdAttrName];
-        if(imageTag.attributes.hasOwnProperty(FileImageTagDataConsts.FileIdAttrName) && attrValue){
+        if (imageTag.attributes.hasOwnProperty(FileImageTagDataConsts.FileIdAttrName) && attrValue) {
             attrStr = `${FileImageTagDataConsts.FileIdAttrName}="${attrValue}"`;
         }
 
         return `<${FileImageTagDataConsts.TagName} ${attrStr}></${FileImageTagDataConsts.TagName}>`;
     }
 
-    static getBodyTags(html:string, options: CrocoHtmlOptions){
+    static getBodyTags(html: string, options: CrocoHtmlOptions) {
         let result = HtmlExtractionMethods.transformHtmlStringToBlocks(html, options);
         return result.map(x => BodyTagsExtensions.toBodyTag(x));
     }
 
-    static sanitizeInnerHtml(html:string):string{
+    static sanitizeInnerHtml(html: string): string {
         return html.trim().replace('\n\t', '');
     }
 
     static toBodyTag(data: InterfaceBlock): HtmlBodyTag {
-        if (TextMethods.textTags.includes(data.type)) {
+        if (TextTags.allTextTags.includes(data.type)) {
             let textTagData = data.data as SimpleTextTagData;
 
             return {
@@ -90,13 +91,13 @@ export class BodyTagsExtensions {
             };
         }
 
-        if(data.type === FileImageTagDataConsts.TagName){
+        if (data.type === FileImageTagDataConsts.TagName) {
 
             let fileData = data.data as FileImageTagData;
 
             let attrs = {};
 
-            if(fileData.fileId) {
+            if (fileData.fileId) {
                 attrs[FileImageTagDataConsts.FileIdAttrName] = fileData.fileId;
             }
 
@@ -111,7 +112,7 @@ export class BodyTagsExtensions {
             };
         }
 
-        if(data.type === ExternalVideoTagDataConsts.TagName){
+        if (data.type === ExternalVideoTagDataConsts.TagName) {
             let fileData = data.data as ExternalVideoTagDataConsts;
 
             return {
@@ -125,7 +126,7 @@ export class BodyTagsExtensions {
             };
         }
 
-        if(data.type === HtmlRawTagDataConsts.TagName){
+        if (data.type === HtmlRawTagDataConsts.TagName) {
 
             return {
                 presentOrEdit: true,
@@ -141,10 +142,10 @@ export class BodyTagsExtensions {
         return {
             presentOrEdit: true,
             tagDescription: {
-                tag: "unsupported-tag",
+                tag: Tags.UnsupportedTag,
                 displayValue: "Неподдерживаемый тег"
             },
-            attributes: { },
+            attributes: {},
             innerHtml: JSON.stringify(data)
         };
     }

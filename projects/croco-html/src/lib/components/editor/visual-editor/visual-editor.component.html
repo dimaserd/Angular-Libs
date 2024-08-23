@@ -1,57 +1,68 @@
-<div *ngIf="isLoading">
+@if (isLoading) {
+  <div>
     <div>
-        <mat-spinner style="margin:0 auto;"></mat-spinner>
-        <div style="text-align: center;">{{loadingText}}</div>
+      <mat-spinner style="margin:0 auto;"></mat-spinner>
+      <div style="text-align: center;">{{loadingText}}</div>
     </div>
     <div style="height: 10px;"></div>
-</div>
+  </div>
+}
 <div [hidden]="isLoading">
   <mat-card style="margin: 2px;" class="mat-card">
     <mat-card-content>
       <div class="row d-flex align-items-center">
         <div class="col-12">
-          <button (click)="addText()" class="w-100" mat-stroked-button *ngIf="!isActiveAddText">
-            Добавить текст
-          </button>
-          <ng-container *ngIf="isActiveAddText">
+          @if (!isActiveAddText) {
+            <button (click)="addText()" class="w-100" mat-stroked-button>
+              Добавить текст
+            </button>
+          }
+          @if (isActiveAddText) {
             <mat-form-field class="w-100" >
-            <textarea
-              #autosize="cdkTextareaAutosize"
-              matInput
-              cdkTextareaAutosize
-              cdkAutosizeMinRows="1"
-              cdkAutosizeMaxRows="5"
-              placeholder="Текст"
-              #textArea
-              [(ngModel)]="text"
-              (ngModelChange)="modelChanged()"
-            ></textarea>
+              <textarea
+                #autosize="cdkTextareaAutosize"
+                matInput
+                cdkTextareaAutosize
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="5"
+                placeholder="Текст"
+                #textArea
+                [(ngModel)]="text"
+                (ngModelChange)="modelChanged()"
+              ></textarea>
             </mat-form-field>
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Тег для текста</mat-label>
               <mat-select [(ngModel)]="textTag" (ngModelChange)="modelChanged()">
-                <mat-option *ngFor="let option of textTagOptions" value="{{ option.tag }}">
-                  {{ option.displayValue }}
-                </mat-option>
+                @for (option of textTagOptions; track option) {
+                  <mat-option value="{{ option.tag }}">
+                    {{ option.displayValue }}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
-
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Горизонтальное выравнивание</mat-label>
               <mat-select [(ngModel)]="alignment" (ngModelChange)="modelChanged()">
-                <mat-option *ngFor="let option of alignmentOptions" value="{{ option.value }}">
-                  {{ option.text }}
-                </mat-option>
+                @for (option of alignmentOptions; track option) {
+                  <mat-option value="{{ option.value }}">
+                    {{ option.text }}
+                  </mat-option>
+                }
               </mat-select>
             </mat-form-field>
-          </ng-container>
+          }
           <div class="d-flex flex-nowrap justify-content-end w-100">
-            <button (click)="addText()" class="w-20" style="margin-right: 10px" mat-flat-button color="primary" *ngIf="isActiveAddText">
-              Добавить
-            </button>
-            <button (click)="closeText()" class="w-20" mat-flat-button color="warn"  *ngIf="isActiveAddText">
-              Отменить
-            </button>
+            @if (isActiveAddText) {
+              <button (click)="addText()" class="w-20" style="margin-right: 10px" mat-flat-button color="primary">
+                Добавить
+              </button>
+            }
+            @if (isActiveAddText) {
+              <button (click)="closeText()" class="w-20" mat-flat-button color="warn" >
+                Отменить
+              </button>
+            }
           </div>
 
         </div>
@@ -70,9 +81,11 @@
           <mat-form-field class="w-100" appearance="outline">
             <mat-label>Выберите тег</mat-label>
             <mat-select [(ngModel)]="selectedValue">
-              <mat-option *ngFor="let tag of tags" [value]="tag.tag">
-                {{tag.displayValue}}
-              </mat-option>
+              @for (tag of tags; track tag) {
+                <mat-option [value]="tag.tag">
+                  {{tag.displayValue}}
+                </mat-option>
+              }
             </mat-select>
           </mat-form-field>
         </div>
@@ -108,7 +121,7 @@
       <div class="row d-flex align-items-center">
         <div class="col-12">
           <croco-html-add-files-btn (filesTagsReady)="filesTagsReadyHandler($event)"
-                                    (postFilesStarted)="postFilesStartedEventHandler($event)" class="w-100">
+            (postFilesStarted)="postFilesStartedEventHandler($event)" class="w-100">
           </croco-html-add-files-btn>
         </div>
       </div>
@@ -119,38 +132,37 @@
   </div>
 </div>
 <div [hidden]="isLoading">
-    <div cdkDropList (cdkDropListDropped)="drop($event)">
-        <div *ngFor="let tag of bodyTags; let i = index" cdkDrag>
-            <mat-card style="margin: 2px;" class="mat-card">
-                <mat-card-content>
-                    <div class="d-flex justify-content-between">
-                        <div class="example-handle" cdkDragHandle>
-                            <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z">
-                                </path>
-                                <path d="M0 0h24v24H0z" fill="none"></path>
-                            </svg>
-                        </div>
-                        <div>
-                          <div class="badge">
-                            {{tag.tagDescription.displayValue}}
-                          </div>
-                        </div>
-                    </div>
-
-                    <div style="height: 15px;"></div>
-
-                    <croco-html-main-editor-block [tag]="tag" (onTagSaved)="onTagSavedHandler($event)"
-                        (onTagRemoved)="onTagRemovedHandler(i)">
-                    </croco-html-main-editor-block>
-                </mat-card-content>
-            </mat-card>
-
-            <div style="height: 10px;">
+  <div cdkDropList (cdkDropListDropped)="drop($event)">
+    @for (tag of bodyTags; track tag; let i = $index) {
+      <div cdkDrag>
+        <mat-card style="margin: 2px;" class="mat-card">
+          <mat-card-content>
+            <div class="d-flex justify-content-between">
+              <div class="example-handle" cdkDragHandle>
+                <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z">
+                  </path>
+                  <path d="M0 0h24v24H0z" fill="none"></path>
+                </svg>
+              </div>
+              <div>
+                <div class="badge">
+                  {{tag.tagDescription.displayValue}}
+                </div>
+              </div>
             </div>
+            <div style="height: 15px;"></div>
+            <croco-html-main-editor-block [tag]="tag" (onTagSaved)="onTagSavedHandler($event)"
+              (onTagRemoved)="onTagRemovedHandler(i)">
+            </croco-html-main-editor-block>
+          </mat-card-content>
+        </mat-card>
+        <div style="height: 10px;">
         </div>
-    </div>
+      </div>
+    }
+  </div>
 </div>
 
 

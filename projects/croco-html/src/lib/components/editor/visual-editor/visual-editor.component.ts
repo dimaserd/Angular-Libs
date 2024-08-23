@@ -10,7 +10,7 @@ import {
   Output,
   ViewChild
 } from '@angular/core';
-import {BodyTagsExtensions, ExternalVideoSupportedTypes} from '../../../extensions';
+import {BodyTagsExtensions, ExternalVideoSupportedTypes, TextTags} from '../../../extensions';
 import { FileImageTagDataConsts } from '../../../extensions';
 import { TextMethods } from '../../../extensions';
 import {
@@ -103,7 +103,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     let attrs = {};
     let innerHtml = "";
 
-    if (TextMethods.textTags.includes(tagDescription.tag)) {
+    if (TextTags.allTextTags.includes(tagDescription.tag)) {
       attrs["h-align"] = EAlignments.Left;
       innerHtml = "Введите ваш текст";
     }

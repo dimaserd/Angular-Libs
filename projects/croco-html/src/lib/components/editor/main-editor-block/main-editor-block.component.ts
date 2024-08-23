@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { TextMethods } from '../../../extensions/TextMethods';
+import { TextTags } from '../../../extensions/TextMethods';
 import { HtmlBodyTag } from '../../../models/models';
 
 @Component({
@@ -9,7 +9,7 @@ import { HtmlBodyTag } from '../../../models/models';
 })
 export class MainEditorBlockComponent implements OnInit {
 
-  textTags = TextMethods.textTags;
+  textTags = TextTags.allTextTags;
 
   @Input()
   tag:HtmlBodyTag;
@@ -19,8 +19,6 @@ export class MainEditorBlockComponent implements OnInit {
 
   @Output()
   onTagRemoved = new EventEmitter<HtmlBodyTag>();
-
-  constructor() { }
 
   tagUpdatedHandler(tag:HtmlBodyTag): void{
   }
