@@ -1,44 +1,44 @@
 @if (item.data.validationResult.isSucceeded && item.data.horizontalAlignment === 'left') {
-  <div style="text-align: left;">
-    @if (item.data.html.length === 0 || !item.data.html) {
-      <span>&nbsp;</span>
-    }
-    @if (item.data.html.length > 0) {
-      <croco-html-xml-tag-header-inner-text-view  [item]="item">
-      </croco-html-xml-tag-header-inner-text-view>
-    }
-  </div>
+<div style="text-align: left;">
+  @if (item.data.html.length === 0 || !item.data.html) {
+  <span>&nbsp;</span>
+  }
+  @if (item.data.html.length > 0) {
+  <croco-html-xml-tag-header-inner-text-view [item]="item">
+  </croco-html-xml-tag-header-inner-text-view>
+  }
+</div>
 }
 
 @if (item.data.validationResult.isSucceeded && item.data.horizontalAlignment === 'right') {
-  <div style="text-align: right;">
-    @if (item.data.html.length === 0 || !item.data.html) {
-      <span>&nbsp;</span>
-    }
-    @if (item.data.html.length > 0) {
-      <croco-html-xml-tag-header-inner-text-view  [item]="item">
-      </croco-html-xml-tag-header-inner-text-view>
-    }
-  </div>
+<div style="text-align: right;">
+  @if (item.data.html.length === 0 || !item.data.html) {
+  <span>&nbsp;</span>
+  }
+  @if (item.data.html.length > 0) {
+  <croco-html-xml-tag-header-inner-text-view [item]="item">
+  </croco-html-xml-tag-header-inner-text-view>
+  }
+</div>
 }
 
 @if (item.data.validationResult.isSucceeded && item.data.horizontalAlignment === 'center') {
-  <div style="text-align: center;">
-    @if (item.data.html.length === 0 || !item.data.html) {
-      <span>&nbsp;</span>
-    }
-    @if (item.data.html.length > 0) {
-      <croco-html-xml-tag-header-inner-text-view  [item]="item">
-      </croco-html-xml-tag-header-inner-text-view>
-    }
-  </div>
+<div style="text-align: center;">
+  @if (item.data.html.length === 0 || !item.data.html) {
+  <span>&nbsp;</span>
+  }
+  @if (item.data.html.length > 0) {
+  <croco-html-xml-tag-header-inner-text-view [item]="item">
+  </croco-html-xml-tag-header-inner-text-view>
+  }
+</div>
 }
 
 @if (!item.data.validationResult.isSucceeded) {
-  <div class="red" style="margin-top: 10px;" >
-    <h4>Допущена ошибка в теге &lt;text&gt;</h4>
-    <span>
-      {{item.data.validationResult.message}}
-    </span>
-  </div>
+<div class="red" style="margin-top: 10px;">
+  <h4>Допущена ошибка в теге &lt;text&gt;</h4>
+  <span>
+    {{item.data.validationResult.message}}
+  </span>
+</div>
 }
