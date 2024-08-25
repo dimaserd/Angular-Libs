@@ -1,6 +1,13 @@
 <div>
   @for (item of data; track $index) {
   <div class="row">
+
+    @if (item.type === 'text') {
+      <div>
+        <croco-html-xml-tag-text-view [item]="item"></croco-html-xml-tag-text-view>
+      </div>
+    }
+
     @if (item.type === 'html-raw') {
     <div>
       <croco-html-raw-view [rawHtml]="item.data.innerHTML">
@@ -8,7 +15,7 @@
     </div>
     }
 
-    @if (isTextTag(item)) {
+    @if (isHeaderTextTag(item)) {
     <div>
       <croco-html-xml-tag-header-text-view [item]="item"></croco-html-xml-tag-header-text-view>
     </div>

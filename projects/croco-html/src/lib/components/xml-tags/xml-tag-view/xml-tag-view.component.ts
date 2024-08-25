@@ -13,7 +13,7 @@ export class XmlTagViewComponent {
   @Input()
   data:InterfaceBlock[] = [];
 
-  isTextTag(item: InterfaceBlock) {
-    return TextTags.allTextTags.includes(item.type);
+  isHeaderTextTag(item: InterfaceBlock) {
+    return TextTags.headerTextTags.includes(item.type);
   }
 }
