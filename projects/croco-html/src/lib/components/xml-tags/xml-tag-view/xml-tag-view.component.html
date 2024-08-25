@@ -8,7 +8,7 @@
     </div>
     }
 
-    @if (textTags.includes(item.type)) {
+    @if (isTextTag(item)) {
     <div>
       <croco-html-xml-tag-header-text-view [item]="item"></croco-html-xml-tag-header-text-view>
     </div>
