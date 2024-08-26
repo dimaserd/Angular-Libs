@@ -27,13 +27,17 @@
     </div>
     }
 
-    @if (item.type === 'table') {
-    <div>
-      @if (item.data) {
-      <croco-html-xml-tag-html-view [html]="item.data">
-      </croco-html-xml-tag-html-view>
+    @if (item.type === 'table' && item.validationResult) {
+      
+      @if (item.validationResult.isSucceeded){
+        <croco-html-xml-tag-html-view [html]="item.bootstrapHtml">
+        </croco-html-xml-tag-html-view>
       }
-    </div>
+      @else {
+        <croco-html-error-banner
+            [message]="item.validationResult.message">
+        </croco-html-error-banner>
+      }
     }
 
     @if (item.type === 'rich-text') {

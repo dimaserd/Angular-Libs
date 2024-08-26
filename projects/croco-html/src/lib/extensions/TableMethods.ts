@@ -37,7 +37,7 @@ export interface TableTagData{
     data: TableData;
 }
 
-export class TableTypes{
+export class TableTypes {
     static readonly TableRowColumnData = "table-row-column-data";
     static readonly Table = "table";
     static readonly TableRowColumn = "table-row-column";

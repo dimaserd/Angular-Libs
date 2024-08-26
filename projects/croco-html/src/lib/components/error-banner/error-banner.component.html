@@ -1,0 +1,13 @@
+@if (message) {
+    <mat-card class="red">
+      <mat-card-content>
+        <p>
+          {{ message }}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button (click)="message = null">ЗАКРЫТЬ</button>
+      </mat-card-actions>
+    </mat-card>
+  }
+  
