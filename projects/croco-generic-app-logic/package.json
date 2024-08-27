@@ -1,6 +1,6 @@
 {
   "name": "croco-generic-app-logic",
-  "version": "2.0.7",
+  "version": "2.1.0",
   "peerDependencies": {
     "@angular/common": "^17.3.4",
     "@angular/core": "^17.3.4"
