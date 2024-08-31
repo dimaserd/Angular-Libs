@@ -12,9 +12,6 @@ export interface TestQuestionModel {
     titleBodyMarkUp: string;
     helpBodyMarkUp: string;
     answerExplanationMarkUp: string;
-    titleBodyMarkUpMobile: string;
-    helpBodyMarkUpMobile: string;
-    answerExplanationMarkUpMobile: string;
     versionId: string;
     type: TestQuestionType;
     selectRightAnswerOrAnswersData: SelectRightAnswerOrAnswersQuestionData;
