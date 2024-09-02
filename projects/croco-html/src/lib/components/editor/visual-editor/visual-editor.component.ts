@@ -25,7 +25,7 @@ import { AlignmentsData, EAlignments } from "./DefaultAligments";
 import { CrocoHtmlOptionsToken } from '../../../consts';
 import { CrocoHtmlOptions } from '../../../extensions/HtmlExtractionMethods';
 
-export const defaultLinkYouTube = "https://youtu.be/jzBneaWSswY";
+export const defaultLinkYouTube = "https://www.youtube.com/embed/4CtSAnJDfsI?si=scyBNJa0Hs2t5aLE";
 export const defaultLinkVk = "https://vk.com/video_ext.php?oid=-22822305&id=456241864&hd=2";
 @Component({
   selector: 'croco-visual-editor',

@@ -2,13 +2,13 @@ import {Component, Input} from '@angular/core';
 import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 
 @Component({
-  selector: 'vk-video-player',
+  selector: 'youtube-video-player',
   standalone: true,
   imports: [],
-  templateUrl: './vk-video-player.component.html',
+  templateUrl: './youtube-video-player.component.html',
   styleUrl: '../external-video-block.component.scss'
 })
-export class VkVideoPlayerComponent{
+export class YoutubeVideoPlayerComponent {
 
   @Input() set link(link: string) {
     this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(link);

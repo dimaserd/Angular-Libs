@@ -1,0 +1,22 @@
+.video-player {
+  margin: 0 auto;
+  max-width: 640px;
+  width: 100%;
+  height: 360px;
+
+  @media screen and (max-width: 760px) {
+    height: 300px;
+  }
+
+  @media screen and (max-width: 540px) {
+    height: 250px;
+  }
+
+  @media screen and (max-width: 450px) {
+    height: 200px;
+  }
+
+  @media screen and (max-width: 380px) {
+    height: 180px;
+  }
+}
