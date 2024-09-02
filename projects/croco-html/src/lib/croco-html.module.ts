@@ -8,6 +8,9 @@ import {
     VkVideoPlayerComponent
 } from "./components/editor/external-video-block/vk-video-player/vk-video-player.component";
 import { ErrorBannerComponent } from "./components/error-banner/error-banner.component";
+import {
+    YoutubeVideoPlayerComponent
+} from "./components/editor/external-video-block/youtube-video-player/youtube-video-player.component";
 
 @NgModule({
     declarations: [
@@ -24,7 +27,8 @@ import { ErrorBannerComponent } from "./components/error-banner/error-banner.com
         ...MaterialModules,
         ErrorBannerComponent,
         YouTubePlayerModule,
-        VkVideoPlayerComponent
+        VkVideoPlayerComponent,
+        YoutubeVideoPlayerComponent
     ]
 })
 export class CrocoHtmlModule { }
