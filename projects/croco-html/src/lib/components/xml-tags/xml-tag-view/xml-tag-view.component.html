@@ -28,7 +28,7 @@
     }
 
     @if (item.type === 'table' && item.validationResult) {
-      
+
       @if (item.validationResult.isSucceeded){
         <croco-html-xml-tag-html-view [html]="item.bootstrapHtml">
         </croco-html-xml-tag-html-view>
@@ -52,6 +52,11 @@
     </div>
     }
 
+    @if (item.type === 'download-button') {
+      <div>
+        <croco-html-xml-tag-download-button [data]="item"></croco-html-xml-tag-download-button>
+      </div>
+    }
     @if (item.type === 'unsupported-tag') {
     <div class="red" style="margin-top: 10px;">
       <h4>Данный тег не поддерживается</h4>

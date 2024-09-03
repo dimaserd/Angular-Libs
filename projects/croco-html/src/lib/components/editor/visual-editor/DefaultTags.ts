@@ -1,7 +1,8 @@
 import { HtmlRawTagDataConsts } from '../../../extensions/HtmlRawTagDataConsts';
-import { FileImageTagDataConsts } from '../../../extensions/ImageMethods';
-import { ExternalVideoTagDataConsts } from '../../../extensions/VideoMethods';
+import { FileImageTagDataConsts } from '../../../extensions';
 import { TagItem } from '../../../models/models';
+import {ExternalVideoTagDataConsts} from "../../../extensions";
+import {DownloadButtonTagDataConsts} from "../../../extensions/DownloadButtonMethods";
 
 export class DefaultTags {
 
@@ -18,6 +19,7 @@ export class DefaultTags {
   static tags: TagItem[] = [
     { tag: FileImageTagDataConsts.TagName, displayValue: 'Изображение' },
     { tag: ExternalVideoTagDataConsts.TagName, displayValue: 'Внешнее видео' },
+    { tag: DownloadButtonTagDataConsts.TagName, displayValue: 'Кнопка для скачивания' },
     ...DefaultTags.textTags
   ];
 
