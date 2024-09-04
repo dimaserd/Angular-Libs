@@ -1,11 +1,19 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TextTags } from '../../../extensions/TextMethods';
 import { HtmlBodyTag } from '../../../models/models';
+import { MatIcon } from '@angular/material/icon';
+import { MatIconButton } from '@angular/material/button';
+import { HtmlRawEditorComponent } from '../html-raw-editor/html-raw-editor.component';
+import { DownloadFileButtonBlockComponent } from '../download-file-button-block/download-file-button-block.component';
+import { ImageEditorComponent } from '../image-editor/image-editor.component';
+import { TextEditorComponent } from '../text-editor/text-editor.component';
 
 @Component({
-  selector: 'croco-html-main-editor-block',
-  templateUrl: './main-editor-block.component.html',
-  styleUrls: ['./main-editor-block.component.css']
+    selector: 'croco-html-main-editor-block',
+    templateUrl: './main-editor-block.component.html',
+    styleUrls: ['./main-editor-block.component.css'],
+    standalone: true,
+    imports: [TextEditorComponent, ImageEditorComponent, DownloadFileButtonBlockComponent, HtmlRawEditorComponent, MatIconButton, MatIcon]
 })
 export class MainEditorBlockComponent implements OnInit {
 

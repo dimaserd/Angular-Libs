@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {MatFormField} from "@angular/material/form-field";
+import {MatFormField, MatFormFieldModule} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HtmlBodyTag} from "../../../models/models";
@@ -14,7 +14,8 @@ import {DownloadButtonTagData} from "../../../extensions/DownloadButtonMethods";
     MatInput,
     ReactiveFormsModule,
     FormsModule,
-    XmlTagDownloadFileButtonComponent
+    XmlTagDownloadFileButtonComponent,
+    MatFormFieldModule
   ],
   templateUrl: './download-file-button-block.component.html',
   styleUrl: './download-file-button-block.component.css'

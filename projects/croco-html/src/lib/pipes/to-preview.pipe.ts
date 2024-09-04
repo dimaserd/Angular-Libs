@@ -4,7 +4,8 @@ import { InterfaceBlock } from "../extensions/InterfaceBlock";
 import { CrocoHtmlOptionsToken } from '../consts';
 
 @Pipe({
-  name: 'topreview'
+    name: 'topreview',
+    standalone: true
 })
 export class ToPreviewPipe implements PipeTransform {
 

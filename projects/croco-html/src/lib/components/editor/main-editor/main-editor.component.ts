@@ -2,11 +2,22 @@ import { AfterContentChecked, AfterViewInit, ChangeDetectorRef, Component, Event
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ClipboardService } from 'ngx-clipboard';
 import { VisualEditorComponent } from '../visual-editor/visual-editor.component';
+import { ToPreviewPipe } from '../../../pipes/to-preview.pipe';
+import { XmlTagViewComponent } from '../../xml-tags/xml-tag-view/xml-tag-view.component';
+import { MatCard, MatCardContent } from '@angular/material/card';
+import { MatButton } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { MatInput } from '@angular/material/input';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatTabGroup, MatTab } from '@angular/material/tabs';
 
 @Component({
-  selector: 'croco-html-main-editor',
-  templateUrl: './main-editor.component.html',
-  styleUrls: ['./main-editor.component.css']
+    selector: 'croco-html-main-editor',
+    templateUrl: './main-editor.component.html',
+    styleUrls: ['./main-editor.component.css'],
+    standalone: true,
+    imports: [MatTabGroup, MatTab, VisualEditorComponent, MatFormField, MatLabel, MatInput, CdkTextareaAutosize, FormsModule, MatButton, MatCard, MatCardContent, XmlTagViewComponent, ToPreviewPipe]
 })
 export class MainEditorComponent implements OnInit, AfterContentChecked, AfterViewInit {
 

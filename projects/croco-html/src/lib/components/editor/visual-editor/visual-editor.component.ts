@@ -1,4 +1,4 @@
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray, CdkDropList, CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
 import {
   AfterViewInit,
   ChangeDetectorRef,
@@ -28,14 +28,27 @@ import { AlignmentsData, EAlignments } from "./DefaultAligments";
 import { CrocoHtmlOptionsToken } from '../../../consts';
 import { CrocoHtmlOptions } from '../../../extensions/HtmlExtractionMethods';
 import {DownloadButtonTagDataConsts} from "../../../extensions/DownloadButtonMethods";
+import { MainEditorBlockComponent } from '../main-editor-block/main-editor-block.component';
+import { AddFilesBtnComponent } from '../../add-files-btn/add-files-btn.component';
+import { MatOption } from '@angular/material/core';
+import { MatSelect } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { MatInput } from '@angular/material/input';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatButton } from '@angular/material/button';
+import { MatCard, MatCardContent } from '@angular/material/card';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 export const defaultLinkYouTube = "https://www.youtube.com/embed/4CtSAnJDfsI?si=scyBNJa0Hs2t5aLE";
 export const defaultLinkVk = "https://vk.com/video_ext.php?oid=-22822305&id=456241864&hd=2";
 export const defaultLinkForDownload = "https://storage.yandexcloud.net/mega-academy/presentation.pdf";
 @Component({
-  selector: 'croco-visual-editor',
-  templateUrl: './visual-editor.component.html',
-  styleUrls: ['./visual-editor.component.css']
+    selector: 'croco-visual-editor',
+    templateUrl: './visual-editor.component.html',
+    styleUrls: ['./visual-editor.component.css'],
+    standalone: true,
+    imports: [MatProgressSpinner, MatCard, MatCardContent, MatButton, MatFormField, MatLabel, MatInput, CdkTextareaAutosize, FormsModule, MatSelect, MatOption, AddFilesBtnComponent, CdkDropList, CdkDrag, CdkDragHandle, MainEditorBlockComponent]
 })
 export class VisualEditorComponent implements OnInit, AfterViewInit {
   @ViewChild('textArea') textArea: ElementRef;

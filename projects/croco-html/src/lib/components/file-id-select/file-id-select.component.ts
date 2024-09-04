@@ -3,6 +3,8 @@ import { ImageMethods } from '../../extensions/ImageMethods';
 import { FileNameAndIdModel, FilesQueryService, FileType } from '../../services/files-query.service';
 import { CrocoHtmlOptionsToken } from '../../consts';
 import { CrocoHtmlOptions } from '../../extensions/HtmlExtractionMethods';
+import { FormsModule } from '@angular/forms';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 export interface SearchQuestionsFormData {
     q: string;
@@ -11,7 +13,9 @@ export interface SearchQuestionsFormData {
 @Component({
     selector: 'croco-html-file-id-select',
     templateUrl: './file-id-select.component.html',
-    styleUrls: ['./file-id-select.component.css']
+    styleUrls: ['./file-id-select.component.css'],
+    standalone: true,
+    imports: [NgSelectModule, FormsModule]
 })
 export class FileIdSelectComponent implements OnInit, OnChanges {
 

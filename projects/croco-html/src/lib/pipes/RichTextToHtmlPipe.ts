@@ -2,7 +2,8 @@ import { Pipe, PipeTransform } from "@angular/core";
 import { RichTextData } from "../extensions/TextMethods";
 
 @Pipe({
-    name: 'richTextToHtml'
+    name: 'richTextToHtml',
+    standalone: true
 })
 export class RichTextToHtmlPipe implements PipeTransform {
 

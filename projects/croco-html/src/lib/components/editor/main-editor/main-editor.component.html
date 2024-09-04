@@ -19,6 +19,7 @@
     @if (visualEditorRendered) {
       <div>
         <mat-form-field class="w-100">
+          <mat-label>Исходный код</mat-label>
           <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
             cdkAutosizeMinRows="1"
             placeholder="Исходный код" [(ngModel)]="html"

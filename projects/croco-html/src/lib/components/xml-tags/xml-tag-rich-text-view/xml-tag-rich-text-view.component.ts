@@ -1,10 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { RichTextData } from '../../../extensions/TextMethods';
+import { RichTextToHtmlPipe } from '../../../pipes/RichTextToHtmlPipe';
 
 @Component({
-  selector: 'croco-html-xml-tag-rich-text-view',
-  templateUrl: './xml-tag-rich-text-view.component.html',
-  styleUrls: ['./xml-tag-rich-text-view.component.css']
+    selector: 'croco-html-xml-tag-rich-text-view',
+    templateUrl: './xml-tag-rich-text-view.component.html',
+    styleUrls: ['./xml-tag-rich-text-view.component.css'],
+    standalone: true,
+    imports: [RichTextToHtmlPipe]
 })
 export class XmlTagRichTextViewComponent implements OnInit {
 

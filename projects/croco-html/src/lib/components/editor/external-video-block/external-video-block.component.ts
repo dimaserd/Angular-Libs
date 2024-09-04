@@ -8,7 +8,11 @@ import { HtmlBodyTag } from '../../../models/models';
 @Component({
   selector: 'croco-html-external-video-block',
   templateUrl: './external-video-block.component.html',
-  styleUrls: ['./external-video-block.component.scss']
+  styleUrls: ['./external-video-block.component.scss'],
+  standalone: true,
+  imports: [
+    
+  ]
 })
 export class ExternalVideoBlockComponent implements OnInit {
 
@@ -17,7 +21,6 @@ export class ExternalVideoBlockComponent implements OnInit {
 
   @Output()
   onTagUpdated = new EventEmitter<HtmlBodyTag>();
-
 
   protected readonly ExternalVideoSupportedTypes = ExternalVideoSupportedTypes;
 

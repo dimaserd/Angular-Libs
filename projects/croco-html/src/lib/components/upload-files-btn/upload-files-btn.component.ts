@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { BaseApiResponseWithFilesIds, FileUploadService } from '../../services/file-upload.service';
+import { MatButton } from '@angular/material/button';
 
 export interface FilePostingStarted {
   filesCount: number;
@@ -7,9 +8,11 @@ export interface FilePostingStarted {
 }
 
 @Component({
-  selector: 'croco-app-upload-files-btn',
-  templateUrl: './upload-files-btn.component.html',
-  styleUrls: ['./upload-files-btn.component.css']
+    selector: 'croco-app-upload-files-btn',
+    templateUrl: './upload-files-btn.component.html',
+    styleUrls: ['./upload-files-btn.component.css'],
+    standalone: true,
+    imports: [MatButton]
 })
 export class UploadFilesBtnComponent implements OnInit {
 

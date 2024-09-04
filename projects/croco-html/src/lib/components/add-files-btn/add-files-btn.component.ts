@@ -3,11 +3,14 @@ import { FileImageTagDataConsts } from '../../extensions/ImageMethods';
 import { HtmlBodyTag } from '../../models/models';
 import { BaseApiResponseWithFilesIds } from '../../services/file-upload.service';
 import { FilePostingStarted, UploadFilesBtnComponent } from '../upload-files-btn/upload-files-btn.component';
+import { MatButton } from '@angular/material/button';
 
 @Component({
-  selector: 'croco-html-add-files-btn',
-  templateUrl: './add-files-btn.component.html',
-  styleUrls: ['./add-files-btn.component.css']
+    selector: 'croco-html-add-files-btn',
+    templateUrl: './add-files-btn.component.html',
+    styleUrls: ['./add-files-btn.component.css'],
+    standalone: true,
+    imports: [UploadFilesBtnComponent, MatButton]
 })
 export class AddFilesBtnComponent implements OnInit {
 

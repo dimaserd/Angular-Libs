@@ -18,6 +18,9 @@
 @if (!tag.presentOrEdit) {
     <div>
       <mat-form-field class="w-100">
+        <mat-label>
+          {{linkText}}
+        </mat-label>
         <input matInput placeholder="{{linkText}}"
           autocomplete="off"
           [(ngModel)]="tagData.link"

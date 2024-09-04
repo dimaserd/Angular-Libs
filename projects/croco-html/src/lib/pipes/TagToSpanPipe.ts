@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
-    name: 'tagToSpan'
+    name: 'tagToSpan',
+    standalone: true
 })
 export class TagToSpanPipe implements PipeTransform {
     transform(value: string[]): string {

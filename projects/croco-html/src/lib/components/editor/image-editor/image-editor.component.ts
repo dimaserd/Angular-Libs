@@ -3,11 +3,19 @@ import { ImageMethods, FileImageTagDataConsts } from '../../../extensions/ImageM
 import { HtmlBodyTag } from '../../../models/models';
 import { CrocoHtmlOptionsToken } from '../../../consts';
 import { CrocoHtmlOptions } from '../../../extensions/HtmlExtractionMethods';
+import { MatInput } from '@angular/material/input';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { FileIdSelectComponent } from '../../file-id-select/file-id-select.component';
+import { MatIcon } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
+import { MatButtonToggleGroup, MatButtonToggle } from '@angular/material/button-toggle';
 
 @Component({
-  selector: 'croco-html-image-editor',
-  templateUrl: './image-editor.component.html',
-  styleUrls: ['./image-editor.component.css']
+    selector: 'croco-html-image-editor',
+    templateUrl: './image-editor.component.html',
+    styleUrls: ['./image-editor.component.css'],
+    standalone: true,
+    imports: [MatButtonToggleGroup, FormsModule, MatButtonToggle, MatIcon, FileIdSelectComponent, MatFormField, MatLabel, MatInput]
 })
 export class ImageEditorComponent implements OnInit {
 

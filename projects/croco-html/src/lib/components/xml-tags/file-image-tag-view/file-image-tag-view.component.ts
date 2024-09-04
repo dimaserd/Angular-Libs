@@ -3,9 +3,10 @@ import { InterfaceBlock } from '../../../extensions/InterfaceBlock';
 import { FileImageTagData } from '../../../extensions';
 
 @Component({
-  selector: 'croco-html-file-image-tag-view',
-  templateUrl: './file-image-tag-view.component.html',
-  styleUrl: './file-image-tag-view.component.css'
+    selector: 'croco-html-file-image-tag-view',
+    templateUrl: './file-image-tag-view.component.html',
+    styleUrl: './file-image-tag-view.component.css',
+    standalone: true
 })
 export class FileImageTagViewComponent implements OnInit {
   

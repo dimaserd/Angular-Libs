@@ -15,7 +15,6 @@ import { AddFilesBtnComponent } from './components/add-files-btn/add-files-btn.c
 import { ExternalVideoBlockComponent } from "./components/editor/external-video-block/external-video-block.component";
 import { XmlTagExternalVideoComponent } from "./components/xml-tags/xml-tag-external-video/xml-tag-external-video.component";
 import { HtmlRawEditorComponent } from "./components/editor/html-raw-editor/html-raw-editor.component";
-
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -54,7 +53,6 @@ export const EditorComponents = [
     MainEditorComponent,
     FileIdSelectComponent,
     TextEditorComponent,
-    ExternalVideoBlockComponent,
     ImageEditorComponent,
     MainEditorBlockComponent,
     VisualEditorComponent,

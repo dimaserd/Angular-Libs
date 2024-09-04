@@ -16,23 +16,21 @@ import {
 } from "./components/xml-tags/xml-tag-download-file-button/xml-tag-download-file-button.component";
 
 @NgModule({
-    declarations: [
-      ...CrocoHtmlDeclarations,
-    ],
     exports: [
-      ...CrocoHtmlDeclarations,
+        ...CrocoHtmlDeclarations,
     ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    NgSelectModule,
-    ...MaterialModules,
-    ErrorBannerComponent,
-    VkVideoPlayerComponent,
-    YoutubeVideoPlayerComponent,
-    DownloadFileButtonBlockComponent,
-    XmlTagDownloadFileButtonComponent
-  ]
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NgSelectModule,
+        ...MaterialModules,
+        ErrorBannerComponent,
+        VkVideoPlayerComponent,
+        YoutubeVideoPlayerComponent,
+        DownloadFileButtonBlockComponent,
+        XmlTagDownloadFileButtonComponent,
+        ...CrocoHtmlDeclarations
+    ]
 })
 export class CrocoHtmlModule { }

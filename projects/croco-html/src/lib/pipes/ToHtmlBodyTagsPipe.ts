@@ -5,7 +5,8 @@ import { CrocoHtmlOptions } from '../extensions/HtmlExtractionMethods';
 import { CrocoHtmlOptionsToken } from '../consts';
 
 @Pipe({
-    name: 'tohtmlbodytags'
+    name: 'tohtmlbodytags',
+    standalone: true
 })
 export class ToHtmlBodyTagsPipe implements PipeTransform {
 

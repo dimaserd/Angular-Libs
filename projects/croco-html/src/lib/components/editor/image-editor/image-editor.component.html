@@ -45,6 +45,9 @@
     <div [hidden]="searchOrEdit !== 'edit'">
       <div>
         <mat-form-field class="w-100">
+          <mat-label>
+            Идентификатор файла
+          </mat-label>
           <input matInput placeholder="Идентификатор файла" new-autocomplete="off" autocomplete="off"
             type="number"
             [(ngModel)]="tag.attributes['file-id']"
