@@ -1,7 +1,7 @@
-import {ExternalVideoTagDataConsts} from "./VideoMethods";
-
 export class DownloadButtonTagDataConsts {
   static TagName = "download-button";
+  static TitleAttrName = "title";
+  static LinkAttrName = "link";
 }
 
 export interface  DownloadButtonTag {
@@ -20,8 +20,8 @@ export class DownloadButtonMethods {
     return {
       type: DownloadButtonTagDataConsts.TagName,
       data:{
-        title: elem.innerHTML,
-        link: elem.getAttribute(ExternalVideoTagDataConsts.LinkAttrName)
+        title: elem.getAttribute(DownloadButtonTagDataConsts.TitleAttrName),
+        link: elem.getAttribute(DownloadButtonTagDataConsts.LinkAttrName)
       }
     };
   }

@@ -31,7 +31,7 @@ import {DownloadButtonTagDataConsts} from "../../../extensions/DownloadButtonMet
 
 export const defaultLinkYouTube = "https://www.youtube.com/embed/4CtSAnJDfsI?si=scyBNJa0Hs2t5aLE";
 export const defaultLinkVk = "https://vk.com/video_ext.php?oid=-22822305&id=456241864&hd=2";
-export const defaultLinkForDownload = "https://mega-academy.website.yandexcloud.net/private-files/9e5d40ff-9af1-4a6e-81ac-7818651f6b7e/1026ххх.svg";
+export const defaultLinkForDownload = "https://storage.yandexcloud.net/mega-academy/presentation.pdf";
 @Component({
   selector: 'croco-visual-editor',
   templateUrl: './visual-editor.component.html',
@@ -118,8 +118,8 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
 
     }
     else if (tagDescription.tag == DownloadButtonTagDataConsts.TagName) {
-      innerHtml = 'Скачать';
-      attrs[ExternalVideoTagDataConsts.LinkAttrName] = defaultLinkForDownload
+      attrs[DownloadButtonTagDataConsts.LinkAttrName] = defaultLinkForDownload
+      attrs[DownloadButtonTagDataConsts.TitleAttrName] = 'Скачать'
     }
     else {
       attrs[FileImageTagDataConsts.FileIdAttrName] = null;

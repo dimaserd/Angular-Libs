@@ -34,7 +34,7 @@ export class DownloadButtonBlockComponent {
 
   ngOnInit(): void {
     this.tagData.link = (this.tag.attributes as DownloadButtonTagData).link;
-    this.tagData.title = this.tag.innerHtml
+    this.tagData.title = (this.tag.attributes as DownloadButtonTagData).title;
   }
 
   linkChanged(){

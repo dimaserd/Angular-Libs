@@ -7,6 +7,7 @@ import {
 import {MatButton} from "@angular/material/button";
 import {BlobCreateService} from "../../../services/blob-create.service";
 import {DownloadButtonTagData} from "../../../extensions/DownloadButtonMethods";
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
   selector: 'croco-html-xml-tag-download-button',
@@ -14,10 +15,11 @@ import {DownloadButtonTagData} from "../../../extensions/DownloadButtonMethods";
   imports: [
     VkVideoPlayerComponent,
     YoutubeVideoPlayerComponent,
-    MatButton
+    MatButton,
+    MatIcon
   ],
   templateUrl: './xml-tag-download-button.component.html',
-  styleUrl: './xml-tag-download-button.component.css'
+  styleUrl: './xml-tag-download-button.component.scss'
 })
 export class XmlTagDownloadButtonComponent {
   @Input() public set data(value: InterfaceBlock) {
