@@ -5,8 +5,9 @@ import { HtmlRawTagDataConsts } from "./HtmlRawTagDataConsts";
 import { FileImageTagData, FileImageTagDataConsts } from "./ImageMethods";
 import { TextTags } from "./TextMethods";
 import { SimpleTextTagData } from "./TextSimpleMethods";
-import { ExternalVideoTagDataConsts } from "./VideoMethods";
 import { Tags } from "./Tags";
+import {ExternalVideoTagDataConsts} from "./VideoMethods";
+import {DownloadButtonTagDataConsts} from "./DownloadButtonMethods";
 
 export class BodyTagsExtensions {
 
@@ -21,6 +22,7 @@ export class BodyTagsExtensions {
             "h6": "Заголовок 6 уровня",
             [FileImageTagDataConsts.TagName]: "Изображение",
             [ExternalVideoTagDataConsts.TagName]: "Внешнее видео",
+            [DownloadButtonTagDataConsts.TagName]: "Кнопка для скачивания",
             [HtmlRawTagDataConsts.TagName]: "Html разметка"
         };
 
@@ -39,6 +41,10 @@ export class BodyTagsExtensions {
 
             if (x.tagDescription.tag === "html-raw") {
                 return `<${x.tagDescription.tag}>${x.innerHtml}</${x.tagDescription.tag}>`
+            }
+
+            if (x.tagDescription.tag === DownloadButtonTagDataConsts.TagName) {
+              return `<${x.tagDescription.tag} title="${x.attributes['title']}" link="${x.attributes['link']}"></${x.tagDescription.tag}>`
             }
 
             return BodyTagsExtensions.imageTagToHtml(x);

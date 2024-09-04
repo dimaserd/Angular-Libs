@@ -21,6 +21,13 @@
       </div>
     }
 
+    @if (tag.tagDescription.tag === 'download-button') {
+      <div>
+        <croco-html-download-button-block (onTagUpdated)="tagUpdatedHandler($event)" [tag]="tag">
+        </croco-html-download-button-block>
+      </div>
+    }
+
     @if (tag.tagDescription.tag === 'html-raw') {
       <div>
         <croco-html-html-raw-editor (onTagUpdated)="tagUpdatedHandler($event)" [tag]="tag">

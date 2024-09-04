@@ -3,10 +3,6 @@
     <vk-video-player [link]="_block.link"></vk-video-player>
   }
   @case (ExternalVideoSupportedTypes.Youtube) {
-    <div #playerContainer class="d-flex justify-content-center y-video">
-      @if (videoId) {
-        <youtube-player [height]="playerHeight()" [width]="playerWidth()" [videoId]="videoId"></youtube-player>
-      }
-    </div>
+    <youtube-video-player [link]="_block.link"></youtube-video-player>
   }
 }
