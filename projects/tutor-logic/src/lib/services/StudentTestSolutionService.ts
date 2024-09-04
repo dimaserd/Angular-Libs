@@ -7,7 +7,7 @@ import { Observable } from "rxjs";
 export class StudentTestSolutionService {
     baseControllerUrl: string;
 
-    constructor(private _httpClient: HttpClient,
+    constructor(private readonly _httpClient: HttpClient,
         @Inject('BASE_URL') baseUrl: string) {
         this.baseControllerUrl = baseUrl + 'api/tutor/test-solution/';
     }
