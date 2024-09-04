@@ -1,0 +1,31 @@
+@if (tag.presentOrEdit) {
+  <div>
+    <div>
+      Ссылка для скачивания: {{tagData.link}}
+    </div>
+    <div style="height: 10px;"></div>
+    <div>
+      Текст кнопки: {{tagData.title}}
+    </div>
+    <div style="height: 20px;"></div>
+    <croco-html-xml-tag-download-button [tagData]="tagData"></croco-html-xml-tag-download-button>
+  </div>
+}
+
+@if (!tag.presentOrEdit) {
+      <div>
+        <mat-form-field class="w-100">
+          <input matInput placeholder="Ссылка на скачивание"
+                 autocomplete="off"
+                 [(ngModel)]="tagData.link"
+                 (ngModelChange)="linkChanged()">
+        </mat-form-field>
+
+        <mat-form-field class="w-100">
+          <input matInput placeholder="Текст на кнопке"
+                 autocomplete="off"
+                 [(ngModel)]="tagData.title"
+                 (ngModelChange)="linkChanged()">
+        </mat-form-field>
+      </div>
+}

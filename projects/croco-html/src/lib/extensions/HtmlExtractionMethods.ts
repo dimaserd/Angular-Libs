@@ -3,7 +3,11 @@ import { InterfaceBlock } from "./InterfaceBlock";
 import { TableMethods } from "./TableMethods";
 import { TextMethods } from "./TextMethods";
 import { GenericTextTag, TextSimpleMethods } from "./TextSimpleMethods";
-import { ExternalVideoTagDataConsts, VideoMethods } from "./VideoMethods";
+import {
+  ExternalVideoTagDataConsts,
+  VideoMethods
+} from "./VideoMethods";
+import {DownloadButtonMethods, DownloadButtonTagDataConsts} from "./DownloadButtonMethods";
 
 export interface CrocoHtmlOptions {
   publicImageResizedUrlFormat: string;
@@ -36,7 +40,8 @@ export class HtmlExtractionMethods {
     ["H4"]: (elem: HTMLElement, options: CrocoHtmlOptions) => HtmlExtractionMethods.ExtractHeaderTag(elem, "h4"),
     ["H5"]: (elem: HTMLElement, options: CrocoHtmlOptions) => HtmlExtractionMethods.ExtractHeaderTag(elem, "h5"),
     ["H6"]: (elem: HTMLElement, options: CrocoHtmlOptions) => HtmlExtractionMethods.ExtractHeaderTag(elem, "h6"),
-    [ExternalVideoTagDataConsts.TagName.toUpperCase()]: (elem: HTMLElement, options: CrocoHtmlOptions) => VideoMethods.ExtractExternalVideoTag(elem)
+    [ExternalVideoTagDataConsts.TagName.toUpperCase()]: (elem: HTMLElement, options: CrocoHtmlOptions) => VideoMethods.ExtractExternalVideoTag(elem),
+    [DownloadButtonTagDataConsts.TagName.toUpperCase()]: (elem: HTMLElement, options: CrocoHtmlOptions) => DownloadButtonMethods.ExtractDownloadButtonTag(elem),
   };
 
   static transformHtmlElementToBlocks(element: HTMLElement, options: CrocoHtmlOptions): InterfaceBlock[] {

@@ -10,9 +10,12 @@ import {
   Output,
   ViewChild
 } from '@angular/core';
-import {BodyTagsExtensions, ExternalVideoSupportedTypes, TextTags} from '../../../extensions';
+import {
+  BodyTagsExtensions,
+  ExternalVideoSupportedTypes,
+  TextTags
+} from '../../../extensions';
 import { FileImageTagDataConsts } from '../../../extensions';
-import { TextMethods } from '../../../extensions';
 import {
   ExternalVideoTagDataConsts,
   ExternalVideoPlayers
@@ -24,9 +27,11 @@ import { DefaultTags } from './DefaultTags';
 import { AlignmentsData, EAlignments } from "./DefaultAligments";
 import { CrocoHtmlOptionsToken } from '../../../consts';
 import { CrocoHtmlOptions } from '../../../extensions/HtmlExtractionMethods';
+import {DownloadButtonTagDataConsts} from "../../../extensions/DownloadButtonMethods";
 
 export const defaultLinkYouTube = "https://www.youtube.com/embed/4CtSAnJDfsI?si=scyBNJa0Hs2t5aLE";
 export const defaultLinkVk = "https://vk.com/video_ext.php?oid=-22822305&id=456241864&hd=2";
+export const defaultLinkForDownload = "https://storage.yandexcloud.net/mega-academy/presentation.pdf";
 @Component({
   selector: 'croco-visual-editor',
   templateUrl: './visual-editor.component.html',
@@ -111,6 +116,10 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
       attrs[ExternalVideoTagDataConsts.VideoTypeAttrName] = this.selectedVideoPlayer;
       attrs[ExternalVideoTagDataConsts.LinkAttrName] = this.selectedVideoPlayer === ExternalVideoSupportedTypes.VkVideo ? defaultLinkVk : defaultLinkYouTube;
 
+    }
+    else if (tagDescription.tag == DownloadButtonTagDataConsts.TagName) {
+      attrs[DownloadButtonTagDataConsts.LinkAttrName] = defaultLinkForDownload
+      attrs[DownloadButtonTagDataConsts.TitleAttrName] = 'Скачать'
     }
     else {
       attrs[FileImageTagDataConsts.FileIdAttrName] = null;
