@@ -7,9 +7,9 @@ import {Observable} from "rxjs";
 })
 export class BlobCreateService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private readonly _http: HttpClient) {}
 
   getBlob(link: string): Observable<Blob> {
-    return this.http.get(link, { responseType: 'blob' })
+    return this._http.get(link, { responseType: 'blob' })
   }
 }
