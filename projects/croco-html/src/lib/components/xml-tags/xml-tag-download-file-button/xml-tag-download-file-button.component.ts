@@ -1,6 +1,5 @@
 import {Component, Input} from '@angular/core';
 import {InterfaceBlock} from "../../../extensions/InterfaceBlock";
-import {VkVideoPlayerComponent} from "../../editor/external-video-block/vk-video-player/vk-video-player.component";
 import {
   YoutubeVideoPlayerComponent
 } from "../../editor/external-video-block/youtube-video-player/youtube-video-player.component";
@@ -10,18 +9,17 @@ import {DownloadButtonTagData} from "../../../extensions/DownloadButtonMethods";
 import {MatIcon} from "@angular/material/icon";
 
 @Component({
-  selector: 'croco-html-xml-tag-download-button',
+  selector: 'croco-html-xml-tag-download-file-button',
   standalone: true,
   imports: [
-    VkVideoPlayerComponent,
     YoutubeVideoPlayerComponent,
     MatButton,
     MatIcon
   ],
-  templateUrl: './xml-tag-download-button.component.html',
-  styleUrl: './xml-tag-download-button.component.scss'
+  templateUrl: './xml-tag-download-file-button.component.html',
+  styleUrl: './xml-tag-download-file-button.component.scss'
 })
-export class XmlTagDownloadButtonComponent {
+export class XmlTagDownloadFileButtonComponent {
   @Input() public set data(value: InterfaceBlock) {
     this.tagData = value.data;
   };

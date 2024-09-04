@@ -21,10 +21,10 @@
       </div>
     }
 
-    @if (tag.tagDescription.tag === 'download-button') {
+    @if (tag.tagDescription.tag === 'download-file-button') {
       <div>
-        <croco-html-download-button-block (onTagUpdated)="tagUpdatedHandler($event)" [tag]="tag">
-        </croco-html-download-button-block>
+        <croco-html-download-file-button-block (onTagUpdated)="tagUpdatedHandler($event)" [tag]="tag">
+        </croco-html-download-file-button-block>
       </div>
     }
 
