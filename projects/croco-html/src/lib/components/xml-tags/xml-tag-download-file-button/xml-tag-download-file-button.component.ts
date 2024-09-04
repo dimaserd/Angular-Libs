@@ -10,7 +10,7 @@ import {DownloadButtonTagData} from "../../../extensions/DownloadButtonMethods";
 import {MatIcon} from "@angular/material/icon";
 
 @Component({
-  selector: 'croco-html-xml-tag-download-button',
+  selector: 'croco-html-xml-tag-download-file-button',
   standalone: true,
   imports: [
     VkVideoPlayerComponent,
@@ -18,10 +18,10 @@ import {MatIcon} from "@angular/material/icon";
     MatButton,
     MatIcon
   ],
-  templateUrl: './xml-tag-download-button.component.html',
-  styleUrl: './xml-tag-download-button.component.scss'
+  templateUrl: './xml-tag-download-file-button.component.html',
+  styleUrl: './xml-tag-download-file-button.component.scss'
 })
-export class XmlTagDownloadButtonComponent {
+export class XmlTagDownloadFileButtonComponent {
   @Input() public set data(value: InterfaceBlock) {
     this.tagData = value.data;
   };

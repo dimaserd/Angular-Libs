@@ -1,5 +1,5 @@
 export class DownloadButtonTagDataConsts {
-  static TagName = "download-button";
+  static TagName = "download-file-button";
   static TitleAttrName = "title";
   static LinkAttrName = "link";
 }

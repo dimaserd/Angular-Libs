@@ -3,10 +3,10 @@
     <div>
       @switch (tagData.type) {
         @case (ExternalVideoSupportedTypes.VkVideo) {
-          Ссылка на Vk Video: {{tagData.link}}
+          {{linkText}}: {{tagData.link}}
         }
         @case (ExternalVideoSupportedTypes.Youtube) {
-          Ссылка на YouTube: {{tagData.link}}
+          {{linkText}}: {{tagData.link}}
         }
       }
     </div>
@@ -18,7 +18,7 @@
 @if (!tag.presentOrEdit) {
     <div>
       <mat-form-field class="w-100">
-        <input matInput placeholder="Ссылка на YouTube"
+        <input matInput placeholder="{{linkText}}"
           autocomplete="off"
           [(ngModel)]="tagData.link"
                   (ngModelChange)="linkChanged()">
