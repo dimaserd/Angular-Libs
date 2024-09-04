@@ -7,20 +7,29 @@ import { HtmlRawEditorComponent } from '../html-raw-editor/html-raw-editor.compo
 import { DownloadFileButtonBlockComponent } from '../download-file-button-block/download-file-button-block.component';
 import { ImageEditorComponent } from '../image-editor/image-editor.component';
 import { TextEditorComponent } from '../text-editor/text-editor.component';
+import { ExternalVideoBlockComponent } from '../external-video-block/external-video-block.component';
 
 @Component({
-    selector: 'croco-html-main-editor-block',
-    templateUrl: './main-editor-block.component.html',
-    styleUrls: ['./main-editor-block.component.css'],
-    standalone: true,
-    imports: [TextEditorComponent, ImageEditorComponent, DownloadFileButtonBlockComponent, HtmlRawEditorComponent, MatIconButton, MatIcon]
+  selector: 'croco-html-main-editor-block',
+  templateUrl: './main-editor-block.component.html',
+  styleUrls: ['./main-editor-block.component.css'],
+  standalone: true,
+  imports: [
+    TextEditorComponent,
+    ImageEditorComponent,
+    DownloadFileButtonBlockComponent,
+    HtmlRawEditorComponent,
+    MatIconButton,
+    MatIcon,
+    ExternalVideoBlockComponent
+  ]
 })
 export class MainEditorBlockComponent implements OnInit {
 
   textTags = TextTags.allTextTags;
 
   @Input()
-  tag:HtmlBodyTag;
+  tag: HtmlBodyTag;
 
   @Output()
   onTagSaved = new EventEmitter<HtmlBodyTag>();
@@ -28,15 +37,15 @@ export class MainEditorBlockComponent implements OnInit {
   @Output()
   onTagRemoved = new EventEmitter<HtmlBodyTag>();
 
-  tagUpdatedHandler(tag:HtmlBodyTag): void{
+  tagUpdatedHandler(tag: HtmlBodyTag): void {
   }
 
-  save(){
+  save() {
     this.tag.presentOrEdit = true;
     this.onTagSaved.emit(this.tag);
   }
 
-  deleteItem(){
+  deleteItem() {
     this.onTagRemoved.emit(this.tag);
   }
 

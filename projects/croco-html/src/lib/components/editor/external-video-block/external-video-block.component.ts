@@ -4,6 +4,11 @@ import {
   ExternalVideoSupportedTypes,
 } from '../../../extensions';
 import { HtmlBodyTag } from '../../../models/models';
+import { YoutubeVideoPlayerComponent } from './youtube-video-player/youtube-video-player.component';
+import { VkVideoPlayerComponent } from './vk-video-player/vk-video-player.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+import { XmlTagExternalVideoComponent } from '../../xml-tags';
 
 @Component({
   selector: 'croco-html-external-video-block',
@@ -11,7 +16,9 @@ import { HtmlBodyTag } from '../../../models/models';
   styleUrls: ['./external-video-block.component.scss'],
   standalone: true,
   imports: [
-    
+    MatFormFieldModule,
+    FormsModule,
+    XmlTagExternalVideoComponent
   ]
 })
 export class ExternalVideoBlockComponent implements OnInit {
