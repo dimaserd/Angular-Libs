@@ -44,7 +44,7 @@ export class BodyTagsExtensions {
             }
 
             if (x.tagDescription.tag === DownloadButtonTagDataConsts.TagName) {
-              return `<${x.tagDescription.tag} title= "${x.attributes['title']}" link="${x.attributes['link']}">${x.innerHtml}</${x.tagDescription.tag}>`
+              return `<${x.tagDescription.tag} title= "${x.attributes['title']}" link="${x.attributes['link']}"></${x.tagDescription.tag}>`
             }
 
             return BodyTagsExtensions.imageTagToHtml(x);
