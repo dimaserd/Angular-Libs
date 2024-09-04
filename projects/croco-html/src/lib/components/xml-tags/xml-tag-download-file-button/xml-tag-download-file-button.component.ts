@@ -1,6 +1,5 @@
 import {Component, Input} from '@angular/core';
 import {InterfaceBlock} from "../../../extensions/InterfaceBlock";
-import {VkVideoPlayerComponent} from "../../editor/external-video-block/vk-video-player/vk-video-player.component";
 import {
   YoutubeVideoPlayerComponent
 } from "../../editor/external-video-block/youtube-video-player/youtube-video-player.component";
@@ -13,7 +12,6 @@ import {MatIcon} from "@angular/material/icon";
   selector: 'croco-html-xml-tag-download-file-button',
   standalone: true,
   imports: [
-    VkVideoPlayerComponent,
     YoutubeVideoPlayerComponent,
     MatButton,
     MatIcon
