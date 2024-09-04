@@ -28,7 +28,6 @@
     "@angular/platform-browser": "^17.3.4",
     "@angular/platform-browser-dynamic": "^17.3.4",
     "@angular/router": "^17.3.4",
-    "@angular/youtube-player": "^17.3.4",
     "@ng-select/ng-select": "^12.0.7",
     "ngx-clipboard": "^16.0.0",
     "rxjs": "~7.8.1",

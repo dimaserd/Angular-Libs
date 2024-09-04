@@ -52,9 +52,9 @@
     </div>
     }
 
-    @if (item.type === 'download-button') {
+    @if (item.type === 'download-file-button') {
       <div>
-        <croco-html-xml-tag-download-button [data]="item"></croco-html-xml-tag-download-button>
+        <croco-html-xml-tag-download-file-button [data]="item"></croco-html-xml-tag-download-file-button>
       </div>
     }
     @if (item.type === 'unsupported-tag') {

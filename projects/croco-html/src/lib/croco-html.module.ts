@@ -3,7 +3,6 @@ import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgSelectModule } from "@ng-select/ng-select";
 import { CrocoHtmlDeclarations, MaterialModules } from ".";
-import { YouTubePlayerModule } from "@angular/youtube-player";
 import {
     VkVideoPlayerComponent
 } from "./components/editor/external-video-block/vk-video-player/vk-video-player.component";
@@ -11,10 +10,10 @@ import { ErrorBannerComponent } from "./components/error-banner/error-banner.com
 import {
     YoutubeVideoPlayerComponent
 } from "./components/editor/external-video-block/youtube-video-player/youtube-video-player.component";
-import {DownloadButtonBlockComponent} from "./components/editor/download-button-block/download-button-block.component";
+import {DownloadFileButtonBlockComponent} from "./components/editor/download-file-button-block/download-file-button-block.component";
 import {
-  XmlTagDownloadButtonComponent
-} from "./components/xml-tags/xml-tag-download-button/xml-tag-download-button.component";
+  XmlTagDownloadFileButtonComponent
+} from "./components/xml-tags/xml-tag-download-file-button/xml-tag-download-file-button.component";
 
 @NgModule({
     declarations: [
@@ -30,11 +29,10 @@ import {
     NgSelectModule,
     ...MaterialModules,
     ErrorBannerComponent,
-    YouTubePlayerModule,
     VkVideoPlayerComponent,
     YoutubeVideoPlayerComponent,
-    DownloadButtonBlockComponent,
-    XmlTagDownloadButtonComponent
+    DownloadFileButtonBlockComponent,
+    XmlTagDownloadFileButtonComponent
   ]
 })
 export class CrocoHtmlModule { }
