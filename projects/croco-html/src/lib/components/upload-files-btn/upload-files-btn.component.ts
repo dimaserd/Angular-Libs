@@ -4,35 +4,35 @@ import { MatButton } from '@angular/material/button';
 
 export interface FilePostingStarted {
   filesCount: number;
-  createLocalCopiesNow:boolean;
+  createLocalCopiesNow: boolean;
 }
 
 @Component({
-    selector: 'croco-app-upload-files-btn',
-    templateUrl: './upload-files-btn.component.html',
-    styleUrls: ['./upload-files-btn.component.css'],
-    standalone: true,
-    imports: [MatButton]
+  selector: 'croco-app-upload-files-btn',
+  templateUrl: './upload-files-btn.component.html',
+  styleUrls: ['./upload-files-btn.component.css'],
+  standalone: true,
+  imports: [MatButton]
 })
 export class UploadFilesBtnComponent implements OnInit {
 
-  constructor(private _fileUploadService: FileUploadService) { }
-  @ViewChild('filesInput') private fileInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('filesInput')
+  private fileInput!: ElementRef<HTMLInputElement>;
 
   @Input()
   extAccepts: string = "*/*";
 
   @Input()
-  isMultiple: boolean = true;
+  isMultiple = true;
 
   @Input()
   btnText: string = "Загрузить файлы";
 
   @Input()
-  createLocalCopiesNow = false;
+  createLocalCopiesNow = true;
 
   @Input()
-  hidden: boolean = false;
+  hidden = false;
 
   @Output()
   postFilesStarted = new EventEmitter<FilePostingStarted>();
@@ -40,9 +40,11 @@ export class UploadFilesBtnComponent implements OnInit {
   @Output()
   onFilesUploaded = new EventEmitter<BaseApiResponseWithFilesIds>();
 
+  constructor(private _fileUploadService: FileUploadService) { }
+
   handleFileInput(files: FileList) {
     this.postFilesStarted.emit({
-      filesCount:files.length,
+      filesCount: files.length,
       createLocalCopiesNow: this.createLocalCopiesNow
     });
 
@@ -51,7 +53,7 @@ export class UploadFilesBtnComponent implements OnInit {
     })
   }
 
-  clickFileInput(){
+  clickFileInput() {
     this.fileInput.nativeElement.click();
   }
 
