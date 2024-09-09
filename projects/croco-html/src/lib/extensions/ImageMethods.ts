@@ -5,7 +5,6 @@ export class FileImageTagDataConsts {
     static FileIdAttrName = "file-id";
     static ScreenMediaRequest = "screen-media-request";
     static DefaultValueForFileImage = "screen-width:1200,max-image-height:300;screen-width:900,max-image-height:200";
-    static DefaultImageMaxHeight = 300;
     static ScreenWidth = 'screen-width';
     static MaxImageHeight = 'max-image-height';
 }
@@ -87,7 +86,7 @@ export class ImageMethods {
   }
 
   public static screenSizeChanged = (screenSize: number, requests: IMediaRequest[]) => {
-    let newSize = FileImageTagDataConsts.DefaultImageMaxHeight;
+    let newSize = null;
     requests
       .sort((a,b) => a.screenWidth > b.screenWidth ? -1 : 1)
       .forEach((el, index) => {

@@ -11,8 +11,8 @@
   @if (hasFileId() && !hasImageError) {
     <div>
       <img
-        [ngStyle]="{ 'max-height': imageMaxHeight + 'px'}"
-        class="mx-auto d-block img-fluid" [src]="getSrc()" (error)="onErrorHandler()"/>
+        [ngStyle]="{ 'max-height': imageMaxHeight ? imageMaxHeight + 'px' : '100%'}"
+        class="mx-auto d-block img-fluid" [src]="getSrc()" (error)="onErrorHandler()" alt="photo"/>
     </div>
   }
 
@@ -22,12 +22,22 @@
     </div>
   }
 
-  <mat-slide-toggle style="padding: 10px 0" [(ngModel)]="isShowMediaRequest">Показывать медиа запросы</mat-slide-toggle>
+  @if(!tag.presentOrEdit) {
+    <mat-slide-toggle style="padding: 10px 0" [(ngModel)]="isShowMediaRequest">Показывать медиа запросы</mat-slide-toggle>
+  }
+
   @if(isShowMediaRequest) {
     <div style="display: flex; flex-direction: column; gap: 20px">
-      <span>Медиа запросы:</span>
+      <div class="media-request__header">
+        <span>Медиа запросы:</span>
+        @if (!tag.presentOrEdit) {
+          <button (click)="addNewMediaRequest()" class="w-30" mat-icon-button color="primary">
+            <mat-icon>add</mat-icon>
+          </button>
+        }
+      </div>
       @for (request of requests; track $index) {
-        <div style="border-bottom: 1px solid rgba(128,128,128,0.7); padding-bottom: 10px" >
+        <div class="media-request__container">
           @if (tag.presentOrEdit) {
             <div style="display: flex; flex-direction: column; gap: 5px">
               <span class="w-100">Граница ширины: {{request.screenWidth}}</span>
@@ -36,7 +46,7 @@
           }
 
           @if (!tag.presentOrEdit) {
-            <div>
+            <div style="width: 100%">
               <mat-form-field class="w-100">
                 <mat-label>
                   Граница ширины
@@ -56,22 +66,15 @@
                        [(ngModel)]="request.maxImageHeight"
                        (ngModelChange)="requestChanged()">
               </mat-form-field>
-              <button (click)="deleteMediaRequest($index)" class="w-30" mat-icon-button color="warn">
-                <mat-icon>delete</mat-icon>
-              </button>
             </div>
+
+            <button (click)="deleteMediaRequest($index)" class="w-30" mat-icon-button color="warn">
+              <mat-icon>delete</mat-icon>
+            </button>
           }
         </div>
       }
     </div>
-  }
-
-  @if (!tag.presentOrEdit && isShowMediaRequest) {
-    <div style="height: 10px;"></div>
-    <button (click)="addNewMediaRequest()" class="w-30" mat-icon-button color="primary">
-      <mat-icon>add</mat-icon>
-    </button>
-    <div style="height: 10px;"></div>
   }
 </div>
 

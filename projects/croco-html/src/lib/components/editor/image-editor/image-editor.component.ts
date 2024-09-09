@@ -21,7 +21,7 @@ import {Subject, takeUntil} from "rxjs";
 @Component({
     selector: 'croco-html-image-editor',
     templateUrl: './image-editor.component.html',
-    styleUrls: ['./image-editor.component.css'],
+    styleUrls: ['./image-editor.component.scss'],
     standalone: true,
   imports: [MatButtonToggleGroup, FormsModule, MatButtonToggle, MatIcon, FileIdSelectComponent, MatFormField, MatLabel, MatInput, CdkDragHandle, MatCard, MatCardContent, XmlTagExternalVideoComponent, NgStyle, MatButton, MatIconButton, MatSlideToggle]
 })
@@ -30,7 +30,7 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
   hasImageError = false;
   searchOrEdit = "search";
   requests: IMediaRequest[] = [];
-  imageMaxHeight = FileImageTagDataConsts.DefaultImageMaxHeight;
+  imageMaxHeight = null;
   isShowMediaRequest = false;
   private unsubscribe = new Subject<void>();
 
@@ -52,6 +52,7 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe))
       .subscribe(screenWidth => {
       this.imageMaxHeight = ImageMethods.screenSizeChanged(screenWidth, this.requests);
+      console.log(this.imageMaxHeight)
     })
   }
 
