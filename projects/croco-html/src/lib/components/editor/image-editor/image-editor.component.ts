@@ -52,7 +52,6 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe))
       .subscribe(screenWidth => {
       this.imageMaxHeight = ImageMethods.screenSizeChanged(screenWidth, this.requests);
-      console.log(this.imageMaxHeight)
     })
   }
 
