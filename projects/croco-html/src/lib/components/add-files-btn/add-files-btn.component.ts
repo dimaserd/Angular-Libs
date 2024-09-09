@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { FileImageTagDataConsts } from '../../extensions/ImageMethods';
+import { FileImageTagDataConsts } from '../../extensions';
 import { HtmlBodyTag } from '../../models/models';
 import { BaseApiResponseWithFilesIds } from '../../services/file-upload.service';
 import { FilePostingStarted, UploadFilesBtnComponent } from '../upload-files-btn/upload-files-btn.component';
@@ -44,7 +44,8 @@ export class AddFilesBtnComponent implements OnInit {
           displayValue: "Изображение"
         },
         attributes: {
-          [FileImageTagDataConsts.FileIdAttrName]: this.fileIds[i]
+          [FileImageTagDataConsts.FileIdAttrName]: this.fileIds[i],
+          [FileImageTagDataConsts.ScreenMediaRequest]: FileImageTagDataConsts.DefaultValueForFileImage
         },
         innerHtml: ""
       };

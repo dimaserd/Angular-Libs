@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
-import { ImageMethods, FileImageTagDataConsts } from '../../../extensions';
+import {Component, EventEmitter, Inject, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {ImageMethods, FileImageTagDataConsts, IMediaRequest} from '../../../extensions';
 import { HtmlBodyTag } from '../../../models/models';
 import { CrocoHtmlOptionsToken } from '../../../consts';
 import { CrocoHtmlOptions } from '../../../extensions/HtmlExtractionMethods';
@@ -14,27 +14,25 @@ import {MatCard, MatCardContent} from "@angular/material/card";
 import {XmlTagExternalVideoComponent} from "../../xml-tags";
 import {NgStyle} from "@angular/common";
 import {ScreenWidthService} from "../../../services/screen-width.service";
-
-export interface IMediaRequest {
-  screenWidth: number,
-  maxImageHeight: number,
-}
-
-export const defaultImageMaxHeight = 300
+import {MatButton, MatIconButton} from "@angular/material/button";
+import {MatSlideToggle} from "@angular/material/slide-toggle";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
     selector: 'croco-html-image-editor',
     templateUrl: './image-editor.component.html',
     styleUrls: ['./image-editor.component.css'],
     standalone: true,
-  imports: [MatButtonToggleGroup, FormsModule, MatButtonToggle, MatIcon, FileIdSelectComponent, MatFormField, MatLabel, MatInput, CdkDragHandle, MatCard, MatCardContent, XmlTagExternalVideoComponent, NgStyle]
+  imports: [MatButtonToggleGroup, FormsModule, MatButtonToggle, MatIcon, FileIdSelectComponent, MatFormField, MatLabel, MatInput, CdkDragHandle, MatCard, MatCardContent, XmlTagExternalVideoComponent, NgStyle, MatButton, MatIconButton, MatSlideToggle]
 })
-export class ImageEditorComponent implements OnInit {
+export class ImageEditorComponent implements OnInit, OnDestroy {
 
   hasImageError = false;
   searchOrEdit = "search";
   requests: IMediaRequest[] = [];
-  imageMaxHeight = defaultImageMaxHeight;
+  imageMaxHeight = FileImageTagDataConsts.DefaultImageMaxHeight;
+  isShowMediaRequest = false;
+  private unsubscribe = new Subject<void>();
 
   @Input()
   tag: HtmlBodyTag;
@@ -50,8 +48,10 @@ export class ImageEditorComponent implements OnInit {
     @Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions,
     screenWidth: ScreenWidthService) {
 
-    screenWidth.getScreenWidth().subscribe(screenWidth => {
-      ScreenSizeChanged(screenWidth, this.requests);
+    screenWidth.getScreenWidth()
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe(screenWidth => {
+      this.imageMaxHeight = ImageMethods.screenSizeChanged(screenWidth, this.requests);
     })
   }
 
@@ -73,46 +73,27 @@ export class ImageEditorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    console.log(this.tag.attributes, 'this.tag.attributesthis.tag.attributesthis.tag.attributesthis.tag.attributesthis.tag.attributes')
-    console.log(this.requests, 'requests123')
-    this.requests = MediaRequestStringToArrayParser(this.tag.attributes[FileImageTagDataConsts.ScreenMediaRequest])
-
+    this.requests = ImageMethods.mediaRequestStringToArrayParser(this.tag.attributes[FileImageTagDataConsts.ScreenMediaRequest])
   }
 
   requestChanged() {
-    this.tag.attributes[FileImageTagDataConsts.ScreenMediaRequest] = MediaRequestsArrayToStringParser(this.requests)
-  }
-}
-
-export const MediaRequestStringToArrayParser = (data: string) => {
-  if(!data.length) {
-    return []
+    this.tag.attributes[FileImageTagDataConsts.ScreenMediaRequest] = ImageMethods.mediaRequestsArrayToStringParser(this.requests)
   }
 
-  return  data.split(';').reduce((requests: IMediaRequest[], currentValue: string ) => {
-    requests.push({
-      screenWidth: +currentValue.split(',')[0],
-      maxImageHeight: +currentValue.split(',')[1],
+  addNewMediaRequest() {
+    this.requests.push({
+      screenWidth: 0,
+      maxImageHeight: 0,
     })
-    return requests
-  }, []).sort((a,b) => a.screenWidth > b.screenWidth ? -1 : 1)
-}
-
-export const MediaRequestsArrayToStringParser = (data: IMediaRequest[]) => {
-  if(!data.length) {
-    return ''
   }
 
-  return data.map(el=> `screen-width:${el.screenWidth},max-image-height:${el.maxImageHeight}`).join(';')
-}
-
-export const ScreenSizeChanged = (screenSize: number, requests: IMediaRequest[]) => {
-  let newSize = defaultImageMaxHeight;
-  for(let i = 0; i < requests.length; i++ ) {
-    if(screenSize < requests[i].screenWidth) {
-      newSize = requests[i].maxImageHeight
-    }
+  deleteMediaRequest(index: number) {
+    this.requests.splice(index, 1);
+    this.requestChanged();
   }
-  return newSize
+
+  ngOnDestroy(): void {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
+  }
 }

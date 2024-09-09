@@ -39,12 +39,10 @@ import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatButton } from '@angular/material/button';
 import { MatCard, MatCardContent } from '@angular/material/card';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
-import {HtmlRawTagDataConsts} from "../../../extensions/HtmlRawTagDataConsts";
 
 export const defaultLinkYouTube = "https://www.youtube.com/embed/4CtSAnJDfsI?si=scyBNJa0Hs2t5aLE";
 export const defaultLinkVk = "https://vk.com/video_ext.php?oid=-22822305&id=456241864&hd=2";
 export const defaultLinkForDownload = "https://storage.yandexcloud.net/mega-academy/presentation.pdf";
-export const defaultValueForFileImage = "screen-width:1200,max-image-height:300;screen-width:900,max-image-height:200";
 
 @Component({
     selector: 'croco-visual-editor',
@@ -131,10 +129,9 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     else if (tagDescription.tag == ExternalVideoTagDataConsts.TagName) {
       attrs[ExternalVideoTagDataConsts.VideoTypeAttrName] = this.selectedVideoPlayer;
       attrs[ExternalVideoTagDataConsts.LinkAttrName] = this.selectedVideoPlayer === ExternalVideoSupportedTypes.VkVideo ? defaultLinkVk : defaultLinkYouTube;
-
     }
     else if (tagDescription.tag == FileImageTagDataConsts.TagName) {
-      attrs[FileImageTagDataConsts.ScreenMediaRequest] = defaultValueForFileImage;
+      attrs[FileImageTagDataConsts.ScreenMediaRequest] = FileImageTagDataConsts.DefaultValueForFileImage;
     }
     else if (tagDescription.tag == DownloadButtonTagDataConsts.TagName) {
       attrs[DownloadButtonTagDataConsts.LinkAttrName] = defaultLinkForDownload
@@ -150,7 +147,6 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
       presentOrEdit: true
     });
 
-    console.log(this.bodyTags, 'this.bodyTagsthis.bodyTagsthis.bodyTagsthis.bodyTagsthis.bodyTags')
     this.recalculateHtml();
   }
 
@@ -198,7 +194,6 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     }
   }
 
-
   postFilesStartedEventHandler(model: FilePostingStarted) {
     this.loadingText = "Файлы загружаются на сервер";
     this.isLoading = true;
@@ -214,7 +209,6 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
       this.bodyTags.push(tags[i]);
     }
     this.recalculateHtml();
-
     this.isLoading = false;
   }
 
@@ -240,7 +234,6 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
 
   recalculateBodyTags() {
     this.bodyTags = BodyTagsExtensions.getBodyTags(this.html, this._options);
-    console.log(this.bodyTags, 'вот сюда смотреть')
   }
 
   ngOnInit(): void {

@@ -11,48 +11,8 @@
   @if (hasFileId() && !hasImageError) {
     <div>
       <img
-        [ngStyle]="{ 'max-height': imageMaxHeight}"
+        [ngStyle]="{ 'max-height': imageMaxHeight + 'px'}"
         class="mx-auto d-block img-fluid" [src]="getSrc()" (error)="onErrorHandler()"/>
-    </div>
-
-    <div>
-      <p>Медиа запросы</p>
-      @for (request of requests; track $index) {
-        <mat-card style="margin: 2px;" class="mat-card">
-          <mat-card-content>
-            @if (tag.presentOrEdit) {
-              <div>
-                <span>Граница ширины: {{request.screenWidth}}</span>
-                <span>Максимальная высота: {{request.maxImageHeight}}</span>
-              </div>
-            }
-
-            @if (!tag.presentOrEdit) {
-              <div>
-                <mat-form-field class="w-100">
-                  <mat-label>
-                    Граница ширины
-                  </mat-label>
-                  <input matInput placeholder="Граница ширины"
-                         autocomplete="off"
-                         [(ngModel)]="request.screenWidth"
-                         (ngModelChange)="requestChanged()">
-                </mat-form-field>
-
-                <mat-form-field class="w-100">
-                  <mat-label>
-                    Максимальная высота
-                  </mat-label>
-                  <input matInput placeholder=" Максимальная высота"
-                         autocomplete="off"
-                         [(ngModel)]="request.maxImageHeight"
-                         (ngModelChange)="requestChanged()">
-                </mat-form-field>
-              </div>
-            }
-          </mat-card-content>
-        </mat-card>
-      }
     </div>
   }
 
@@ -60,6 +20,58 @@
     <div>
       <h5>[Изображение не выбрано]</h5>
     </div>
+  }
+
+  <mat-slide-toggle style="padding: 10px 0" [(ngModel)]="isShowMediaRequest">Показывать медиа запросы</mat-slide-toggle>
+  @if(isShowMediaRequest) {
+    <div style="display: flex; flex-direction: column; gap: 20px">
+      <span>Медиа запросы:</span>
+      @for (request of requests; track $index) {
+        <div style="border-bottom: 1px solid rgba(128,128,128,0.7); padding-bottom: 10px" >
+          @if (tag.presentOrEdit) {
+            <div style="display: flex; flex-direction: column; gap: 5px">
+              <span class="w-100">Граница ширины: {{request.screenWidth}}</span>
+              <span class="w-100">Максимальная высота: {{request.maxImageHeight}}</span>
+            </div>
+          }
+
+          @if (!tag.presentOrEdit) {
+            <div>
+              <mat-form-field class="w-100">
+                <mat-label>
+                  Граница ширины
+                </mat-label>
+                <input matInput placeholder="Граница ширины"
+                       autocomplete="off"
+                       [(ngModel)]="request.screenWidth"
+                       (ngModelChange)="requestChanged()">
+              </mat-form-field>
+
+              <mat-form-field class="w-100">
+                <mat-label>
+                  Максимальная высота
+                </mat-label>
+                <input matInput placeholder=" Максимальная высота"
+                       autocomplete="off"
+                       [(ngModel)]="request.maxImageHeight"
+                       (ngModelChange)="requestChanged()">
+              </mat-form-field>
+              <button (click)="deleteMediaRequest($index)" class="w-30" mat-icon-button color="warn">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  }
+
+  @if (!tag.presentOrEdit && isShowMediaRequest) {
+    <div style="height: 10px;"></div>
+    <button (click)="addNewMediaRequest()" class="w-30" mat-icon-button color="primary">
+      <mat-icon>add</mat-icon>
+    </button>
+    <div style="height: 10px;"></div>
   }
 </div>
 
@@ -96,22 +108,6 @@
             (ngModelChange)="removeImageError()">
         </mat-form-field>
       </div>
-    </div>
-
-    <div>
-      <mat-form-field class="w-100">
-        <mat-label>
-          Медиа запрос для высоты изображения
-        </mat-label>
-        <input matInput placeholder="Граница" new-autocomplete="off" autocomplete="off"
-               type="number"
-               [(ngModel)]="tag.attributes['file-id']"
-               (ngModelChange)="removeImageError()">
-        <input matInput placeholder="Идентификатор файла" new-autocomplete="off" autocomplete="off"
-               type="number"
-               [(ngModel)]="tag.attributes['file-id']"
-               (ngModelChange)="removeImageError()">
-      </mat-form-field>
     </div>
   </div>
 }

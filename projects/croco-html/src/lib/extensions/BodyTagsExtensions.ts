@@ -40,7 +40,6 @@ export class BodyTagsExtensions {
             }
 
             if (x.tagDescription.tag === "html-raw") {
-              console.log(x.attributes)
                 return `<${x.tagDescription.tag}>${x.innerHtml}</${x.tagDescription.tag}>`
             }
 
@@ -64,18 +63,15 @@ export class BodyTagsExtensions {
 
     static imageTagToHtml(imageTag: HtmlBodyTag) {
 
-      console.log(imageTag,'imageTagimageTagimageTag')
-        var attrStr = "";
+        let fileIdAttr = "";
+        let screenMediaRequestAttr = "";
 
-        var attrValue = imageTag.attributes[FileImageTagDataConsts.FileIdAttrName];
+        let attrValue = imageTag.attributes[FileImageTagDataConsts.FileIdAttrName];
         if (imageTag.attributes.hasOwnProperty(FileImageTagDataConsts.FileIdAttrName) && attrValue) {
-            attrStr = `${FileImageTagDataConsts.FileIdAttrName}="${attrValue}"`;
+            fileIdAttr = `${FileImageTagDataConsts.FileIdAttrName}="${attrValue}"`;
         }
 
-        return `<${FileImageTagDataConsts.TagName}
-                    ${attrStr}
-                    ${FileImageTagDataConsts.ScreenMediaRequest}=${imageTag.attributes[FileImageTagDataConsts.ScreenMediaRequest]}
-                ></${FileImageTagDataConsts.TagName}>`;
+        return `<${FileImageTagDataConsts.TagName} ${fileIdAttr} ${FileImageTagDataConsts.ScreenMediaRequest}="${imageTag.attributes[FileImageTagDataConsts.ScreenMediaRequest]}"></${FileImageTagDataConsts.TagName}>`;
     }
 
     static getBodyTags(html: string, options: CrocoHtmlOptions) {
@@ -112,9 +108,9 @@ export class BodyTagsExtensions {
                 attrs[FileImageTagDataConsts.FileIdAttrName] = fileData.fileId;
             }
 
-          if (fileData.screenMediaRequest) {
-            attrs[FileImageTagDataConsts.ScreenMediaRequest] = fileData.screenMediaRequest;
-          }
+            if (fileData.screenMediaRequest) {
+              attrs[FileImageTagDataConsts.ScreenMediaRequest] = fileData.screenMediaRequest;
+            }
 
             return {
                 presentOrEdit: true,
