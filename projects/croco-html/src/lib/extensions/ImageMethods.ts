@@ -3,6 +3,7 @@ import { CrocoHtmlOptions } from "./HtmlExtractionMethods";
 export class FileImageTagDataConsts {
     static TagName = "file-image";
     static FileIdAttrName = "file-id";
+    static ScreenMediaRequest = " screen-media-request";
 }
 
 export interface FileImageTag {
@@ -13,6 +14,7 @@ export interface FileImageTag {
 export interface FileImageTagData {
     src: string;
     fileId: number;
+    screenMediaRequest: string;
 }
 
 export class ImageMethods {
@@ -44,6 +46,7 @@ export class ImageMethods {
             data: {
                 src,
                 fileId: fileId,
+                screenMediaRequest: elem.getAttribute(FileImageTagDataConsts.ScreenMediaRequest)
             }
         };
     }

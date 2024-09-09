@@ -10,7 +10,49 @@
 
   @if (hasFileId() && !hasImageError) {
     <div>
-      <img class="mx-auto d-block img-fluid" [src]="getSrc()" (error)="onErrorHandler()"/>
+      <img
+        [ngStyle]="{ 'max-height': imageMaxHeight}"
+        class="mx-auto d-block img-fluid" [src]="getSrc()" (error)="onErrorHandler()"/>
+    </div>
+
+    <div>
+      <p>Медиа запросы</p>
+      @for (request of requests; track $index) {
+        <mat-card style="margin: 2px;" class="mat-card">
+          <mat-card-content>
+            @if (tag.presentOrEdit) {
+              <div>
+                <span>Граница ширины: {{request.screenWidth}}</span>
+                <span>Максимальная высота: {{request.maxImageHeight}}</span>
+              </div>
+            }
+
+            @if (!tag.presentOrEdit) {
+              <div>
+                <mat-form-field class="w-100">
+                  <mat-label>
+                    Граница ширины
+                  </mat-label>
+                  <input matInput placeholder="Граница ширины"
+                         autocomplete="off"
+                         [(ngModel)]="request.screenWidth"
+                         (ngModelChange)="requestChanged()">
+                </mat-form-field>
+
+                <mat-form-field class="w-100">
+                  <mat-label>
+                    Максимальная высота
+                  </mat-label>
+                  <input matInput placeholder=" Максимальная высота"
+                         autocomplete="off"
+                         [(ngModel)]="request.maxImageHeight"
+                         (ngModelChange)="requestChanged()">
+                </mat-form-field>
+              </div>
+            }
+          </mat-card-content>
+        </mat-card>
+      }
     </div>
   }
 
@@ -54,6 +96,22 @@
             (ngModelChange)="removeImageError()">
         </mat-form-field>
       </div>
+    </div>
+
+    <div>
+      <mat-form-field class="w-100">
+        <mat-label>
+          Медиа запрос для высоты изображения
+        </mat-label>
+        <input matInput placeholder="Граница" new-autocomplete="off" autocomplete="off"
+               type="number"
+               [(ngModel)]="tag.attributes['file-id']"
+               (ngModelChange)="removeImageError()">
+        <input matInput placeholder="Идентификатор файла" new-autocomplete="off" autocomplete="off"
+               type="number"
+               [(ngModel)]="tag.attributes['file-id']"
+               (ngModelChange)="removeImageError()">
+      </mat-form-field>
     </div>
   </div>
 }
