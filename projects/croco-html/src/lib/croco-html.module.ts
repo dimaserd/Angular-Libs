@@ -10,9 +10,9 @@ import { ErrorBannerComponent } from "./components/error-banner/error-banner.com
 import {
     YoutubeVideoPlayerComponent
 } from "./components/editor/external-video-block/youtube-video-player/youtube-video-player.component";
-import {DownloadFileButtonBlockComponent} from "./components/editor/download-file-button-block/download-file-button-block.component";
+import { DownloadFileButtonBlockComponent } from "./components/editor/download-file-button-block/download-file-button-block.component";
 import {
-  XmlTagDownloadFileButtonComponent
+    XmlTagDownloadFileButtonComponent
 } from "./components/xml-tags/xml-tag-download-file-button/xml-tag-download-file-button.component";
 
 @NgModule({
