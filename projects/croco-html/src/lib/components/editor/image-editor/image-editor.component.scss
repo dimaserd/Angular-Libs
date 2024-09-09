@@ -1,0 +1,20 @@
+.error-block{
+    background-color: rgb(243 35 35);
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.media-request__header {
+  align-items: center;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.media-request__container {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(128,128,128,0.7);
+  padding-bottom: 10px;
+}

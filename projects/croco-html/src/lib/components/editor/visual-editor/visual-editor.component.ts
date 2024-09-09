@@ -43,6 +43,7 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 export const defaultLinkYouTube = "https://www.youtube.com/embed/4CtSAnJDfsI?si=scyBNJa0Hs2t5aLE";
 export const defaultLinkVk = "https://vk.com/video_ext.php?oid=-22822305&id=456241864&hd=2";
 export const defaultLinkForDownload = "https://storage.yandexcloud.net/mega-academy/presentation.pdf";
+
 @Component({
     selector: 'croco-visual-editor',
     templateUrl: './visual-editor.component.html',
@@ -128,7 +129,9 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     else if (tagDescription.tag == ExternalVideoTagDataConsts.TagName) {
       attrs[ExternalVideoTagDataConsts.VideoTypeAttrName] = this.selectedVideoPlayer;
       attrs[ExternalVideoTagDataConsts.LinkAttrName] = this.selectedVideoPlayer === ExternalVideoSupportedTypes.VkVideo ? defaultLinkVk : defaultLinkYouTube;
-
+    }
+    else if (tagDescription.tag == FileImageTagDataConsts.TagName) {
+      attrs[FileImageTagDataConsts.ScreenMediaRequest] = FileImageTagDataConsts.DefaultValueForFileImage;
     }
     else if (tagDescription.tag == DownloadButtonTagDataConsts.TagName) {
       attrs[DownloadButtonTagDataConsts.LinkAttrName] = defaultLinkForDownload
@@ -191,7 +194,6 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     }
   }
 
-
   postFilesStartedEventHandler(model: FilePostingStarted) {
     this.loadingText = "Файлы загружаются на сервер";
     this.isLoading = true;
@@ -207,7 +209,6 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
       this.bodyTags.push(tags[i]);
     }
     this.recalculateHtml();
-
     this.isLoading = false;
   }
 

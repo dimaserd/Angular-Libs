@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
-import { ImageMethods, FileImageTagDataConsts } from '../../../extensions/ImageMethods';
+import {Component, EventEmitter, Inject, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {ImageMethods, FileImageTagDataConsts, IMediaRequest} from '../../../extensions';
 import { HtmlBodyTag } from '../../../models/models';
 import { CrocoHtmlOptionsToken } from '../../../consts';
 import { CrocoHtmlOptions } from '../../../extensions/HtmlExtractionMethods';
@@ -9,18 +9,30 @@ import { FileIdSelectComponent } from '../../file-id-select/file-id-select.compo
 import { MatIcon } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { MatButtonToggleGroup, MatButtonToggle } from '@angular/material/button-toggle';
+import {CdkDragHandle} from "@angular/cdk/drag-drop";
+import {MatCard, MatCardContent} from "@angular/material/card";
+import {XmlTagExternalVideoComponent} from "../../xml-tags";
+import {NgStyle} from "@angular/common";
+import {ScreenWidthService} from "../../../services/screen-width.service";
+import {MatButton, MatIconButton} from "@angular/material/button";
+import {MatSlideToggle} from "@angular/material/slide-toggle";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
     selector: 'croco-html-image-editor',
     templateUrl: './image-editor.component.html',
-    styleUrls: ['./image-editor.component.css'],
+    styleUrls: ['./image-editor.component.scss'],
     standalone: true,
-    imports: [MatButtonToggleGroup, FormsModule, MatButtonToggle, MatIcon, FileIdSelectComponent, MatFormField, MatLabel, MatInput]
+  imports: [MatButtonToggleGroup, FormsModule, MatButtonToggle, MatIcon, FileIdSelectComponent, MatFormField, MatLabel, MatInput, CdkDragHandle, MatCard, MatCardContent, XmlTagExternalVideoComponent, NgStyle, MatButton, MatIconButton, MatSlideToggle]
 })
-export class ImageEditorComponent implements OnInit {
+export class ImageEditorComponent implements OnInit, OnDestroy {
 
   hasImageError = false;
   searchOrEdit = "search";
+  requests: IMediaRequest[] = [];
+  imageMaxHeight = null;
+  isShowMediaRequest = false;
+  private unsubscribe = new Subject<void>();
 
   @Input()
   tag: HtmlBodyTag;
@@ -32,7 +44,17 @@ export class ImageEditorComponent implements OnInit {
   @Output()
   onTagUpdated = new EventEmitter<HtmlBodyTag>();
 
-  constructor(@Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions) { }
+  constructor(
+    @Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions,
+    screenWidth: ScreenWidthService) {
+
+    screenWidth.getScreenWidth()
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe(screenWidth => {
+      this.imageMaxHeight = ImageMethods.screenSizeChanged(screenWidth, this.requests);
+      console.log(this.imageMaxHeight)
+    })
+  }
 
   getSrc(){
     return ImageMethods.buildUrl(this.tag.attributes[FileImageTagDataConsts.FileIdAttrName], "Medium", this._options);
@@ -52,6 +74,27 @@ export class ImageEditorComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.requests = ImageMethods.mediaRequestStringToArrayParser(this.tag.attributes[FileImageTagDataConsts.ScreenMediaRequest])
   }
 
+  requestChanged() {
+    this.tag.attributes[FileImageTagDataConsts.ScreenMediaRequest] = ImageMethods.mediaRequestsArrayToStringParser(this.requests)
+  }
+
+  addNewMediaRequest() {
+    this.requests.push({
+      screenWidth: 0,
+      maxImageHeight: 0,
+    })
+  }
+
+  deleteMediaRequest(index: number) {
+    this.requests.splice(index, 1);
+    this.requestChanged();
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
+  }
 }
