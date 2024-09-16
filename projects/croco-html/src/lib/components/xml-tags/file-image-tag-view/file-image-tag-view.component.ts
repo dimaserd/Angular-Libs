@@ -18,7 +18,6 @@ export class FileImageTagViewComponent implements OnInit {
   ngOnInit(): void {
 
     let data = this.item.data as FileImageTagData;
-
     this.imageSrc = data.src;
   }
 }

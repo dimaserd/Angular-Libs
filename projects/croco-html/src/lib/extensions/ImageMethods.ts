@@ -60,6 +60,10 @@ export class ImageMethods {
     }
 
   public static mediaRequestStringToArrayParser = (data: string) => {
+    if (!data){
+      return [];
+    }
+    
     if(!data.length) {
       return []
     }
