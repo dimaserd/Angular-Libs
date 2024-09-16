@@ -75,7 +75,6 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     let attr = this.tag.attributes[FileImageTagDataConsts.ScreenMediaRequest];
-
     this.requests = ImageMethods.mediaRequestStringToArrayParser(attr)
   }
 
