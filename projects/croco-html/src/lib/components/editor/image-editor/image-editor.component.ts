@@ -46,14 +46,7 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
 
   constructor(
     @Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions,
-    screenWidth: ScreenWidthService) {
-
-    screenWidth.getScreenWidth()
-      .pipe(takeUntil(this.unsubscribe))
-      .subscribe(screenWidth => {
-        this.imageMaxHeight = ImageMethods.screenSizeChanged(screenWidth, this.requests);
-      })
-  }
+    private readonly screenWidthService: ScreenWidthService) {}
 
   getSrc() {
     return ImageMethods.buildUrl(this.tag.attributes[FileImageTagDataConsts.FileIdAttrName], "Medium", this._options);
@@ -73,9 +66,14 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
     let attr = this.tag.attributes[FileImageTagDataConsts.ScreenMediaRequest];
     this.requests = ImageMethods.mediaRequestStringToArrayParser(attr)
+
+    this.screenWidthService.getScreenWidth()
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe(screenWidth => {
+        this.imageMaxHeight = ImageMethods.screenSizeChanged(screenWidth, this.requests);
+      })
   }
 
   requestChanged() {
