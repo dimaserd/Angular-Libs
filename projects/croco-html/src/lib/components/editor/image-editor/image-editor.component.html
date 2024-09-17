@@ -40,7 +40,8 @@
         <div class="media-request__container">
           @if (tag.presentOrEdit) {
             <div style="display: flex; flex-direction: column; gap: 5px">
-              <span class="w-100">Граница ширины: {{request.screenWidth}}</span>
+              <span class="w-100">Максимальная граница ширины: {{request.maxScreenWidth}}</span>
+              <span class="w-100">Минимальная граница ширины: {{request.minScreenWidth}}</span>
               <span class="w-100">Максимальная высота: {{request.maxImageHeight}}</span>
             </div>
           }
@@ -49,13 +50,24 @@
             <div style="width: 100%">
               <mat-form-field class="w-100">
                 <mat-label>
-                  Граница ширины
+                  Максимальная граница ширины
                 </mat-label>
-                <input matInput placeholder="Граница ширины"
+                <input matInput placeholder="Максимальная граница ширины"
                        autocomplete="off"
-                       [(ngModel)]="request.screenWidth"
+                       [(ngModel)]="request.maxScreenWidth"
                        (ngModelChange)="requestChanged()">
               </mat-form-field>
+
+              <mat-form-field class="w-100">
+                <mat-label>
+                  Минимальная граница ширины
+                </mat-label>
+                <input matInput placeholder="Минимальная граница ширины"
+                       autocomplete="off"
+                       [(ngModel)]="request.minScreenWidth"
+                       (ngModelChange)="requestChanged()">
+              </mat-form-field>
+
 
               <mat-form-field class="w-100">
                 <mat-label>

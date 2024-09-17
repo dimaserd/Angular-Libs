@@ -82,7 +82,8 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
 
   addNewMediaRequest() {
     this.requests.push({
-      screenWidth: 0,
+      maxScreenWidth: 0,
+      minScreenWidth: 0,
       maxImageHeight: 0,
     })
   }
