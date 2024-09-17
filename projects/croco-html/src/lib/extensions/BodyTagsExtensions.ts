@@ -66,12 +66,15 @@ export class BodyTagsExtensions {
         let fileIdAttr = "";
         let screenMediaRequestAttr = "";
 
-        let attrValue = imageTag.attributes[FileImageTagDataConsts.FileIdAttrName];
-        if (imageTag.attributes.hasOwnProperty(FileImageTagDataConsts.FileIdAttrName) && attrValue) {
-            fileIdAttr = `${FileImageTagDataConsts.FileIdAttrName}="${attrValue}"`;
+        if (imageTag.attributes.hasOwnProperty(FileImageTagDataConsts.FileIdAttrName) && imageTag.attributes[FileImageTagDataConsts.FileIdAttrName]) {
+            fileIdAttr = `${FileImageTagDataConsts.FileIdAttrName}="${imageTag.attributes[FileImageTagDataConsts.FileIdAttrName]}"`;
         }
 
-        return `<${FileImageTagDataConsts.TagName} ${fileIdAttr} ${FileImageTagDataConsts.ScreenMediaRequest}="${imageTag.attributes[FileImageTagDataConsts.ScreenMediaRequest]}"></${FileImageTagDataConsts.TagName}>`;
+        if (imageTag.attributes.hasOwnProperty(FileImageTagDataConsts.ScreenMediaRequest) && imageTag.attributes[FileImageTagDataConsts.ScreenMediaRequest]) {
+          screenMediaRequestAttr = `${FileImageTagDataConsts.ScreenMediaRequest}="${imageTag.attributes[FileImageTagDataConsts.ScreenMediaRequest]}"`;
+        }
+
+        return `<${FileImageTagDataConsts.TagName} ${fileIdAttr} ${screenMediaRequestAttr}></${FileImageTagDataConsts.TagName}>`;
     }
 
     static getBodyTags(html: string, options: CrocoHtmlOptions) {

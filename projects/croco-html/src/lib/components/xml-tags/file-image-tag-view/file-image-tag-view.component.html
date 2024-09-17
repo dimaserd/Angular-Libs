@@ -1,1 +1,6 @@
-<img class="mx-auto d-block img-fluid" [src]="imageSrc" alt="Изображение не загружено"/>
+<img
+  [ngStyle]="{ 'max-height': imageMaxHeight ? imageMaxHeight + 'px' : '100%'}"
+  class="mx-auto d-block img-fluid"
+  [src]="imageSrc"
+  alt="Изображение не загружено"
+/>
