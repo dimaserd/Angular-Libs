@@ -8,6 +8,7 @@ import { SimpleTextTagData } from "./TextSimpleMethods";
 import { Tags } from "./Tags";
 import {ExternalVideoTagDataConsts} from "./VideoMethods";
 import {DownloadButtonTagDataConsts} from "./DownloadButtonMethods";
+import {CustomButtonTagDataConsts} from "./CustomButtonMethods";
 
 export class BodyTagsExtensions {
 
@@ -47,7 +48,11 @@ export class BodyTagsExtensions {
               return `<${x.tagDescription.tag} title="${x.attributes['title']}" link="${x.attributes['link']}"></${x.tagDescription.tag}>`
             }
 
-            return BodyTagsExtensions.imageTagToHtml(x);
+            if (x.tagDescription.tag === CustomButtonTagDataConsts.TagName) {
+              return `<${x.tagDescription.tag} text="${x.attributes['text']}" type="${x.attributes['type']}"  click="${x.attributes['click']}"></${x.tagDescription.tag}>`
+            }
+
+          return BodyTagsExtensions.imageTagToHtml(x);
         });
 
         let result = "";

@@ -39,6 +39,7 @@ import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatButton } from '@angular/material/button';
 import { MatCard, MatCardContent } from '@angular/material/card';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import {CustomButtonTagDataConsts} from "../../../extensions/CustomButtonMethods";
 
 export const defaultLinkYouTube = "https://www.youtube.com/embed/4CtSAnJDfsI?si=scyBNJa0Hs2t5aLE";
 export const defaultLinkVk = "https://vk.com/video_ext.php?oid=-22822305&id=456241864&hd=2";
@@ -136,6 +137,11 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     else if (tagDescription.tag == DownloadButtonTagDataConsts.TagName) {
       attrs[DownloadButtonTagDataConsts.LinkAttrName] = defaultLinkForDownload
       attrs[DownloadButtonTagDataConsts.TitleAttrName] = 'Скачать'
+    }
+    else if (tagDescription.tag == CustomButtonTagDataConsts.TagName) {
+      attrs[CustomButtonTagDataConsts.ClickAttrName] = 'Клик на кнопку'
+      attrs[CustomButtonTagDataConsts.TypeAttrName] = 'button'
+      attrs[CustomButtonTagDataConsts.TextAttrName] = 'Кнопка для клика'
     }
     else {
       attrs[FileImageTagDataConsts.FileIdAttrName] = null;

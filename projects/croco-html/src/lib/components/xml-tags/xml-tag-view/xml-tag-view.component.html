@@ -57,6 +57,12 @@
         <croco-html-xml-tag-download-file-button [data]="item"></croco-html-xml-tag-download-file-button>
       </div>
     }
+
+    @if (item.type === 'custom-button') {
+      <div>
+        <croco-html-xml-tag-custom-button [data]="item"></croco-html-xml-tag-custom-button>
+      </div>
+    }
     @if (item.type === 'unsupported-tag') {
     <div class="red" style="margin-top: 10px;">
       <h4>Данный тег не поддерживается</h4>

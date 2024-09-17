@@ -3,6 +3,7 @@ import { FileImageTagDataConsts } from '../../../extensions';
 import { TagItem } from '../../../models/models';
 import {ExternalVideoTagDataConsts} from "../../../extensions";
 import {DownloadButtonTagDataConsts} from "../../../extensions/DownloadButtonMethods";
+import {CustomButtonTagDataConsts} from "../../../extensions/CustomButtonMethods";
 
 export class DefaultTags {
 
@@ -20,6 +21,7 @@ export class DefaultTags {
     { tag: FileImageTagDataConsts.TagName, displayValue: 'Изображение' },
     { tag: ExternalVideoTagDataConsts.TagName, displayValue: 'Внешнее видео' },
     { tag: DownloadButtonTagDataConsts.TagName, displayValue: 'Кнопка для скачивания' },
+    { tag: CustomButtonTagDataConsts.TagName, displayValue: 'Кнопка для клика' },
     ...DefaultTags.textTags
   ];
 
