@@ -1,20 +1,20 @@
-import { ImageEditorComponent } from "./components/editor/image-editor/image-editor.component";
-import { MainEditorBlockComponent } from "./components/editor/main-editor-block/main-editor-block.component";
-import { MainEditorComponent } from "./components/editor/main-editor/main-editor.component";
-import { TextEditorComponent } from "./components/editor/text-editor/text-editor.component";
-import { FileIdSelectComponent } from "./components/file-id-select/file-id-select.component";
-import { XmlTagHeaderInnerTextViewComponent } from "./components/xml-tags/xml-tag-header-inner-text-view/xml-tag-header-inner-text-view.component";
-import { XmlTagHeaderTextViewComponent } from "./components/xml-tags/xml-tag-header-text-view/xml-tag-header-text-view.component";
-import { XmlTagHtmlViewComponent } from "./components/xml-tags/xml-tag-html-view/xml-tag-html-view.component";
-import { XmlTagRichTextViewComponent } from "./components/xml-tags/xml-tag-rich-text-view/xml-tag-rich-text-view.component";
-import { XmlTagTableViewComponent } from "./components/xml-tags/xml-tag-table-view/xml-tag-table-view.component";
-import { XmlTagTextViewComponent } from "./components/xml-tags/xml-tag-text-view/xml-tag-text-view.component";
-import { XmlTagViewComponent } from "./components/xml-tags/xml-tag-view/xml-tag-view.component";
-import { VisualEditorComponent } from './components/editor/visual-editor/visual-editor.component';
-import { AddFilesBtnComponent } from './components/add-files-btn/add-files-btn.component';
-import { ExternalVideoBlockComponent } from "./components/editor/external-video-block/external-video-block.component";
-import { XmlTagExternalVideoComponent } from "./components/xml-tags/xml-tag-external-video/xml-tag-external-video.component";
-import { HtmlRawEditorComponent } from "./components/editor/html-raw-editor/html-raw-editor.component";
+import { ImageEditorComponent } from "./components";
+import { MainEditorBlockComponent } from "./components";
+import { MainEditorComponent } from "./components";
+import { TextEditorComponent } from "./components";
+import { FileIdSelectComponent } from "./components";
+import { XmlTagHeaderInnerTextViewComponent } from "./components";
+import { XmlTagHeaderTextViewComponent } from "./components";
+import { XmlTagHtmlViewComponent } from "./components";
+import { XmlTagRichTextViewComponent } from "./components";
+import { XmlTagTableViewComponent } from "./components";
+import { XmlTagTextViewComponent } from "./components";
+import { XmlTagViewComponent } from "./components";
+import { VisualEditorComponent } from './components';
+import { AddFilesBtnComponent } from './components';
+import { ExternalVideoEditorComponent } from "./components/editor/external-video-editor/external-video-editor.component";
+import { XmlTagExternalVideoComponent } from "./components";
+import { HtmlRawEditorComponent } from "./components";
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -46,8 +46,8 @@ import { MatBadgeModule } from '@angular/material/badge';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { RichTextToHtmlPipe, TagToSpanPipe, ToHtmlBodyTagsPipe, ToPreviewHtmlPipe, ToPreviewPipe } from "./pipes";
 import { FileImageTagViewComponent, UploadFilesBtnComponent } from "./components";
-import { HtmlRawViewComponent } from "./components/xml-tags/html-raw-view/html-raw-view.component";
-import { HtmlViewComponent } from "./components/html-view/html-view.component";
+import { HtmlRawViewComponent } from "./components";
+import { HtmlViewComponent } from "./components";
 
 export const EditorComponents = [
     MainEditorComponent,

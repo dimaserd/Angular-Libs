@@ -9,8 +9,8 @@ import { FileImageTagViewComponent } from '../file-image-tag-view/file-image-tag
 import { XmlTagHeaderTextViewComponent } from '../xml-tag-header-text-view/xml-tag-header-text-view.component';
 import { HtmlRawViewComponent } from '../html-raw-view/html-raw-view.component';
 import { XmlTagTextViewComponent } from '../xml-tag-text-view/xml-tag-text-view.component';
-import {ButtonBlockComponent} from "../../editor/button-block/button-block.component";
-import {XmlTagButtonComponent} from "../xml-tag-custom-button/xml-tag-button.component";
+import { ButtonEditorComponent } from "../../editor/button-editor/button-editor.component";
+import { XmlTagButtonComponent } from "../xml-tag-custom-button/xml-tag-button.component";
 
 @Component({
     selector: 'croco-html-xml-tag-view',
@@ -27,7 +27,7 @@ import {XmlTagButtonComponent} from "../xml-tag-custom-button/xml-tag-button.com
     ErrorBannerComponent,
     XmlTagExternalVideoComponent,
     XmlTagDownloadFileButtonComponent,
-    ButtonBlockComponent,
+    ButtonEditorComponent,
     XmlTagButtonComponent,
   ],
 })

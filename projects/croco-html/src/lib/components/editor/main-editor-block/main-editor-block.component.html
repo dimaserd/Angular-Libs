@@ -16,22 +16,22 @@
 
     @if (tag.tagDescription.tag === 'external-video') {
       <div>
-        <croco-html-external-video-block (onTagUpdated)="tagUpdatedHandler($event)" [tag]="tag">
-        </croco-html-external-video-block>
+        <croco-html-external-video-editor (onTagUpdated)="tagUpdatedHandler($event)" [tag]="tag">
+        </croco-html-external-video-editor>
       </div>
     }
 
     @if (tag.tagDescription.tag === 'download-file-button') {
       <div>
-        <croco-html-download-file-button-block (onTagUpdated)="tagUpdatedHandler($event)" [tag]="tag">
-        </croco-html-download-file-button-block>
+        <croco-html-download-file-button-editor (onTagUpdated)="tagUpdatedHandler($event)" [tag]="tag">
+        </croco-html-download-file-button-editor>
       </div>
     }
 
     @if (tag.tagDescription.tag === 'button') {
       <div>
-        <croco-html-button-block (onTagUpdated)="tagUpdatedHandler($event)" [tag]="tag">
-        </croco-html-button-block>
+        <croco-html-button-editor (onTagUpdated)="tagUpdatedHandler($event)" [tag]="tag">
+        </croco-html-button-editor>
       </div>
     }
 

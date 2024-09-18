@@ -21,7 +21,7 @@ export class DefaultTags {
     { tag: FileImageTagDataConsts.TagName, displayValue: 'Изображение' },
     { tag: ExternalVideoTagDataConsts.TagName, displayValue: 'Внешнее видео' },
     { tag: DownloadButtonTagDataConsts.TagName, displayValue: 'Кнопка для скачивания' },
-    { tag: ButtonTagDataConsts.TagName, displayValue: 'Кнопка для клика' },
+    { tag: ButtonTagDataConsts.TagName, displayValue: 'Кнопка' },
     ...DefaultTags.textTags
   ];
 

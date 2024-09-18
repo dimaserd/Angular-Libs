@@ -1,6 +1,10 @@
 import { BaseApiResponse } from "./TableMethods";
 import {EAlignments} from "../components/editor/visual-editor/DefaultAligments";
 
+export class TextTagDataConsts {
+  static HAlign = "h-align";
+}
+
 export const TextTag = "text";
 
 export interface SimpleTextTag {

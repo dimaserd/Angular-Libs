@@ -4,7 +4,7 @@ import { InterfaceBlock } from "./InterfaceBlock";
 import { HtmlRawTagDataConsts } from "./HtmlRawTagDataConsts";
 import { FileImageTagData, FileImageTagDataConsts } from "./ImageMethods";
 import { TextTags } from "./TextMethods";
-import { SimpleTextTagData } from "./TextSimpleMethods";
+import {SimpleTextTagData, TextTagDataConsts} from "./TextSimpleMethods";
 import { Tags } from "./Tags";
 import {ExternalVideoTagDataConsts} from "./VideoMethods";
 import {DownloadButtonTagDataConsts} from "./DownloadButtonMethods";
@@ -33,11 +33,11 @@ export class BodyTagsExtensions {
     static toHtml(bodyTags: HtmlBodyTag[]): string {
         let htmls = bodyTags.map(x => {
             if (TextTags.allTextTags.includes(x.tagDescription.tag)) {
-                return `<${x.tagDescription.tag} h-align="${x.attributes['h-align']}">${x.innerHtml}</${x.tagDescription.tag}>`;
+                return `<${x.tagDescription.tag} h-align="${x.attributes[TextTagDataConsts.HAlign]}">${x.innerHtml}</${x.tagDescription.tag}>`;
             }
 
             if (x.tagDescription.tag === ExternalVideoTagDataConsts.TagName) {
-                return `<${x.tagDescription.tag} type="${x.attributes['type']}" link="${x.attributes['link']}">${x.innerHtml}</${x.tagDescription.tag}>`
+                return `<${x.tagDescription.tag} type="${x.attributes[ExternalVideoTagDataConsts.VideoTypeAttrName]}" link="${x.attributes[ExternalVideoTagDataConsts.LinkAttrName]}">${x.innerHtml}</${x.tagDescription.tag}>`
             }
 
             if (x.tagDescription.tag === "html-raw") {
@@ -45,11 +45,11 @@ export class BodyTagsExtensions {
             }
 
             if (x.tagDescription.tag === DownloadButtonTagDataConsts.TagName) {
-              return `<${x.tagDescription.tag} title="${x.attributes['title']}" link="${x.attributes['link']}"></${x.tagDescription.tag}>`
+              return `<${x.tagDescription.tag} title="${x.attributes[DownloadButtonTagDataConsts.TitleAttrName]}" link="${x.attributes[DownloadButtonTagDataConsts.LinkAttrName]}"></${x.tagDescription.tag}>`
             }
 
             if (x.tagDescription.tag === ButtonTagDataConsts.TagName) {
-              return `<${x.tagDescription.tag} text="${x.attributes['text']}" type="${x.attributes['type']}"  click="${x.attributes['click']}"></${x.tagDescription.tag}>`
+              return `<${x.tagDescription.tag} text="${x.attributes[ButtonTagDataConsts.TextAttrName]}" type="${x.attributes[ButtonTagDataConsts.TypeAttrName]}"  click="${x.attributes[ButtonTagDataConsts.ClickAttrName]}"></${x.tagDescription.tag}>`
             }
 
           return BodyTagsExtensions.imageTagToHtml(x);

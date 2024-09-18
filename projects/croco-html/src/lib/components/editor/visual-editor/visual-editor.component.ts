@@ -139,7 +139,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
       attrs[DownloadButtonTagDataConsts.TitleAttrName] = 'Скачать'
     }
     else if (tagDescription.tag == ButtonTagDataConsts.TagName) {
-      attrs[ButtonTagDataConsts.ClickAttrName] = 'Обработчик нажатия'
+      attrs[ButtonTagDataConsts.ClickAttrName] = ''
       attrs[ButtonTagDataConsts.TypeAttrName] = 'button'
       attrs[ButtonTagDataConsts.TextAttrName] = 'Кнопка'
     }

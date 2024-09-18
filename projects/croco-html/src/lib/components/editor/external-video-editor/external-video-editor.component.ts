@@ -10,9 +10,9 @@ import { XmlTagExternalVideoComponent } from '../../xml-tags';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
-  selector: 'croco-html-external-video-block',
-  templateUrl: './external-video-block.component.html',
-  styleUrls: ['./external-video-block.component.scss'],
+  selector: 'croco-html-external-video-editor',
+  templateUrl: './external-video-editor.component.html',
+  styleUrls: ['./external-video-editor.component.scss'],
   standalone: true,
   imports: [
     MatFormFieldModule,
@@ -21,7 +21,7 @@ import { MatInputModule } from '@angular/material/input';
     XmlTagExternalVideoComponent,
   ]
 })
-export class ExternalVideoBlockComponent implements OnInit {
+export class ExternalVideoEditorComponent implements OnInit {
 
   @Input()
   tag: HtmlBodyTag;

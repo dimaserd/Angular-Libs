@@ -10,7 +10,7 @@ import {
 import {XmlTagButtonComponent} from "../../xml-tags/xml-tag-custom-button/xml-tag-button.component";
 
 @Component({
-  selector: 'croco-html-button-block',
+  selector: 'croco-html-button-editor',
   standalone: true,
   imports: [
     FormsModule,
@@ -20,10 +20,10 @@ import {XmlTagButtonComponent} from "../../xml-tags/xml-tag-custom-button/xml-ta
     XmlTagDownloadFileButtonComponent,
     XmlTagButtonComponent
   ],
-  templateUrl: './button-block.component.html',
-  styleUrl: './button-block.component.css'
+  templateUrl: './button-editor.component.html',
+  styleUrl: './button-editor.component.css'
 })
-export class ButtonBlockComponent {
+export class ButtonEditorComponent {
   @Input()
   tag: HtmlBodyTag;
 
@@ -37,9 +37,10 @@ export class ButtonBlockComponent {
   };
 
   ngOnInit(): void {
-    this.tagData.type = (this.tag.attributes as ButtonTagData).type;
-    this.tagData.text = (this.tag.attributes as ButtonTagData).text;
-    this.tagData.click = (this.tag.attributes as ButtonTagData).click;
+    const data = this.tag.attributes as ButtonTagData;
+    this.tagData.type = data.type;
+    this.tagData.text = data.text;
+    this.tagData.click = data.click;
   }
 
   linkChanged(){
