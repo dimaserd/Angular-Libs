@@ -1,25 +1,25 @@
 import {Component, Input} from '@angular/core';
 import {InterfaceBlock} from "../../../extensions/InterfaceBlock";
-import {CustomButtonTagData} from "../../../extensions/CustomButtonMethods";
+import {ButtonTagData} from "../../../extensions/ButtonMethods";
 import {MatIcon} from "@angular/material/icon";
 import {MatButton} from "@angular/material/button";
 
 @Component({
-  selector: 'croco-html-xml-tag-custom-button',
+  selector: 'croco-html-xml-tag-button',
   standalone: true,
   imports: [
     MatIcon,
     MatButton
   ],
-  templateUrl: './xml-tag-custom-button.component.html',
-  styleUrl: './xml-tag-custom-button.component.css'
+  templateUrl: './xml-tag-button.component.html',
+  styleUrl: './xml-tag-button.component.css'
 })
-export class XmlTagCustomButtonComponent {
+export class XmlTagButtonComponent {
   @Input() public set data(value: InterfaceBlock) {
     this.tagData = value.data;
   };
 
-  @Input() public set tagData(value: CustomButtonTagData) {
+  @Input() public set tagData(value: ButtonTagData) {
     this._block = {
       text: value.text,
       type: value.type,
@@ -27,7 +27,7 @@ export class XmlTagCustomButtonComponent {
     }
   };
 
-  public _block: CustomButtonTagData = {
+  public _block: ButtonTagData = {
     text: '',
     type: '',
     click: ''

@@ -1,28 +1,26 @@
 @if (tag.presentOrEdit) {
   <div>
     <div>
-      Тип кнопки: {{tagData.type}}
+      Тип: {{tagData.type}}
     </div>
     <div style="height: 10px;"></div>
     <div>
-      Текст кнопки: {{tagData.text}}
+      Текст: {{tagData.text}}
     </div>
     <div style="height: 10px;"></div>
     <div>
-      Клик кнопки: {{tagData.click}}
+      Обработчик нажатия: {{tagData.click}}
     </div>
     <div style="height: 10px;"></div>
-    <croco-html-xml-tag-custom-button [tagData]="tagData"></croco-html-xml-tag-custom-button>
+    <croco-html-xml-tag-button [tagData]="tagData"></croco-html-xml-tag-button>
   </div>
-}
-
-@if (!tag.presentOrEdit) {
+} @else {
   <div>
     <mat-form-field class="w-100">
       <mat-label>
-        Тип кнопки
+        Тип
       </mat-label>
-      <input matInput placeholder=" Тип кнопки"
+      <input matInput placeholder="Тип"
              autocomplete="off"
              [(ngModel)]="tagData.type"
              (ngModelChange)="linkChanged()">
@@ -30,9 +28,9 @@
 
     <mat-form-field class="w-100">
       <mat-label>
-        Текст кнопки
+        Текст
       </mat-label>
-      <input matInput placeholder="Текст кнопки"
+      <input matInput placeholder="Текст"
              autocomplete="off"
              [(ngModel)]="tagData.text"
              (ngModelChange)="linkChanged()">
@@ -40,9 +38,9 @@
 
     <mat-form-field class="w-100">
       <mat-label>
-        Клик кнопки
+        Обработчик нажатия
       </mat-label>
-      <input matInput placeholder="Клик кнопки"
+      <input matInput placeholder="Обработчик нажатияи"
              autocomplete="off"
              [(ngModel)]="tagData.click"
              (ngModelChange)="linkChanged()">

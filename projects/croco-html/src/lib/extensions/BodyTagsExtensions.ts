@@ -8,7 +8,7 @@ import { SimpleTextTagData } from "./TextSimpleMethods";
 import { Tags } from "./Tags";
 import {ExternalVideoTagDataConsts} from "./VideoMethods";
 import {DownloadButtonTagDataConsts} from "./DownloadButtonMethods";
-import {CustomButtonTagDataConsts} from "./CustomButtonMethods";
+import {ButtonTagDataConsts} from "./ButtonMethods";
 
 export class BodyTagsExtensions {
 
@@ -23,7 +23,7 @@ export class BodyTagsExtensions {
             "h6": "Заголовок 6 уровня",
             [FileImageTagDataConsts.TagName]: "Изображение",
             [ExternalVideoTagDataConsts.TagName]: "Внешнее видео",
-            [DownloadButtonTagDataConsts.TagName]: "Кнопка для скачивания",
+            [DownloadButtonTagDataConsts.TagName]: "Кнопка",
             [HtmlRawTagDataConsts.TagName]: "Html разметка"
         };
 
@@ -48,7 +48,7 @@ export class BodyTagsExtensions {
               return `<${x.tagDescription.tag} title="${x.attributes['title']}" link="${x.attributes['link']}"></${x.tagDescription.tag}>`
             }
 
-            if (x.tagDescription.tag === CustomButtonTagDataConsts.TagName) {
+            if (x.tagDescription.tag === ButtonTagDataConsts.TagName) {
               return `<${x.tagDescription.tag} text="${x.attributes['text']}" type="${x.attributes['type']}"  click="${x.attributes['click']}"></${x.tagDescription.tag}>`
             }
 

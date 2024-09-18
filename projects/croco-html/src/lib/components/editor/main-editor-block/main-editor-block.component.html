@@ -28,10 +28,10 @@
       </div>
     }
 
-    @if (tag.tagDescription.tag === 'custom-button') {
+    @if (tag.tagDescription.tag === 'button') {
       <div>
-        <croco-html-custom-button-block (onTagUpdated)="tagUpdatedHandler($event)" [tag]="tag">
-        </croco-html-custom-button-block>
+        <croco-html-button-block (onTagUpdated)="tagUpdatedHandler($event)" [tag]="tag">
+        </croco-html-button-block>
       </div>
     }
 

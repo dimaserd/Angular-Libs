@@ -93,15 +93,13 @@ export class ImageMethods {
   }
 
   public static screenSizeChanged = (screenSize: number, requests: IMediaRequest[]) => {
-    let newSize = null;
     requests
-      .sort((a, b) => a.maxScreenWidth > b.maxScreenWidth ? -1 : 1)
-      .forEach((el, index) => {
+      .sort((a, b) => b.maxScreenWidth - a.maxScreenWidth)
+      .find(el => {
         if (screenSize <= +el.maxScreenWidth && screenSize >= +el.minScreenWidth) {
-          newSize = el.maxImageHeight;
+          return el.maxImageHeight;
         }
-      })
-    return newSize
+        return null
+      });
   }
-
 }
