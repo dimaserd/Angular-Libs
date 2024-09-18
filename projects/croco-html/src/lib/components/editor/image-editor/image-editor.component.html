@@ -40,8 +40,9 @@
         <div class="media-request__container">
           @if (tag.presentOrEdit) {
             <div style="display: flex; flex-direction: column; gap: 5px">
-              <span class="w-100">Граница ширины: {{request.screenWidth}}</span>
-              <span class="w-100">Максимальная высота: {{request.maxImageHeight}}</span>
+              <span class="w-100">Минимальная ширина: {{request.minScreenWidth}}</span>
+              <span class="w-100">Максимальная ширина: {{request.maxScreenWidth}}</span>
+              <span class="w-100">Максимальная высота изображения: {{request.maxImageHeight}}</span>
             </div>
           }
 
@@ -49,19 +50,29 @@
             <div style="width: 100%">
               <mat-form-field class="w-100">
                 <mat-label>
-                  Граница ширины
+                  Минимальная ширина
                 </mat-label>
-                <input matInput placeholder="Граница ширины"
+                <input matInput placeholder="Минимальная граница ширины"
                        autocomplete="off"
-                       [(ngModel)]="request.screenWidth"
+                       [(ngModel)]="request.minScreenWidth"
                        (ngModelChange)="requestChanged()">
               </mat-form-field>
 
               <mat-form-field class="w-100">
                 <mat-label>
-                  Максимальная высота
+                  Максимальная ширина
                 </mat-label>
-                <input matInput placeholder=" Максимальная высота"
+                <input matInput placeholder="Максимальная граница ширины"
+                       autocomplete="off"
+                       [(ngModel)]="request.maxScreenWidth"
+                       (ngModelChange)="requestChanged()">
+              </mat-form-field>
+
+              <mat-form-field class="w-100">
+                <mat-label>
+                  Максимальная высота изображения
+                </mat-label>
+                <input matInput placeholder="Максимальная высота изображения"
                        autocomplete="off"
                        [(ngModel)]="request.maxImageHeight"
                        (ngModelChange)="requestChanged()">

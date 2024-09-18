@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 import {InterfaceBlock} from "../../../extensions/InterfaceBlock";
 import {
   YoutubeVideoPlayerComponent
-} from "../../editor/external-video-block/youtube-video-player/youtube-video-player.component";
+} from "../../editor/external-video-editor/youtube-video-player/youtube-video-player.component";
 import {MatButton} from "@angular/material/button";
 import {BlobCreateService} from "../../../services/blob-create.service";
 import {DownloadButtonTagData} from "../../../extensions/DownloadButtonMethods";

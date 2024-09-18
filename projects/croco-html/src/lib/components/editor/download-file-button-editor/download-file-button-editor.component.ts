@@ -7,7 +7,7 @@ import {XmlTagDownloadFileButtonComponent} from "../../xml-tags/xml-tag-download
 import {DownloadButtonTagData} from "../../../extensions/DownloadButtonMethods";
 
 @Component({
-  selector: 'croco-html-download-file-button-block',
+  selector: 'croco-html-download-file-button-editor',
   standalone: true,
   imports: [
     MatFormField,
@@ -17,10 +17,10 @@ import {DownloadButtonTagData} from "../../../extensions/DownloadButtonMethods";
     XmlTagDownloadFileButtonComponent,
     MatFormFieldModule
   ],
-  templateUrl: './download-file-button-block.component.html',
-  styleUrl: './download-file-button-block.component.css'
+  templateUrl: './download-file-button-editor.component.html',
+  styleUrl: './download-file-button-editor.component.css'
 })
-export class DownloadFileButtonBlockComponent {
+export class DownloadFileButtonEditorComponent {
 
   @Input()
   tag: HtmlBodyTag;

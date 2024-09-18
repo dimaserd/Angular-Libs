@@ -1,0 +1,49 @@
+@if (tag.presentOrEdit) {
+  <div>
+    <div>
+      Тип: {{tagData.type}}
+    </div>
+    <div style="height: 10px;"></div>
+    <div>
+      Текст: {{tagData.text}}
+    </div>
+    <div style="height: 10px;"></div>
+    <div>
+      Обработчик нажатия: {{tagData.click}}
+    </div>
+    <div style="height: 10px;"></div>
+    <croco-html-xml-tag-button [tagData]="tagData"></croco-html-xml-tag-button>
+  </div>
+} @else {
+  <div>
+    <mat-form-field class="w-100">
+      <mat-label>
+        Тип
+      </mat-label>
+      <input matInput placeholder="Тип"
+             autocomplete="off"
+             [(ngModel)]="tagData.type"
+             (ngModelChange)="linkChanged()">
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>
+        Текст
+      </mat-label>
+      <input matInput placeholder="Текст"
+             autocomplete="off"
+             [(ngModel)]="tagData.text"
+             (ngModelChange)="linkChanged()">
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>
+        Обработчик нажатия
+      </mat-label>
+      <input matInput placeholder="Обработчик нажатия"
+             autocomplete="off"
+             [(ngModel)]="tagData.click"
+             (ngModelChange)="linkChanged()">
+    </mat-form-field>
+  </div>
+}

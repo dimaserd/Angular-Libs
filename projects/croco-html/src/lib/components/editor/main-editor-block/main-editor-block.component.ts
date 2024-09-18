@@ -4,10 +4,11 @@ import { HtmlBodyTag } from '../../../models/models';
 import { MatIcon } from '@angular/material/icon';
 import { MatIconButton } from '@angular/material/button';
 import { HtmlRawEditorComponent } from '../html-raw-editor/html-raw-editor.component';
-import { DownloadFileButtonBlockComponent } from '../download-file-button-block/download-file-button-block.component';
+import { DownloadFileButtonEditorComponent } from '../download-file-button-editor/download-file-button-editor.component';
 import { ImageEditorComponent } from '../image-editor/image-editor.component';
 import { TextEditorComponent } from '../text-editor/text-editor.component';
-import { ExternalVideoBlockComponent } from '../external-video-block/external-video-block.component';
+import { ExternalVideoEditorComponent } from '../external-video-editor/external-video-editor.component';
+import {ButtonEditorComponent} from "../button-editor/button-editor.component";
 
 @Component({
   selector: 'croco-html-main-editor-block',
@@ -17,11 +18,12 @@ import { ExternalVideoBlockComponent } from '../external-video-block/external-vi
   imports: [
     TextEditorComponent,
     ImageEditorComponent,
-    DownloadFileButtonBlockComponent,
+    DownloadFileButtonEditorComponent,
     HtmlRawEditorComponent,
     MatIconButton,
     MatIcon,
-    ExternalVideoBlockComponent
+    ExternalVideoEditorComponent,
+    ButtonEditorComponent
   ]
 })
 export class MainEditorBlockComponent implements OnInit {

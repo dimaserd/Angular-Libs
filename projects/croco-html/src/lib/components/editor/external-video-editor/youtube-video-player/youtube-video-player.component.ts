@@ -6,7 +6,7 @@ import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
   standalone: true,
   imports: [],
   templateUrl: './youtube-video-player.component.html',
-  styleUrl: '../external-video-block.component.scss'
+  styleUrl: '../external-video-editor.component.scss'
 })
 export class YoutubeVideoPlayerComponent {
 

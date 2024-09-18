@@ -4,8 +4,9 @@ export class FileImageTagDataConsts {
   static TagName = "file-image";
   static FileIdAttrName = "file-id";
   static ScreenMediaRequest = "screen-media-request";
-  static DefaultValueForFileImage = "screen-width:1200,max-image-height:300;screen-width:900,max-image-height:200";
-  static ScreenWidth = 'screen-width';
+  static DefaultValueForFileImage = "max-screen-width:1200,min-screen-width:900,max-image-height:300;max-screen-width:900,min-screen-width:600,max-image-height:200";
+  static MaxScreenWidth = 'max-screen-width';
+  static MinScreenWidth = 'min-screen-width';
   static MaxImageHeight = 'max-image-height';
 }
 
@@ -21,7 +22,8 @@ export interface FileImageTagData {
 }
 
 export interface IMediaRequest {
-  screenWidth: number,
+  minScreenWidth: number,
+  maxScreenWidth: number,
   maxImageHeight: number,
 }
 
@@ -70,7 +72,8 @@ export class ImageMethods {
 
     return data.split(';').reduce((requests: IMediaRequest[], currentValue: string) => {
       requests.push({
-        screenWidth: ImageMethods.createMediaRequestValue(currentValue.split(','), FileImageTagDataConsts.ScreenWidth),
+        maxScreenWidth: ImageMethods.createMediaRequestValue(currentValue.split(','), FileImageTagDataConsts.MaxScreenWidth ),
+        minScreenWidth: ImageMethods.createMediaRequestValue(currentValue.split(','), FileImageTagDataConsts.MinScreenWidth),
         maxImageHeight: ImageMethods.createMediaRequestValue(currentValue.split(','), FileImageTagDataConsts.MaxImageHeight),
       })
       return requests
@@ -86,19 +89,17 @@ export class ImageMethods {
       return ''
     }
 
-    return data.map(el => `${FileImageTagDataConsts.ScreenWidth}:${el.screenWidth},${FileImageTagDataConsts.MaxImageHeight}:${el.maxImageHeight}`).join(';')
+    return data.map(el => `${FileImageTagDataConsts.MaxScreenWidth}:${el.maxScreenWidth},${FileImageTagDataConsts.MinScreenWidth}:${el.minScreenWidth},${FileImageTagDataConsts.MaxImageHeight}:${el.maxImageHeight}`).join(';')
   }
 
   public static screenSizeChanged = (screenSize: number, requests: IMediaRequest[]) => {
-    let newSize = null;
     requests
-      .sort((a, b) => a.screenWidth > b.screenWidth ? -1 : 1)
-      .forEach((el, index) => {
-        if (screenSize < +el.screenWidth) {
-          newSize = el.maxImageHeight;
+      .sort((a, b) => b.maxScreenWidth - a.maxScreenWidth)
+      .find(el => {
+        if (screenSize <= +el.maxScreenWidth && screenSize >= +el.minScreenWidth) {
+          return el.maxImageHeight;
         }
-      })
-    return newSize
+        return null
+      });
   }
-
 }
