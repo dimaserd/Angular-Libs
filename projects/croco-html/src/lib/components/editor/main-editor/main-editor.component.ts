@@ -11,7 +11,6 @@ import { MatInput } from '@angular/material/input';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatTabsModule } from '@angular/material/tabs';
 import { HtmlViewComponent } from "../../html-view/html-view.component";
-import { HtmlViewController } from '../../../services/HtmlViewController';
 
 @Component({
     selector: 'croco-html-main-editor',
@@ -44,9 +43,6 @@ export class MainEditorComponent implements OnInit, AfterContentChecked, AfterVi
 
   @Input()
   useHtmlRaw = false;
-
-  @Input()
-  controller = new HtmlViewController();
 
   @Input()
   @Output()

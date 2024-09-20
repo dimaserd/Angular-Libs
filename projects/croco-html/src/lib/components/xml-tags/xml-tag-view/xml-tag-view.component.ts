@@ -1,4 +1,4 @@
-import {Component, Input, ViewEncapsulation} from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { InterfaceBlock } from "../../../extensions/InterfaceBlock";
 import { TextTags } from '../../../extensions';
 import { XmlTagDownloadFileButtonComponent } from '../xml-tag-download-file-button/xml-tag-download-file-button.component';
@@ -11,14 +11,13 @@ import { HtmlRawViewComponent } from '../html-raw-view/html-raw-view.component';
 import { XmlTagTextViewComponent } from '../xml-tag-text-view/xml-tag-text-view.component';
 import { ButtonEditorComponent } from "../../editor/button-editor/button-editor.component";
 import { XmlTagButtonComponent } from "../xml-tag-custom-button/xml-tag-button.component";
-import { HtmlViewController } from '../../../services/HtmlViewController';
 
 @Component({
-    selector: 'croco-html-xml-tag-view',
-    templateUrl: './xml-tag-view.component.html',
-    styleUrls: ['./xml-tag-view.component.css'],
-    encapsulation: ViewEncapsulation.None,
-    standalone: true,
+  selector: 'croco-html-xml-tag-view',
+  templateUrl: './xml-tag-view.component.html',
+  styleUrls: ['./xml-tag-view.component.css'],
+  encapsulation: ViewEncapsulation.None,
+  standalone: true,
   imports: [
     XmlTagTextViewComponent,
     HtmlRawViewComponent,
@@ -35,10 +34,7 @@ import { HtmlViewController } from '../../../services/HtmlViewController';
 export class XmlTagViewComponent {
 
   @Input()
-  data:InterfaceBlock[] = [];
-
-  @Input()
-  controller = new HtmlViewController();
+  data: InterfaceBlock[] = [];
 
   isHeaderTextTag(item: InterfaceBlock) {
     return TextTags.headerTextTags.includes(item.type);

@@ -28,8 +28,8 @@ export class XmlTagButtonComponent {
     }
   };
 
-  @Input()
-  controller = new HtmlViewController();
+  constructor(private readonly _controller: HtmlViewController) {
+  }
 
   public _block: ButtonTagData = {
     text: '',
@@ -38,6 +38,6 @@ export class XmlTagButtonComponent {
   };
 
   clickHandler() {
-    this.controller.onScriptCalled(this._block.click);
+    this._controller.onScriptCalled(this._block.click);
   }
 }

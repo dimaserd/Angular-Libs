@@ -3,9 +3,9 @@
   <div class="row">
 
     @if (item.type === 'text') {
-      <div>
-        <croco-html-xml-tag-text-view [item]="item"></croco-html-xml-tag-text-view>
-      </div>
+    <div>
+      <croco-html-xml-tag-text-view [item]="item"></croco-html-xml-tag-text-view>
+    </div>
     }
 
     @if (item.type === 'html-raw') {
@@ -29,15 +29,14 @@
 
     @if (item.type === 'table' && item.validationResult) {
 
-      @if (item.validationResult.isSucceeded){
-        <croco-html-xml-tag-html-view [html]="item.bootstrapHtml">
-        </croco-html-xml-tag-html-view>
-      }
-      @else {
-        <croco-html-error-banner
-            [message]="item.validationResult.message">
-        </croco-html-error-banner>
-      }
+    @if (item.validationResult.isSucceeded){
+    <croco-html-xml-tag-html-view [html]="item.bootstrapHtml">
+    </croco-html-xml-tag-html-view>
+    }
+    @else {
+    <croco-html-error-banner [message]="item.validationResult.message">
+    </croco-html-error-banner>
+    }
     }
 
     @if (item.type === 'rich-text') {
@@ -53,15 +52,15 @@
     }
 
     @if (item.type === 'download-file-button') {
-      <div>
-        <croco-html-xml-tag-download-file-button [data]="item"></croco-html-xml-tag-download-file-button>
-      </div>
+    <div>
+      <croco-html-xml-tag-download-file-button [data]="item"></croco-html-xml-tag-download-file-button>
+    </div>
     }
 
     @if (item.type === 'button') {
-      <div>
-        <croco-html-xml-tag-button [controller]="controller" [data]="item"></croco-html-xml-tag-button>
-      </div>
+    <div>
+      <croco-html-xml-tag-button [data]="item"></croco-html-xml-tag-button>
+    </div>
     }
     @if (item.type === 'unsupported-tag') {
     <div class="red" style="margin-top: 10px;">
