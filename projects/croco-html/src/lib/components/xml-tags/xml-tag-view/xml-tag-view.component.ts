@@ -11,6 +11,7 @@ import { HtmlRawViewComponent } from '../html-raw-view/html-raw-view.component';
 import { XmlTagTextViewComponent } from '../xml-tag-text-view/xml-tag-text-view.component';
 import { ButtonEditorComponent } from "../../editor/button-editor/button-editor.component";
 import { XmlTagButtonComponent } from "../xml-tag-custom-button/xml-tag-button.component";
+import { HtmlViewController } from '../../../services/HtmlViewController';
 
 @Component({
     selector: 'croco-html-xml-tag-view',
@@ -35,6 +36,9 @@ export class XmlTagViewComponent {
 
   @Input()
   data:InterfaceBlock[] = [];
+
+  @Input()
+  controller = new HtmlViewController();
 
   isHeaderTextTag(item: InterfaceBlock) {
     return TextTags.headerTextTags.includes(item.type);

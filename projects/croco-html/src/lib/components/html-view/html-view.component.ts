@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ToPreviewPipe } from '../../pipes/to-preview.pipe';
 import { XmlTagViewComponent } from '../xml-tags/xml-tag-view/xml-tag-view.component';
+import { HtmlViewController } from '../../services/HtmlViewController';
 
 @Component({
     selector: 'croco-html-view',
@@ -12,4 +13,7 @@ import { XmlTagViewComponent } from '../xml-tags/xml-tag-view/xml-tag-view.compo
 export class HtmlViewComponent {
   @Input()
   html: string = "<body></body>";
+
+  @Input()
+  controller = new HtmlViewController();
 }

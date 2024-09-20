@@ -1,8 +1,9 @@
-import {Component, Input} from '@angular/core';
-import {InterfaceBlock} from "../../../extensions/InterfaceBlock";
-import {ButtonTagData} from "../../../extensions/ButtonMethods";
-import {MatIcon} from "@angular/material/icon";
-import {MatButton} from "@angular/material/button";
+import { Component, Input } from '@angular/core';
+import { InterfaceBlock } from "../../../extensions/InterfaceBlock";
+import { ButtonTagData } from "../../../extensions/ButtonMethods";
+import { MatIcon } from "@angular/material/icon";
+import { MatButton } from "@angular/material/button";
+import { HtmlViewController } from '../../../services/HtmlViewController';
 
 @Component({
   selector: 'croco-html-xml-tag-button',
@@ -27,9 +28,16 @@ export class XmlTagButtonComponent {
     }
   };
 
+  @Input()
+  controller = new HtmlViewController();
+
   public _block: ButtonTagData = {
     text: '',
     type: '',
     click: ''
+  };
+
+  clickHandler() {
+    this.controller.onScriptCalled(this._block.click);
   }
 }

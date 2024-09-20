@@ -60,7 +60,7 @@
 
     @if (item.type === 'button') {
       <div>
-        <croco-html-xml-tag-button [data]="item"></croco-html-xml-tag-button>
+        <croco-html-xml-tag-button [controller]="controller" [data]="item"></croco-html-xml-tag-button>
       </div>
     }
     @if (item.type === 'unsupported-tag') {
