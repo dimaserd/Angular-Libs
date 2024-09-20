@@ -2,22 +2,35 @@ import { AfterContentChecked, AfterViewInit, ChangeDetectorRef, Component, Event
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ClipboardService } from 'ngx-clipboard';
 import { VisualEditorComponent } from '../visual-editor/visual-editor.component';
-import { ToPreviewPipe } from '../../../pipes/to-preview.pipe';
 import { XmlTagViewComponent } from '../../xml-tags/xml-tag-view/xml-tag-view.component';
-import { MatCard, MatCardContent } from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { MatButton } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { MatInput } from '@angular/material/input';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatTabGroup, MatTab } from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
+import { HtmlViewComponent } from "../../html-view/html-view.component";
+import { HtmlViewController } from '../../../services/HtmlViewController';
 
 @Component({
     selector: 'croco-html-main-editor',
     templateUrl: './main-editor.component.html',
     styleUrls: ['./main-editor.component.css'],
     standalone: true,
-    imports: [MatTabGroup, MatTab, VisualEditorComponent, MatFormField, MatLabel, MatInput, CdkTextareaAutosize, FormsModule, MatButton, MatCard, MatCardContent, XmlTagViewComponent, ToPreviewPipe]
+    imports: [
+      MatTabsModule,
+      VisualEditorComponent, 
+      MatFormField, 
+      MatLabel, 
+      MatInput, 
+      CdkTextareaAutosize, 
+      FormsModule, 
+      MatButton, 
+      MatCardModule, 
+      XmlTagViewComponent,  
+      HtmlViewComponent
+    ]
 })
 export class MainEditorComponent implements OnInit, AfterContentChecked, AfterViewInit {
 
@@ -31,6 +44,9 @@ export class MainEditorComponent implements OnInit, AfterContentChecked, AfterVi
 
   @Input()
   useHtmlRaw = false;
+
+  @Input()
+  controller = new HtmlViewController();
 
   @Input()
   @Output()
