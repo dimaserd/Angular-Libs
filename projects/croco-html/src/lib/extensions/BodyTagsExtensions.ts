@@ -145,27 +145,55 @@ export class BodyTagsExtensions {
             };
         }
 
-        if (data.type === HtmlRawTagDataConsts.TagName) {
+        if (data.type === ButtonTagDataConsts.TagName) {
+          let fileData = data.data as ButtonTagDataConsts;
 
-            return {
-                presentOrEdit: true,
-                tagDescription: {
-                    tag: HtmlRawTagDataConsts.TagName,
-                    displayValue: BodyTagsExtensions.getDescription(data.type)
-                },
-                attributes: {},
-                innerHtml: BodyTagsExtensions.sanitizeInnerHtml(data.data["innerHTML"])
-            };
-        }
-
-        return {
+          return {
             presentOrEdit: true,
             tagDescription: {
-                tag: Tags.UnsupportedTag,
-                displayValue: "Неподдерживаемый тег"
+              tag: data.type,
+              displayValue: BodyTagsExtensions.getDescription(data.type)
             },
-            attributes: {},
-            innerHtml: JSON.stringify(data)
-        };
+            attributes: fileData,
+            innerHtml: ""
+          };
+        }
+
+        if (data.type === DownloadButtonTagDataConsts.TagName) {
+          let fileData = data.data as ButtonTagDataConsts;
+
+          return {
+            presentOrEdit: true,
+            tagDescription: {
+              tag: data.type,
+              displayValue: BodyTagsExtensions.getDescription(data.type)
+            },
+            attributes: fileData,
+            innerHtml: ""
+          };
+        }
+
+        if (data.type === HtmlRawTagDataConsts.TagName) {
+
+              return {
+                  presentOrEdit: true,
+                  tagDescription: {
+                      tag: HtmlRawTagDataConsts.TagName,
+                      displayValue: BodyTagsExtensions.getDescription(data.type)
+                  },
+                  attributes: {},
+                  innerHtml: BodyTagsExtensions.sanitizeInnerHtml(data.data["innerHTML"])
+              };
+          }
+
+          return {
+              presentOrEdit: true,
+              tagDescription: {
+                  tag: Tags.UnsupportedTag,
+                  displayValue: "Неподдерживаемый тег"
+              },
+              attributes: {},
+              innerHtml: JSON.stringify(data)
+          };
     }
 }
