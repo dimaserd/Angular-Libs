@@ -24,7 +24,9 @@ export class BodyTagsExtensions {
             [FileImageTagDataConsts.TagName]: "Изображение",
             [ExternalVideoTagDataConsts.TagName]: "Внешнее видео",
             [DownloadButtonTagDataConsts.TagName]: "Кнопка",
-            [HtmlRawTagDataConsts.TagName]: "Html разметка"
+            [HtmlRawTagDataConsts.TagName]: "Html разметка",
+            [DownloadButtonTagDataConsts.TagName]: "Кнопка для скачивания",
+            [ButtonTagDataConsts.TagName]: "Кнопка"
         };
 
         return descriptions[tagName];
