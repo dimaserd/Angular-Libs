@@ -18,7 +18,7 @@ export interface ButtonTagData {
 }
 
 export class ButtonMethods {
-  static ExtractDownloadButtonTag(elem: HTMLElement): ButtonTag{
+  static ExtractButtonTag(elem: HTMLElement): ButtonTag{
     return {
       type: ButtonTagDataConsts.TagName,
       data:{
