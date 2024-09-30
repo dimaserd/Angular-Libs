@@ -81,6 +81,7 @@ export class MainEditorComponent implements OnInit, AfterContentChecked, AfterVi
   recalculateBodyTags() {
     this.visualEditor.html = this.html;
     this.visualEditor.recalculateBodyTags();
+    this._cdref.markForCheck();
   }
 
   copyMarkUp() {
