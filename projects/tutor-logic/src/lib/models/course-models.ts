@@ -24,21 +24,20 @@ export interface CourseThemeDetailedModel {
 }
 
 export interface CourseThemeItemModel {
-    id: string;
-    name: string;
-    html: string;
-    type: CourseThemeItemType;
-    weight: number;
-    templateItemId: string;
-    test: CourseThemeItemTestModel;
-    uISettings: CourseThemeItemUISettingsModel;
+    id: string; 
+    name: string; 
+    html: string; 
+    type: CourseThemeItemType; 
+    weight: number; 
+    templateItemId: string; 
+    test: CourseThemeItemTestModel; 
+    userInterfaceSettings: CourseThemeItemUISettingsModel; 
 }
 
 export interface CourseThemeItemUISettingsModel {
     previousSlideBtnText: string;
     nextSlideBtnText: string;
 }
-
 
 export enum CourseThemeItemType {
     JustHtml = 'JustHtml',
