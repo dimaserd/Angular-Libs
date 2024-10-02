@@ -47,7 +47,7 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
   hasImageError = false;
   searchOrEdit = "search";
   requests: IMediaRequest[] = [];
-  imageMaxHeight = null;
+  imageMaxHeight: number = null;
   isShowMediaRequest = false;
   private unsubscribe = new Subject<void>();
 
@@ -89,7 +89,7 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
     this.screenWidthService.getScreenWidth()
       .pipe(takeUntil(this.unsubscribe))
       .subscribe(screenWidth => {
-        this.imageMaxHeight = ImageMethods.screenSizeChanged(screenWidth, this.requests);
+        this.imageMaxHeight = ImageMethods.getMaxImageHeightByScreenSize(screenWidth, this.requests);
       })
   }
 

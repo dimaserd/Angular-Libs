@@ -28,7 +28,7 @@ export class FileImageTagViewComponent implements OnInit, OnDestroy {
   requests: IMediaRequest[] = []
 
   private unsubscribe = new Subject<void>();
-  public imageMaxHeight = null;
+  public imageMaxHeight: number = null;
 
   constructor(private readonly screenWidthService: ScreenWidthService,
     @Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions
@@ -48,7 +48,7 @@ export class FileImageTagViewComponent implements OnInit, OnDestroy {
     this.screenWidthService.getScreenWidth()
       .pipe(takeUntil(this.unsubscribe))
       .subscribe(screenWidth => {
-        this.imageMaxHeight = ImageMethods.screenSizeChanged(screenWidth, this.requests);
+        this.imageMaxHeight = ImageMethods.getMaxImageHeightByScreenSize(screenWidth, this.requests);
       })
   }
 

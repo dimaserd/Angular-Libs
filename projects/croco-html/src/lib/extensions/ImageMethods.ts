@@ -92,14 +92,15 @@ export class ImageMethods {
     return data.map(el => `${FileImageTagDataConsts.MaxScreenWidth}:${el.maxScreenWidth},${FileImageTagDataConsts.MinScreenWidth}:${el.minScreenWidth},${FileImageTagDataConsts.MaxImageHeight}:${el.maxImageHeight}`).join(';')
   }
 
-  public static screenSizeChanged = (screenSize: number, requests: IMediaRequest[]) => {
-    requests
+  public static getMaxImageHeightByScreenSize(screenSize: number, requests: IMediaRequest[]) : number | null {
+    let result = requests
       .sort((a, b) => b.maxScreenWidth - a.maxScreenWidth)
-      .find(el => {
-        if (screenSize <= +el.maxScreenWidth && screenSize >= +el.minScreenWidth) {
-          return el.maxImageHeight;
-        }
-        return null
-      });
+      .find(el => screenSize <= +el.maxScreenWidth && screenSize >= +el.minScreenWidth);
+    
+    if (!result) {
+      return null;
+    }
+
+    return result.maxImageHeight;
   }
 }
