@@ -26,7 +26,6 @@ import { FilePostingStarted } from '../../upload-files-btn/upload-files-btn.comp
 import { DefaultTags } from './DefaultTags';
 import { AlignmentsData, EAlignments } from "./DefaultAligments";
 import { CrocoHtmlOptionsToken } from '../../../consts';
-import { CrocoHtmlOptions } from '../../../extensions/HtmlExtractionMethods';
 import {DownloadButtonTagDataConsts} from "../../../extensions/DownloadButtonMethods";
 import { MainEditorBlockComponent } from '../main-editor-block/main-editor-block.component';
 import { AddFilesBtnComponent } from '../../add-files-btn/add-files-btn.component';
@@ -40,6 +39,7 @@ import { MatButton } from '@angular/material/button';
 import { MatCard, MatCardContent } from '@angular/material/card';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import {ButtonTagDataConsts} from "../../../extensions/ButtonMethods";
+import { CrocoHtmlOptions } from '../../../options';
 
 export const defaultLinkYouTube = "https://www.youtube.com/embed/4CtSAnJDfsI?si=scyBNJa0Hs2t5aLE";
 export const defaultLinkVk = "https://vk.com/video_ext.php?oid=-22822305&id=456241864&hd=2";

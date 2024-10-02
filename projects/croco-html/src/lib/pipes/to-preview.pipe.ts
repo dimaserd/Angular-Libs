@@ -1,7 +1,8 @@
 import { Inject, Pipe, PipeTransform } from '@angular/core';
-import { CrocoHtmlOptions, HtmlExtractionMethods } from '../extensions/HtmlExtractionMethods';
+import { HtmlExtractionMethods } from '../extensions/HtmlExtractionMethods';
 import { InterfaceBlock } from "../extensions/InterfaceBlock";
 import { CrocoHtmlOptionsToken } from '../consts';
+import { CrocoHtmlOptions } from '../options';
 
 @Pipe({
     name: 'topreview',

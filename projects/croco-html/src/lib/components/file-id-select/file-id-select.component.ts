@@ -2,9 +2,9 @@ import { Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output, Simp
 import { ImageMethods } from '../../extensions/ImageMethods';
 import { FileNameAndIdModel, FilesQueryService, FileType } from '../../services/files-query.service';
 import { CrocoHtmlOptionsToken } from '../../consts';
-import { CrocoHtmlOptions } from '../../extensions/HtmlExtractionMethods';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { CrocoHtmlOptions } from '../../options';
 
 export interface SearchQuestionsFormData {
     q: string;

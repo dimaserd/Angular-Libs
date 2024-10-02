@@ -1,4 +1,4 @@
-import { CrocoHtmlOptions } from "./HtmlExtractionMethods";
+import { CrocoHtmlOptions } from "../options";
 
 export class FileImageTagDataConsts {
   static TagName = "file-image";

@@ -1,5 +1,5 @@
 import { HtmlBodyTag } from "../models/models";
-import { HtmlExtractionMethods, CrocoHtmlOptions } from "./HtmlExtractionMethods";
+import { HtmlExtractionMethods } from "./HtmlExtractionMethods";
 import { InterfaceBlock } from "./InterfaceBlock";
 import { HtmlRawTagDataConsts } from "./HtmlRawTagDataConsts";
 import { FileImageTagData, FileImageTagDataConsts } from "./ImageMethods";
@@ -9,6 +9,7 @@ import { Tags } from "./Tags";
 import {ExternalVideoTagDataConsts} from "./VideoMethods";
 import {DownloadButtonTagDataConsts} from "./DownloadButtonMethods";
 import {ButtonTagDataConsts} from "./ButtonMethods";
+import { CrocoHtmlOptions } from "../options";
 
 export class BodyTagsExtensions {
 

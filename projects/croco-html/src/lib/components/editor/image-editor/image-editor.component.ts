@@ -2,7 +2,6 @@ import { Component, EventEmitter, Inject, Input, OnDestroy, OnInit, Output } fro
 import { ImageMethods, FileImageTagDataConsts, IMediaRequest } from '../../../extensions';
 import { HtmlBodyTag } from '../../../models/models';
 import { CrocoHtmlOptionsToken } from '../../../consts';
-import { CrocoHtmlOptions } from '../../../extensions/HtmlExtractionMethods';
 import { MatInput } from '@angular/material/input';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { FileIdSelectComponent } from '../../file-id-select/file-id-select.component';
@@ -17,13 +16,31 @@ import { ScreenWidthService } from "../../../services/screen-width.service";
 import { MatButton, MatIconButton } from "@angular/material/button";
 import { MatSlideToggle } from "@angular/material/slide-toggle";
 import { Subject, takeUntil } from "rxjs";
+import { CrocoHtmlOptions } from '../../../options';
 
 @Component({
   selector: 'croco-html-image-editor',
   templateUrl: './image-editor.component.html',
   styleUrls: ['./image-editor.component.scss'],
   standalone: true,
-  imports: [MatButtonToggleGroup, FormsModule, MatButtonToggle, MatIcon, FileIdSelectComponent, MatFormField, MatLabel, MatInput, CdkDragHandle, MatCard, MatCardContent, XmlTagExternalVideoComponent, NgStyle, MatButton, MatIconButton, MatSlideToggle]
+  imports: [
+    MatButtonToggleGroup,
+    FormsModule,
+    MatButtonToggle,
+    MatIcon,
+    FileIdSelectComponent,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    CdkDragHandle,
+    MatCard,
+    MatCardContent,
+    XmlTagExternalVideoComponent,
+    NgStyle,
+    MatButton,
+    MatIconButton,
+    MatSlideToggle
+  ]
 })
 export class ImageEditorComponent implements OnInit, OnDestroy {
 
@@ -46,7 +63,7 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
 
   constructor(
     @Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions,
-    private readonly screenWidthService: ScreenWidthService) {}
+    private readonly screenWidthService: ScreenWidthService) { }
 
   getSrc() {
     return ImageMethods.buildUrl(this.tag.attributes[FileImageTagDataConsts.FileIdAttrName], "Medium", this._options);

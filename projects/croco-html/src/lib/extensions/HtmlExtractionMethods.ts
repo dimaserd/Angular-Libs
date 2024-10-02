@@ -7,12 +7,9 @@ import {
   ExternalVideoTagDataConsts,
   VideoMethods
 } from "./VideoMethods";
-import {DownloadButtonMethods, DownloadButtonTagDataConsts} from "./DownloadButtonMethods";
-import {ButtonMethods, ButtonTagDataConsts} from "./ButtonMethods";
-
-export interface CrocoHtmlOptions {
-  publicImageResizedUrlFormat: string;
-}
+import { DownloadButtonMethods, DownloadButtonTagDataConsts } from "./DownloadButtonMethods";
+import { ButtonMethods, ButtonTagDataConsts } from "./ButtonMethods";
+import { CrocoHtmlOptions } from "../options";
 
 export class HtmlExtractionMethods {
 

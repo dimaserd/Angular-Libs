@@ -1,6 +1,7 @@
+import { CrocoHtmlOptions } from '../options';
 import { AngularMaterialTableMethods } from './AngularMaterialTableMethods';
 import { BootstrapTableMethods } from './BootstrapTableMethods';
-import { CrocoHtmlOptions, HtmlExtractionMethods } from './HtmlExtractionMethods';
+import { HtmlExtractionMethods } from './HtmlExtractionMethods';
 import { InterfaceBlock } from "./InterfaceBlock";
 import { TextSimpleMethods } from './TextSimpleMethods';
 

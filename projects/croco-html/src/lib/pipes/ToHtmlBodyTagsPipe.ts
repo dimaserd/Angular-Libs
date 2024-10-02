@@ -1,8 +1,8 @@
 import { Inject, Pipe, PipeTransform } from '@angular/core';
 import { BodyTagsExtensions } from '../extensions/BodyTagsExtensions';
 import { HtmlBodyTag } from '../models/models';
-import { CrocoHtmlOptions } from '../extensions/HtmlExtractionMethods';
 import { CrocoHtmlOptionsToken } from '../consts';
+import { CrocoHtmlOptions } from '../options';
 
 @Pipe({
     name: 'tohtmlbodytags',
