@@ -48,6 +48,7 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
   searchOrEdit = "search";
   requests: IMediaRequest[] = [];
   imageMaxHeight: number = null;
+  imageMaxWidth: number = null;
   isShowMediaRequest = false;
   private unsubscribe = new Subject<void>();
 
@@ -89,8 +90,11 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
     this.screenWidthService.getScreenWidth()
       .pipe(takeUntil(this.unsubscribe))
       .subscribe(screenWidth => {
-        this.imageMaxHeight = ImageMethods.getMaxImageHeightByScreenSize(screenWidth, this.requests);
-      })
+        let imageRestrictions = ImageMethods.getImageRestrictionsByScreenSize(screenWidth, this.requests);
+        
+        this.imageMaxHeight = imageRestrictions.maxHeight;
+        this.imageMaxWidth = imageRestrictions.maxWidth;
+      });
   }
 
   requestChanged() {
@@ -102,6 +106,7 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
       maxScreenWidth: 0,
       minScreenWidth: 0,
       maxImageHeight: 0,
+      maxImageWidth: 0
     })
   }
 

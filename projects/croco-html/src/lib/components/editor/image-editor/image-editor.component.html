@@ -11,7 +11,7 @@
   @if (hasFileId() && !hasImageError) {
     <div>
       <img
-        [ngStyle]="{ 'max-height': imageMaxHeight ? imageMaxHeight + 'px' : '100%'}"
+        [ngStyle]="{ 'max-height': imageMaxHeight ? imageMaxHeight + 'px' : '100%', 'max-width': imageMaxWidth ? imageMaxWidth + 'px' : '100%', }"
         class="mx-auto d-block img-fluid" [src]="getSrc()" (error)="onErrorHandler()" alt="photo"/>
     </div>
   }
@@ -43,6 +43,7 @@
               <span class="w-100">Минимальная ширина: {{request.minScreenWidth}}</span>
               <span class="w-100">Максимальная ширина: {{request.maxScreenWidth}}</span>
               <span class="w-100">Максимальная высота изображения: {{request.maxImageHeight}}</span>
+              <span class="w-100">Максимальная ширина изображения: {{request.maxImageWidth}}</span>
             </div>
           }
 
@@ -75,6 +76,16 @@
                 <input matInput placeholder="Максимальная высота изображения"
                        autocomplete="off"
                        [(ngModel)]="request.maxImageHeight"
+                       (ngModelChange)="requestChanged()">
+              </mat-form-field>
+
+              <mat-form-field class="w-100">
+                <mat-label>
+                  Максимальная ширина изображения
+                </mat-label>
+                <input matInput placeholder="Максимальная ширина изображения"
+                       autocomplete="off"
+                       [(ngModel)]="request.maxImageWidth"
                        (ngModelChange)="requestChanged()">
               </mat-form-field>
             </div>
