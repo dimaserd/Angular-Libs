@@ -24,14 +24,25 @@ export interface CourseThemeDetailedModel {
 }
 
 export interface CourseThemeItemModel {
-    id: string; 
-    name: string; 
-    html: string; 
-    type: CourseThemeItemType; 
-    weight: number; 
-    templateItemId: string; 
-    test: CourseThemeItemTestModel; 
-    userInterfaceSettings: CourseThemeItemUISettingsModel; 
+    id: string;
+    name: string;
+    html: string;
+    type: CourseThemeItemType;
+    weight: number;
+    templateItemId: string;
+    test: CourseThemeItemTestModel;
+    userInterfaceSettings: CourseThemeItemUISettingsModel;
+    computedProgress: CourseThemeItemComputedProgressModel;
+}
+
+export interface CourseThemeItemComputedProgressModel {
+    course: ProgressModel;
+    theme: ProgressModel;
+}
+
+export interface ProgressModel {
+    weight: number;
+    progressPercents: number;
 }
 
 export interface CourseThemeItemUISettingsModel {
