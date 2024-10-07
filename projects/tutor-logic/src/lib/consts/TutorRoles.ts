@@ -22,4 +22,9 @@ export class TutorRoles {
      * Пользователь, который может вносить вопросы
      */
     static readonly testAuthor: string = 'Tutor.TestAuthor';
+
+    /**
+     * Администратор конкретной школы
+     */
+    static readonly schoolAdmin: string = 'Tutor.SchoolAdmin';
 }
