@@ -10,7 +10,7 @@ export class QuestionLikeService {
   baseControllerUrl: string;
 
   constructor(
-    private _httpClient: HttpClient,
+    private readonly _httpClient: HttpClient,
     @Inject('BASE_URL') baseUrl: string,
   ) {
     this.baseControllerUrl = baseUrl + 'api/tutor/question-likes/';

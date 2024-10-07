@@ -26,3 +26,5 @@ export { CourseShopWindowDetailedService } from './CourseShopWindowDetailedServi
 export { StudentGroupPaymentPlanQueryService } from './StudentGroupPaymentPlanQueryService'
 export { TutorAppConfigurationService } from './TutorAppConfigurationService'
 export { QuestionLikeService } from './QuestionLikeService'
+export { StudentCourseProgressQueryService } from './StudentCourseProgressQueryService'
+export { StudentCourseProgressService } from './StudentCourseProgressService'

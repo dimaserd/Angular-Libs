@@ -10,7 +10,7 @@ import { SettingModel } from "../models/setting-models";
 export class TutorCommonSettingsService {
     baseControllerUrl: string;
 
-    constructor(private _httpClient: HttpClient,
+    constructor(private readonly _httpClient: HttpClient,
         @Inject('BASE_URL') baseUrl: string) {
         this.baseControllerUrl = baseUrl + 'api/tutor/settings/';
     }
