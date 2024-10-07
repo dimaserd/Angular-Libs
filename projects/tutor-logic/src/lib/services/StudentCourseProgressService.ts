@@ -24,19 +24,11 @@ export class StudentCourseProgressService {
   }
 
   updateThemeProgress(model: UpdateStudentCourseThemeProgressRequest) {
-    return this._httpClient.post<BaseApiResponse>(`${this.baseControllerUrl}/theme/update`, model);
-  }
-
-  updateThemeProgressV2(model: UpdateStudentCourseThemeProgressRequest) {
-    return this._httpClient.post<UpdateStudentCourseThemeProgressResult>(`${this.baseControllerUrl}/theme/update/v2`, model);
+    return this._httpClient.post<UpdateStudentCourseThemeProgressResult>(`${this.baseControllerUrl}/theme/update`, model);
   }
 
   finishTheme(model: FinishStudentCourseThemeProgressRequest) {
-    return this._httpClient.post<BaseApiResponse>(`${this.baseControllerUrl}/theme/finish`, model);
-  }
-
-  finishThemeV2(model: FinishStudentCourseThemeProgressRequest) {
-    return this._httpClient.post<UpdateStudentCourseThemeProgressResult>(`${this.baseControllerUrl}/theme/finish/v2`, model);
+    return this._httpClient.post<UpdateStudentCourseThemeProgressResult>(`${this.baseControllerUrl}/theme/finish`, model);
   }
 
   startTestForItemBlock(model: StartCourseThemeItemTestRequest) {
