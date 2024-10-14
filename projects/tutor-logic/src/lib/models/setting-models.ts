@@ -14,6 +14,8 @@ export interface TutorFullApplicationPublicOptions {
   webAppRoutes: WebAppRoutes;
   telephoneInputOptions: TelephoneInputOptions;
   solutionChatSettings: TestSolutionChatSettings;
+  serverAppVersion: string;
+  dataOnUtc: string;
 }
 
 export interface TestSolutionChatSettings {
