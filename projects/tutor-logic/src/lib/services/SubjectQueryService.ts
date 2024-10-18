@@ -40,7 +40,7 @@ export class SubjectQueryService {
   }
 
   public getByAliasOrId(id: string): Observable<SubjectCountsModel> {
-    return this._httpClient.get<SubjectCountsModel>(this.baseControllerUrl + `GetByAliasOrId?aliasOrId=${id}`);
+    return this._httpClient.get<SubjectCountsModel>(this.baseControllerUrl + `GetByAliasOrId?idOrAlias=${id}`);
   }
 
   public getByAliasOrIdCached(idOrAlias: string): Observable<SubjectCountsModel> {
