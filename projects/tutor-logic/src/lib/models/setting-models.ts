@@ -8,6 +8,7 @@ export interface TutorFullApplicationPublicOptions {
   applicationName: string;
   applicationUrl: string;
   telegramBotSettings: MainTelegramBotSettings;
+  studentDemo: StudentDemoSettings;
   publicImageUrlFormat: string;
   imagesPack: TutorImagesPackSettings;
   icon: IconApplicatonSettings;
@@ -20,6 +21,10 @@ export interface TutorFullApplicationPublicOptions {
 
 export interface TestSolutionChatSettings {
   useNewChats: boolean;
+}
+
+export interface StudentDemoSettings {
+  demoRegistrationEnabled: boolean;
 }
 
 
