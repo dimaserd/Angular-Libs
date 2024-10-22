@@ -10,6 +10,7 @@ import {ExternalVideoTagDataConsts} from "./VideoMethods";
 import {DownloadButtonTagDataConsts} from "./DownloadButtonMethods";
 import {ButtonTagDataConsts} from "./ButtonMethods";
 import { CrocoHtmlOptions } from "../options";
+import {CustomWidgetTagDataConsts} from "./CustomWidgetMethods";
 
 export class BodyTagsExtensions {
 
@@ -27,7 +28,8 @@ export class BodyTagsExtensions {
             [DownloadButtonTagDataConsts.TagName]: "Кнопка",
             [HtmlRawTagDataConsts.TagName]: "Html разметка",
             [DownloadButtonTagDataConsts.TagName]: "Кнопка для скачивания",
-            [ButtonTagDataConsts.TagName]: "Кнопка"
+            [ButtonTagDataConsts.TagName]: "Кнопка",
+            [CustomWidgetTagDataConsts.TagName]: "Кастомный виджет"
         };
 
         return descriptions[tagName];
@@ -53,6 +55,10 @@ export class BodyTagsExtensions {
 
             if (x.tagDescription.tag === ButtonTagDataConsts.TagName) {
               return `<${x.tagDescription.tag} text="${x.attributes[ButtonTagDataConsts.TextAttrName]}" type="${x.attributes[ButtonTagDataConsts.TypeAttrName]}"  click="${x.attributes[ButtonTagDataConsts.ClickAttrName]}"></${x.tagDescription.tag}>`
+            }
+
+            if (x.tagDescription.tag === CustomWidgetTagDataConsts.TagName) {
+              return `<${x.tagDescription.tag} type="${x.attributes[CustomWidgetTagDataConsts.TypeAttrName]}" data-id="${x.attributes[CustomWidgetTagDataConsts.DataIdAttrName]}"  widget-id="${x.attributes[CustomWidgetTagDataConsts.WidgetIdAttrName]}"></${x.tagDescription.tag}>`
             }
 
           return BodyTagsExtensions.imageTagToHtml(x);
@@ -164,6 +170,20 @@ export class BodyTagsExtensions {
 
         if (data.type === DownloadButtonTagDataConsts.TagName) {
           let fileData = data.data as ButtonTagDataConsts;
+
+          return {
+            presentOrEdit: true,
+            tagDescription: {
+              tag: data.type,
+              displayValue: BodyTagsExtensions.getDescription(data.type)
+            },
+            attributes: fileData,
+            innerHtml: ""
+          };
+        }
+
+        if (data.type === CustomWidgetTagDataConsts.TagName) {
+          let fileData = data.data as CustomWidgetTagDataConsts;
 
           return {
             presentOrEdit: true,

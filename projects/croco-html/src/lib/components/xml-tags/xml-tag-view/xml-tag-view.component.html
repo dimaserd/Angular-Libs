@@ -27,6 +27,12 @@
     </div>
     }
 
+    @if (item.type === 'custom-widget') {
+      <div>
+        <croco-html-custom-widget-tag-view [tagData]="item.data"></croco-html-custom-widget-tag-view>
+      </div>
+    }
+
     @if (item.type === 'table' && item.validationResult) {
 
     @if (item.validationResult.isSucceeded){

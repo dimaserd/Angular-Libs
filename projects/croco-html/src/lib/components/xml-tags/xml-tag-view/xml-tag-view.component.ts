@@ -11,6 +11,7 @@ import { HtmlRawViewComponent } from '../html-raw-view/html-raw-view.component';
 import { XmlTagTextViewComponent } from '../xml-tag-text-view/xml-tag-text-view.component';
 import { ButtonEditorComponent } from "../../editor/button-editor/button-editor.component";
 import { XmlTagButtonComponent } from "../xml-tag-custom-button/xml-tag-button.component";
+import {CustomWidgetTagViewComponent} from "../custom-widget-tag-view/custom-widget-tag-view.component";
 
 @Component({
   selector: 'croco-html-xml-tag-view',
@@ -29,6 +30,7 @@ import { XmlTagButtonComponent } from "../xml-tag-custom-button/xml-tag-button.c
     XmlTagDownloadFileButtonComponent,
     ButtonEditorComponent,
     XmlTagButtonComponent,
+    CustomWidgetTagViewComponent,
   ],
 })
 export class XmlTagViewComponent {

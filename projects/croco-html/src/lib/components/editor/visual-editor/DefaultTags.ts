@@ -4,6 +4,7 @@ import { TagItem } from '../../../models/models';
 import {ExternalVideoTagDataConsts} from "../../../extensions";
 import {DownloadButtonTagDataConsts} from "../../../extensions/DownloadButtonMethods";
 import {ButtonTagDataConsts} from "../../../extensions/ButtonMethods";
+import {CustomWidgetTagDataConsts} from "../../../extensions";
 
 export class DefaultTags {
 
@@ -22,6 +23,7 @@ export class DefaultTags {
     { tag: ExternalVideoTagDataConsts.TagName, displayValue: 'Внешнее видео' },
     { tag: DownloadButtonTagDataConsts.TagName, displayValue: 'Кнопка для скачивания' },
     { tag: ButtonTagDataConsts.TagName, displayValue: 'Кнопка' },
+    { tag: CustomWidgetTagDataConsts.TagName, displayValue: 'Кастомный виджет' },
     ...DefaultTags.textTags
   ];
 

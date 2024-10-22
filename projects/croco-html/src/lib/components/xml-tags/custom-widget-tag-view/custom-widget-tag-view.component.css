@@ -1,0 +1,6 @@
+:host div {
+  background-color: rgb(163, 222, 213);
+  padding: 5px 10px;
+  display: inline-block;
+  border-radius: 10px;
+}

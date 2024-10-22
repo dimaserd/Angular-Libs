@@ -10,6 +10,7 @@ import { XmlTagRichTextViewComponent } from "./components";
 import { XmlTagTableViewComponent } from "./components";
 import { XmlTagTextViewComponent } from "./components";
 import { XmlTagViewComponent } from "./components";
+import {CustomWidgetEditorComponent} from "./components";
 import { VisualEditorComponent } from './components';
 import { AddFilesBtnComponent } from './components';
 import { ExternalVideoEditorComponent } from "./components/editor/external-video-editor/external-video-editor.component";
@@ -48,6 +49,7 @@ import { RichTextToHtmlPipe, TagToSpanPipe, ToHtmlBodyTagsPipe, ToPreviewHtmlPip
 import { FileImageTagViewComponent, UploadFilesBtnComponent } from "./components";
 import { HtmlRawViewComponent } from "./components";
 import { HtmlViewComponent } from "./components";
+import {CustomWidgetTagViewComponent} from "./components";
 
 export const EditorComponents = [
     MainEditorComponent,
@@ -58,6 +60,8 @@ export const EditorComponents = [
     VisualEditorComponent,
     AddFilesBtnComponent,
     HtmlRawEditorComponent,
+    CustomWidgetEditorComponent,
+
 ];
 
 export const XmlComponents = [
@@ -71,6 +75,7 @@ export const XmlComponents = [
     XmlTagExternalVideoComponent,
     HtmlRawViewComponent,
     FileImageTagViewComponent,
+    CustomWidgetTagViewComponent,
     HtmlViewComponent
 ];
 
