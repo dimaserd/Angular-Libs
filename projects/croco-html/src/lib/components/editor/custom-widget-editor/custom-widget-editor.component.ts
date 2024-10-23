@@ -1,10 +1,10 @@
-import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {HtmlBodyTag} from "../../../models/models";
 import {FormsModule} from "@angular/forms";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
-import {CustomWidgetTagData} from "../../../extensions/CustomWidgetMethods";
-import {CustomWidgetTagViewComponent} from "../../xml-tags/custom-widget-tag-view/custom-widget-tag-view.component";
+import {CustomWidgetMethods, CustomWidgetTagData} from "../../../extensions";
+import {CustomWidgetTagViewComponent} from "../../xml-tags";
 
 @Component({
   selector: 'croco-html-custom-widget-editor',
@@ -33,15 +33,10 @@ export class CustomWidgetEditorComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    const data = this.tag.attributes as CustomWidgetTagData;
-
-    this.tagData.type = data.type;
-    this.tagData.dataId = data.dataId;
-    this.tagData.widgetId = data.widgetId;
+    this.tagData = CustomWidgetMethods.ExtractCustomWidgetTagData(this.tag.attributes);
   }
 
-
-  linkChanged(){
-    this.tag.attributes = this.tagData;
+  linkChanged() {
+    this.tag.attributes = CustomWidgetMethods.ExtractCustomWidgetAttributes(this.tagData);
   }
 }

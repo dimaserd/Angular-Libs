@@ -10,7 +10,7 @@ import {ExternalVideoTagDataConsts} from "./VideoMethods";
 import {DownloadButtonTagDataConsts} from "./DownloadButtonMethods";
 import {ButtonTagDataConsts} from "./ButtonMethods";
 import { CrocoHtmlOptions } from "../options";
-import {CustomWidgetTagDataConsts} from "./CustomWidgetMethods";
+import {CustomWidgetTagData, CustomWidgetTagDataConsts} from "./CustomWidgetMethods";
 
 export class BodyTagsExtensions {
 
@@ -183,7 +183,7 @@ export class BodyTagsExtensions {
         }
 
         if (data.type === CustomWidgetTagDataConsts.TagName) {
-          let fileData = data.data as CustomWidgetTagDataConsts;
+          let customWidgetTagData = data.data as CustomWidgetTagData;
 
           return {
             presentOrEdit: true,
@@ -191,7 +191,7 @@ export class BodyTagsExtensions {
               tag: data.type,
               displayValue: BodyTagsExtensions.getDescription(data.type)
             },
-            attributes: fileData,
+            attributes: customWidgetTagData,
             innerHtml: ""
           };
         }

@@ -1,4 +1,4 @@
-import {Component, input, OnInit, signal, WritableSignal} from '@angular/core';
+import {Component, computed, input, Signal} from '@angular/core';
 import {CustomWidgetTagData} from "../../../extensions";
 import {MatTooltip} from "@angular/material/tooltip";
 
@@ -9,13 +9,9 @@ import {MatTooltip} from "@angular/material/tooltip";
   imports: [MatTooltip],
   standalone: true
 })
-export class CustomWidgetTagViewComponent implements OnInit {
+export class CustomWidgetTagViewComponent {
 
   tagData = input.required<CustomWidgetTagData>();
 
-  tooltipData: WritableSignal<string> = signal('');
-
-  ngOnInit(): void {
-    this.tooltipData.set(`data-id:${this.tagData().dataId}; widget-id: ${this.tagData().widgetId}`);
-  }
+  tooltipData: Signal<string> = computed(() => `data-id:${this.tagData().dataId}; widget-id: ${this.tagData().widgetId}`);
 }

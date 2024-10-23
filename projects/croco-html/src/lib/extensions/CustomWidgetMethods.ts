@@ -19,6 +19,22 @@ export interface CustomWidgetTagData {
 
 export class CustomWidgetMethods {
 
+  static ExtractCustomWidgetTagData(attributes: any): CustomWidgetTagData {
+    return {
+      type: attributes[CustomWidgetTagDataConsts.TypeAttrName],
+      dataId: attributes[CustomWidgetTagDataConsts.DataIdAttrName],
+      widgetId: attributes[CustomWidgetTagDataConsts.WidgetIdAttrName]
+    }
+  }
+
+  static ExtractCustomWidgetAttributes(customWidgetTagData: CustomWidgetTagData): any {
+    return {
+      [CustomWidgetTagDataConsts.TypeAttrName]: customWidgetTagData.type,
+      [CustomWidgetTagDataConsts.DataIdAttrName]: customWidgetTagData.dataId,
+      [CustomWidgetTagDataConsts.WidgetIdAttrName]: customWidgetTagData.widgetId
+    }
+  }
+
   static ExtractCustomWidgetTag(elem: HTMLElement): CustomWidgetTag {
     return {
       type: CustomWidgetTagDataConsts.TagName,
