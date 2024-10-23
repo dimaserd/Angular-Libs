@@ -4,7 +4,7 @@ import {FormsModule} from "@angular/forms";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {CustomWidgetMethods, CustomWidgetTagData} from "../../../extensions";
-import {CustomWidgetTagViewComponent} from "../../xml-tags";
+import {XmlTagCustomWidgetComponent} from "../../xml-tags";
 
 @Component({
   selector: 'croco-html-custom-widget-editor',
@@ -14,7 +14,7 @@ import {CustomWidgetTagViewComponent} from "../../xml-tags";
     MatFormField,
     MatInput,
     MatLabel,
-    CustomWidgetTagViewComponent,
+    XmlTagCustomWidgetComponent,
   ],
   templateUrl: './custom-widget-editor.component.html',
   styleUrl: './custom-widget-editor.component.css'

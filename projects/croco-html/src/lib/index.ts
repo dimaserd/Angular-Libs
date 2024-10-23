@@ -49,7 +49,7 @@ import { RichTextToHtmlPipe, TagToSpanPipe, ToHtmlBodyTagsPipe, ToPreviewHtmlPip
 import { FileImageTagViewComponent, UploadFilesBtnComponent } from "./components";
 import { HtmlRawViewComponent } from "./components";
 import { HtmlViewComponent } from "./components";
-import {CustomWidgetTagViewComponent} from "./components";
+import {XmlTagCustomWidgetComponent} from "./components";
 
 export const EditorComponents = [
     MainEditorComponent,
@@ -75,7 +75,7 @@ export const XmlComponents = [
     XmlTagExternalVideoComponent,
     HtmlRawViewComponent,
     FileImageTagViewComponent,
-    CustomWidgetTagViewComponent,
+    XmlTagCustomWidgetComponent,
     HtmlViewComponent
 ];
 
