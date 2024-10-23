@@ -40,6 +40,7 @@ import { MatCard, MatCardContent } from '@angular/material/card';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import {ButtonTagDataConsts} from "../../../extensions/ButtonMethods";
 import { CrocoHtmlOptions } from '../../../options';
+import {CustomWidgetTagDataConsts} from "../../../extensions/CustomWidgetMethods";
 
 export const defaultLinkYouTube = "https://www.youtube.com/embed/4CtSAnJDfsI?si=scyBNJa0Hs2t5aLE";
 export const defaultLinkVk = "https://vk.com/video_ext.php?oid=-22822305&id=456241864&hd=2";
@@ -142,6 +143,11 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
       attrs[ButtonTagDataConsts.ClickAttrName] = ''
       attrs[ButtonTagDataConsts.TypeAttrName] = 'button'
       attrs[ButtonTagDataConsts.TextAttrName] = 'Кнопка'
+    }
+    else if (tagDescription.tag == CustomWidgetTagDataConsts.TagName) {
+      attrs[CustomWidgetTagDataConsts.TypeAttrName] = 'example-type'
+      attrs[CustomWidgetTagDataConsts.DataIdAttrName] = 'example-data-id'
+      attrs[CustomWidgetTagDataConsts.WidgetIdAttrName] = 'example-widget-id'
     }
     else {
       attrs[FileImageTagDataConsts.FileIdAttrName] = null;

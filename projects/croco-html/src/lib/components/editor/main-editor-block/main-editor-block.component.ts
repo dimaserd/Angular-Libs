@@ -9,6 +9,7 @@ import { ImageEditorComponent } from '../image-editor/image-editor.component';
 import { TextEditorComponent } from '../text-editor/text-editor.component';
 import { ExternalVideoEditorComponent } from '../external-video-editor/external-video-editor.component';
 import {ButtonEditorComponent} from "../button-editor/button-editor.component";
+import {CustomWidgetEditorComponent} from "../custom-widget-editor/custom-widget-editor.component";
 
 @Component({
   selector: 'croco-html-main-editor-block',
@@ -23,7 +24,8 @@ import {ButtonEditorComponent} from "../button-editor/button-editor.component";
     MatIconButton,
     MatIcon,
     ExternalVideoEditorComponent,
-    ButtonEditorComponent
+    ButtonEditorComponent,
+    CustomWidgetEditorComponent
   ]
 })
 export class MainEditorBlockComponent implements OnInit {

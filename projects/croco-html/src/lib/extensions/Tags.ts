@@ -2,6 +2,7 @@ import { HtmlRawTagDataConsts } from "./HtmlRawTagDataConsts";
 import { FileImageTagDataConsts } from "./ImageMethods";
 import { TextTags } from "./TextMethods";
 import { ExternalVideoTagDataConsts } from "./VideoMethods";
+import {CustomWidgetTagDataConsts} from "./CustomWidgetMethods";
 
 export class Tags {
   public static readonly Text = TextTags.text;
@@ -18,4 +19,5 @@ export class Tags {
   public static readonly RichText = 'rich-text';
   public static readonly ExternalVideo = ExternalVideoTagDataConsts.TagName;
   public static readonly UnsupportedTag = 'unsupported-tag';
+  public static readonly CustomWidget = CustomWidgetTagDataConsts.TagName;
 }
