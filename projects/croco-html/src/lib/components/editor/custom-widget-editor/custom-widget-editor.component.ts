@@ -36,7 +36,7 @@ export class CustomWidgetEditorComponent implements OnInit {
     this.tagData = CustomWidgetMethods.ExtractCustomWidgetTagData(this.tag.attributes);
   }
 
-  linkChanged() {
+  dataChanged() {
     this.tag.attributes = CustomWidgetMethods.ExtractCustomWidgetAttributes(this.tagData);
   }
 }

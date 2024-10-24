@@ -24,7 +24,7 @@
              placeholder="type"
              autocomplete="off"
              [(ngModel)]="tagData.type"
-             (ngModelChange)="linkChanged()">
+             (ngModelChange)="dataChanged()">
     </mat-form-field>
 
     <mat-form-field class="w-100">
@@ -35,7 +35,7 @@
              placeholder="data-id"
              autocomplete="off"
              [(ngModel)]="tagData.dataId"
-             (ngModelChange)="linkChanged()">
+             (ngModelChange)="dataChanged()">
     </mat-form-field>
 
     <mat-form-field class="w-100">
@@ -46,7 +46,7 @@
              placeholder="widget-id"
              autocomplete="off"
              [(ngModel)]="tagData.widgetId"
-             (ngModelChange)="linkChanged()">
+             (ngModelChange)="dataChanged()">
     </mat-form-field>
   </div>
 }

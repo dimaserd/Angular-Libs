@@ -9,7 +9,6 @@ import {MatTooltip} from "@angular/material/tooltip";
   imports: [MatTooltip],
   standalone: true
 })
-
 export class XmlTagCustomWidgetComponent {
   @Input()
   public set tagData(value: CustomWidgetTagData) {
@@ -17,7 +16,7 @@ export class XmlTagCustomWidgetComponent {
     this.tooltipData = `data-id:${value.dataId}; widget-id: ${value.widgetId}`;
   };
 
-  public get tagData(): any {
+  public get tagData(): CustomWidgetTagData {
     return this._tagData;
   }
 
