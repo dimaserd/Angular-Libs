@@ -1,0 +1,52 @@
+@if (tag.presentOrEdit) {
+  <div>
+    <div>
+      <b>type:</b> {{tagData.type}}
+    </div>
+    <div style="height: 10px;"></div>
+    <div>
+      <b>data-id:</b> {{tagData.dataId}}
+    </div>
+    <div style="height: 10px;"></div>
+    <div>
+      <b>widget-id:</b> {{tagData.widgetId}}
+    </div>
+    <div style="height: 10px;"></div>
+    <croco-html-xml-tag-custom-widget [tagData]="tagData"></croco-html-xml-tag-custom-widget>
+  </div>
+} @else {
+  <div>
+    <mat-form-field class="w-100">
+      <mat-label>
+        type
+      </mat-label>
+      <input matInput
+             placeholder="type"
+             autocomplete="off"
+             [(ngModel)]="tagData.type"
+             (ngModelChange)="dataChanged()">
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>
+        data-id
+      </mat-label>
+      <input matInput
+             placeholder="data-id"
+             autocomplete="off"
+             [(ngModel)]="tagData.dataId"
+             (ngModelChange)="dataChanged()">
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>
+        widget-id
+      </mat-label>
+      <input matInput
+             placeholder="widget-id"
+             autocomplete="off"
+             [(ngModel)]="tagData.widgetId"
+             (ngModelChange)="dataChanged()">
+    </mat-form-field>
+  </div>
+}

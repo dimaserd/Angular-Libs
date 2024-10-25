@@ -10,6 +10,7 @@ import {
 import { DownloadButtonMethods, DownloadButtonTagDataConsts } from "./DownloadButtonMethods";
 import { ButtonMethods, ButtonTagDataConsts } from "./ButtonMethods";
 import { CrocoHtmlOptions } from "../options";
+import {CustomWidgetMethods, CustomWidgetTagDataConsts} from "./CustomWidgetMethods";
 
 export class HtmlExtractionMethods {
 
@@ -41,6 +42,7 @@ export class HtmlExtractionMethods {
     [ExternalVideoTagDataConsts.TagName.toUpperCase()]: (elem: HTMLElement, options: CrocoHtmlOptions) => VideoMethods.ExtractExternalVideoTag(elem),
     [DownloadButtonTagDataConsts.TagName.toUpperCase()]: (elem: HTMLElement, options: CrocoHtmlOptions) => DownloadButtonMethods.ExtractDownloadButtonTag(elem),
     [ButtonTagDataConsts.TagName.toUpperCase()]: (elem: HTMLElement, options: CrocoHtmlOptions) => ButtonMethods.ExtractButtonTag(elem),
+    [CustomWidgetTagDataConsts.TagName.toUpperCase()]: (elem: HTMLElement, options: CrocoHtmlOptions) => CustomWidgetMethods.ExtractCustomWidgetTag(elem),
   };
 
   static transformHtmlElementToBlocks(element: HTMLElement, options: CrocoHtmlOptions): InterfaceBlock[] {
