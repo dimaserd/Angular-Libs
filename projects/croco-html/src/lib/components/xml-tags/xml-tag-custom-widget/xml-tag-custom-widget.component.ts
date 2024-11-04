@@ -27,18 +27,20 @@ export class XmlTagCustomWidgetComponent extends BaseCustomWidgetComponent<Custo
 
   @Input()
   public set tagData(value: CustomWidgetTagData) {
-    this._tagData = value;
-    this.tooltipData = `data-id:${value.dataId}; widget-id: ${value.widgetId}`;
-    if (this.dynamicContainerRef?.instance) {
-      this.dynamicContainerRef.instance.tagData = value;
+    if (value) {
+      this._tagData = value;
+      this.tooltipData = `data-id:${value.dataId}; widget-id: ${value.widgetId}`;
+      if (this.dynamicContainerRef?.instance) {
+        this.dynamicContainerRef.instance.tagData = value;
+      }
     }
   };
 
-  public get tagData(): CustomWidgetTagData {
+  public get tagData(): any {
     return this._tagData;
   }
 
-  public _tagData: CustomWidgetTagData;
+ // public _tagData: CustomWidgetTagData;
   public tooltipData: string = "";
   public isDynamicComponent = false;
 
