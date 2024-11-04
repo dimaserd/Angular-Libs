@@ -29,7 +29,7 @@ export class XmlTagCustomWidgetComponent extends BaseCustomWidgetComponent<Custo
   public set tagData(value: CustomWidgetTagData) {
     this._tagData = value;
     this.tooltipData = `data-id:${value.dataId}; widget-id: ${value.widgetId}`;
-    if (this.dynamicContainerRef.instance) {
+    if (this.dynamicContainerRef?.instance) {
       this.dynamicContainerRef.instance.tagData = value;
     }
   };
