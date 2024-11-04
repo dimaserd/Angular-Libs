@@ -35,7 +35,7 @@ export class XmlTagCustomWidgetComponent implements OnInit, OnDestroy {
     }
   };
 
-  public get tagData(): any {
+  public get tagData(): CustomWidgetTagData {
     return this._tagData;
   }
 
