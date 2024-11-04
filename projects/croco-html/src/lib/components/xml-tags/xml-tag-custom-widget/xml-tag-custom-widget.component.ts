@@ -12,7 +12,6 @@ import {CustomWidgetTagData} from "../../../extensions";
 import {MatTooltip} from "@angular/material/tooltip";
 import {CrocoHtmlOptionsToken} from "../../../consts";
 import {CrocoHtmlOptions} from "../../../options";
-import {BaseCustomWidgetComponent} from "./base-custom-widget.component";
 
 @Component({
   selector: 'croco-html-xml-tag-custom-widget',
@@ -21,7 +20,7 @@ import {BaseCustomWidgetComponent} from "./base-custom-widget.component";
   imports: [MatTooltip],
   standalone: true
 })
-export class XmlTagCustomWidgetComponent extends BaseCustomWidgetComponent<CustomWidgetTagData> implements OnInit, OnDestroy {
+export class XmlTagCustomWidgetComponent implements OnInit, OnDestroy {
   @ViewChild('container', {read: ViewContainerRef, static: true})
   viewContainerRef!: ViewContainerRef;
 
@@ -40,16 +39,15 @@ export class XmlTagCustomWidgetComponent extends BaseCustomWidgetComponent<Custo
     return this._tagData;
   }
 
- // public _tagData: CustomWidgetTagData;
+  public _tagData: CustomWidgetTagData;
   public tooltipData: string = "";
   public isDynamicComponent = false;
 
-  public dynamicContainerRef: ComponentRef<BaseCustomWidgetComponent<CustomWidgetTagData>>;
+  public dynamicContainerRef: ComponentRef<any>;
 
   constructor(
-    @Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions
+      @Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions
   ) {
-    super();
   }
 
   ngOnInit(): void {
