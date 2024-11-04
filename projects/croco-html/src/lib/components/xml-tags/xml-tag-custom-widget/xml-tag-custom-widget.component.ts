@@ -1,6 +1,18 @@
-import {Component, Input} from '@angular/core';
+import {
+  Component,
+  ComponentRef,
+  Inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 import {CustomWidgetTagData} from "../../../extensions";
 import {MatTooltip} from "@angular/material/tooltip";
+import {CrocoHtmlOptionsToken} from "../../../consts";
+import {CrocoHtmlOptions} from "../../../options";
+import {BaseCustomWidgetComponent} from "./base-custom-widget.component";
 
 @Component({
   selector: 'croco-html-xml-tag-custom-widget',
@@ -9,11 +21,17 @@ import {MatTooltip} from "@angular/material/tooltip";
   imports: [MatTooltip],
   standalone: true
 })
-export class XmlTagCustomWidgetComponent {
+export class XmlTagCustomWidgetComponent extends BaseCustomWidgetComponent<CustomWidgetTagData> implements OnInit, OnDestroy {
+  @ViewChild('container', {read: ViewContainerRef, static: true})
+  viewContainerRef!: ViewContainerRef;
+
   @Input()
   public set tagData(value: CustomWidgetTagData) {
     this._tagData = value;
     this.tooltipData = `data-id:${value.dataId}; widget-id: ${value.widgetId}`;
+    if (this.dynamicContainerRef.instance) {
+      this.dynamicContainerRef.instance.tagData = value;
+    }
   };
 
   public get tagData(): CustomWidgetTagData {
@@ -22,4 +40,26 @@ export class XmlTagCustomWidgetComponent {
 
   public _tagData: CustomWidgetTagData;
   public tooltipData: string = "";
+  public isDynamicComponent = false;
+
+  public dynamicContainerRef: ComponentRef<BaseCustomWidgetComponent<CustomWidgetTagData>>;
+
+  constructor(
+    @Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions
+  ) {
+    super();
+  }
+
+  ngOnInit(): void {
+    if (this._options.dynamicComponent) {
+      this.isDynamicComponent = true;
+      this.viewContainerRef.remove();
+      this.dynamicContainerRef = this.viewContainerRef.createComponent(this._options.dynamicComponent);
+      this.dynamicContainerRef.instance.tagData = this.tagData;
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.dynamicContainerRef.destroy();
+  }
 }
