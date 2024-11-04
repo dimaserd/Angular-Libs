@@ -41,7 +41,7 @@ export class XmlTagCustomWidgetComponent implements OnInit, OnDestroy {
 
   public _tagData: CustomWidgetTagData;
   public tooltipData: string = "";
-  public isDynamicComponent = false;
+  public useDynamicComponent = false;
 
   public dynamicContainerRef: ComponentRef<any>;
 
@@ -51,10 +51,10 @@ export class XmlTagCustomWidgetComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    if (this._options.dynamicComponent) {
-      this.isDynamicComponent = true;
+    if (this._options.customWidgetRendererComponent) {
+      this.useDynamicComponent = true;
       this.viewContainerRef.remove();
-      this.dynamicContainerRef = this.viewContainerRef.createComponent(this._options.dynamicComponent);
+      this.dynamicContainerRef = this.viewContainerRef.createComponent(this._options.customWidgetRendererComponent);
       this.dynamicContainerRef.instance.tagData = this.tagData;
     }
   }

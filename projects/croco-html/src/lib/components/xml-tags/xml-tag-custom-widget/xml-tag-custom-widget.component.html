@@ -1,7 +1,7 @@
 <ng-container #container>
-  @if (!isDynamicComponent) {
+  @if (!useDynamicComponent) {
     <div [matTooltip]="tooltipData">
-      Дефолтный кастомный виджет Тип: {{ tagData?.type }}
+       Кастомный виджет. тип виджета: {{ tagData?.type }}
     </div>
   }
 </ng-container>
