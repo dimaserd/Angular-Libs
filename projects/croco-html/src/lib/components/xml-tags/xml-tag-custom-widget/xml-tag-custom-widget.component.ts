@@ -35,7 +35,7 @@ export class XmlTagCustomWidgetComponent implements OnInit, OnDestroy {
     }
   };
 
-  public get tagData(): any {
+  public get tagData(): CustomWidgetTagData {
     return this._tagData;
   }
 
@@ -55,7 +55,7 @@ export class XmlTagCustomWidgetComponent implements OnInit, OnDestroy {
       this.useDynamicComponent = true;
       this.viewContainerRef.remove();
       this.dynamicContainerRef = this.viewContainerRef.createComponent(this._options.customWidgetRendererComponent);
-      this.dynamicContainerRef.instance.tagData = this.tagData;
+      this.dynamicContainerRef.setInput("tagData", this.tagData);
     }
   }
 
