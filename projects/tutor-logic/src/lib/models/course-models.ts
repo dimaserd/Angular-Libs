@@ -60,4 +60,5 @@ export interface CourseThemeItemTestModel {
     testName: string;
     totalPointsToPass: number;
     totalPercentageToPass: number;
+    canCheckSingleQuestion: boolean;
 }
