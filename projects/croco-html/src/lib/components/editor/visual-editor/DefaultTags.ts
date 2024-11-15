@@ -9,26 +9,26 @@ import {CustomWidgetTagDataConsts} from "../../../extensions";
 export class DefaultTags {
 
   static textTags: TagItem[] = [
-    { tag: 'text', displayValue: 'Текст' },
-    { tag: 'h1', displayValue: 'Заголовок 1 уровня' },
-    { tag: 'h2', displayValue: 'Заголовок 2 уровня' },
-    { tag: 'h3', displayValue: 'Заголовок 3 уровня' },
-    { tag: 'h4', displayValue: 'Заголовок 4 уровня' },
-    { tag: 'h5', displayValue: 'Заголовок 5 уровня' },
-    { tag: 'h6', displayValue: 'Заголовок 6 уровня' },
+    { tag: 'text', displayValue: 'T' },
+    { tag: 'h1', displayValue: 'H1' },
+    { tag: 'h2', displayValue: 'H2' },
+    { tag: 'h3', displayValue: 'H3' },
+    { tag: 'h4', displayValue: 'H4' },
+    { tag: 'h5', displayValue: 'H5' },
+    { tag: 'h6', displayValue: 'H6' },
   ]
 
   static tags: TagItem[] = [
     { tag: FileImageTagDataConsts.TagName, displayValue: 'Изображение' },
-    { tag: ExternalVideoTagDataConsts.TagName, displayValue: 'Внешнее видео' },
+    { tag: ExternalVideoTagDataConsts.TagName, displayValue: 'Видео' },
     { tag: DownloadButtonTagDataConsts.TagName, displayValue: 'Кнопка для скачивания' },
     { tag: ButtonTagDataConsts.TagName, displayValue: 'Кнопка' },
-    { tag: CustomWidgetTagDataConsts.TagName, displayValue: 'Кастомный виджет' },
-    ...DefaultTags.textTags
+    { tag: CustomWidgetTagDataConsts.TagName, displayValue: 'Виджет' },
+    // ...DefaultTags.textTags /*на картинке нет этих тэгев */
   ];
 
   static htmlRawTag: TagItem = {
-    tag: HtmlRawTagDataConsts.TagName, displayValue: 'Html разметка'
+    tag: HtmlRawTagDataConsts.TagName, displayValue: 'Разметка'
   };
 
   static getTags(useHtmlRaw: boolean): TagItem[] {

@@ -41,6 +41,10 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import {ButtonTagDataConsts} from "../../../extensions/ButtonMethods";
 import { CrocoHtmlOptions } from '../../../options';
 import {CustomWidgetTagDataConsts} from "../../../extensions/CustomWidgetMethods";
+import {MatButtonToggle, MatButtonToggleGroup} from "@angular/material/button-toggle";
+import {NgTemplateOutlet} from "@angular/common";
+import {MatChip, MatChipSet} from "@angular/material/chips";
+import {MatIcon} from "@angular/material/icon";
 
 export const defaultLinkYouTube = "https://www.youtube.com/embed/4CtSAnJDfsI?si=scyBNJa0Hs2t5aLE";
 export const defaultLinkVk = "https://vk.com/video_ext.php?oid=-22822305&id=456241864&hd=2";
@@ -51,7 +55,7 @@ export const defaultLinkForDownload = "https://storage.yandexcloud.net/mega-acad
     templateUrl: './visual-editor.component.html',
     styleUrls: ['./visual-editor.component.css'],
     standalone: true,
-    imports: [MatProgressSpinner, MatCard, MatCardContent, MatButton, MatFormField, MatLabel, MatInput, CdkTextareaAutosize, FormsModule, MatSelect, MatOption, AddFilesBtnComponent, CdkDropList, CdkDrag, CdkDragHandle, MainEditorBlockComponent]
+  imports: [MatProgressSpinner, MatCard, MatCardContent, MatButton, MatFormField, MatLabel, MatInput, CdkTextareaAutosize, FormsModule, MatSelect, MatOption, AddFilesBtnComponent, CdkDropList, CdkDrag, CdkDragHandle, MainEditorBlockComponent, MatButtonToggleGroup, MatButtonToggle, NgTemplateOutlet, MatChipSet, MatChip, MatIcon]
 })
 export class VisualEditorComponent implements OnInit, AfterViewInit {
   @ViewChild('textArea') textArea: ElementRef;
@@ -188,8 +192,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   modelChanged() {
     let lines = this.text.split('\n');
     this.bodyTags = JSON.parse(JSON.stringify(this.saveBodyTags));
-    let tagDescription = this.tags
-      .find(x => x.tag === this.textTag);
+    let tagDescription = this.textTagOptions?.find(x => x.tag === this.textTag);
 
     for (let i = 0; i < lines.length; i++) {
       if (lines[i].length > 0) {
