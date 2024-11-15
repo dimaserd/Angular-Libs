@@ -13,7 +13,12 @@ export interface CmsPageModel {
     title: string;
     navigationItems: Array<CmsPageNavigationItem>;
     properties: CmsPropertiesModel;
-    buttons: Array<CmsButton>;
+    buttons: Array<CmsPageButton>;
+}
+
+export interface CmsPageButton {
+    id: string; 
+    button: CmsButton; 
 }
 
 export interface CmsPageNavigationItem {
