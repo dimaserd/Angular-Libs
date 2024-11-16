@@ -11,11 +11,6 @@
   --mdc-outlined-button-container-height: 44px;
 }
 
-.mat-mdc-tab {
-  padding: 0 20px !important; /*не работает*/
-  min-width: auto !important; /*не работает*/
-}
-
 :host ::ng-deep .mat-button-toggle-label-content {
   padding: 0 8px!important;
   min-width: 36px!important;
@@ -35,17 +30,6 @@
 
 .mat-button-toggle-checked .text-align-icon {
   stroke: white;
-}
-
-.custom-chip-container .mat-mdc-chip.mat-mdc-standard-chip {
-  --mdc-chip-container-height: 44px!important; /*тут все не работает*/
-  --mdc-chip-container-shape-radius: 30px;
-}
-
-:root {
-  --mdc-chip-container-height: 44px!important; /*тут все не работает*/
-  --mdc-chip-container-shape-radius: 30px;
-  --mdc-chip-elevated-container-color: white;
 }
 
 :host ::ng-deep .mat-mdc-chip-action {
@@ -120,4 +104,29 @@
   border: 1px solid #747EBF;
   border-radius: 8px;
   box-shadow: none;
+}
+.tags {
+  display: flex;
+  gap: 10px;
+}
+
+.tag-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  padding: 5px 20px;
+  border-radius: 20px;
+  background-color: #e0e0e0;
+  color: #212121;
+  transition: 0.2s ease-in-out;
+
+  &.active {
+    background-color: #323E8B;
+    color: white;
+  }
+}
+
+.move-icon:hover {
+  opacity: 0.7;
 }

@@ -1,13 +1,3 @@
-:host {
-  /*это все не работает*/
-  /*  --mat-tab-header-foreground-color: #F7F7FA; !* Цвет текста неактивной вкладки *!
-    --mat-tab-header-active-ripple-color: #323E8B;
-    --mat-tab-header-indicator-color: #323E8B; !* Цвет индикатора под активной вкладкой *!
-    --mat-tab-header-background-color: #F7F7FA; !* Фон для вкладок *!
-    --mat-tab-header-hover-background-color: #F7F7FA; !* Фон для вкладки при наведении *!
-    --mat-tab-header-selected-background-color: #323E8B; !* Фон для выбранной вкладки *!*/
-}
-
 :host ::ng-deep .mdc-tab.mat-mdc-tab {
   background-color: #F7F7FA;
 }
