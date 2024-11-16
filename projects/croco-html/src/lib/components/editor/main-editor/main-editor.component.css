@@ -18,8 +18,8 @@
   background-color: #323E8B;
 }
 
-:host ::ng-deep .mdc-tab.mat-mdc-tab.mdc-tab--active .custom-icon {
-  fill: white !important;
+:host ::ng-deep .mdc-tab.mat-mdc-tab.mdc-tab--active svg.custom-icon {
+  fill: white;
 }
 
 

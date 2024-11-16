@@ -42,9 +42,7 @@ import {ButtonTagDataConsts} from "../../../extensions/ButtonMethods";
 import { CrocoHtmlOptions } from '../../../options';
 import {CustomWidgetTagDataConsts} from "../../../extensions/CustomWidgetMethods";
 import {MatButtonToggle, MatButtonToggleGroup} from "@angular/material/button-toggle";
-import {NgTemplateOutlet} from "@angular/common";
-import {MatChip, MatChipSet} from "@angular/material/chips";
-import {MatIcon} from "@angular/material/icon";
+import {NgTemplateOutlet, UpperCasePipe} from "@angular/common";
 
 export const defaultLinkYouTube = "https://www.youtube.com/embed/4CtSAnJDfsI?si=scyBNJa0Hs2t5aLE";
 export const defaultLinkVk = "https://vk.com/video_ext.php?oid=-22822305&id=456241864&hd=2";
@@ -55,7 +53,28 @@ export const defaultLinkForDownload = "https://storage.yandexcloud.net/mega-acad
     templateUrl: './visual-editor.component.html',
     styleUrls: ['./visual-editor.component.css'],
     standalone: true,
-  imports: [MatProgressSpinner, MatCard, MatCardContent, MatButton, MatFormField, MatLabel, MatInput, CdkTextareaAutosize, FormsModule, MatSelect, MatOption, AddFilesBtnComponent, CdkDropList, CdkDrag, CdkDragHandle, MainEditorBlockComponent, MatButtonToggleGroup, MatButtonToggle, NgTemplateOutlet, MatChipSet, MatChip, MatIcon]
+  imports: [
+    MatProgressSpinner,
+    MatCard,
+    MatCardContent,
+    MatButton,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    CdkTextareaAutosize,
+    FormsModule,
+    MatSelect,
+    MatOption,
+    AddFilesBtnComponent,
+    CdkDropList,
+    CdkDrag,
+    CdkDragHandle,
+    MainEditorBlockComponent,
+    MatButtonToggleGroup,
+    MatButtonToggle,
+    NgTemplateOutlet,
+    UpperCasePipe,
+  ]
 })
 export class VisualEditorComponent implements OnInit, AfterViewInit {
   @ViewChild('textArea') textArea: ElementRef;

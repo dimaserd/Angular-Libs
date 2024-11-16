@@ -11,9 +11,9 @@
   --mdc-outlined-button-container-height: 44px;
 }
 
-:host ::ng-deep .mat-button-toggle-label-content {
-  padding: 0 8px!important;
-  min-width: 36px!important;
+:host ::ng-deep .mat-button-toggle-appearance-standard span.mat-button-toggle-label-content {
+  padding: 0 8px;
+  min-width: 36px;
 }
 
 .mat-button-toggle .text-align-icon {
@@ -30,15 +30,6 @@
 
 .mat-button-toggle-checked .text-align-icon {
   stroke: white;
-}
-
-:host ::ng-deep .mat-mdc-chip-action {
-  padding: 0 20px!important;
-}
-
-.mdc-evolution-chip__text-label .mat-mdc-chip-action-label {
-  display: flex!important;
-  align-items: center!important;
 }
 
 .example-list {
@@ -108,6 +99,7 @@
 .tags {
   display: flex;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
 .tag-item {
