@@ -53,6 +53,12 @@ export interface StartSolutionFromDirectory {
     filter: QuestionsFilter;
 }
 
+export interface TestSolutionCreatedResult {
+    succeeded: boolean; 
+    errorMessage: string; 
+    solutionId: string; 
+}
+
 export interface QuestionsFilter {
     types: Array<TestQuestionType>;
 }
