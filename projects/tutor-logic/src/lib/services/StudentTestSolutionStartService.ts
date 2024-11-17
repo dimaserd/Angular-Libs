@@ -13,10 +13,10 @@ export class StudentTestSolutionStartService {
     }
 
     startByTestId(model: StartTestSolutionByTestId): Observable<TestSolutionCreatedResult> {
-        return this._httpClient.post<TestSolutionCreatedResult>(`${this.baseControllerUrl}/v1/By/TestId`, model);
+        return this._httpClient.post<TestSolutionCreatedResult>(`${this.baseControllerUrl}/By/TestId`, model);
     }
 
     startByDirectory(model: StartSolutionFromDirectory): Observable<TestSolutionCreatedResult> {
-        return this._httpClient.post<TestSolutionCreatedResult>(`${this.baseControllerUrl}/v1/By/Directory`, model);
+        return this._httpClient.post<TestSolutionCreatedResult>(`${this.baseControllerUrl}/By/Directory`, model);
     }
 }
