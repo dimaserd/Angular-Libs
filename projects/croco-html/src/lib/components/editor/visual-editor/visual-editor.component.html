@@ -12,83 +12,6 @@
     <mat-card-content>
       <div class="row d-flex align-items-center">
         <div class="col-12">
-          @if (!isActiveAddText) {
-            <button (click)="addText()" class="w-100" mat-stroked-button>
-              Добавить текст
-            </button>
-          }
-          @if (isActiveAddText) {
-            <div style="display: flex; justify-content: space-between">
-              <div  style="margin-bottom: 22px">
-                <mat-button-toggle-group
-                  [(ngModel)]="textTag"
-                  (ngModelChange)="modelChanged()"
-                  [hideSingleSelectionIndicator]="true"
-                >
-                  @for (option of textTagOptions; track option) {
-                    <mat-button-toggle value="{{ option.tag }}">
-                      {{ option.displayValue }}
-                    </mat-button-toggle>
-                  }
-                </mat-button-toggle-group>
-              </div>
-
-              <div  style="margin-bottom: 22px">
-                <mat-button-toggle-group
-                  [(ngModel)]="alignment"
-                  (ngModelChange)="modelChanged()"
-                  [hideSingleSelectionIndicator]="true"
-                >
-                  @for (option of alignmentOptions; track option) {
-                    <mat-button-toggle value="{{ option.value }}">
-                      <ng-container [ngTemplateOutlet]="textAlignToggleIcons" [ngTemplateOutletContext]="{icon: option.value}">
-                      </ng-container>
-                    </mat-button-toggle>
-                  }
-                </mat-button-toggle-group>
-              </div>
-            </div>
-            <mat-form-field class="w-100" >
-              <mat-label>Текст</mat-label>
-              <textarea
-                #autosize="cdkTextareaAutosize"
-                matInput
-                cdkTextareaAutosize
-                cdkAutosizeMinRows="1"
-                cdkAutosizeMaxRows="5"
-                placeholder="Текст"
-                #textArea
-                [(ngModel)]="text"
-                (ngModelChange)="modelChanged()"
-              ></textarea>
-            </mat-form-field>
-          }
-          <div class="d-flex flex-nowrap justify-content-end w-100">
-            @if (isActiveAddText) {
-              <button (click)="addText()" class="w-20" style="margin-right: 10px; --mdc-outlined-button-outline-color: #323E8B" mat-stroked-button color="primary">
-                Добавить
-              </button>
-            }
-            @if (isActiveAddText) {
-              <button (click)="closeText()" class="w-20" style="--mdc-outlined-button-outline-color: #F96666" mat-stroked-button color="warn" >
-                Отменить
-              </button>
-            }
-          </div>
-
-        </div>
-      </div>
-    </mat-card-content>
-  </mat-card>
-
-  <div style="height: 10px;">
-  </div>
-</div>
-<div [hidden]="isLoading">
-  <mat-card style="margin: 2px;" class="mat-card">
-    <mat-card-content>
-      <div class="row d-flex align-items-center">
-        <div class="col-12">
           <div class="w-100" style="margin-bottom: 22px">
             <div class="tags">
               @for (tag of tags; track tag) {
@@ -115,6 +38,50 @@
               </mat-select>
             </mat-form-field>
           </div>
+        }
+        @if (selectedValue === 'text') {
+          <div style="display: flex; justify-content: space-between">
+            <div style="margin-bottom: 22px">
+              <mat-button-toggle-group
+                [(ngModel)]="textTag"
+                [hideSingleSelectionIndicator]="true"
+              >
+                @for (option of textTagOptions; track option) {
+                  <mat-button-toggle value="{{ option.tag }}">
+                    {{ option.displayValue }}
+                  </mat-button-toggle>
+                }
+              </mat-button-toggle-group>
+            </div>
+
+            <div style="margin-bottom: 22px">
+              <mat-button-toggle-group
+                [(ngModel)]="alignment"
+                [hideSingleSelectionIndicator]="true"
+              >
+                @for (option of alignmentOptions; track option) {
+                  <mat-button-toggle value="{{ option.value }}">
+                    <ng-container [ngTemplateOutlet]="textAlignToggleIcons"
+                                  [ngTemplateOutletContext]="{icon: option.value}">
+                    </ng-container>
+                  </mat-button-toggle>
+                }
+              </mat-button-toggle-group>
+            </div>
+          </div>
+          <mat-form-field class="w-100">
+            <mat-label>Текст</mat-label>
+            <textarea
+              #autosize="cdkTextareaAutosize"
+              matInput
+              cdkTextareaAutosize
+              cdkAutosizeMinRows="1"
+              cdkAutosizeMaxRows="5"
+              placeholder="Текст"
+              #textArea
+              [(ngModel)]="text"
+            ></textarea>
+          </mat-form-field>
         }
         <div class="col-12">
           <button (click)="addTag()" class="w-100" mat-stroked-button>

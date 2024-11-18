@@ -81,7 +81,6 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
 
   isLoading = false;
   loadingText = "Идёт загрузка";
-  isActiveAddText = false;
   text = '';
 
   alignment = EAlignments.Left;
@@ -148,8 +147,9 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     let innerHtml = "";
 
     if (TextTags.allTextTags.includes(tagDescription.tag)) {
-      attrs["h-align"] = EAlignments.Left;
-      innerHtml = "Введите ваш текст";
+      this.addTextTags();
+      this.startAddingText();
+      return;
     }
     else if (tagDescription.tag == ExternalVideoTagDataConsts.TagName) {
       attrs[ExternalVideoTagDataConsts.VideoTypeAttrName] = this.selectedVideoPlayer;
@@ -185,19 +185,15 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     this.recalculateHtml();
   }
 
-  addText(): void {
-    this.isActiveAddText = !this.isActiveAddText;
+  startAddingText(): void {
     this.saveBodyTags = JSON.parse(JSON.stringify(this.bodyTags));
-    if (this.isActiveAddText) {
-      setTimeout(() => {
-        this.textArea.nativeElement.focus();
-      })
-    }
+    setTimeout(() => {
+      this.textArea.nativeElement.focus();
+    })
     this.resetTextStyle();
   }
 
-  closeText(): void {
-    this.isActiveAddText = !this.isActiveAddText;
+  finishAddingText(): void {
     this.bodyTags = JSON.parse(JSON.stringify(this.saveBodyTags));
     this.resetTextStyle();
   }
@@ -208,7 +204,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     this.textTag = DefaultTags.textTags[0].tag;
   }
 
-  modelChanged() {
+  addTextTags() {
     let lines = this.text.split('\n');
     this.bodyTags = JSON.parse(JSON.stringify(this.saveBodyTags));
     let tagDescription = this.textTagOptions?.find(x => x.tag === this.textTag);
@@ -272,6 +268,12 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
 
   selectTag(data: TagItem) {
     this.selectedValue = data.tag;
+
+    if (data.tag === 'text') {
+      this.startAddingText();
+    } else {
+      this.finishAddingText();
+    }
   }
 
   ngOnInit(): void {
