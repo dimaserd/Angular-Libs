@@ -272,10 +272,6 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
 
   selectTag(data: TagItem) {
     this.selectedValue = data.tag;
-
-    if(data.tag === 'text') {
-      this.addText();
-    }
   }
 
   ngOnInit(): void {

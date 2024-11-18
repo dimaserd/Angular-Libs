@@ -12,6 +12,11 @@
     <mat-card-content>
       <div class="row d-flex align-items-center">
         <div class="col-12">
+          @if (!isActiveAddText) {
+            <button (click)="addText()" class="w-100" mat-stroked-button>
+              Добавить текст
+            </button>
+          }
           @if (isActiveAddText) {
             <div style="display: flex; justify-content: space-between">
               <div  style="margin-bottom: 22px">
