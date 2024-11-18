@@ -24,7 +24,7 @@ export class DefaultTags {
     { tag: DownloadButtonTagDataConsts.TagName, displayValue: 'Кнопка для скачивания' },
     { tag: ButtonTagDataConsts.TagName, displayValue: 'Кнопка' },
     { tag: CustomWidgetTagDataConsts.TagName, displayValue: 'Виджет' },
-    ...DefaultTags.textTags
+    { tag: 'text', displayValue: 'Текст' },
   ];
 
   static htmlRawTag: TagItem = {

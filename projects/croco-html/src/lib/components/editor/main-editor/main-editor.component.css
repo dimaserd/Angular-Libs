@@ -22,6 +22,10 @@
   fill: white;
 }
 
+:host ::ng-deep div.mat-mdc-tab-labels {
+    justify-content: center;
+}
+
 
 .example-list {
   width: 500px;

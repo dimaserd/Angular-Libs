@@ -270,6 +270,14 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     this.bodyTags = BodyTagsExtensions.getBodyTags(this.html, this._options);
   }
 
+  selectTag(data: TagItem) {
+    this.selectedValue = data.tag;
+
+    if(data.tag === 'text') {
+      this.addText();
+    }
+  }
+
   ngOnInit(): void {
     this.recalculateBodyTags();
 
