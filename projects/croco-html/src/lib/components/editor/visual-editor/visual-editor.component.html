@@ -17,7 +17,7 @@
               @for (tag of tags; track tag) {
                 <span class="tag-item" (click)="selectTag(tag)" [class.active]="selectedValue === tag.tag">
                   <ng-container [ngTemplateOutlet]="tagButtonIcons"
-                                [ngTemplateOutletContext]="{icon: tag.tag, tagValue: tag.displayValue, isCardView: false}">
+                                [ngTemplateOutletContext]="{icon: tag.tag}">
                   </ng-container>
                   {{tag.displayValue}}
                 </span>
@@ -128,11 +128,7 @@
               <div>
                 <div class="badge" style="color:#323E8B">
                   <ng-container [ngTemplateOutlet]="tagButtonIcons"
-                                [ngTemplateOutletContext]="{
-                                  icon: tag.tagDescription.tag,
-                                  tagValue: tag.tagDescription.displayValue,
-                                  isCardView: true
-                                }">
+                                [ngTemplateOutletContext]="{icon: tag.tagDescription.tag}">
                   </ng-container>
                 </div>
               </div>
@@ -171,7 +167,7 @@
   }
 </ng-template>
 
-<ng-template #tagButtonIcons let-icon="icon" let-value = "tagValue" let-isCardView = "isCardView">
+<ng-template #tagButtonIcons let-icon="icon">
   @if (icon === 'text') {
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M7.49952 15.6246H12.4995M9.99952 4.37459V15.6246M3.74951 6.87459V4.37459H16.2495V6.87459"
