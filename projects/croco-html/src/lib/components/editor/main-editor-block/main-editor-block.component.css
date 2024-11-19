@@ -1,0 +1,8 @@
+.main-editor-block {
+  display: flex;
+  justify-content: space-between;
+}
+
+.editor-container {
+  flex-grow: 1;
+}

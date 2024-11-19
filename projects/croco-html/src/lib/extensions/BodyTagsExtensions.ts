@@ -16,20 +16,20 @@ export class BodyTagsExtensions {
 
     static getDescription(tagName: string) {
         var descriptions = {
-            "text": "Текст",
-            "h1": "Заголовок 1 уровня",
-            "h2": "Заголовок 2 уровня",
-            "h3": "Заголовок 3 уровня",
-            "h4": "Заголовок 4 уровня",
-            "h5": "Заголовок 5 уровня",
-            "h6": "Заголовок 6 уровня",
+            "text": "T",
+            "h1": "H1",
+            "h2": "H2",
+            "h3": "H3",
+            "h4": "H4",
+            "h5": "H5",
+            "h6": "H6",
             [FileImageTagDataConsts.TagName]: "Изображение",
-            [ExternalVideoTagDataConsts.TagName]: "Внешнее видео",
+            [ExternalVideoTagDataConsts.TagName]: "Видео",
             [DownloadButtonTagDataConsts.TagName]: "Кнопка",
-            [HtmlRawTagDataConsts.TagName]: "Html разметка",
+            [HtmlRawTagDataConsts.TagName]: "Разметка",
             [DownloadButtonTagDataConsts.TagName]: "Кнопка для скачивания",
             [ButtonTagDataConsts.TagName]: "Кнопка",
-            [CustomWidgetTagDataConsts.TagName]: "Кастомный виджет"
+            [CustomWidgetTagDataConsts.TagName]: "Виджет"
         };
 
         return descriptions[tagName];

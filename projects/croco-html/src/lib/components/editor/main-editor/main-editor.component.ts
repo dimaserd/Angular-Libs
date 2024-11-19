@@ -11,30 +11,34 @@ import { MatInput } from '@angular/material/input';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatTabsModule } from '@angular/material/tabs';
 import { HtmlViewComponent } from "../../html-view/html-view.component";
+import {MatIcon} from "@angular/material/icon";
+import {NgTemplateOutlet} from "@angular/common";
 
 @Component({
     selector: 'croco-html-main-editor',
     templateUrl: './main-editor.component.html',
     styleUrls: ['./main-editor.component.css'],
     standalone: true,
-    imports: [
-      MatTabsModule,
-      VisualEditorComponent, 
-      MatFormField, 
-      MatLabel, 
-      MatInput, 
-      CdkTextareaAutosize, 
-      FormsModule, 
-      MatButton, 
-      MatCardModule, 
-      XmlTagViewComponent,  
-      HtmlViewComponent
-    ]
+  imports: [
+    MatTabsModule,
+    VisualEditorComponent,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    CdkTextareaAutosize,
+    FormsModule,
+    MatButton,
+    MatCardModule,
+    XmlTagViewComponent,
+    HtmlViewComponent,
+    MatIcon,
+    NgTemplateOutlet
+  ]
 })
 export class MainEditorComponent implements OnInit, AfterContentChecked, AfterViewInit {
 
   visualEditorRendered = false;
-  
+
   @ViewChild("visualEditor", { static: true })
   visualEditor: VisualEditorComponent;
 
@@ -54,7 +58,7 @@ export class MainEditorComponent implements OnInit, AfterContentChecked, AfterVi
   constructor(private _clipboardService: ClipboardService,
     private _snackBar: MatSnackBar,
     private _cdref: ChangeDetectorRef) { }
-  
+
   ngAfterViewInit(): void {
     this.recalculateBodyTags();
   }
