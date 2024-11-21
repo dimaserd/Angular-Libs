@@ -53,10 +53,17 @@ export interface StartSolutionFromDirectory {
     filter: QuestionsFilter;
 }
 
+export interface CreateTestForStudentErrorsRequest {
+    testName: string;
+    questionsCount: number;
+    questionTypes: Array<TestQuestionType>;
+    canCheckSingleQuestion: boolean;
+}
+
 export interface TestSolutionCreatedResult {
-    succeeded: boolean; 
-    errorMessage: string; 
-    solutionId: string; 
+    succeeded: boolean;
+    errorMessage: string;
+    solutionId: string;
 }
 
 export interface QuestionsFilter {

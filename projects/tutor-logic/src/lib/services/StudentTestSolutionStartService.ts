@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { StartSolutionFromDirectory, StartTestSolutionByTestId, TestSolutionCreatedResult } from "../models";
+import { CreateTestForStudentErrorsRequest, StartSolutionFromDirectory, StartTestSolutionByTestId, TestSolutionCreatedResult } from "../models";
 
 @Injectable({ providedIn: 'root' })
 export class StudentTestSolutionStartService {
@@ -18,5 +18,9 @@ export class StudentTestSolutionStartService {
 
     startByDirectory(model: StartSolutionFromDirectory): Observable<TestSolutionCreatedResult> {
         return this._httpClient.post<TestSolutionCreatedResult>(`${this.baseControllerUrl}/By/Directory`, model);
+    }
+
+    startByErrors(model: CreateTestForStudentErrorsRequest): Observable<TestSolutionCreatedResult> {
+        return this._httpClient.post<TestSolutionCreatedResult>(`${this.baseControllerUrl}/By/Errors`, model);
     }
 }
