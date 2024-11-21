@@ -1,3 +1,37 @@
+:host{
+  --mat-standard-button-toggle-selected-state-background-color: #323E8B;
+  --mat-standard-button-toggle-text-color: #323E8B;
+  --mat-standard-button-toggle-selected-state-text-color: white;
+  --mat-standard-button-toggle-height: 36px;
+  --mat-standard-button-toggle-divider-color: #323E8B;
+  --mdc-outlined-button-label-text-weight: 400;
+  --mdc-outlined-button-label-text-color: #333333!important;
+  --mdc-outlined-button-container-shape: 30px;
+  --mdc-outlined-button-outline-width: 2px;
+  --mdc-outlined-button-container-height: 44px;
+}
+
+:host ::ng-deep .mat-button-toggle-appearance-standard span.mat-button-toggle-label-content {
+  padding: 0 8px;
+  min-width: 36px;
+}
+
+.mat-button-toggle .text-align-icon {
+  stroke: #323E8B;
+}
+
+.mat-button-toggle:hover {
+  color: #747EBF;
+}
+
+.mat-button-toggle:hover .text-align-icon {
+  stroke: #747EBF;
+}
+
+.mat-button-toggle-checked .text-align-icon {
+  stroke: white;
+}
+
 .example-list {
     width: 500px;
     max-width: 100%;
@@ -48,13 +82,43 @@
 }
 
 .badge {
-  background-color: #50a450;
-  color: #fff;
-  min-width: 55px;
-  height: 25px;
-  border-radius: 15px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid #323E8B;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 400;
+}
+
+.mat-card.special {
+  border: 1px solid #747EBF;
+  border-radius: 8px;
+  box-shadow: none;
+}
+.tags {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.tag-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  padding: 5px 20px;
+  border-radius: 20px;
+  background-color: #e0e0e0;
+  color: #212121;
+  transition: 0.2s ease-in-out;
+
+  &.active {
+    background-color: #323E8B;
+    color: white;
+  }
+}
+
+.move-icon:hover {
+  opacity: 0.7;
 }

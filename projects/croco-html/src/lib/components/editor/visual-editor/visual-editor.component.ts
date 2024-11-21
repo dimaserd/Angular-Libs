@@ -41,6 +41,8 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import {ButtonTagDataConsts} from "../../../extensions/ButtonMethods";
 import { CrocoHtmlOptions } from '../../../options';
 import {CustomWidgetTagDataConsts} from "../../../extensions/CustomWidgetMethods";
+import {MatButtonToggle, MatButtonToggleGroup} from "@angular/material/button-toggle";
+import {NgTemplateOutlet, UpperCasePipe} from "@angular/common";
 
 export const defaultLinkYouTube = "https://www.youtube.com/embed/4CtSAnJDfsI?si=scyBNJa0Hs2t5aLE";
 export const defaultLinkVk = "https://vk.com/video_ext.php?oid=-22822305&id=456241864&hd=2";
@@ -51,14 +53,34 @@ export const defaultLinkForDownload = "https://storage.yandexcloud.net/mega-acad
     templateUrl: './visual-editor.component.html',
     styleUrls: ['./visual-editor.component.css'],
     standalone: true,
-    imports: [MatProgressSpinner, MatCard, MatCardContent, MatButton, MatFormField, MatLabel, MatInput, CdkTextareaAutosize, FormsModule, MatSelect, MatOption, AddFilesBtnComponent, CdkDropList, CdkDrag, CdkDragHandle, MainEditorBlockComponent]
+  imports: [
+    MatProgressSpinner,
+    MatCard,
+    MatCardContent,
+    MatButton,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    CdkTextareaAutosize,
+    FormsModule,
+    MatSelect,
+    MatOption,
+    AddFilesBtnComponent,
+    CdkDropList,
+    CdkDrag,
+    CdkDragHandle,
+    MainEditorBlockComponent,
+    MatButtonToggleGroup,
+    MatButtonToggle,
+    NgTemplateOutlet,
+    UpperCasePipe,
+  ]
 })
 export class VisualEditorComponent implements OnInit, AfterViewInit {
   @ViewChild('textArea') textArea: ElementRef;
 
   isLoading = false;
   loadingText = "Идёт загрузка";
-  isActiveAddText = false;
   text = '';
 
   alignment = EAlignments.Left;
@@ -125,8 +147,9 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     let innerHtml = "";
 
     if (TextTags.allTextTags.includes(tagDescription.tag)) {
-      attrs["h-align"] = EAlignments.Left;
-      innerHtml = "Введите ваш текст";
+      this.addTextTags();
+      this.startAddingText();
+      return;
     }
     else if (tagDescription.tag == ExternalVideoTagDataConsts.TagName) {
       attrs[ExternalVideoTagDataConsts.VideoTypeAttrName] = this.selectedVideoPlayer;
@@ -162,19 +185,15 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     this.recalculateHtml();
   }
 
-  addText(): void {
-    this.isActiveAddText = !this.isActiveAddText;
+  startAddingText(): void {
     this.saveBodyTags = JSON.parse(JSON.stringify(this.bodyTags));
-    if (this.isActiveAddText) {
-      setTimeout(() => {
-        this.textArea.nativeElement.focus();
-      })
-    }
+    setTimeout(() => {
+      this.textArea.nativeElement.focus();
+    })
     this.resetTextStyle();
   }
 
-  closeText(): void {
-    this.isActiveAddText = !this.isActiveAddText;
+  finishAddingText(): void {
     this.bodyTags = JSON.parse(JSON.stringify(this.saveBodyTags));
     this.resetTextStyle();
   }
@@ -185,11 +204,10 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     this.textTag = DefaultTags.textTags[0].tag;
   }
 
-  modelChanged() {
+  addTextTags() {
     let lines = this.text.split('\n');
     this.bodyTags = JSON.parse(JSON.stringify(this.saveBodyTags));
-    let tagDescription = this.tags
-      .find(x => x.tag === this.textTag);
+    let tagDescription = this.textTagOptions?.find(x => x.tag === this.textTag);
 
     for (let i = 0; i < lines.length; i++) {
       if (lines[i].length > 0) {
@@ -246,6 +264,16 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
 
   recalculateBodyTags() {
     this.bodyTags = BodyTagsExtensions.getBodyTags(this.html, this._options);
+  }
+
+  selectTag(data: TagItem) {
+    this.selectedValue = data.tag;
+
+    if (data.tag === 'text') {
+      this.startAddingText();
+    } else {
+      this.finishAddingText();
+    }
   }
 
   ngOnInit(): void {

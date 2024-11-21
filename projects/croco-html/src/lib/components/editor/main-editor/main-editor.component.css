@@ -1,3 +1,32 @@
+:host ::ng-deep .mdc-tab.mat-mdc-tab {
+  background-color: #F7F7FA;
+}
+
+:host ::ng-deep .mdc-tab.mat-mdc-tab .custom-icon {
+  fill: #323E8B;
+}
+
+:host ::ng-deep .mdc-tab.mat-mdc-tab:hover {
+  background-color: #F7F7FA;
+}
+
+:host ::ng-deep .mdc-tab.mat-mdc-tab:hover .custom-icon {
+  fill: #747EBF;
+}
+
+:host ::ng-deep .mdc-tab.mat-mdc-tab.mdc-tab--active {
+  background-color: #323E8B;
+}
+
+:host ::ng-deep .mdc-tab.mat-mdc-tab.mdc-tab--active svg.custom-icon {
+  fill: white;
+}
+
+:host ::ng-deep div.mat-mdc-tab-labels {
+    justify-content: center;
+}
+
+
 .example-list {
   width: 500px;
   max-width: 100%;
