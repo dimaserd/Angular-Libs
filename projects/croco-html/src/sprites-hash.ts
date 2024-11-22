@@ -1,0 +1,1 @@
+export const spritesHash = {symbol:"8c6e4c57"}

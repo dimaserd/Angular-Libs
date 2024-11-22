@@ -13,6 +13,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { HtmlViewComponent } from "../../html-view/html-view.component";
 import {MatIcon} from "@angular/material/icon";
 import {NgTemplateOutlet} from "@angular/common";
+import {SpriteIconPathPipe} from "../../../pipes/sprite-icon-path.pipe";
 
 @Component({
     selector: 'croco-html-main-editor',
@@ -32,7 +33,8 @@ import {NgTemplateOutlet} from "@angular/common";
     XmlTagViewComponent,
     HtmlViewComponent,
     MatIcon,
-    NgTemplateOutlet
+    NgTemplateOutlet,
+    SpriteIconPathPipe
   ]
 })
 export class MainEditorComponent implements OnInit, AfterContentChecked, AfterViewInit {
