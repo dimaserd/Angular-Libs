@@ -1,6 +1,7 @@
 import { CourseThemeItemModel } from "./course-models";
 import { TestQuestionModel, TestQuestionType } from "./question-models";
 import { QuestionValidationSourceType } from "./solution-validation-models";
+import { TestQuestionErrorsStatisticOrderType } from "./student-statistic-models";
 
 export interface SearchStudentTestSolutions {
     isFinished: boolean | null;
@@ -54,10 +55,11 @@ export interface StartSolutionFromDirectory {
 }
 
 export interface CreateTestForStudentErrorsRequest {
-    testName: string;
-    questionsCount: number;
-    questionTypes: Array<TestQuestionType>;
-    canCheckSingleQuestion: boolean;
+    testName: string; 
+    questionsCount: number; 
+    questionTypes: Array<TestQuestionType>; 
+    orderType: TestQuestionErrorsStatisticOrderType; 
+    canCheckSingleQuestion: boolean; 
 }
 
 export interface TestSolutionCreatedResult {
