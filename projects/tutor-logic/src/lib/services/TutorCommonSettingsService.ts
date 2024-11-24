@@ -27,5 +27,3 @@ export class TutorCommonSettingsService {
         return this._httpClient.post<BaseApiResponse>(this.baseControllerUrl + 'set', model);
     }
 }
-
-
