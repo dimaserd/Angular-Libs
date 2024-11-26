@@ -1,0 +1,1 @@
+export type SpriteIdsType = 'source-code-tab' | 'visual-editor-tab'
