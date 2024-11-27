@@ -107,15 +107,33 @@
   align-items: center;
   gap: 5px;
   cursor: pointer;
-  padding: 5px 20px;
-  border-radius: 20px;
-  background-color: #e0e0e0;
-  color: #212121;
+  padding: 10px 20px;
+  border: 1px solid #323E8B;
+  border-radius: 30px;
+  background-color: white;
+  color: #23262A;
   transition: 0.2s ease-in-out;
 
-  &.active {
-    background-color: #323E8B;
+  svg {
+    color: #323E8B;
+  }
+}
+
+.tag-item.active {
+  background-color: #323E8B;
+  color: white;
+
+  svg {
     color: white;
+  }
+}
+
+.tag-item:hover {
+  color: #747EBF;
+  box-shadow: 0px 0px 4px 0px #747EBF;
+
+  svg {
+    color: #747EBF;
   }
 }
 
