@@ -10,13 +10,53 @@ npm publish
   "assets": [
     "shared/sprites"
   ]
-4. в контейнер-проект в angular.json нужно добавить внутрь "assets" следующий код:
+4. в контейнер-проект в angular.json нужно добавить внутрь 
+"projects"."YourProjectApp"."architect"."build"."options"."assets" следующий код:
   {
     "glob": "**/*",
     "input": "node_modules/croco-html/lib/assets/sprites/",
     "output": "/assets/sprites/"
   }
-  ps: нужно быть предельно внимательным к прописываемым путям!
+ps: нужно быть предельно внимательным к прописываемым путям!
+
+Например так
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "GenericApp": {
+      "root": "",
+      "sourceRoot": "src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "allowedCommonJsDependencies": ["bezier-easing"],
+            "progress": false,
+            "outputPath": "dist",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.app.json",
+            "assets": [
+              "src/assets",
+              "src/manifest.webmanifest",
+              {
+                "glob": "**/*",
+                "input": "node_modules/croco-html/lib/assets/sprites/",
+                "output": "/assets/sprites/"
+              }
+            ],
+          }
+        }
+      }
+    }
+  }
+}
 
 
 
