@@ -44,6 +44,11 @@ export class TableTypes {
     static readonly TableRowColumn = "table-row-column";
 }
 
+export interface AngularMaterialTableData {
+  displayedColumns: string[];
+  data: object[];
+}
+
 export class TableMethods {
 
     static getTableFromHtmlTag(tableTag: HTMLTableElement, options: CrocoHtmlOptions) {

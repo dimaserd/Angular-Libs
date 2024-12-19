@@ -1,5 +1,4 @@
-import { BaseApiResponse, TableData, TableRowData } from './TableMethods';
-import {AngularMaterialTableData} from "../models/models";
+import {AngularMaterialTableData, BaseApiResponse, TableData, TableRowData} from './TableMethods';
 
 
 export class AngularMaterialTableMethods {
