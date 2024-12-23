@@ -8,6 +8,6 @@ import {SpriteIdsType} from "../../sprites-ids.type";
 })
 export class SpriteIconPathPipe implements PipeTransform {
   transform(id: SpriteIdsType): string {
-    return `assets/sprites/symbol/croco-html-svg-sprite-${spritesHash.symbol}.svg#${id}`;
+    return `assets/lib-sprites/symbol/croco-html-svg-sprite-${spritesHash.symbol}.svg#${id}`;
   }
 }
