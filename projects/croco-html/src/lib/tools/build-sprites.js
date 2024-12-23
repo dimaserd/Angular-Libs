@@ -3,11 +3,15 @@
 const SVGSpriter = require('svg-sprite');
 const path = require('path');
 const fs = require('fs');
+const del = require('del');
 
 const svgDirectoryPath = 'projects/croco-html/src/lib/assets/svg-for-sprites/';
 const spritesOutputPath = 'projects/croco-html/src/lib/assets/sprites/';
 const distSpritesPath = 'dist/croco-html/lib/assets/sprites/';
 const iconIds = [];
+
+// Удаляем старые файлы
+del.sync(`${spritesOutputPath}/symbol/croco-html-svg-sprite*.svg`);
 
 // Конфигурация для SVGSpriter
 const config = {

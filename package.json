@@ -9,7 +9,7 @@
     "build:croco-generic-interface-components": "ng build croco-generic-interface-components",
     "build:angular-js-open-api": "ng build angular-js-open-api",
     "build:croco-generic-app-logic": "ng build croco-generic-app-logic",
-    "build:croco-html": "npm run run:croco-html-sprites && ng build croco-html",
+    "build:croco-html": "ng build croco-html && npm run run:croco-html-sprites",
     "build:croco-type-description": "ng build croco-type-description",
     "build:tutor-logic": "ng build tutor-logic",
     "watch": "ng build croco-html --watch --configuration development",
@@ -30,6 +30,7 @@
     "@angular/platform-browser-dynamic": "^17.3.4",
     "@angular/router": "^17.3.4",
     "@ng-select/ng-select": "^12.0.7",
+    "del": "^5.1.0",
     "ngx-clipboard": "^16.0.0",
     "rxjs": "~7.8.1",
     "tslib": "^2.2.0",
@@ -47,8 +48,8 @@
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.5.0",
-    "svg-sprite": "^2.0.2",
     "ng-packagr": "^17.3.0",
+    "svg-sprite": "^2.0.2",
     "typescript": "~5.3.3"
   }
 }
