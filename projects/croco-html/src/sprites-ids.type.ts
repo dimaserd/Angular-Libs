@@ -1,1 +1,1 @@
-export type SpriteIdsType = 'source-code-tab' | 'visual-editor-tab'
+export type SpriteIdsType = 'source-code-tab' | 'viewer-tab' | 'visual-editor-tab'
