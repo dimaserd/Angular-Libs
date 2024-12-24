@@ -10,21 +10,20 @@ import { XmlTagRichTextViewComponent } from "./components";
 import { XmlTagTableViewComponent } from "./components";
 import { XmlTagTextViewComponent } from "./components";
 import { XmlTagViewComponent } from "./components";
-import {CustomWidgetEditorComponent} from "./components";
+import { CustomWidgetEditorComponent } from "./components";
 import { VisualEditorComponent } from './components';
 import { AddFilesBtnComponent } from './components';
-import { ExternalVideoEditorComponent } from "./components/editor/external-video-editor/external-video-editor.component";
 import { XmlTagExternalVideoComponent } from "./components";
 import { HtmlRawEditorComponent } from "./components";
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import {MatChipsModule} from '@angular/material/chips';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -44,39 +43,39 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatBadgeModule } from '@angular/material/badge';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { RichTextToHtmlPipe, TagToSpanPipe, ToHtmlBodyTagsPipe, ToPreviewHtmlPipe, ToPreviewPipe } from "./pipes";
 import { FileImageTagViewComponent, UploadFilesBtnComponent } from "./components";
 import { HtmlRawViewComponent } from "./components";
 import { HtmlViewComponent } from "./components";
-import {XmlTagCustomWidgetComponent} from "./components";
+import { XmlTagCustomWidgetComponent } from "./components";
 
 export const EditorComponents = [
-    MainEditorComponent,
-    FileIdSelectComponent,
-    TextEditorComponent,
-    ImageEditorComponent,
-    MainEditorBlockComponent,
-    VisualEditorComponent,
-    AddFilesBtnComponent,
-    HtmlRawEditorComponent,
-    CustomWidgetEditorComponent,
+  MainEditorComponent,
+  FileIdSelectComponent,
+  TextEditorComponent,
+  ImageEditorComponent,
+  MainEditorBlockComponent,
+  VisualEditorComponent,
+  AddFilesBtnComponent,
+  HtmlRawEditorComponent,
+  CustomWidgetEditorComponent,
 
 ];
 
 export const XmlComponents = [
-    XmlTagTableViewComponent,
-    XmlTagViewComponent,
-    XmlTagRichTextViewComponent,
-    XmlTagHtmlViewComponent,
-    XmlTagTextViewComponent,
-    XmlTagHeaderTextViewComponent,
-    XmlTagHeaderInnerTextViewComponent,
-    XmlTagExternalVideoComponent,
-    HtmlRawViewComponent,
-    FileImageTagViewComponent,
-    XmlTagCustomWidgetComponent,
-    HtmlViewComponent
+  XmlTagTableViewComponent,
+  XmlTagViewComponent,
+  XmlTagRichTextViewComponent,
+  XmlTagHtmlViewComponent,
+  XmlTagTextViewComponent,
+  XmlTagHeaderTextViewComponent,
+  XmlTagHeaderInnerTextViewComponent,
+  XmlTagExternalVideoComponent,
+  HtmlRawViewComponent,
+  FileImageTagViewComponent,
+  XmlTagCustomWidgetComponent,
+  HtmlViewComponent
 ];
 
 export const CrocoPipes = [
@@ -88,11 +87,11 @@ export const CrocoPipes = [
 ]
 
 export const CrocoHtmlDeclarations = [
-    UploadFilesBtnComponent,
-    HtmlViewComponent,
-    ...XmlComponents,
-    ...EditorComponents,
-    ...CrocoPipes
+  UploadFilesBtnComponent,
+  HtmlViewComponent,
+  ...XmlComponents,
+  ...EditorComponents,
+  ...CrocoPipes
 ]
 
 export const MaterialModules = [

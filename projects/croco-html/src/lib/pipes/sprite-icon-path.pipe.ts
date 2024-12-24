@@ -1,6 +1,6 @@
-import {Pipe, PipeTransform} from "@angular/core";
-import {spritesHash} from "../../sprites-hash";
-import {SpriteIdsType} from "../../sprites-ids.type";
+import { Pipe, PipeTransform } from "@angular/core";
+import { spritesHash } from "../../sprites-hash";
+import { SpriteIdsType } from "../../sprites-ids.type";
 
 @Pipe({
   name: 'spriteIconPath',
@@ -8,6 +8,9 @@ import {SpriteIdsType} from "../../sprites-ids.type";
 })
 export class SpriteIconPathPipe implements PipeTransform {
   transform(id: SpriteIdsType): string {
-    return `assets/lib-sprites/symbol/croco-html-svg-sprite-${spritesHash.symbol}.svg#${id}`;
+
+    const hashString = spritesHash.useHash ? `-${spritesHash.symbol}` : '';
+
+    return `assets/lib-sprites/symbol/croco-html-svg-sprite${hashString}.svg#${id}`;
   }
 }
