@@ -10,6 +10,9 @@ const spritesOutputPath = 'projects/croco-html/src/lib/assets/sprites/';
 const distSpritesPath = 'dist/croco-html/lib/assets/sprites/';
 const iconIds = [];
 
+// Добавляет хэш к имени файла
+const useHash = false;
+
 // Удаляем старые файлы
 del.sync(`${spritesOutputPath}/symbol/croco-html-svg-sprite*.svg`);
 
@@ -27,7 +30,7 @@ const config = {
   },
   mode: {
     symbol: {
-      bust: false, // Добавляет хэш к имени файла
+      bust: useHash, // Добавляет хэш к имени файла
       sprite: 'croco-html-svg-sprite.svg', // Базовое имя для спрайта
     },
   },
@@ -63,8 +66,7 @@ spriter.compile((err, result) => {
 
   // Извлечение пути к сгенерированному файлу с учётом хэша
   const spriteFilePath = result.symbol.sprite.path;
-  const hashedFileName = path.basename(spriteFilePath); // Имя с хэшем
-
+  
   fs.writeFileSync(spriteFilePath, result.symbol.sprite.contents);
   console.log(`Sprite created: ${spriteFilePath}`);
 
@@ -76,17 +78,23 @@ spriter.compile((err, result) => {
   fs.copyFileSync(spriteFilePath, distSpriteFullPath);
   console.log(`Sprite copied to: ${distSpriteFullPath}`);
 
-  // Сохранение ID и хэша
+  // Сохранение ID
   fs.writeFileSync(
     path.join('projects/croco-html/src', 'sprites-ids.type.ts'),
     'export type SpriteIdsType = ' + iconIds.map((id) => `'${id}'`).join(' | '),
   );
 
   // Сохранение хэша
-  const hash = hashedFileName.replace('croco-html-svg-sprite-', '').replace('.svg', '');
-  fs.writeFileSync(
-    path.join('projects/croco-html/src', 'sprites-hash.ts'),
-    `export const spritesHash = { symbol: "${hash}" };`,
-  );
+  if (useHash) {
+    
+    const hashedFileName = path.basename(spriteFilePath); // Имя с хэшем
+    const hash = hashedFileName.replace('croco-html-svg-sprite-', '').replace('.svg', '');
+    
+    fs.writeFileSync(
+      path.join('projects/croco-html/src', 'sprites-hash.ts'),
+      `export const spritesHash = { symbol: "${hash}" };`,
+    );
+  }
+
 });
 
