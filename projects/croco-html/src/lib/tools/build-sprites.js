@@ -6,9 +6,8 @@ const fs = require('fs');
 const del = require('del');
 
 const projectDirectoryPath = 'projects/croco-html/src';
-const svgDirectoryPath = `${projectDirectoryPath}/lib/assets/svg-for-sprites/`;
-const spritesOutputPath = `${projectDirectoryPath}/lib/assets/sprites/`;
-const distSpritesPath = 'dist/croco-html/lib/assets/sprites/';
+const svgDirectoryPath = `${projectDirectoryPath}/assets/svg-for-sprites/`;
+const spritesOutputPath = `${projectDirectoryPath}/assets/sprites/`;
 const iconIds = [];
 
 // Добавляет хэш к имени файла
@@ -70,14 +69,6 @@ spriter.compile((err, result) => {
 
   fs.writeFileSync(spriteFilePath, result.symbol.sprite.contents);
   console.log(`Sprite created: ${spriteFilePath}`);
-
-  // Копирование спрайта в dist
-  const spriteSubPath = path.relative(spritesOutputPath, spriteFilePath); // Относительный путь от outputPath
-  const distSpriteFullPath = path.join(distSpritesPath, spriteSubPath);
-
-  fs.mkdirSync(path.dirname(distSpriteFullPath), { recursive: true });
-  fs.copyFileSync(spriteFilePath, distSpriteFullPath);
-  console.log(`Sprite copied to: ${distSpriteFullPath}`);
 
   // Сохранение ID
   fs.writeFileSync(
