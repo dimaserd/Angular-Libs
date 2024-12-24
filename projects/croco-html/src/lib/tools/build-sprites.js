@@ -27,7 +27,7 @@ const config = {
   },
   mode: {
     symbol: {
-      bust: true, // Добавляет хэш к имени файла
+      bust: false, // Добавляет хэш к имени файла
       sprite: 'croco-html-svg-sprite.svg', // Базовое имя для спрайта
     },
   },

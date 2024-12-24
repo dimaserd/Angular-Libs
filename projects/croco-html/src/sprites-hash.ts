@@ -1,1 +1,1 @@
-export const spritesHash = { symbol: "4a99dba7" };
+export const spritesHash = { symbol: "croco-html-svg-sprite" };
