@@ -5,9 +5,10 @@ const path = require('path');
 const fs = require('fs');
 const del = require('del');
 
+const projectPath = 'projects/croco-html';
 const projectDirectoryPath = 'projects/croco-html/src';
-const svgDirectoryPath = `${projectDirectoryPath}/assets/svg-for-sprites/`;
-const spritesOutputPath = `${projectDirectoryPath}/assets/sprites/`;
+const svgDirectoryPath = `${projectPath}/assets/svg-for-sprites/`;
+const spritesOutputPath = `${projectPath}/assets/sprites/`;
 const iconIds = [];
 
 // Добавляет хэш к имени файла
