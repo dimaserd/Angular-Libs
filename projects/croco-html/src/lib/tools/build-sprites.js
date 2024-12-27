@@ -3,22 +3,24 @@
 const SVGSpriter = require('svg-sprite');
 const path = require('path');
 const fs = require('fs');
-const del = require('del');
 
-const projectDirectoryPath = 'projects/croco-html/src';
-const svgDirectoryPath = `${projectDirectoryPath}/assets/svg-for-sprites/`;
-const spritesOutputPath = `${projectDirectoryPath}/assets/sprites/`;
+const mainPath = 'projects/croco-html/src/';
+const svgsPath = `${mainPath}/assets/svg-for-sprites/`;
+const spritesPath = `${mainPath}/assets/sprites/`;
 const iconIds = [];
 
 // Добавляет хэш к имени файла
 const useHash = false;
 
-// Удаляем старые файлы
-del.sync(`${spritesOutputPath}/symbol/croco-html-svg-sprite*.svg`);
+// Удаляем старый спрайт
+const spriteFilePath = `${spritesPath}/symbol/croco-html-svg-sprite.svg`;
+if (fs.existsSync(spriteFilePath)) {
+  fs.unlinkSync(spriteFilePath);
+}
 
 // Конфигурация для SVGSpriter
 const config = {
-  dest: spritesOutputPath,
+  dest: spritesPath,
   shape: {
     id: {
       generator: (filePath) => {
@@ -39,21 +41,27 @@ const config = {
 const spriter = new SVGSpriter(config);
 
 // Проверка существования директории
-if (!fs.existsSync(svgDirectoryPath)) {
-  console.error(`Directory "${svgDirectoryPath}" does not exist.`);
+if (!fs.existsSync(svgsPath)) {
+  console.error(`Directory "${svgsPath}" does not exist.`);
   process.exit(1);
 }
 
 // Получение всех SVG файлов
-const files = fs.readdirSync(svgDirectoryPath).filter((file) => file.endsWith('.svg'));
+const files = fs.readdirSync(svgsPath).filter((file) => file.endsWith('.svg'));
 if (files.length === 0) {
   console.error('No SVG files found.');
   process.exit(1);
 }
 
+// Создание директории для спрайтов, если ее нет
+const symbolDir = path.join(spritesPath, 'symbol');
+if (!fs.existsSync(symbolDir)) {
+  fs.mkdirSync(symbolDir, { recursive: true });
+}
+
 // Добавляем SVG в спрайтер
 files.forEach((file) => {
-  const filePath = path.join(svgDirectoryPath, file);
+  const filePath = path.join(svgsPath, file);
   spriter.add(filePath, file, fs.readFileSync(filePath, 'utf-8'));
 });
 
@@ -64,7 +72,7 @@ spriter.compile((err, result) => {
     return;
   }
 
-  // Извлечение пути к сгенерированному файлу с учётом хэша
+  // Извлечение пути к сгенерированному файлу
   const spriteFilePath = result.symbol.sprite.path;
 
   fs.writeFileSync(spriteFilePath, result.symbol.sprite.contents);
@@ -72,18 +80,8 @@ spriter.compile((err, result) => {
 
   // Сохранение ID
   fs.writeFileSync(
-    path.join(projectDirectoryPath, 'sprites-ids.type.ts'),
+    path.join(mainPath, 'sprites-ids.type.ts'),
     'export type SpriteIdsType = ' + iconIds.map((id) => `'${id}'`).join(' | '),
   );
-
-  // Сохранение хэша
-  const hashedFileName = path.basename(spriteFilePath); // Имя с хэшем
-  const hash = hashedFileName.replace('croco-html-svg-sprite-', '').replace('.svg', '');
-
-  fs.writeFileSync(
-    path.join(projectDirectoryPath, 'sprites-hash.ts'),
-    `export const spritesHash = { symbol: "${hash}", useHash: ${useHash} };`,
-  );
-
 });
 

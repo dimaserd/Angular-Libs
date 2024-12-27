@@ -30,7 +30,6 @@
     "@angular/platform-browser-dynamic": "^17.3.4",
     "@angular/router": "^17.3.4",
     "@ng-select/ng-select": "^12.0.7",
-    "del": "^5.1.0",
     "ngx-clipboard": "^16.0.0",
     "rxjs": "~7.8.1",
     "tslib": "^2.2.0",
