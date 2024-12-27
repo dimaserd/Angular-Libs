@@ -4,9 +4,9 @@ const SVGSpriter = require('svg-sprite');
 const path = require('path');
 const fs = require('fs');
 
-const mainPath = 'projects/croco-html/src/';
-const svgsPath = `${mainPath}/assets/svg-for-sprites/`;
-const spritesPath = `${mainPath}/assets/sprites/`;
+const mainPath = 'projects/croco-html/src';
+const svgsPath = `${mainPath}/assets/svg-for-sprites`;
+const spritesPath = `${mainPath}/assets/sprites`;
 const iconIds = [];
 
 // Добавляет хэш к имени файла
