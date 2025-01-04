@@ -117,7 +117,7 @@
     <div [hidden]="searchOrEdit !== 'search'">
       <croco-html-file-id-select
         [labelText]="'Выбрать файл'"
-        [(fileId)]="tag.attributes['file-id']"
+        [(fileId)]="fileId"
         (onFileIdChanged)="onFileIdChanged($event)">
       </croco-html-file-id-select>
     </div>
@@ -129,7 +129,7 @@
           </mat-label>
           <input matInput placeholder="Идентификатор файла" new-autocomplete="off" autocomplete="off"
             type="number"
-            [(ngModel)]="tag.attributes['file-id']"
+            [(ngModel)]="fileId"
             (ngModelChange)="removeImageError()">
         </mat-form-field>
       </div>
