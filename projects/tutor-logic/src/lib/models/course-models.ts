@@ -32,12 +32,7 @@ export interface CourseThemeItemModel {
     templateItemId: string;
     test: CourseThemeItemTestModel;
     userInterfaceSettings: CourseThemeItemUISettingsModel;
-    computedProgress: CourseThemeItemComputedProgressModel;
-}
-
-export interface CourseThemeItemComputedProgressModel {
-    course: ProgressModel;
-    theme: ProgressModel;
+    computedThemeProgress: ProgressModel;
 }
 
 export interface ProgressModel {
