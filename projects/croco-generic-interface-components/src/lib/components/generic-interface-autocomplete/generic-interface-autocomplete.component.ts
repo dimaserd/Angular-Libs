@@ -6,7 +6,6 @@ import {UserInterfaceBlock} from "../../models/UserInterfaceBlock";
 import {AutoCompleteSuggestion} from "../../models/AutoCompleteSuggestion";
 import {GetAutocompleteDataService} from "../../services/get-autocomplete-data.service";
 import {NgSelectModule} from "@ng-select/ng-select";
-import {HttpClientModule} from "@angular/common/http";
 
 @Component({
   selector: 'app-generic-interface-autocomplete',
@@ -24,7 +23,6 @@ import {HttpClientModule} from "@angular/common/http";
   imports: [
     NgSelectModule,
     ReactiveFormsModule,
-    HttpClientModule
   ]
 })
 export class GenericInterfaceAutocompleteComponent implements OnInit, ControlValueAccessor, OnDestroy {

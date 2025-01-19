@@ -3,7 +3,8 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {
   AbstractControl,
   ControlValueAccessor,
-  FormBuilder, FormControl,
+  FormBuilder,
+  FormControl,
   FormRecord,
   NG_VALUE_ACCESSOR,
   ReactiveFormsModule,
@@ -21,7 +22,6 @@ import {NgForOf, NgIf} from "@angular/common";
 import {
   GenericInterfaceBlockSwitcherComponent
 } from "../generic-interface-block-switcher/generic-interface-block-switcher.component";
-import {HttpClientModule} from "@angular/common/http";
 
 interface MainForm {
   [key: string]: any;
@@ -44,8 +44,7 @@ interface MainForm {
     NgIf,
     ReactiveFormsModule,
     NgForOf,
-    GenericInterfaceBlockSwitcherComponent,
-    HttpClientModule
+    GenericInterfaceBlockSwitcherComponent
   ]
 })
 export class GenericInterfaceComponent implements OnInit, OnDestroy, ControlValueAccessor {

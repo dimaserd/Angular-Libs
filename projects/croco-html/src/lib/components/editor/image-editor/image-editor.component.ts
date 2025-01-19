@@ -62,6 +62,14 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
   @Output()
   onTagUpdated = new EventEmitter<HtmlBodyTag>();
 
+  public get fileId(): unknown {
+    return this.tag.attributes['file-id'];
+  }
+
+  public set fileId(value: unknown) {
+    this.tag.attributes['file-id'] = value;
+  }
+
   constructor(
     @Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions,
     private readonly screenWidthService: ScreenWidthService) { }
@@ -91,7 +99,7 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe))
       .subscribe(screenWidth => {
         let imageRestrictions = ImageMethods.getImageRestrictionsByScreenSize(screenWidth, this.requests);
-        
+
         this.imageMaxHeight = imageRestrictions.maxHeight;
         this.imageMaxWidth = imageRestrictions.maxWidth;
       });
