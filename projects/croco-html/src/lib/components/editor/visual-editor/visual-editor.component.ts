@@ -185,16 +185,13 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     this.recalculateHtml();
   }
 
-  startAddingText(): void {
+  startAddingText(tag = ''): void {
     this.saveBodyTags = JSON.parse(JSON.stringify(this.bodyTags));
-    setTimeout(() => {
-      this.textArea.nativeElement.focus();
-    })
-    this.resetTextStyle();
-  }
-
-  finishAddingText(): void {
-    this.bodyTags = JSON.parse(JSON.stringify(this.saveBodyTags));
+    if (tag === 'text') {
+      setTimeout(() => {
+        this.textArea.nativeElement.focus();
+      })
+    }
     this.resetTextStyle();
   }
 
@@ -269,11 +266,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   selectTag(data: TagItem) {
     this.selectedValue = data.tag;
 
-    if (data.tag === 'text') {
-      this.startAddingText();
-    } else {
-      this.finishAddingText();
-    }
+    this.startAddingText(data.tag);
   }
 
   ngOnInit(): void {
