@@ -1,9 +1,9 @@
 {
   "name": "croco-generic-interface",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "peerDependencies": {
-    "@angular/common": "^17.3.4",
-    "@angular/core": "^17.3.4"
+    "@angular/common": "^18.2.13",
+    "@angular/core": "^18.2.13"
   },
   "dependencies": {
     "tslib": "^2.3.0"
