@@ -6,3 +6,12 @@
 .editor-container {
   flex-grow: 1;
 }
+
+
+
+@media screen and (max-width: 700px) {
+  .main-editor-block {
+    display: flex;
+    flex-direction: column;
+  }
+}
