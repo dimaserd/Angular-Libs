@@ -40,8 +40,8 @@
           </div>
         }
         @if (selectedValue === 'text') {
-          <div style="display: flex; justify-content: space-between">
-            <div style="margin-bottom: 22px">
+          <div style="display: flex; justify-content: space-between; flex-wrap: wrap">
+            <div style="margin-bottom: 22px; overflow-x: auto;">
               <mat-button-toggle-group
                 [(ngModel)]="textTag"
                 [hideSingleSelectionIndicator]="true"
@@ -178,6 +178,9 @@
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M15 6.875L18.75 10L15 13.125M5 6.875L1.25 10L5 13.125M12.5 3.125L7.5 16.875" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
+  }
+  @if (icon.indexOf('h') === 0) {
+    {{icon.toUpperCase()}}
   }
   @if (icon === 'external-video') {
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
