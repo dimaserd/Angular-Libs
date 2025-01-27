@@ -26,7 +26,7 @@ import { FilePostingStarted } from '../../upload-files-btn/upload-files-btn.comp
 import { DefaultTags } from './DefaultTags';
 import { AlignmentsData, EAlignments } from "./DefaultAligments";
 import { CrocoHtmlOptionsToken } from '../../../consts';
-import {DownloadButtonTagDataConsts} from "../../../extensions/DownloadButtonMethods";
+import { DownloadButtonTagDataConsts } from "../../../extensions/DownloadButtonMethods";
 import { MainEditorBlockComponent } from '../main-editor-block/main-editor-block.component';
 import { AddFilesBtnComponent } from '../../add-files-btn/add-files-btn.component';
 import { MatOption } from '@angular/material/core';
@@ -38,21 +38,21 @@ import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatButton } from '@angular/material/button';
 import { MatCard, MatCardContent } from '@angular/material/card';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
-import {ButtonTagDataConsts} from "../../../extensions/ButtonMethods";
+import { ButtonTagDataConsts } from "../../../extensions/ButtonMethods";
 import { CrocoHtmlOptions } from '../../../options';
-import {CustomWidgetTagDataConsts} from "../../../extensions/CustomWidgetMethods";
-import {MatButtonToggle, MatButtonToggleGroup} from "@angular/material/button-toggle";
-import {NgTemplateOutlet, UpperCasePipe} from "@angular/common";
+import { CustomWidgetTagDataConsts } from "../../../extensions/CustomWidgetMethods";
+import { MatButtonToggle, MatButtonToggleGroup } from "@angular/material/button-toggle";
+import { NgTemplateOutlet, UpperCasePipe } from "@angular/common";
 
 export const defaultLinkYouTube = "https://www.youtube.com/embed/4CtSAnJDfsI?si=scyBNJa0Hs2t5aLE";
 export const defaultLinkVk = "https://vk.com/video_ext.php?oid=-22822305&id=456241864&hd=2";
 export const defaultLinkForDownload = "https://storage.yandexcloud.net/mega-academy/presentation.pdf";
 
 @Component({
-    selector: 'croco-visual-editor',
-    templateUrl: './visual-editor.component.html',
-    styleUrls: ['./visual-editor.component.css'],
-    standalone: true,
+  selector: 'croco-visual-editor',
+  templateUrl: './visual-editor.component.html',
+  styleUrls: ['./visual-editor.component.css'],
+  standalone: true,
   imports: [
     MatProgressSpinner,
     MatCard,
