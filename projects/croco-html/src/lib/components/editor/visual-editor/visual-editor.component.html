@@ -41,7 +41,7 @@
         }
         @if (selectedValue === 'text') {
           <div style="display: flex; justify-content: space-between; flex-wrap: wrap">
-            <div style="margin-bottom: 22px">
+            <div style="margin-bottom: 22px; overflow-x: auto;">
               <mat-button-toggle-group
                 [(ngModel)]="textTag"
                 [hideSingleSelectionIndicator]="true"
