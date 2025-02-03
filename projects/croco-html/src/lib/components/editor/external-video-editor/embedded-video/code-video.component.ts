@@ -1,5 +1,5 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {DomSanitizer, SafeHtml, SafeResourceUrl} from "@angular/platform-browser";
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 
 @Component({
   selector: 'code-video',
@@ -12,9 +12,9 @@ export class CodeVideoComponent implements OnChanges {
 
   @Input() code = "";
 
-  safeHtml : SafeHtml;
+  safeHtml: SafeHtml;
 
-  constructor(private readonly _sanitizer: DomSanitizer) {}
+  constructor(private readonly _sanitizer: DomSanitizer) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['code'] && changes['code'].currentValue !== changes['code'].previousValue) {

@@ -1,13 +1,10 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {HtmlBodyTag} from "../../../models/models";
-import {ButtonTagData} from "../../../extensions/ButtonMethods";
-import {FormsModule} from "@angular/forms";
-import {MatFormField, MatLabel} from "@angular/material/form-field";
-import {MatInput} from "@angular/material/input";
-import {
-  XmlTagDownloadFileButtonComponent
-} from "../../xml-tags/xml-tag-download-file-button/xml-tag-download-file-button.component";
-import {XmlTagButtonComponent} from "../../xml-tags/xml-tag-custom-button/xml-tag-button.component";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { HtmlBodyTag } from "../../../models/models";
+import { ButtonTagData } from "../../../extensions/ButtonMethods";
+import { FormsModule } from "@angular/forms";
+import { MatFormField, MatLabel } from "@angular/material/form-field";
+import { MatInput } from "@angular/material/input";
+import { XmlTagButtonComponent } from "../../xml-tags/xml-tag-custom-button/xml-tag-button.component";
 
 @Component({
   selector: 'croco-html-button-editor',
@@ -17,7 +14,6 @@ import {XmlTagButtonComponent} from "../../xml-tags/xml-tag-custom-button/xml-ta
     MatFormField,
     MatInput,
     MatLabel,
-    XmlTagDownloadFileButtonComponent,
     XmlTagButtonComponent
   ],
   templateUrl: './button-editor.component.html',
@@ -43,7 +39,7 @@ export class ButtonEditorComponent {
     this.tagData.click = data.click;
   }
 
-  linkChanged(){
+  linkChanged() {
     this.tag.attributes = this.tagData;
   }
 }

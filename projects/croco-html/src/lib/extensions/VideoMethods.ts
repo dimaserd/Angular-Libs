@@ -1,14 +1,14 @@
 export class ExternalVideoTagDataConsts {
-    static TagName = "external-video";
-    static VideoTypeAttrName = "type";
-    static LinkAttrName = "link";
-    static IframeAttrName = "iframe";
+  static TagName = "external-video";
+  static VideoTypeAttrName = "type";
+  static LinkAttrName = "link";
+  static IframeAttrName = "iframe";
 }
 
-export class ExternalVideoSupportedTypes{
-    static Youtube = "youtube"
-    static VkVideo = "vk-video"
-    static Code = "code"
+export class ExternalVideoSupportedTypes {
+  static Youtube = "youtube"
+  static VkVideo = "vk-video"
+  static Code = "code"
 }
 
 export const ExternalVideoPlayers = [
@@ -26,26 +26,26 @@ export const ExternalVideoPlayers = [
   }
 ]
 
-export interface ExternalVideoTag{
-    type: string;
-    data: ExternalVideoTagData;
+export interface ExternalVideoTag {
+  type: string;
+  data: ExternalVideoTagData;
 }
 
-export interface ExternalVideoTagData{
-    type: string;
-    link: string;
-    iframe: string;
+export interface ExternalVideoTagData {
+  type: string;
+  link: string;
+  innerHtml: string;
 }
 
 export class VideoMethods {
-    static ExtractExternalVideoTag(elem: HTMLElement): ExternalVideoTag {
-        return {
-            type: ExternalVideoTagDataConsts.TagName,
-            data:{
-                type: elem.getAttribute(ExternalVideoTagDataConsts.VideoTypeAttrName),
-                link: elem.getAttribute(ExternalVideoTagDataConsts.LinkAttrName),
-                iframe: elem.innerHTML
-            }
-        };
-    }
+  static ExtractExternalVideoTag(elem: HTMLElement): ExternalVideoTag {
+    return {
+      type: ExternalVideoTagDataConsts.TagName,
+      data: {
+        type: elem.getAttribute(ExternalVideoTagDataConsts.VideoTypeAttrName),
+        link: elem.getAttribute(ExternalVideoTagDataConsts.LinkAttrName),
+        innerHtml: elem.innerHTML
+      }
+    };
+  }
 }

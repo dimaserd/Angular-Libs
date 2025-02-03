@@ -1,10 +1,10 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {MatFormField, MatFormFieldModule} from "@angular/material/form-field";
-import {MatInput} from "@angular/material/input";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HtmlBodyTag} from "../../../models/models";
-import {XmlTagDownloadFileButtonComponent} from "../../xml-tags/xml-tag-download-file-button/xml-tag-download-file-button.component";
-import {DownloadButtonTagData} from "../../../extensions/DownloadButtonMethods";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatFormField, MatFormFieldModule } from "@angular/material/form-field";
+import { MatInput } from "@angular/material/input";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { HtmlBodyTag } from "../../../models/models";
+import { XmlTagDownloadFileButtonComponent } from "../../xml-tags/xml-tag-download-file-button/xml-tag-download-file-button.component";
+import { DownloadButtonTagData } from "../../../extensions/DownloadButtonMethods";
 
 @Component({
   selector: 'croco-html-download-file-button-editor',
@@ -38,7 +38,7 @@ export class DownloadFileButtonEditorComponent {
     this.tagData.title = (this.tag.attributes as DownloadButtonTagData).title;
   }
 
-  linkChanged(){
+  linkChanged() {
     this.tag.attributes = this.tagData;
   }
 }
