@@ -1,6 +1,23 @@
 export class HtmlRawTagDataConsts {
     static TagName = "html-raw";
-    static ScreenWidth = "screen-width";
-    static MaxImageHeight = "max-image-height";
-    static MediaRequest=" media-request"
+}
+
+export interface ExtractHtmlRawTag{
+  type: string;
+  data: ExtractHtmlRawTagData;
+}
+
+export interface ExtractHtmlRawTagData{
+  innerHTML: string;
+}
+
+export class ExtractHtmlRawTagMethods {
+  static ExtractHtmlRawTag(elem: HTMLElement): ExtractHtmlRawTag {
+    return {
+      type: HtmlRawTagDataConsts.TagName,
+      data: {
+        innerHTML: elem.innerHTML
+      }
+    }
+  }
 }

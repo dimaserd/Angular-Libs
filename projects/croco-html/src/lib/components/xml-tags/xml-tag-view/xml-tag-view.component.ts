@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import {Component, Input, ViewEncapsulation} from '@angular/core';
 import { InterfaceBlock } from "../../../extensions/InterfaceBlock";
 import { TextTags } from '../../../extensions';
 import { XmlTagDownloadFileButtonComponent } from '../xml-tag-download-file-button/xml-tag-download-file-button.component';

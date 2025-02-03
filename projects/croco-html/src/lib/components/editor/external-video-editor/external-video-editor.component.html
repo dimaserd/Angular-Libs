@@ -8,6 +8,9 @@
         @case (ExternalVideoSupportedTypes.Youtube) {
           {{linkText}}: {{tagData.link}}
         }
+        @case (ExternalVideoSupportedTypes.Code) {
+          {{linkText}}: {{tagData.iframe}}
+        }
       }
     </div>
     <div style="height: 10px;"></div>
@@ -16,15 +19,37 @@
 }
 
 @if (!tag.presentOrEdit) {
+  @if(tagData.type !== ExternalVideoSupportedTypes.Code) {
     <div>
       <mat-form-field class="w-100">
         <mat-label>
           {{linkText}}
         </mat-label>
         <input matInput placeholder="{{linkText}}"
-          autocomplete="off"
-          [(ngModel)]="tagData.link"
-                  (ngModelChange)="linkChanged()">
-          </mat-form-field>
+               autocomplete="off"
+               [(ngModel)]="tagData.link"
+               (ngModelChange)="linkChanged()">
+      </mat-form-field>
     </div>
+  } @else {
+    <div>
+        <mat-label>
+          {{linkText}}
+        </mat-label>
+        <mat-form-field class="w-100">
+          <mat-label>Разметка</mat-label>
+          <textarea
+            #autosize="cdkTextareaAutosize"
+            matInput
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="1"
+            cdkAutosizeMaxRows="5"
+            placeholder="Текст"
+            #textArea
+            [(ngModel)]="tagData.iframe"
+            (ngModelChange)="linkChanged()"
+          ></textarea>
+        </mat-form-field>
+    </div>
+  }
 }

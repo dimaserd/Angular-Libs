@@ -33,6 +33,7 @@ export class ExternalVideoEditorComponent implements OnInit {
 
   tagData: ExternalVideoTagData = {
     link: '',
+    iframe: '',
     type: ExternalVideoSupportedTypes.Youtube
   };
 
@@ -41,15 +42,33 @@ export class ExternalVideoEditorComponent implements OnInit {
   ngOnInit(): void {
     this.tagData.link = (this.tag.attributes as ExternalVideoTagData).link;
     this.tagData.type = (this.tag.attributes as ExternalVideoTagData).type;
+    this.tagData.iframe = this.tag.innerHtml;
 
-    this.linkText = this.tagData.type === ExternalVideoSupportedTypes.VkVideo ? 'Ссылка на Vk Video' : ' Ссылка на YouTube';
+    switch (this.tagData.type) {
+      case ExternalVideoSupportedTypes.Youtube: {
+        this.linkText = 'Ссылка на YouTube'
+        break;
+      }
+      case ExternalVideoSupportedTypes.VkVideo: {
+        this.linkText = 'Ссылка на Vk Video'
+        break;
+      }
+      case ExternalVideoSupportedTypes.Code: {
+        this.linkText = 'Code'
+        break;
+      }
+    }
   }
 
   linkChanged(){
     if(this.tagData.link.includes('iframe')) {
       this.createLinkByIFrame()
     }
-    this.tag.attributes = this.tagData;
+
+    const { iframe, ...tagData } = this.tagData;
+    this.tag.attributes = tagData;
+    this.tag.innerHtml = iframe
+
   }
 
   createLinkByIFrame() {

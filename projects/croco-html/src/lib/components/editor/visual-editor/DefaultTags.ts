@@ -1,10 +1,8 @@
-import { HtmlRawTagDataConsts } from '../../../extensions/HtmlRawTagDataConsts';
-import { FileImageTagDataConsts } from '../../../extensions';
-import { TagItem } from '../../../models/models';
-import {ExternalVideoTagDataConsts} from "../../../extensions";
+import {HtmlRawTagDataConsts} from '../../../extensions/HtmlRawTagDataConsts';
+import {CustomWidgetTagDataConsts, ExternalVideoTagDataConsts, FileImageTagDataConsts} from '../../../extensions';
+import {TagItem} from '../../../models/models';
 import {DownloadButtonTagDataConsts} from "../../../extensions/DownloadButtonMethods";
 import {ButtonTagDataConsts} from "../../../extensions/ButtonMethods";
-import {CustomWidgetTagDataConsts} from "../../../extensions";
 
 export class DefaultTags {
 
@@ -24,20 +22,11 @@ export class DefaultTags {
     { tag: DownloadButtonTagDataConsts.TagName, displayValue: 'Кнопка для скачивания' },
     { tag: ButtonTagDataConsts.TagName, displayValue: 'Кнопка' },
     { tag: CustomWidgetTagDataConsts.TagName, displayValue: 'Виджет' },
+    { tag: HtmlRawTagDataConsts.TagName, displayValue: 'Разметка' },
     { tag: 'text', displayValue: 'Текст' },
   ];
 
-  static htmlRawTag: TagItem = {
-    tag: HtmlRawTagDataConsts.TagName, displayValue: 'Разметка'
-  };
-
-  static getTags(useHtmlRaw: boolean): TagItem[] {
-    var result = [...DefaultTags.tags];
-
-    if (useHtmlRaw) {
-      result.push(DefaultTags.htmlRawTag);
-    }
-
-    return result;
+  static getTags(): TagItem[] {
+    return [...DefaultTags.tags];
   }
 }

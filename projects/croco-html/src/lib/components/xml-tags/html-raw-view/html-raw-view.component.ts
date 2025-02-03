@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';;
 
 @Component({
     selector: 'croco-html-raw-view',
@@ -7,18 +7,18 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
     styleUrls: ['./html-raw-view.component.css'],
     standalone: true
 })
-export class HtmlRawViewComponent implements OnInit {
-  
+export class HtmlRawViewComponent implements OnChanges {
+
   @Input()
   rawHtml = "";
 
   safeHtml : SafeHtml;
-  isInitialized = false; 
 
-  constructor(private readonly _sanitizer: DomSanitizer) {
-  }
+  constructor(private readonly _sanitizer: DomSanitizer) {}
 
-  ngOnInit(): void {
-    this.safeHtml = this._sanitizer.bypassSecurityTrustHtml(this.rawHtml);
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['rawHtml'] && changes['rawHtml'].currentValue !== changes['rawHtml'].previousValue) {
+      this.safeHtml = this._sanitizer.bypassSecurityTrustHtml(this.rawHtml);
+    }
   }
 }

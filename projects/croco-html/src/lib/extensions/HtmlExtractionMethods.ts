@@ -11,6 +11,7 @@ import { DownloadButtonMethods, DownloadButtonTagDataConsts } from "./DownloadBu
 import { ButtonMethods, ButtonTagDataConsts } from "./ButtonMethods";
 import { CrocoHtmlOptions } from "../options";
 import {CustomWidgetMethods, CustomWidgetTagDataConsts} from "./CustomWidgetMethods";
+import {ExtractHtmlRawTagMethods, HtmlRawTagDataConsts} from "./HtmlRawTagDataConsts";
 
 export class HtmlExtractionMethods {
 
@@ -27,12 +28,6 @@ export class HtmlExtractionMethods {
     ["FILE-IMAGE"]: (elem: HTMLElement, options: CrocoHtmlOptions) => ImageMethods.ExtractImage(elem, options),
     ["TABLE"]: (elem: HTMLElement, options: CrocoHtmlOptions) => TableMethods.getTableFromHtmlTag(elem as HTMLTableElement, options),
     ["RICH-TEXT"]: (elem: HTMLElement, options: CrocoHtmlOptions) => TextMethods.ExtractRichTextData(elem),
-    ["HTML-RAW"]: (elem: HTMLElement, options: CrocoHtmlOptions) => ({
-      type: "html-raw",
-      data: {
-        innerHTML: elem.innerHTML
-      }
-    }),
     ["H1"]: (elem: HTMLElement, options: CrocoHtmlOptions) => HtmlExtractionMethods.ExtractHeaderTag(elem, "h1"),
     ["H2"]: (elem: HTMLElement, options: CrocoHtmlOptions) => HtmlExtractionMethods.ExtractHeaderTag(elem, "h2"),
     ["H3"]: (elem: HTMLElement, options: CrocoHtmlOptions) => HtmlExtractionMethods.ExtractHeaderTag(elem, "h3"),
@@ -43,6 +38,7 @@ export class HtmlExtractionMethods {
     [DownloadButtonTagDataConsts.TagName.toUpperCase()]: (elem: HTMLElement, options: CrocoHtmlOptions) => DownloadButtonMethods.ExtractDownloadButtonTag(elem),
     [ButtonTagDataConsts.TagName.toUpperCase()]: (elem: HTMLElement, options: CrocoHtmlOptions) => ButtonMethods.ExtractButtonTag(elem),
     [CustomWidgetTagDataConsts.TagName.toUpperCase()]: (elem: HTMLElement, options: CrocoHtmlOptions) => CustomWidgetMethods.ExtractCustomWidgetTag(elem),
+    [HtmlRawTagDataConsts.TagName.toUpperCase()]: (elem: HTMLElement, options: CrocoHtmlOptions) => ExtractHtmlRawTagMethods.ExtractHtmlRawTag(elem)
   };
 
   static transformHtmlElementToBlocks(element: HTMLElement, options: CrocoHtmlOptions): InterfaceBlock[] {
