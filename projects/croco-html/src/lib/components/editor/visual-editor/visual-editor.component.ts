@@ -190,6 +190,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
       presentOrEdit: true
     });
 
+    this.htmlRaw = '';
     this.recalculateHtml();
   }
 
