@@ -5,4 +5,7 @@
   @case (ExternalVideoSupportedTypes.Youtube) {
     <youtube-video-player [link]="_block.link"></youtube-video-player>
   }
+  @case (ExternalVideoSupportedTypes.Code) {
+    <code-video [code]="_block.iframe"></code-video>
+  }
 }

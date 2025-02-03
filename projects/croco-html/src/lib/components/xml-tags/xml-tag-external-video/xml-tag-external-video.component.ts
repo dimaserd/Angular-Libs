@@ -7,13 +7,14 @@ import {InterfaceBlock} from "../../../extensions/InterfaceBlock";
 import {ExternalVideoSupportedTypes, ExternalVideoTagData} from '../../../extensions';
 import { YoutubeVideoPlayerComponent } from '../../editor/external-video-editor/youtube-video-player/youtube-video-player.component';
 import { VkVideoPlayerComponent } from '../../editor/external-video-editor/vk-video-player/vk-video-player.component';
+import {CodeVideoComponent} from "../../editor/external-video-editor/embedded-video/code-video.component";
 @Component({
     selector: 'croco-html-xml-tag-external-video',
     templateUrl: './xml-tag-external-video.component.html',
     styleUrls: ['./xml-tag-external-video.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [VkVideoPlayerComponent, YoutubeVideoPlayerComponent],
+  imports: [VkVideoPlayerComponent, YoutubeVideoPlayerComponent, CodeVideoComponent],
 })
 export class XmlTagExternalVideoComponent {
   @Input() public set data(value: InterfaceBlock) {
@@ -23,7 +24,8 @@ export class XmlTagExternalVideoComponent {
   @Input() public set tagData(value: ExternalVideoTagData) {
     this._block = {
       type: value.type,
-      link: value.link
+      link: value.link,
+      iframe: value.iframe
     }
   };
 
@@ -31,6 +33,7 @@ export class XmlTagExternalVideoComponent {
 
   public _block: ExternalVideoTagData = {
     type: '',
-    link: ''
+    link: '',
+    iframe: ''
   }
 }

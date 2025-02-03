@@ -11,14 +11,13 @@ import {
   ViewChild
 } from '@angular/core';
 import {
-  BodyTagsExtensions,
+  BodyTagsExtensions, ExternalVideoPlayers,
   ExternalVideoSupportedTypes,
   TextTags
 } from '../../../extensions';
 import { FileImageTagDataConsts } from '../../../extensions';
 import {
   ExternalVideoTagDataConsts,
-  ExternalVideoPlayers
 } from '../../../extensions';
 import { XmlExtensions } from '../../../extensions';
 import { TagItem, HtmlBodyTag } from '../../../models/models';
@@ -43,6 +42,7 @@ import { CrocoHtmlOptions } from '../../../options';
 import { CustomWidgetTagDataConsts } from "../../../extensions/CustomWidgetMethods";
 import { MatButtonToggle, MatButtonToggleGroup } from "@angular/material/button-toggle";
 import { NgTemplateOutlet, UpperCasePipe } from "@angular/common";
+import {HtmlRawTagDataConsts} from "../../../extensions/HtmlRawTagDataConsts";
 
 export const defaultLinkYouTube = "https://www.youtube.com/embed/4CtSAnJDfsI?si=scyBNJa0Hs2t5aLE";
 export const defaultLinkVk = "https://vk.com/video_ext.php?oid=-22822305&id=456241864&hd=2";
@@ -82,6 +82,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   isLoading = false;
   loadingText = "Идёт загрузка";
   text = '';
+  htmlRaw = '';
 
   alignment = EAlignments.Left;
   textTag = DefaultTags.textTags[0].tag;
@@ -96,9 +97,10 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   selectedValue: string;
   selectedVideoPlayer: string;
   protected readonly ExternalVideoTagDataConsts = ExternalVideoTagDataConsts;
+  protected readonly HtmlRawTagDataConsts = HtmlRawTagDataConsts;
 
   @Input()
-  useHtmlRaw = false;
+  useHtmlRaw = true;
 
   @Input()
   @Output()
@@ -153,7 +155,10 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     }
     else if (tagDescription.tag == ExternalVideoTagDataConsts.TagName) {
       attrs[ExternalVideoTagDataConsts.VideoTypeAttrName] = this.selectedVideoPlayer;
-      attrs[ExternalVideoTagDataConsts.LinkAttrName] = this.selectedVideoPlayer === ExternalVideoSupportedTypes.VkVideo ? defaultLinkVk : defaultLinkYouTube;
+      attrs[ExternalVideoTagDataConsts.LinkAttrName] = this.selectedVideoPlayer === ExternalVideoSupportedTypes.Code ? '' :
+        this.selectedVideoPlayer === ExternalVideoSupportedTypes.VkVideo
+          ?  defaultLinkVk
+          :  defaultLinkYouTube;
     }
     else if (tagDescription.tag == FileImageTagDataConsts.TagName) {
       attrs[FileImageTagDataConsts.ScreenMediaRequest] = FileImageTagDataConsts.DefaultValueForFileImage;
@@ -166,6 +171,9 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
       attrs[ButtonTagDataConsts.ClickAttrName] = ''
       attrs[ButtonTagDataConsts.TypeAttrName] = 'button'
       attrs[ButtonTagDataConsts.TextAttrName] = 'Кнопка'
+    }
+    else if(tagDescription.tag === HtmlRawTagDataConsts.TagName) {
+      innerHtml = this.htmlRaw;
     }
     else if (tagDescription.tag == CustomWidgetTagDataConsts.TagName) {
       attrs[CustomWidgetTagDataConsts.TypeAttrName] = 'example-type'
@@ -266,13 +274,14 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   selectTag(data: TagItem) {
     this.selectedValue = data.tag;
 
+    console.log(this.selectedValue)
     this.startAddingText(data.tag);
   }
 
   ngOnInit(): void {
     this.recalculateBodyTags();
 
-    this.tags = DefaultTags.getTags(this.useHtmlRaw);
+    this.tags = DefaultTags.getTags();
     this.selectedValue = this.tags[0].tag;
     this.selectedVideoPlayer = this.videoPlayers[0].type;
   }

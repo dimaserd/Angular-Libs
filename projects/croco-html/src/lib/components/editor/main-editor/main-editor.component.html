@@ -9,7 +9,7 @@
     <div style="height: 20px;"></div>
 
     <croco-visual-editor #visualEditor
-      [useHtmlRaw]="useHtmlRaw"
+      [useHtmlRaw]="true"
       [html]="html"
       (onHtmlChanged)="onHtmlChangedHandler($event)"
       (rendered)="visualEditorRenderedHandler()">
