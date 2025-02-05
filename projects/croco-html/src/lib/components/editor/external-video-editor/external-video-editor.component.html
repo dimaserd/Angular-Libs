@@ -9,7 +9,9 @@
           {{linkText}}: {{tagData.link}}
         }
         @case (ExternalVideoSupportedTypes.Code) {
-          {{linkText}}: {{tagData.iframe}}
+          <div>
+            Встраиваемый код плеера.
+          </div>
         }
       }
     </div>
@@ -52,7 +54,7 @@
             cdkAutosizeMaxRows="5"
             placeholder="Текст"
             #textArea
-            [(ngModel)]="tagData.iframe"
+            [(ngModel)]="tagData.innerHtml"
             (ngModelChange)="linkChanged()"
           ></textarea>
         </mat-form-field>

@@ -1,10 +1,10 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {HtmlBodyTag} from "../../../models/models";
-import {FormsModule} from "@angular/forms";
-import {MatFormField, MatLabel} from "@angular/material/form-field";
-import {MatInput} from "@angular/material/input";
-import {CustomWidgetMethods, CustomWidgetTagData} from "../../../extensions";
-import {XmlTagCustomWidgetComponent} from "../../xml-tags";
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { HtmlBodyTag } from "../../../models/models";
+import { FormsModule } from "@angular/forms";
+import { MatFormField, MatLabel } from "@angular/material/form-field";
+import { MatInput } from "@angular/material/input";
+import { CustomWidgetMethods, CustomWidgetTagData } from "../../../extensions";
+import { XmlTagCustomWidgetComponent } from "../../xml-tags";
 
 @Component({
   selector: 'croco-html-custom-widget-editor',

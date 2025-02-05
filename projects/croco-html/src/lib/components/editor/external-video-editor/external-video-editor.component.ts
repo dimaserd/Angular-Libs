@@ -35,7 +35,7 @@ export class ExternalVideoEditorComponent implements OnInit {
 
   tagData: ExternalVideoTagData = {
     link: '',
-    iframe: '',
+    innerHtml: '',
     type: ExternalVideoSupportedTypes.Youtube,
     useResponsiveWrapper: '',
   };
@@ -49,7 +49,7 @@ export class ExternalVideoEditorComponent implements OnInit {
       link,
       type,
       useResponsiveWrapper,
-      iframe: this.tag.innerHtml
+      innerHtml: this.tag.innerHtml
     }
 
     switch (this.tagData.type) {
@@ -62,21 +62,21 @@ export class ExternalVideoEditorComponent implements OnInit {
         break;
       }
       case ExternalVideoSupportedTypes.Code: {
-        this.linkText = 'Code'
+        this.linkText = 'Встраиваемый код'
         break;
       }
     }
   }
 
-  linkChanged(){
-    if(this.tagData.link.includes('iframe')) {
+  linkChanged() {
+    if (this.tagData.link.includes('iframe')) {
       this.createLinkByIFrame()
     }
 
     this.tagData.useResponsiveWrapper = `${this.tagData.useResponsiveWrapper}`
-    const { iframe, ...tagData } = this.tagData;
+    const {innerHtml, ...tagData} = this.tagData;
     this.tag.attributes = tagData;
-    this.tag.innerHtml = iframe
+    this.tag.innerHtml = innerHtml
   }
 
   onCheck(checked: boolean): void {

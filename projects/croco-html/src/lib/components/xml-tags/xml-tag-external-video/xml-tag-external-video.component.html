@@ -6,6 +6,6 @@
     <youtube-video-player [link]="_block.link" [useResponsiveWrapper]="_block.useResponsiveWrapper"></youtube-video-player>
   }
   @case (ExternalVideoSupportedTypes.Code) {
-    <code-video [code]="_block.iframe" [useResponsiveWrapper]="_block.useResponsiveWrapper"></code-video>
+    <code-video [code]="_block.innerHtml" [useResponsiveWrapper]="_block.useResponsiveWrapper"></code-video>
   }
 }

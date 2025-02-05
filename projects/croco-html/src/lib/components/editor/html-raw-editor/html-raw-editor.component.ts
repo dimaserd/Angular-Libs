@@ -30,4 +30,8 @@ export class HtmlRawEditorComponent implements OnChanges {
       this.safeHtml = this._sanitizer.bypassSecurityTrustHtml(this.tag.innerHtml);
     }
   }
+
+  onSafeHtmlChange(): void {
+    this.safeHtml = this._sanitizer.bypassSecurityTrustHtml(this.tag.innerHtml);
+  }
 }

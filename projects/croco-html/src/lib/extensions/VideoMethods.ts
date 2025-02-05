@@ -1,15 +1,15 @@
 export class ExternalVideoTagDataConsts {
-    static TagName = "external-video";
-    static VideoTypeAttrName = "type";
-    static LinkAttrName = "link";
-    static UseResponsiveWrapper = "useResponsiveWrapper";
+  static TagName = "external-video";
+  static VideoTypeAttrName = "type";
+  static LinkAttrName = "link";
+  static UseResponsiveWrapper = "useResponsiveWrapper";
     static IframeAttrName = "iframe";
 }
 
-export class ExternalVideoSupportedTypes{
-    static Youtube = "youtube"
-    static VkVideo = "vk-video"
-    static Code = "code"
+export class ExternalVideoSupportedTypes {
+  static Youtube = "youtube"
+  static VkVideo = "vk-video"
+  static Code = "code"
 }
 
 export const ExternalVideoPlayers = [
@@ -27,16 +27,16 @@ export const ExternalVideoPlayers = [
   }
 ]
 
-export interface ExternalVideoTag{
-    type: string;
-    data: ExternalVideoTagData;
+export interface ExternalVideoTag {
+  type: string;
+  data: ExternalVideoTagData;
 }
 
-export interface ExternalVideoTagData{
-    type: string;
-    link: string;
-    iframe: string;
-    useResponsiveWrapper: string;
+export interface ExternalVideoTagData {
+  type: string;
+  link: string;
+  innerHtml: string;
+  useResponsiveWrapper: string;
 }
 
 export class VideoMethods {
@@ -47,7 +47,7 @@ export class VideoMethods {
                 type: elem.getAttribute(ExternalVideoTagDataConsts.VideoTypeAttrName),
                 link: elem.getAttribute(ExternalVideoTagDataConsts.LinkAttrName),
                 useResponsiveWrapper: elem.getAttribute(ExternalVideoTagDataConsts.UseResponsiveWrapper),
-                iframe: elem.innerHTML
+                innerHtml: elem.innerHTML
             }
         };
     }
