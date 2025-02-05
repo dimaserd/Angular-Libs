@@ -1,18 +1,19 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import { HtmlBodyTag } from '../../../models/models';
 import { FormsModule } from '@angular/forms';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { MatInput } from '@angular/material/input';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
+import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
 
 @Component({
     selector: 'croco-html-html-raw-editor',
     templateUrl: './html-raw-editor.component.html',
-    styleUrls: ['./html-raw-editor.component.css'],
+    styleUrls: ['../external-video-editor/external-video-editor.component.scss'],
     standalone: true,
     imports: [MatFormField, MatLabel, MatInput, CdkTextareaAutosize, FormsModule]
 })
-export class HtmlRawEditorComponent implements OnInit {
+export class HtmlRawEditorComponent implements OnChanges {
 
   @Input()
   tag: HtmlBodyTag;
@@ -20,9 +21,13 @@ export class HtmlRawEditorComponent implements OnInit {
   @Output()
   onTagUpdated = new EventEmitter<HtmlBodyTag>();
 
-  constructor() { }
+  safeHtml : SafeHtml;
 
-  ngOnInit(): void {
+  constructor(private readonly _sanitizer: DomSanitizer) {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['tag'] && changes['tag'].currentValue !== changes['tag'].previousValue) {
+      this.safeHtml = this._sanitizer.bypassSecurityTrustHtml(this.tag.innerHtml);
+    }
   }
-
 }

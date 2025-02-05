@@ -2,6 +2,7 @@ export class ExternalVideoTagDataConsts {
     static TagName = "external-video";
     static VideoTypeAttrName = "type";
     static LinkAttrName = "link";
+    static UseResponsiveWrapper = "useResponsiveWrapper";
     static IframeAttrName = "iframe";
 }
 
@@ -35,6 +36,7 @@ export interface ExternalVideoTagData{
     type: string;
     link: string;
     iframe: string;
+    useResponsiveWrapper: string;
 }
 
 export class VideoMethods {
@@ -44,6 +46,7 @@ export class VideoMethods {
             data:{
                 type: elem.getAttribute(ExternalVideoTagDataConsts.VideoTypeAttrName),
                 link: elem.getAttribute(ExternalVideoTagDataConsts.LinkAttrName),
+                useResponsiveWrapper: elem.getAttribute(ExternalVideoTagDataConsts.UseResponsiveWrapper),
                 iframe: elem.innerHTML
             }
         };

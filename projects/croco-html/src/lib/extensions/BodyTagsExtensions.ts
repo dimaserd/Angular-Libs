@@ -42,7 +42,7 @@ export class BodyTagsExtensions {
             }
 
             if (x.tagDescription.tag === ExternalVideoTagDataConsts.TagName) {
-                return `<${x.tagDescription.tag} type="${x.attributes[ExternalVideoTagDataConsts.VideoTypeAttrName]}" link="${x.attributes[ExternalVideoTagDataConsts.LinkAttrName]}">${x.innerHtml}</${x.tagDescription.tag}>`
+                return `<${x.tagDescription.tag} useResponsiveWrapper="${x.attributes[ExternalVideoTagDataConsts.UseResponsiveWrapper] || 'false'}" type="${x.attributes[ExternalVideoTagDataConsts.VideoTypeAttrName]}" link="${x.attributes[ExternalVideoTagDataConsts.LinkAttrName]}">${x.innerHtml}</${x.tagDescription.tag}>`
             }
 
             if (x.tagDescription.tag === "html-raw") {

@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { XmlTagExternalVideoComponent } from '../../xml-tags';
 import { MatInputModule } from '@angular/material/input';
+import {MatCheckbox} from "@angular/material/checkbox";
 
 @Component({
   selector: 'croco-html-external-video-editor',
@@ -19,6 +20,7 @@ import { MatInputModule } from '@angular/material/input';
     MatInputModule,
     FormsModule,
     XmlTagExternalVideoComponent,
+    MatCheckbox,
   ]
 })
 export class ExternalVideoEditorComponent implements OnInit {
@@ -34,15 +36,21 @@ export class ExternalVideoEditorComponent implements OnInit {
   tagData: ExternalVideoTagData = {
     link: '',
     iframe: '',
-    type: ExternalVideoSupportedTypes.Youtube
+    type: ExternalVideoSupportedTypes.Youtube,
+    useResponsiveWrapper: '',
   };
 
   linkText = '';
 
   ngOnInit(): void {
-    this.tagData.link = (this.tag.attributes as ExternalVideoTagData).link;
-    this.tagData.type = (this.tag.attributes as ExternalVideoTagData).type;
-    this.tagData.iframe = this.tag.innerHtml;
+    const { link, type, useResponsiveWrapper } = this.tag.attributes as ExternalVideoTagData;
+
+    this.tagData = {
+      link,
+      type,
+      useResponsiveWrapper,
+      iframe: this.tag.innerHtml
+    }
 
     switch (this.tagData.type) {
       case ExternalVideoSupportedTypes.Youtube: {
@@ -65,10 +73,15 @@ export class ExternalVideoEditorComponent implements OnInit {
       this.createLinkByIFrame()
     }
 
+    this.tagData.useResponsiveWrapper = `${this.tagData.useResponsiveWrapper}`
     const { iframe, ...tagData } = this.tagData;
     this.tag.attributes = tagData;
     this.tag.innerHtml = iframe
+  }
 
+  onCheck(checked: boolean): void {
+    this.tagData.useResponsiveWrapper = checked ? 'true' : 'false';
+    this.linkChanged();
   }
 
   createLinkByIFrame() {

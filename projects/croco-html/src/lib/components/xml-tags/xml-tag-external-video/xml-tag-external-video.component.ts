@@ -25,7 +25,8 @@ export class XmlTagExternalVideoComponent {
     this._block = {
       type: value.type,
       link: value.link,
-      iframe: value.iframe
+      iframe: value.iframe,
+      useResponsiveWrapper: value.useResponsiveWrapper
     }
   };
 
@@ -34,6 +35,7 @@ export class XmlTagExternalVideoComponent {
   public _block: ExternalVideoTagData = {
     type: '',
     link: '',
-    iframe: ''
+    iframe: '',
+    useResponsiveWrapper: ''
   }
 }

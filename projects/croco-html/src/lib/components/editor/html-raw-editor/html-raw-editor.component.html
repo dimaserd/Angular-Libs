@@ -1,7 +1,5 @@
 @if (tag.presentOrEdit) {
-  <div>
-    <div [innerHTML]="tag.innerHtml"></div>
-  </div>
+    <div class="code-view use-responsive" [innerHTML]="safeHtml"></div>
 }
 
 @if (!tag.presentOrEdit) {

@@ -43,6 +43,9 @@ import { CustomWidgetTagDataConsts } from "../../../extensions/CustomWidgetMetho
 import { MatButtonToggle, MatButtonToggleGroup } from "@angular/material/button-toggle";
 import { NgTemplateOutlet, UpperCasePipe } from "@angular/common";
 import {HtmlRawTagDataConsts} from "../../../extensions/HtmlRawTagDataConsts";
+import {MatTooltip} from "@angular/material/tooltip";
+import {SpriteIconPathPipe} from "../../../pipes/sprite-icon-path.pipe";
+import {SpriteIdsType} from "../../../../sprites-ids.type";
 
 export const defaultLinkYouTube = "https://www.youtube.com/embed/4CtSAnJDfsI?si=scyBNJa0Hs2t5aLE";
 export const defaultLinkVk = "https://vk.com/video_ext.php?oid=-22822305&id=456241864&hd=2";
@@ -51,7 +54,7 @@ export const defaultLinkForDownload = "https://storage.yandexcloud.net/mega-acad
 @Component({
   selector: 'croco-visual-editor',
   templateUrl: './visual-editor.component.html',
-  styleUrls: ['./visual-editor.component.css'],
+  styleUrls: ['./visual-editor.component.scss'],
   standalone: true,
   imports: [
     MatProgressSpinner,
@@ -74,6 +77,8 @@ export const defaultLinkForDownload = "https://storage.yandexcloud.net/mega-acad
     MatButtonToggle,
     NgTemplateOutlet,
     UpperCasePipe,
+    MatTooltip,
+    SpriteIconPathPipe,
   ]
 })
 export class VisualEditorComponent implements OnInit, AfterViewInit {
@@ -98,6 +103,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   selectedVideoPlayer: string;
   protected readonly ExternalVideoTagDataConsts = ExternalVideoTagDataConsts;
   protected readonly HtmlRawTagDataConsts = HtmlRawTagDataConsts;
+  protected readonly ExternalVideoSupportedTypes = ExternalVideoSupportedTypes;
 
   @Input()
   useHtmlRaw = true;
@@ -155,10 +161,15 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     }
     else if (tagDescription.tag == ExternalVideoTagDataConsts.TagName) {
       attrs[ExternalVideoTagDataConsts.VideoTypeAttrName] = this.selectedVideoPlayer;
+      attrs[ExternalVideoTagDataConsts.UseResponsiveWrapper] = 'false';
       attrs[ExternalVideoTagDataConsts.LinkAttrName] = this.selectedVideoPlayer === ExternalVideoSupportedTypes.Code ? '' :
         this.selectedVideoPlayer === ExternalVideoSupportedTypes.VkVideo
           ?  defaultLinkVk
           :  defaultLinkYouTube;
+
+      if(this.selectedVideoPlayer === ExternalVideoSupportedTypes.Code) {
+        innerHtml = this.htmlRaw
+      }
     }
     else if (tagDescription.tag == FileImageTagDataConsts.TagName) {
       attrs[FileImageTagDataConsts.ScreenMediaRequest] = FileImageTagDataConsts.DefaultValueForFileImage;
@@ -273,9 +284,9 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   }
 
   selectTag(data: TagItem) {
-    this.selectedValue = data.tag;
+    this.htmlRaw = '';
 
-    console.log(this.selectedValue)
+    this.selectedValue = data.tag;
     this.startAddingText(data.tag);
   }
 
@@ -285,5 +296,13 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     this.tags = DefaultTags.getTags();
     this.selectedValue = this.tags[0].tag;
     this.selectedVideoPlayer = this.videoPlayers[0].type;
+  }
+
+  setTagButton(type: string): SpriteIdsType {
+    return `tag-button-${type}` as SpriteIdsType
+  }
+
+  setAlignButton(type: string): SpriteIdsType {
+    return `align-${type}` as SpriteIdsType
   }
 }

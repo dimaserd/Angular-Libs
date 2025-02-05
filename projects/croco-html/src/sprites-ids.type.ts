@@ -1,1 +1,1 @@
-export type SpriteIdsType = 'source-code-tab' | 'viewer-tab' | 'visual-editor-tab'
+export type SpriteIdsType = 'align-center' | 'align-left' | 'align-right' | 'move-icon' | 'source-code-tab' | 'tag-button-button' | 'tag-button-custom-widget' | 'tag-button-download-file-button' | 'tag-button-external-video' | 'tag-button-file-image' | 'tag-button-html-raw' | 'tag-button-text' | 'viewer-tab' | 'visual-editor-tab'
