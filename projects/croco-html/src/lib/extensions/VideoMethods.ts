@@ -3,7 +3,8 @@ export class ExternalVideoTagDataConsts {
   static VideoTypeAttrName = "type";
   static LinkAttrName = "link";
   static UseResponsiveWrapper = "useResponsiveWrapper";
-    static IframeAttrName = "iframe";
+  static UseResponsiveWrapperAttrName = "use-responsive-wrapper";
+  static IframeAttrName = "iframe";
 }
 
 export class ExternalVideoSupportedTypes {
@@ -36,7 +37,7 @@ export interface ExternalVideoTagData {
   type: string;
   link: string;
   innerHtml: string;
-  useResponsiveWrapper: string;
+  useResponsiveWrapper: boolean;
 }
 
 export class VideoMethods {
@@ -46,7 +47,7 @@ export class VideoMethods {
             data:{
                 type: elem.getAttribute(ExternalVideoTagDataConsts.VideoTypeAttrName),
                 link: elem.getAttribute(ExternalVideoTagDataConsts.LinkAttrName),
-                useResponsiveWrapper: elem.getAttribute(ExternalVideoTagDataConsts.UseResponsiveWrapper),
+                useResponsiveWrapper: elem.getAttribute(ExternalVideoTagDataConsts.UseResponsiveWrapperAttrName) !== 'false' ,
                 innerHtml: elem.innerHTML
             }
         };

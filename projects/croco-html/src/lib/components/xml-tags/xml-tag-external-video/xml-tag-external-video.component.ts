@@ -37,6 +37,6 @@ export class XmlTagExternalVideoComponent {
     type: '',
     link: '',
     innerHtml: '',
-    useResponsiveWrapper: ''
+    useResponsiveWrapper: false
   }
 }

@@ -14,7 +14,6 @@ export class VkVideoPlayerComponent{
     this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(link);
   }
 
-  @Input() useResponsiveWrapper = 'false';
   public safeUrl: SafeResourceUrl;
 
   constructor(private sanitizer: DomSanitizer) {}

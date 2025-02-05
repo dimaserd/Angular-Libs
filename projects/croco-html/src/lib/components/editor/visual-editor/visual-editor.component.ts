@@ -161,7 +161,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     }
     else if (tagDescription.tag == ExternalVideoTagDataConsts.TagName) {
       attrs[ExternalVideoTagDataConsts.VideoTypeAttrName] = this.selectedVideoPlayer;
-      attrs[ExternalVideoTagDataConsts.UseResponsiveWrapper] = 'false';
+      attrs[ExternalVideoTagDataConsts.UseResponsiveWrapper] = false;
       attrs[ExternalVideoTagDataConsts.LinkAttrName] = this.selectedVideoPlayer === ExternalVideoSupportedTypes.Code ? '' :
         this.selectedVideoPlayer === ExternalVideoSupportedTypes.VkVideo
           ?  defaultLinkVk

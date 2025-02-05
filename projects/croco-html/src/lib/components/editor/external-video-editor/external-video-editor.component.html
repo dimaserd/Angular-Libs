@@ -32,12 +32,6 @@
                [(ngModel)]="tagData.link"
                (ngModelChange)="linkChanged()">
       </mat-form-field>
-      <mat-checkbox
-        [checked]="tagData.useResponsiveWrapper === 'true'"
-        (change)="onCheck($event.checked)"
-      >
-        Использовать адаптив?
-      </mat-checkbox>
     </div>
   } @else {
     <div>
@@ -60,7 +54,7 @@
         </mat-form-field>
 
         <mat-checkbox
-          [checked]="tagData.useResponsiveWrapper === 'true'"
+          [checked]="tagData.useResponsiveWrapper"
           (change)="onCheck($event.checked)"
         >
           Использовать адаптив?

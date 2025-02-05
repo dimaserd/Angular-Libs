@@ -6,7 +6,7 @@ import { FileImageTagData, FileImageTagDataConsts } from "./ImageMethods";
 import { TextTags } from "./TextMethods";
 import {SimpleTextTagData, TextTagDataConsts} from "./TextSimpleMethods";
 import { Tags } from "./Tags";
-import {ExternalVideoTagDataConsts} from "./VideoMethods";
+import {ExternalVideoSupportedTypes, ExternalVideoTagDataConsts, VideoMethods} from "./VideoMethods";
 import {DownloadButtonTagDataConsts} from "./DownloadButtonMethods";
 import {ButtonTagDataConsts} from "./ButtonMethods";
 import { CrocoHtmlOptions } from "../options";
@@ -42,7 +42,11 @@ export class BodyTagsExtensions {
             }
 
             if (x.tagDescription.tag === ExternalVideoTagDataConsts.TagName) {
-                return `<${x.tagDescription.tag} useResponsiveWrapper="${x.attributes[ExternalVideoTagDataConsts.UseResponsiveWrapper] || 'false'}" type="${x.attributes[ExternalVideoTagDataConsts.VideoTypeAttrName]}" link="${x.attributes[ExternalVideoTagDataConsts.LinkAttrName]}">${x.innerHtml}</${x.tagDescription.tag}>`
+              let useResponsiveWrapperAttr = '';
+              if(x.attributes[ExternalVideoTagDataConsts.VideoTypeAttrName] === ExternalVideoSupportedTypes.Code) {
+                useResponsiveWrapperAttr = `${ExternalVideoTagDataConsts.UseResponsiveWrapperAttrName}="${x.attributes[ExternalVideoTagDataConsts.UseResponsiveWrapper] || false }"`
+              }
+                return `<${x.tagDescription.tag} ${useResponsiveWrapperAttr} type="${x.attributes[ExternalVideoTagDataConsts.VideoTypeAttrName]}" link="${x.attributes[ExternalVideoTagDataConsts.LinkAttrName]}">${x.innerHtml}</${x.tagDescription.tag}>`
             }
 
             if (x.tagDescription.tag === "html-raw") {

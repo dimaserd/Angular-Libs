@@ -1,11 +1,11 @@
 @switch (_block.type) {
   @case (ExternalVideoSupportedTypes.VkVideo) {
-    <vk-video-player [link]="_block.link" [useResponsiveWrapper]="_block.useResponsiveWrapper"></vk-video-player>
+    <vk-video-player [link]="_block.link"></vk-video-player>
   }
   @case (ExternalVideoSupportedTypes.Youtube) {
-    <youtube-video-player [link]="_block.link" [useResponsiveWrapper]="_block.useResponsiveWrapper"></youtube-video-player>
+    <youtube-video-player [link]="_block.link"></youtube-video-player>
   }
   @case (ExternalVideoSupportedTypes.Code) {
-    <code-video [code]="_block.innerHtml" [useResponsiveWrapper]="_block.useResponsiveWrapper"></code-video>
+    <code-video [code]="_block.innerHtml" [_useResponsiveWrapper]="_block.useResponsiveWrapper"></code-video>
   }
 }

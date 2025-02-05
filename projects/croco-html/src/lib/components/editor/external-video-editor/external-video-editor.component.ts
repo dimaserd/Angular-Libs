@@ -37,7 +37,7 @@ export class ExternalVideoEditorComponent implements OnInit {
     link: '',
     innerHtml: '',
     type: ExternalVideoSupportedTypes.Youtube,
-    useResponsiveWrapper: '',
+    useResponsiveWrapper: false,
   };
 
   linkText = '';
@@ -73,14 +73,13 @@ export class ExternalVideoEditorComponent implements OnInit {
       this.createLinkByIFrame()
     }
 
-    this.tagData.useResponsiveWrapper = `${this.tagData.useResponsiveWrapper}`
     const {innerHtml, ...tagData} = this.tagData;
     this.tag.attributes = tagData;
     this.tag.innerHtml = innerHtml
   }
 
   onCheck(checked: boolean): void {
-    this.tagData.useResponsiveWrapper = checked ? 'true' : 'false';
+    this.tagData.useResponsiveWrapper = checked;
     this.linkChanged();
   }
 
