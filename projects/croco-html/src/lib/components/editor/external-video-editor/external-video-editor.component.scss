@@ -1,8 +1,10 @@
 .code-view {
-  margin: 0 auto;
-  max-width: 640px;
-  width: 100%;
-  height: 360px;
+  &.video-player {
+    margin: 0 auto;
+    max-width: 640px;
+    width: 100%;
+    height: 360px;
+  }
 
   &.use-responsive {
     ::ng-deep {
