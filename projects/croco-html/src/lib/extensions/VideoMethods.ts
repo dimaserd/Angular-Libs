@@ -2,7 +2,6 @@ export class ExternalVideoTagDataConsts {
   static TagName = "external-video";
   static VideoTypeAttrName = "type";
   static LinkAttrName = "link";
-  static UseResponsiveWrapper = "useResponsiveWrapper";
   static UseResponsiveWrapperAttrName = "use-responsive-wrapper";
   static IframeAttrName = "iframe";
 }

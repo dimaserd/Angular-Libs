@@ -42,10 +42,10 @@ import { CrocoHtmlOptions } from '../../../options';
 import { CustomWidgetTagDataConsts } from "../../../extensions/CustomWidgetMethods";
 import { MatButtonToggle, MatButtonToggleGroup } from "@angular/material/button-toggle";
 import { NgTemplateOutlet, UpperCasePipe } from "@angular/common";
-import {HtmlRawTagDataConsts} from "../../../extensions/HtmlRawTagDataConsts";
-import {MatTooltip} from "@angular/material/tooltip";
-import {SpriteIconPathPipe} from "../../../pipes/sprite-icon-path.pipe";
-import {SpriteIdsType} from "../../../../sprites-ids.type";
+import { HtmlRawTagDataConsts } from "../../../extensions/HtmlRawTagDataConsts";
+import { MatTooltip } from "@angular/material/tooltip";
+import { SpriteIconPathPipe } from "../../../pipes/sprite-icon-path.pipe";
+import { SpriteIdsType } from "../../../../sprites-ids.type";
 
 export const defaultLinkYouTube = "https://www.youtube.com/embed/4CtSAnJDfsI?si=scyBNJa0Hs2t5aLE";
 export const defaultLinkVk = "https://vk.com/video_ext.php?oid=-22822305&id=456241864&hd=2";
@@ -161,13 +161,13 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     }
     else if (tagDescription.tag == ExternalVideoTagDataConsts.TagName) {
       attrs[ExternalVideoTagDataConsts.VideoTypeAttrName] = this.selectedVideoPlayer;
-      attrs[ExternalVideoTagDataConsts.UseResponsiveWrapper] = false;
+      attrs[ExternalVideoTagDataConsts.UseResponsiveWrapperAttrName] = false;
       attrs[ExternalVideoTagDataConsts.LinkAttrName] = this.selectedVideoPlayer === ExternalVideoSupportedTypes.Code ? '' :
         this.selectedVideoPlayer === ExternalVideoSupportedTypes.VkVideo
-          ?  defaultLinkVk
-          :  defaultLinkYouTube;
+          ? defaultLinkVk
+          : defaultLinkYouTube;
 
-      if(this.selectedVideoPlayer === ExternalVideoSupportedTypes.Code) {
+      if (this.selectedVideoPlayer === ExternalVideoSupportedTypes.Code) {
         innerHtml = this.htmlRaw
       }
     }
@@ -183,7 +183,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
       attrs[ButtonTagDataConsts.TypeAttrName] = 'button'
       attrs[ButtonTagDataConsts.TextAttrName] = 'Кнопка'
     }
-    else if(tagDescription.tag === HtmlRawTagDataConsts.TagName) {
+    else if (tagDescription.tag === HtmlRawTagDataConsts.TagName) {
       innerHtml = this.htmlRaw;
     }
     else if (tagDescription.tag == CustomWidgetTagDataConsts.TagName) {

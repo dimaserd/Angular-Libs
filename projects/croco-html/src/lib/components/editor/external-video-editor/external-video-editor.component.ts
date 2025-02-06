@@ -8,7 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { XmlTagExternalVideoComponent } from '../../xml-tags';
 import { MatInputModule } from '@angular/material/input';
-import {MatCheckbox} from "@angular/material/checkbox";
+import { MatCheckbox } from "@angular/material/checkbox";
 
 @Component({
   selector: 'croco-html-external-video-editor',
@@ -73,7 +73,7 @@ export class ExternalVideoEditorComponent implements OnInit {
       this.createLinkByIFrame()
     }
 
-    const {innerHtml, ...tagData} = this.tagData;
+    const { innerHtml, ...tagData } = this.tagData;
     this.tag.attributes = tagData;
     this.tag.innerHtml = innerHtml
   }

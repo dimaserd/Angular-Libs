@@ -1,8 +1,8 @@
-import {HtmlRawTagDataConsts} from '../../../extensions/HtmlRawTagDataConsts';
-import {CustomWidgetTagDataConsts, ExternalVideoTagDataConsts, FileImageTagDataConsts} from '../../../extensions';
-import {TagItem} from '../../../models/models';
-import {DownloadButtonTagDataConsts} from "../../../extensions/DownloadButtonMethods";
-import {ButtonTagDataConsts} from "../../../extensions/ButtonMethods";
+import { HtmlRawTagDataConsts } from '../../../extensions/HtmlRawTagDataConsts';
+import { CustomWidgetTagDataConsts, ExternalVideoTagDataConsts, FileImageTagDataConsts } from '../../../extensions';
+import { TagItem } from '../../../models/models';
+import { DownloadButtonTagDataConsts } from "../../../extensions/DownloadButtonMethods";
+import { ButtonTagDataConsts } from "../../../extensions/ButtonMethods";
 
 export class DefaultTags {
 

@@ -1,9 +1,5 @@
 @if (tag.presentOrEdit) {
-    <div
-      class="code-view use-responsive"
-      [class.video-player]="tag.innerHtml.includes('<iframe')"
-      [innerHTML]="safeHtml">
-
+    <div [innerHTML]="safeHtml">
     </div>
 }
 @if (!tag.presentOrEdit) {

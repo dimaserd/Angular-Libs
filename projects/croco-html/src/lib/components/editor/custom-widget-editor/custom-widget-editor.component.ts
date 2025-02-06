@@ -16,8 +16,7 @@ import { XmlTagCustomWidgetComponent } from "../../xml-tags";
     MatLabel,
     XmlTagCustomWidgetComponent,
   ],
-  templateUrl: './custom-widget-editor.component.html',
-  styleUrl: './custom-widget-editor.component.css'
+  templateUrl: './custom-widget-editor.component.html'
 })
 export class CustomWidgetEditorComponent implements OnInit {
   @Input()

@@ -1,5 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
+import { Component, Input } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
 
 @Component({
   selector: 'vk-video-player',
@@ -8,7 +8,7 @@ import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
   templateUrl: './vk-video-player.component.html',
   styleUrl: '../external-video-editor.component.scss'
 })
-export class VkVideoPlayerComponent{
+export class VkVideoPlayerComponent {
 
   @Input() set link(link: string) {
     this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(link);
@@ -16,5 +16,5 @@ export class VkVideoPlayerComponent{
 
   public safeUrl: SafeResourceUrl;
 
-  constructor(private sanitizer: DomSanitizer) {}
+  constructor(private sanitizer: DomSanitizer) { }
 }

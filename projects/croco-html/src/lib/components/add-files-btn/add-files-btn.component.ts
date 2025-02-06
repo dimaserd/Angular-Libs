@@ -8,7 +8,6 @@ import { MatButton } from '@angular/material/button';
 @Component({
     selector: 'croco-html-add-files-btn',
     templateUrl: './add-files-btn.component.html',
-    styleUrls: ['./add-files-btn.component.css'],
     standalone: true,
     imports: [UploadFilesBtnComponent, MatButton]
 })
