@@ -76,7 +76,6 @@ export const defaultLinkForDownload = "https://storage.yandexcloud.net/mega-acad
     MatButtonToggleGroup,
     MatButtonToggle,
     NgTemplateOutlet,
-    UpperCasePipe,
     MatTooltip,
     SpriteIconPathPipe,
   ]
