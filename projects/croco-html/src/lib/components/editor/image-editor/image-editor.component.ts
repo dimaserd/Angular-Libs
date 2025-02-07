@@ -8,12 +8,9 @@ import { FileIdSelectComponent } from '../../file-id-select/file-id-select.compo
 import { MatIcon } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { MatButtonToggleGroup, MatButtonToggle } from '@angular/material/button-toggle';
-import { CdkDragHandle } from "@angular/cdk/drag-drop";
-import { MatCard, MatCardContent } from "@angular/material/card";
-import { XmlTagExternalVideoComponent } from "../../xml-tags";
 import { NgStyle } from "@angular/common";
 import { ScreenWidthService } from "../../../services/screen-width.service";
-import { MatButton, MatIconButton } from "@angular/material/button";
+import { MatIconButton } from "@angular/material/button";
 import { MatSlideToggle } from "@angular/material/slide-toggle";
 import { Subject, takeUntil } from "rxjs";
 import { CrocoHtmlOptions } from '../../../options';
@@ -32,12 +29,7 @@ import { CrocoHtmlOptions } from '../../../options';
     MatFormField,
     MatLabel,
     MatInput,
-    CdkDragHandle,
-    MatCard,
-    MatCardContent,
-    XmlTagExternalVideoComponent,
     NgStyle,
-    MatButton,
     MatIconButton,
     MatSlideToggle
   ]

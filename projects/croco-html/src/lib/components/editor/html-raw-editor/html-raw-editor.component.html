@@ -1,9 +1,7 @@
 @if (tag.presentOrEdit) {
-  <div>
-    <div [innerHTML]="tag.innerHtml"></div>
-  </div>
+    <div [innerHTML]="safeHtml">
+    </div>
 }
-
 @if (!tag.presentOrEdit) {
   <div>
     <div style="height: 10px;">
@@ -16,7 +14,9 @@
         <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
           cdkAutosizeMinRows="1"
           placeholder="Внутренняя разметка тега"
-        [(ngModel)]="tag.innerHtml"></textarea>
+          [(ngModel)]="tag.innerHtml"
+          (ngModelChange)="onSafeHtmlChange()"
+        ></textarea>
       </mat-form-field>
     </div>
   </div>

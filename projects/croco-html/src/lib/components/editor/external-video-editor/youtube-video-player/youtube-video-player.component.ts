@@ -13,6 +13,7 @@ export class YoutubeVideoPlayerComponent {
   @Input() set link(link: string) {
     this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(link);
   }
+
   public safeUrl: SafeResourceUrl;
 
   constructor(private sanitizer: DomSanitizer) {}

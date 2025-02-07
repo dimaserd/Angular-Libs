@@ -10,7 +10,6 @@ import { MatButtonToggleGroup, MatButtonToggle } from '@angular/material/button-
 @Component({
     selector: 'croco-html-text-editor',
     templateUrl: './text-editor.component.html',
-    styleUrls: ['./text-editor.component.css'],
     standalone: true,
     imports: [MatButtonToggleGroup, FormsModule, MatButtonToggle, MatIcon, MatFormField, MatLabel, MatInput, CdkTextareaAutosize]
 })

@@ -16,8 +16,12 @@
   min-width: 36px;
 }
 
+.text-align-icon{
+  color: #323E8B;
+}
+
 .mat-button-toggle .text-align-icon {
-  stroke: #323E8B;
+  color: #323E8B;
 }
 
 .mat-button-toggle:hover {
@@ -25,11 +29,11 @@
 }
 
 .mat-button-toggle:hover .text-align-icon {
-  stroke: #747EBF;
+  color: #747EBF;
 }
 
 .mat-button-toggle-checked .text-align-icon {
-  stroke: white;
+  color: white;
 }
 
 .example-list {
@@ -89,6 +93,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #323E8B;
 }
 
 .mat-card.special {
@@ -115,10 +120,10 @@
   background-color: white;
   color: #23262A;
   transition: 0.2s ease-in-out;
+}
 
-  svg {
-    color: #323E8B;
-  }
+.text-align-icon {
+  color: #323E8B;
 }
 
 .tag-item.active {
@@ -132,13 +137,48 @@
 
 .tag-item:hover {
   color: #747EBF;
-  box-shadow: 0px 0px 4px 0px #747EBF;
+  box-shadow: 0 0 4px 0 #747EBF;
 
   svg {
     color: #747EBF;
   }
 }
 
+@media (max-width: 760px) {
+  .tag-item:hover {
+    color: inherit;
+    box-shadow: none;
+  }
+
+  .tag-item:hover svg {
+    color: inherit;
+  }
+
+  .tag-item:active {
+    color: #747EBF;
+    box-shadow: 0 0 4px 0 #747EBF;
+  }
+
+  .tag-item:active svg {
+    color: #747EBF;
+  }
+}
+
 .move-icon:hover {
+  cursor: pointer;
   opacity: 0.7;
+}
+
+.cdk-drag.cdk-drag-placeholder {
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+
+.cdk-drag-preview {
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+
+.example-handle {
+  color: #323E8B;
 }

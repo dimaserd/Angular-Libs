@@ -6,6 +6,6 @@
     <youtube-video-player [link]="_block.link"></youtube-video-player>
   }
   @case (ExternalVideoSupportedTypes.Code) {
-    <code-video [code]="_block.innerHtml"></code-video>
+    <code-video [code]="_block.innerHtml" [_useResponsiveWrapper]="_block.useResponsiveWrapper"></code-video>
   }
 }

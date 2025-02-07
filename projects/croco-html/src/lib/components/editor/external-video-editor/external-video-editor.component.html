@@ -52,6 +52,13 @@
             (ngModelChange)="linkChanged()"
           ></textarea>
         </mat-form-field>
+
+        <mat-checkbox
+          [checked]="tagData.useResponsiveWrapper"
+          (change)="onCheck($event.checked)"
+        >
+          Использовать адаптив?
+        </mat-checkbox>
     </div>
   }
 }

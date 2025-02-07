@@ -16,8 +16,7 @@ import { XmlTagButtonComponent } from "../../xml-tags/xml-tag-custom-button/xml-
     MatLabel,
     XmlTagButtonComponent
   ],
-  templateUrl: './button-editor.component.html',
-  styleUrl: './button-editor.component.css'
+  templateUrl: './button-editor.component.html'
 })
 export class ButtonEditorComponent {
   @Input()

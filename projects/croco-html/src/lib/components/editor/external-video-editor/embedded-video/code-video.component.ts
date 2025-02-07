@@ -11,6 +11,11 @@ import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 export class CodeVideoComponent implements OnChanges {
 
   @Input() code = "";
+  @Input() set _useResponsiveWrapper(useResponsiveWrapper: boolean) {
+    this.useResponsiveWrapper = useResponsiveWrapper;
+  }
+
+  useResponsiveWrapper = false
 
   safeHtml: SafeHtml;
 
