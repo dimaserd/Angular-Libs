@@ -7,9 +7,11 @@ export interface SettingModel {
 export interface TutorFullApplicationPublicOptions {
   applicationName: string;
   applicationUrl: string;
+  multiSchoolEnabled: boolean;
   telegramBotSettings: MainTelegramBotSettings;
   studentDemo: StudentDemoSettings;
   publicImageUrlFormat: string;
+  privateImageUrlFormat: string;
   imagesPack: TutorImagesPackSettings;
   icon: IconApplicatonSettings;
   webAppRoutes: WebAppRoutes;
