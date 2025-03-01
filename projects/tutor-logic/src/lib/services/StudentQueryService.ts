@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Inject } from "@angular/core";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { GetListResult, SearchStudents, StudentSimpleModel } from "../models";
+import { GetListResult, SearchStudentsRequest, StudentSimpleModel } from "../models";
 
 @Injectable({
     providedIn: 'root',
@@ -23,7 +23,7 @@ export class StudentQueryService {
         return this._httpClient.get<StudentSimpleModel>(this.baseControllerUrl + `ByTelegramId/${telegramId}`);
     }
 
-    public search(searchModel: SearchStudents): Observable<GetListResult<StudentSimpleModel>> {
+    public search(searchModel: SearchStudentsRequest): Observable<GetListResult<StudentSimpleModel>> {
         return this._httpClient.post<GetListResult<StudentSimpleModel>>(this.baseControllerUrl + 'Search', searchModel);
     }
 }

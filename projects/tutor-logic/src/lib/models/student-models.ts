@@ -10,8 +10,10 @@ export interface StudentSimpleModel {
     telegramUserName: string; 
 }
 
-export interface SearchStudents {
-    q: string;
+export interface SearchStudentsRequest {
+    q: string; 
+    isDemo: boolean | null; 
+    schoolId: string; 
     count: number | null; 
     offSet: number; 
 }
