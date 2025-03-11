@@ -28,12 +28,13 @@ export interface CourseShopWindowDetailedModel {
 }
 
 export interface StudentGroupWithPaymentPlansModel {
-    studentGroupName: string;
-    studentGroupId: string;
-    getCourseMiniHtml: string;
-    getCourseDetailedHtml: string;
-    isFreeOfCharge: boolean;
-    paymentPlans: Array<StudentGroupPaymentPlanSimpleModel>;
+    studentGroupName: string; 
+    studentGroupId: string; 
+    studentGroupAlias: string; 
+    getCourseMiniHtml: string; 
+    getCourseDetailedHtml: string; 
+    isFreeOfCharge: boolean; 
+    paymentPlans: Array<StudentGroupPaymentPlanSimpleModel>; 
 }
 
 export interface StudentGroupPaymentPlanSimpleModel {
