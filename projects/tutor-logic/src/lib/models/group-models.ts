@@ -13,7 +13,9 @@ export interface StudentGroupSimpleModel {
     name: string;
     isDeleting: boolean;
     useHtmlForName: boolean;
+    useCourse: boolean;
     nameHtml: string;
+    isFreeOfCharge: boolean;
 }
 
 export interface StudentGroupDetailedModel {
