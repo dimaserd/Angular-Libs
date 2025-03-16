@@ -6,6 +6,8 @@ export interface AddCoursePaymentRequest {
     isPrivatePaymentPlan: boolean;
     type: StudentCoursePaymentType;
     courseId: string;
+    source: string;
+    sourceDescription: string;
 }
 
 export enum StudentCoursePaymentType {

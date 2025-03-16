@@ -2,6 +2,8 @@ export interface CreateCourseOrderRequest {
     courseId: string;
     tariffId: string;
     isFreeOfCharge: boolean;
+    source: string;
+    sourceDescription: string;
 }
 
 export interface CreateCourseOrderResponse {
@@ -28,13 +30,13 @@ export interface CourseShopWindowDetailedModel {
 }
 
 export interface StudentGroupWithPaymentPlansModel {
-    studentGroupName: string; 
-    studentGroupId: string; 
-    studentGroupAlias: string; 
-    getCourseMiniHtml: string; 
-    getCourseDetailedHtml: string; 
-    isFreeOfCharge: boolean; 
-    paymentPlans: Array<StudentGroupPaymentPlanSimpleModel>; 
+    studentGroupName: string;
+    studentGroupId: string;
+    studentGroupAlias: string;
+    getCourseMiniHtml: string;
+    getCourseDetailedHtml: string;
+    isFreeOfCharge: boolean;
+    paymentPlans: Array<StudentGroupPaymentPlanSimpleModel>;
 }
 
 export interface StudentGroupPaymentPlanSimpleModel {
@@ -50,6 +52,3 @@ export interface StudentGroupPaymentPlansModel {
     isFreeOfCharge: boolean;
     globalPaymentPlans: StudentGroupPaymentPlanSimpleModel[];
 }
-
-
-
