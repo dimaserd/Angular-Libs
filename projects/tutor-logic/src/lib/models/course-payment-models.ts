@@ -8,6 +8,7 @@ export interface AddCoursePaymentRequest {
     courseId: string;
     source: string;
     sourceDescription: string;
+    paymentSystemId: string;
 }
 
 export enum StudentCoursePaymentType {

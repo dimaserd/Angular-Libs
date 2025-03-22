@@ -24,3 +24,5 @@ export class CoursePaymentService {
         return this._httpClient.post<BaseApiResponse>(`${this.baseControllerUrl}/set-payment-system`, model);
     }
 }
+
+
