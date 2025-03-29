@@ -35,3 +35,5 @@ export { TestQuestionErrorStatisticQueryService } from './TestQuestionErrorStati
 export { StudentGroupCourseAccessService } from './StudentGroupCourseAccessService'
 export { StudentRegistrationService } from './StudentRegistrationService'
 export { PmtSystemService } from './PmtSystemService'
+export { DefaultCourseLandingPageQueryService } from './DefaultCourseLandingPageQueryService'
+export { StudentGroupInfoPageService } from './StudentGroupInfoPageService'
