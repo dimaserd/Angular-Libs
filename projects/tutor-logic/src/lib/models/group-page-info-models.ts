@@ -7,12 +7,17 @@ import { PaymentSystemModel } from "./payment-system-models";
 export interface StudentGroupInfoPageDetailedModel {
     isUserAuthorized: boolean;
     isStudent: boolean;
+    displayOptions: DefaultCourseLandingDisplayOptions;
     groupInfo: StudentGroupSimpleModel;
     landingPage: DefaultCourseLandingPageModel;
     studentAccess: StudentGroupInfoPageDetailedStudentAccessModel;
     globalPaymentPlans: Array<StudentGroupPaymentPlanSimpleModel>;
     privatePaymentPlans: Array<StudentGroupPaymentPlanSimpleModel>;
     paymentSystems: Array<PaymentSystemModel>;
+}
+
+export interface DefaultCourseLandingDisplayOptions {
+    notFoundPageTransparentLogoSrc: string;
 }
 
 export interface StudentGroupInfoPageDetailedStudentAccessModel {
