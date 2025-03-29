@@ -4,6 +4,5 @@ export interface DefaultCourseLandingPageModel {
     titleHtml: string;
     descriptionHtml: string;
     themeColor: string;
-    backgroundColor: string;
     backgroundImageSrc: string;
 }
