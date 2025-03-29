@@ -17,7 +17,8 @@ export interface StudentGroupInfoPageDetailedModel {
 }
 
 export interface DefaultCourseLandingDisplayOptions {
-    notFoundPageTransparentLogoSrc: string;
+    notFoundPageTransparentLogoSrc: string; 
+    defaultBackgroundImageSrc: string; 
 }
 
 export interface StudentGroupInfoPageDetailedStudentAccessModel {
