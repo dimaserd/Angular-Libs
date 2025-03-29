@@ -25,7 +25,6 @@ export interface StudentGroupDetailedModel {
     enterCode: string;
     useCourse: boolean;
     studentsCount: number;
-    solutionsCount: number;
     isDeleting: boolean;
     useHtmlForName: boolean;
     nameHtml: string;
@@ -33,6 +32,9 @@ export interface StudentGroupDetailedModel {
     scheduleId: string;
     useMaterials: boolean;
     materialsHtml: string;
+    solutionsCount: number;
+    hasDefaultLandingPage: boolean;
+    defaultCourseLandingPageUrl: string;
 }
 
 export interface StudentInGroupSimpleModel {
