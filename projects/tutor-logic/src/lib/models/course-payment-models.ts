@@ -49,7 +49,7 @@ export interface StudentCoursePaymentModel {
     isFinished: boolean;
     isPaid: boolean;
     type: StudentCoursePaymentType;
-    studentProccessedToGroup: boolean;
+    studentProcessedToGroup: boolean;
     hasError: boolean;
     errorType: string;
     errorMessage: string;
@@ -57,7 +57,6 @@ export interface StudentCoursePaymentModel {
     paidOnUtc: string;
     finishedOnUtc: string;
 }
-
 
 export interface SearchStudentCoursePaymentsRequest {
     q: string;
@@ -86,7 +85,7 @@ export interface StudentCoursePaymentDetailedModel {
     paymentSystemProviderName: string;
     isFinished: boolean;
     isPaid: boolean;
-    studentProccessedToGroup: boolean;
+    studentProcessedToGroup: boolean;
     hasError: boolean;
     errorType: string;
     errorMessage: string;
