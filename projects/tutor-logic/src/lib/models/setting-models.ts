@@ -7,18 +7,23 @@ export interface SettingModel {
 export interface TutorFullApplicationPublicOptions {
   applicationName: string;
   applicationUrl: string;
+  customMainHostUrl: string;
   multiSchoolEnabled: boolean;
   telegramBotSettings: MainTelegramBotSettings;
   studentDemo: StudentDemoSettings;
   publicImageUrlFormat: string;
   privateImageUrlFormat: string;
   imagesPack: TutorImagesPackSettings;
-  icon: IconApplicatonSettings;
+  icon: IconApplicationSettings;
   webAppRoutes: WebAppRoutes;
   telephoneInputOptions: TelephoneInputOptions;
   solutionChatSettings: TestSolutionChatSettings;
   serverAppVersion: string;
   dataOnUtc: string;
+}
+
+export interface IconApplicationSettings {
+  currentIconSetId: string;
 }
 
 export interface TestSolutionChatSettings {
