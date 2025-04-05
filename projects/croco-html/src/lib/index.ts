@@ -60,7 +60,6 @@ export const EditorComponents = [
   AddFilesBtnComponent,
   HtmlRawEditorComponent,
   CustomWidgetEditorComponent,
-
 ];
 
 export const XmlComponents = [

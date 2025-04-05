@@ -1,5 +1,5 @@
-import { IMediaRequest } from "../extensions";
 import { Type } from "@angular/core";
+import { IMediaRequest } from "../models";
 
 export interface CrocoHtmlOptions {
 

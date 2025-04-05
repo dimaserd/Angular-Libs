@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ImageMethods } from '../../extensions/ImageMethods';
-import { FileNameAndIdModel, FilesQueryService, FileType } from '../../services/files-query.service';
+import { FileType, PublicFilesQueryService } from '../../services/PublicFilesQueryService';
 import { CrocoHtmlOptionsToken } from '../../consts';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { CrocoHtmlOptions } from '../../options';
+import { FileSimpleModel } from 'croco-generic-app-logic';
 
 export interface SearchQuestionsFormData {
     q: string;
@@ -30,13 +31,13 @@ export class FileIdSelectComponent implements OnInit, OnChanges {
 
     loading = false;
 
-    files: FileNameAndIdModel[] = [];
+    files: FileSimpleModel[] = [];
 
     @Output()
     onFileIdChanged = new EventEmitter<number>();
 
     constructor(
-        private readonly _fileService: FilesQueryService,
+        private readonly _publicFileService: PublicFilesQueryService,
         @Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions
     ) {
     }
@@ -55,17 +56,19 @@ export class FileIdSelectComponent implements OnInit, OnChanges {
 
     public loadFiles() {
         this.loading = true;
-        this._fileService.getFiles({
-            count: 10,
-            offSet: 0,
-            fileName: null,
-            fileTypes: [FileType.Image],
-            applicationId: null,
-            q: this.q
-        }).subscribe(data => {
-            this.files = [...data.list];
-            this.loading = false;
-        });
+        this._publicFileService
+            .search({
+                count: 10,
+                offSet: 0,
+                fileName: null,
+                fileTypes: [FileType.Image],
+                applicationId: null,
+                q: this.q
+            })
+            .subscribe(data => {
+                this.files = [...data.list];
+                this.loading = false;
+            });
     }
 
     onSearchChanged(q: { term: string, items: object[] }) {

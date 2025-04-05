@@ -2,7 +2,6 @@ import { AfterContentChecked, AfterViewInit, ChangeDetectorRef, Component, Event
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ClipboardService } from 'ngx-clipboard';
 import { VisualEditorComponent } from '../visual-editor/visual-editor.component';
-import { XmlTagViewComponent } from '../../xml-tags/xml-tag-view/xml-tag-view.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatButton } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
@@ -11,15 +10,13 @@ import { MatInput } from '@angular/material/input';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatTabsModule } from '@angular/material/tabs';
 import { HtmlViewComponent } from "../../html-view/html-view.component";
-import {MatIcon} from "@angular/material/icon";
-import {NgTemplateOutlet} from "@angular/common";
-import {SpriteIconPathPipe} from "../../../pipes/sprite-icon-path.pipe";
+import { SpriteIconPathPipe } from "../../../pipes/sprite-icon-path.pipe";
 
 @Component({
-    selector: 'croco-html-main-editor',
-    templateUrl: './main-editor.component.html',
-    styleUrls: ['./main-editor.component.css'],
-    standalone: true,
+  selector: 'croco-html-main-editor',
+  templateUrl: './main-editor.component.html',
+  styleUrls: ['./main-editor.component.css'],
+  standalone: true,
   imports: [
     MatTabsModule,
     VisualEditorComponent,
@@ -30,10 +27,7 @@ import {SpriteIconPathPipe} from "../../../pipes/sprite-icon-path.pipe";
     FormsModule,
     MatButton,
     MatCardModule,
-    XmlTagViewComponent,
     HtmlViewComponent,
-    MatIcon,
-    NgTemplateOutlet,
     SpriteIconPathPipe
   ]
 })
@@ -57,9 +51,9 @@ export class MainEditorComponent implements OnInit, AfterContentChecked, AfterVi
   @Output()
   onHtmlChanged = new EventEmitter<string>();
 
-  constructor(private _clipboardService: ClipboardService,
-    private _snackBar: MatSnackBar,
-    private _cdref: ChangeDetectorRef) { }
+  constructor(private readonly _clipboardService: ClipboardService,
+    private readonly _snackBar: MatSnackBar,
+    private readonly _cdref: ChangeDetectorRef) { }
 
   ngAfterViewInit(): void {
     this.recalculateBodyTags();
@@ -69,7 +63,7 @@ export class MainEditorComponent implements OnInit, AfterContentChecked, AfterVi
     this._cdref.detectChanges();
   }
 
-  visualEditorRenderedHandler(){
+  visualEditorRenderedHandler() {
     this.visualEditorRendered = true;
     this.recalculateBodyTags();
   }
@@ -79,7 +73,7 @@ export class MainEditorComponent implements OnInit, AfterContentChecked, AfterVi
     this.onHtmlChanged.emit(html);
   }
 
-  textAreaModelChangedHandler(){
+  textAreaModelChangedHandler() {
     this.recalculateBodyTags();
     this.onHtmlChangedHandler(this.html);
   }

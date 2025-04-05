@@ -1,3 +1,4 @@
+import { FileImageTag, ImageRestrictions, IMediaRequest } from "../models";
 import { CrocoHtmlOptions } from "../options";
 
 export class FileImageTagDataConsts {
@@ -11,29 +12,6 @@ export class FileImageTagDataConsts {
   static MaxImageWidth = 'max-image-width';
 
   static DefaultValueForFileImage = "max-screen-width:1200,min-screen-width:900,max-image-height:300;max-screen-width:900,min-screen-width:600,max-image-height:200";
-}
-
-export interface ImageRestrictions {
-  maxWidth: number | undefined;
-  maxHeight: number | undefined;
-}
-
-export interface FileImageTag {
-  type: string;
-  data: FileImageTagData;
-}
-
-export interface FileImageTagData {
-  src: string;
-  fileId: number;
-  screenMediaRequest: string;
-}
-
-export interface IMediaRequest {
-  minScreenWidth: number;
-  maxScreenWidth: number;
-  maxImageHeight?: number;
-  maxImageWidth?: number;
 }
 
 export class ImageMethods {
