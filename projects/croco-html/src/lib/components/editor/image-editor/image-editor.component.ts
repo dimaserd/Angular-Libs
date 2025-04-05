@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { ImageMethods, FileImageTagDataConsts, IMediaRequest } from '../../../extensions';
+import { ImageMethods, FileImageTagDataConsts } from '../../../extensions';
 import { HtmlBodyTag } from '../../../models/models';
 import { CrocoHtmlOptionsToken } from '../../../consts';
 import { MatInput } from '@angular/material/input';
@@ -14,6 +14,7 @@ import { MatIconButton } from "@angular/material/button";
 import { MatSlideToggle } from "@angular/material/slide-toggle";
 import { Subject, takeUntil } from "rxjs";
 import { CrocoHtmlOptions } from '../../../options';
+import { IMediaRequest } from '../../../models';
 
 @Component({
   selector: 'croco-html-image-editor',

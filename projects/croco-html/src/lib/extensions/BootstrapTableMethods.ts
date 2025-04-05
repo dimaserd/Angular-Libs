@@ -1,7 +1,8 @@
 import { InterfaceBlock } from "./InterfaceBlock";
-import { FileImageTag, FileImageTagDataConsts } from './ImageMethods';
+import { FileImageTagDataConsts } from './ImageMethods';
 import { TableData, TableHeaderData, TableRowData } from './TableMethods';
 import { SimpleTextTag, TextTag } from './TextSimpleMethods';
+import { FileImageTag } from "../models/image-models";
 
 export class BootstrapTableMethods {
 

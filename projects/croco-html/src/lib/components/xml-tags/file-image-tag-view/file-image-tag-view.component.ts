@@ -1,11 +1,12 @@
 import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { InterfaceBlock } from '../../../extensions/InterfaceBlock';
-import { FileImageTagData, ImageMethods, IMediaRequest } from '../../../extensions';
+import { ImageMethods } from '../../../extensions';
 import { ScreenWidthService } from "../../../services/screen-width.service";
 import { Subject, takeUntil } from "rxjs";
 import { NgStyle } from "@angular/common";
 import { CrocoHtmlOptions } from '../../../options';
 import { CrocoHtmlOptionsToken } from '../../../consts';
+import { FileImageTagData, IMediaRequest } from '../../../models';
 
 @Component({
   selector: 'croco-html-file-image-tag-view',
