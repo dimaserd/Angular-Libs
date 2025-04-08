@@ -1,8 +1,8 @@
-import { BaseApiResponse } from "./TableMethods";
-import {EAlignments} from "../components/editor/visual-editor/DefaultAligments";
+import { EAlignments } from "../components/editor/visual-editor/DefaultAligments";
+import { BaseApiResponse } from "../models";
 
 export class TextTagDataConsts {
-  static HAlign = "h-align";
+    static HAlign = "h-align";
 }
 
 export const TextTag = "text";
@@ -48,10 +48,10 @@ export class TextSimpleMethods {
             data: data
         };
 
-        if(result.data.text === '\n'){
+        if (result.data.text === '\n') {
             result.data.text = '';
         }
-        if(result.data.html === '\n'){
+        if (result.data.html === '\n') {
             result.data.html = '';
         }
 
@@ -69,14 +69,14 @@ export class TextSimpleMethods {
         var html = result.data.html;
         var htmlValidation = this.ValidateTextHtml(html);
 
-        if(!htmlValidation.isSucceeded){
+        if (!htmlValidation.isSucceeded) {
             result.data.validationResult = htmlValidation;
         }
 
         return result;
     }
 
-    static ValidateTextHtml(html: string) : BaseApiResponse{
+    static ValidateTextHtml(html: string): BaseApiResponse {
 
         var p = document.createElement("p");
         p.innerHTML = html;
@@ -86,21 +86,21 @@ export class TextSimpleMethods {
 
             var validationResult = this.ValidateTag(element);
 
-            if(!validationResult.isSucceeded){
+            if (!validationResult.isSucceeded) {
                 return validationResult;
             }
         }
 
         return {
-            isSucceeded:true,
+            isSucceeded: true,
             message: `Ok`
         }
     }
 
-    static ValidateTag(element : Element): BaseApiResponse{
+    static ValidateTag(element: Element): BaseApiResponse {
         let lowerTag = element.tagName.toLowerCase();
 
-        if(!this.supportedTags.includes(lowerTag)){
+        if (!this.supportedTags.includes(lowerTag)) {
             return {
                 isSucceeded: false,
                 message: `Тег <${lowerTag}> не поддерживается внутри тега <text>`
@@ -112,7 +112,7 @@ export class TextSimpleMethods {
 
             var innerValidationResult = this.ValidateTag(nElement);
 
-            if(!innerValidationResult.isSucceeded){
+            if (!innerValidationResult.isSucceeded) {
                 return innerValidationResult;
             }
         }

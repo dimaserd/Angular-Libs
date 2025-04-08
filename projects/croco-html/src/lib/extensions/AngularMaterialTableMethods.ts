@@ -1,4 +1,5 @@
-import {AngularMaterialTableData, BaseApiResponse, TableData, TableRowData} from './TableMethods';
+import { BaseApiResponse } from '../models';
+import { AngularMaterialTableData, TableData, TableRowData } from './TableMethods';
 
 
 export class AngularMaterialTableMethods {
@@ -27,7 +28,7 @@ export class AngularMaterialTableMethods {
     }
 
     static checkHeaders(tableData: TableData): BaseApiResponse {
-        if(tableData.header === null){
+        if (tableData.header === null) {
             return {
                 isSucceeded: false,
                 message: "Необходимо указать заголовок таблицы"
@@ -52,10 +53,10 @@ export class AngularMaterialTableMethods {
     }
     static checkAngularMaterialTableData(tableData: TableData, checkHeaders: boolean = true): BaseApiResponse {
 
-        if(checkHeaders){
+        if (checkHeaders) {
             var checkHeadersResult = this.checkHeaders(tableData);
 
-            if(!checkHeadersResult.isSucceeded){
+            if (!checkHeadersResult.isSucceeded) {
                 return checkHeadersResult;
             }
         }

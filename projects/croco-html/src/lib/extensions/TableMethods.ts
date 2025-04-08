@@ -1,14 +1,10 @@
+import { BaseApiResponse } from '../models';
 import { CrocoHtmlOptions } from '../options';
 import { AngularMaterialTableMethods } from './AngularMaterialTableMethods';
 import { BootstrapTableMethods } from './BootstrapTableMethods';
 import { HtmlExtractionMethods } from './HtmlExtractionMethods';
 import { InterfaceBlock } from "./InterfaceBlock";
 import { TextSimpleMethods } from './TextSimpleMethods';
-
-export interface BaseApiResponse {
-    isSucceeded: boolean;
-    message: string;
-}
 
 export interface TableHeaderData{
     type: "table-header";
