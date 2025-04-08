@@ -22,3 +22,26 @@ export interface CrocoHtmlOptions {
    */
   customWidgetRendererComponent?: Type<any>;
 }
+
+/**
+ * Тип файла
+ */
+export enum FileType {
+  Public = "Public", 
+  Private = "Private",
+}
+
+/**
+ * Опции для работы с файлами в редакторе разметки
+ */
+export interface CrocoHtmlEditorFileOptions {
+  /**
+   * Тип файла
+   */
+  fileType: FileType;
+
+  /**
+   * Свойство которое подставляется в фильтр с файлами
+   */
+  applicationId: string | null;
+}

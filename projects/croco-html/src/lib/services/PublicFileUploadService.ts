@@ -23,9 +23,9 @@ export interface UploadFileWithProgressEvent {
 }
 
 @Injectable({ providedIn: 'root' })
-export class FileUploadService {
+export class PublicFileUploadService {
   constructor(
-    private _httpClient: HttpClient,
+    private readonly _httpClient: HttpClient,
     @Inject('BASE_URL') private baseUrl: string,
   ) {}
 
@@ -51,6 +51,7 @@ export class FileUploadService {
     createLocalCopiesNow?: boolean,
     withProgress?: false,
   ): Observable<BaseApiResponseWithFilesIds>;
+  
   public postFilesInner(
     formData: FormData,
     createLocalCopiesNow: boolean,

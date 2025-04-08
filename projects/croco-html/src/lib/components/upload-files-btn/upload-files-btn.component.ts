@@ -1,5 +1,5 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { BaseApiResponseWithFilesIds, FileUploadService } from '../../services/file-upload.service';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { BaseApiResponseWithFilesIds, PublicFileUploadService } from '../../services/PublicFileUploadService';
 import { MatButton } from '@angular/material/button';
 
 export interface FilePostingStarted {
@@ -14,7 +14,7 @@ export interface FilePostingStarted {
   standalone: true,
   imports: [MatButton]
 })
-export class UploadFilesBtnComponent implements OnInit {
+export class UploadFilesBtnComponent {
 
   @ViewChild('filesInput')
   private fileInput!: ElementRef<HTMLInputElement>;
@@ -38,9 +38,9 @@ export class UploadFilesBtnComponent implements OnInit {
   postFilesStarted = new EventEmitter<FilePostingStarted>();
 
   @Output()
-  onFilesUploaded = new EventEmitter<BaseApiResponseWithFilesIds>();
+  onPublicFilesUploaded = new EventEmitter<BaseApiResponseWithFilesIds>();
 
-  constructor(private _fileUploadService: FileUploadService) { }
+  constructor(private _fileUploadService: PublicFileUploadService) { }
 
   handleFileInput(files: FileList) {
     this.postFilesStarted.emit({
@@ -48,15 +48,14 @@ export class UploadFilesBtnComponent implements OnInit {
       createLocalCopiesNow: this.createLocalCopiesNow
     });
 
-    this._fileUploadService.postFiles(files, this.createLocalCopiesNow).subscribe(data => {
-      this.onFilesUploaded.emit(data);
-    })
+    this._fileUploadService
+      .postFiles(files, this.createLocalCopiesNow)
+      .subscribe(data => {
+        this.onPublicFilesUploaded.emit(data);
+      })
   }
 
   clickFileInput() {
     this.fileInput.nativeElement.click();
-  }
-
-  ngOnInit() {
   }
 }

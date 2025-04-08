@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FileImageTagDataConsts } from '../../extensions';
 import { HtmlBodyTag } from '../../models/models';
-import { BaseApiResponseWithFilesIds } from '../../services/file-upload.service';
+import { BaseApiResponseWithFilesIds } from '../../services/PublicFileUploadService';
 import { FilePostingStarted, UploadFilesBtnComponent } from '../upload-files-btn/upload-files-btn.component';
 import { MatButton } from '@angular/material/button';
 
@@ -30,12 +30,12 @@ export class AddFilesBtnComponent implements OnInit {
     this.postFilesStarted.emit(data);
   }
 
-  filesUploadedHandler(data: BaseApiResponseWithFilesIds){
+  publicFilesUploadedHandler(data: BaseApiResponseWithFilesIds){
     this.fileIds = data.responseObject;
 
     let fileTags:HtmlBodyTag[] = [];
 
-    for(let i= 0; i < this.fileIds.length; i++){
+    for(let i = 0; i < this.fileIds.length; i++){
       let fileTag: HtmlBodyTag = {
         presentOrEdit: true,
         tagDescription: {
