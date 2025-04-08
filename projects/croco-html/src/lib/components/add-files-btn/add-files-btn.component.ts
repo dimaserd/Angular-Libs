@@ -1,9 +1,9 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FileImageTagDataConsts } from '../../extensions';
 import { HtmlBodyTag } from '../../models/models';
-import { BaseApiResponseWithFilesIds } from '../../services/PublicFileUploadService';
 import { FilePostingStarted, UploadFilesBtnComponent } from '../upload-files-btn/upload-files-btn.component';
 import { MatButton } from '@angular/material/button';
+import { PublicFilesUploadResponse } from '../../services/PublicFileUploadService';
 
 @Component({
     selector: 'croco-html-add-files-btn',
@@ -30,8 +30,8 @@ export class AddFilesBtnComponent implements OnInit {
     this.postFilesStarted.emit(data);
   }
 
-  publicFilesUploadedHandler(data: BaseApiResponseWithFilesIds){
-    this.fileIds = data.responseObject;
+  publicFilesUploadedHandler(data: PublicFilesUploadResponse){
+    this.fileIds = data.fileIds;
 
     let fileTags:HtmlBodyTag[] = [];
 

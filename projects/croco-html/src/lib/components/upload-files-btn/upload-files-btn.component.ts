@@ -1,10 +1,9 @@
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { BaseApiResponseWithFilesIds, PublicFileUploadService } from '../../services/PublicFileUploadService';
+import { PublicFilesUploadResponse, PublicFileUploadService } from '../../services/PublicFileUploadService';
 import { MatButton } from '@angular/material/button';
 
 export interface FilePostingStarted {
   filesCount: number;
-  createLocalCopiesNow: boolean;
 }
 
 @Component({
@@ -29,27 +28,23 @@ export class UploadFilesBtnComponent {
   btnText: string = "Загрузить файлы";
 
   @Input()
-  createLocalCopiesNow = true;
-
-  @Input()
   hidden = false;
 
   @Output()
   postFilesStarted = new EventEmitter<FilePostingStarted>();
 
   @Output()
-  onPublicFilesUploaded = new EventEmitter<BaseApiResponseWithFilesIds>();
+  onPublicFilesUploaded = new EventEmitter<PublicFilesUploadResponse>();
 
   constructor(private _fileUploadService: PublicFileUploadService) { }
 
   handleFileInput(files: FileList) {
     this.postFilesStarted.emit({
-      filesCount: files.length,
-      createLocalCopiesNow: this.createLocalCopiesNow
+      filesCount: files.length
     });
 
     this._fileUploadService
-      .postFiles(files, this.createLocalCopiesNow)
+      .postFiles(files, null)
       .subscribe(data => {
         this.onPublicFilesUploaded.emit(data);
       })

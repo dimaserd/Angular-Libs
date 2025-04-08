@@ -1,4 +1,4 @@
-import { BaseApiResponse } from "../services/PublicFileUploadService";
+import { BaseApiResponse } from "../models";
 
 export interface InterfaceBlock {
   type: string;

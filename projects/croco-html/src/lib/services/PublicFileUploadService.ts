@@ -2,34 +2,28 @@ import { HttpClient, HttpEvent } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-export interface BaseApiResponse {
-  isSucceeded: boolean;
-  message: string;
-}
-
-export interface GenericBaseApiResponse<T> extends BaseApiResponse {
-  responseObject: T;
-}
-
-export interface BaseApiResponseWithFilesIds extends BaseApiResponse {
-  responseObject: number[];
-}
-
 export interface UploadFileWithProgressEvent {
   loading: boolean;
-  response?: BaseApiResponseWithFilesIds;
+  response?: PublicFilesUploadResponse;
   uploadingLoaded: number;
   uploadingTotal: number;
+}
+
+export interface PublicFilesUploadResponse {
+  succeeded: boolean; 
+  errorMessage: string; 
+  fileIds: Array<number>; 
+  filesUploadedEventId: string; 
 }
 
 @Injectable({ providedIn: 'root' })
 export class PublicFileUploadService {
   constructor(
     private readonly _httpClient: HttpClient,
-    @Inject('BASE_URL') private baseUrl: string,
+    @Inject('BASE_URL') private readonly baseUrl: string,
   ) {}
 
-  public postFiles(files: FileList, createLocalCopiesNow = false): Observable<BaseApiResponseWithFilesIds> {
+  public postFiles(files: FileList, applicationId: string | null): Observable<PublicFilesUploadResponse> {
     const formData: FormData = new FormData();
 
     for (let i = 0; i < files.length; i++) {
@@ -37,36 +31,38 @@ export class PublicFileUploadService {
       formData.append(`fileKey${i}`, fileToUpload as Blob, fileToUpload?.name);
     }
 
-    return this.postFilesInner(formData, createLocalCopiesNow);
+    return this.postFilesInner(formData, applicationId);
   }
 
   public postFilesInner(
     formData: FormData,
-    createLocalCopiesNow: boolean,
+    applicationId: string | null,
     withProgress: true,
-  ): Observable<HttpEvent<BaseApiResponseWithFilesIds>>;
+  ): Observable<HttpEvent<PublicFilesUploadResponse>>;
 
   public postFilesInner(
     formData: FormData,
-    createLocalCopiesNow?: boolean,
+    applicationId: string | null,
     withProgress?: false,
-  ): Observable<BaseApiResponseWithFilesIds>;
+  ): Observable<PublicFilesUploadResponse>;
   
   public postFilesInner(
     formData: FormData,
-    createLocalCopiesNow: boolean,
+    applicationId: string | null,
     withProgress: boolean,
-  ): Observable<BaseApiResponseWithFilesIds> | Observable<HttpEvent<BaseApiResponseWithFilesIds>>;
+  ): Observable<PublicFilesUploadResponse> | Observable<HttpEvent<PublicFilesUploadResponse>>;
   public postFilesInner(
     formData: FormData,
-    createLocalCopiesNow = false,
+    applicationId: string | null,
     withProgress = false,
-  ): Observable<BaseApiResponseWithFilesIds> | Observable<HttpEvent<BaseApiResponseWithFilesIds>> {
-    let endpoint = createLocalCopiesNow
-      ? this.baseUrl + 'api/files/upload/now/with-handlers'
-      : this.baseUrl + 'Api/Files/UploadFiles';
+  ): Observable<PublicFilesUploadResponse> | Observable<HttpEvent<PublicFilesUploadResponse>> {
+    let endpoint = this.baseUrl + `api/files/upload?makeLocalCopiesNow=true&executeHandlersNow=true`;
 
-    return this._httpClient.post<BaseApiResponseWithFilesIds>(
+    if (applicationId) {
+      endpoint += `&applicationId=${applicationId}`;
+    }
+
+    return this._httpClient.post<PublicFilesUploadResponse>(
       endpoint,
       formData,
       withProgress ? { reportProgress: true, observe: 'events' } : undefined,

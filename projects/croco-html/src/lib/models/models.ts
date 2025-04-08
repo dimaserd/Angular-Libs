@@ -9,3 +9,8 @@ export interface HtmlBodyTag {
   attributes: Object;
   presentOrEdit: boolean;
 }
+
+export interface BaseApiResponse {
+  isSucceeded: boolean;
+  message: string;
+}
