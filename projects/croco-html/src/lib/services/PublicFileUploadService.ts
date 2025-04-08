@@ -2,7 +2,7 @@ import { HttpClient, HttpEvent } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-export interface UploadFileWithProgressEvent {
+export interface UploadPublicFilesWithProgressEvent {
   loading: boolean;
   response?: PublicFilesUploadResponse;
   uploadingLoaded: number;
