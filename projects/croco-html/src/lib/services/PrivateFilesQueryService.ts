@@ -10,6 +10,7 @@ export interface PrivateFileNameModel {
     type: FileType;
     downloadUrl: string;
     createdOn: string;
+    applicationId: string;
 }
 
 @Injectable({
