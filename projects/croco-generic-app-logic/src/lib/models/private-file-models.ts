@@ -1,9 +1,12 @@
+import { FileType } from "./file-models";
+
 export interface PrivateFileNameModel {
-    id: string;
-    setId: string;
-    fileName: string;
-    downloadUrl: string;
-    createdOn: string;
+    id: string; 
+    setId: string; 
+    fileName: string; 
+    type: FileType; 
+    downloadUrl: string; 
+    createdOn: string; 
 }
 
 export interface PrivateFilesCreatedResult {
