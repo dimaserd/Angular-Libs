@@ -18,7 +18,7 @@ export interface FileRelationModel {
     relationCustomData: string;
 }
 
-export interface SearchFiles {
+export interface SearchFilesRequest {
     q: string;
     fileName: string;
     applicationId: string;

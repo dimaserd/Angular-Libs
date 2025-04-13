@@ -24,13 +24,13 @@ export interface FileRelationModel {
     relationCustomData: string;
 }
 
-export interface SearchFiles {
-    q: string;
-    fileName: string;
-    applicationId: string;
-    fileTypes: Array<FileType>;
-    count: number | null;
-    offSet: number;
+export interface SearchFilesRequest {
+    q: string; 
+    fileName: string; 
+    applicationId: string; 
+    fileTypes: Array<FileType>; 
+    count: number | null; 
+    offSet: number; 
 }
 
 export enum FileType {
@@ -68,7 +68,7 @@ export class PublicFilesQueryService {
         this._baseControllerUrl = `${baseUrl}Api/Files`;
     }
 
-    public search(model: SearchFiles): Observable<GetListResult<FileSimpleModel>> {
+    public search(model: SearchFilesRequest): Observable<GetListResult<FileSimpleModel>> {
         return this._httpClient.post<GetListResult<FileSimpleModel>>(
             `${this._baseControllerUrl}/GetFiles`, model
         );

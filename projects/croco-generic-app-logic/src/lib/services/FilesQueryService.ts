@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, Inject } from "@angular/core";
 import { Observable } from "rxjs";
-import { DbFileNoDataWithRelations, FileSimpleModel, SearchFiles } from "../models/file-models";
+import { DbFileNoDataWithRelations, FileSimpleModel, SearchFilesRequest } from "../models/file-models";
 import { GetListResult } from "../models";
 
 @Injectable({
@@ -18,14 +18,14 @@ export class FilesQueryService {
     this._baseControllerUrl = `${baseUrl}Api/Files`;
   }
 
-  public getFilesWithRelations(model: SearchFiles): Observable<GetListResult<DbFileNoDataWithRelations>> {
+  public getFilesWithRelations(model: SearchFilesRequest): Observable<GetListResult<DbFileNoDataWithRelations>> {
     return this._httpClient.post<GetListResult<DbFileNoDataWithRelations>>(
       `${this._baseControllerUrl}/GetFiles/WithRelations`,
       model
     );
   }
 
-  public getFiles(model: SearchFiles): Observable<GetListResult<FileSimpleModel>> {
+  public getFiles(model: SearchFilesRequest): Observable<GetListResult<FileSimpleModel>> {
     return this._httpClient.post<GetListResult<FileSimpleModel>>(`${this._baseControllerUrl}/GetFiles`, model);
   }
 }

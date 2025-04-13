@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
-import { BaseApiResponse, GetListResult, SearchFiles } from "../models";
+import { BaseApiResponse, GetListResult, SearchFilesRequest } from "../models";
 import { PrivateFileNameModel } from "../models/private-file-models";
 
 @Injectable({
@@ -27,7 +27,7 @@ export class PrivateFileService {
         return this._httpClient.post<BaseApiResponse>(url, {});
     }
 
-    public search(model: SearchFiles) {
+    public search(model: SearchFilesRequest) {
         return this._httpClient.post<GetListResult<PrivateFileNameModel>>(`${this._baseControllerUrl}/query/search`, model);
     }
 }
