@@ -73,7 +73,7 @@ export class PrivateFileUploadService {
 
     private postFiles(formData: FormData, createCopiesNow: boolean, applicationId: string): Observable<PrivateFilesCreatedResult> {
         const url = this.buildUrl(createCopiesNow, applicationId);
-        return this._httpClient.post<PrivateFilesCreatedResult>(`${this._baseControllerUrl}/upload`, formData);
+        return this._httpClient.post<PrivateFilesCreatedResult>(url, formData);
     }
 
     private postFilesWithProgress(formData: FormData, createCopiesNow: boolean, applicationId: string): Observable<HttpEvent<PrivateFilesCreatedResult>> {
