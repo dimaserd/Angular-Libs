@@ -12,6 +12,8 @@ export interface CourseSimpleModel {
     name: string;
     weight: number;
     versionId: string;
+    templateVersionId: string;
+    needsUpdating: boolean;
 }
 
 export interface CourseThemeDetailedModel {
