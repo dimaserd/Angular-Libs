@@ -82,7 +82,7 @@ export class ImageMethods {
     return +elem.match(/\d+/g).join('');
   }
 
-  public static mediaRequestsArrayToStringParser(data: IMediaRequest[]) {
+  public static mediaRequestsArrayToString(data: IMediaRequest[]) {
     if (!data.length) {
       return ''
     }

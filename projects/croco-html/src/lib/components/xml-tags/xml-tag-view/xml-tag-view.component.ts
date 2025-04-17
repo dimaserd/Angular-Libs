@@ -1,4 +1,4 @@
-import {Component, Input, ViewEncapsulation} from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { InterfaceBlock } from "../../../extensions/InterfaceBlock";
 import { TextTags } from '../../../extensions';
 import { XmlTagDownloadFileButtonComponent } from '../xml-tag-download-file-button/xml-tag-download-file-button.component';
@@ -9,9 +9,8 @@ import { FileImageTagViewComponent } from '../file-image-tag-view/file-image-tag
 import { XmlTagHeaderTextViewComponent } from '../xml-tag-header-text-view/xml-tag-header-text-view.component';
 import { HtmlRawViewComponent } from '../html-raw-view/html-raw-view.component';
 import { XmlTagTextViewComponent } from '../xml-tag-text-view/xml-tag-text-view.component';
-import { ButtonEditorComponent } from "../../editor/button-editor/button-editor.component";
 import { XmlTagButtonComponent } from "../xml-tag-custom-button/xml-tag-button.component";
-import {XmlTagCustomWidgetComponent} from "../xml-tag-custom-widget/xml-tag-custom-widget.component";
+import { XmlTagCustomWidgetComponent } from "../xml-tag-custom-widget/xml-tag-custom-widget.component";
 
 @Component({
   selector: 'croco-html-xml-tag-view',
@@ -28,7 +27,6 @@ import {XmlTagCustomWidgetComponent} from "../xml-tag-custom-widget/xml-tag-cust
     ErrorBannerComponent,
     XmlTagExternalVideoComponent,
     XmlTagDownloadFileButtonComponent,
-    ButtonEditorComponent,
     XmlTagButtonComponent,
     XmlTagCustomWidgetComponent,
   ],

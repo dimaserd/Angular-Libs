@@ -99,7 +99,7 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
   }
 
   requestChanged() {
-    this.tag.attributes[FileImageTagDataConsts.ScreenMediaRequest] = ImageMethods.mediaRequestsArrayToStringParser(this.requests)
+    this.tag.attributes[FileImageTagDataConsts.ScreenMediaRequest] = ImageMethods.mediaRequestsArrayToString(this.requests)
   }
 
   addNewMediaRequest() {
