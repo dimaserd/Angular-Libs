@@ -40,7 +40,8 @@ export class AddFilesBtnComponent implements OnInit {
         presentOrEdit: true,
         tagDescription: {
           tag: FileImageTagDataConsts.TagName,
-          displayValue: "Изображение"
+          displayValue: "Изображение",
+          isCustom: false
         },
         attributes: {
           [FileImageTagDataConsts.FileIdAttrName]: this.fileIds[i],

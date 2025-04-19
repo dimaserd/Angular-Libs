@@ -1,5 +1,6 @@
 import { Type } from "@angular/core";
 import { IMediaRequest } from "../models";
+import { VisualEditorComponent } from "../components";
 
 export interface CrocoHtmlOptions {
 
@@ -21,6 +22,17 @@ export interface CrocoHtmlOptions {
    * Компонент для рендера кастомных виджетов
    */
   customWidgetRendererComponent?: Type<any>;
+
+  /**
+   * Использовать кнопку для отрисовки кастомных виджетов
+   */
+  useCustomWidgetsButton: boolean;
+
+  /**
+   * Обработчик нажатия на кнопку кастомных виджетов
+   * @returns 
+   */
+  customWidgetClickHandler: (editor: VisualEditorComponent) => void;
 }
 
 /**

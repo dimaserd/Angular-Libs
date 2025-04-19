@@ -24,6 +24,18 @@
                   {{tag.displayValue}}
                 </span>
               }
+
+              @if (useCustomWidgetsButton) {
+                <span class="tag-item" (click)="customWidgetsClickHandler()">
+                  <span class="text-align-icon">
+                    <ng-container [ngTemplateOutlet]="tagButtonIcons"
+                                  [ngTemplateOutletContext]="{icon: 'custom-widget'}">
+                    </ng-container>
+                  </span>
+                  Другие виджеты
+                </span>
+              }
+              
             </div>
           </div>
         </div>
@@ -116,8 +128,9 @@
             ></textarea>
           </mat-form-field>
         }
+
         <div class="col-12">
-          <button (click)="addTag()" class="w-100" mat-stroked-button>
+          <button (click)="addTagClickHandler()" class="w-100" mat-stroked-button>
             Добавить тег
           </button>
         </div>
@@ -189,13 +202,7 @@
   }
   @else {
     <svg width="20" height="20">
-      <use [attr.xlink:href]="setTagButton(icon)| spriteIconPath"></use>
+      <use [attr.xlink:href]="setTagButton(icon) | spriteIconPath"></use>
     </svg>
   }
 </ng-template>
-
-
-
-
-
-

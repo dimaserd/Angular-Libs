@@ -1,6 +1,7 @@
 export interface TagItem {
   tag: string;
   displayValue: string;
+  isCustom: boolean;
 }
 
 export interface HtmlBodyTag {

@@ -113,7 +113,8 @@ export class BodyTagsExtensions {
         presentOrEdit: true,
         tagDescription: {
           tag: textTagData.textTagName,
-          displayValue: BodyTagsExtensions.getDescription(data.type)
+          displayValue: BodyTagsExtensions.getDescription(data.type),
+          isCustom: false
         },
         attributes: { "h-align": textTagData.horizontalAlignment },
         innerHtml: BodyTagsExtensions.sanitizeInnerHtml(textTagData.html)
@@ -138,7 +139,8 @@ export class BodyTagsExtensions {
         presentOrEdit: true,
         tagDescription: {
           tag: FileImageTagDataConsts.TagName,
-          displayValue: BodyTagsExtensions.getDescription(data.type)
+          displayValue: BodyTagsExtensions.getDescription(data.type),
+          isCustom: false
         },
         attributes: attrs,
         innerHtml: ""
@@ -152,7 +154,8 @@ export class BodyTagsExtensions {
         presentOrEdit: true,
         tagDescription: {
           tag: data.type,
-          displayValue: BodyTagsExtensions.getDescription(data.type)
+          displayValue: BodyTagsExtensions.getDescription(data.type),
+          isCustom: false
         },
         attributes: fileData,
         innerHtml: ""
@@ -166,7 +169,8 @@ export class BodyTagsExtensions {
         presentOrEdit: true,
         tagDescription: {
           tag: data.type,
-          displayValue: BodyTagsExtensions.getDescription(data.type)
+          displayValue: BodyTagsExtensions.getDescription(data.type),
+          isCustom: false
         },
         attributes: fileData,
         innerHtml: ""
@@ -180,7 +184,8 @@ export class BodyTagsExtensions {
         presentOrEdit: true,
         tagDescription: {
           tag: data.type,
-          displayValue: BodyTagsExtensions.getDescription(data.type)
+          displayValue: BodyTagsExtensions.getDescription(data.type),
+          isCustom: false
         },
         attributes: fileData,
         innerHtml: ""
@@ -194,7 +199,8 @@ export class BodyTagsExtensions {
         presentOrEdit: true,
         tagDescription: {
           tag: data.type,
-          displayValue: BodyTagsExtensions.getDescription(data.type)
+          displayValue: BodyTagsExtensions.getDescription(data.type),
+          isCustom: false
         },
         attributes: customWidgetTagData,
         innerHtml: ""
@@ -207,7 +213,8 @@ export class BodyTagsExtensions {
         presentOrEdit: true,
         tagDescription: {
           tag: HtmlRawTagDataConsts.TagName,
-          displayValue: BodyTagsExtensions.getDescription(data.type)
+          displayValue: BodyTagsExtensions.getDescription(data.type),
+          isCustom: false
         },
         attributes: {},
         innerHtml: BodyTagsExtensions.sanitizeInnerHtml(data.data["innerHTML"])
@@ -218,7 +225,8 @@ export class BodyTagsExtensions {
       presentOrEdit: true,
       tagDescription: {
         tag: Tags.UnsupportedTag,
-        displayValue: "Неподдерживаемый тег"
+        displayValue: "Неподдерживаемый тег",
+        isCustom: false
       },
       attributes: {},
       innerHtml: JSON.stringify(data)

@@ -8,15 +8,11 @@
 
     <div style="height: 20px;"></div>
 
-    <croco-visual-editor #visualEditor
-      [useHtmlRaw]="true"
-      [html]="html"
-      (onHtmlChanged)="onHtmlChangedHandler($event)"
+    <croco-visual-editor #visualEditor [useHtmlRaw]="true" [html]="html" (onHtmlChanged)="onHtmlChangedHandler($event)"
       (rendered)="visualEditorRenderedHandler()">
     </croco-visual-editor>
 
     <div style="height: 20px;"></div>
-
   </mat-tab>
 
   <mat-tab>
@@ -28,19 +24,16 @@
 
     <div style="height: 10px;"></div>
     @if (visualEditorRendered) {
-      <div>
-        <mat-form-field class="w-100">
-          <mat-label>Исходный код</mat-label>
-          <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
-            cdkAutosizeMinRows="1"
-            placeholder="Исходный код" [(ngModel)]="html"
-          (ngModelChange)="textAreaModelChangedHandler()"></textarea>
-        </mat-form-field>
-      </div>
+    <div>
+      <mat-form-field class="w-100">
+        <mat-label>Исходный код</mat-label>
+        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+          placeholder="Исходный код" [(ngModel)]="html" (ngModelChange)="textAreaModelChangedHandler()"></textarea>
+      </mat-form-field>
+    </div>
     }
 
-    <button (click)="copyMarkUp()"
-      mat-raised-button color="primary">
+    <button (click)="copyMarkUp()" mat-raised-button color="primary">
       Копировать разметку
     </button>
   </mat-tab>

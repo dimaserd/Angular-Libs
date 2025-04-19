@@ -17,8 +17,7 @@ import { DownloadButtonTagData } from "../../../extensions/DownloadButtonMethods
     XmlTagDownloadFileButtonComponent,
     MatFormFieldModule
   ],
-  templateUrl: './download-file-button-editor.component.html',
-  styleUrl: './download-file-button-editor.component.css'
+  templateUrl: './download-file-button-editor.component.html'
 })
 export class DownloadFileButtonEditorComponent {
 

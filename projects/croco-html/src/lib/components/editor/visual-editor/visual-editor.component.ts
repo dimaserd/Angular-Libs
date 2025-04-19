@@ -41,7 +41,7 @@ import { ButtonTagDataConsts } from "../../../extensions/ButtonMethods";
 import { CrocoHtmlOptions } from '../../../options';
 import { CustomWidgetTagDataConsts } from "../../../extensions/CustomWidgetMethods";
 import { MatButtonToggle, MatButtonToggleGroup } from "@angular/material/button-toggle";
-import { NgTemplateOutlet, UpperCasePipe } from "@angular/common";
+import { NgTemplateOutlet } from "@angular/common";
 import { HtmlRawTagDataConsts } from "../../../extensions/HtmlRawTagDataConsts";
 import { MatTooltip } from "@angular/material/tooltip";
 import { SpriteIconPathPipe } from "../../../pipes/sprite-icon-path.pipe";
@@ -98,8 +98,9 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
 
   tags: TagItem[] = [];
   videoPlayers = ExternalVideoPlayers
-  selectedValue: string;
+  selectedValue: string = null;
   selectedVideoPlayer: string;
+
   protected readonly ExternalVideoTagDataConsts = ExternalVideoTagDataConsts;
   protected readonly HtmlRawTagDataConsts = HtmlRawTagDataConsts;
   protected readonly ExternalVideoSupportedTypes = ExternalVideoSupportedTypes;
@@ -134,9 +135,14 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   bodyTags: HtmlBodyTag[] = [];
   saveBodyTags: HtmlBodyTag[] = [];
 
+  useCustomWidgetsButton = false;
+
   constructor(
     private readonly _cdref: ChangeDetectorRef,
-    @Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions) { }
+    @Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions) { 
+
+    this.useCustomWidgetsButton = this._options.useCustomWidgetsButton;
+  }
 
   ngAfterViewInit(): void {
     this.rendered.emit(true);
@@ -146,7 +152,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     this._cdref.detectChanges();
   }
 
-  addTag(): void {
+  addTagClickHandler(): void {
     let tagDescription = this.tags
       .find(x => x.tag === this.selectedValue);
 
@@ -190,9 +196,10 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
       attrs[CustomWidgetTagDataConsts.DataIdAttrName] = 'example-data-id'
       attrs[CustomWidgetTagDataConsts.WidgetIdAttrName] = 'example-widget-id'
     }
-    else {
+    else if (tagDescription.tag === FileImageTagDataConsts.TagName) {
       attrs[FileImageTagDataConsts.FileIdAttrName] = null;
     }
+
     this.bodyTags.push({
       tagDescription,
       innerHtml,
@@ -205,7 +212,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   }
 
   startAddingText(tag = ''): void {
-    this.saveBodyTags = JSON.parse(JSON.stringify(this.bodyTags));
+    this.saveBodyTags = [...this.bodyTags];
     if (tag === 'text') {
       setTimeout(() => {
         this.textArea.nativeElement.focus();
@@ -222,7 +229,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
 
   addTextTags() {
     let lines = this.text.split('\n');
-    this.bodyTags = JSON.parse(JSON.stringify(this.saveBodyTags));
+    this.bodyTags = [...this.saveBodyTags];
     let tagDescription = this.textTagOptions?.find(x => x.tag === this.textTag);
 
     for (let i = 0; i < lines.length; i++) {
@@ -245,7 +252,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     this.isLoading = true;
   }
 
-  addTagCustom(tag: HtmlBodyTag) {
+  addTag(tag: HtmlBodyTag) {
     this.bodyTags.push(tag);
     this.recalculateHtml();
   }
@@ -287,6 +294,10 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
 
     this.selectedValue = data.tag;
     this.startAddingText(data.tag);
+  }
+
+  customWidgetsClickHandler() {
+    this._options.customWidgetClickHandler(this);
   }
 
   ngOnInit(): void {
