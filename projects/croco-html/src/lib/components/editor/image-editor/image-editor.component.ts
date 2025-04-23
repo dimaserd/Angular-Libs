@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { ImageMethods, FileImageTagDataConsts } from '../../../extensions';
 import { HtmlBodyTag } from '../../../models/models';
-import { CrocoHtmlOptionsToken } from '../../../consts';
+import {crocoHtmlEditorFileOptionsToken, CrocoHtmlOptionsToken} from '../../../consts';
 import { MatInput } from '@angular/material/input';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { FileIdSelectComponent } from '../../file-id-select/file-id-select.component';
@@ -56,11 +56,11 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
   onTagUpdated = new EventEmitter<HtmlBodyTag>();
 
   public get fileId(): unknown {
-    return this.tag.attributes['file-id'];
+    return this.tag.attributes[FileImageTagDataConsts.FileIdAttrName];
   }
 
   public set fileId(value: unknown) {
-    this.tag.attributes['file-id'] = value;
+    this.tag.attributes[FileImageTagDataConsts.FileIdAttrName] = value;
   }
 
   constructor(
@@ -72,10 +72,12 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
   }
 
   hasFileId() {
-    return this.tag.attributes.hasOwnProperty(FileImageTagDataConsts.FileIdAttrName) && !isNaN(this.tag.attributes[FileImageTagDataConsts.FileIdAttrName]);
+    return crocoHtmlEditorFileOptionsToken.value.usePrivateFiles
+      ? this.tag.attributes.hasOwnProperty(FileImageTagDataConsts.FileIdAttrName)
+      : this.tag.attributes.hasOwnProperty(FileImageTagDataConsts.FileIdAttrName) && !isNaN(this.tag.attributes[FileImageTagDataConsts.FileIdAttrName])
   }
 
-  onFileIdChanged(fileId: number) {
+  onFileIdChanged(fileId: number | string) {
     this.tag.attributes[FileImageTagDataConsts.FileIdAttrName] = fileId;
     this.removeImageError();
   }

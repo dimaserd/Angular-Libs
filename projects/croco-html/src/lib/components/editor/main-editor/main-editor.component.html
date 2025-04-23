@@ -1,4 +1,4 @@
-<mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+<mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" style="position: relative">
   <mat-tab>
     <ng-template mat-tab-label>
       <svg class="custom-icon" width="32" height="26">
@@ -53,3 +53,7 @@
     </mat-card>
   </mat-tab>
 </mat-tab-group>
+
+<div>
+  <mat-icon class="settings" (click)="openSettings()">settings</mat-icon>
+</div>

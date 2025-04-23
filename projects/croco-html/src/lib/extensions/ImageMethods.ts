@@ -1,5 +1,6 @@
 import { FileImageTag, ImageRestrictions, IMediaRequest } from "../models";
 import { CrocoHtmlOptions } from "../options";
+import {crocoHtmlEditorFileOptionsToken} from "../consts";
 
 export class FileImageTagDataConsts {
   static TagName = "file-image";
@@ -16,27 +17,36 @@ export class FileImageTagDataConsts {
 
 export class ImageMethods {
 
-  public static buildUrl(fileId: number, sizeType: string, options: CrocoHtmlOptions): string {
+  public static buildUrl(fileId: number | string, sizeType: string, options: CrocoHtmlOptions): string {
 
     if (fileId === null || fileId === undefined) {
       return null;
     }
 
-    return options.publicImageResizedUrlFormat
-      .replace("{sizeType}", sizeType)
-      .replace("{fileId}", fileId.toString());
+    return crocoHtmlEditorFileOptionsToken.value.usePrivateFiles
+      ?
+        options.privateImageResizedUrlFormat
+          .replace("{sizeType}", sizeType)
+          .replace("{fileId}", fileId as string)
+      :
+        options.publicImageResizedUrlFormat
+          .replace("{sizeType}", sizeType)
+          .replace("{fileId}", fileId.toString());
   }
 
-  public static buildSmallUrl(fileId: number, options: CrocoHtmlOptions): string {
+  public static buildSmallUrl(fileId: number | string, options: CrocoHtmlOptions): string {
     return ImageMethods.buildUrl(fileId, "Small", options);
   }
 
-  public static buildMediumUrl(fileId: number, options: CrocoHtmlOptions): string {
+  public static buildMediumUrl(fileId: number | string, options: CrocoHtmlOptions): string {
     return ImageMethods.buildUrl(fileId, "Medium", options);
   }
 
   public static ExtractImage(elem: HTMLElement, options: CrocoHtmlOptions): FileImageTag {
-    let fileId = +elem.getAttribute(FileImageTagDataConsts.FileIdAttrName);
+    let fileId = crocoHtmlEditorFileOptionsToken.value.usePrivateFiles
+      ? elem.getAttribute(FileImageTagDataConsts.FileIdAttrName)
+      : +elem.getAttribute(FileImageTagDataConsts.FileIdAttrName);
+
     let src = ImageMethods.buildMediumUrl(fileId, options);
     return {
       type: FileImageTagDataConsts.TagName,

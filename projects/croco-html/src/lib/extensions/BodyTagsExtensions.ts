@@ -81,7 +81,6 @@ export class BodyTagsExtensions {
   }
 
   static imageTagToHtml(imageTag: HtmlBodyTag) {
-
     let fileIdAttr = "";
     let screenMediaRequestAttr = "";
 

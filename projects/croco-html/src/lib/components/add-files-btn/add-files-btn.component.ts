@@ -4,6 +4,7 @@ import { HtmlBodyTag } from '../../models/models';
 import { FilePostingStarted, UploadFilesBtnComponent } from '../upload-files-btn/upload-files-btn.component';
 import { MatButton } from '@angular/material/button';
 import { PublicFilesUploadResponse } from '../../services/PublicFileUploadService';
+import {PrivateFilesCreatedResult} from "../../services/PrivateFileUploadService";
 
 @Component({
     selector: 'croco-html-add-files-btn',
@@ -19,7 +20,6 @@ export class AddFilesBtnComponent implements OnInit {
   @ViewChild("fakeBtn")
   fakeBtn!: UploadFilesBtnComponent;
 
-  fileIds:number[] = [];
 
   constructor() { }
 
@@ -30,12 +30,11 @@ export class AddFilesBtnComponent implements OnInit {
     this.postFilesStarted.emit(data);
   }
 
-  publicFilesUploadedHandler(data: PublicFilesUploadResponse){
-    this.fileIds = data.fileIds;
+  filesUploadedHandler(data: PublicFilesUploadResponse | PrivateFilesCreatedResult){
 
     let fileTags:HtmlBodyTag[] = [];
 
-    for(let i = 0; i < this.fileIds.length; i++){
+    for(let i = 0; i < data.fileIds.length; i++){
       let fileTag: HtmlBodyTag = {
         presentOrEdit: true,
         tagDescription: {
@@ -44,7 +43,7 @@ export class AddFilesBtnComponent implements OnInit {
           isCustom: false
         },
         attributes: {
-          [FileImageTagDataConsts.FileIdAttrName]: this.fileIds[i],
+          [FileImageTagDataConsts.FileIdAttrName]: data.fileIds[i],
           [FileImageTagDataConsts.ScreenMediaRequest]: FileImageTagDataConsts.DefaultValueForFileImage
         },
         innerHtml: ""
