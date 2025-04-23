@@ -22,10 +22,11 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { HtmlViewComponent } from "../../html-view/html-view.component";
 import { SpriteIconPathPipe } from "../../../pipes/sprite-icon-path.pipe";
 import {MatDialog} from "@angular/material/dialog";
-import {EditorSettingsModalComponent} from "../editor-settings-modal/editor-settings-modal.component";
+import {HtmlEditorSettingsModalComponent} from "../html-editor-settings-modal/html-editor-settings-modal.component";
 import {CrocoHtmlEditorFileOptions} from "../../../options";
 import {crocoHtmlEditorFileOptionsToken} from "../../../consts";
 import {MatIcon} from "@angular/material/icon";
+import {HtmlSettingsService} from "../../../services/html-settings.service";
 
 @Component({
   selector: 'croco-html-main-editor',
@@ -70,7 +71,8 @@ export class MainEditorComponent implements OnInit, AfterContentChecked, AfterVi
   constructor(private readonly _clipboardService: ClipboardService,
     private readonly _snackBar: MatSnackBar,
     private readonly _cdref: ChangeDetectorRef,
-              private readonly _dialog: MatDialog) { }
+              private readonly _dialog: MatDialog,
+              private _htmlSettingsService: HtmlSettingsService) { }
 
   ngAfterViewInit(): void {
     this.recalculateBodyTags();
@@ -108,10 +110,11 @@ export class MainEditorComponent implements OnInit, AfterContentChecked, AfterVi
 
   ngOnInit(): void {
     this.visualEditor.recalculateBodyTags();
+    crocoHtmlEditorFileOptionsToken.next(this._htmlSettingsService.get())
   }
 
   openSettings(): void {
-    this._dialog.open(EditorSettingsModalComponent,
+    this._dialog.open(HtmlEditorSettingsModalComponent,
       {
         height: '300px',
       }).afterClosed().subscribe((data: CrocoHtmlEditorFileOptions) => {
@@ -122,7 +125,7 @@ export class MainEditorComponent implements OnInit, AfterContentChecked, AfterVi
         applicationId: data.applicationId === '' ? null : data.applicationId,
       })
 
-      localStorage.setItem('crocoHtmlEditorFileOptions', JSON.stringify(data))
+      this._htmlSettingsService.set(data)
     })
   }
 }

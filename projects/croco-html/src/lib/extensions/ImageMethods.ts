@@ -17,35 +17,33 @@ export class FileImageTagDataConsts {
 
 export class ImageMethods {
 
-  public static buildUrl(fileId: number | string, sizeType: string, options: CrocoHtmlOptions): string {
+  public static buildUrl(fileId: string, sizeType: string, options: CrocoHtmlOptions): string {
 
     if (fileId === null || fileId === undefined) {
       return null;
     }
 
-    return crocoHtmlEditorFileOptionsToken.value.usePrivateFiles
-      ?
-        options.privateImageResizedUrlFormat
-          .replace("{sizeType}", sizeType)
-          .replace("{fileId}", fileId as string)
-      :
-        options.publicImageResizedUrlFormat
-          .replace("{sizeType}", sizeType)
-          .replace("{fileId}", fileId.toString());
+    const isNumericId = !isNaN(Number(fileId)); // определяем: число или UUID
+
+    const format = isNumericId
+      ? options.publicImageResizedUrlFormat
+      : options.privateImageResizedUrlFormat;
+
+    return format
+      .replace("{sizeType}", sizeType)
+      .replace("{fileId}", fileId);
   }
 
-  public static buildSmallUrl(fileId: number | string, options: CrocoHtmlOptions): string {
+  public static buildSmallUrl(fileId: string, options: CrocoHtmlOptions): string {
     return ImageMethods.buildUrl(fileId, "Small", options);
   }
 
-  public static buildMediumUrl(fileId: number | string, options: CrocoHtmlOptions): string {
+  public static buildMediumUrl(fileId: string, options: CrocoHtmlOptions): string {
     return ImageMethods.buildUrl(fileId, "Medium", options);
   }
 
   public static ExtractImage(elem: HTMLElement, options: CrocoHtmlOptions): FileImageTag {
-    let fileId = crocoHtmlEditorFileOptionsToken.value.usePrivateFiles
-      ? elem.getAttribute(FileImageTagDataConsts.FileIdAttrName)
-      : +elem.getAttribute(FileImageTagDataConsts.FileIdAttrName);
+    let fileId = elem.getAttribute(FileImageTagDataConsts.FileIdAttrName)
 
     let src = ImageMethods.buildMediumUrl(fileId, options);
     return {
@@ -53,6 +51,7 @@ export class ImageMethods {
       data: {
         src,
         fileId: fileId,
+        isPrivate: crocoHtmlEditorFileOptionsToken.value.usePrivateFiles,
         screenMediaRequest: elem.getAttribute(FileImageTagDataConsts.ScreenMediaRequest)
       }
     };

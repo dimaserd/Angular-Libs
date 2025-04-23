@@ -7,7 +7,7 @@ import {MatButton} from "@angular/material/button";
 import {crocoHtmlEditorFileOptionsToken} from "../../../consts";
 
 @Component({
-  selector: 'lib-editor-settings-modal',
+  selector: 'croco-html-html-editor-settings-modal',
   standalone: true,
   imports: [
     MatInput,
@@ -20,13 +20,13 @@ import {crocoHtmlEditorFileOptionsToken} from "../../../consts";
     MatDialogActions,
     MatButton
   ],
-  templateUrl: './editor-settings-modal.component.html',
-  styleUrl: './editor-settings-modal.component.scss'
+  templateUrl: './html-editor-settings-modal.component.html',
+  styleUrl: './html-editor-settings-modal.component.scss'
 })
-export class EditorSettingsModalComponent implements OnInit {
+export class HtmlEditorSettingsModalComponent implements OnInit {
   public form: FormGroup;
 
-  constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<EditorSettingsModalComponent>,) {
+  constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<HtmlEditorSettingsModalComponent>,) {
     this.form = this.fb.group({
       usePrivateFiles: false,
       applicationId: ''

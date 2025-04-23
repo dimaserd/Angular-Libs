@@ -36,7 +36,10 @@ export class UploadFilesBtnComponent {
   postFilesStarted = new EventEmitter<FilePostingStarted>();
 
   @Output()
-  onFilesUploaded = new EventEmitter<PublicFilesUploadResponse | PrivateFilesCreatedResult>();
+  onPublicFilesUploaded = new EventEmitter<PublicFilesUploadResponse>();
+
+  @Output()
+  onPrivateFilesUploaded = new EventEmitter<PrivateFilesCreatedResult>();
 
   constructor(private _publicFileUploadService: PublicFileUploadService, private _privateFileUploadService: PrivateFileUploadService ) { }
 
@@ -49,14 +52,14 @@ export class UploadFilesBtnComponent {
       this._privateFileUploadService
         .postFiles(files, crocoHtmlEditorFileOptionsToken.value.applicationId)
         .subscribe(data => {
-          this.onFilesUploaded.emit(data);
+          this.onPrivateFilesUploaded.emit(data);
         })
     }
     else  {
       this._publicFileUploadService
         .postFiles(files, null)
         .subscribe(data => {
-          this.onFilesUploaded.emit(data);
+          this.onPublicFilesUploaded.emit(data);
         })
     }
   }

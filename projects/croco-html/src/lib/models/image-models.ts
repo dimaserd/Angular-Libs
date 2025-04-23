@@ -11,7 +11,8 @@ export interface FileImageTag {
 
 export interface FileImageTagData {
   src: string;
-  fileId: number | string;
+  fileId: string;
+  isPrivate: boolean;
   screenMediaRequest: string;
 }
 

@@ -1,14 +1,24 @@
 import { Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ImageMethods } from '../../extensions/ImageMethods';
-import {FileSimpleModel, FileType, PublicFilesQueryService} from '../../services/PublicFilesQueryService';
+import { FileType, PublicFilesQueryService} from '../../services/PublicFilesQueryService';
 import {crocoHtmlEditorFileOptionsToken, CrocoHtmlOptionsToken} from '../../consts';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import {CrocoHtmlEditorFileOptions, CrocoHtmlOptions} from '../../options';
-import {PrivateFileNameModel, PrivateFilesQueryService} from "../../services/PrivateFilesQueryService";
+import {PrivateFilesQueryService} from "../../services/PrivateFilesQueryService";
 
 export interface SearchQuestionsFormData {
     q: string;
+}
+
+export interface FileUnifiedModel {
+  fileId: string;
+  setId?: string;
+  fileName: string;
+  type: FileType;
+  downloadUrl: string;
+  createdOn?: string;
+  applicationId?: string;
 }
 
 @Component({
@@ -27,14 +37,14 @@ export class FileIdSelectComponent implements OnInit, OnChanges {
 
     @Input()
     @Output()
-    fileId: number | string;
+    fileId: string;
 
     loading = false;
 
-    files: FileSimpleModel[] | PrivateFileNameModel[] = [];
+    files: FileUnifiedModel[] = [];
 
     @Output()
-    onFileIdChanged = new EventEmitter<number | string>();
+    onFileIdChanged = new EventEmitter<string>();
 
     get crocoHtmlEditorFileOptions(): CrocoHtmlEditorFileOptions {
       return crocoHtmlEditorFileOptionsToken.value
@@ -47,11 +57,11 @@ export class FileIdSelectComponent implements OnInit, OnChanges {
     ) {
     }
 
-    onModelChanged(fileId: number) {
+    onModelChanged(fileId: string) {
         this.onFileIdChanged.emit(fileId);
     }
 
-    getSrc(fileId: number | string) {
+    getSrc(fileId: string) {
       return ImageMethods.buildSmallUrl(fileId, this._options);
     }
 

@@ -72,12 +72,14 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
   }
 
   hasFileId() {
-    return crocoHtmlEditorFileOptionsToken.value.usePrivateFiles
-      ? this.tag.attributes.hasOwnProperty(FileImageTagDataConsts.FileIdAttrName)
-      : this.tag.attributes.hasOwnProperty(FileImageTagDataConsts.FileIdAttrName) && !isNaN(this.tag.attributes[FileImageTagDataConsts.FileIdAttrName])
+    const hasFileId = this.tag.attributes.hasOwnProperty(FileImageTagDataConsts.FileIdAttrName);
+    const isValidNumber = !isNaN(this.tag.attributes[FileImageTagDataConsts.FileIdAttrName]);
+    const isPrivate = crocoHtmlEditorFileOptionsToken.value.usePrivateFiles;
+
+    return isPrivate ? hasFileId : hasFileId && isValidNumber;
   }
 
-  onFileIdChanged(fileId: number | string) {
+  onFileIdChanged(fileId: string) {
     this.tag.attributes[FileImageTagDataConsts.FileIdAttrName] = fileId;
     this.removeImageError();
   }

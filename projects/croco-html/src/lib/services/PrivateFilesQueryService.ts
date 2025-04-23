@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable, Inject } from "@angular/core";
 import { Observable } from "rxjs";
 import { GetListResult, FileType, SearchFilesRequest } from "./PublicFilesQueryService";
+import {FileUnifiedModel} from "../components";
 
 export interface PrivateFileNameModel {
     id: string;
@@ -25,8 +26,8 @@ export class PrivateFilesQueryService {
         this._baseControllerUrl = `${baseUrl}api/private-files/query`;
     }
 
-    public search(model: SearchFilesRequest): Observable<GetListResult<PrivateFileNameModel>> {
-        return this._httpClient.post<GetListResult<PrivateFileNameModel>>(
+    public search(model: SearchFilesRequest): Observable<GetListResult<FileUnifiedModel>> {
+        return this._httpClient.post<GetListResult<FileUnifiedModel>>(
             `${this._baseControllerUrl}/search`, model
         );
     }

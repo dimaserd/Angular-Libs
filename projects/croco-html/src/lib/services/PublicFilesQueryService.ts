@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import {FileUnifiedModel} from "../components";
 
 export interface GetListResult<T> {
 
@@ -25,12 +26,12 @@ export interface FileRelationModel {
 }
 
 export interface SearchFilesRequest {
-    q: string; 
-    fileName: string; 
-    applicationId: string; 
-    fileTypes: Array<FileType>; 
-    count: number | null; 
-    offSet: number; 
+    q: string;
+    fileName: string;
+    applicationId: string;
+    fileTypes: Array<FileType>;
+    count: number | null;
+    offSet: number;
 }
 
 export enum FileType {
@@ -50,10 +51,10 @@ export interface GetListSearchModel {
 }
 
 export interface FileSimpleModel {
-    fileId: number; 
-    fileName: string; 
-    type: FileType; 
-    downloadUrl: string; 
+    fileId: number;
+    fileName: string;
+    type: FileType;
+    downloadUrl: string;
 }
 
 @Injectable({
@@ -68,8 +69,8 @@ export class PublicFilesQueryService {
         this._baseControllerUrl = `${baseUrl}Api/Files`;
     }
 
-    public search(model: SearchFilesRequest): Observable<GetListResult<FileSimpleModel>> {
-        return this._httpClient.post<GetListResult<FileSimpleModel>>(
+    public search(model: SearchFilesRequest): Observable<GetListResult<FileUnifiedModel>> {
+        return this._httpClient.post<GetListResult<FileUnifiedModel>>(
             `${this._baseControllerUrl}/GetFiles`, model
         );
     }

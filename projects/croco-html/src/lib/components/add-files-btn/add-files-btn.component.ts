@@ -20,6 +20,7 @@ export class AddFilesBtnComponent implements OnInit {
   @ViewChild("fakeBtn")
   fakeBtn!: UploadFilesBtnComponent;
 
+  fileIds:number[] = [];
 
   constructor() { }
 
@@ -30,29 +31,30 @@ export class AddFilesBtnComponent implements OnInit {
     this.postFilesStarted.emit(data);
   }
 
-  filesUploadedHandler(data: PublicFilesUploadResponse | PrivateFilesCreatedResult){
-
-    let fileTags:HtmlBodyTag[] = [];
-
-    for(let i = 0; i < data.fileIds.length; i++){
-      let fileTag: HtmlBodyTag = {
-        presentOrEdit: true,
-        tagDescription: {
-          tag: FileImageTagDataConsts.TagName,
-          displayValue: "Изображение",
-          isCustom: false
-        },
-        attributes: {
-          [FileImageTagDataConsts.FileIdAttrName]: data.fileIds[i],
-          [FileImageTagDataConsts.ScreenMediaRequest]: FileImageTagDataConsts.DefaultValueForFileImage
-        },
-        innerHtml: ""
-      };
-
-      fileTags.push(fileTag);
-    }
-
+  filesUploadedPublicHandler(data: PublicFilesUploadResponse) {
+    const fileTags = this.buildFileTags(data.fileIds.map(el=> el.toString()));
     this.filesTagsReady.emit(fileTags);
+  }
+
+  filesUploadedPrivateHandler(data: PrivateFilesCreatedResult) {
+    const fileTags = this.buildFileTags(data.fileIds);
+    this.filesTagsReady.emit(fileTags);
+  }
+
+  private buildFileTags(fileIds: string[]): HtmlBodyTag[] {
+    return fileIds.map(fileId => ({
+      presentOrEdit: true,
+      tagDescription: {
+        tag: FileImageTagDataConsts.TagName,
+        displayValue: "Изображение",
+        isCustom: false
+      },
+      attributes: {
+        [FileImageTagDataConsts.FileIdAttrName]: fileId,
+        [FileImageTagDataConsts.ScreenMediaRequest]: FileImageTagDataConsts.DefaultValueForFileImage
+      },
+      innerHtml: ""
+    }));
   }
 
   handleClick(){
