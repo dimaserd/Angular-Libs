@@ -18,6 +18,11 @@ export class CrocoHtmlFileOptionsService {
   }
 
   get(): CrocoHtmlEditorFileOptions {
-    return JSON.parse(localStorage.getItem(this.localStorageToken)) ?? this.defaultOptions;
+    try {
+      const data = localStorage.getItem(this.localStorageToken);
+      return data ? JSON.parse(data) : this.defaultOptions;
+    } catch (e) {
+      return this.defaultOptions;
+    }
   }
 }
