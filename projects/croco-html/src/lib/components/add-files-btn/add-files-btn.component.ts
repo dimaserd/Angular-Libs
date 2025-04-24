@@ -4,6 +4,7 @@ import { HtmlBodyTag } from '../../models/models';
 import { FilePostingStarted, UploadFilesBtnComponent } from '../upload-files-btn/upload-files-btn.component';
 import { MatButton } from '@angular/material/button';
 import { PublicFilesUploadResponse } from '../../services/PublicFileUploadService';
+import {PrivateFilesCreatedResult} from "../../services/PrivateFileUploadService";
 
 @Component({
     selector: 'croco-html-add-files-btn',
@@ -30,30 +31,30 @@ export class AddFilesBtnComponent implements OnInit {
     this.postFilesStarted.emit(data);
   }
 
-  publicFilesUploadedHandler(data: PublicFilesUploadResponse){
-    this.fileIds = data.fileIds;
-
-    let fileTags:HtmlBodyTag[] = [];
-
-    for(let i = 0; i < this.fileIds.length; i++){
-      let fileTag: HtmlBodyTag = {
-        presentOrEdit: true,
-        tagDescription: {
-          tag: FileImageTagDataConsts.TagName,
-          displayValue: "Изображение",
-          isCustom: false
-        },
-        attributes: {
-          [FileImageTagDataConsts.FileIdAttrName]: this.fileIds[i],
-          [FileImageTagDataConsts.ScreenMediaRequest]: FileImageTagDataConsts.DefaultValueForFileImage
-        },
-        innerHtml: ""
-      };
-
-      fileTags.push(fileTag);
-    }
-
+  filesUploadedPublicHandler(data: PublicFilesUploadResponse) {
+    const fileTags = this.buildFileTags(data.fileIds.map(el=> el.toString()));
     this.filesTagsReady.emit(fileTags);
+  }
+
+  filesUploadedPrivateHandler(data: PrivateFilesCreatedResult) {
+    const fileTags = this.buildFileTags(data.fileIds);
+    this.filesTagsReady.emit(fileTags);
+  }
+
+  private buildFileTags(fileIds: string[]): HtmlBodyTag[] {
+    return fileIds.map(fileId => ({
+      presentOrEdit: true,
+      tagDescription: {
+        tag: FileImageTagDataConsts.TagName,
+        displayValue: "Изображение",
+        isCustom: false
+      },
+      attributes: {
+        [FileImageTagDataConsts.FileIdAttrName]: fileId,
+        [FileImageTagDataConsts.ScreenMediaRequest]: FileImageTagDataConsts.DefaultValueForFileImage
+      },
+      innerHtml: ""
+    }));
   }
 
   handleClick(){

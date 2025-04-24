@@ -1,14 +1,20 @@
 import { Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ImageMethods } from '../../extensions/ImageMethods';
-import { FileType, PublicFilesQueryService } from '../../services/PublicFilesQueryService';
-import { CrocoHtmlOptionsToken } from '../../consts';
+import {FileSimpleModel, FileType, PublicFilesQueryService} from '../../services/PublicFilesQueryService';
+import { CrocoHtmlOptionsToken} from '../../consts';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { CrocoHtmlOptions } from '../../options';
-import { FileSimpleModel } from 'croco-generic-app-logic';
+import {CrocoHtmlEditorFileOptions, CrocoHtmlOptions} from '../../options';
+import {PrivateFileNameModel, PrivateFilesQueryService} from "../../services/PrivateFilesQueryService";
+import {CrocoHtmlFileOptionsService} from "../../services/croco-html-file-options.service";
 
 export interface SearchQuestionsFormData {
     q: string;
+}
+
+export interface FileUnifiedModel {
+  fileId: string;
+  fileName: string;
 }
 
 @Component({
@@ -27,27 +33,33 @@ export class FileIdSelectComponent implements OnInit, OnChanges {
 
     @Input()
     @Output()
-    fileId: number;
+    fileId: string;
 
     loading = false;
 
-    files: FileSimpleModel[] = [];
+    files: FileUnifiedModel[] = [];
 
     @Output()
-    onFileIdChanged = new EventEmitter<number>();
+    onFileIdChanged = new EventEmitter<string>();
+
+    get crocoHtmlEditorFileOptions(): CrocoHtmlEditorFileOptions {
+      return this._htmlSettingsService.get();
+    }
 
     constructor(
         private readonly _publicFileService: PublicFilesQueryService,
+        private readonly _privateFileService: PrivateFilesQueryService,
+        private _htmlSettingsService: CrocoHtmlFileOptionsService,
         @Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions
     ) {
     }
 
-    onModelChanged(fileId: number) {
+    onModelChanged(fileId: string) {
         this.onFileIdChanged.emit(fileId);
     }
 
-    getSrc(fileId: number) {
-        return ImageMethods.buildSmallUrl(fileId, this._options);
+    getSrc(fileId: string) {
+      return ImageMethods.buildSmallUrl(fileId, this._options);
     }
 
     ngOnInit(): void {
@@ -55,20 +67,31 @@ export class FileIdSelectComponent implements OnInit, OnChanges {
     }
 
     public loadFiles() {
-        this.loading = true;
-        this._publicFileService
-            .search({
-                count: 10,
-                offSet: 0,
-                fileName: null,
-                fileTypes: [FileType.Image],
-                applicationId: null,
-                q: this.q
-            })
-            .subscribe(data => {
-                this.files = [...data.list];
-                this.loading = false;
-            });
+      this.loading = true;
+      const isPrivate = this.crocoHtmlEditorFileOptions.usePrivateFiles;
+
+      const searchParams = {
+        count: 10,
+        offSet: 0,
+        fileName: null,
+        fileTypes: [FileType.Image],
+        applicationId: isPrivate ? this.crocoHtmlEditorFileOptions.applicationId : null,
+        q: this.q
+      };
+
+      if (isPrivate) {
+        this._privateFileService.search(searchParams)
+          .subscribe(data => {
+            this.files = data.list.map(el => ({fileId: el.id, fileName: el.fileName }));
+            this.loading = false;
+        });
+      } else {
+        this._publicFileService.search(searchParams)
+          .subscribe(data => {
+            this.files = data.list.map(el => ({fileId: el.fileId.toString(), fileName: el.fileName }));
+            this.loading = false;
+          })
+      }
     }
 
     onSearchChanged(q: { term: string, items: object[] }) {

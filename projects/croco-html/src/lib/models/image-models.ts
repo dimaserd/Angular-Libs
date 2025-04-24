@@ -11,7 +11,7 @@ export interface FileImageTag {
 
 export interface FileImageTagData {
   src: string;
-  fileId: number;
+  fileId: string;
   screenMediaRequest: string;
 }
 

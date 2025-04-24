@@ -1,5 +1,7 @@
 <div [hidden]="true">
-    <croco-app-upload-files-btn #fakeBtn (onPublicFilesUploaded)="publicFilesUploadedHandler($event)"
+    <croco-app-upload-files-btn #fakeBtn
+                                (onPrivateFilesUploaded)="filesUploadedPrivateHandler($event)"
+                                (onPublicFilesUploaded)="filesUploadedPublicHandler($event)"
         [btnText]="'Добавить изображения'"
         (postFilesStarted)="postFilesStartedEventHandler($event)" [extAccepts]="'image/*'"></croco-app-upload-files-btn>
 </div>

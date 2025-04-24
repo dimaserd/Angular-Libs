@@ -1,4 +1,14 @@
-import { AfterContentChecked, AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  AfterContentChecked,
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ClipboardService } from 'ngx-clipboard';
 import { VisualEditorComponent } from '../visual-editor/visual-editor.component';
@@ -11,11 +21,16 @@ import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatTabsModule } from '@angular/material/tabs';
 import { HtmlViewComponent } from "../../html-view/html-view.component";
 import { SpriteIconPathPipe } from "../../../pipes/sprite-icon-path.pipe";
+import {MatDialog} from "@angular/material/dialog";
+import {HtmlEditorSettingsModalComponent} from "../html-editor-settings-modal/html-editor-settings-modal.component";
+import {CrocoHtmlEditorFileOptions} from "../../../options";
+import {MatIcon} from "@angular/material/icon";
+import {CrocoHtmlFileOptionsService} from "../../../services/croco-html-file-options.service";
 
 @Component({
   selector: 'croco-html-main-editor',
   templateUrl: './main-editor.component.html',
-  styleUrls: ['./main-editor.component.css'],
+  styleUrls: ['./main-editor.component.scss'],
   standalone: true,
   imports: [
     MatTabsModule,
@@ -28,7 +43,8 @@ import { SpriteIconPathPipe } from "../../../pipes/sprite-icon-path.pipe";
     MatButton,
     MatCardModule,
     HtmlViewComponent,
-    SpriteIconPathPipe
+    SpriteIconPathPipe,
+    MatIcon
   ]
 })
 export class MainEditorComponent implements OnInit, AfterContentChecked, AfterViewInit {
@@ -53,7 +69,9 @@ export class MainEditorComponent implements OnInit, AfterContentChecked, AfterVi
 
   constructor(private readonly _clipboardService: ClipboardService,
     private readonly _snackBar: MatSnackBar,
-    private readonly _cdref: ChangeDetectorRef) { }
+    private readonly _cdref: ChangeDetectorRef,
+              private readonly _dialog: MatDialog,
+              private _htmlSettingsService: CrocoHtmlFileOptionsService) { }
 
   ngAfterViewInit(): void {
     this.recalculateBodyTags();
@@ -91,5 +109,20 @@ export class MainEditorComponent implements OnInit, AfterContentChecked, AfterVi
 
   ngOnInit(): void {
     this.visualEditor.recalculateBodyTags();
+    this._htmlSettingsService.set(this._htmlSettingsService.get())
+  }
+
+  openSettings(): void {
+    this._dialog.open(HtmlEditorSettingsModalComponent,
+      {
+        height: '300px',
+      }).afterClosed().subscribe((data: CrocoHtmlEditorFileOptions) => {
+      if(!data) return
+
+      this._htmlSettingsService.set({
+        usePrivateFiles: data.usePrivateFiles,
+        applicationId: data.applicationId === '' ? null : data.applicationId,
+      })
+    })
   }
 }

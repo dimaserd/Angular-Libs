@@ -25,12 +25,12 @@ export interface FileRelationModel {
 }
 
 export interface SearchFilesRequest {
-    q: string; 
-    fileName: string; 
-    applicationId: string; 
-    fileTypes: Array<FileType>; 
-    count: number | null; 
-    offSet: number; 
+    q: string;
+    fileName: string;
+    applicationId: string;
+    fileTypes: Array<FileType>;
+    count: number | null;
+    offSet: number;
 }
 
 export enum FileType {
@@ -50,10 +50,10 @@ export interface GetListSearchModel {
 }
 
 export interface FileSimpleModel {
-    fileId: number; 
-    fileName: string; 
-    type: FileType; 
-    downloadUrl: string; 
+    fileId: number;
+    fileName: string;
+    type: FileType;
+    downloadUrl: string;
 }
 
 @Injectable({

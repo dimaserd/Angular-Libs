@@ -10,14 +10,14 @@ export interface UploadPrivateFilesWithProgressEvent {
 }
 
 export interface PrivateFilesCreatedResult {
-  succeeded: boolean; 
-  errorMessage: string; 
-  setId: string; 
-  fileIds: Array<string>; 
+  succeeded: boolean;
+  errorMessage: string;
+  setId: string;
+  fileIds: Array<string>;
 }
 
 @Injectable({ providedIn: 'root' })
-export class PublicFileUploadService {
+export class PrivateFileUploadService {
   constructor(
     private readonly _httpClient: HttpClient,
     @Inject('BASE_URL') private readonly baseUrl: string,
@@ -45,7 +45,7 @@ export class PublicFileUploadService {
     applicationId: string | null,
     withProgress?: false,
   ): Observable<PrivateFilesCreatedResult>;
-  
+
   public postFilesInner(
     formData: FormData,
     applicationId: string | null,

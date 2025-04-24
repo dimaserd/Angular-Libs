@@ -16,28 +16,38 @@ export class FileImageTagDataConsts {
 
 export class ImageMethods {
 
-  public static buildUrl(fileId: number, sizeType: string, options: CrocoHtmlOptions): string {
+  public static buildUrl(fileId: string, sizeType: string, options: CrocoHtmlOptions): string {
 
     if (fileId === null || fileId === undefined) {
       return null;
     }
 
-    return options.publicImageResizedUrlFormat
+    const format = ImageMethods.isPrivateFileId(fileId)
+      ? options.publicImageResizedUrlFormat
+      : options.privateImageResizedUrlFormat;
+
+    return format
       .replace("{sizeType}", sizeType)
-      .replace("{fileId}", fileId.toString());
+      .replace("{fileId}", fileId);
   }
 
-  public static buildSmallUrl(fileId: number, options: CrocoHtmlOptions): string {
+  public static buildSmallUrl(fileId: string, options: CrocoHtmlOptions): string {
     return ImageMethods.buildUrl(fileId, "Small", options);
   }
 
-  public static buildMediumUrl(fileId: number, options: CrocoHtmlOptions): string {
+  public static buildMediumUrl(fileId: string, options: CrocoHtmlOptions): string {
     return ImageMethods.buildUrl(fileId, "Medium", options);
   }
 
+  public static isPrivateFileId(fileId: string): boolean {
+    return !isNaN(Number(fileId));
+  }
+
   public static ExtractImage(elem: HTMLElement, options: CrocoHtmlOptions): FileImageTag {
-    let fileId = +elem.getAttribute(FileImageTagDataConsts.FileIdAttrName);
+    let fileId = elem.getAttribute(FileImageTagDataConsts.FileIdAttrName)
+
     let src = ImageMethods.buildMediumUrl(fileId, options);
+
     return {
       type: FileImageTagDataConsts.TagName,
       data: {

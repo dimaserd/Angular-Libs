@@ -128,9 +128,8 @@
             Идентификатор файла
           </mat-label>
           <input matInput placeholder="Идентификатор файла" new-autocomplete="off" autocomplete="off"
-            type="number"
             [(ngModel)]="fileId"
-            (ngModelChange)="removeImageError()">
+            (ngModelChange)="onFileIdChanged($event)">
         </mat-form-field>
       </div>
     </div>

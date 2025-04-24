@@ -1,6 +1,8 @@
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { PublicFilesUploadResponse, PublicFileUploadService } from '../../services/PublicFileUploadService';
 import { MatButton } from '@angular/material/button';
+import {PrivateFilesCreatedResult, PrivateFileUploadService} from "../../services/PrivateFileUploadService";
+import {CrocoHtmlFileOptionsService} from "../../services/croco-html-file-options.service";
 
 export interface FilePostingStarted {
   filesCount: number;
@@ -36,18 +38,34 @@ export class UploadFilesBtnComponent {
   @Output()
   onPublicFilesUploaded = new EventEmitter<PublicFilesUploadResponse>();
 
-  constructor(private _fileUploadService: PublicFileUploadService) { }
+  @Output()
+  onPrivateFilesUploaded = new EventEmitter<PrivateFilesCreatedResult>();
+
+  constructor(
+    private _publicFileUploadService: PublicFileUploadService,
+    private _privateFileUploadService: PrivateFileUploadService,
+    private _htmlSettingsService: CrocoHtmlFileOptionsService,
+    ) { }
 
   handleFileInput(files: FileList) {
     this.postFilesStarted.emit({
       filesCount: files.length
     });
 
-    this._fileUploadService
-      .postFiles(files, null)
-      .subscribe(data => {
-        this.onPublicFilesUploaded.emit(data);
-      })
+    if(this._htmlSettingsService.get().usePrivateFiles) {
+      this._privateFileUploadService
+        .postFiles(files, this._htmlSettingsService.get().applicationId)
+        .subscribe(data => {
+          this.onPrivateFilesUploaded.emit(data);
+        })
+    }
+    else  {
+      this._publicFileUploadService
+        .postFiles(files, null)
+        .subscribe(data => {
+          this.onPublicFilesUploaded.emit(data);
+        })
+    }
   }
 
   clickFileInput() {

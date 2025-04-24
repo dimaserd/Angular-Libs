@@ -61,7 +61,6 @@ export class HtmlExtractionMethods {
         data.push(result);
       }
     }
-
     return data;
   }
 
