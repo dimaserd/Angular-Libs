@@ -25,7 +25,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {HtmlEditorSettingsModalComponent} from "../html-editor-settings-modal/html-editor-settings-modal.component";
 import {CrocoHtmlEditorFileOptions} from "../../../options";
 import {MatIcon} from "@angular/material/icon";
-import {HtmlSettingsService} from "../../../services/html-settings.service";
+import {CrocoHtmlFileOptionsService} from "../../../services/croco-html-file-options.service";
 
 @Component({
   selector: 'croco-html-main-editor',
@@ -71,7 +71,7 @@ export class MainEditorComponent implements OnInit, AfterContentChecked, AfterVi
     private readonly _snackBar: MatSnackBar,
     private readonly _cdref: ChangeDetectorRef,
               private readonly _dialog: MatDialog,
-              private _htmlSettingsService: HtmlSettingsService) { }
+              private _htmlSettingsService: CrocoHtmlFileOptionsService) { }
 
   ngAfterViewInit(): void {
     this.recalculateBodyTags();
@@ -123,8 +123,6 @@ export class MainEditorComponent implements OnInit, AfterContentChecked, AfterVi
         usePrivateFiles: data.usePrivateFiles,
         applicationId: data.applicationId === '' ? null : data.applicationId,
       })
-
-      this._htmlSettingsService.set(data)
     })
   }
 }

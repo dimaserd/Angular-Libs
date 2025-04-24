@@ -2,7 +2,7 @@ import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@
 import { PublicFilesUploadResponse, PublicFileUploadService } from '../../services/PublicFileUploadService';
 import { MatButton } from '@angular/material/button';
 import {PrivateFilesCreatedResult, PrivateFileUploadService} from "../../services/PrivateFileUploadService";
-import {HtmlSettingsService} from "../../services/html-settings.service";
+import {CrocoHtmlFileOptionsService} from "../../services/croco-html-file-options.service";
 
 export interface FilePostingStarted {
   filesCount: number;
@@ -44,7 +44,7 @@ export class UploadFilesBtnComponent {
   constructor(
     private _publicFileUploadService: PublicFileUploadService,
     private _privateFileUploadService: PrivateFileUploadService,
-    private _htmlSettingsService: HtmlSettingsService,
+    private _htmlSettingsService: CrocoHtmlFileOptionsService,
     ) { }
 
   handleFileInput(files: FileList) {

@@ -4,7 +4,7 @@ import {CrocoHtmlEditorFileOptions} from "../options";
 @Injectable({
   providedIn: 'root'
 })
-export class HtmlSettingsService {
+export class CrocoHtmlFileOptionsService {
   private readonly localStorageToken = 'crocoHtmlEditorFileOptions'
 
   constructor() { }

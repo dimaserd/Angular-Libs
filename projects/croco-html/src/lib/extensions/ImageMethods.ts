@@ -1,6 +1,5 @@
 import { FileImageTag, ImageRestrictions, IMediaRequest } from "../models";
 import { CrocoHtmlOptions } from "../options";
-import {crocoHtmlEditorFileOptionsToken} from "../consts";
 
 export class FileImageTagDataConsts {
   static TagName = "file-image";
@@ -23,9 +22,7 @@ export class ImageMethods {
       return null;
     }
 
-    const isNumericId = !isNaN(Number(fileId));
-
-    const format = isNumericId
+    const format = ImageMethods.isPrivateFileId(fileId)
       ? options.publicImageResizedUrlFormat
       : options.privateImageResizedUrlFormat;
 
@@ -42,17 +39,20 @@ export class ImageMethods {
     return ImageMethods.buildUrl(fileId, "Medium", options);
   }
 
+  public static isPrivateFileId(fileId: string): boolean {
+    return !isNaN(Number(fileId));
+  }
+
   public static ExtractImage(elem: HTMLElement, options: CrocoHtmlOptions): FileImageTag {
     let fileId = elem.getAttribute(FileImageTagDataConsts.FileIdAttrName)
 
     let src = ImageMethods.buildMediumUrl(fileId, options);
-    const isNumericId = !isNaN(Number(fileId));
+
     return {
       type: FileImageTagDataConsts.TagName,
       data: {
         src,
         fileId: fileId,
-        isPrivate: !isNumericId,
         screenMediaRequest: elem.getAttribute(FileImageTagDataConsts.ScreenMediaRequest)
       }
     };

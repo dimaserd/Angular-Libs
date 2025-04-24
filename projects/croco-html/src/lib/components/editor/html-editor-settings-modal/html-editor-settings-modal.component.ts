@@ -4,7 +4,7 @@ import {MatFormField, MatInput, MatLabel} from "@angular/material/input";
 import {MatCheckbox} from "@angular/material/checkbox";
 import {MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle} from "@angular/material/dialog";
 import {MatButton} from "@angular/material/button";
-import {HtmlSettingsService} from "../../../services/html-settings.service";
+import {CrocoHtmlFileOptionsService} from "../../../services/croco-html-file-options.service";
 
 @Component({
   selector: 'croco-html-html-editor-settings-modal',
@@ -29,7 +29,7 @@ export class HtmlEditorSettingsModalComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<HtmlEditorSettingsModalComponent>,
-    private _htmlSettingsService: HtmlSettingsService
+    private _htmlSettingsService: CrocoHtmlFileOptionsService
     ) {
     this.form = this.fb.group({
       usePrivateFiles: false,

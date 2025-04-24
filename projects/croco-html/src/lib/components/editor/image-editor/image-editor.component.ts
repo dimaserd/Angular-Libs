@@ -15,7 +15,6 @@ import { MatSlideToggle } from "@angular/material/slide-toggle";
 import { Subject, takeUntil } from "rxjs";
 import { CrocoHtmlOptions } from '../../../options';
 import { IMediaRequest } from '../../../models';
-import {HtmlSettingsService} from "../../../services/html-settings.service";
 
 @Component({
   selector: 'croco-html-image-editor',
@@ -67,7 +66,6 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
   constructor(
     @Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions,
     private readonly screenWidthService: ScreenWidthService,
-    private _htmlSettingsService: HtmlSettingsService
   ) { }
 
   getSrc() {
@@ -76,15 +74,14 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
 
   hasFileId() {
     const hasFileId = this.tag.attributes.hasOwnProperty(FileImageTagDataConsts.FileIdAttrName);
+    const fileId = this.tag.attributes[FileImageTagDataConsts.FileIdAttrName];
 
     if(!hasFileId) {
       return false
     }
 
-    const isValidNumber = !isNaN(this.tag.attributes[FileImageTagDataConsts.FileIdAttrName]);
-    const isPrivate = this._htmlSettingsService.get().usePrivateFiles;
-
-    return isPrivate ? true : isValidNumber;
+    const isValidId = !isNaN(Number(this.tag.attributes[FileImageTagDataConsts.FileIdAttrName]));
+    return ImageMethods.isPrivateFileId(fileId) ? true : isValidId;
   }
 
   onFileIdChanged(fileId: string) {

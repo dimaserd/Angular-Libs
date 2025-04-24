@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import {CrocoHtmlEditorFileOptions, CrocoHtmlOptions} from '../../options';
 import {PrivateFilesQueryService} from "../../services/PrivateFilesQueryService";
-import {HtmlSettingsService} from "../../services/html-settings.service";
+import {CrocoHtmlFileOptionsService} from "../../services/croco-html-file-options.service";
 
 export interface SearchQuestionsFormData {
     q: string;
@@ -51,7 +51,7 @@ export class FileIdSelectComponent implements OnInit, OnChanges {
     constructor(
         private readonly _publicFileService: PublicFilesQueryService,
         private readonly _privateFileService: PrivateFilesQueryService,
-        private _htmlSettingsService: HtmlSettingsService,
+        private _htmlSettingsService: CrocoHtmlFileOptionsService,
         @Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions
     ) {
     }
