@@ -6,6 +6,10 @@ import {CrocoHtmlEditorFileOptions} from "../options";
 })
 export class CrocoHtmlFileOptionsService {
   private readonly localStorageToken = 'crocoHtmlEditorFileOptions'
+  private readonly defaultOptions = {
+    applicationId: null,
+    usePrivateFiles: false,
+  }
 
   constructor() { }
 
@@ -14,9 +18,6 @@ export class CrocoHtmlFileOptionsService {
   }
 
   get(): CrocoHtmlEditorFileOptions {
-    return JSON.parse(localStorage.getItem(this.localStorageToken)) ?? {
-      applicationId: null,
-      usePrivateFiles: false,
-    }
+    return JSON.parse(localStorage.getItem(this.localStorageToken)) ?? this.defaultOptions;
   }
 }

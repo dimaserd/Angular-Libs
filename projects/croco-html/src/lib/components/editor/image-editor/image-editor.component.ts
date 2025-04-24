@@ -73,15 +73,7 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
   }
 
   hasFileId() {
-    const hasFileId = this.tag.attributes.hasOwnProperty(FileImageTagDataConsts.FileIdAttrName);
-    const fileId = this.tag.attributes[FileImageTagDataConsts.FileIdAttrName];
-
-    if(!hasFileId) {
-      return false
-    }
-
-    const isValidId = !isNaN(Number(this.tag.attributes[FileImageTagDataConsts.FileIdAttrName]));
-    return ImageMethods.isPrivateFileId(fileId) ? true : isValidId;
+    return this.tag.attributes.hasOwnProperty(FileImageTagDataConsts.FileIdAttrName);
   }
 
   onFileIdChanged(fileId: string) {

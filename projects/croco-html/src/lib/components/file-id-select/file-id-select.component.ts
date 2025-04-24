@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ImageMethods } from '../../extensions/ImageMethods';
-import { FileType, PublicFilesQueryService} from '../../services/PublicFilesQueryService';
+import {FileSimpleModel, FileType, PublicFilesQueryService} from '../../services/PublicFilesQueryService';
 import { CrocoHtmlOptionsToken} from '../../consts';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import {CrocoHtmlEditorFileOptions, CrocoHtmlOptions} from '../../options';
-import {PrivateFilesQueryService} from "../../services/PrivateFilesQueryService";
+import {PrivateFileNameModel, PrivateFilesQueryService} from "../../services/PrivateFilesQueryService";
 import {CrocoHtmlFileOptionsService} from "../../services/croco-html-file-options.service";
 
 export interface SearchQuestionsFormData {
@@ -14,9 +14,7 @@ export interface SearchQuestionsFormData {
 
 export interface FileUnifiedModel {
   fileId: string;
-  applicationId: string;
   fileName: string;
-  type: FileType;
 }
 
 @Component({
@@ -81,20 +79,24 @@ export class FileIdSelectComponent implements OnInit, OnChanges {
         q: this.q
       };
 
-      const setFiles = (data): FileUnifiedModel[] => {
-        return data.list.map(el => ({fileId: el.id ?? el.fileId, applicationId: el.applicationId ?? null, fileName: el.fileName, type: el.type }));
+      const setPrivateFiles = (data: PrivateFileNameModel[]): FileUnifiedModel[] => {
+        return data.map(el => ({fileId: el.id, fileName: el.fileName }));
+      }
+
+      const setPublicFiles = (data: FileSimpleModel[]): FileUnifiedModel[] => {
+        return data.map(el => ({fileId: el.fileId.toString(), fileName: el.fileName }));
       }
 
       if (isPrivate) {
         this._privateFileService.search(searchParams)
           .subscribe(data => {
-            this.files = setFiles(data)
+            this.files = setPrivateFiles(data.list)
             this.loading = false;
         });
       } else {
         this._publicFileService.search(searchParams)
           .subscribe(data => {
-            this.files = setFiles(data)
+            this.files = setPublicFiles(data.list)
             this.loading = false;
           })
       }
