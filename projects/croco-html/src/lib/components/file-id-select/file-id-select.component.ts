@@ -79,24 +79,16 @@ export class FileIdSelectComponent implements OnInit, OnChanges {
         q: this.q
       };
 
-      const setPrivateFiles = (data: PrivateFileNameModel[]): FileUnifiedModel[] => {
-        return data.map(el => ({fileId: el.id, fileName: el.fileName }));
-      }
-
-      const setPublicFiles = (data: FileSimpleModel[]): FileUnifiedModel[] => {
-        return data.map(el => ({fileId: el.fileId.toString(), fileName: el.fileName }));
-      }
-
       if (isPrivate) {
         this._privateFileService.search(searchParams)
           .subscribe(data => {
-            this.files = setPrivateFiles(data.list)
+            this.files = data.list.map(el => ({fileId: el.id, fileName: el.fileName }));
             this.loading = false;
         });
       } else {
         this._publicFileService.search(searchParams)
           .subscribe(data => {
-            this.files = setPublicFiles(data.list)
+            this.files = data.list.map(el => ({fileId: el.fileId.toString(), fileName: el.fileName }));
             this.loading = false;
           })
       }
