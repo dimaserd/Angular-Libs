@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { ImageMethods, FileImageTagDataConsts } from '../../../extensions';
 import { HtmlBodyTag } from '../../../models/models';
-import {crocoHtmlEditorFileOptionsToken, CrocoHtmlOptionsToken} from '../../../consts';
+import { CrocoHtmlOptionsToken} from '../../../consts';
 import { MatInput } from '@angular/material/input';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { FileIdSelectComponent } from '../../file-id-select/file-id-select.component';
@@ -15,6 +15,7 @@ import { MatSlideToggle } from "@angular/material/slide-toggle";
 import { Subject, takeUntil } from "rxjs";
 import { CrocoHtmlOptions } from '../../../options';
 import { IMediaRequest } from '../../../models';
+import {HtmlSettingsService} from "../../../services/html-settings.service";
 
 @Component({
   selector: 'croco-html-image-editor',
@@ -55,17 +56,19 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
   @Output()
   onTagUpdated = new EventEmitter<HtmlBodyTag>();
 
-  public get fileId(): unknown {
+  public get fileId(): string {
     return this.tag.attributes[FileImageTagDataConsts.FileIdAttrName];
   }
 
-  public set fileId(value: unknown) {
+  public set fileId(value: string) {
     this.tag.attributes[FileImageTagDataConsts.FileIdAttrName] = value;
   }
 
   constructor(
     @Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions,
-    private readonly screenWidthService: ScreenWidthService) { }
+    private readonly screenWidthService: ScreenWidthService,
+    private _htmlSettingsService: HtmlSettingsService
+  ) { }
 
   getSrc() {
     return ImageMethods.buildUrl(this.tag.attributes[FileImageTagDataConsts.FileIdAttrName], "Medium", this._options);
@@ -73,10 +76,15 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
 
   hasFileId() {
     const hasFileId = this.tag.attributes.hasOwnProperty(FileImageTagDataConsts.FileIdAttrName);
-    const isValidNumber = !isNaN(this.tag.attributes[FileImageTagDataConsts.FileIdAttrName]);
-    const isPrivate = crocoHtmlEditorFileOptionsToken.value.usePrivateFiles;
 
-    return isPrivate ? hasFileId : hasFileId && isValidNumber;
+    if(!hasFileId) {
+      return false
+    }
+
+    const isValidNumber = !isNaN(this.tag.attributes[FileImageTagDataConsts.FileIdAttrName]);
+    const isPrivate = this._htmlSettingsService.get().usePrivateFiles;
+
+    return isPrivate ? true : isValidNumber;
   }
 
   onFileIdChanged(fileId: string) {

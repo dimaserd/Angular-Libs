@@ -69,8 +69,8 @@ export class PublicFilesQueryService {
         this._baseControllerUrl = `${baseUrl}Api/Files`;
     }
 
-    public search(model: SearchFilesRequest): Observable<GetListResult<FileUnifiedModel>> {
-        return this._httpClient.post<GetListResult<FileUnifiedModel>>(
+    public search(model: SearchFilesRequest): Observable<GetListResult<FileSimpleModel>> {
+        return this._httpClient.post<GetListResult<FileSimpleModel>>(
             `${this._baseControllerUrl}/GetFiles`, model
         );
     }

@@ -24,7 +24,6 @@ import { SpriteIconPathPipe } from "../../../pipes/sprite-icon-path.pipe";
 import {MatDialog} from "@angular/material/dialog";
 import {HtmlEditorSettingsModalComponent} from "../html-editor-settings-modal/html-editor-settings-modal.component";
 import {CrocoHtmlEditorFileOptions} from "../../../options";
-import {crocoHtmlEditorFileOptionsToken} from "../../../consts";
 import {MatIcon} from "@angular/material/icon";
 import {HtmlSettingsService} from "../../../services/html-settings.service";
 
@@ -110,7 +109,7 @@ export class MainEditorComponent implements OnInit, AfterContentChecked, AfterVi
 
   ngOnInit(): void {
     this.visualEditor.recalculateBodyTags();
-    crocoHtmlEditorFileOptionsToken.next(this._htmlSettingsService.get())
+    this._htmlSettingsService.set(this._htmlSettingsService.get())
   }
 
   openSettings(): void {
@@ -120,7 +119,7 @@ export class MainEditorComponent implements OnInit, AfterContentChecked, AfterVi
       }).afterClosed().subscribe((data: CrocoHtmlEditorFileOptions) => {
       if(!data) return
 
-      crocoHtmlEditorFileOptionsToken.next({
+      this._htmlSettingsService.set({
         usePrivateFiles: data.usePrivateFiles,
         applicationId: data.applicationId === '' ? null : data.applicationId,
       })

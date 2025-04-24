@@ -26,8 +26,8 @@ export class PrivateFilesQueryService {
         this._baseControllerUrl = `${baseUrl}api/private-files/query`;
     }
 
-    public search(model: SearchFilesRequest): Observable<GetListResult<FileUnifiedModel>> {
-        return this._httpClient.post<GetListResult<FileUnifiedModel>>(
+    public search(model: SearchFilesRequest): Observable<GetListResult<PrivateFileNameModel>> {
+        return this._httpClient.post<GetListResult<PrivateFileNameModel>>(
             `${this._baseControllerUrl}/search`, model
         );
     }

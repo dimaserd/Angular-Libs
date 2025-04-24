@@ -30,6 +30,14 @@
   position: relative;
 }
 
+:host {
+  ::ng-deep {
+    .mat-expansion-panel, .mat-mdc-tab-body-content,   .mat-mdc-tab-body,  .mat-mdc-tab-body-wrapper  {
+      overflow: visible;
+    }
+  }
+}
+
 
 .example-list {
   width: 500px;

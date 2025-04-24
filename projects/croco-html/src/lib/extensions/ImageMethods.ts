@@ -23,7 +23,7 @@ export class ImageMethods {
       return null;
     }
 
-    const isNumericId = !isNaN(Number(fileId)); // определяем: число или UUID
+    const isNumericId = !isNaN(Number(fileId));
 
     const format = isNumericId
       ? options.publicImageResizedUrlFormat
@@ -46,12 +46,13 @@ export class ImageMethods {
     let fileId = elem.getAttribute(FileImageTagDataConsts.FileIdAttrName)
 
     let src = ImageMethods.buildMediumUrl(fileId, options);
+    const isNumericId = !isNaN(Number(fileId));
     return {
       type: FileImageTagDataConsts.TagName,
       data: {
         src,
         fileId: fileId,
-        isPrivate: crocoHtmlEditorFileOptionsToken.value.usePrivateFiles,
+        isPrivate: !isNumericId,
         screenMediaRequest: elem.getAttribute(FileImageTagDataConsts.ScreenMediaRequest)
       }
     };

@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ImageMethods } from '../../extensions/ImageMethods';
 import { FileType, PublicFilesQueryService} from '../../services/PublicFilesQueryService';
-import {crocoHtmlEditorFileOptionsToken, CrocoHtmlOptionsToken} from '../../consts';
+import { CrocoHtmlOptionsToken} from '../../consts';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import {CrocoHtmlEditorFileOptions, CrocoHtmlOptions} from '../../options';
 import {PrivateFilesQueryService} from "../../services/PrivateFilesQueryService";
+import {HtmlSettingsService} from "../../services/html-settings.service";
 
 export interface SearchQuestionsFormData {
     q: string;
@@ -13,12 +14,9 @@ export interface SearchQuestionsFormData {
 
 export interface FileUnifiedModel {
   fileId: string;
-  setId?: string;
+  applicationId: string;
   fileName: string;
   type: FileType;
-  downloadUrl: string;
-  createdOn?: string;
-  applicationId?: string;
 }
 
 @Component({
@@ -47,12 +45,13 @@ export class FileIdSelectComponent implements OnInit, OnChanges {
     onFileIdChanged = new EventEmitter<string>();
 
     get crocoHtmlEditorFileOptions(): CrocoHtmlEditorFileOptions {
-      return crocoHtmlEditorFileOptionsToken.value
+      return this._htmlSettingsService.get();
     }
 
     constructor(
         private readonly _publicFileService: PublicFilesQueryService,
         private readonly _privateFileService: PrivateFilesQueryService,
+        private _htmlSettingsService: HtmlSettingsService,
         @Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions
     ) {
     }
@@ -82,16 +81,22 @@ export class FileIdSelectComponent implements OnInit, OnChanges {
         q: this.q
       };
 
+      const setFiles = (data): FileUnifiedModel[] => {
+        return data.list.map(el => ({fileId: el.id ?? el.fileId, applicationId: el.applicationId ?? null, fileName: el.fileName, type: el.type }));
+      }
+
       if (isPrivate) {
-        this._privateFileService.search(searchParams).subscribe(data => {
-          this.files = [...data.list];
-          this.loading = false;
+        this._privateFileService.search(searchParams)
+          .subscribe(data => {
+            this.files = setFiles(data)
+            this.loading = false;
         });
       } else {
-        this._publicFileService.search(searchParams).subscribe(data => {
-          this.files = [...data.list];
-          this.loading = false;
-        });
+        this._publicFileService.search(searchParams)
+          .subscribe(data => {
+            this.files = setFiles(data)
+            this.loading = false;
+          })
       }
     }
 

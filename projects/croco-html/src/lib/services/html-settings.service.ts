@@ -5,14 +5,18 @@ import {CrocoHtmlEditorFileOptions} from "../options";
   providedIn: 'root'
 })
 export class HtmlSettingsService {
+  private readonly localStorageToken = 'crocoHtmlEditorFileOptions'
 
   constructor() { }
 
   set(data: CrocoHtmlEditorFileOptions) {
-    localStorage.setItem("crocoHtmlEditorFileOptions", JSON.stringify(data));
+    localStorage.setItem(this.localStorageToken, JSON.stringify(data));
   }
 
   get(): CrocoHtmlEditorFileOptions {
-    return JSON.parse(localStorage.getItem('crocoHtmlEditorFileOptions'))
+    return JSON.parse(localStorage.getItem(this.localStorageToken)) ?? {
+      applicationId: null,
+      usePrivateFiles: false,
+    }
   }
 }
