@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {CrocoHtmlEditorFileOptions} from "../options";
+import { CrocoHtmlEditorFileOptions } from "../options";
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +10,6 @@ export class CrocoHtmlFileOptionsService {
     applicationId: null,
     usePrivateFiles: false,
   }
-
-  constructor() { }
 
   set(data: CrocoHtmlEditorFileOptions) {
     localStorage.setItem(this.localStorageToken, JSON.stringify(data));

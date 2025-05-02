@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
-import {MatFormField, MatInput, MatLabel} from "@angular/material/input";
-import {MatCheckbox} from "@angular/material/checkbox";
-import {MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle} from "@angular/material/dialog";
-import {MatButton} from "@angular/material/button";
-import {CrocoHtmlFileOptionsService} from "../../../services/croco-html-file-options.service";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
+import { MatFormField, MatInput, MatLabel } from "@angular/material/input";
+import { MatCheckbox } from "@angular/material/checkbox";
+import { MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle } from "@angular/material/dialog";
+import { MatButton } from "@angular/material/button";
+import { CrocoHtmlFileOptionsService } from "../../../services/croco-html-file-options.service";
 
 @Component({
   selector: 'croco-html-html-editor-settings-modal',
@@ -27,14 +27,14 @@ export class HtmlEditorSettingsModalComponent implements OnInit {
   public form: FormGroup;
 
   constructor(
-    private fb: FormBuilder,
-    public dialogRef: MatDialogRef<HtmlEditorSettingsModalComponent>,
-    private _htmlSettingsService: CrocoHtmlFileOptionsService
-    ) {
+    private readonly fb: FormBuilder,
+    public readonly dialogRef: MatDialogRef<HtmlEditorSettingsModalComponent>,
+    private readonly _htmlSettingsService: CrocoHtmlFileOptionsService
+  ) {
     this.form = this.fb.group({
       usePrivateFiles: false,
       applicationId: ''
-    })
+    });
   }
 
   ngOnInit() {

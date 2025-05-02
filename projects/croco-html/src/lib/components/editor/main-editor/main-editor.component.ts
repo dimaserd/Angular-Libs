@@ -4,6 +4,7 @@ import {
   ChangeDetectorRef,
   Component,
   EventEmitter,
+  Inject,
   Input,
   OnInit,
   Output,
@@ -21,11 +22,12 @@ import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatTabsModule } from '@angular/material/tabs';
 import { HtmlViewComponent } from "../../html-view/html-view.component";
 import { SpriteIconPathPipe } from "../../../pipes/sprite-icon-path.pipe";
-import {MatDialog} from "@angular/material/dialog";
-import {HtmlEditorSettingsModalComponent} from "../html-editor-settings-modal/html-editor-settings-modal.component";
-import {CrocoHtmlEditorFileOptions} from "../../../options";
-import {MatIcon} from "@angular/material/icon";
-import {CrocoHtmlFileOptionsService} from "../../../services/croco-html-file-options.service";
+import { MatDialog } from "@angular/material/dialog";
+import { HtmlEditorSettingsModalComponent } from "../html-editor-settings-modal/html-editor-settings-modal.component";
+import { CrocoHtmlEditorFileOptions, CrocoHtmlOptions } from "../../../options";
+import { MatIcon } from "@angular/material/icon";
+import { CrocoHtmlFileOptionsService } from "../../../services/croco-html-file-options.service";
+import { CrocoHtmlOptionsToken } from '../../../consts';
 
 @Component({
   selector: 'croco-html-main-editor',
@@ -67,11 +69,16 @@ export class MainEditorComponent implements OnInit, AfterContentChecked, AfterVi
   @Output()
   onHtmlChanged = new EventEmitter<string>();
 
+  showSettingsButton = false;
+
   constructor(private readonly _clipboardService: ClipboardService,
     private readonly _snackBar: MatSnackBar,
     private readonly _cdref: ChangeDetectorRef,
-              private readonly _dialog: MatDialog,
-              private _htmlSettingsService: CrocoHtmlFileOptionsService) { }
+    private readonly _dialog: MatDialog,
+    private readonly _htmlSettingsService: CrocoHtmlFileOptionsService,
+    @Inject(CrocoHtmlOptionsToken) options: CrocoHtmlOptions) {
+      this.showSettingsButton = options.showSettingsButton;
+  }
 
   ngAfterViewInit(): void {
     this.recalculateBodyTags();
@@ -109,20 +116,24 @@ export class MainEditorComponent implements OnInit, AfterContentChecked, AfterVi
 
   ngOnInit(): void {
     this.visualEditor.recalculateBodyTags();
-    this._htmlSettingsService.set(this._htmlSettingsService.get())
   }
 
-  openSettings(): void {
-    this._dialog.open(HtmlEditorSettingsModalComponent,
-      {
-        height: '300px',
-      }).afterClosed().subscribe((data: CrocoHtmlEditorFileOptions) => {
-      if(!data) return
+  openSettingsModal(): void {
+    this._dialog
+      .open(HtmlEditorSettingsModalComponent,
+        {
+          height: '300px',
+        })
+      .afterClosed()
+      .subscribe((data: CrocoHtmlEditorFileOptions) => {
+        if (!data) {
+          return;
+        }
 
-      this._htmlSettingsService.set({
-        usePrivateFiles: data.usePrivateFiles,
-        applicationId: data.applicationId === '' ? null : data.applicationId,
+        this._htmlSettingsService.set({
+          usePrivateFiles: data.usePrivateFiles,
+          applicationId: data.applicationId === '' ? null : data.applicationId,
+        })
       })
-    })
   }
 }

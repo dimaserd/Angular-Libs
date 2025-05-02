@@ -29,6 +29,11 @@ export interface CrocoHtmlOptions {
   useCustomWidgetsButton: boolean;
 
   /**
+   * Показывать кнопку для запуска настроек
+   */
+  showSettingsButton: boolean;
+
+  /**
    * Обработчик нажатия на кнопку кастомных виджетов
    * @returns 
    */

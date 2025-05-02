@@ -54,6 +54,6 @@
   </mat-tab>
 </mat-tab-group>
 
-<div>
-  <mat-icon class="settings" (click)="openSettings()">settings</mat-icon>
+<div [hidden]="!showSettingsButton">
+  <mat-icon class="settings" (click)="openSettingsModal()">settings</mat-icon>
 </div>
