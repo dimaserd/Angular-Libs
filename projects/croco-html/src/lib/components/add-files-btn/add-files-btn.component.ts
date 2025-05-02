@@ -1,18 +1,18 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { FileImageTagDataConsts } from '../../extensions';
 import { HtmlBodyTag } from '../../models/models';
 import { FilePostingStarted, UploadFilesBtnComponent } from '../upload-files-btn/upload-files-btn.component';
 import { MatButton } from '@angular/material/button';
 import { PublicFilesUploadResponse } from '../../services/PublicFileUploadService';
-import {PrivateFilesCreatedResult} from "../../services/PrivateFileUploadService";
+import { PrivateFilesCreatedResult } from "../../services/PrivateFileUploadService";
 
 @Component({
-    selector: 'croco-html-add-files-btn',
-    templateUrl: './add-files-btn.component.html',
-    standalone: true,
-    imports: [UploadFilesBtnComponent, MatButton]
+  selector: 'croco-html-add-files-btn',
+  templateUrl: './add-files-btn.component.html',
+  standalone: true,
+  imports: [UploadFilesBtnComponent, MatButton]
 })
-export class AddFilesBtnComponent implements OnInit {
+export class AddFilesBtnComponent {
 
   @Output()
   postFilesStarted = new EventEmitter<FilePostingStarted>();
@@ -20,19 +20,19 @@ export class AddFilesBtnComponent implements OnInit {
   @ViewChild("fakeBtn")
   fakeBtn!: UploadFilesBtnComponent;
 
-  fileIds:number[] = [];
+  fileIds: number[] = [];
 
   constructor() { }
 
   @Output()
   filesTagsReady = new EventEmitter<HtmlBodyTag[]>();
 
-  postFilesStartedEventHandler(data: FilePostingStarted){
+  postFilesStartedEventHandler(data: FilePostingStarted) {
     this.postFilesStarted.emit(data);
   }
 
   filesUploadedPublicHandler(data: PublicFilesUploadResponse) {
-    const fileTags = this.buildFileTags(data.fileIds.map(el=> el.toString()));
+    const fileTags = this.buildFileTags(data.fileIds.map(el => el.toString()));
     this.filesTagsReady.emit(fileTags);
   }
 
@@ -57,10 +57,7 @@ export class AddFilesBtnComponent implements OnInit {
     }));
   }
 
-  handleClick(){
+  handleClick() {
     this.fakeBtn.clickFileInput();
-  }
-
-  ngOnInit(): void {
   }
 }

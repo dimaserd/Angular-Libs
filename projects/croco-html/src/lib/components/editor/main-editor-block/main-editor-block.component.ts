@@ -8,8 +8,8 @@ import { DownloadFileButtonEditorComponent } from '../download-file-button-edito
 import { ImageEditorComponent } from '../image-editor/image-editor.component';
 import { TextEditorComponent } from '../text-editor/text-editor.component';
 import { ExternalVideoEditorComponent } from '../external-video-editor/external-video-editor.component';
-import {ButtonEditorComponent} from "../button-editor/button-editor.component";
-import {CustomWidgetEditorComponent} from "../custom-widget-editor/custom-widget-editor.component";
+import { ButtonEditorComponent } from "../button-editor/button-editor.component";
+import { CustomWidgetEditorComponent } from "../custom-widget-editor/custom-widget-editor.component";
 
 @Component({
   selector: 'croco-html-main-editor-block',
@@ -22,13 +22,12 @@ import {CustomWidgetEditorComponent} from "../custom-widget-editor/custom-widget
     DownloadFileButtonEditorComponent,
     HtmlRawEditorComponent,
     MatIconButton,
-    MatIcon,
     ExternalVideoEditorComponent,
     ButtonEditorComponent,
     CustomWidgetEditorComponent
   ]
 })
-export class MainEditorBlockComponent implements OnInit {
+export class MainEditorBlockComponent {
 
   textTags = TextTags.allTextTags;
 
@@ -51,8 +50,5 @@ export class MainEditorBlockComponent implements OnInit {
 
   deleteItem() {
     this.onTagRemoved.emit(this.tag);
-  }
-
-  ngOnInit(): void {
   }
 }

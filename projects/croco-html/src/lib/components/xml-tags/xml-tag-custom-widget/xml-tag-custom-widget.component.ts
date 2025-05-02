@@ -8,10 +8,10 @@ import {
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
-import {CustomWidgetTagData} from "../../../extensions";
-import {MatTooltip} from "@angular/material/tooltip";
-import {CrocoHtmlOptionsToken} from "../../../consts";
-import {CrocoHtmlOptions} from "../../../options";
+import { CustomWidgetTagData } from "../../../extensions";
+import { MatTooltip } from "@angular/material/tooltip";
+import { CrocoHtmlOptionsToken } from "../../../consts";
+import { CrocoHtmlOptions } from "../../../options";
 
 @Component({
   selector: 'croco-html-xml-tag-custom-widget',
@@ -21,7 +21,7 @@ import {CrocoHtmlOptions} from "../../../options";
   standalone: true
 })
 export class XmlTagCustomWidgetComponent implements OnInit, OnDestroy {
-  @ViewChild('container', {read: ViewContainerRef, static: true})
+  @ViewChild('container', { read: ViewContainerRef, static: true })
   viewContainerRef!: ViewContainerRef;
 
   @Input()
@@ -46,7 +46,7 @@ export class XmlTagCustomWidgetComponent implements OnInit, OnDestroy {
   public dynamicContainerRef: ComponentRef<any>;
 
   constructor(
-      @Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions
+    @Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions
   ) {
   }
 

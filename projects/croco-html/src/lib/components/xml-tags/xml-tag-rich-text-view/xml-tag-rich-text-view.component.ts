@@ -5,7 +5,6 @@ import { RichTextToHtmlPipe } from '../../../pipes/RichTextToHtmlPipe';
 @Component({
     selector: 'croco-html-xml-tag-rich-text-view',
     templateUrl: './xml-tag-rich-text-view.component.html',
-    styleUrls: ['./xml-tag-rich-text-view.component.css'],
     standalone: true,
     imports: [RichTextToHtmlPipe]
 })

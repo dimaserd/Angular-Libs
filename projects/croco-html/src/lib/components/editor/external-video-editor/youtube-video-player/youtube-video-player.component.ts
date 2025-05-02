@@ -1,5 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
+import { Component, Input } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
 
 @Component({
   selector: 'youtube-video-player',
@@ -16,5 +16,5 @@ export class YoutubeVideoPlayerComponent {
 
   public safeUrl: SafeResourceUrl;
 
-  constructor(private sanitizer: DomSanitizer) {}
+  constructor(private sanitizer: DomSanitizer) { }
 }

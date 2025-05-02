@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { InterfaceBlock } from "../../../extensions/InterfaceBlock";
 import { ButtonTagData } from "../../../extensions/ButtonMethods";
-import { MatIcon } from "@angular/material/icon";
 import { MatButton } from "@angular/material/button";
 import { HtmlViewController } from '../../../services/HtmlViewController';
 
@@ -9,7 +8,6 @@ import { HtmlViewController } from '../../../services/HtmlViewController';
   selector: 'croco-html-xml-tag-button',
   standalone: true,
   imports: [
-    MatIcon,
     MatButton
   ],
   templateUrl: './xml-tag-button.component.html',

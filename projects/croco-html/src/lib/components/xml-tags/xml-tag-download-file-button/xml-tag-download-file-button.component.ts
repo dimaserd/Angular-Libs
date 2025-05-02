@@ -1,19 +1,13 @@
-import {Component, Input} from '@angular/core';
-import {InterfaceBlock} from "../../../extensions/InterfaceBlock";
-import {
-  YoutubeVideoPlayerComponent
-} from "../../editor/external-video-editor/youtube-video-player/youtube-video-player.component";
-import {MatButton} from "@angular/material/button";
-import {BlobCreateService} from "../../../services/blob-create.service";
-import {DownloadButtonTagData} from "../../../extensions/DownloadButtonMethods";
-import {MatIcon} from "@angular/material/icon";
+import { Component, Input } from '@angular/core';
+import { InterfaceBlock } from "../../../extensions/InterfaceBlock";
+import { BlobCreateService } from "../../../services/blob-create.service";
+import { DownloadButtonTagData } from "../../../extensions/DownloadButtonMethods";
+import { MatIcon } from "@angular/material/icon";
 
 @Component({
   selector: 'croco-html-xml-tag-download-file-button',
   standalone: true,
   imports: [
-    YoutubeVideoPlayerComponent,
-    MatButton,
     MatIcon
   ],
   templateUrl: './xml-tag-download-file-button.component.html',
@@ -31,7 +25,7 @@ export class XmlTagDownloadFileButtonComponent {
     }
   };
 
-  constructor(private readonly _blobCreateService: BlobCreateService) {}
+  constructor(private readonly _blobCreateService: BlobCreateService) { }
 
   public _block: DownloadButtonTagData = {
     title: '',
@@ -40,7 +34,7 @@ export class XmlTagDownloadFileButtonComponent {
 
   downloadFile() {
     this._blobCreateService.getBlob(this._block.link).subscribe(
-      blob=> {
+      blob => {
         const link = document.createElement('a');
         const objectUrl = URL.createObjectURL(blob);
         link.href = objectUrl;
