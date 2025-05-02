@@ -4,7 +4,7 @@ import { MatFormField, MatInput, MatLabel } from "@angular/material/input";
 import { MatCheckbox } from "@angular/material/checkbox";
 import { MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle } from "@angular/material/dialog";
 import { MatButton } from "@angular/material/button";
-import { CrocoHtmlFileOptionsService } from "../../../services/croco-html-file-options.service";
+import { CrocoHtmlFileOptionsService } from "../../../services/CrocoHtmlFileOptionsService";
 
 @Component({
   selector: 'croco-html-html-editor-settings-modal',

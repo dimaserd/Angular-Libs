@@ -4,6 +4,7 @@
         <ng-select [(ngModel)]="fileId" (ngModelChange)="onModelChanged($event)" [items]="files" #select
             bindLabel="fileName" (search)="onSearchChanged($event)" [loading]="loading" [loadingText]="'Загружаю файлы'"
             dropdownPosition="auto" [bindValue]="'fileId'" labelForId="fileName" placeholder="Выбрать файл"
+            appendTo="body"
             [virtualScroll]="true">
             <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
                 <div>

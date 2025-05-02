@@ -26,7 +26,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { HtmlEditorSettingsModalComponent } from "../html-editor-settings-modal/html-editor-settings-modal.component";
 import { CrocoHtmlEditorFileOptions, CrocoHtmlOptions } from "../../../options";
 import { MatIcon } from "@angular/material/icon";
-import { CrocoHtmlFileOptionsService } from "../../../services/croco-html-file-options.service";
+import { CrocoHtmlFileOptionsService } from "../../../services/CrocoHtmlFileOptionsService";
 import { CrocoHtmlOptionsToken } from '../../../consts';
 
 @Component({

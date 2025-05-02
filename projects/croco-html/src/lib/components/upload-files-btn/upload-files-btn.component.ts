@@ -2,7 +2,7 @@ import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@
 import { PublicFilesUploadResponse, PublicFileUploadService } from '../../services/PublicFileUploadService';
 import { MatButton } from '@angular/material/button';
 import {PrivateFilesCreatedResult, PrivateFileUploadService} from "../../services/PrivateFileUploadService";
-import {CrocoHtmlFileOptionsService} from "../../services/croco-html-file-options.service";
+import {CrocoHtmlFileOptionsService} from "../../services/CrocoHtmlFileOptionsService";
 
 export interface FilePostingStarted {
   filesCount: number;
