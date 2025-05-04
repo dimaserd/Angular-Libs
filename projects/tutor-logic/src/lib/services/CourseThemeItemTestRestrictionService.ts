@@ -41,6 +41,6 @@ export class CourseThemeItemTestRestrictionService {
     }
 
     getRemovingAllState(courseId: string) {
-        return this._http.post<CourseRemovingAllTestRestrictionsState>(`${this.baseControllerUrl}/removing-all/${courseId}/start`, {})
+        return this._http.get<CourseRemovingAllTestRestrictionsState>(`${this.baseControllerUrl}/removing-all/${courseId}/state`)
     }
 }
