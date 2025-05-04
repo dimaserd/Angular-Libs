@@ -73,3 +73,16 @@ export interface DeadLineWithWarningMessage {
     deadLine: string;
     warningMessage: string;
 }
+
+export interface CourseRemovingAllTestRestrictionsState {
+    taskId: string;
+    inProcess: boolean;
+    state: CourseRemovingAllTestRestrictionsStateModel;
+}
+
+export interface CourseRemovingAllTestRestrictionsStateModel {
+    courseId: string;
+    themeIdsLeftToUpdate: Array<string>;
+    totalThemesToUpdateCount: number;
+    updateProgressPercents: number;
+}
