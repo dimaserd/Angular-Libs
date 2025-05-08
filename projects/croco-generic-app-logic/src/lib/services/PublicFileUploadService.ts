@@ -2,20 +2,7 @@ import { HttpClient, HttpEvent } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PrivateFileUploadService } from './PrivateFileUploadService';
-
-export interface UploadPublicFilesWithProgressEvent {
-  loading: boolean;
-  response?: PublicFilesUploadResponse;
-  uploadingLoaded: number;
-  uploadingTotal: number;
-}
-
-export interface PublicFilesUploadResponse {
-  succeeded: boolean; 
-  errorMessage: string; 
-  fileIds: Array<number>; 
-  filesUploadedEventId: string; 
-}
+import { PublicFilesUploadResponse } from '../models/file-models';
 
 @Injectable({ providedIn: 'root' })
 export class PublicFileUploadService {

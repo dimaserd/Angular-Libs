@@ -1,9 +1,3 @@
-import { BaseApiResponse } from "./models";
-
-export interface BaseApiResponseWithFilesIds extends BaseApiResponse {
-    responseObject: number[];
-}
-
 export interface DbFileNoDataWithRelations {
     id: number;
     fileName: string;
@@ -42,4 +36,18 @@ export interface FileSimpleModel {
     fileName: string;
     type: FileType;
     downloadUrl: string;
+}
+
+export interface UploadPublicFilesWithProgressEvent {
+  loading: boolean;
+  response?: PublicFilesUploadResponse;
+  uploadingLoaded: number;
+  uploadingTotal: number;
+}
+
+export interface PublicFilesUploadResponse {
+  succeeded: boolean; 
+  errorMessage: string; 
+  fileIds: Array<number>; 
+  filesUploadedEventId: string; 
 }
