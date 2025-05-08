@@ -1,7 +1,7 @@
 import { LoginResultModel } from "./login-models";
 
-export interface ForgotPasswordModel {
-    email: string;
+export interface RestorePasswordRequest {
+    emailOrPhoneNumber: string;
 }
 
 export interface ChangePasswordByTokenRequest {

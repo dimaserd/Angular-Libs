@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { BaseApiResponse, ChangePasswordByTokenRequest, ChangeUserPasswordModel } from "../models";
-import { ForgotPasswordModel } from "../models";
+import { RestorePasswordRequest } from "../models";
 
 /**
  * Сервис для изменения пароля
@@ -15,7 +15,7 @@ export class PasswordChangeService {
     private readonly _baseControllerUrl: string = "";
 
     constructor(private readonly _httpClient: HttpClient,
-        @Inject('BASE_URL') private readonly baseUrl: string) {
+        @Inject('BASE_URL') baseUrl: string) {
             this._baseControllerUrl = `${baseUrl}api/account/password`;
     }
 
@@ -24,7 +24,7 @@ export class PasswordChangeService {
      * @param data 
      * @returns 
      */
-    public userForgotPassword(data: ForgotPasswordModel): Observable<BaseApiResponse> {
+    public userForgotPassword(data: RestorePasswordRequest): Observable<BaseApiResponse> {
         return this._httpClient.post<BaseApiResponse>(this._baseControllerUrl + '/forgot/start', data);
     }
 

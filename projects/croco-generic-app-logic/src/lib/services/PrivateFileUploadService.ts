@@ -91,12 +91,12 @@ export class PrivateFileUploadService {
         return url;
     }
 
-    private static getFormData(files: FileList): FormData {
+    public static getFormData(files: FileList): FormData {
         const formData: FormData = new FormData();
 
         for (let i = 0; i < files.length; i++) {
             var fileToUpload = files.item(i);
-            formData.append(`fileKey${i}`, fileToUpload as Blob, fileToUpload?.name);
+            formData.append(`fileKey${i}`, fileToUpload, fileToUpload?.name);
         }
 
         return formData;
