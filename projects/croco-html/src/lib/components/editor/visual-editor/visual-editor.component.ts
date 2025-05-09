@@ -155,16 +155,17 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   addTagClickHandler(): void {
     let tagDescription = this.tags
       .find(x => x.tag === this.selectedValue);
-
-    let attrs = {};
-    let innerHtml = "";
-
+ 
     if (TextTags.allTextTags.includes(tagDescription.tag)) {
       this.addTextTags();
       this.startAddingText();
       return;
     }
-    else if (tagDescription.tag == ExternalVideoTagDataConsts.TagName) {
+
+    let attrs = {};
+    let innerHtml = "";
+
+    if (tagDescription.tag == ExternalVideoTagDataConsts.TagName) {
       attrs[ExternalVideoTagDataConsts.VideoTypeAttrName] = this.selectedVideoPlayer;
       attrs[ExternalVideoTagDataConsts.UseResponsiveWrapperAttrName] = false;
       attrs[ExternalVideoTagDataConsts.LinkAttrName] = this.selectedVideoPlayer === ExternalVideoSupportedTypes.Code ? '' :
@@ -233,10 +234,13 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     let tagDescription = this.textTagOptions?.find(x => x.tag === this.textTag);
 
     for (let i = 0; i < lines.length; i++) {
-      if (lines[i].length > 0) {
+
+      const line = lines[i];
+
+      if (line.length > 0) {
         this.bodyTags.push({
           tagDescription,
-          innerHtml: lines[i],
+          innerHtml: line,
           attributes: {
             "h-align": `${this.alignment}`
           },
@@ -247,7 +251,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     }
   }
 
-  postFilesStartedEventHandler(model: FilePostingStarted) {
+  postFilesStartedEventHandler() {
     this.loadingText = "Файлы загружаются на сервер";
     this.isLoading = true;
   }
@@ -276,6 +280,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
 
   onTagRemovedHandler(index: number) {
     this.bodyTags.splice(index, 1);
+    this.saveBodyTags = [...this.bodyTags];
     this.recalculateHtml();
   }
 
@@ -287,6 +292,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
 
   recalculateBodyTags() {
     this.bodyTags = BodyTagsExtensions.getBodyTags(this.html, this._options);
+    this.saveBodyTags = [...this.bodyTags];
   }
 
   selectTag(data: TagItem) {

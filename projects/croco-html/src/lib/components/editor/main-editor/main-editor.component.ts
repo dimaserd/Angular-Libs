@@ -77,7 +77,7 @@ export class MainEditorComponent implements OnInit, AfterContentChecked, AfterVi
     private readonly _dialog: MatDialog,
     private readonly _htmlSettingsService: CrocoHtmlFileOptionsService,
     @Inject(CrocoHtmlOptionsToken) options: CrocoHtmlOptions) {
-      this.showSettingsButton = options.showSettingsButton;
+    this.showSettingsButton = options.showSettingsButton;
   }
 
   ngAfterViewInit(): void {
