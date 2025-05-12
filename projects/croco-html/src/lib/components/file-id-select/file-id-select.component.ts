@@ -20,7 +20,7 @@ export interface FileUnifiedModel {
 @Component({
   selector: 'croco-html-file-id-select',
   templateUrl: './file-id-select.component.html',
-  styleUrls: ['./file-id-select.component.css'],
+  styleUrls: ['./file-id-select.component.scss'],
   standalone: true,
   imports: [NgSelectModule, FormsModule]
 })
