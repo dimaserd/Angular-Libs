@@ -1,3 +1,5 @@
+@import "../../styles/screen_sizes";
+
 .file-id {
   &__container {
     display: flex;
@@ -5,7 +7,7 @@
     justify-content: space-between;
     gap: 10px;
 
-    @media (max-width: 768px) {
+    @media (max-width: $media-m) {
       align-items: unset;
       flex-direction: column;
     }
@@ -19,13 +21,13 @@
       word-break: break-word;
       white-space: normal;
 
-      @media (max-width: 768px) {
+      @media (max-width: $media-m) {
         font-size: 14px;
       }
     }
 
     span {
-      @media (max-width: 768px) {
+      @media (max-width: $media-m) {
         font-size: 14px;
       }
     }
