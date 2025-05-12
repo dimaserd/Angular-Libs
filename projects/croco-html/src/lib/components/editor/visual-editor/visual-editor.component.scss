@@ -1,3 +1,5 @@
+@import "../../../styles/screen_sizes";
+
 :host {
   --mat-standard-button-toggle-selected-state-background-color: #323E8B;
   --mat-standard-button-toggle-text-color: #323E8B;
@@ -144,7 +146,7 @@
   }
 }
 
-@media (max-width: 760px) {
+@media (max-width: $media-m) {
   .tag-item:hover {
     color: inherit;
     box-shadow: none;

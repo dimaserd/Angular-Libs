@@ -1,3 +1,5 @@
+@import "../../../styles/screen_sizes";
+
 .code-view {
   &.video-player {
     margin: 0 auto;
@@ -13,19 +15,19 @@
         height: 100%;
       }
     }
-    @media screen and (max-width: 760px) {
+    @media screen and (max-width: $media-m) {
       height: 300px;
     }
 
-    @media screen and (max-width: 540px) {
+    @media screen and (max-width: $media-ms) {
       height: 250px;
     }
 
-    @media screen and (max-width: 450px) {
+    @media screen and (max-width: $media-s) {
       height: 200px;
     }
 
-    @media screen and (max-width: 380px) {
+    @media screen and (max-width: $media-xs) {
       height: 180px;
     }
   }

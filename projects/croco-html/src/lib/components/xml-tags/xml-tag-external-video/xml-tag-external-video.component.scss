@@ -1,4 +1,6 @@
-@media only screen and (min-width: 769px) {
+@import "../../../styles/screen_sizes";
+
+@media only screen and (min-width: $media-m) {
     .y-video {
         display: block;
         width: 640px;
@@ -7,7 +9,7 @@
     }
 }
 
-@media only screen and (max-width: 827px) {
+@media only screen and (max-width: $media-l) {
     .y-video {
         display: block;
         width: 100%;

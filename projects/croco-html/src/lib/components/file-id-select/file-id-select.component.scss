@@ -1,0 +1,42 @@
+@import "../../styles/screen_sizes";
+
+.file-id {
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+
+    @media (max-width: $media-m) {
+      align-items: unset;
+      flex-direction: column;
+    }
+  }
+
+  &__text-container {
+    display: flex;
+    flex-direction: column;
+
+    b {
+      word-break: break-word;
+      white-space: normal;
+
+      @media (max-width: $media-m) {
+        font-size: 14px;
+      }
+    }
+
+    span {
+      @media (max-width: $media-m) {
+        font-size: 14px;
+      }
+    }
+  }
+
+  &__img {
+    img {
+      width: 100px;
+      height: 100px;
+    }
+  }
+}
