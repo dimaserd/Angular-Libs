@@ -8,7 +8,7 @@ export interface TutorFullApplicationPublicOptions {
   applicationName: string;
   applicationUrl: string;
   customMainHostUrl: string;
-  multiSchoolEnabled: boolean;
+  multiSchoolOptions: MultiSchoolOptions;
   telegramBotSettings: MainTelegramBotSettings;
   studentDemo: StudentDemoSettings;
   publicImageUrlFormat: string;
@@ -20,6 +20,12 @@ export interface TutorFullApplicationPublicOptions {
   solutionChatSettings: TestSolutionChatSettings;
   serverAppVersion: string;
   dataOnUtc: string;
+}
+
+
+export interface MultiSchoolOptions {
+  schoolRegistrationEnabled: boolean;
+  infoEmail: string;
 }
 
 export interface IconApplicationSettings {
