@@ -27,3 +27,39 @@ export enum TestQuestionErrorsStatisticOrderType {
 export interface QuestionErrorStatisticsComputingState {
     toComputeReportsCount: number;
 }
+
+export interface GetAggregatedStudentStatisticsRequest {
+    studentId: string;
+    subjectId: string;
+    computeSubjects: boolean;
+    questionTags: Array<string>;
+    tagsCount: number;
+}
+
+export interface AggregatedStudentStatisticsResult {
+    studentId: string;
+    subjects: Array<SubjectAggregatedStatisticModel>;
+    questionTags: Array<QuestionTagAggregatedStatisticModel>;
+}
+
+
+export interface SubjectAggregatedStatisticModel {
+    subjectId: string;
+    subjectName: string;
+    statistic: ComputedStatisticModel;
+}
+
+
+export interface ComputedStatisticModel {
+    errorsAnswersCount: number;
+    almostRightAnswersCount: number;
+    rightAnswersCount: number;
+    score: number;
+    totalAttemptsCount: number;
+}
+
+export interface QuestionTagAggregatedStatisticModel {
+    tagId: string;
+    tagDisplayName: string;
+    statistic: ComputedStatisticModel;
+}
