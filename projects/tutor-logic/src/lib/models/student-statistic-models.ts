@@ -42,20 +42,20 @@ export interface AggregatedStudentStatisticsResult {
     questionTags: Array<QuestionTagAggregatedStatisticModel>;
 }
 
-
 export interface SubjectAggregatedStatisticModel {
     subjectId: string;
     subjectName: string;
     statistic: ComputedStatisticModel;
 }
 
-
 export interface ComputedStatisticModel {
     errorsAnswersCount: number;
     almostRightAnswersCount: number;
     rightAnswersCount: number;
     score: number;
+    attemptsInScoreTotalCount: number;
     totalAttemptsCount: number;
+    successRate: number;
 }
 
 export interface QuestionTagAggregatedStatisticModel {
