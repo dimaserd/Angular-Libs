@@ -36,10 +36,11 @@ export interface GetAggregatedStudentStatisticsRequest {
     tagsCount: number;
 }
 
+
 export interface AggregatedStudentStatisticsResult {
     studentId: string;
     subjects: Array<SubjectAggregatedStatisticModel>;
-    questionTags: Array<QuestionTagAggregatedStatisticModel>;
+    questionTags: AggregatedQuestionTagStatistics;
 }
 
 export interface SubjectAggregatedStatisticModel {
@@ -53,9 +54,14 @@ export interface ComputedStatisticModel {
     almostRightAnswersCount: number;
     rightAnswersCount: number;
     score: number;
-    attemptsInScoreTotalCount: number;
+    attemptsWithScoreTotalCount: number;
     totalAttemptsCount: number;
     successRate: number;
+}
+
+export interface AggregatedQuestionTagStatistics {
+    best: Array<QuestionTagAggregatedStatisticModel>;
+    worst: Array<QuestionTagAggregatedStatisticModel>;
 }
 
 export interface QuestionTagAggregatedStatisticModel {
