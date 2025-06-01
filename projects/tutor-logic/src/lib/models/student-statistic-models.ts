@@ -24,8 +24,9 @@ export enum TestQuestionErrorsStatisticOrderType {
     RecentErrors = 'RecentErrors'
 }
 
-export interface QuestionErrorStatisticsComputingState {
-    toComputeReportsCount: number;
+export interface QuestionStatisticComputingState {
+    toComputeQuestionReportsCount: number;
+    toComputeSnapshotsCount: number;
 }
 
 export interface GetAggregatedStudentStatisticsRequest {

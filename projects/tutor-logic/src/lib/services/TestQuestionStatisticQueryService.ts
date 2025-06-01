@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, Inject } from "@angular/core";
-import { AggregatedStudentStatisticsResult, GetAggregatedStudentStatisticsRequest, GetListResult, QuestionErrorStatisticsComputingState, SearchTestQuestionErrorsStatisticRequest, StudentTestQuestionStatisticDetailedModel } from "../models";
+import { AggregatedStudentStatisticsResult, GetAggregatedStudentStatisticsRequest, GetListResult, QuestionStatisticComputingState, SearchTestQuestionErrorsStatisticRequest, StudentTestQuestionStatisticDetailedModel } from "../models";
 
 @Injectable({ providedIn: 'root' })
 export class TestQuestionStatisticQueryService {
@@ -28,6 +28,6 @@ export class TestQuestionStatisticQueryService {
   }
 
   getState() {
-    return this._httpClient.get<QuestionErrorStatisticsComputingState>(`${this.baseControllerUrl}/state`);
+    return this._httpClient.get<QuestionStatisticComputingState>(`${this.baseControllerUrl}/state`);
   }
 }
