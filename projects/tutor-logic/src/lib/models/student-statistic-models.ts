@@ -25,8 +25,9 @@ export enum TestQuestionErrorsStatisticOrderType {
 }
 
 export interface QuestionStatisticComputingState {
-    toComputeQuestionReportsCount: number;
-    toComputeSnapshotsCount: number;
+	 toComputeQuestionReportsCount: number; 
+	 toComputeStudentSnapshotsCount: number; 
+	 toComputeStudentGroupSnapshotsCount: number; 
 }
 
 export interface GetAggregatedStudentStatisticsRequest {
