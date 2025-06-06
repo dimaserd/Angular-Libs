@@ -19,55 +19,47 @@ export interface SearchTestQuestionErrorsStatisticRequest {
     offSet: number;
 }
 
+
 export enum TestQuestionErrorsStatisticOrderType {
     MostErrors = 'MostErrors',
     RecentErrors = 'RecentErrors'
 }
 
 export interface QuestionStatisticComputingState {
-	 toComputeQuestionReportsCount: number; 
-	 toComputeStudentSnapshotsCount: number; 
-	 toComputeStudentGroupSnapshotsCount: number; 
+    toComputeQuestionReportsCount: number;
+    toComputeStudentSnapshotsCount: number;
+    toComputeStudentGroupSnapshotsCount: number;
 }
 
-export interface GetAggregatedStudentStatisticsRequest {
+export interface StudentStatisticSnapshotValueModel {
     studentId: string;
-    subjectId: string;
-    computeSubjects: boolean;
-    questionTags: Array<string>;
-    tagsCount: number;
+    dataOnUtc: string;
+    computedOnUtc: string;
+    tags: Array<StudentStatisticSnapshotTagValueModel>;
+    subjects: Array<StudentStatisticSnapshotSubjectValueModel>;
 }
 
-
-export interface AggregatedStudentStatisticsResult {
-    studentId: string;
-    subjects: Array<SubjectAggregatedStatisticModel>;
-    questionTags: AggregatedQuestionTagStatistics;
+export interface StudentStatisticSnapshotTagValueModel {
+    tagId: string;
+    tagDisplayName: string;
+    statistic: ComputedStatisticPresentationModel;
 }
 
-export interface SubjectAggregatedStatisticModel {
-    subjectId: string;
-    subjectName: string;
-    statistic: ComputedStatisticModel;
-}
-
-export interface ComputedStatisticModel {
+export interface ComputedStatisticPresentationModel {
     errorsAnswersCount: number;
     almostRightAnswersCount: number;
     rightAnswersCount: number;
     score: number;
     attemptsWithScoreTotalCount: number;
     totalAttemptsCount: number;
-    successRate: number;
+    successRatePercents: string;
+    successRateRankValue: number;
+    earnedPoints: number;
+    totalPoints: number;
 }
 
-export interface AggregatedQuestionTagStatistics {
-    best: Array<QuestionTagAggregatedStatisticModel>;
-    worst: Array<QuestionTagAggregatedStatisticModel>;
-}
-
-export interface QuestionTagAggregatedStatisticModel {
-    tagId: string;
-    tagDisplayName: string;
-    statistic: ComputedStatisticModel;
+export interface StudentStatisticSnapshotSubjectValueModel {
+    subjectId: string;
+    subjectName: string;
+    statistic: ComputedStatisticPresentationModel;
 }

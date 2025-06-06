@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, Inject } from "@angular/core";
-import { AggregatedStudentStatisticsResult, GetAggregatedStudentStatisticsRequest, GetListResult, QuestionStatisticComputingState, SearchTestQuestionErrorsStatisticRequest, StudentTestQuestionStatisticDetailedModel } from "../models";
+import { GetListResult, QuestionStatisticComputingState, SearchTestQuestionErrorsStatisticRequest, StudentTestQuestionStatisticDetailedModel } from "../models";
 
 @Injectable({ providedIn: 'root' })
 export class TestQuestionStatisticQueryService {
@@ -16,13 +16,6 @@ export class TestQuestionStatisticQueryService {
   search(model: SearchTestQuestionErrorsStatisticRequest) {
     return this._httpClient.post<GetListResult<StudentTestQuestionStatisticDetailedModel>>(
       `${this.baseControllerUrl}/query/search`,
-      model
-    );
-  }
-
-  searchAggregated(model: GetAggregatedStudentStatisticsRequest) {
-    return this._httpClient.post<AggregatedStudentStatisticsResult>(
-      `${this.baseControllerUrl}/query/search-aggregated`,
       model
     );
   }
