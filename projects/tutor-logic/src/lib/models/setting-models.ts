@@ -17,7 +17,6 @@ export interface TutorFullApplicationPublicOptions {
   icon: IconApplicationSettings;
   webAppRoutes: WebAppRoutes;
   telephoneInputOptions: TelephoneInputOptions;
-  solutionChatSettings: TestSolutionChatSettings;
   serverAppVersion: string;
   dataOnUtc: string;
 }
@@ -30,10 +29,6 @@ export interface MultiSchoolOptions {
 
 export interface IconApplicationSettings {
   currentIconSetId: string;
-}
-
-export interface TestSolutionChatSettings {
-  useNewChats: boolean;
 }
 
 export interface StudentDemoSettings {
