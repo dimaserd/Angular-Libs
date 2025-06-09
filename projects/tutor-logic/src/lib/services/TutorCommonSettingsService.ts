@@ -12,18 +12,18 @@ export class TutorCommonSettingsService {
 
     constructor(private readonly _httpClient: HttpClient,
         @Inject('BASE_URL') baseUrl: string) {
-        this.baseControllerUrl = baseUrl + 'api/tutor/settings/';
+        this.baseControllerUrl = baseUrl + 'api/tutor/settings';
     }
 
     get(name: string) {
-        return this._httpClient.get<SettingModel>(this.baseControllerUrl + 'get/' + name);
+        return this._httpClient.get<SettingModel>(`${this.baseControllerUrl}/get/${name}`);
     }
 
     getCached(name: string) {
-        return this._httpClient.get<SettingModel>(this.baseControllerUrl + 'get/' + name + '/cached');
+        return this._httpClient.get<SettingModel>(`${this.baseControllerUrl}/get/${name}/cached`);
     }
 
     set(model: SettingModel) {
-        return this._httpClient.post<BaseApiResponse>(this.baseControllerUrl + 'set', model);
+        return this._httpClient.post<BaseApiResponse>(`${this.baseControllerUrl}/set`, model);
     }
 }
