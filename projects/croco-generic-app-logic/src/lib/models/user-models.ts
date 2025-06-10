@@ -42,6 +42,7 @@ export interface RegistrationResult {
 }
 
 export enum RegistrationErrorResultType {
+    ModelNotValid = 'ModelNotValid',
     RegistrationNotEnabled = 'RegistrationNotEnabled',
     AlreadyAuthenticated = 'AlreadyAuthenticated',
     EmailShouldBeSet = 'EmailShouldBeSet',
@@ -50,12 +51,15 @@ export enum RegistrationErrorResultType {
     UserWithThisPhoneAlreadyExists = 'UserWithThisPhoneAlreadyExists',
     UserManagerError = 'UserManagerError',
     ClientAddingError = 'ClientAddingError',
-    UnAcceptablePassword = 'UnAcceptablePassword'
+    UnAcceptablePassword = 'UnAcceptablePassword',
+    NoRights = 'NoRights'
 }
 
 export interface RegisteredUser {
     id: string;
+    noPhoneNumber: boolean;
     phoneNumber: string;
+    noEmail: boolean;
     email: string;
 }
 
