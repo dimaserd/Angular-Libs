@@ -3,16 +3,17 @@ import { ComputedStatisticPresentationModel } from "./student-statistic-models";
 export interface GetStudentInGroupStatisticSnapshotRequest {
     groupId: string;
     studentId: string;
+    snapshotId: string;
 }
 
 export interface StudentInGroupStatisticSnapshotModel {
     snapshotId: string;
+    studentGroupName: string;
     actualFromUtc: string;
     createdOnUtc: string;
     subjectValues: Array<StudentInGroupStatisticBySubjectSnapshotValueModel>;
     tagValues: Array<StudentInGroupStatisticByTagSnapshotValueModel>;
 }
-
 
 export interface StudentInGroupStatisticBySubjectSnapshotValueModel {
     id: string;
