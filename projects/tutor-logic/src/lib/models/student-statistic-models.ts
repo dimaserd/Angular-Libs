@@ -29,6 +29,7 @@ export interface QuestionStatisticComputingState {
     toComputeQuestionReportsCount: number;
     toComputeStudentSnapshotsCount: number;
     toComputeStudentGroupSnapshotsCount: number;
+    dataOnUtc: string;
 }
 
 export interface StudentStatisticSnapshotValueModel {
