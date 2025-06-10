@@ -1,0 +1,21 @@
+{
+  "name": "ecc-chat",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/animations": "^18.0.0",
+    "@angular/cdk": "^18.0.0",
+    "@angular/common": "^18.0.0",
+    "@angular/core": "^18.0.0",
+    "@angular/material": "^18.0.0",
+    "rxjs": "^7.0.0",
+    "ngx-scrollbar": "16.1.1",
+    "ngx-skeleton-loader": "^7.0.0",
+    "date-fns": "^2.21.1",
+    "croco-generic-app-logic": "3.2.3",
+    "tutor-logic": "3.4.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  }
+}
+

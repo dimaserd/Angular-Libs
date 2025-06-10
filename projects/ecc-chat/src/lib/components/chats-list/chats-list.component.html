@@ -1,0 +1,36 @@
+<div class="chat-list-header">
+  <app-chat-search [formControl]="searchControl"></app-chat-search>
+
+  <button (click)="createNewChat()" aria-label="Создать чат" title="Создать чат" class="new-chat-button">
+    <svg>
+      <use [attr.xlink:href]="'new-chat' | chatSymbolSprite"></use>
+    </svg>
+  </button>
+</div>
+<ng-scrollbar>
+  @if (!loading) {
+    @if (chats.length) {
+      @for (chat of chats; track chat.id) {
+        <app-chats-list-item
+          class="chats-list-item"
+          [chatInfo]="chat"
+          [isActive]="activeChatId === chat.id"
+          (openChat)="openChat(chat.id)"
+          >
+        </app-chats-list-item>
+      }
+    } @else {
+      <span>Нет чатов</span>
+    }
+  } @else {
+    @for (item of skeletonCountArray; track $index) {
+      <div class="loader-wrapper">
+        <ngx-skeleton-loader appearance="circle" [theme]="{ height: '54px', width: '54px', margin: '0' }">
+        </ngx-skeleton-loader>
+        <div class="loader-text-wrapper">
+          <ngx-skeleton-loader [theme]="{ height: '16px', margin: '0' }" [count]="2"></ngx-skeleton-loader>
+        </div>
+      </div>
+    }
+  }
+</ng-scrollbar>

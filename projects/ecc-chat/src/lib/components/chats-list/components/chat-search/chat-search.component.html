@@ -1,0 +1,18 @@
+<input
+  [ngModel]="value"
+  (ngModelChange)="commitValue($event)"
+  (blur)="onTouch?.()"
+  type="text"
+  placeholder="Поиск"
+  [disabled]="disabled"
+  />
+  <svg class="search-icon">
+    <use [attr.xlink:href]="'telegram-pencil' | chatSymbolSprite"></use>
+  </svg>
+  @if (value) {
+    <button class="clear-button" type="button" (click)="commitValue('')">
+      <svg>
+        <use [attr.xlink:href]="'telegram-x' | chatSymbolSprite"></use>
+      </svg>
+    </button>
+  }

@@ -1,0 +1,14 @@
+@if (_chatLogicService.chatChanges$ | async; as chatInfo) {
+  <div class="chat-info">
+    @if (showCloseChatButton) {
+      <button class="close-chat-button" (click)="closeChat.emit()">
+        <svg class="close-chat-button-icon">
+          <use [attr.xlink:href]="'arrow-2' | chatSymbolSprite"></use>
+        </svg>
+      </button>
+    }
+    <button class="chat-info-button" (click)="openChatInfo(chatInfo)">
+      <app-chat-short-info [chatInfo]="chatInfo"></app-chat-short-info>
+    </button>
+  </div>
+}

@@ -1,0 +1,50 @@
+:host {
+  padding: 24px;
+  display: flex;
+  max-height: 100dvh;
+  max-width: 100dvw;
+  background-color: #fff;
+  flex-direction: column;
+  border-radius: 10px;
+}
+
+.controls-wrapper {
+  text-align: center;
+}
+
+.cancel-button {
+  border: none;
+  background-color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+
+  &:hover {
+    background-color: rgba(112, 117, 121, 0.08);
+  }
+
+  svg {
+    color: rgb(112, 117, 121);
+    height: 24px;
+    width: 24px;
+  }
+}
+
+.chat-modal-header {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  align-items: center;
+}
+
+.new-chat-form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+}

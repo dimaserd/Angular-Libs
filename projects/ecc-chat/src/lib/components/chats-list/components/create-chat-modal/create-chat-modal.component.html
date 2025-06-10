@@ -1,0 +1,15 @@
+<div class="chat-modal-header">
+  <span>Создать новый чат</span>
+
+  <button (click)="dialogRef.close()" type="button" class="cancel-button">
+    <svg>
+      <use [attr.xlink:href]="'telegram-x' | chatSymbolSprite"></use>
+    </svg>
+  </button>
+</div>
+<form class="new-chat-form" [formGroup]="newChatFormGroup" (ngSubmit)="createChat()">
+  <app-chat-plain-input [label]="'ID пользователя'" formControlName="userId"></app-chat-plain-input>
+  <div class="controls-wrapper">
+    <app-button-template [type]="'submit'" [disabled]="!newChatFormGroup.valid || loading"> Создать чат </app-button-template>
+  </div>
+</form>

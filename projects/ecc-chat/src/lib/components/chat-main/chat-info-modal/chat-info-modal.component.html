@@ -1,0 +1,22 @@
+<div class="chat-modal-header">
+  @if (chatInfo) {
+    <app-chat-short-info [chatInfo]="chatInfo"></app-chat-short-info>
+  }
+
+  <button (click)="dialogRef.close()" type="button" class="cancel-button">
+    <svg>
+      <use [attr.xlink:href]="'telegram-x' | chatSymbolSprite"></use>
+    </svg>
+  </button>
+</div>
+@if (chatInfo) {
+  <div class="chat-members-wrapper">
+    <h6 class="chat-members-header">Список участников</h6>
+    @for (chatMember of chatInfo.users; track chatMember.user.id) {
+      <div class="chat-member">
+        <div class="chat-member-avatar">{{ chatMember.user | pipeMapper: getAvatarText }}</div>
+        <div class="chat-member-name">{{ chatMember.user.name }} {{ chatMember.user.surname }}</div>
+      </div>
+    }
+  </div>
+}

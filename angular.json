@@ -68,6 +68,37 @@
         }
       }
     },
+    "ecc-chat": {
+      "projectType": "library",
+      "root": "projects/ecc-chat",
+      "sourceRoot": "projects/ecc-chat/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ecc-chat/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ecc-chat/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ecc-chat/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ecc-chat/src/test.ts",
+            "tsConfig": "projects/ecc-chat/tsconfig.spec.json",
+            "karmaConfig": "projects/ecc-chat/karma.conf.js"
+          }
+        }
+      }
+    },
     "croco-type-description": {
       "projectType": "library",
       "root": "projects/croco-type-description",

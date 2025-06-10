@@ -1,0 +1,32 @@
+<div class="upload-files-modal-header">
+  <button (click)="dialogRef.close()" type="button" class="cancel-button">
+    <svg>
+      <use [attr.xlink:href]="'telegram-x' | chatSymbolSprite"></use>
+    </svg>
+  </button>
+  <div class="upload-files-modal-title">
+    Отправить {{ message?.files?.length }} {{ message?.files?.length | pluralize: 'файл' : 'файла' : 'файлов' }}
+  </div>
+</div>
+<div class="files-wrapper">
+  @for (file of message?.files; track file) {
+    <app-chat-file-view [file]="file"></app-chat-file-view>
+  }
+</div>
+<div class="controls-wrapper">
+  <div class="chat-input-wrapper">
+    <textarea
+      [ngModel]="message?.text"
+      (keydown)="textareaKeyDown($event)"
+      (ngModelChange)="changeMessageText($event)"
+      cdkAutosizeMaxRows="10"
+      cdkAutosizeMinRows="1"
+      cdkTextareaAutosize
+      class="chat-input"
+      placeholder="Добавить подпись..."
+      >
+    </textarea>
+  </div>
+
+  <button class="submit-files-button" type="button" (click)="submit()">Отправить</button>
+</div>

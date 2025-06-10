@@ -1,0 +1,48 @@
+@if (message) {
+  @if (message?.message.attachments?.length) {
+    <div class="files-wrapper">
+      @for (file of message.message.attachments; track file.fileId; let fileIndex = $index) {
+        <app-chat-file-view
+          [file]="file"
+          [class.uploading]="isUploading"
+          [uploadingProgress]="(message.filesUploadingProgress$ | async)?.[fileIndex]"
+          [isUploading]="isUploading"
+          (click)="handleClickOnFile(file)">
+        </app-chat-file-view>
+      }
+    </div>
+  }
+  @if (isFirstInGroupMessage && _chatLogicService.chatSettings.useSenderNickName) {
+    <span class="sender-name">{{ sender?.name }} {{ sender?.surname }}</span>
+  }
+
+  {{ message.message.message }}
+  <span class="time-inner" title="Отправлено: {{ message.date | date: 'dd MMMM yyyy, HH:mm:ss' }}{{
+      message.message.sentOnUtcTicks !== message.message.lastUpdateUtcTicks
+        ? '\nИзменено: ' + (message.message.lastUpdateUtcTicks | ticksToDate | date: 'dd MMMM yyyy, HH:mm:ss')
+        : ''
+    }}">
+  <ng-container *ngTemplateOutlet="timeRef"> </ng-container>
+  <div class="time">
+    <ng-container *ngTemplateOutlet="timeRef"> </ng-container>
+  </div>
+</span>
+  @if (isLastInGroupMessage) {
+    <svg viewBox="0 0 11 20" class="message-tail-filled">
+      <use [attr.xlink:href]="'message-tail-filled' | chatSymbolSprite"></use>
+    </svg>
+  }
+  <ng-template #timeRef>
+    @if (message.message.sentOnUtcTicks !== message.message.lastUpdateUtcTicks) {
+      <span class="time-edited">изменено</span>
+    }
+    <span>{{ message.date | date: 'HH:mm' }}</span>
+    @if (isOutgoing) {
+      <svg viewBox="0 0 18 18" class="message-status-icon">
+        <use [attr.xlink:href]="
+          ((interlocutorVisitTime$ | async) >= message.message.sentOnUtcTicks ? 'message-read' : 'message-sent') | chatSymbolSprite
+        "></use>
+      </svg>
+    }
+  </ng-template>
+}

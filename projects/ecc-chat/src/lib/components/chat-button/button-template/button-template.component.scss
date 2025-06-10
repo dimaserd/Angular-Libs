@@ -1,0 +1,102 @@
+:host {
+  display: inline-block;
+  border-radius: 46px;
+}
+
+button {
+  border-radius: 46px;
+  text-align: center;
+  padding: 20px 34px 18px;
+  font-size: 16px;
+  line-height: 16px;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: -0.3px;
+  box-sizing: border-box;
+  width: 100%;
+  outline: none;
+  border: 2px solid;
+
+  &.pink.default {
+    color: var(--app-ui-button-color);
+    background-color: var(--app-ui-button-background-color);
+    border-color: var(--app-ui-button-border-color);
+  }
+
+  &.blue.default {
+    color: var(--app-ui-button-color);
+    background-color: var(--app-ui-button-background-color-blue);
+    border-color: var(--app-ui-button-border-color);
+  }
+
+  &.pink.light {
+    color: var(--app-ui-button-light-color);
+    background-color: var(--app-ui-button-light-background-color);
+    border-color: var(--app-ui-button-light-border-color);
+  }
+
+  &.blue.light {
+    color: var(--app-ui-button-light-color);
+    background-color: var(--app-ui-button-light-background-color);
+    border-color: var(--app-ui-button-light-border-color-blue);
+  }
+
+  &:hover,
+  &:focus-visible {
+    &:not(:disabled, :active) {
+      &.pink.default {
+        background-color: var(--app-ui-button-background-color-hover);
+        border-color: var(--app-ui-button-border-color-hover);
+        box-shadow: 0 0 8px 0 var(--app-ui-button-border-color-hover);
+      }
+
+      &.blue.default {
+        background-color: var( --app-ui-button-background-color-hover-blue);
+        border-color: var(  --app-ui-button-border-color-hover-blue);
+        box-shadow: 0 0 8px 0 var(--app-ui-button-border-color-hover-blue);
+      }
+
+      &.pink.light {
+        background-color: var(--app-ui-button-light-background-color-hover);
+        border-color: var(--app-ui-button-light-border-color-hover);
+        box-shadow: 0 0 8px 0 var(--app-ui-button-light-border-color-hover);
+      }
+
+      &.blue.light {
+        background-color: var(--app-ui-button-light-background-color-hover);
+        border-color: var(--app-ui-button-border-color-hover-blue);
+        box-shadow: 0 0 8px 0 var(--app-ui-button-border-color-hover-blue);
+      }
+    }
+  }
+
+  &:disabled {
+    cursor: default;
+
+    * {
+      pointer-events: none;
+    }
+
+    &.pink.default {
+      color: var(--app-ui-button-color);
+      background-color: var(--app-ui-button-background-color-disabled);
+      border-color: var(--app-ui-button-border-disabled);
+    }
+
+    &.blue.default {
+      color: var(--app-ui-button-color);
+      background-color: var(--app-ui-button-background-color-disabled-blue);
+      border-color: var(--app-ui-button-border-disabled);
+    }
+
+    &.pink.light {
+      background-color: var(--app-ui-button-light-background-color-disabled);
+      border-color: var(--app-ui-button-light-border-disabled);
+    }
+
+    &.blue.light {
+      background-color: var(--app-ui-button-light-background-color-disabled);
+      border-color: var(--app-ui-button-background-color-disabled-blue);
+    }
+  }
+}

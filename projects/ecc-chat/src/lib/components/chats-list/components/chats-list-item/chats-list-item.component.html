@@ -1,0 +1,38 @@
+<div (click)="openChat.emit()" class="chats-list-item-wrapper" [class.active]="isActive">
+  @if (chatInfo?.iconPath$ | async; as iconPath) {
+    <img [src]="iconPath" alt="chat image" class="chat-item-image" />
+  } @else {
+    <div class="chat-item-empty-image">
+      {{ chatInfo.chatName$ | async | pipeMapper: getIconText }}
+    </div>
+  }
+
+
+  <div [ngClass]="{ muted: chatInfo.muted }" class="chat-info">
+    <div class="chat-info-title-row row-row">
+      <div class="chat-info-name">{{ chatInfo.chatName$ | async }}</div>
+      @if (chatInfo.lastMessage) {
+        <div class="chat-info-time">
+          {{ chatInfo.lastMessage.sentOnUtcTicks | ticksToDate | pipeMapper: formatDate }}
+        </div>
+      }
+    </div>
+
+    <div class="chat-info-subtitle-row row-row">
+      @if (chatInfo.lastMessage) {
+        <div class="chat-info-last-message">
+          <!--        TODO: вывод имени пользователя-->
+          <strong class="chat-info-last-message-username"> {{ chatInfo.lastMessage.senderUserId }} : </strong>
+          <span>{{ chatInfo.lastMessage.message }}</span>
+        </div>
+        @if (chatInfo?.unreadMessagesCount) {
+          <div class="chat-info-unread-messages-count">
+            {{ chatInfo.unreadMessagesCount }}
+          </div>
+        }
+      } @else {
+        <span class="no-messages-text">Нет сообщений</span>
+      }
+    </div>
+  </div>
+</div>

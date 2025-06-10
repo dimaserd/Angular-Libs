@@ -1,0 +1,40 @@
+.chat-info {
+  position: relative;
+  height: 56px;
+  padding: 0 16px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  column-gap: 12px;
+
+  &-button {
+    border: none;
+    outline: none;
+    appearance: none;
+    padding: 0;
+    background: transparent;
+  }
+}
+
+.close-chat-button {
+  border: none;
+  background-color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+
+  &:hover {
+    background-color: rgba(112, 117, 121, 0.08);
+  }
+
+  svg {
+    color: rgb(112, 117, 121);
+    height: 24px;
+    width: 24px;
+  }
+}

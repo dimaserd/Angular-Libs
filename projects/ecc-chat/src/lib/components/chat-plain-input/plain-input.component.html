@@ -1,0 +1,41 @@
+@if (withLabel) {
+  <label
+    class="plain-input-label"
+    [class.with-value-or-focused]="focused || value || value === 0"
+    >
+    <span class="plain-input-label-text">{{ label }}</span>
+    <ng-container *ngTemplateOutlet="mainInput"> </ng-container>
+  </label>
+} @else {
+  <ng-container *ngTemplateOutlet="mainInput"></ng-container>
+}
+
+<ng-template #mainInput>
+  <div class="plain-input-native-wrapper">
+    <input
+      #nativeInput
+      class="plain-input-native"
+      tabindex="0"
+      [attr.type]="type"
+      [ngModel]="value"
+      [disabled]="disabled"
+      (focus)="updateFocusState(true)"
+      (cdkAutofill)="updateFocusState($event.isAutofilled)"
+      (blur)="updateFocusState(false)"
+      (ngModelChange)="changeMainInput($event)"
+      />
+    @if (buttonIcon) {
+      <button
+        (click)="inputButtonClick.emit()"
+        type="button"
+        [disabled]="disabled"
+        [attr.aria-label]="buttonAriaLabel"
+        class="plain-input-button"
+        >
+        <svg class="plain-input-button-icon">
+          <use [attr.xlink:href]="buttonIcon | chatSymbolSprite"></use>
+        </svg>
+      </button>
+    }
+  </div>
+</ng-template>

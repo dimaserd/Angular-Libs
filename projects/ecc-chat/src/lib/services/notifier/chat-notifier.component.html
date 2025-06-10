@@ -1,0 +1,51 @@
+<div
+  class="notifiers-list {{ setting.align }} {{ setting.theme }}"
+  [hidden]="(!notifiers || !notifiers.length) && !this.animationInProgress"
+  #notifiersList
+  role="status"
+  aria-live="polite"
+  aria-atomic="true"
+>
+  <ng-template #closeIcon>
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0.888672 14.8889L14.8887 0.888885" stroke="#B9BDC1" />
+      <path d="M0.888672 0.888885L14.8887 14.8889" stroke="#B9BDC1" />
+    </svg>
+  </ng-template>
+  <div *ngIf="setting.showCloseAllCount && notifiers.length >= setting.showCloseAllCount" class="notifier hide-all">
+    <button class="close-all" (click)="removeAll()">Очистить все</button>
+  </div>
+  <div
+    *ngFor="let notifier of notifiers; let last = last"
+    class="notifier"
+    [class.icon]="notifier.showIcon"
+    [class.notifier-error]="notifier.type === NotifierType.Error"
+    [class.notifier-process]="notifier.type === NotifierType.Process"
+    [class.notifier-success]="notifier.type === NotifierType.Success"
+    [class.notifier-warning]="notifier.type === NotifierType.Warning"
+    [class.last-one]="last"
+    [class.animate-bg-success]="notifier.type === NotifierType.Success && notifier.animateBgColor"
+    [ngStyle]="{ animation: 'fillBgColor ' + notifier.animateBgDelay + 's linear' }"
+  >
+    <div class="flex-container-md justify-between-md">
+      {{ notifier.message }}
+      <button
+        *ngIf="notifier.onCancel"
+        class="cancel"
+        [class.white]="notifier.type !== NotifierType.Warning"
+        (click)="cancelNotifier(notifier)"
+      >
+        Отменить
+      </button>
+      <button
+        *ngIf="notifier.onAction"
+        class="cancel"
+        [class.white]="notifier.type !== NotifierType.Warning"
+        (click)="actionNotifier(notifier)"
+      >
+        {{ notifier.actionName || 'Повторить' }}
+      </button>
+    </div>
+    <a class="close" (click)="closeNotifier(notifier)" title="Закрыть"></a>
+  </div>
+</div>
