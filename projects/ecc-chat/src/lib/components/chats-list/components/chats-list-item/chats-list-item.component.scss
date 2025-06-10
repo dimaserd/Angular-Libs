@@ -1,0 +1,157 @@
+.chats-list-item-wrapper {
+  cursor: pointer;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  border-radius: 12px;
+  height: 72px;
+  padding: 0 6px;
+
+  &:hover,
+  &:active {
+    background-color: #f3f3f4;
+  }
+
+  &.active {
+    background-color: rgb(51, 144, 236);
+    .no-messages-text {
+      color: #fff;
+    }
+    .chat-info {
+      &-name,
+      &-time {
+        color: #fff;
+      }
+      &-last-message {
+        &,
+        &-username {
+          color: #fff;
+        }
+      }
+
+      &-unread-messages-count {
+        background-color: #fff;
+        color: #3390ec;
+      }
+    }
+  }
+}
+
+.chat-item {
+  &-empty-image {
+    width: 54px;
+    height: 54px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(#ff845e, #d45246);
+    text-transform: uppercase;
+    user-select: none;
+    font-size: 14px;
+    color: #fff;
+    font-weight: 500;
+  }
+
+  &-image {
+    border-radius: 50%;
+    width: 54px;
+    height: 54px;
+    object-fit: cover;
+  }
+}
+
+.chat-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-basis: 100%;
+  max-width: calc(100% - 62px);
+
+  .row-row {
+    height: 22px;
+  }
+
+  &-name {
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  &-last-message {
+    display: flex;
+    color: rgb(112, 117, 121);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &-username {
+      display: inline-block;
+      color: rgb(0, 0, 0);
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+
+      max-width: 160px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+  }
+
+  &-title-row {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &-subtitle-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2px;
+  }
+
+  &-time {
+    color: rgb(112, 117, 121);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+  }
+
+  &-unread-messages-count {
+    --size: 1.375rem;
+    --padding: 0.4375rem;
+    border-radius: calc(var(--size) / 2);
+    font-weight: 500;
+    color: #fff;
+    font-size: 0.875rem;
+    text-align: center;
+    height: var(--size);
+    min-width: var(--size);
+    line-height: var(--size) !important;
+    padding: 0 var(--padding);
+    display: block !important;
+    margin-inline-start: 0.5rem;
+    flex: 0 0 auto;
+    background-color: #3390ec;
+  }
+}
+
+.muted {
+  .chat-info-unread-messages-count {
+    background-color: #c4c9cc;
+  }
+}
+
+.no-messages-text {
+  color: rgb(112, 117, 121);
+}

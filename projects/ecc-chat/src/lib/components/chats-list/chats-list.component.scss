@@ -1,0 +1,68 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 0;
+  overflow-y: auto;
+
+  &::ng-deep {
+    .ng-scroll-content {
+      width: 100%;
+    }
+  }
+}
+
+app-chat-search {
+  display: block;
+  flex-grow: 1;
+}
+
+.chats-list-item {
+  display: block;
+  padding: 0 12px;
+}
+
+.new-chat-button {
+  border: none;
+  background-color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  flex-shrink: 0;
+
+  &:hover {
+    background-color: rgba(112, 117, 121, 0.08);
+  }
+
+  svg {
+    color: #707579;
+    flex-shrink: 0;
+    height: 28px;
+    width: 28px;
+  }
+}
+
+.chat-list-header {
+  margin-bottom: 12px;
+  display: flex;
+  column-gap: 4px;
+  align-items: center;
+  vertical-align: middle;
+  justify-content: center;
+  padding: 0 12px;
+}
+
+.loader-wrapper {
+  display: flex;
+  padding: 0 6px;
+  height: 72px;
+  column-gap: 6px;
+  align-items: center;
+}
+
+.loader-text-wrapper {
+  width: 120px;
+}

@@ -1,0 +1,61 @@
+@if (editData$ | async) {
+  <div class="editable-message-wrapper">
+    <svg class="editable-message-icon">
+      <use [attr.xlink:href]="'telegram-pencil' | chatSymbolSprite"></use>
+    </svg>
+    <div class="explanation-panel">
+      <div class="explanation-header">Редактирование</div>
+      <div class="explanation-content">
+        @if ((editData$ | async)?.message.attachments?.length) {
+          {{ (editData$ | async)?.message.attachments | pipeMapper: printFiles }};
+        }
+        {{ (editData$ | async).message.message }}
+      </div>
+    </div>
+    <button (click)="cancelEdit()" type="button" class="cancel-button">
+      <svg>
+        <use [attr.xlink:href]="'telegram-x' | chatSymbolSprite"></use>
+      </svg>
+    </button>
+  </div>
+}
+
+<div class="chat-input-new-message">
+  <div class="chat-input-wrapper">
+    <textarea
+      [ngModel]="message.text"
+      (keydown)="textareaKeyDown($event)"
+      (ngModelChange)="changeMessageText($event)"
+      (blur)="onTouched?.()"
+      cdkAutosizeMaxRows="10"
+      cdkAutosizeMinRows="1"
+      cdkTextareaAutosize
+      class="chat-input"
+      placeholder="Сообщение"
+    >
+    </textarea>
+  </div>
+
+  <div class="attach-menu">
+    <div class="attach-menu__actions">
+      @for (button of _chatLogicService.chatSettings.customButtons; track button.id) {
+          <button (click)="button.clickHandler()" [type]="'button'">
+            <svg>
+              <use [attr.xlink:href]="button.iconType | chatSymbolSprite"></use>
+            </svg>
+          </button>
+      }
+      @if (_chatLogicService.chatSettings.canSendFiles) {
+        <button (click)="fileInput.click()" type="button">
+          <svg>
+            <use [attr.xlink:href]="'paper-clip' | chatSymbolSprite"></use>
+          </svg>
+        </button>
+      }
+    </div>
+    <input class="file-input" (change)="emitFiles($event)" #fileInput [multiple]="true" type="file"/>
+  </div>
+</div>
+<svg viewBox="0 0 11 20" class="message-tail-filled">
+  <use [attr.xlink:href]="'message-tail-filled' | chatSymbolSprite"></use>
+</svg>

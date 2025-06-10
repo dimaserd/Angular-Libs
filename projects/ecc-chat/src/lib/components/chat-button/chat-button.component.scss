@@ -1,0 +1,42 @@
+.chat-button-content {
+  display: flex;
+  align-items: center;
+  column-gap: 12px;
+}
+.speech-balloon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 16px;
+  width: 16px;
+  position: relative;
+  flex-shrink: 0;
+
+  .speech-balloon-icon {
+    height: 30px;
+    width: 30px;
+    color: #323e8b;
+    position: absolute;
+  }
+
+  .speech-balloon-text {
+    position: relative;
+    color: #fff;
+    font-family: Lato, serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+  }
+}
+
+.chat-button-text {
+  flex-grow: 1;
+}
+
+.chat-button-next-icon {
+  flex-shrink: 0;
+  height: 18px;
+  width: 18px;
+  color: #333333;
+}

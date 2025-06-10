@@ -1,0 +1,24 @@
+<div class="file-icon" [class.uploading]="isUploading">
+  @if (isUploading) {
+    <div class="file-uploading-spinner"></div>
+
+    <svg class="file-uploading-x">
+      <use [attr.xlink:href]="'telegram-x' | chatSymbolSprite"></use>
+    </svg>
+  }
+  @else {
+    <span class="file-ext">{{ fileExt }}</span>
+    <svg class="file-download-icon">
+      <use [attr.xlink:href]="'telegram-preloader-download' | chatSymbolSprite"></use>
+    </svg>
+  }
+</div>
+<div class="file-data-wrapper">
+  <span class="file-name" title="{{ fileName }}">{{ fileName }}</span>
+  <span class="file-size">
+    @if (isUploading) {
+      {{ uploadingProgress?.uploadingLoaded ?? 0 | pipeMapper: formatFileSize }} /
+      {{ uploadingProgress?.uploadingTotal | pipeMapper: formatFileSize }}
+    }
+  </span>
+</div>

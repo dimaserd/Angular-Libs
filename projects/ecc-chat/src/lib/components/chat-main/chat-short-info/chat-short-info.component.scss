@@ -1,0 +1,21 @@
+:host {
+  display: flex;
+  align-items: center;
+  column-gap: 12px;
+}
+
+.chat-info-avatar {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(#ff845e, #d45246);
+  text-transform: uppercase;
+  user-select: none;
+  font-size: 14px;
+  color: #fff;
+  font-weight: 500;
+}

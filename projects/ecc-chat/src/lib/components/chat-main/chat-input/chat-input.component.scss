@@ -1,0 +1,136 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px 16px 0 16px;
+  margin-right: 8px;
+  background-color: #fff;
+  padding: 5px 12px;
+  position: relative;
+  width: 1px;
+  box-shadow:
+    0 0 1px 0 rgba(0, 0, 0, 0.35),
+    0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+.editable-message-wrapper {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+}
+.explanation-panel {
+  flex-grow: 1;
+  margin-right: 10px;
+  width: 1px;
+  background-color: rgba(51, 144, 236, 0.1);
+  border-radius: 4px;
+  border-left: 3px solid rgb(51, 144, 236);
+  padding: 3px 6px;
+  font-size: 14px;
+  line-height: 18px;
+}
+.editable-message-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+  color: rgb(51, 144, 236);
+  flex-shrink: 0;
+}
+
+.explanation-header {
+  color: rgb(51, 144, 236);
+}
+
+.cancel-button {
+  border: none;
+  background-color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+
+  &:hover {
+    background-color: rgba(112, 117, 121, 0.08);
+  }
+
+  svg {
+    color: rgb(51, 144, 236);
+    height: 34px;
+    width: 34px;
+  }
+}
+
+.explanation-content {
+  color: rgb(112, 117, 121);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.chat-input-new-message {
+  display: flex;
+  align-items: flex-end;
+}
+
+.chat-input {
+  border: none;
+  outline: none;
+  background: none;
+  width: 100%;
+  padding: 0;
+}
+
+.chat-input-wrapper {
+  padding: 10px 0;
+  display: flex;
+  flex-grow: 1;
+}
+
+.attach-menu {
+  display: inline-block;
+  padding: 5px 0;
+
+  &__actions {
+    display: flex;
+    gap: 5px;
+  }
+
+  button {
+    border: none;
+    background-color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+
+    &:hover {
+      background-color: rgba(112, 117, 121, 0.08);
+    }
+
+    svg {
+      color: #707579;
+      flex-shrink: 0;
+      height: 24px;
+      width: 24px;
+    }
+  }
+}
+
+.message-tail-filled {
+  display: block;
+  position: absolute;
+  width: 11px;
+  height: 20px;
+  color: var(--app-message-incoming-background-color);
+  inset-inline-end: -8.4px;
+  bottom: 0;
+  transform: translateY(1px) scaleX(-1);
+}
+
+.file-input {
+  display: none;
+}

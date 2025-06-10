@@ -1,0 +1,7 @@
+<div class="chat-background"></div>
+
+@if (_chatLogicService.chatIdSubject$ | async | pipeMapper: hasChatId) {
+  <app-chat-header (closeChat)="closeChat.emit()"></app-chat-header>
+  <app-chat-messages [newMessage]="newMessage"></app-chat-messages>
+  <app-chat-input-box (sendNewMessageEvent)="newMessage = $event"></app-chat-input-box>
+}

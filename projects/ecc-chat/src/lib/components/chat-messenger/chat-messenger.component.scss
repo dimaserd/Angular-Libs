@@ -1,0 +1,32 @@
+:host {
+  display: flex;
+}
+
+.chat-main-wrapper {
+  height: 100%;
+  flex-basis: calc(100% - 300px);
+  width: 1px;
+  &.mobile-view {
+    &:not(.has-active-chat) {
+      display: none;
+    }
+
+    &.has-active-chat {
+      flex-basis: 100%;
+    }
+  }
+}
+
+.chats-list {
+  flex-basis: 300px;
+  flex-shrink: 0;
+  &.mobile-view {
+    &:not(.has-active-chat) {
+      flex-basis: 100%;
+    }
+
+    &.has-active-chat {
+      display: none;
+    }
+  }
+}

@@ -1,0 +1,8 @@
+@if (iconPath$ | async; as iconPath) {
+  <img [src]="iconPath" alt="chat image" class="chat-info-avatar" />
+} @else {
+  <div class="chat-info-avatar">{{ chatName$ | async | pipeMapper: getIconText }}</div>
+}
+<div class="chat-info-description">
+  <div class="chat-info-name">{{ chatName$ | async }}</div>
+</div>

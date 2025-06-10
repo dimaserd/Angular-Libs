@@ -1,0 +1,114 @@
+<ng-scrollbar (scroll)="scrolled.next()" [class.hidden]="!chatIdInitialised">
+  <div scrollViewport>
+    <div class="messages-wrapper">
+      <ng-container *ngFor="let day of messagesByDays; let isLastDay = last">
+        <div class="day-title">{{ day.date | date: 'dd MMMM' }}</div>
+        <div
+          [class.is-outgoing-group]="messagesGroup.isOutgoing"
+          class="messages-by-sender-group"
+          *ngFor="let messagesGroup of day.messagesGroups; let isLastGroupInDay = last"
+        >
+          <div class="message-avatar" *ngIf="!messagesGroup.isOutgoing">
+            {{ messagesGroup.sender | pipeMapper: getTextForAvatar }}
+          </div>
+          <ng-container
+            *ngFor="
+              let message of messagesGroup.messages;
+              let isLastInGroupMessage = last;
+              let isFirstInGroupMessage = first
+            "
+          >
+            <app-message
+              #messageRef
+              *ngIf="messagesGroup.isOutgoing; else incomingMessageRef"
+              [cdkContextMenuTriggerFor]="contextMenuRef"
+              [isLastInGroupMessage]="isLastInGroupMessage"
+              [message]="message"
+              [isOutgoing]="messagesGroup.isOutgoing"
+              [interlocutorVisitTime$]="interlocutorVisitTime$"
+              [isLastMessage]="
+                isLastInGroupMessage && isLastGroupInDay && isLastDay && !(uploadingMessages$ | async)?.length
+              "
+              class="message-wrapper"
+              [class.outgoing]="messagesGroup.isOutgoing"
+            >
+            </app-message>
+
+            <ng-template #incomingMessageRef>
+              <app-message
+                #messageRef
+                [isLastInGroupMessage]="isLastInGroupMessage"
+                [message]="message"
+                [isOutgoing]="messagesGroup.isOutgoing"
+                [interlocutorVisitTime$]="interlocutorVisitTime$"
+                [isFirstInGroupMessage]="isFirstInGroupMessage"
+                [sender]="messagesGroup.sender"
+                [isLastMessage]="isLastInGroupMessage && isLastGroupInDay && isLastDay"
+                class="message-wrapper"
+                [class.outgoing]="messagesGroup.isOutgoing"
+              >
+              </app-message>
+            </ng-template>
+
+            <ng-template #contextMenuRef>
+              <div class="context-menu-wrapper" cdkMenu>
+                <button class="context-menu-item" (click)="editMessage(message)" cdkMenuItem>
+                  <svg>
+                    <use [attr.xlink:href]="'telegram-pencil' | chatSymbolSprite"></use>
+                  </svg>
+                  <span>Изменить</span>
+                </button>
+                <button class="context-menu-item danger" (click)="deleteMessage(message)" cdkMenuItem>
+                  <svg>
+                    <use [attr.xlink:href]="'telegram-trash' | chatSymbolSprite"></use>
+                  </svg>
+                  <span>Удалить</span>
+                </button>
+              </div>
+            </ng-template>
+          </ng-container>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="uploadingMessages$ | async as uploadingMessages">
+        <ng-container *ngIf="uploadingMessages.length">
+          <div *ngIf="!hasSentMessagesToday()" class="day-title">{{ today | date: 'dd MMMM' }}</div>
+          <div class="messages-by-sender-group is-outgoing-group">
+            <ng-container *ngFor="let message of uploadingMessages; let isLastInGroupMessage = last">
+              <app-message
+                #messageRef
+                [cdkContextMenuTriggerFor]="contextMenuRef"
+                class="message-wrapper outgoing"
+                [message]="message"
+                [isLastInGroupMessage]="isLastInGroupMessage"
+                [isOutgoing]="true"
+                [isUploading]="true"
+                [isLastMessage]="isLastInGroupMessage"
+              >
+              </app-message>
+              <ng-template #contextMenuRef>
+                <div class="context-menu-wrapper" cdkMenu>
+                  <button class="context-menu-item danger" (click)="deleteMessage(message)" cdkMenuItem>
+                    <svg>
+                      <use [attr.xlink:href]="'telegram-trash' | chatSymbolSprite"></use>
+                    </svg>
+                    <span>Удалить</span>
+                  </button>
+                </div>
+              </ng-template>
+            </ng-container>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</ng-scrollbar>
+<div *ngIf="!scrollPositionBottom" class="to-bottom-button-wrapper">
+  <button class="to-bottom-button" (click)="scrollToFirstNotReadOrBottom()">
+    <svg width="22" height="22">
+      <use [attr.xlink:href]="'arrow-to-bottom' | chatSymbolSprite"></use>
+    </svg>
+    <span class="not-read-count" *ngIf="_chatLogicService.notReadMessages.length">{{
+      _chatLogicService.notReadMessages.length > 99 ? '99+' : _chatLogicService.notReadMessages.length
+    }}</span>
+  </button>
+</div>

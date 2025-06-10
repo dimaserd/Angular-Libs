@@ -1,0 +1,15 @@
+<app-button-template [colorType]="'light'">
+  <div class="chat-button-content">
+    <div class="speech-balloon">
+      <svg class="speech-balloon-icon">
+        <use [attr.xlink:href]="'speech-balloon' | chatSymbolSprite "></use>
+      </svg>
+      <span class="speech-balloon-text">{{ speechBalloonText }}</span>
+    </div>
+    <div class="chat-button-text">{{text}}</div>
+
+    <svg class="chat-button-next-icon">
+      <use [attr.xlink:href]="'arrow-bold' | chatSymbolSprite"></use>
+    </svg>
+  </div>
+</app-button-template>

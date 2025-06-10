@@ -1,0 +1,138 @@
+:host {
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  color: #707579;
+  top: 9px;
+  left: 8px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+input {
+  appearance: none;
+  background-color: rgb(255, 255, 255);
+  border-bottom-color: rgb(223, 225, 229);
+  border-bottom-style: solid;
+  border-bottom-width: 0.666667px;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(223, 225, 229);
+  border-left-style: solid;
+  border-left-width: 0.666667px;
+  border-right-color: rgb(223, 225, 229);
+  border-right-style: solid;
+  border-right-width: 0.666667px;
+  border-top-color: rgb(223, 225, 229);
+  border-radius: 22px;
+  border-top-style: solid;
+  border-top-width: 0.666667px;
+  box-sizing: border-box;
+  caret-color: rgb(51, 144, 236);
+  color: rgb(0, 0, 0);
+  cursor: text;
+  display: block;
+  font-family:
+    Roboto,
+    -apple-system,
+    'apple color emoji',
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen-Sans,
+    Ubuntu,
+    Cantarell,
+    'Helvetica Neue',
+    sans-serif;
+  font-feature-settings: normal;
+  font-kerning: auto;
+  font-optical-sizing: auto;
+  font-size: 16px;
+  font-stretch: 100%;
+  font-style: normal;
+  font-variant-alternates: normal;
+  font-variant-caps: normal;
+  font-variant-east-asian: normal;
+  font-variant-ligatures: normal;
+  font-variant-numeric: normal;
+  font-variant-position: normal;
+  font-variation-settings: normal;
+  font-weight: 400;
+  height: 42px;
+  letter-spacing: normal;
+  line-height: 42px;
+  margin: 0px;
+  max-height: 42px;
+  min-height: 42px;
+  padding-block-end: 0px;
+  padding-block-start: 0px;
+  padding-inline-end: 44px;
+  padding-inline-start: 44px;
+  padding: 0px 44px;
+  position: relative;
+  text-align: start;
+  text-indent: 0px;
+  text-rendering: auto;
+  text-shadow: none;
+  text-size-adjust: 100%;
+  text-transform: none;
+  transition-behavior: normal;
+  transition-delay: 0s;
+  transition-duration: 0.2s;
+  transition-property: border-color;
+  transition-timing-function: ease-in-out;
+  unicode-bidi: plaintext;
+  user-select: none;
+  width: 100%;
+  word-spacing: 0px;
+  z-index: 1;
+  -webkit-font-smoothing: antialiased;
+  -webkit-rtl-ordering: logical;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-border-image: none;
+
+  &:focus {
+    background-color: transparent;
+    border-color: #3390ec;
+    outline: none;
+
+    & ~ .search-icon,
+    & ~ .clear-button svg {
+      color: #3390ec;
+    }
+  }
+}
+
+.clear-button {
+  position: absolute;
+  z-index: 1;
+  right: 9px;
+  top: 4px;
+  border: none;
+  background-color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+
+  &:hover {
+    background-color: rgba(112, 117, 121, 0.08);
+  }
+
+  svg {
+    color: #707579;
+    flex-shrink: 0;
+    height: 24px;
+    width: 24px;
+  }
+}
