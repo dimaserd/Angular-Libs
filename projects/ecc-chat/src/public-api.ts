@@ -15,3 +15,4 @@ export * from './lib/models/messages-day-group.interface';
 export * from './lib/models/messages-sender-group.interface';
 
 export * from './lib/services/ChatService';
+export * from './lib/services/ChatMessagingService';
