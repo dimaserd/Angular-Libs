@@ -1,14 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, Inject } from "@angular/core";
-
-export interface ChatGroupUserModel {
-  userId: string;
-  email: string;
-  name: string;
-  surname: string;
-  unreadMessagesCount: number;
-  lastVisitUtcTicks: number;
-}
+import {ChatGroupUserModel} from "../models/ecc-chat-group.interface";
 
 @Injectable({
   providedIn: 'root',
