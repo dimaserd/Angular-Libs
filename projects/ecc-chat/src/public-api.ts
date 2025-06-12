@@ -18,3 +18,4 @@ export * from './lib/models/ecc-chat-group.interface';
 export * from './lib/services/ChatService';
 export * from './lib/services/ChatMessagingService';
 export * from './lib/services/EccChatGroupService';
+export * from './lib/services/ChatLogicService';
