@@ -8,6 +8,6 @@ import { EccChatSpriteIdsType } from '../../chat-sprite-ids.type';
 })
 export class ChatSymbolSpritePipe implements PipeTransform {
   transform(id: EccChatSpriteIdsType): string {
-    return `assets/sprites/symbol/chat-html-svg-sprite.svg#${id}`;
+    return `assets/chat-sprites/symbol/chat-html-svg-sprite.svg#${id}`;
   }
 }
