@@ -8,7 +8,7 @@ export interface TestSolutionWithPointsValidation {
     maxTotalPoints: number; 
     questionsCount: number; 
     validatedQuestionsCount: number; 
-    inProccessQuestionsCount: number; 
+    inProcessQuestionsCount: number; 
     hasRightAnswerQuestionsCount: number; 
 }
 

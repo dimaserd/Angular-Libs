@@ -99,7 +99,7 @@ export enum AnswerValidationResultType {
     NotCorrectAnswer = 'NotCorrectAnswer',
     PartiallyCorrectAnswer = 'PartiallyCorrectAnswer',
     CorrectAnswer = 'CorrectAnswer',
-    InProccess = 'InProccess'
+    InProcess = 'InProcess'
 }
 
 export interface SolutionWithAnswersModel {
@@ -125,7 +125,7 @@ export interface StudentTestSolutionDataModel {
     /**
      * Есть ли вопросы, которые находятся в процессе расчёта результата
     */
-    hasAnswersInProccess: boolean;
+    hasAnswersInProcess: boolean;
     answers: Array<QuestionAnswerWithResult>;
 }
 
@@ -152,7 +152,7 @@ export interface QuestionAnswerWithResult {
 
 export interface QuestionPointsValidationModel {
     errorOccured: boolean;
-    inProccess: boolean;
+    inProcess: boolean;
     answerPoints: number;
     questionTotalPoints: number;
     description: string;
@@ -163,7 +163,7 @@ export interface QuestionPointsValidationModel {
 
 export interface StudentTestSolutionDetailedModel {
     solutionId: string;
-    hasAnswersInProccess: boolean;
+    hasAnswersInProcess: boolean;
     hasCuratorValidation: boolean;
     canCheckSingleQuestion: boolean;
     studentGroupId: string;
