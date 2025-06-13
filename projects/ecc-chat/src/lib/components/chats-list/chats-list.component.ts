@@ -14,15 +14,14 @@ import { ChatSearchComponent } from './components/chat-search/chat-search.compon
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { ChatSymbolSpritePipe } from '../../pipes/chat-symbol-sprite.pipe';
-import { IChatsListItem } from '../../models/chats-list-item.interface';
 import { delay, Observable, repeatWhen, startWith, Subject } from 'rxjs';
 import { ChatService, ChatSimpleModelWithUsers } from '../../services/ChatService';
 import { Dialog } from '@angular/cdk/dialog';
 import { InterlocutorService } from '../../services/interlocutor.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter, switchMap, take } from 'rxjs/operators';
-import { GetListResult } from 'tutor-logic';
 import { CreateChatModalComponent } from './components/create-chat-modal/create-chat-modal.component';
+import { GetListResult, IChatsListItem } from '../../models';
 
 @Component({
   selector: 'app-chats-list',

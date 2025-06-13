@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { BaseApiResponse } from 'croco-generic-app-logic';
 import { Observable } from 'rxjs';
-import { GetListResult } from 'tutor-logic';
+import { GetListResult } from '../models';
 
 export interface ChatDetailedModel {
   /* Идентификатор чата */
