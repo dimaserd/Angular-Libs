@@ -11,25 +11,25 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
-import {Subscription} from 'rxjs';
-import {Notifier, NOTIFIER_DEFAULT_SETTING, NotifierSetting, NotifierType} from './chat-notifier.model';
-import {ChatNotifierService} from './chat-notifier.service';
-import {animate, AnimationBuilder, style} from '@angular/animations';
+import { Subscription } from 'rxjs';
+import { Notifier, NOTIFIER_DEFAULT_SETTING, NotifierSetting, NotifierType } from './chat-notifier.model';
+import { ChatNotifierService } from './chat-notifier.service';
+import { animate, AnimationBuilder, style } from '@angular/animations';
 import { NgIf, NgFor, NgStyle } from '@angular/common';
 
 const ANIMATION_TIME = 200;
 
 @Component({
-    selector: 'app-chat-notifier',
-    templateUrl: 'chat-notifier.component.html',
-    styleUrls: ['./chat-notifier.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [
-        NgIf,
-        NgFor,
-        NgStyle,
-    ],
+  selector: 'ecc-chat-notifier',
+  templateUrl: 'chat-notifier.component.html',
+  styleUrls: ['./chat-notifier.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    NgIf,
+    NgFor,
+    NgStyle,
+  ],
 })
 export class ChatNotifierComponent implements OnInit, OnDestroy {
   @Input() public id: string;
@@ -47,7 +47,7 @@ export class ChatNotifierComponent implements OnInit, OnDestroy {
     private animationBuilder: AnimationBuilder,
     private renderer: Renderer2,
     private changeDetection: ChangeDetectorRef,
-  ) {}
+  ) { }
 
   public ngOnInit(): void {
     this.setting = { ...NOTIFIER_DEFAULT_SETTING, ...this.setting };

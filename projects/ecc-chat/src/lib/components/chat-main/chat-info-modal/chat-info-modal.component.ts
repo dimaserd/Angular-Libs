@@ -7,7 +7,7 @@ import { getAvatarText } from '../../../utils/base/get-avatar-text';
 import { ChatSymbolSpritePipe } from '../../../pipes/chat-symbol-sprite.pipe';
 
 @Component({
-  selector: 'app-chat-info-modal',
+  selector: 'ecc-chat-info-modal',
   templateUrl: './chat-info-modal.component.html',
   styleUrls: ['./chat-info-modal.component.scss'],
   standalone: true,

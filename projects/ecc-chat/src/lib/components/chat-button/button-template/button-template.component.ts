@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-button-template',
+  selector: 'ecc-chat-button-template',
   templateUrl: './button-template.component.html',
   styleUrls: ['./button-template.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

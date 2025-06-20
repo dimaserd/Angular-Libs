@@ -7,7 +7,7 @@ import { InputMessage } from '../../../../models/input-message.interface';
 import { ChatSymbolSpritePipe } from '../../../../pipes/chat-symbol-sprite.pipe';
 
 @Component({
-  selector: 'app-chat-input-box',
+  selector: 'ecc-chat-input-box',
   standalone: true,
   imports: [
     ReactiveFormsModule,

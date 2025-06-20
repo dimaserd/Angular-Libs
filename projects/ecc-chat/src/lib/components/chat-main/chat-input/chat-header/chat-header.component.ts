@@ -8,7 +8,7 @@ import { ChatInfoModalComponent } from '../../chat-info-modal/chat-info-modal.co
 import { ChatSymbolSpritePipe } from '../../../../pipes/chat-symbol-sprite.pipe';
 
 @Component({
-  selector: 'app-chat-header',
+  selector: 'ecc-chat-header',
   standalone: true,
   imports: [
     ChatShortInfoComponent,

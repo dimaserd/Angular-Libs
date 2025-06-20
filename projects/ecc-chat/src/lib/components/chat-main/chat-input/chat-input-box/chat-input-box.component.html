@@ -1,17 +1,9 @@
-<form
-  [formGroup]="chatControlForm"
-  (ngSubmit)="sendMessage()"
-  class="chat-controls-form"
->
-  <app-chat-input
-    (submitText)="sendMessage()"
-    (cancelEditEvent)="cancelEdit()"
-    formControlName="message"
-  ></app-chat-input>
+<form [formGroup]="chatControlForm" (ngSubmit)="sendMessage()" class="chat-controls-form">
+  <ecc-chat-input (submitText)="sendMessage()" (cancelEditEvent)="cancelEdit()"
+    formControlName="message"></ecc-chat-input>
   <button type="submit" class="send-button" [disabled]="!chatControlForm.valid">
     <svg>
       <use [attr.xlink:href]="'telegram-send' | chatSymbolSprite"></use>
     </svg>
   </button>
 </form>
-

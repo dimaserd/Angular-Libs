@@ -2,13 +2,13 @@
   @if (message?.message.attachments?.length) {
     <div class="files-wrapper">
       @for (file of message.message.attachments; track file.fileId; let fileIndex = $index) {
-        <app-chat-file-view
+        <ecc-chat-file-view
           [file]="file"
           [class.uploading]="isUploading"
           [uploadingProgress]="(message.filesUploadingProgress$ | async)?.[fileIndex]"
           [isUploading]="isUploading"
           (click)="handleClickOnFile(file)">
-        </app-chat-file-view>
+        </ecc-chat-file-view>
       }
     </div>
   }

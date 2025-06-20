@@ -6,7 +6,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ChatsListComponent } from '../chats-list/chats-list.component';
 
 @Component({
-  selector: 'app-chat-messenger',
+  selector: 'ecc-chat-messenger',
   templateUrl: './chat-messenger.component.html',
   styleUrls: ['./chat-messenger.component.scss'],
   standalone: true,

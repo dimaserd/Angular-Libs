@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { AsyncPipe } from '@angular/common';
 import { ChatMainComponent } from '../chat-main/chat-main.component';
@@ -13,7 +13,7 @@ export interface ChatModalComponentData {
 }
 
 @Component({
-  selector: 'app-chat-modal',
+  selector: 'ecc-chat-modal',
   templateUrl: './chat-modal.component.html',
   styleUrls: ['./chat-modal.component.scss'],
   standalone: true,

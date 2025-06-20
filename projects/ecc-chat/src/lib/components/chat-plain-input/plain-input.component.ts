@@ -18,7 +18,7 @@ import { EccChatSpriteIdsType } from '../../../chat-sprite-ids.type';
 
 
 @Component({
-  selector: 'app-chat-plain-input',
+  selector: 'ecc-chat-plain-input',
   templateUrl: './plain-input.component.html',
   styleUrls: ['./plain-input.component.scss'],
   standalone: true,

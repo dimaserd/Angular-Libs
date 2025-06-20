@@ -6,7 +6,7 @@ import { formatFileSize } from '../../../utils/base/format-file-size';
 import { ChatSymbolSpritePipe } from '../../../pipes/chat-symbol-sprite.pipe';
 
 @Component({
-  selector: 'app-chat-file-view',
+  selector: 'ecc-chat-file-view',
   templateUrl: './chat-file-view.component.html',
   styleUrls: ['./chat-file-view.component.scss'],
   standalone: true,

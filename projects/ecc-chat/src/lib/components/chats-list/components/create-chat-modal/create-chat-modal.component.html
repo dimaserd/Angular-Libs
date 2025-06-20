@@ -8,8 +8,8 @@
   </button>
 </div>
 <form class="new-chat-form" [formGroup]="newChatFormGroup" (ngSubmit)="createChat()">
-  <app-chat-plain-input [label]="'ID пользователя'" formControlName="userId"></app-chat-plain-input>
+  <ecc-chat-plain-input [label]="'ID пользователя'" formControlName="userId"></ecc-chat-plain-input>
   <div class="controls-wrapper">
-    <app-button-template [type]="'submit'" [disabled]="!newChatFormGroup.valid || loading"> Создать чат </app-button-template>
+    <ecc-chat-button-template [type]="'submit'" [disabled]="!newChatFormGroup.valid || loading"> Создать чат </ecc-chat-button-template>
   </div>
 </form>

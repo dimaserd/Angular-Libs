@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { ChatSymbolSpritePipe } from '../../pipes/chat-symbol-sprite.pipe';
-import {ButtonTemplateComponent} from "./button-template/button-template.component";
+import { ButtonTemplateComponent } from "./button-template/button-template.component";
 
 @Component({
-  selector: 'app-chat-button',
+  selector: 'ecc-chat-button',
   templateUrl: './chat-button.component.html',
   styleUrls: ['./chat-button.component.scss'],
   standalone: true,

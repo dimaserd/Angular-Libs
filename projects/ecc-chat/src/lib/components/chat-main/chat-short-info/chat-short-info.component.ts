@@ -7,7 +7,7 @@ import { AsyncPipe } from "@angular/common";
 import { getIconText } from '../../../utils/base/get-icon-text';
 
 @Component({
-  selector: 'app-chat-short-info',
+  selector: 'ecc-chat-short-info',
   templateUrl: './chat-short-info.component.html',
   styleUrls: ['./chat-short-info.component.scss'],
   standalone: true,

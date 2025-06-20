@@ -34,7 +34,7 @@ import { getNextId } from '../../../utils/base/get-next-id';
 import { dateToTicks } from '../../../utils/base/date-to-ticks';
 import { ChatSymbolSpritePipe } from '../../../pipes/chat-symbol-sprite.pipe';
 @Component({
-  selector: 'app-chat-messages',
+  selector: 'ecc-chat-messages',
   templateUrl: './chat-messages.component.html',
   styleUrls: ['./chat-messages.component.scss'],
   standalone: true,

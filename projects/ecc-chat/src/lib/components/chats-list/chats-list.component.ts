@@ -24,7 +24,7 @@ import { CreateChatModalComponent } from './components/create-chat-modal/create-
 import { GetListResult, IChatsListItem } from '../../models';
 
 @Component({
-  selector: 'app-chats-list',
+  selector: 'ecc-chats-list',
   templateUrl: './chats-list.component.html',
   styleUrls: ['./chats-list.component.scss'],
   standalone: true,

@@ -1,9 +1,9 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component} from '@angular/core';
-import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ChatSymbolSpritePipe } from '../../../../pipes/chat-symbol-sprite.pipe';
 
 @Component({
-  selector: 'app-chat-search',
+  selector: 'ecc-chat-search',
   templateUrl: './chat-search.component.html',
   styleUrls: ['./chat-search.component.scss'],
   standalone: true,
@@ -25,7 +25,7 @@ export class ChatSearchComponent implements ControlValueAccessor {
 
   public disabled = false;
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(private cdr: ChangeDetectorRef) { }
   public registerOnChange(fn: (value: string) => void): void {
     this.onChange = fn;
   }

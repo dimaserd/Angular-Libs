@@ -1,14 +1,6 @@
-<app-chats-list
-  class="chats-list"
-  [class.mobile-view]="isMobileView"
-  [class.has-active-chat]="hasChatId"
-  [activeChatId]="activeChatId"
-  (onOpenChat)="openChat($event)"
-></app-chats-list>
+<ecc-chats-list class="chats-list" [class.mobile-view]="isMobileView" [class.has-active-chat]="hasChatId"
+  [activeChatId]="activeChatId" (onOpenChat)="openChat($event)"></ecc-chats-list>
 <div class="chat-main-wrapper" [class.mobile-view]="isMobileView" [class.has-active-chat]="hasChatId">
-  <ecc-chat-main
-    [chatId]="activeChatId"
-    [showCloseChatButton]="isMobileView"
-    (closeChat)="openChat(undefined)"
-  ></ecc-chat-main>
+  <ecc-chat-main [chatId]="activeChatId" [showCloseChatButton]="isMobileView"
+    (closeChat)="openChat(undefined)"></ecc-chat-main>
 </div>

@@ -6,7 +6,7 @@
   position: relative;
 }
 
-app-chat-messages {
+ecc-chat-messages {
   flex-grow: 1;
   margin-bottom: 6px;
 }
@@ -20,7 +20,7 @@ app-chat-messages {
   margin-left: auto;
   padding: 0 13px 20px;
   align-items: flex-end;
-  app-chat-input {
+  ecc-chat-input {
     flex-grow: 1;
   }
 }

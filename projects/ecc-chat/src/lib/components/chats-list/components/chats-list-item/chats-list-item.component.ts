@@ -7,7 +7,7 @@ import { TicksToDatePipe } from "../../../../pipes/ticks-to-date.pipe";
 import { getIconText } from '../../../../utils/base/get-icon-text';
 
 @Component({
-  selector: 'app-chats-list-item',
+  selector: 'ecc-chats-list-item',
   templateUrl: './chats-list-item.component.html',
   styleUrls: ['./chats-list-item.component.scss'],
   standalone: true,
