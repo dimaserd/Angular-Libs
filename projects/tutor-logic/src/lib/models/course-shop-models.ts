@@ -26,6 +26,7 @@ export interface CourseShopWindowDetailedModel {
     id: string;
     name: string;
     description: string;
+    dataOnUtc: string;
     courses: Array<StudentGroupWithPaymentPlansModel>;
 }
 

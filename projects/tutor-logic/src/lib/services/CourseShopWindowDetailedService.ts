@@ -13,14 +13,22 @@ export class CourseShopWindowDetailedService {
         private _httpClient: HttpClient,
         @Inject('BASE_URL') baseUrl: string
     ) {
-        this.baseControllerUrl = baseUrl + 'api/tutor/course-shop-window-detailed/';
+        this.baseControllerUrl = baseUrl + 'api/tutor/course-shop-window-detailed';
     }
 
-    getDefault() {
-        return this._httpClient.get<CourseShopWindowDetailedModel>(this.baseControllerUrl + 'default');
+    getMain() {
+        return this._httpClient.get<CourseShopWindowDetailedModel>(`${this.baseControllerUrl}/main`);
+    }
+
+    getMainCached() {
+        return this._httpClient.get<CourseShopWindowDetailedModel>(`${this.baseControllerUrl}/main/cached`);
     }
 
     getById(id: string) {
-        return this._httpClient.get<CourseShopWindowDetailedModel>(this.baseControllerUrl + `byId/${id}`);
+        return this._httpClient.get<CourseShopWindowDetailedModel>(`${this.baseControllerUrl}/by-id/${id}`);
+    }
+
+    getByIdCached(id: string) {
+        return this._httpClient.get<CourseShopWindowDetailedModel>(`${this.baseControllerUrl}/by-id/${id}/cached`);
     }
 }
