@@ -35,6 +35,9 @@ export interface StudentGroupDetailedModel {
     solutionsCount: number;
     hasDefaultLandingPage: boolean;
     defaultCourseLandingPageUrl: string;
+    schoolId: string;
+    courseShopWindowId: string;
+    computedDataOnUtc: string;
 }
 
 export interface StudentInGroupSimpleModel {

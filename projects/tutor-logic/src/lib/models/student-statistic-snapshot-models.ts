@@ -27,6 +27,7 @@ export interface StudentInGroupStatisticBySubjectSnapshotValueModel {
 
 export interface StudentInGroupStatisticByTagSnapshotValueModel {
     id: string;
+    tagId: string;
     tagDisplayName: string;
     place: number;
     studentsWithSameResultCount: number;
