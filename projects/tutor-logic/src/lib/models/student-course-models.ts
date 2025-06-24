@@ -46,16 +46,17 @@ export interface StudentCourseProgressModel {
 }
 
 export interface StudentCourseThemeProgressModel {
-    id: string;
-    themeId: string;
-    isStarted: boolean;
-    currentProgress: number;
-    currentItemIndex: number;
-    themeTotalWeight: number;
-    currentProgressPercents: number;
-    isFinished: boolean;
-    finishedOnUtc: string | Date;
-    updatedOnUtc: string | Date;
+	 id: string; 
+	 themeId: string; 
+	 isStarted: boolean; 
+	 isRestricted: boolean; 
+	 currentProgress: number; 
+	 currentItemIndex: number; 
+	 themeTotalWeight: number; 
+	 currentProgressPercents: number; 
+	 isFinished: boolean; 
+	 finishedOnUtc: string; 
+	 updatedOnUtc: string; 
 }
 
 export interface SearchCourseProgressesRequest {
