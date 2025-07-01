@@ -10,7 +10,7 @@ export class CourseShopWindowDetailedService {
     baseControllerUrl: string;
 
     constructor(
-        private _httpClient: HttpClient,
+        private readonly _httpClient: HttpClient,
         @Inject('BASE_URL') baseUrl: string
     ) {
         this.baseControllerUrl = baseUrl + 'api/tutor/course-shop-window-detailed';

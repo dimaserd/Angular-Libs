@@ -44,6 +44,7 @@ export interface CurrentLoginData {
     isAuthenticated: boolean;
     userId: string;
     email: string;
+    emailConfirmed: boolean;
     roles: Array<string>;
     avatarFileId: number | null;
     name: string;

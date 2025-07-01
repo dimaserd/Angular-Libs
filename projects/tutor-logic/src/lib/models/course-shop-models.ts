@@ -1,3 +1,5 @@
+import { StudentGroupSimpleModel } from "./group-models";
+
 export interface CreateCourseOrderRequest {
     courseId: string;
     tariffId: string;
@@ -26,8 +28,20 @@ export interface CourseShopWindowDetailedModel {
     id: string;
     name: string;
     description: string;
+    courses: Array<CourseShopWindowItemModel>;
     dataOnUtc: string;
-    courses: Array<StudentGroupWithPaymentPlansModel>;
+}
+
+export interface CourseShopWindowItemModel {
+    id: string;
+    name: string;
+    studentGroup: StudentGroupSimpleModel;
+    cardOptions: CourseShopWindowItemCardOptionsModel;
+}
+
+export interface CourseShopWindowItemCardOptionsModel {
+    color: string;
+    imageSrc: string;
 }
 
 export interface StudentGroupWithPaymentPlansModel {
