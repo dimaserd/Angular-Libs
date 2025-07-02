@@ -28,8 +28,18 @@ export interface CourseShopWindowDetailedModel {
     id: string;
     name: string;
     description: string;
-    courses: Array<CourseShopWindowItemModel>;
+    courses: Array<CourseShopWindowItemDetailedModel>;
     dataOnUtc: string;
+}
+
+export interface CourseShopWindowItemDetailedModel {
+    id: string;
+    name: string;
+    getCourseMiniHtml: string;
+    getCourseDetailedHtml: string;
+    studentGroup: StudentGroupSimpleModel;
+    cardOptions: CourseShopWindowItemCardOptionsModel;
+    globalPaymentPlans: Array<StudentGroupPaymentPlanSimpleModel>;
 }
 
 export interface CourseShopWindowItemModel {
