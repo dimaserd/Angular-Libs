@@ -31,7 +31,6 @@ export interface DemoPaymentDescription {
     html: string;
 }
 
-
 export interface StudentCoursePaymentModel {
     id: string;
     name: string;
@@ -53,6 +52,8 @@ export interface StudentCoursePaymentModel {
     hasError: boolean;
     errorType: string;
     errorMessage: string;
+    providerErrorType: string;
+    providerErrorMessage: string;
     createdOnUtc: string;
     paidOnUtc: string;
     finishedOnUtc: string;
