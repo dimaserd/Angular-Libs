@@ -3,7 +3,7 @@ import { Inject } from "@angular/core";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { BaseApiResponse, GetListResult, StudentGroupSimpleModel } from "../models";
-import { TestSearchModel, CreateTest, EditTest } from "../models/test-models";
+import { SearchTestsRequest, CreateTestRequest, EditTestRequest } from "../models/test-models";
 
 @Injectable({
     providedIn: 'root',
@@ -11,21 +11,21 @@ import { TestSearchModel, CreateTest, EditTest } from "../models/test-models";
 export class TestsService {
     baseControllerUrl:string;
     
-    constructor(private _httpClient: HttpClient,
+    constructor(private readonly _httpClient: HttpClient,
         @Inject('BASE_URL') baseUrl: string){
-        const adding = 'api/tutor/tests/';
+        const adding = 'api/tutor/tests';
         this.baseControllerUrl = baseUrl + adding;
     }
 
-    public searchGroupRelationsInTest(model: TestSearchModel): Observable<GetListResult<StudentGroupSimpleModel>>{
-        return this._httpClient.post<GetListResult<StudentGroupSimpleModel>>(this.baseControllerUrl + 'groups/search/in', model);
+    public searchGroupRelationsInTest(model: SearchTestsRequest): Observable<GetListResult<StudentGroupSimpleModel>>{
+        return this._httpClient.post<GetListResult<StudentGroupSimpleModel>>(`${this.baseControllerUrl}/groups/search/in`, model);
     }
 
-    public create(model: CreateTest): Observable<BaseApiResponse> {
-        return this._httpClient.post<BaseApiResponse>(this.baseControllerUrl + 'Create', model);
+    public create(model: CreateTestRequest): Observable<BaseApiResponse> {
+        return this._httpClient.post<BaseApiResponse>(`${this.baseControllerUrl}/create`, model);
     }
 
-    public edit(model: EditTest): Observable<BaseApiResponse> {
-        return this._httpClient.post<BaseApiResponse>(this.baseControllerUrl + 'Edit', model);
+    public edit(model: EditTestRequest): Observable<BaseApiResponse> {
+        return this._httpClient.post<BaseApiResponse>(`${this.baseControllerUrl}/edit`, model);
     }
 }

@@ -10,34 +10,34 @@ BasePath = api/tutor/test-solution-result
     providedIn: 'root',
 })
 export class TestSolutionResultService {
-    baseControllerUrl: string;
+    readonly baseControllerUrl: string;
 
-    constructor(private _httpClient: HttpClient,
+    constructor(private readonly _httpClient: HttpClient,
         @Inject('BASE_URL') baseUrl: string) {
-        this.baseControllerUrl = baseUrl + 'api/tutor/test-solution-result/';
+        this.baseControllerUrl = `${baseUrl}api/tutor/test-solution-result`;
     }
 
     public getQuestionsWithModifiersBySolution(solutionId: string) {
-        return this._httpClient.get<TestQuestionWithModifiers[]>(this.baseControllerUrl + `modifiers/${solutionId}`);
+        return this._httpClient.get<TestQuestionWithModifiers[]>(`${this.baseControllerUrl}/modifiers/${solutionId}`);
     }
 
     public getQuestionsWithPointsValidationBySolution(solutionId: string) {
-        return this._httpClient.get<TestSolutionWithPointsValidation>(this.baseControllerUrl + `points/${solutionId}`);
+        return this._httpClient.get<TestSolutionWithPointsValidation>(`${this.baseControllerUrl}/points/${solutionId}`);
     }
 
     public create(solutionId: string) {
-        return this._httpClient.post<BaseApiResponse>(this.baseControllerUrl + `create/${solutionId}`, {});
+        return this._httpClient.post<BaseApiResponse>(`${this.baseControllerUrl}/create/${solutionId}`, {});
     }
 
     public recalculate(solutionId: string) {
-        return this._httpClient.post<BaseApiResponse>(this.baseControllerUrl + `recalculate/${solutionId}`, {});
+        return this._httpClient.post<BaseApiResponse>(`${this.baseControllerUrl}/recalculate/${solutionId}`, {});
     }
 
     public saveQuestionResult(model: SaveQuestionPointsValidation) {
-        return this._httpClient.post<GenericBaseApiResponse<QuestionAnswerWithResult>>(this.baseControllerUrl + `question/validation/save`, model);
+        return this._httpClient.post<GenericBaseApiResponse<QuestionAnswerWithResult>>(`${this.baseControllerUrl}/question/validation/save`, model);
     }
 
     public removeQuestionResult(model: QuestionInSolutionIdModel) {
-        return this._httpClient.post<GenericBaseApiResponse<QuestionAnswerWithResult>>(this.baseControllerUrl + `question/validation/remove`, model);
+        return this._httpClient.post<GenericBaseApiResponse<QuestionAnswerWithResult>>(`${this.baseControllerUrl}/question/validation/remove`, model);
     }
 }
