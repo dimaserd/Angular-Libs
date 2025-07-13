@@ -17,6 +17,7 @@ export interface TutorFullApplicationPublicOptions {
   icon: IconApplicationSettings;
   webAppRoutes: WebAppRoutes;
   telephoneInputOptions: TelephoneInputOptions;
+  subjectAliases: string[];
   serverAppVersion: string;
   dataOnUtc: string;
 }

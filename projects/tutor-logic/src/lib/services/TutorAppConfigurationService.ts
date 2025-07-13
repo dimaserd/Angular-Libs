@@ -27,7 +27,14 @@ export class TutorAppConfigurationService {
      * @returns
      */
     get(): TutorFullApplicationPublicOptions {
+        return TutorAppConfigurationService.getFromWindow();
+    }
 
+    /**
+     * Получить конифгурацию из window
+     * @returns
+     */
+    static getFromWindow(): TutorFullApplicationPublicOptions {
         const value = window[TutorAppConfigurationService.VariableKey];
 
         if (value === undefined || value === null) {
