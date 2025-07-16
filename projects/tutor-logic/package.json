@@ -1,9 +1,9 @@
 {
   "name": "tutor-logic",
-  "version": "3.7.3",
+  "version": "4.0.0",
   "peerDependencies": {
-    "@angular/common": "^18.2.13",
-    "@angular/core": "^18.2.13"
+    "@angular/common": "^19.2.14",
+    "@angular/core": "^19.2.14"
   },
   "dependencies": {
     "tslib": "^2.3.0"
