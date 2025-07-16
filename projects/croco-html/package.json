@@ -2,7 +2,7 @@
   "name": "croco-html",
   "version": "4.0.0",
   "peerDependencies": {
-    "@angular/common": "^18.2.13",
+    "@angular/common": "^19.2.14",
     "@angular/core": "^19.2.14",
     "@angular/cdk": "^19.2.14",
     "@angular/youtube-player": "^19.2.19",
