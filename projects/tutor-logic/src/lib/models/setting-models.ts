@@ -1,3 +1,5 @@
+import { SubjectMenuWithIconsModel } from "./subject-menu-models";
+
 export interface SettingModel {
   name: string;
   description: string;
@@ -11,13 +13,13 @@ export interface TutorFullApplicationPublicOptions {
   multiSchoolOptions: MultiSchoolOptions;
   telegramBotSettings: MainTelegramBotSettings;
   studentDemo: StudentDemoSettings;
+  mainMenu: SubjectMenuWithIconsModel;
   publicImageUrlFormat: string;
   privateImageUrlFormat: string;
   imagesPack: TutorImagesPackSettings;
   icon: IconApplicationSettings;
   webAppRoutes: WebAppRoutes;
   telephoneInputOptions: TelephoneInputOptions;
-  subjectAliases: string[];
   serverAppVersion: string;
   dataOnUtc: string;
 }
