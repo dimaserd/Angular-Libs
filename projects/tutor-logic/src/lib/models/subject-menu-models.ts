@@ -1,4 +1,4 @@
-import { IconSimpleModel } from "./icon-models";
+import { SubjectWithIconModel } from "./subject.models";
 
 export interface SubjectMenu {
   root: SubjectMenuItem;
@@ -23,11 +23,4 @@ export interface SubjectMenuWithIconsModel {
   isMain: boolean;
   iconSetId: string;
   subjects: Array<SubjectWithIconModel>;
-}
-
-export interface SubjectWithIconModel {
-  id: string;
-  name: string;
-  alias: string;
-  icon: IconSimpleModel;
 }
