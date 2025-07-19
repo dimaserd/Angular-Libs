@@ -24,3 +24,10 @@ export interface SubjectMenuWithIconsModel {
   iconSetId: string;
   subjects: Array<SubjectWithIconModel>;
 }
+
+export interface SubjectMenuSimpleModel {
+  id: string;
+  name: string;
+  isMain: boolean;
+  iconSetId: string;
+}
