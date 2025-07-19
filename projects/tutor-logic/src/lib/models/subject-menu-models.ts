@@ -18,6 +18,12 @@ export enum SubjectMenuItemType {
   SubjectTestsLink = 'SubjectTestsLink',
 }
 
+export interface CreateSubjectMenuRequest {
+	 isMain: boolean; 
+	 name: string; 
+	 iconSetId: string; 
+}
+
 export interface SubjectMenuWithIconsModel {
   id: string;
   isMain: boolean;

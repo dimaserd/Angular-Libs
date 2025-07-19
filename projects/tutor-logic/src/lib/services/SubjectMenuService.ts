@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { ChangeSubjectConfiguration } from '../models/subject.models';
 import { BaseApiResponse } from '../models';
-import { SubjectMenu, SubjectMenuSimpleModel } from '../models/subject-menu-models';
+import { CreateSubjectMenuRequest, SubjectMenu, SubjectMenuSimpleModel } from '../models/subject-menu-models';
 
 /**
  * Методы контроллера Tutor.Api.Controllers.Subjects.SubjectMenuController
@@ -34,6 +34,10 @@ export class SubjectMenuService {
 
   public update(model: ChangeSubjectConfiguration) {
     return this._httpClient.post<BaseApiResponse>(`${this.baseControllerUrl}/Update`, model);
+  }
+
+  public create(model: CreateSubjectMenuRequest) {
+    return this._httpClient.post<BaseApiResponse>(`${this.baseControllerUrl}/create`, model);
   }
 
   public getMain() {
