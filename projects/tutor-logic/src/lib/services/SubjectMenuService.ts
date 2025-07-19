@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { ChangeSubjectConfiguration } from '../models/subject.models';
 import { BaseApiResponse } from '../models';
-import { SubjectMenu } from '../models/subject-menu-models';
+import { SubjectMenu, SubjectMenuSimpleModel } from '../models/subject-menu-models';
 
 /**
  * Методы контроллера Tutor.Api.Controllers.Subjects.SubjectMenuController
@@ -25,19 +24,19 @@ export class SubjectMenuService {
     this.baseControllerUrl = `${baseUrl}api/tutor/subject/menu`;
   }
 
-  public getByAliasOrId(idOrAlias: string): Observable<SubjectMenu> {
+  public getByAliasOrId(idOrAlias: string) {
     return this._httpClient.get<SubjectMenu>(`${this.baseControllerUrl}/GetByAliasOrId?idOrAlias=${idOrAlias}`);
   }
 
-  public getByAliasOrIdCached(idOrAlias: string): Observable<SubjectMenu> {
+  public getByAliasOrIdCached(idOrAlias: string) {
     return this._httpClient.get<SubjectMenu>(`${this.baseControllerUrl}/GetByAliasOrId/Cached?idOrAlias=${idOrAlias}`);
   }
 
-  public update(model: ChangeSubjectConfiguration): Observable<BaseApiResponse> {
+  public update(model: ChangeSubjectConfiguration) {
     return this._httpClient.post<BaseApiResponse>(`${this.baseControllerUrl}/Update`, model);
   }
 
   public getMain() {
-    return this._httpClient.get<BaseApiResponse>(`${this.baseControllerUrl}/query/main`);
+    return this._httpClient.get<SubjectMenuSimpleModel>(`${this.baseControllerUrl}/query/main`);
   }
 }
