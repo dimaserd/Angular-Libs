@@ -267,7 +267,7 @@
         --current-message-background-color: rgb(223, 255, 223);
         --file-icon-background-color: rgb(79, 174, 78);
         .message-wrapper {
-          background-color: white;
+          background-color: var(--app-message-outgoing-background-color);
           border-radius: 15px 15px 5px 15px;
           .message-tail-filled {
             color: var(--app-message-outgoing-background-color);
