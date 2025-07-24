@@ -267,10 +267,10 @@
         --current-message-background-color: rgb(223, 255, 223);
         --file-icon-background-color: rgb(79, 174, 78);
         .message-wrapper {
-          background-color: var(--app-message-outgoing-background-color);
+          background-color: var(--ecc-chat-message-outgoing-background-color);
           border-radius: 15px 15px 5px 15px;
           .message-tail-filled {
-            color: var(--app-message-outgoing-background-color);
+            color: var(--ecc-chat-message-outgoing-background-color);
             inset-inline-end: -8.4px;
             bottom: 0;
             transform: translateY(1px) scaleX(-1);
@@ -295,9 +295,9 @@
       }
 
       .message-wrapper {
-        background-color: var(--app-message-incoming-background-color);
+        background-color: var(--ecc-chat-message-incoming-background-color);
         border-radius: 15px 15px 15px 5px;
-        box-shadow: var(--app-message-shadow) 0 1px 2px 0;
+        box-shadow: var(--ecc-chat-message-shadow) 0 1px 2px 0;
         box-sizing: border-box;
         color: rgb(0, 0, 0);
         flex-direction: column-reverse;
@@ -326,7 +326,7 @@
           position: absolute;
           width: 11px;
           height: 20px;
-          color: var(--app-message-incoming-background-color);
+          color: var(--ecc-chat-message-incoming-background-color);
           margin-inline-start: -15.4px;
           bottom: 0;
           transform: translateY(1px);
