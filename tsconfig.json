@@ -14,6 +14,9 @@
         "dist/croco-html/croco-html",
         "dist/croco-html"
       ],
+      "croco-ngx-owl-carousel": [
+        "./dist/croco-ngx-owl-carousel"
+      ],
       "croco-type-description": [
         "dist/croco-type-description/croco-type-description",
         "dist/croco-type-description"
@@ -51,5 +54,13 @@
     "strictMetadataEmit": true,
     "enableResourceInlining": true,
     "enableIvy": true,
-  }
+  },
+  "references": [
+    {
+      "path": "./projects/croco-ngx-owl-carousel/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/croco-ngx-owl-carousel/tsconfig.spec.json"
+    }
+  ]
 }

@@ -99,6 +99,7 @@
         }
       }
     },
+
     "croco-type-description": {
       "projectType": "library",
       "root": "projects/croco-type-description",
@@ -221,6 +222,36 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "tsConfig": "projects/croco-generic-interface-components/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    },
+    "croco-ngx-owl-carousel": {
+      "projectType": "library",
+      "root": "projects/croco-ngx-owl-carousel",
+      "sourceRoot": "projects/croco-ngx-owl-carousel/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/croco-ngx-owl-carousel/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/croco-ngx-owl-carousel/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/croco-ngx-owl-carousel/tsconfig.spec.json",
             "polyfills": [
               "zone.js",
               "zone.js/testing"
