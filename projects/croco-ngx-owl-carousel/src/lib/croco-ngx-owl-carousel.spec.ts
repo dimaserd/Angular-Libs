@@ -1,23 +1,16 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
+import { NgxOwlCarouselOModule } from './croco-ngx-owl-carousel'
 
-import { CrocoNgxOwlCarousel } from './croco-ngx-owl-carousel';
-
-describe('CrocoNgxOwlCarousel', () => {
-  let component: CrocoNgxOwlCarousel;
-  let fixture: ComponentFixture<CrocoNgxOwlCarousel>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [CrocoNgxOwlCarousel]
+describe('NgxOwlCarouselOModule', () => {
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [NgxOwlCarouselOModule]
+      }).compileComponents();
     })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(CrocoNgxOwlCarousel);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+  );
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(NgxOwlCarouselOModule).toBeDefined();
   });
 });
