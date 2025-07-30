@@ -1,12 +1,13 @@
 import { Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ImageMethods } from '../../extensions/ImageMethods';
-import { FileType, PublicFilesQueryService } from '../../services/PublicFilesQueryService';
+import { PublicFilesQueryService } from '../../services/PublicFilesQueryService';
 import { CrocoHtmlOptionsToken } from '../../consts';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { CrocoHtmlEditorFileOptions, CrocoHtmlOptions } from '../../options';
 import { PrivateFilesQueryService } from "../../services/PrivateFilesQueryService";
 import { CrocoHtmlFileOptionsService } from "../../services/CrocoHtmlFileOptionsService";
+import { FileType } from '../../services/file-models';
 
 export interface SearchQuestionsFormData {
   q: string;

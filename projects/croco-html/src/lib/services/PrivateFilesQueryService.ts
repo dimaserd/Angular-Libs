@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, Inject } from "@angular/core";
 import { Observable } from "rxjs";
-import { GetListResult, FileType, SearchFilesRequest } from "./PublicFilesQueryService";
+import { FileType, GetListResult, SearchFilesRequest } from "./file-models";
 
 export interface PrivateFileNameModel {
     id: string;

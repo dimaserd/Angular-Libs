@@ -1,6 +1,6 @@
 {
   "name": "croco-html",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "peerDependencies": {
     "@angular/common": "^20.1.3",
     "@angular/core": "^20.1.3",
