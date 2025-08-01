@@ -74,6 +74,16 @@ export interface StudentGroupPaymentPlanSimpleModel {
 
 export interface StudentGroupPaymentPlansModel {
     id: string;
+    alias: string;
     isFreeOfCharge: boolean;
-    globalPaymentPlans: StudentGroupPaymentPlanSimpleModel[];
+    globalPaymentPlans: Array<StudentGroupGlobalPaymentPlanModel>;
+}
+
+export interface StudentGroupGlobalPaymentPlanModel {
+    id: string;
+    name: string;
+    description: string;
+    daysLength: number;
+    amount: number;
+    defaultLandingPageUrl: string;
 }
