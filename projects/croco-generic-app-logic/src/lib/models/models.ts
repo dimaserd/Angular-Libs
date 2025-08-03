@@ -19,6 +19,11 @@ export interface GenericBaseApiResponse<T> extends BaseApiResponse {
     responseObject: T;
 }
 
+export interface GetListSearchModel {
+    count: number | null;
+    offSet: number;
+}
+
 export interface GetListResult<T> {
 
     /*
