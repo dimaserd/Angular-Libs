@@ -10,7 +10,7 @@ import { UploadPrivateFilesWithProgressResult, PrivateFilesCreatedResult } from 
     providedIn: 'root',
 })
 export class PrivateFileUploadService {
-    _baseControllerUrl: string;
+    private readonly _baseControllerUrl: string;
 
     constructor(
         private readonly _httpClient: HttpClient,
