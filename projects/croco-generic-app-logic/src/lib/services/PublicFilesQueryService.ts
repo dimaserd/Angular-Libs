@@ -17,10 +17,10 @@ export class PublicFilesQueryService {
     }
 
     public getFilesWithRelations(model: SearchFilesRequest): Observable<GetListResult<DbFileNoDataWithRelations>> {
-      return this._httpClient.post<GetListResult<DbFileNoDataWithRelations>>(
-        `${this._baseControllerUrl}/GetFiles/WithRelations`,
-        model
-      );
+        return this._httpClient.post<GetListResult<DbFileNoDataWithRelations>>(
+            `${this._baseControllerUrl}/GetFiles/WithRelations`,
+            model
+        );
     }
 
     public search(model: SearchFilesRequest): Observable<GetListResult<FileSimpleModel>> {

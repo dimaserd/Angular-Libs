@@ -79,7 +79,6 @@ export interface StudentGroupPaymentPlansModel {
     globalPaymentPlans: Array<StudentGroupGlobalPaymentPlanModel>;
 }
 
-
 export interface StudentGroupGlobalPaymentPlanModel {
     id: string;
     name: string;
