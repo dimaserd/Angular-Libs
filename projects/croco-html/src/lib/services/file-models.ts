@@ -1,6 +1,5 @@
 
 export interface GetListResult<T> {
-
     /*
     Сколько всего записей
      */

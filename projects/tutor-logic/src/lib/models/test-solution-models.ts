@@ -144,7 +144,6 @@ export interface TestWithActiveSolutionModel {
 
 export interface QuestionAnswerWithResult {
     isChecked: boolean;
-    questionIndex: number;
     questionId: string;
     answerOrAnswers: string;
     pointsValidation: QuestionPointsValidationModel;

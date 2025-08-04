@@ -33,6 +33,7 @@ export interface StudentGroupDetailedModel {
     useMaterials: boolean;
     materialsHtml: string;
     solutionsCount: number;
+    scheduleStudentSubscribersCount: number;
     hasDefaultLandingPage: boolean;
     defaultCourseLandingPageUrl: string;
     schoolId: string;
