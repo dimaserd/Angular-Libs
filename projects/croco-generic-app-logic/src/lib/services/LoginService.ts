@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import {BehaviorSubject, defaultIfEmpty, filter, Observable, of, switchMap, take, timer} from 'rxjs';
 import { Injectable } from '@angular/core';
-import { concatMap, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { CurrentLoginData, LoginModel, LoginResultModel, LoginByEmailOrPhoneNumber, LoginViaLinkRequest, LoginViaLinkResult, LogoutResponse, LogoutErrorType } from '../models/login-models';
 
 @Injectable({
@@ -10,9 +10,19 @@ import { CurrentLoginData, LoginModel, LoginResultModel, LoginByEmailOrPhoneNumb
 })
 export class LoginService {
   private loginData$ = new BehaviorSubject<CurrentLoginData>(null);
-  private loginDataCached$ = this.loginData$.pipe(concatMap(data => {  
-    return data ? of(data) : this.getLoginData();
-  }))
+  private loginDataCached$ = this.loginData$.pipe(
+    switchMap(data => {
+      if (data) return of(data);
+
+      return timer(0, 300).pipe(
+        switchMap(() => this.loginData$),
+        filter(val => !!val),
+        take(3),
+        defaultIfEmpty(null),
+        switchMap(cached => cached ? of(cached) : this.getLoginData())
+      );
+    })
+  );
 
   constructor(
     private readonly _httpClient: HttpClient,
