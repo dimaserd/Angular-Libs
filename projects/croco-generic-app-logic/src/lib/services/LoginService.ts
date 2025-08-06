@@ -10,15 +10,26 @@ import { CurrentLoginData, LoginModel, LoginResultModel, LoginByEmailOrPhoneNumb
 })
 export class LoginService {
   private loginData$ = new BehaviorSubject<CurrentLoginData>(null);
+
   private loginDataCached$ = this.loginData$.pipe(
     switchMap(data => {
+      // Если данные уже есть в loginData$, просто возвращает их
       if (data) return of(data);
 
+      // Если данных нет, начинает проверять их наличие каждые 300 мс
       return timer(0, 300).pipe(
+        // Ограничивает и делает максимум 5 повторений и потом завершает поток
+        take(5),
+        // Каждые 300 мс запрашивает текущее значение loginData$
         switchMap(() => this.loginData$),
+        // Пропускает только непустые значения
         filter(val => !!val),
-        take(3),
+        // Берёт первое непустое значение и завершает стрим
+        take(1),
+        // Если ничего не получили, возвращает null
         defaultIfEmpty(null),
+        // Если данные появились - возвращает их,
+        // если нет - делаем запрос через getLoginData()
         switchMap(cached => cached ? of(cached) : this.getLoginData())
       );
     })
