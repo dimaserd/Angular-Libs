@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import {BehaviorSubject, defaultIfEmpty, filter, Observable, of, switchMap, take, timer} from 'rxjs';
 import { Injectable } from '@angular/core';
-import { concatMap, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { CurrentLoginData, LoginModel, LoginResultModel, LoginByEmailOrPhoneNumber, LoginViaLinkRequest, LoginViaLinkResult, LogoutResponse, LogoutErrorType } from '../models/login-models';
 
 @Injectable({
@@ -10,9 +10,30 @@ import { CurrentLoginData, LoginModel, LoginResultModel, LoginByEmailOrPhoneNumb
 })
 export class LoginService {
   private loginData$ = new BehaviorSubject<CurrentLoginData>(null);
-  private loginDataCached$ = this.loginData$.pipe(concatMap(data => {  
-    return data ? of(data) : this.getLoginData();
-  }))
+
+  private loginDataCached$ = this.loginData$.pipe(
+    switchMap(data => {
+      // Если данные уже есть в loginData$, просто возвращает их
+      if (data) return of(data);
+
+      // Если данных нет, начинает проверять их наличие каждые 300 мс
+      return timer(0, 300).pipe(
+        // Ограничивает и делает максимум 5 повторений и потом завершает поток
+        take(5),
+        // Каждые 300 мс запрашивает текущее значение loginData$
+        switchMap(() => this.loginData$),
+        // Пропускает только непустые значения
+        filter(val => !!val),
+        // Берёт первое непустое значение и завершает стрим
+        take(1),
+        // Если ничего не получили, возвращает null
+        defaultIfEmpty(null),
+        // Если данные появились - возвращает их,
+        // если нет - делаем запрос через getLoginData()
+        switchMap(cached => cached ? of(cached) : this.getLoginData())
+      );
+    })
+  );
 
   constructor(
     private readonly _httpClient: HttpClient,
