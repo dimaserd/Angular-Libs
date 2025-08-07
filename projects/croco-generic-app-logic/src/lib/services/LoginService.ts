@@ -11,7 +11,10 @@ import { CurrentLoginData, LoginModel, LoginResultModel, LoginByEmailOrPhoneNumb
 export class LoginService {
   private loginData$ = new BehaviorSubject<CurrentLoginData>(null);
 
-  private hasRequestForLoginData = false;
+  /**
+   * Был ли совершен запрос к api за данными о логине пользователя.
+   */
+  private hasApiRequestForLoginData = false;
 
   // Отрабатываю только изменения, а не null который является значением по-умолчанию.
   private loginDataCached$ = this.loginData$.pipe(filter(data => data !== null && data !== undefined));
@@ -28,20 +31,21 @@ export class LoginService {
 
   loginByEmail(data: LoginModel): Observable<LoginResultModel> {
     return this.loginByEmailApi(data).pipe(tap(res => {
-      if (res.succeeded) {
-        this.clearLoginDataCache();
-        this.getLoginData().subscribe();
-      }
+      this.handleLoginResult(res);
     }));
   }
 
   loginByEmailOrPhoneNumber(data: LoginByEmailOrPhoneNumber): Observable<LoginResultModel> {
     return this.loginByEmailOrPhoneNumberApi(data).pipe(tap(res => {
-      if (res.succeeded) {
-        this.clearLoginDataCache();
-        this.getLoginData().subscribe();
-      }
+      this.handleLoginResult(res);
     }));
+  }
+
+  handleLoginResult(result: LoginResultModel) {
+    if (result.succeeded) {
+      this.clearLoginDataCache();
+      this.getLoginData().subscribe();
+    }
   }
 
   loginByLink(model: LoginViaLinkRequest) {
@@ -77,12 +81,12 @@ export class LoginService {
 
   getLoginDataCached(): Observable<CurrentLoginData> {
 
-    // Избавляемся от нескольких запросов
-    if (!this.hasRequestForLoginData) {
+    // Избавляемся от нескольких запросов к api
+    if (!this.hasApiRequestForLoginData) {
 
       // Вызываем метод авторизации
       this.getLoginData().subscribe();
-      this.hasRequestForLoginData = true;
+      this.hasApiRequestForLoginData = true;
     }
 
     return this.loginDataCached$;
