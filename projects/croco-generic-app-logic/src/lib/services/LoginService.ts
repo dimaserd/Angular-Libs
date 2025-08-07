@@ -13,7 +13,7 @@ export class LoginService {
 
   private hasRequestForLoginData = false;
 
-  // Отрабатываю только изменения
+  // Отрабатываю только изменения, а не null который является значением по-умолчанию.
   private loginDataCached$ = this.loginData$.pipe(filter(data => data !== null && data !== undefined));
 
   constructor(
@@ -79,6 +79,8 @@ export class LoginService {
 
     // Избавляемся от нескольких запросов
     if (!this.hasRequestForLoginData) {
+
+      // Вызываем метод авторизации
       this.getLoginData().subscribe();
       this.hasRequestForLoginData = true;
     }
