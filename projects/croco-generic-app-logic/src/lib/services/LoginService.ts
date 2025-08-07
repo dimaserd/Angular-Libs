@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject } from '@angular/core';
-import {BehaviorSubject, defaultIfEmpty, filter, Observable, of, switchMap, take, timer} from 'rxjs';
+import { BehaviorSubject, filter, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { CurrentLoginData, LoginModel, LoginResultModel, LoginByEmailOrPhoneNumber, LoginViaLinkRequest, LoginViaLinkResult, LogoutResponse, LogoutErrorType } from '../models/login-models';
@@ -11,29 +11,10 @@ import { CurrentLoginData, LoginModel, LoginResultModel, LoginByEmailOrPhoneNumb
 export class LoginService {
   private loginData$ = new BehaviorSubject<CurrentLoginData>(null);
 
-  private loginDataCached$ = this.loginData$.pipe(
-    switchMap(data => {
-      // Если данные уже есть в loginData$, просто возвращает их
-      if (data) return of(data);
+  private hasRequestForLoginData = false;
 
-      // Если данных нет, начинает проверять их наличие каждые 300 мс
-      return timer(0, 300).pipe(
-        // Ограничивает и делает максимум 5 повторений и потом завершает поток
-        take(5),
-        // Каждые 300 мс запрашивает текущее значение loginData$
-        switchMap(() => this.loginData$),
-        // Пропускает только непустые значения
-        filter(val => !!val),
-        // Берёт первое непустое значение и завершает стрим
-        take(1),
-        // Если ничего не получили, возвращает null
-        defaultIfEmpty(null),
-        // Если данные появились - возвращает их,
-        // если нет - делаем запрос через getLoginData()
-        switchMap(cached => cached ? of(cached) : this.getLoginData())
-      );
-    })
-  );
+  // Отрабатываю только изменения
+  private loginDataCached$ = this.loginData$.pipe(filter(data => data !== null && data !== undefined));
 
   constructor(
     private readonly _httpClient: HttpClient,
@@ -41,13 +22,13 @@ export class LoginService {
   ) {
   }
 
-  clearLoginDataCache(){
+  clearLoginDataCache() {
     this.loginData$.next(null);
   }
 
   loginByEmail(data: LoginModel): Observable<LoginResultModel> {
     return this.loginByEmailApi(data).pipe(tap(res => {
-      if(res.succeeded){
+      if (res.succeeded) {
         this.clearLoginDataCache();
         this.getLoginData().subscribe();
       }
@@ -56,14 +37,14 @@ export class LoginService {
 
   loginByEmailOrPhoneNumber(data: LoginByEmailOrPhoneNumber): Observable<LoginResultModel> {
     return this.loginByEmailOrPhoneNumberApi(data).pipe(tap(res => {
-      if(res.succeeded){
+      if (res.succeeded) {
         this.clearLoginDataCache();
         this.getLoginData().subscribe();
       }
     }));
   }
 
-  loginByLink(model: LoginViaLinkRequest){
+  loginByLink(model: LoginViaLinkRequest) {
     return this._httpClient.post<LoginViaLinkResult>(`${this._baseUrl}api/account/Login/ByLink`, model);
   }
 
@@ -81,7 +62,7 @@ export class LoginService {
     return this._httpClient
       .post<LogoutResponse>(`${this._baseUrl}api/Account/LogOut`, {})
       .pipe(tap(res => {
-        if(res.succeeded || (!res.succeeded && res.errorType === LogoutErrorType.NotAuthenticated)) {
+        if (res.succeeded || (!res.succeeded && res.errorType === LogoutErrorType.NotAuthenticated)) {
           this.clearLoginDataCache();
           this.getLoginData().subscribe();
         }
@@ -95,6 +76,13 @@ export class LoginService {
   }
 
   getLoginDataCached(): Observable<CurrentLoginData> {
+
+    // Избавляемся от нескольких запросов
+    if (!this.hasRequestForLoginData) {
+      this.getLoginData().subscribe();
+      this.hasRequestForLoginData = true;
+    }
+
     return this.loginDataCached$;
   }
 
