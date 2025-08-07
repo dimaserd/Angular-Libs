@@ -37,7 +37,7 @@ export class LoginService {
 
   constructor(
     private readonly _httpClient: HttpClient,
-    @Inject('BASE_URL') private baseUrl: string
+    @Inject('BASE_URL') private readonly _baseUrl: string
   ) {
   }
 
@@ -64,22 +64,22 @@ export class LoginService {
   }
 
   loginByLink(model: LoginViaLinkRequest){
-    return this._httpClient.post<LoginViaLinkResult>(`${this.baseUrl}api/account/Login/ByLink`, model);
+    return this._httpClient.post<LoginViaLinkResult>(`${this._baseUrl}api/account/Login/ByLink`, model);
   }
 
   private loginByEmailApi(data: LoginModel): Observable<LoginResultModel> {
     return this._httpClient
-      .post<LoginResultModel>(`${this.baseUrl}api/Account/Login/ByEmail`, data)
+      .post<LoginResultModel>(`${this._baseUrl}api/Account/Login/ByEmail`, data)
   }
 
   private loginByEmailOrPhoneNumberApi(data: LoginByEmailOrPhoneNumber): Observable<LoginResultModel> {
     return this._httpClient
-      .post<LoginResultModel>(`${this.baseUrl}api/Account/Login`, data)
+      .post<LoginResultModel>(`${this._baseUrl}api/Account/Login`, data)
   }
 
   logOut(): Observable<LogoutResponse> {
     return this._httpClient
-      .post<LogoutResponse>(`${this.baseUrl}api/Account/LogOut`, {})
+      .post<LogoutResponse>(`${this._baseUrl}api/Account/LogOut`, {})
       .pipe(tap(res => {
         if(res.succeeded || (!res.succeeded && res.errorType === LogoutErrorType.NotAuthenticated)) {
           this.clearLoginDataCache();
@@ -100,6 +100,6 @@ export class LoginService {
 
   private getLoginDataApi(): Observable<CurrentLoginData> {
     return this._httpClient
-      .get<CurrentLoginData>(`${this.baseUrl}api/Account/User`);
+      .get<CurrentLoginData>(`${this._baseUrl}api/Account/User`);
   }
 }
