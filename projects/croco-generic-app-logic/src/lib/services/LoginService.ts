@@ -24,9 +24,7 @@ export class LoginService {
 
   clearLoginDataCacheAndGetLoginData() {
     this.loginData$.next(null);
-    const subscription = this.getLoginData().subscribe();
-
-    subscription.unsubscribe();
+    this.getLoginData().subscribe();
   }
 
   loginByEmail(data: LoginModel): Observable<LoginResultModel> {
@@ -94,14 +92,16 @@ export class LoginService {
     return new Date().getTime().toString() + Math.random().toString(16).slice(2)
   }
 
-  private executeLatestLoginDataRequest(requestId: string) {
+  private executeLatestLoginDataRequest(requestId: string):void {
     
-    if (this.latestLoginDataRequest$.value !== requestId) {
+    const latestValue = this.latestLoginDataRequest$.getValue();
+
+    console.log("LoginService.executeLatestLoginDataRequest", JSON.stringify(latestValue), requestId);
+    if (latestValue !== requestId) {
       return;
     }
 
-    const subscription = this.getLoginData().subscribe();
-    subscription.unsubscribe();
+    this.getLoginData().subscribe();
   }
 
   private getLoginDataApi(): Observable<CurrentLoginData> {
