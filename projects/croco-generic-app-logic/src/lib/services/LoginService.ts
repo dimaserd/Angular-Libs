@@ -11,7 +11,7 @@ import { CurrentLoginData, LoginModel, LoginResultModel, LoginByEmailOrPhoneNumb
 export class LoginService {
   private loginData$ = new BehaviorSubject<CurrentLoginData>(null);
 
-  private latestLoginDataRequest$ = new BehaviorSubject<number>(null);
+  private latestLoginDataRequest$ = new BehaviorSubject<string>(null);
 
   // Отрабатываю только изменения, а не null который является значением по-умолчанию.
   private loginDataCached$ = this.loginData$.pipe(filter(data => data !== null && data !== undefined));
@@ -79,20 +79,24 @@ export class LoginService {
 
   getLoginDataCached(): Observable<CurrentLoginData> {
 
-    const time = new Date().getTime();
+    const requestId = this.getUniqueRequestId();
 
-    this.latestLoginDataRequest$.next(time);
+    this.latestLoginDataRequest$.next(requestId);
     // Избавляемся от нескольких запросов к api
     timer(50).subscribe(() => {
-      this.executeLatestLoginDataRequest(time);
+      this.executeLatestLoginDataRequest(requestId);
     });
 
     return this.loginDataCached$;
   }
 
-  private executeLatestLoginDataRequest(time: number) {
+  getUniqueRequestId(): string {
+    return new Date().getTime().toString() + Math.random().toString(16).slice(2)
+  }
+
+  private executeLatestLoginDataRequest(requestId: string) {
     
-    if (this.latestLoginDataRequest$.value !== time) {
+    if (this.latestLoginDataRequest$.value !== requestId) {
       return;
     }
 
