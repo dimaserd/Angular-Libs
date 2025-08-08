@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject } from '@angular/core';
-import { BehaviorSubject, filter, Observable } from 'rxjs';
+import { BehaviorSubject, filter, Observable, timer } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { CurrentLoginData, LoginModel, LoginResultModel, LoginByEmailOrPhoneNumber, LoginViaLinkRequest, LoginViaLinkResult, LogoutResponse, LogoutErrorType } from '../models/login-models';
@@ -11,10 +11,7 @@ import { CurrentLoginData, LoginModel, LoginResultModel, LoginByEmailOrPhoneNumb
 export class LoginService {
   private loginData$ = new BehaviorSubject<CurrentLoginData>(null);
 
-  /**
-   * Был ли совершен запрос к api за данными о логине пользователя.
-   */
-  private hasApiRequestForLoginData = false;
+  private latestLoginDataRequest$ = new BehaviorSubject<number>(null);
 
   // Отрабатываю только изменения, а не null который является значением по-умолчанию.
   private loginDataCached$ = this.loginData$.pipe(filter(data => data !== null && data !== undefined));
@@ -25,8 +22,11 @@ export class LoginService {
   ) {
   }
 
-  clearLoginDataCache() {
+  clearLoginDataCacheAndGetLoginData() {
     this.loginData$.next(null);
+    const subscription = this.getLoginData().subscribe();
+
+    subscription.unsubscribe();
   }
 
   loginByEmail(data: LoginModel): Observable<LoginResultModel> {
@@ -43,8 +43,7 @@ export class LoginService {
 
   handleLoginResult(result: LoginResultModel) {
     if (result.succeeded) {
-      this.clearLoginDataCache();
-      this.getLoginData().subscribe();
+      this.clearLoginDataCacheAndGetLoginData();
     }
   }
 
@@ -67,8 +66,7 @@ export class LoginService {
       .post<LogoutResponse>(`${this._baseUrl}api/Account/LogOut`, {})
       .pipe(tap(res => {
         if (res.succeeded || (!res.succeeded && res.errorType === LogoutErrorType.NotAuthenticated)) {
-          this.clearLoginDataCache();
-          this.getLoginData().subscribe();
+          this.clearLoginDataCacheAndGetLoginData();
         }
       }));
   }
@@ -81,15 +79,25 @@ export class LoginService {
 
   getLoginDataCached(): Observable<CurrentLoginData> {
 
-    // Избавляемся от нескольких запросов к api
-    if (!this.hasApiRequestForLoginData) {
+    const time = new Date().getTime();
 
-      // Вызываем метод авторизации
-      this.getLoginData().subscribe();
-      this.hasApiRequestForLoginData = true;
-    }
+    this.latestLoginDataRequest$.next(time);
+    // Избавляемся от нескольких запросов к api
+    timer(50).subscribe(() => {
+      this.executeLatestLoginDataRequest(time);
+    });
 
     return this.loginDataCached$;
+  }
+
+  private executeLatestLoginDataRequest(time: number) {
+    
+    if (this.latestLoginDataRequest$.value !== time) {
+      return;
+    }
+
+    const subscription = this.getLoginData().subscribe();
+    subscription.unsubscribe();
   }
 
   private getLoginDataApi(): Observable<CurrentLoginData> {
