@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject } from '@angular/core';
-import { BehaviorSubject, filter, Observable, timer } from 'rxjs';
+import { BehaviorSubject, filter, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { CurrentLoginData, LoginModel, LoginResultModel, LoginByEmailOrPhoneNumber, LoginViaLinkRequest, LoginViaLinkResult, LogoutResponse, LogoutErrorType } from '../models/login-models';
@@ -11,7 +11,7 @@ import { CurrentLoginData, LoginModel, LoginResultModel, LoginByEmailOrPhoneNumb
 export class LoginService {
   private loginData$ = new BehaviorSubject<CurrentLoginData>(null);
 
-  private latestLoginDataRequest$ = new BehaviorSubject<string>(null);
+  private hasRequestToLoginDataRequest$ = new BehaviorSubject<boolean>(false);
 
   // Отрабатываю только изменения, а не null который является значением по-умолчанию.
   private loginDataCached$ = this.loginData$.pipe(filter(data => data !== null && data !== undefined));
@@ -77,29 +77,25 @@ export class LoginService {
 
   getLoginDataCached(): Observable<CurrentLoginData> {
 
-    const requestId = this.getUniqueRequestId();
-
-    this.latestLoginDataRequest$.next(requestId);
-    // Избавляемся от нескольких запросов к api
-    timer(50).subscribe(() => {
+    const hasRequestForLoginData = this.hasRequestToLoginDataRequest$.getValue()
+    
+    if (!hasRequestForLoginData) {
+      
+      const requestId = this.getUniqueRequestId();
+      this.hasRequestToLoginDataRequest$.next(true);
       this.executeLatestLoginDataRequest(requestId);
-    });
+    }
 
     return this.loginDataCached$;
   }
 
   getUniqueRequestId(): string {
-    return new Date().getTime().toString() + Math.random().toString(16).slice(2)
+    return `Date:${new Date().getTime().toString()}+Hash:${Math.random().toString(16).slice(2)}`
   }
 
   private executeLatestLoginDataRequest(requestId: string):void {
-    
-    const latestValue = this.latestLoginDataRequest$.getValue();
 
-    console.log("LoginService.executeLatestLoginDataRequest", JSON.stringify(latestValue), requestId);
-    if (latestValue !== requestId) {
-      return;
-    }
+    console.log("LoginService.executeLatestLoginDataRequest", requestId);
 
     this.getLoginData().subscribe();
   }
