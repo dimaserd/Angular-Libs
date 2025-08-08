@@ -72,30 +72,32 @@ export interface SearchStudentCoursePaymentsRequest {
 
 
 export interface StudentCoursePaymentDetailedModel {
-    id: string;
-    name: string;
-    description: string;
-    courseName: string;
-    courseMiniHtml: string;
-    courseDetailedHtml: string;
-    daysLength: number;
-    amount: number;
-    amountString: string;
-    paymentId: string;
-    paymentSystemId: string;
-    paymentSystemProviderName: string;
-    isFinished: boolean;
-    isPaid: boolean;
-    studentProcessedToGroup: boolean;
-    hasError: boolean;
-    errorType: string;
-    errorMessage: string;
-    createdOnUtc: string;
-    paidOnUtc: string;
-    finishedOnUtc: string;
-    type: StudentCoursePaymentType;
-    student: StudentSimpleModel;
-    group: StudentGroupSimpleModel;
+	 id: string; 
+	 name: string; 
+	 description: string; 
+	 courseName: string; 
+	 courseMiniHtml: string; 
+	 courseDetailedHtml: string; 
+	 daysLength: number; 
+	 amount: number; 
+	 amountString: string; 
+	 paymentId: string; 
+	 paymentSystemId: string; 
+	 paymentSystemProviderName: string; 
+	 isFinished: boolean; 
+	 isPaid: boolean; 
+	 studentProcessedToGroup: boolean; 
+	 hasError: boolean; 
+	 errorType: string; 
+	 errorMessage: string; 
+	 providerErrorType: string; 
+	 providerErrorMessage: string; 
+	 createdOnUtc: string; 
+	 paidOnUtc: string; 
+	 finishedOnUtc: string; 
+	 type: StudentCoursePaymentType; 
+	 student: StudentSimpleModel; 
+	 group: StudentGroupSimpleModel; 
 }
 
 export interface EnumValueTypeWithDescriptionStudentCoursePaymentType {
