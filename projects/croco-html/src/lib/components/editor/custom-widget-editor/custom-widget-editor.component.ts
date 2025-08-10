@@ -3,8 +3,8 @@ import { HtmlBodyTag } from "../../../models/models";
 import { FormsModule } from "@angular/forms";
 import { MatFormField, MatLabel } from "@angular/material/form-field";
 import { MatInput } from "@angular/material/input";
-import { CustomWidgetMethods, CustomWidgetTagData } from "../../../extensions";
 import { XmlTagCustomWidgetComponent } from "../../xml-tags";
+import { CustomWidgetTagData, CustomWidgetTagService } from '../../../tag-services/CustomWidgetTagService';
 
 @Component({
   selector: 'croco-html-custom-widget-editor',
@@ -32,10 +32,10 @@ export class CustomWidgetEditorComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.tagData = CustomWidgetMethods.ExtractCustomWidgetTagData(this.tag.attributes);
+    this.tagData = CustomWidgetTagService.ExtractCustomWidgetTagData(this.tag.attributes);
   }
 
   dataChanged() {
-    this.tag.attributes = CustomWidgetMethods.ExtractCustomWidgetAttributes(this.tagData);
+    this.tag.attributes = CustomWidgetTagService.ExtractCustomWidgetAttributes(this.tagData);
   }
 }

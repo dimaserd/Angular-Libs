@@ -1,8 +1,8 @@
+import { CustomWidgetTagDataConsts } from "../tag-services/CustomWidgetTagService";
 import { HtmlRawTagDataConsts } from "./HtmlRawTagDataConsts";
 import { FileImageTagDataConsts } from "./ImageMethods";
 import { TextTags } from "./TextMethods";
 import { ExternalVideoTagDataConsts } from "./VideoMethods";
-import {CustomWidgetTagDataConsts} from "./CustomWidgetMethods";
 
 export class Tags {
   public static readonly Text = TextTags.text;

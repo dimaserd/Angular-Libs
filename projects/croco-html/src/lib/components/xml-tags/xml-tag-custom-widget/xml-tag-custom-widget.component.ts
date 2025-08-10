@@ -8,10 +8,10 @@ import {
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
-import { CustomWidgetTagData } from "../../../extensions";
 import { MatTooltip } from "@angular/material/tooltip";
 import { CrocoHtmlOptionsToken } from "../../../consts";
 import { CrocoHtmlOptions } from "../../../options";
+import { CustomWidgetTagData } from '../../../tag-services/CustomWidgetTagService';
 
 @Component({
   selector: 'croco-html-xml-tag-custom-widget',

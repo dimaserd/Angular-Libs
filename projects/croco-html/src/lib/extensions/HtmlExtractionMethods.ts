@@ -1,7 +1,6 @@
 import { InterfaceBlock } from "./InterfaceBlock";
 import { TableMethods, TableTypes } from "./TableMethods";
 import { CrocoHtmlOptions } from "../options";
-import { CustomWidgetMethods, CustomWidgetTagDataConsts } from "./CustomWidgetMethods";
 import { BodyTagsExtensions } from "./BodyTagsExtensions";
 
 export class HtmlExtractionMethods {
@@ -9,7 +8,6 @@ export class HtmlExtractionMethods {
   // TODO удалить в пользу BodyTagsExtensions
   static Extractors = {
     [TableTypes.Table]: (elem: HTMLElement, options: CrocoHtmlOptions) => TableMethods.getTableFromHtmlTag(elem as HTMLTableElement, options),
-    [CustomWidgetTagDataConsts.TagName]: (elem: HTMLElement, options: CrocoHtmlOptions) => CustomWidgetMethods.ExtractCustomWidgetTag(elem),
   };
 
   static transformHtmlElementToBlocks(element: HTMLElement, options: CrocoHtmlOptions): InterfaceBlock[] {

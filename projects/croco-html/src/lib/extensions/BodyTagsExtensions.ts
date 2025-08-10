@@ -6,7 +6,6 @@ import { FileImageTagDataConsts } from "./ImageMethods";
 import { Tags } from "./Tags";
 import { ExternalVideoTagDataConsts } from "./VideoMethods";
 import { CrocoHtmlOptions } from "../options";
-import { CustomWidgetTagData, CustomWidgetTagDataConsts } from "./CustomWidgetMethods";
 import { IMarkUpTagService } from "../tag-services/IMarkUpTagService";
 import { DownloadButtonTagDataConsts, DownloadButtonTagService, FileImageTagService, TextTagHtmlMarkupTagService } from "../tag-services";
 import { ExternalVideoTagService } from "../tag-services/ExternalVideoTagService";
@@ -31,23 +30,11 @@ export class BodyTagsExtensions {
     [ButtonTagDataConsts.TagName]: new ButtonTagService()
   }
 
-  static getDescription(tagName: string) {
-    var descriptions = {   
-      [CustomWidgetTagDataConsts.TagName]: "Виджет"
-    };
-
-    return descriptions[tagName];
-  }
-
   static convertToHtmlString(bodyTag: HtmlBodyTag): string {
     const tagName = bodyTag.tagDescription.tag;
 
     if (this.tagServices.hasOwnProperty(tagName)) {
       return this.tagServices[tagName].bodyTagToHtmlStringConverter(bodyTag);
-    }
-
-    if (bodyTag.tagDescription.tag === CustomWidgetTagDataConsts.TagName) {
-      return `<${bodyTag.tagDescription.tag} type="${bodyTag.attributes[CustomWidgetTagDataConsts.TypeAttrName]}" data-id="${bodyTag.attributes[CustomWidgetTagDataConsts.DataIdAttrName]}"  widget-id="${bodyTag.attributes[CustomWidgetTagDataConsts.WidgetIdAttrName]}"></${bodyTag.tagDescription.tag}>`
     }
 
     return `<mapper-not-found>"${bodyTag.tagDescription.tag}" тег не найден.</mapper-not-found>`;
@@ -80,21 +67,6 @@ export class BodyTagsExtensions {
 
     if (this.tagServices.hasOwnProperty(data.type)) {
       return this.tagServices[data.type].toBodyTag(data);
-    }
-
-    if (data.type === CustomWidgetTagDataConsts.TagName) {
-      let customWidgetTagData = data.data as CustomWidgetTagData;
-
-      return {
-        presentOrEdit: true,
-        tagDescription: {
-          tag: data.type,
-          displayValue: BodyTagsExtensions.getDescription(data.type),
-          isCustom: false
-        },
-        attributes: customWidgetTagData,
-        innerHtml: ""
-      };
     }
 
     return {
