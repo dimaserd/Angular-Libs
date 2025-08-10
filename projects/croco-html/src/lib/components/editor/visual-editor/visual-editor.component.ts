@@ -35,7 +35,6 @@ import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatButton } from '@angular/material/button';
 import { MatCard, MatCardContent } from '@angular/material/card';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
-import { ButtonTagDataConsts } from "../../../extensions/ButtonMethods";
 import { CrocoHtmlOptions } from '../../../options';
 import { CustomWidgetTagDataConsts } from "../../../extensions/CustomWidgetMethods";
 import { MatButtonToggle, MatButtonToggleGroup } from "@angular/material/button-toggle";
@@ -45,6 +44,7 @@ import { MatTooltip } from "@angular/material/tooltip";
 import { SpriteIconPathPipe } from "../../../pipes/sprite-icon-path.pipe";
 import { SpriteIdsType } from "../../../../sprites-ids.type";
 import { DownloadButtonTagDataConsts } from '../../../tag-services';
+import { ButtonTagDataConsts } from '../../../tag-services/ButtonTagService';
 
 export const defaultLinkYouTube = "https://www.youtube.com/embed/4CtSAnJDfsI?si=scyBNJa0Hs2t5aLE";
 export const defaultLinkVk = "https://vk.com/video_ext.php?oid=-22822305&id=456241864&hd=2";

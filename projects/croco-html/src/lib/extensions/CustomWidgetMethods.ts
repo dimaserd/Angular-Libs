@@ -1,9 +1,9 @@
 export class CustomWidgetTagDataConsts {
-  static TagName = "custom-widget";
+  static readonly TagName = "custom-widget";
 
-  static TypeAttrName = "type";
-  static DataIdAttrName = "data-id";
-  static WidgetIdAttrName = "widget-id";
+  static readonly TypeAttrName = "type";
+  static readonly DataIdAttrName = "data-id";
+  static readonly WidgetIdAttrName = "widget-id";
 }
 
 export interface CustomWidgetTag {

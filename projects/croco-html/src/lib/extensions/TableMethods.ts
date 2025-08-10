@@ -6,7 +6,7 @@ import { HtmlExtractionMethods } from './HtmlExtractionMethods';
 import { InterfaceBlock } from "./InterfaceBlock";
 import { TextSimpleMethods } from './TextSimpleMethods';
 
-export interface TableHeaderData{
+export interface TableHeaderData {
     type: "table-header";
     columns: string[];
 }
@@ -24,12 +24,12 @@ export interface TableRowData {
     columns: TableRowColumnData[];
 }
 
-export interface TableData{
+export interface TableData {
     header: TableHeaderData,
     rows: TableRowData[]
 }
 
-export interface TableTagData{
+export interface TableTagData {
     type: "table";
     data: TableData;
 }
@@ -41,14 +41,14 @@ export class TableTypes {
 }
 
 export interface AngularMaterialTableData {
-  displayedColumns: string[];
-  data: object[];
+    displayedColumns: string[];
+    data: object[];
 }
 
 export class TableMethods {
 
     static getTableFromHtmlTag(tableTag: HTMLTableElement, options: CrocoHtmlOptions) {
-        let tableData : TableData = {
+        let tableData: TableData = {
             header: TableMethods.getHeader(tableTag),
             rows: TableMethods.getTableRows(tableTag, options)
         };
@@ -60,7 +60,7 @@ export class TableMethods {
             bootstrapHtml: ""
         }
 
-        if(!result.validationResult){
+        if (!result.validationResult) {
             return result;
         }
         result.bootstrapHtml = BootstrapTableMethods.BuildTable(result.data);
@@ -82,7 +82,7 @@ export class TableMethods {
         };
     }
 
-    static checkTable(tableData: TableData) : BaseApiResponse{
+    static checkTable(tableData: TableData): BaseApiResponse {
 
         let rows = tableData.rows;
 
@@ -108,10 +108,10 @@ export class TableMethods {
     }
 
 
-    static getHeader(tableTag: HTMLTableElement) : TableHeaderData {
+    static getHeader(tableTag: HTMLTableElement): TableHeaderData {
         let header = tableTag.tHead;
 
-        if(header === null){
+        if (header === null) {
             return null;
         }
 
@@ -146,7 +146,7 @@ export class TableMethods {
 
                 let children = HtmlExtractionMethods.transformHtmlElementToBlocks(jElement, options);
 
-                if(children.length === 0){
+                if (children.length === 0) {
                     var textTag = document.createElement("p");
                     textTag.innerHTML = jElement.innerHTML;
 
@@ -155,7 +155,7 @@ export class TableMethods {
                     children.push(textElem);
                 }
 
-                var result:TableRowColumnData = {
+                var result: TableRowColumnData = {
                     type: TableTypes.TableRowColumnData,
                     data: {
                         text: jElement.innerHTML,

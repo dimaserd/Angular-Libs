@@ -5,14 +5,14 @@ import { HtmlRawTagDataConsts } from "./HtmlRawTagDataConsts";
 import { FileImageTagDataConsts } from "./ImageMethods";
 import { Tags } from "./Tags";
 import { ExternalVideoTagDataConsts } from "./VideoMethods";
-import { ButtonTagDataConsts } from "./ButtonMethods";
 import { CrocoHtmlOptions } from "../options";
 import { CustomWidgetTagData, CustomWidgetTagDataConsts } from "./CustomWidgetMethods";
 import { IMarkUpTagService } from "../tag-services/IMarkUpTagService";
 import { DownloadButtonTagDataConsts, DownloadButtonTagService, FileImageTagService, TextTagHtmlMarkupTagService } from "../tag-services";
 import { ExternalVideoTagService } from "../tag-services/ExternalVideoTagService";
 import { HtmlRawTagService } from "../tag-services/HtmlRawTagService";
-import { TextTags } from "croco-html";
+import { ButtonTagDataConsts, ButtonTagService } from "../tag-services/ButtonTagService";
+import { TextTags } from "./TextMethods";
 
 export class BodyTagsExtensions {
 
@@ -27,12 +27,12 @@ export class BodyTagsExtensions {
     [FileImageTagDataConsts.TagName]: new FileImageTagService(),
     [ExternalVideoTagDataConsts.TagName]: new ExternalVideoTagService(),
     [HtmlRawTagDataConsts.TagName]: new HtmlRawTagService(),
-    [DownloadButtonTagDataConsts.TagName]: new DownloadButtonTagService()
+    [DownloadButtonTagDataConsts.TagName]: new DownloadButtonTagService(),
+    [ButtonTagDataConsts.TagName]: new ButtonTagService()
   }
 
   static getDescription(tagName: string) {
     var descriptions = {   
-      [ButtonTagDataConsts.TagName]: "Кнопка",
       [CustomWidgetTagDataConsts.TagName]: "Виджет"
     };
 
@@ -44,10 +44,6 @@ export class BodyTagsExtensions {
 
     if (this.tagServices.hasOwnProperty(tagName)) {
       return this.tagServices[tagName].bodyTagToHtmlStringConverter(bodyTag);
-    }
-
-    if (bodyTag.tagDescription.tag === ButtonTagDataConsts.TagName) {
-      return `<${bodyTag.tagDescription.tag} text="${bodyTag.attributes[ButtonTagDataConsts.TextAttrName]}" type="${bodyTag.attributes[ButtonTagDataConsts.TypeAttrName]}"  click="${bodyTag.attributes[ButtonTagDataConsts.ClickAttrName]}"></${bodyTag.tagDescription.tag}>`
     }
 
     if (bodyTag.tagDescription.tag === CustomWidgetTagDataConsts.TagName) {
@@ -84,21 +80,6 @@ export class BodyTagsExtensions {
 
     if (this.tagServices.hasOwnProperty(data.type)) {
       return this.tagServices[data.type].toBodyTag(data);
-    }
-
-    if (data.type === ButtonTagDataConsts.TagName) {
-      let fileData = data.data as ButtonTagDataConsts;
-
-      return {
-        presentOrEdit: true,
-        tagDescription: {
-          tag: data.type,
-          displayValue: BodyTagsExtensions.getDescription(data.type),
-          isCustom: false
-        },
-        attributes: fileData,
-        innerHtml: ""
-      };
     }
 
     if (data.type === CustomWidgetTagDataConsts.TagName) {

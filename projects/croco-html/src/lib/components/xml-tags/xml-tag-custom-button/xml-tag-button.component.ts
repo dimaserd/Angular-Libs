@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { InterfaceBlock } from "../../../extensions/InterfaceBlock";
-import { ButtonTagData } from "../../../extensions/ButtonMethods";
 import { MatButton } from "@angular/material/button";
 import { HtmlViewController } from '../../../services/HtmlViewController';
+import { ButtonTagData } from '../../../tag-services/ButtonTagService';
 
 @Component({
   selector: 'croco-html-xml-tag-button',

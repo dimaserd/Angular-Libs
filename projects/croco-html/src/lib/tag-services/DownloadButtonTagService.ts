@@ -1,7 +1,7 @@
-import { ButtonTagDataConsts } from "../extensions/ButtonMethods";
 import { InterfaceBlock } from "../extensions/InterfaceBlock";
 import { HtmlBodyTag } from "../models";
 import { CrocoHtmlOptions } from "../options";
+import { ButtonTagDataConsts } from "./ButtonTagService";
 import { IMarkUpTagService } from "./IMarkUpTagService";
 
 export class DownloadButtonTagDataConsts {
