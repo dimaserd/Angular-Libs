@@ -38,17 +38,3 @@ export interface ExternalVideoTagData {
   innerHtml: string;
   useResponsiveWrapper: boolean;
 }
-
-export class VideoMethods {
-    static ExtractExternalVideoTag(elem: HTMLElement): ExternalVideoTag {
-        return {
-            type: ExternalVideoTagDataConsts.TagName,
-            data:{
-                type: elem.getAttribute(ExternalVideoTagDataConsts.VideoTypeAttrName),
-                link: elem.getAttribute(ExternalVideoTagDataConsts.LinkAttrName),
-                useResponsiveWrapper: elem.getAttribute(ExternalVideoTagDataConsts.UseResponsiveWrapperAttrName) !== 'false' ,
-                innerHtml: elem.innerHTML
-            }
-        };
-    }
-}

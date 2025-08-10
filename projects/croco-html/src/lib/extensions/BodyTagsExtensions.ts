@@ -30,8 +30,7 @@ export class BodyTagsExtensions {
   }
 
   static getDescription(tagName: string) {
-    var descriptions = {
-      [DownloadButtonTagDataConsts.TagName]: "Кнопка",   
+    var descriptions = {   
       [DownloadButtonTagDataConsts.TagName]: "Кнопка для скачивания",
       [ButtonTagDataConsts.TagName]: "Кнопка",
       [CustomWidgetTagDataConsts.TagName]: "Виджет"

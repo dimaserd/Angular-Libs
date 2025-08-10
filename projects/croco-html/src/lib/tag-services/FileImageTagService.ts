@@ -1,4 +1,4 @@
-import { BodyTagsExtensions, FileImageTagDataConsts, ImageMethods } from "../extensions";
+import { FileImageTagDataConsts, ImageMethods } from "../extensions";
 import { InterfaceBlock } from "../extensions/InterfaceBlock";
 import { HtmlBodyTag, FileImageTagData } from "../models";
 import { CrocoHtmlOptions } from "../options";
@@ -24,7 +24,18 @@ export class FileImageTagService implements IMarkUpTagService {
   }
 
   extractBlockFromHtmlElement(elem: HTMLElement, options: CrocoHtmlOptions): InterfaceBlock {
-    return ImageMethods.ExtractImage(elem, options);
+    let fileId = elem.getAttribute(FileImageTagDataConsts.FileIdAttrName);
+
+    let src = ImageMethods.buildMediumUrl(fileId, options);
+
+    return {
+      type: FileImageTagDataConsts.TagName,
+      data: {
+        src,
+        fileId: fileId,
+        screenMediaRequest: elem.getAttribute(FileImageTagDataConsts.ScreenMediaRequest)
+      }
+    };
   }
 
   toBodyTag(data: InterfaceBlock): HtmlBodyTag {

@@ -1,4 +1,4 @@
-import { ExternalVideoTagDataConsts, ExternalVideoSupportedTypes, VideoMethods } from "../extensions";
+import { ExternalVideoTagDataConsts, ExternalVideoSupportedTypes } from "../extensions";
 import { InterfaceBlock } from "../extensions/InterfaceBlock";
 import { HtmlBodyTag } from "../models";
 import { CrocoHtmlOptions } from "../options";
@@ -19,7 +19,15 @@ export class ExternalVideoTagService implements IMarkUpTagService {
   }
 
   extractBlockFromHtmlElement(elem: HTMLElement, options: CrocoHtmlOptions): InterfaceBlock {
-    return VideoMethods.ExtractExternalVideoTag(elem);
+    return {
+      type: ExternalVideoTagDataConsts.TagName,
+      data: {
+        type: elem.getAttribute(ExternalVideoTagDataConsts.VideoTypeAttrName),
+        link: elem.getAttribute(ExternalVideoTagDataConsts.LinkAttrName),
+        useResponsiveWrapper: elem.getAttribute(ExternalVideoTagDataConsts.UseResponsiveWrapperAttrName) !== 'false',
+        innerHtml: elem.innerHTML
+      }
+    };
   }
 
   toBodyTag(data: InterfaceBlock): HtmlBodyTag {

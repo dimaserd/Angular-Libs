@@ -43,21 +43,6 @@ export class ImageMethods {
     return !isNaN(Number(fileId));
   }
 
-  public static ExtractImage(elem: HTMLElement, options: CrocoHtmlOptions): FileImageTag {
-    let fileId = elem.getAttribute(FileImageTagDataConsts.FileIdAttrName)
-
-    let src = ImageMethods.buildMediumUrl(fileId, options);
-
-    return {
-      type: FileImageTagDataConsts.TagName,
-      data: {
-        src,
-        fileId: fileId,
-        screenMediaRequest: elem.getAttribute(FileImageTagDataConsts.ScreenMediaRequest)
-      }
-    };
-  }
-
   public static mediaRequestStringToArrayParser = (data: string) => {
     if (!data) {
       return [];

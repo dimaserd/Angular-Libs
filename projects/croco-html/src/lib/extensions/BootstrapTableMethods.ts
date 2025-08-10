@@ -65,7 +65,7 @@ export class BootstrapTableMethods {
             let fileImageTag = data as FileImageTag;
             return `<img src=${fileImageTag.data.src} class="mx-auto d-block img-fluid" />`;
         }
-        else if(data.type === TextTag){
+        else if (data.type === TextTag) {
 
             let simpleTextTag = data as GenericTextTag;
 
@@ -75,7 +75,7 @@ export class BootstrapTableMethods {
                 ["right"]: "text-end"
             };
 
-            if(!simpleTextTag.data.validationResult.isSucceeded){
+            if (!simpleTextTag.data.validationResult.isSucceeded) {
                 return `<span>Ошибка в тексте ${simpleTextTag.data.validationResult.message}</span>`;
             }
 
