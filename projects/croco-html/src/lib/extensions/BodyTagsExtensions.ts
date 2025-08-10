@@ -12,6 +12,7 @@ import { CustomWidgetTagData, CustomWidgetTagDataConsts } from "./CustomWidgetMe
 import { IMarkUpTagService } from "../tag-services/IMarkUpTagService";
 import { FileImageTagService, TextTagHtmlMarkupTagService } from "../tag-services";
 import { ExternalVideoTagService } from "../tag-services/ExternalVideoTagService";
+import { HtmlRawTagService } from "../tag-services/HtmlRawTagService";
 
 export class BodyTagsExtensions {
 
@@ -25,12 +26,12 @@ export class BodyTagsExtensions {
     ["h6"]: new TextTagHtmlMarkupTagService("h6", "H6"),
     [FileImageTagDataConsts.TagName]: new FileImageTagService(),
     [ExternalVideoTagDataConsts.TagName]: new ExternalVideoTagService(),
+    [HtmlRawTagDataConsts.TagName]: new HtmlRawTagService()
   }
 
   static getDescription(tagName: string) {
     var descriptions = {
-      [DownloadButtonTagDataConsts.TagName]: "Кнопка",
-      [HtmlRawTagDataConsts.TagName]: "Разметка",
+      [DownloadButtonTagDataConsts.TagName]: "Кнопка",   
       [DownloadButtonTagDataConsts.TagName]: "Кнопка для скачивания",
       [ButtonTagDataConsts.TagName]: "Кнопка",
       [CustomWidgetTagDataConsts.TagName]: "Виджет"
@@ -44,10 +45,6 @@ export class BodyTagsExtensions {
 
     if (this.tagServices.hasOwnProperty(tagName)) {
       return this.tagServices[tagName].bodyTagToHtmlStringConverter(bodyTag);
-    }
-
-    if (bodyTag.tagDescription.tag === HtmlRawTagDataConsts.TagName) {
-      return `<${bodyTag.tagDescription.tag}>${bodyTag.innerHtml}</${bodyTag.tagDescription.tag}>`
     }
 
     if (bodyTag.tagDescription.tag === DownloadButtonTagDataConsts.TagName) {
@@ -136,20 +133,6 @@ export class BodyTagsExtensions {
         },
         attributes: customWidgetTagData,
         innerHtml: ""
-      };
-    }
-
-    if (data.type === HtmlRawTagDataConsts.TagName) {
-
-      return {
-        presentOrEdit: true,
-        tagDescription: {
-          tag: HtmlRawTagDataConsts.TagName,
-          displayValue: BodyTagsExtensions.getDescription(data.type),
-          isCustom: false
-        },
-        attributes: {},
-        innerHtml: BodyTagsExtensions.sanitizeInnerHtml(data.data["innerHTML"])
       };
     }
 

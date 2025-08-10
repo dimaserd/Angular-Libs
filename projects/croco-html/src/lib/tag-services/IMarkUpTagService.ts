@@ -15,7 +15,7 @@ export interface IMarkUpTagService {
   shortDescription: string;
 
   /**
-   * Функция для конвертации модели редактора в Html строку разметки
+   * Функция для конвертации из модели редактора в Html строку разметки
    * @param bodyTag тег
    * @returns
    */

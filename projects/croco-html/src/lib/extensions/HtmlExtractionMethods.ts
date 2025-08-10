@@ -1,26 +1,19 @@
 import { InterfaceBlock } from "./InterfaceBlock";
 import { TableMethods, TableTypes } from "./TableMethods";
-import {
-  ExternalVideoTagDataConsts,
-  VideoMethods
-} from "./VideoMethods";
 import { DownloadButtonMethods, DownloadButtonTagDataConsts } from "./DownloadButtonMethods";
 import { ButtonMethods, ButtonTagDataConsts } from "./ButtonMethods";
 import { CrocoHtmlOptions } from "../options";
 import { CustomWidgetMethods, CustomWidgetTagDataConsts } from "./CustomWidgetMethods";
-import { ExtractHtmlRawTagMethods, HtmlRawTagDataConsts } from "./HtmlRawTagDataConsts";
 import { BodyTagsExtensions } from "./BodyTagsExtensions";
 
 export class HtmlExtractionMethods {
 
   // TODO удалить в пользу BodyTagsExtensions
   static Extractors = {
-    
     [TableTypes.Table]: (elem: HTMLElement, options: CrocoHtmlOptions) => TableMethods.getTableFromHtmlTag(elem as HTMLTableElement, options),
     [DownloadButtonTagDataConsts.TagName]: (elem: HTMLElement, options: CrocoHtmlOptions) => DownloadButtonMethods.ExtractDownloadButtonTag(elem),
     [ButtonTagDataConsts.TagName]: (elem: HTMLElement, options: CrocoHtmlOptions) => ButtonMethods.ExtractButtonTag(elem),
     [CustomWidgetTagDataConsts.TagName]: (elem: HTMLElement, options: CrocoHtmlOptions) => CustomWidgetMethods.ExtractCustomWidgetTag(elem),
-    [HtmlRawTagDataConsts.TagName]: (elem: HTMLElement, options: CrocoHtmlOptions) => ExtractHtmlRawTagMethods.ExtractHtmlRawTag(elem)
   };
 
   static transformHtmlElementToBlocks(element: HTMLElement, options: CrocoHtmlOptions): InterfaceBlock[] {
