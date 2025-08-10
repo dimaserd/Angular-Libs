@@ -1,7 +1,6 @@
 import { BaseApiResponse } from '../models';
 import { AngularMaterialTableData, TableData, TableRowData } from './TableMethods';
 
-
 export class AngularMaterialTableMethods {
     static getAngularMaterialTableData(columns: string[], rows: TableRowData[]): AngularMaterialTableData {
 

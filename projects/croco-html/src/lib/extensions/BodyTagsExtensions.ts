@@ -56,6 +56,7 @@ export class BodyTagsExtensions {
 
   static getBodyTags(html: string, options: CrocoHtmlOptions) {
     let result = HtmlExtractionMethods.transformHtmlStringToBlocks(html, options);
+    
     return result.map(x => BodyTagsExtensions.toBodyTag(x));
   }
 
