@@ -1,7 +1,7 @@
 import { InterfaceBlock } from "../extensions/InterfaceBlock";
 import { HtmlBodyTag } from "../models";
 import { CrocoHtmlOptions } from "../options";
-import { IMarkUpTagService } from "./IMarkUpTagService";
+import { IMarkUpTagService, IVisualEditorProps } from "./IMarkUpTagService";
 
 export class CustomWidgetTagDataConsts {
   static readonly TagName = "custom-widget";
@@ -58,6 +58,23 @@ export class CustomWidgetTagService implements IMarkUpTagService {
       },
       attributes: customWidgetTagData,
       innerHtml: ""
+    };
+  }
+
+  getDefaultValue(props: IVisualEditorProps): HtmlBodyTag {
+    return {
+      tagDescription: {
+        tag: this.tagName,
+        displayValue: this.shortDescription,
+        isCustom: false
+      },
+      attributes: {
+        [CustomWidgetTagDataConsts.TypeAttrName]: 'example-type',
+        [CustomWidgetTagDataConsts.DataIdAttrName]: 'example-data-id',
+        [CustomWidgetTagDataConsts.WidgetIdAttrName]: 'example-widget-id'
+      },
+      presentOrEdit: false,
+      innerHtml: props.htmlRaw,
     };
   }
 

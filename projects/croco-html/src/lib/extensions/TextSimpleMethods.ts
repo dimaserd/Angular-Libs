@@ -1,12 +1,7 @@
-import { EAlignments } from "../components/editor/visual-editor/DefaultAligments";
 import { BaseApiResponse } from "../models";
-
-export class TextTagDataConsts {
-    static HAlign = "h-align";
-}
+import { TextAlignment } from "../tag-services";
 
 export const TextTag = "text";
-
 
 export interface GenericTextTag {
     type: string,
@@ -26,7 +21,7 @@ export class TextSimpleMethods {
     static supportedTags = ["sup", "sub", "strong", "b", "i", "u"];
 
     static ExtractTextTag(elem: HTMLElement): GenericTextTag {
-        var hAlignValue = elem.getAttribute("h-align") ?? EAlignments.Left as any;
+        var hAlignValue = elem.getAttribute("h-align") ?? TextAlignment.Left as any;
 
         var data: SimpleTextTagData = {
             textTagName: elem.tagName.toLowerCase(),
@@ -51,7 +46,7 @@ export class TextSimpleMethods {
             result.data.html = '';
         }
 
-        var alignmentVals = [EAlignments.Left, EAlignments.Right, EAlignments.Center];
+        var alignmentVals = [TextAlignment.Left, TextAlignment.Right, TextAlignment.Center];
 
         if (alignmentVals.indexOf(hAlignValue) < 0) {
 

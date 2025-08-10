@@ -2,7 +2,10 @@ import { ExternalVideoTagDataConsts, ExternalVideoSupportedTypes } from "../exte
 import { InterfaceBlock } from "../extensions/InterfaceBlock";
 import { HtmlBodyTag } from "../models";
 import { CrocoHtmlOptions } from "../options";
-import { IMarkUpTagService } from "./IMarkUpTagService";
+import { IMarkUpTagService, IVisualEditorProps } from "./IMarkUpTagService";
+
+const defaultLinkYouTube = "https://www.youtube.com/embed/4CtSAnJDfsI?si=scyBNJa0Hs2t5aLE";
+const defaultLinkVk = "https://vk.com/video_ext.php?oid=-22822305&id=456241864&hd=2";
 
 export class ExternalVideoTagService implements IMarkUpTagService {
   tagName: string = ExternalVideoTagDataConsts.TagName;
@@ -43,6 +46,36 @@ export class ExternalVideoTagService implements IMarkUpTagService {
       },
       attributes: fileData,
       innerHtml: ""
+    };
+  }
+
+  getDefaultValue(props: IVisualEditorProps): HtmlBodyTag {
+
+    let attrs = {
+    };
+
+    let innerHtml = "";
+
+    attrs[ExternalVideoTagDataConsts.VideoTypeAttrName] = props.selectedVideoPlayer;
+    attrs[ExternalVideoTagDataConsts.UseResponsiveWrapperAttrName] = false;
+    attrs[ExternalVideoTagDataConsts.LinkAttrName] = props.selectedVideoPlayer === ExternalVideoSupportedTypes.Code ? '' :
+      props.selectedVideoPlayer === ExternalVideoSupportedTypes.VkVideo
+        ? defaultLinkVk
+        : defaultLinkYouTube;
+
+    if (props.selectedVideoPlayer === ExternalVideoSupportedTypes.Code) {
+      innerHtml = props.htmlRaw;
+    }
+
+    return {
+      tagDescription: {
+        tag: this.tagName,
+        displayValue: this.shortDescription,
+        isCustom: false
+      },
+      attributes: attrs,
+      presentOrEdit: false,
+      innerHtml: "",
     };
   }
 }

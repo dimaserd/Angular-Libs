@@ -4,6 +4,11 @@ import { CrocoHtmlOptions } from "../options";
 
 // TODO croco-visual-editor.addTagClickHandler вынести сюда
 
+export interface IVisualEditorProps {
+  selectedVideoPlayer: string;
+  htmlRaw: string;
+}
+
 export interface IMarkUpTagService {
   /**
    * Название тега
@@ -30,4 +35,10 @@ export interface IMarkUpTagService {
    * @returns
    */
   toBodyTag: (data: InterfaceBlock) => HtmlBodyTag;
+
+  /**
+   * Получить значение по умолчанию
+   * @returns 
+   */
+  getDefaultValue: (props: IVisualEditorProps) => HtmlBodyTag;
 }

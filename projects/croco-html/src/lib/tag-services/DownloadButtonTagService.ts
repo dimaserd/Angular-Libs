@@ -2,7 +2,9 @@ import { InterfaceBlock } from "../extensions/InterfaceBlock";
 import { HtmlBodyTag } from "../models";
 import { CrocoHtmlOptions } from "../options";
 import { ButtonTagDataConsts } from "./ButtonTagService";
-import { IMarkUpTagService } from "./IMarkUpTagService";
+import { IMarkUpTagService, IVisualEditorProps } from "./IMarkUpTagService";
+
+const defaultLinkForDownload = "https://storage.yandexcloud.net/mega-academy/presentation.pdf";
 
 export class DownloadButtonTagDataConsts {
   static readonly TagName = "download-file-button";
@@ -51,6 +53,22 @@ export class DownloadButtonTagService implements IMarkUpTagService {
       },
       attributes: fileData,
       innerHtml: ""
+    };
+  }
+
+  getDefaultValue(props: IVisualEditorProps): HtmlBodyTag {
+    return {
+      tagDescription: {
+        tag: this.tagName,
+        displayValue: this.shortDescription,
+        isCustom: false
+      },
+      attributes: {
+        [DownloadButtonTagDataConsts.LinkAttrName]: defaultLinkForDownload,
+        [DownloadButtonTagDataConsts.TitleAttrName]: 'Скачать'
+      },
+      presentOrEdit: false,
+      innerHtml: props.htmlRaw,
     };
   }
 }

@@ -22,7 +22,7 @@ import {
 import { XmlExtensions } from '../../../extensions';
 import { TagItem, HtmlBodyTag } from '../../../models/models';
 import { DefaultTags } from './DefaultTags';
-import { AlignmentsData, EAlignments } from "./DefaultAligments";
+import { AlignmentsData } from "./DefaultAligments";
 import { CrocoHtmlOptionsToken } from '../../../consts';
 import { MainEditorBlockComponent } from '../main-editor-block/main-editor-block.component';
 import { AddFilesBtnComponent } from '../../add-files-btn/add-files-btn.component';
@@ -42,12 +42,9 @@ import { HtmlRawTagDataConsts } from "../../../extensions/HtmlRawTagDataConsts";
 import { MatTooltip } from "@angular/material/tooltip";
 import { SpriteIconPathPipe } from "../../../pipes/sprite-icon-path.pipe";
 import { SpriteIdsType } from "../../../../sprites-ids.type";
-import { CustomWidgetTagDataConsts, DownloadButtonTagDataConsts } from '../../../tag-services';
+import { CustomWidgetTagDataConsts, TextAlignment } from '../../../tag-services';
 import { ButtonTagDataConsts } from '../../../tag-services/ButtonTagService';
 
-export const defaultLinkYouTube = "https://www.youtube.com/embed/4CtSAnJDfsI?si=scyBNJa0Hs2t5aLE";
-export const defaultLinkVk = "https://vk.com/video_ext.php?oid=-22822305&id=456241864&hd=2";
-export const defaultLinkForDownload = "https://storage.yandexcloud.net/mega-academy/presentation.pdf";
 
 @Component({
   selector: 'croco-visual-editor',
@@ -86,7 +83,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   text = '';
   htmlRaw = '';
 
-  alignment = EAlignments.Left;
+  alignment = TextAlignment.Left;
   textTag = DefaultTags.textTags[0].tag;
   textTagOptions = DefaultTags.textTags
   alignmentOptions = AlignmentsData
@@ -137,7 +134,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
 
   constructor(
     private readonly _cdref: ChangeDetectorRef,
-    @Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions) { 
+    @Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions) {
 
     this.useCustomWidgetsButton = this._options.useCustomWidgetsButton;
   }
@@ -153,61 +150,33 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   addTagClickHandler(): void {
     let tagDescription = this.tags
       .find(x => x.tag === this.selectedValue);
- 
-    if (TextTags.allTextTags.includes(tagDescription.tag)) {
+
+
+    const tagName = tagDescription.tag;
+
+    if (TextTags.allTextTags.includes(tagName)) {
       this.addTextTags();
       this.startAddingText();
       return;
     }
 
-    let attrs = {};
-    let innerHtml = "";
+    if (BodyTagsExtensions.tagServices.hasOwnProperty(tagName)) {
 
-    if (tagDescription.tag == ExternalVideoTagDataConsts.TagName) {
-      attrs[ExternalVideoTagDataConsts.VideoTypeAttrName] = this.selectedVideoPlayer;
-      attrs[ExternalVideoTagDataConsts.UseResponsiveWrapperAttrName] = false;
-      attrs[ExternalVideoTagDataConsts.LinkAttrName] = this.selectedVideoPlayer === ExternalVideoSupportedTypes.Code ? '' :
-        this.selectedVideoPlayer === ExternalVideoSupportedTypes.VkVideo
-          ? defaultLinkVk
-          : defaultLinkYouTube;
+      const tagService = BodyTagsExtensions.tagServices[tagName];
 
-      if (this.selectedVideoPlayer === ExternalVideoSupportedTypes.Code) {
-        innerHtml = this.htmlRaw
-      }
-    }
-    else if (tagDescription.tag == FileImageTagDataConsts.TagName) {
-      attrs[FileImageTagDataConsts.ScreenMediaRequest] = FileImageTagDataConsts.DefaultValueForFileImage;
-    }
-    else if (tagDescription.tag == DownloadButtonTagDataConsts.TagName) {
-      attrs[DownloadButtonTagDataConsts.LinkAttrName] = defaultLinkForDownload
-      attrs[DownloadButtonTagDataConsts.TitleAttrName] = 'Скачать'
-    }
-    else if (tagDescription.tag == ButtonTagDataConsts.TagName) {
-      attrs[ButtonTagDataConsts.ClickAttrName] = ''
-      attrs[ButtonTagDataConsts.TypeAttrName] = 'button'
-      attrs[ButtonTagDataConsts.TextAttrName] = 'Кнопка'
-    }
-    else if (tagDescription.tag === HtmlRawTagDataConsts.TagName) {
-      innerHtml = this.htmlRaw;
-    }
-    else if (tagDescription.tag == CustomWidgetTagDataConsts.TagName) {
-      attrs[CustomWidgetTagDataConsts.TypeAttrName] = 'example-type'
-      attrs[CustomWidgetTagDataConsts.DataIdAttrName] = 'example-data-id'
-      attrs[CustomWidgetTagDataConsts.WidgetIdAttrName] = 'example-widget-id'
-    }
-    else if (tagDescription.tag === FileImageTagDataConsts.TagName) {
-      attrs[FileImageTagDataConsts.FileIdAttrName] = null;
+      let tag = tagService.getDefaultValue({
+        htmlRaw: this.htmlRaw,
+        selectedVideoPlayer: this.selectedVideoPlayer
+      });
+
+      this.bodyTags.push(tag);
+
+      this.htmlRaw = '';
+      this.recalculateHtml();
+      return;
     }
 
-    this.bodyTags.push({
-      tagDescription,
-      innerHtml,
-      attributes: attrs,
-      presentOrEdit: true
-    });
-
-    this.htmlRaw = '';
-    this.recalculateHtml();
+    alert(`Сервис для тега ${tagName} не зарегистрирован.`)
   }
 
   startAddingText(tag = ''): void {
@@ -222,7 +191,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
 
   resetTextStyle(): void {
     this.text = '';
-    this.alignment = EAlignments.Left;
+    this.alignment = TextAlignment.Left;
     this.textTag = DefaultTags.textTags[0].tag;
   }
 

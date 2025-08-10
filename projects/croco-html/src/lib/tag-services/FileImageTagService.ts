@@ -63,4 +63,21 @@ export class FileImageTagService implements IMarkUpTagService {
       innerHtml: ""
     };
   }
+
+  getDefaultValue(): HtmlBodyTag {
+    return {
+      tagDescription: {
+        tag: this.tagName,
+        displayValue: this.shortDescription,
+        isCustom: false
+      },
+      attributes: {
+        [FileImageTagDataConsts.FileIdAttrName]: null,
+        [FileImageTagDataConsts.ScreenMediaRequest]: FileImageTagDataConsts.DefaultValueForFileImage
+      },
+      presentOrEdit: false,
+      innerHtml: "",
+    }
+
+  }
 }

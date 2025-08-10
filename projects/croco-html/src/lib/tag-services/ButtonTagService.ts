@@ -1,7 +1,7 @@
 import { InterfaceBlock } from "../extensions/InterfaceBlock";
 import { HtmlBodyTag } from "../models";
 import { CrocoHtmlOptions } from "../options";
-import { IMarkUpTagService } from "./IMarkUpTagService";
+import { IMarkUpTagService, IVisualEditorProps } from "./IMarkUpTagService";
 
 export class ButtonTagDataConsts {
   static readonly TagName = "button";
@@ -36,7 +36,7 @@ export class ButtonTagService implements IMarkUpTagService {
   extractBlockFromHtmlElement(elem: HTMLElement, options: CrocoHtmlOptions): InterfaceBlock {
     return {
       type: ButtonTagDataConsts.TagName,
-      data:{
+      data: {
         text: elem.getAttribute(ButtonTagDataConsts.TextAttrName),
         type: elem.getAttribute(ButtonTagDataConsts.TypeAttrName),
         click: elem.getAttribute(ButtonTagDataConsts.ClickAttrName)
@@ -57,6 +57,23 @@ export class ButtonTagService implements IMarkUpTagService {
       },
       attributes: fileData,
       innerHtml: ""
+    };
+  }
+
+  getDefaultValue(props: IVisualEditorProps): HtmlBodyTag {
+    return {
+      tagDescription: {
+        tag: this.tagName,
+        displayValue: this.shortDescription,
+        isCustom: false
+      },
+      attributes: {
+        [ButtonTagDataConsts.ClickAttrName]: '',
+        [ButtonTagDataConsts.TypeAttrName]: 'button',
+        [ButtonTagDataConsts.TextAttrName]: 'Кнопка'
+      },
+      presentOrEdit: false,
+      innerHtml: props.htmlRaw,
     };
   }
 }

@@ -1,8 +1,18 @@
-import { TextTagDataConsts, TextSimpleMethods, SimpleTextTagData, BodyTagsExtensions } from "../extensions";
+import { TextSimpleMethods, SimpleTextTagData, BodyTagsExtensions } from "../extensions";
 import { InterfaceBlock } from "../extensions/InterfaceBlock";
 import { HtmlBodyTag } from "../models";
 import { CrocoHtmlOptions } from "../options";
-import { IMarkUpTagService } from "../tag-services/IMarkUpTagService";
+import { IMarkUpTagService, IVisualEditorProps } from "../tag-services/IMarkUpTagService";
+
+export enum TextAlignment {
+  Left = 'left',
+  Center = 'center',
+  Right = 'right',
+}
+
+export class TextTagDataConsts {
+  static readonly HAlign = "h-align";
+}
 
 export class TextTagHtmlMarkupTagService implements IMarkUpTagService {
 
@@ -33,8 +43,22 @@ export class TextTagHtmlMarkupTagService implements IMarkUpTagService {
         displayValue: this.shortDescription,
         isCustom: false
       },
-      attributes: { "h-align": textTagData.horizontalAlignment },
+      attributes: { [TextTagDataConsts.HAlign]: textTagData.horizontalAlignment },
       innerHtml: BodyTagsExtensions.sanitizeInnerHtml(textTagData.html)
     };
+  }
+  getDefaultValue(props: IVisualEditorProps): HtmlBodyTag {
+    return {
+      tagDescription: {
+        tag: this.tagName,
+        displayValue: this.shortDescription,
+        isCustom: false
+      },
+      attributes: {
+        [TextTagDataConsts.HAlign]: TextAlignment.Left
+      },
+      presentOrEdit: false,
+      innerHtml: "",
+    }
   }
 }

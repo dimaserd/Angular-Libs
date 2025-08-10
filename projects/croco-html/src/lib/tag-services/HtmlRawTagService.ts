@@ -3,9 +3,10 @@ import { HtmlRawTagDataConsts } from "../extensions/HtmlRawTagDataConsts";
 import { InterfaceBlock } from "../extensions/InterfaceBlock";
 import { HtmlBodyTag } from "../models";
 import { CrocoHtmlOptions } from "../options";
-import { IMarkUpTagService } from "./IMarkUpTagService";
+import { IMarkUpTagService, IVisualEditorProps } from "./IMarkUpTagService";
 
 export class HtmlRawTagService implements IMarkUpTagService {
+
   tagName: string = HtmlRawTagDataConsts.TagName;
   shortDescription: string = "Разметка";
 
@@ -33,6 +34,20 @@ export class HtmlRawTagService implements IMarkUpTagService {
       },
       attributes: {},
       innerHtml: BodyTagsExtensions.sanitizeInnerHtml(data.data["innerHTML"])
+    };
+  }
+
+  getDefaultValue(props: IVisualEditorProps): HtmlBodyTag {
+    return {
+      tagDescription: {
+        tag: this.tagName,
+        displayValue: this.shortDescription,
+        isCustom: false
+      },
+      attributes: {
+      },
+      presentOrEdit: false,
+      innerHtml: props.htmlRaw,
     };
   }
 }
