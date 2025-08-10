@@ -1,7 +1,7 @@
 import { InterfaceBlock } from "./InterfaceBlock";
 import { FileImageTagDataConsts } from './ImageMethods';
 import { TableData, TableHeaderData, TableRowData } from './TableMethods';
-import { SimpleTextTag, TextTag } from './TextSimpleMethods';
+import { GenericTextTag, TextTag } from './TextSimpleMethods';
 import { FileImageTag } from "../models/image-models";
 
 export class BootstrapTableMethods {
@@ -67,7 +67,7 @@ export class BootstrapTableMethods {
         }
         else if(data.type === TextTag){
 
-            let simpleTextTag = data as SimpleTextTag;
+            let simpleTextTag = data as GenericTextTag;
 
             var map = {
                 ["left"]: "text-start",

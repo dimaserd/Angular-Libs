@@ -1,20 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { GenericTextTag } from '../../../extensions/TextSimpleMethods';
 
 @Component({
-    selector: 'croco-html-xml-tag-header-inner-text-view',
-    templateUrl: './xml-tag-header-inner-text-view.component.html',
-    styleUrls: ['./xml-tag-header-inner-text-view.component.css'],
-    standalone: true
+  selector: 'croco-html-xml-tag-header-inner-text-view',
+  templateUrl: './xml-tag-header-inner-text-view.component.html',
+  standalone: true
 })
-export class XmlTagHeaderInnerTextViewComponent implements OnInit {
+export class XmlTagHeaderInnerTextViewComponent {
 
-  @Input()
+  @Input({ required: true })
   item: GenericTextTag;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }

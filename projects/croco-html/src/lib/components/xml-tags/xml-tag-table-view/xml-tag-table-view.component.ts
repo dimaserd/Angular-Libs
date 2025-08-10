@@ -4,7 +4,6 @@ import { MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, Ma
 @Component({
     selector: 'croco-html-xml-tag-table-view',
     templateUrl: './xml-tag-table-view.component.html',
-    styleUrls: ['./xml-tag-table-view.component.css'],
     standalone: true,
     imports: [MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow]
 })
