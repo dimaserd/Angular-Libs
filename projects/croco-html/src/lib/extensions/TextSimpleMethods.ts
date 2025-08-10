@@ -7,10 +7,6 @@ export class TextTagDataConsts {
 
 export const TextTag = "text";
 
-export interface SimpleTextTag {
-    type: "text",
-    data: SimpleTextTagData
-}
 
 export interface GenericTextTag {
     type: string,
@@ -29,7 +25,7 @@ export class TextSimpleMethods {
 
     static supportedTags = ["sup", "sub", "strong", "b", "i", "u"];
 
-    static ExtractTextTag(elem: HTMLElement): SimpleTextTag {
+    static ExtractTextTag(elem: HTMLElement): GenericTextTag {
         var hAlignValue = elem.getAttribute("h-align") ?? EAlignments.Left as any;
 
         var data: SimpleTextTagData = {
@@ -43,8 +39,8 @@ export class TextSimpleMethods {
             }
         };
 
-        let result: SimpleTextTag = {
-            type: TextTag,
+        let result: GenericTextTag = {
+            type: data.textTagName,
             data: data
         };
 

@@ -1,8 +1,6 @@
-import { ImageMethods } from "./ImageMethods";
+import { FileImageTagDataConsts, ImageMethods } from "./ImageMethods";
 import { InterfaceBlock } from "./InterfaceBlock";
-import { TableMethods } from "./TableMethods";
-import { TextMethods } from "./TextMethods";
-import { GenericTextTag, TextSimpleMethods } from "./TextSimpleMethods";
+import { TableMethods, TableTypes } from "./TableMethods";
 import {
   ExternalVideoTagDataConsts,
   VideoMethods
@@ -10,35 +8,33 @@ import {
 import { DownloadButtonMethods, DownloadButtonTagDataConsts } from "./DownloadButtonMethods";
 import { ButtonMethods, ButtonTagDataConsts } from "./ButtonMethods";
 import { CrocoHtmlOptions } from "../options";
-import {CustomWidgetMethods, CustomWidgetTagDataConsts} from "./CustomWidgetMethods";
-import {ExtractHtmlRawTagMethods, HtmlRawTagDataConsts} from "./HtmlRawTagDataConsts";
+import { CustomWidgetMethods, CustomWidgetTagDataConsts } from "./CustomWidgetMethods";
+import { ExtractHtmlRawTagMethods, HtmlRawTagDataConsts } from "./HtmlRawTagDataConsts";
+import { BodyTagsExtensions } from "./BodyTagsExtensions";
 
 export class HtmlExtractionMethods {
 
-  static ExtractHeaderTag(elem: HTMLElement, tagName: string): GenericTextTag {
 
-    var data: GenericTextTag = TextSimpleMethods.ExtractTextTag(elem);
-    data.type = tagName;
-
-    return data;
-  }
-
+  // TODO удалить в пользу BodyTagsExtensions
   static Extractors = {
-    ["TEXT"]: (elem: HTMLElement, options: CrocoHtmlOptions) => TextSimpleMethods.ExtractTextTag(elem),
-    ["FILE-IMAGE"]: (elem: HTMLElement, options: CrocoHtmlOptions) => ImageMethods.ExtractImage(elem, options),
-    ["TABLE"]: (elem: HTMLElement, options: CrocoHtmlOptions) => TableMethods.getTableFromHtmlTag(elem as HTMLTableElement, options),
-    ["RICH-TEXT"]: (elem: HTMLElement, options: CrocoHtmlOptions) => TextMethods.ExtractRichTextData(elem),
-    ["H1"]: (elem: HTMLElement, options: CrocoHtmlOptions) => HtmlExtractionMethods.ExtractHeaderTag(elem, "h1"),
-    ["H2"]: (elem: HTMLElement, options: CrocoHtmlOptions) => HtmlExtractionMethods.ExtractHeaderTag(elem, "h2"),
-    ["H3"]: (elem: HTMLElement, options: CrocoHtmlOptions) => HtmlExtractionMethods.ExtractHeaderTag(elem, "h3"),
-    ["H4"]: (elem: HTMLElement, options: CrocoHtmlOptions) => HtmlExtractionMethods.ExtractHeaderTag(elem, "h4"),
-    ["H5"]: (elem: HTMLElement, options: CrocoHtmlOptions) => HtmlExtractionMethods.ExtractHeaderTag(elem, "h5"),
-    ["H6"]: (elem: HTMLElement, options: CrocoHtmlOptions) => HtmlExtractionMethods.ExtractHeaderTag(elem, "h6"),
-    [ExternalVideoTagDataConsts.TagName.toUpperCase()]: (elem: HTMLElement, options: CrocoHtmlOptions) => VideoMethods.ExtractExternalVideoTag(elem),
-    [DownloadButtonTagDataConsts.TagName.toUpperCase()]: (elem: HTMLElement, options: CrocoHtmlOptions) => DownloadButtonMethods.ExtractDownloadButtonTag(elem),
-    [ButtonTagDataConsts.TagName.toUpperCase()]: (elem: HTMLElement, options: CrocoHtmlOptions) => ButtonMethods.ExtractButtonTag(elem),
-    [CustomWidgetTagDataConsts.TagName.toUpperCase()]: (elem: HTMLElement, options: CrocoHtmlOptions) => CustomWidgetMethods.ExtractCustomWidgetTag(elem),
-    [HtmlRawTagDataConsts.TagName.toUpperCase()]: (elem: HTMLElement, options: CrocoHtmlOptions) => ExtractHtmlRawTagMethods.ExtractHtmlRawTag(elem)
+    
+    ["text"]: (elem: HTMLElement, options: CrocoHtmlOptions) => BodyTagsExtensions.tagServices["text"].extractBlockFromHtmlElement(elem, options),
+    ["h1"]: (elem: HTMLElement, options: CrocoHtmlOptions) => BodyTagsExtensions.tagServices["h1"].extractBlockFromHtmlElement(elem, options),
+    ["h2"]: (elem: HTMLElement, options: CrocoHtmlOptions) => BodyTagsExtensions.tagServices["h2"].extractBlockFromHtmlElement(elem, options),
+    ["h3"]: (elem: HTMLElement, options: CrocoHtmlOptions) => BodyTagsExtensions.tagServices["h3"].extractBlockFromHtmlElement(elem, options),
+    ["h4"]: (elem: HTMLElement, options: CrocoHtmlOptions) => BodyTagsExtensions.tagServices["h4"].extractBlockFromHtmlElement(elem, options),
+    ["h5"]: (elem: HTMLElement, options: CrocoHtmlOptions) => BodyTagsExtensions.tagServices["h5"].extractBlockFromHtmlElement(elem, options),
+    ["h6"]: (elem: HTMLElement, options: CrocoHtmlOptions) => BodyTagsExtensions.tagServices["h6"].extractBlockFromHtmlElement(elem, options),
+    
+
+    [FileImageTagDataConsts.TagName]: (elem: HTMLElement, options: CrocoHtmlOptions) => ImageMethods.ExtractImage(elem, options),
+    [TableTypes.Table]: (elem: HTMLElement, options: CrocoHtmlOptions) => TableMethods.getTableFromHtmlTag(elem as HTMLTableElement, options),
+
+    [ExternalVideoTagDataConsts.TagName]: (elem: HTMLElement, options: CrocoHtmlOptions) => VideoMethods.ExtractExternalVideoTag(elem),
+    [DownloadButtonTagDataConsts.TagName]: (elem: HTMLElement, options: CrocoHtmlOptions) => DownloadButtonMethods.ExtractDownloadButtonTag(elem),
+    [ButtonTagDataConsts.TagName]: (elem: HTMLElement, options: CrocoHtmlOptions) => ButtonMethods.ExtractButtonTag(elem),
+    [CustomWidgetTagDataConsts.TagName]: (elem: HTMLElement, options: CrocoHtmlOptions) => CustomWidgetMethods.ExtractCustomWidgetTag(elem),
+    [HtmlRawTagDataConsts.TagName]: (elem: HTMLElement, options: CrocoHtmlOptions) => ExtractHtmlRawTagMethods.ExtractHtmlRawTag(elem)
   };
 
   static transformHtmlElementToBlocks(element: HTMLElement, options: CrocoHtmlOptions): InterfaceBlock[] {
@@ -47,7 +43,10 @@ export class HtmlExtractionMethods {
     for (let i = 0; i < element.children.length; i++) {
       var elem = element.children.item(i) as HTMLElement;
 
-      if (!HtmlExtractionMethods.Extractors.hasOwnProperty(elem.tagName)) {
+
+      var loweredTagName = elem.tagName.toLowerCase();
+
+      if (!HtmlExtractionMethods.Extractors.hasOwnProperty(loweredTagName)) {
         data.push({
           type: "unsupported-tag",
           data: {
@@ -56,7 +55,7 @@ export class HtmlExtractionMethods {
         });
       }
       else {
-        var extractor = HtmlExtractionMethods.Extractors[elem.tagName];
+        var extractor = HtmlExtractionMethods.Extractors[loweredTagName];
         var result = extractor(elem, options);
         data.push(result);
       }

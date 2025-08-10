@@ -4,16 +4,89 @@ import { InterfaceBlock } from "./InterfaceBlock";
 import { HtmlRawTagDataConsts } from "./HtmlRawTagDataConsts";
 import { FileImageTagDataConsts } from "./ImageMethods";
 import { TextTags } from "./TextMethods";
-import { SimpleTextTagData, TextTagDataConsts } from "./TextSimpleMethods";
+import { SimpleTextTagData, TextSimpleMethods, TextTagDataConsts } from "./TextSimpleMethods";
 import { Tags } from "./Tags";
-import { ExternalVideoSupportedTypes, ExternalVideoTagDataConsts, VideoMethods } from "./VideoMethods";
+import { ExternalVideoSupportedTypes, ExternalVideoTagDataConsts } from "./VideoMethods";
 import { DownloadButtonTagDataConsts } from "./DownloadButtonMethods";
 import { ButtonTagDataConsts } from "./ButtonMethods";
 import { CrocoHtmlOptions } from "../options";
 import { CustomWidgetTagData, CustomWidgetTagDataConsts } from "./CustomWidgetMethods";
 import { FileImageTagData } from "../models/image-models";
 
+export interface IMarkUpTagService {
+  /**
+   * Название тега
+   */
+  tagName: string;
+
+  /**
+   * Описание тега
+   */
+  shortDescription: string;
+
+  /**
+   * Функция для конвертации модели редактора в Html строку разметки
+   * @param bodyTag тег
+   * @returns 
+   */
+  bodyTagToHtmlStringConverter: (bodyTag: HtmlBodyTag) => string;
+
+  extractBlockFromHtmlElement: (elem: HTMLElement, options: CrocoHtmlOptions) => InterfaceBlock;
+
+  /**
+   * Конвертация блока интерфейса в модель тега для редактора
+   * @param data 
+   * @returns 
+   */
+  toBodyTag: (data: InterfaceBlock) => HtmlBodyTag;
+}
+
+export class TextTagHtmlMarkupTagService implements IMarkUpTagService {
+
+  constructor(tagName: string, shortDescription: string){
+    this.tagName = tagName;
+    this.shortDescription = shortDescription;
+  }
+
+  tagName: string = "text";
+  shortDescription: string = "T";
+
+  bodyTagToHtmlStringConverter(bodyTag: HtmlBodyTag): string {
+    return `<${this.tagName} h-align="${bodyTag.attributes[TextTagDataConsts.HAlign]}">${bodyTag.innerHtml}</${this.tagName}>`;
+  }
+
+  extractBlockFromHtmlElement(elem: HTMLElement, options: CrocoHtmlOptions): InterfaceBlock {
+    return TextSimpleMethods.ExtractTextTag(elem);
+  }
+  
+  toBodyTag(data: InterfaceBlock): HtmlBodyTag {
+    
+    let textTagData = data.data as SimpleTextTagData;
+    
+    return {
+        presentOrEdit: true,
+        tagDescription: {
+          tag: this.tagName,
+          displayValue: BodyTagsExtensions.getDescription(data.type),
+          isCustom: false
+        },
+        attributes: { "h-align": textTagData.horizontalAlignment },
+        innerHtml: BodyTagsExtensions.sanitizeInnerHtml(textTagData.html)
+      };
+  }
+}
+
 export class BodyTagsExtensions {
+
+  public static tagServices: { [id: string] : IMarkUpTagService; } = {
+    "text": new TextTagHtmlMarkupTagService("text", "T"),
+    "h1": new TextTagHtmlMarkupTagService("h1", "H1"),
+    "h2": new TextTagHtmlMarkupTagService("h2", "H2"),
+    "h3": new TextTagHtmlMarkupTagService("h3", "H3"),
+    "h4": new TextTagHtmlMarkupTagService("h4", "H4"),
+    "h5": new TextTagHtmlMarkupTagService("h5", "H5"),
+    "h6": new TextTagHtmlMarkupTagService("h6", "H6"),
+  }
 
   static getDescription(tagName: string) {
     var descriptions = {
@@ -36,38 +109,46 @@ export class BodyTagsExtensions {
     return descriptions[tagName];
   }
 
-  static toHtml(bodyTags: HtmlBodyTag[]): string {
-    let htmls = bodyTags.map(x => {
-      if (TextTags.allTextTags.includes(x.tagDescription.tag)) {
-        return `<${x.tagDescription.tag} h-align="${x.attributes[TextTagDataConsts.HAlign]}">${x.innerHtml}</${x.tagDescription.tag}>`;
+  static convertToHtmlString(bodyTag: HtmlBodyTag): string {
+      const tagName = bodyTag.tagDescription.tag;
+
+      if (this.tagServices.hasOwnProperty(tagName)) {
+        return this.tagServices[tagName].bodyTagToHtmlStringConverter(bodyTag);
       }
 
-      if (x.tagDescription.tag === ExternalVideoTagDataConsts.TagName) {
+      if (bodyTag.tagDescription.tag === ExternalVideoTagDataConsts.TagName) {
         let useResponsiveWrapperAttr = '';
-        if (x.attributes[ExternalVideoTagDataConsts.VideoTypeAttrName] === ExternalVideoSupportedTypes.Code) {
-          useResponsiveWrapperAttr = `${ExternalVideoTagDataConsts.UseResponsiveWrapperAttrName}="${x.attributes[ExternalVideoTagDataConsts.UseResponsiveWrapperAttrName] || false}"`
+        if (bodyTag.attributes[ExternalVideoTagDataConsts.VideoTypeAttrName] === ExternalVideoSupportedTypes.Code) {
+          useResponsiveWrapperAttr = `${ExternalVideoTagDataConsts.UseResponsiveWrapperAttrName}="${bodyTag.attributes[ExternalVideoTagDataConsts.UseResponsiveWrapperAttrName] || false}"`
         }
-        return `<${x.tagDescription.tag} ${useResponsiveWrapperAttr} type="${x.attributes[ExternalVideoTagDataConsts.VideoTypeAttrName]}" link="${x.attributes[ExternalVideoTagDataConsts.LinkAttrName]}">${x.innerHtml}</${x.tagDescription.tag}>`
+        return `<${bodyTag.tagDescription.tag} ${useResponsiveWrapperAttr} type="${bodyTag.attributes[ExternalVideoTagDataConsts.VideoTypeAttrName]}" link="${bodyTag.attributes[ExternalVideoTagDataConsts.LinkAttrName]}">${bodyTag.innerHtml}</${bodyTag.tagDescription.tag}>`
       }
 
-      if (x.tagDescription.tag === "html-raw") {
-        return `<${x.tagDescription.tag}>${x.innerHtml}</${x.tagDescription.tag}>`
+      if (bodyTag.tagDescription.tag === HtmlRawTagDataConsts.TagName) {
+        return `<${bodyTag.tagDescription.tag}>${bodyTag.innerHtml}</${bodyTag.tagDescription.tag}>`
       }
 
-      if (x.tagDescription.tag === DownloadButtonTagDataConsts.TagName) {
-        return `<${x.tagDescription.tag} title="${x.attributes[DownloadButtonTagDataConsts.TitleAttrName]}" link="${x.attributes[DownloadButtonTagDataConsts.LinkAttrName]}"></${x.tagDescription.tag}>`
+      if (bodyTag.tagDescription.tag === DownloadButtonTagDataConsts.TagName) {
+        return `<${bodyTag.tagDescription.tag} title="${bodyTag.attributes[DownloadButtonTagDataConsts.TitleAttrName]}" link="${bodyTag.attributes[DownloadButtonTagDataConsts.LinkAttrName]}"></${bodyTag.tagDescription.tag}>`
       }
 
-      if (x.tagDescription.tag === ButtonTagDataConsts.TagName) {
-        return `<${x.tagDescription.tag} text="${x.attributes[ButtonTagDataConsts.TextAttrName]}" type="${x.attributes[ButtonTagDataConsts.TypeAttrName]}"  click="${x.attributes[ButtonTagDataConsts.ClickAttrName]}"></${x.tagDescription.tag}>`
+      if (bodyTag.tagDescription.tag === ButtonTagDataConsts.TagName) {
+        return `<${bodyTag.tagDescription.tag} text="${bodyTag.attributes[ButtonTagDataConsts.TextAttrName]}" type="${bodyTag.attributes[ButtonTagDataConsts.TypeAttrName]}"  click="${bodyTag.attributes[ButtonTagDataConsts.ClickAttrName]}"></${bodyTag.tagDescription.tag}>`
       }
 
-      if (x.tagDescription.tag === CustomWidgetTagDataConsts.TagName) {
-        return `<${x.tagDescription.tag} type="${x.attributes[CustomWidgetTagDataConsts.TypeAttrName]}" data-id="${x.attributes[CustomWidgetTagDataConsts.DataIdAttrName]}"  widget-id="${x.attributes[CustomWidgetTagDataConsts.WidgetIdAttrName]}"></${x.tagDescription.tag}>`
+      if (bodyTag.tagDescription.tag === CustomWidgetTagDataConsts.TagName) {
+        return `<${bodyTag.tagDescription.tag} type="${bodyTag.attributes[CustomWidgetTagDataConsts.TypeAttrName]}" data-id="${bodyTag.attributes[CustomWidgetTagDataConsts.DataIdAttrName]}"  widget-id="${bodyTag.attributes[CustomWidgetTagDataConsts.WidgetIdAttrName]}"></${bodyTag.tagDescription.tag}>`
       }
 
-      return BodyTagsExtensions.imageTagToHtml(x);
-    });
+      if (bodyTag.tagDescription.tag === FileImageTagDataConsts.TagName) {
+        return BodyTagsExtensions.imageTagToHtml(bodyTag);
+      }
+
+      return `<mapper-not-found>"${bodyTag.tagDescription.tag}" тег не найден.</mapper-not-found>`;
+  }
+
+  static bodyTagsToHtml(bodyTags: HtmlBodyTag[]): string {
+    let htmls = bodyTags.map(bodyTag => (BodyTagsExtensions.convertToHtmlString(bodyTag)));
 
     let result = "";
 
@@ -105,19 +186,9 @@ export class BodyTagsExtensions {
   }
 
   static toBodyTag(data: InterfaceBlock): HtmlBodyTag {
-    if (TextTags.allTextTags.includes(data.type)) {
-      let textTagData = data.data as SimpleTextTagData;
-
-      return {
-        presentOrEdit: true,
-        tagDescription: {
-          tag: textTagData.textTagName,
-          displayValue: BodyTagsExtensions.getDescription(data.type),
-          isCustom: false
-        },
-        attributes: { "h-align": textTagData.horizontalAlignment },
-        innerHtml: BodyTagsExtensions.sanitizeInnerHtml(textTagData.html)
-      };
+    
+    if (this.tagServices.hasOwnProperty(data.type)) {
+      return this.tagServices[data.type].toBodyTag(data);
     }
 
     if (data.type === FileImageTagDataConsts.TagName) {

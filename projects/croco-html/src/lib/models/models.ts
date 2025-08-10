@@ -1,4 +1,7 @@
 export interface TagItem {
+  /**
+   * Название тега
+   */
   tag: string;
   displayValue: string;
   isCustom: boolean;

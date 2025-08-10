@@ -37,35 +37,3 @@ export class TextTags {
   public static allTextTags = [TextTags.text, ...TextTags.headerTextTags];
 
 }
-
-export class TextMethods {
-
-  static ExtractRichTextData(elem: HTMLElement): RichTextData {
-
-    let children: Array<TextBlock | LineBreakBlock> = [];
-    for (let i = 0; i < elem.children.length; i++) {
-      const child = elem.children.item(i);
-
-      if (child.tagName === "text-block".toUpperCase()) {
-        children.push({
-          type: "text-block",
-          data: {
-            text: child.innerHTML
-          }
-        });
-      }
-      else if (child.tagName === "line-break".toUpperCase()) {
-        children.push({
-          type: "line-break"
-        });
-      }
-    }
-
-    return {
-      type: "rich-text",
-      data: {
-        children
-      }
-    };
-  }
-}

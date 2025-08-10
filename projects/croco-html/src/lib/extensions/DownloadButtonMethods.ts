@@ -4,7 +4,7 @@ export class DownloadButtonTagDataConsts {
   static LinkAttrName = "link";
 }
 
-export interface  DownloadButtonTag {
+export interface DownloadButtonTag {
   type: string;
   data: DownloadButtonTagData;
 }
@@ -16,10 +16,10 @@ export interface DownloadButtonTagData {
 }
 
 export class DownloadButtonMethods {
-  static ExtractDownloadButtonTag(elem: HTMLElement): DownloadButtonTag{
+  static ExtractDownloadButtonTag(elem: HTMLElement): DownloadButtonTag {
     return {
       type: DownloadButtonTagDataConsts.TagName,
-      data:{
+      data: {
         title: elem.getAttribute(DownloadButtonTagDataConsts.TitleAttrName),
         link: elem.getAttribute(DownloadButtonTagDataConsts.LinkAttrName)
       }
