@@ -12,17 +12,18 @@ import { IMarkUpTagService } from "../tag-services/IMarkUpTagService";
 import { DownloadButtonTagDataConsts, DownloadButtonTagService, FileImageTagService, TextTagHtmlMarkupTagService } from "../tag-services";
 import { ExternalVideoTagService } from "../tag-services/ExternalVideoTagService";
 import { HtmlRawTagService } from "../tag-services/HtmlRawTagService";
+import { TextTags } from "croco-html";
 
 export class BodyTagsExtensions {
 
   public static tagServices: { [id: string]: IMarkUpTagService; } = {
-    ["text"]: new TextTagHtmlMarkupTagService("text", "T"),
-    ["h1"]: new TextTagHtmlMarkupTagService("h1", "H1"),
-    ["h2"]: new TextTagHtmlMarkupTagService("h2", "H2"),
-    ["h3"]: new TextTagHtmlMarkupTagService("h3", "H3"),
-    ["h4"]: new TextTagHtmlMarkupTagService("h4", "H4"),
-    ["h5"]: new TextTagHtmlMarkupTagService("h5", "H5"),
-    ["h6"]: new TextTagHtmlMarkupTagService("h6", "H6"),
+    [TextTags.text]: new TextTagHtmlMarkupTagService("text", "T"),
+    [TextTags.h1]: new TextTagHtmlMarkupTagService("h1", "H1"),
+    [TextTags.h2]: new TextTagHtmlMarkupTagService("h2", "H2"),
+    [TextTags.h3]: new TextTagHtmlMarkupTagService("h3", "H3"),
+    [TextTags.h4]: new TextTagHtmlMarkupTagService("h4", "H4"),
+    [TextTags.h5]: new TextTagHtmlMarkupTagService("h5", "H5"),
+    [TextTags.h6]: new TextTagHtmlMarkupTagService("h6", "H6"),
     [FileImageTagDataConsts.TagName]: new FileImageTagService(),
     [ExternalVideoTagDataConsts.TagName]: new ExternalVideoTagService(),
     [HtmlRawTagDataConsts.TagName]: new HtmlRawTagService(),

@@ -2,16 +2,16 @@ import { ImageRestrictions, IMediaRequest } from "../models";
 import { CrocoHtmlOptions } from "../options";
 
 export class FileImageTagDataConsts {
-  static TagName = "file-image";
-  static FileIdAttrName = "file-id";
-  static ScreenMediaRequest = "screen-media-request";
+  static readonly TagName = "file-image";
+  static readonly FileIdAttrName = "file-id";
+  static readonly ScreenMediaRequest = "screen-media-request";
 
-  static MaxScreenWidth = 'max-screen-width';
-  static MinScreenWidth = 'min-screen-width';
-  static MaxImageHeight = 'max-image-height';
-  static MaxImageWidth = 'max-image-width';
+  static readonly MaxScreenWidth = 'max-screen-width';
+  static readonly MinScreenWidth = 'min-screen-width';
+  static readonly MaxImageHeight = 'max-image-height';
+  static readonly MaxImageWidth = 'max-image-width';
 
-  static DefaultValueForFileImage = "max-screen-width:1200,min-screen-width:900,max-image-height:300;max-screen-width:900,min-screen-width:600,max-image-height:200";
+  static readonly DefaultValueForFileImage = "max-screen-width:1200,min-screen-width:900,max-image-height:300;max-screen-width:900,min-screen-width:600,max-image-height:200";
 }
 
 export class ImageMethods {

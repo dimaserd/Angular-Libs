@@ -5,9 +5,9 @@ import { CrocoHtmlOptions } from "../options";
 import { IMarkUpTagService } from "./IMarkUpTagService";
 
 export class DownloadButtonTagDataConsts {
-  static TagName = "download-file-button";
-  static TitleAttrName = "title";
-  static LinkAttrName = "link";
+  static readonly TagName = "download-file-button";
+  static readonly TitleAttrName = "title";
+  static readonly LinkAttrName = "link";
 }
 
 export interface DownloadButtonTag {

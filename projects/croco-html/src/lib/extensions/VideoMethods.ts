@@ -1,15 +1,15 @@
 export class ExternalVideoTagDataConsts {
-  static TagName = "external-video";
-  static VideoTypeAttrName = "type";
-  static LinkAttrName = "link";
-  static UseResponsiveWrapperAttrName = "use-responsive-wrapper";
-  static IframeAttrName = "iframe";
+  static readonly TagName = "external-video";
+  static readonly VideoTypeAttrName = "type";
+  static readonly LinkAttrName = "link";
+  static readonly UseResponsiveWrapperAttrName = "use-responsive-wrapper";
+  static readonly IframeAttrName = "iframe";
 }
 
 export class ExternalVideoSupportedTypes {
-  static Youtube = "youtube"
-  static VkVideo = "vk-video"
-  static Code = "code"
+  static readonly Youtube = "youtube"
+  static readonly VkVideo = "vk-video"
+  static readonly Code = "code"
 }
 
 export const ExternalVideoPlayers = [

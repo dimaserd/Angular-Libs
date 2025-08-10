@@ -1,5 +1,5 @@
 export class HtmlRawTagDataConsts {
-  static TagName = "html-raw";
+  static readonly TagName = "html-raw";
 }
 
 export interface ExtractHtmlRawTag {
