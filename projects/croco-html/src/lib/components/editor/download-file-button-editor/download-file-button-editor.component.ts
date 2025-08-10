@@ -4,7 +4,7 @@ import { MatInput } from "@angular/material/input";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HtmlBodyTag } from "../../../models/models";
 import { XmlTagDownloadFileButtonComponent } from "../../xml-tags/xml-tag-download-file-button/xml-tag-download-file-button.component";
-import { DownloadButtonTagData } from "../../../extensions/DownloadButtonMethods";
+import { DownloadButtonTagData } from '../../../tag-services/DownloadButtonTagService';
 
 @Component({
   selector: 'croco-html-download-file-button-editor',

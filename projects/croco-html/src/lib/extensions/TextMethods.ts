@@ -1,21 +1,3 @@
-export interface TextBlock{
-    type: "text-block" | "text-sup-block" | "text-sub-block";
-    data: {
-      text: string;
-    }
-  }
-  
-  export interface LineBreakBlock {
-    type: "line-break";
-  }
-  
-  export interface RichTextData{
-    type: "rich-text"
-    data: {
-      children: Array<TextBlock | LineBreakBlock>;
-    }
-  }
-
 export class TextTags {
 
   public static readonly text = "text";

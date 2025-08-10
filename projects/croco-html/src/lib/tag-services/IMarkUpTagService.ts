@@ -2,6 +2,7 @@ import { InterfaceBlock } from "../extensions/InterfaceBlock";
 import { HtmlBodyTag } from "../models";
 import { CrocoHtmlOptions } from "../options";
 
+// TODO croco-visual-editor.addTagClickHandler вынести сюда
 
 export interface IMarkUpTagService {
   /**

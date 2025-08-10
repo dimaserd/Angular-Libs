@@ -5,12 +5,11 @@ import { HtmlRawTagDataConsts } from "./HtmlRawTagDataConsts";
 import { FileImageTagDataConsts } from "./ImageMethods";
 import { Tags } from "./Tags";
 import { ExternalVideoTagDataConsts } from "./VideoMethods";
-import { DownloadButtonTagDataConsts } from "./DownloadButtonMethods";
 import { ButtonTagDataConsts } from "./ButtonMethods";
 import { CrocoHtmlOptions } from "../options";
 import { CustomWidgetTagData, CustomWidgetTagDataConsts } from "./CustomWidgetMethods";
 import { IMarkUpTagService } from "../tag-services/IMarkUpTagService";
-import { FileImageTagService, TextTagHtmlMarkupTagService } from "../tag-services";
+import { DownloadButtonTagDataConsts, DownloadButtonTagService, FileImageTagService, TextTagHtmlMarkupTagService } from "../tag-services";
 import { ExternalVideoTagService } from "../tag-services/ExternalVideoTagService";
 import { HtmlRawTagService } from "../tag-services/HtmlRawTagService";
 
@@ -26,12 +25,12 @@ export class BodyTagsExtensions {
     ["h6"]: new TextTagHtmlMarkupTagService("h6", "H6"),
     [FileImageTagDataConsts.TagName]: new FileImageTagService(),
     [ExternalVideoTagDataConsts.TagName]: new ExternalVideoTagService(),
-    [HtmlRawTagDataConsts.TagName]: new HtmlRawTagService()
+    [HtmlRawTagDataConsts.TagName]: new HtmlRawTagService(),
+    [DownloadButtonTagDataConsts.TagName]: new DownloadButtonTagService()
   }
 
   static getDescription(tagName: string) {
     var descriptions = {   
-      [DownloadButtonTagDataConsts.TagName]: "Кнопка для скачивания",
       [ButtonTagDataConsts.TagName]: "Кнопка",
       [CustomWidgetTagDataConsts.TagName]: "Виджет"
     };
@@ -44,10 +43,6 @@ export class BodyTagsExtensions {
 
     if (this.tagServices.hasOwnProperty(tagName)) {
       return this.tagServices[tagName].bodyTagToHtmlStringConverter(bodyTag);
-    }
-
-    if (bodyTag.tagDescription.tag === DownloadButtonTagDataConsts.TagName) {
-      return `<${bodyTag.tagDescription.tag} title="${bodyTag.attributes[DownloadButtonTagDataConsts.TitleAttrName]}" link="${bodyTag.attributes[DownloadButtonTagDataConsts.LinkAttrName]}"></${bodyTag.tagDescription.tag}>`
     }
 
     if (bodyTag.tagDescription.tag === ButtonTagDataConsts.TagName) {
@@ -91,21 +86,6 @@ export class BodyTagsExtensions {
     }
 
     if (data.type === ButtonTagDataConsts.TagName) {
-      let fileData = data.data as ButtonTagDataConsts;
-
-      return {
-        presentOrEdit: true,
-        tagDescription: {
-          tag: data.type,
-          displayValue: BodyTagsExtensions.getDescription(data.type),
-          isCustom: false
-        },
-        attributes: fileData,
-        innerHtml: ""
-      };
-    }
-
-    if (data.type === DownloadButtonTagDataConsts.TagName) {
       let fileData = data.data as ButtonTagDataConsts;
 
       return {

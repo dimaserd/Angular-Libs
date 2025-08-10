@@ -6,7 +6,6 @@ import { FileIdSelectComponent } from "./components";
 import { XmlTagHeaderInnerTextViewComponent } from "./components";
 import { XmlTagHeaderTextViewComponent } from "./components";
 import { XmlTagHtmlViewComponent } from "./components";
-import { XmlTagRichTextViewComponent } from "./components";
 import { XmlTagTableViewComponent } from "./components";
 import { XmlTagTextViewComponent } from "./components";
 import { XmlTagViewComponent } from "./components";
@@ -44,7 +43,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { RichTextToHtmlPipe, TagToSpanPipe, ToHtmlBodyTagsPipe, ToPreviewHtmlPipe, ToPreviewPipe } from "./pipes";
+import { TagToSpanPipe, ToHtmlBodyTagsPipe, ToPreviewHtmlPipe, ToPreviewPipe } from "./pipes";
 import { FileImageTagViewComponent, UploadFilesBtnComponent } from "./components";
 import { HtmlRawViewComponent } from "./components";
 import { HtmlViewComponent } from "./components";
@@ -65,7 +64,6 @@ export const EditorComponents = [
 export const XmlComponents = [
   XmlTagTableViewComponent,
   XmlTagViewComponent,
-  XmlTagRichTextViewComponent,
   XmlTagHtmlViewComponent,
   XmlTagTextViewComponent,
   XmlTagHeaderTextViewComponent,
@@ -78,7 +76,6 @@ export const XmlComponents = [
 ];
 
 export const CrocoPipes = [
-  RichTextToHtmlPipe,
   TagToSpanPipe,
   ToPreviewPipe,
   ToHtmlBodyTagsPipe,

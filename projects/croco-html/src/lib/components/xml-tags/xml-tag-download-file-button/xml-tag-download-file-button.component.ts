@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { InterfaceBlock } from "../../../extensions/InterfaceBlock";
 import { BlobCreateService } from "../../../services/blob-create.service";
-import { DownloadButtonTagData } from "../../../extensions/DownloadButtonMethods";
 import { MatIcon } from "@angular/material/icon";
+import { DownloadButtonTagData } from '../../../tag-services/DownloadButtonTagService';
 
 @Component({
   selector: 'croco-html-xml-tag-download-file-button',

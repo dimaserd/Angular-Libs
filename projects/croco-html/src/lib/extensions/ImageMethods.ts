@@ -1,4 +1,4 @@
-import { FileImageTag, ImageRestrictions, IMediaRequest } from "../models";
+import { ImageRestrictions, IMediaRequest } from "../models";
 import { CrocoHtmlOptions } from "../options";
 
 export class FileImageTagDataConsts {

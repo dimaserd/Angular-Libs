@@ -21,11 +21,9 @@ import {
 } from '../../../extensions';
 import { XmlExtensions } from '../../../extensions';
 import { TagItem, HtmlBodyTag } from '../../../models/models';
-import { FilePostingStarted } from '../../upload-files-btn/upload-files-btn.component';
 import { DefaultTags } from './DefaultTags';
 import { AlignmentsData, EAlignments } from "./DefaultAligments";
 import { CrocoHtmlOptionsToken } from '../../../consts';
-import { DownloadButtonTagDataConsts } from "../../../extensions/DownloadButtonMethods";
 import { MainEditorBlockComponent } from '../main-editor-block/main-editor-block.component';
 import { AddFilesBtnComponent } from '../../add-files-btn/add-files-btn.component';
 import { MatOption } from '@angular/material/core';
@@ -46,6 +44,7 @@ import { HtmlRawTagDataConsts } from "../../../extensions/HtmlRawTagDataConsts";
 import { MatTooltip } from "@angular/material/tooltip";
 import { SpriteIconPathPipe } from "../../../pipes/sprite-icon-path.pipe";
 import { SpriteIdsType } from "../../../../sprites-ids.type";
+import { DownloadButtonTagDataConsts } from '../../../tag-services';
 
 export const defaultLinkYouTube = "https://www.youtube.com/embed/4CtSAnJDfsI?si=scyBNJa0Hs2t5aLE";
 export const defaultLinkVk = "https://vk.com/video_ext.php?oid=-22822305&id=456241864&hd=2";
