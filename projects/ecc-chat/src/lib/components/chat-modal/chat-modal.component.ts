@@ -9,6 +9,7 @@ import { ChatSymbolSpritePipe } from '../../pipes/chat-symbol-sprite.pipe';
 
 export interface ChatModalComponentData {
   chatId: number;
+  chatName: string;
   settings?: ChatSettings;
 }
 
