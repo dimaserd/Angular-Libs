@@ -47,7 +47,7 @@ export class ChatMainComponent implements OnDestroy {
   }
 
   constructor(readonly _chatLogicService: ChatLogicService) { }
-  
+
   ngOnDestroy(): void {
     this._chatLogicService.closeChatLogic();
   }
