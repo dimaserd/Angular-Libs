@@ -41,6 +41,7 @@ import { MatTooltip } from "@angular/material/tooltip";
 import { SpriteIconPathPipe } from "../../../pipes/sprite-icon-path.pipe";
 import { SpriteIdsType } from "../../../../sprites-ids.type";
 import { HtmlRawTagDataConsts, TextAlignment } from '../../../tag-services';
+import { CustomWidgetIconComponent } from "./components/custom-widget-icon/custom-widget-icon.component";
 
 
 @Component({
@@ -70,6 +71,7 @@ import { HtmlRawTagDataConsts, TextAlignment } from '../../../tag-services';
     NgTemplateOutlet,
     MatTooltip,
     SpriteIconPathPipe,
+    CustomWidgetIconComponent
   ]
 })
 export class VisualEditorComponent implements OnInit, AfterViewInit {
@@ -266,6 +268,14 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     this.startAddingText(data.tag);
   }
 
+  isDefinedCustomWidget(tagName: string):boolean {
+    if (this._options.definedCustomTags.hasOwnProperty(tagName)){
+      return true;
+    }
+
+    return false;
+  }
+
   customWidgetsClickHandler() {
     this._options.customWidgetClickHandler(this);
   }
@@ -278,8 +288,8 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     this.selectedVideoPlayer = this.videoPlayers[0].type;
   }
 
-  setTagButton(type: string): SpriteIdsType {
-    return `tag-button-${type}` as SpriteIdsType
+  setTagButton(tagName: string): SpriteIdsType {
+    return `tag-button-${tagName}` as SpriteIdsType
   }
 
   setAlignButton(type: string): SpriteIdsType {

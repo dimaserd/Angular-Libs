@@ -31,10 +31,33 @@ export interface CrocoHtmlOptions {
   definedCustomTags: { [id: string]: IMarkUpTagService; };
 
   /**
+   * Рендеры для кастомных тегов.
+   */
+  definedCustomTagViewRenderers: { [id: string] : ICustomTagViewRender }
+
+  /**
    * Обработчик нажатия на кнопку кастомных виджетов
    * @returns 
    */
   customWidgetClickHandler: (editor: VisualEditorComponent) => void;
+}
+
+export interface ICustomTagViewRender {
+
+  /**
+   * Компонент для визуального редактора croco-html-custom-widget-editor
+   */
+  editorComponent?: Type<any>;
+
+  /**
+   * Иконка в визуальном редакторе croco-html-custom-widget-icon
+   */
+  iconComponent?: Type<any>;
+
+  /**
+   * Компонент для отрисовки на интерфейсе croco-html-defined-custom-tag-view
+   */
+  viewComponent?: Type<any>;
 }
 
 export interface CrocoHtmlImageOptions {

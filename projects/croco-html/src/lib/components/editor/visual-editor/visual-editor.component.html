@@ -197,7 +197,10 @@
 </ng-template>
 
 <ng-template #tagButtonIcons let-icon="icon">
-  @if (icon.indexOf('h') === 0 && icon.length === 2) {
+  @if (isDefinedCustomWidget(icon)) {
+    <croco-html-custom-widget-icon [tagName]="icon"></croco-html-custom-widget-icon>
+  }
+  @else if (icon.indexOf('h') === 0 && icon.length === 2) {
     {{icon.toUpperCase()}}
   }
   @else {

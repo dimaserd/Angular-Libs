@@ -1,4 +1,4 @@
-import { DefinedCustomEditorBlockComponent, DefinedCustomTagViewComponent, ImageEditorComponent } from "./components";
+import { CustomWidgetIconComponent, DefinedCustomEditorBlockComponent, DefinedCustomTagViewComponent, ImageEditorComponent } from "./components";
 import { MainEditorBlockComponent } from "./components";
 import { MainEditorComponent } from "./components";
 import { TextEditorComponent } from "./components";
@@ -59,6 +59,7 @@ export const EditorComponents = [
   HtmlRawEditorComponent,
   CustomWidgetEditorComponent,
   DefinedCustomEditorBlockComponent,
+  CustomWidgetIconComponent
 ];
 
 export const XmlComponents = [

@@ -24,6 +24,10 @@ export class XmlTagCustomWidgetComponent implements OnInit, OnDestroy {
   @ViewChild('container', { read: ViewContainerRef, static: true })
   viewContainerRef!: ViewContainerRef;
 
+  public useDynamicComponent = false;
+
+  public dynamicContainerRef: ComponentRef<any>;
+
   @Input()
   public set tagData(value: CustomWidgetTagData) {
     if (value) {
@@ -41,9 +45,6 @@ export class XmlTagCustomWidgetComponent implements OnInit, OnDestroy {
 
   public _tagData: CustomWidgetTagData;
   public tooltipData: string = "";
-  public useDynamicComponent = false;
-
-  public dynamicContainerRef: ComponentRef<any>;
 
   constructor(
     @Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions

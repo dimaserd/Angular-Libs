@@ -7,3 +7,4 @@ export * from './main-editor-block/components/defined-custom-editor-block/define
 export * from './text-editor/text-editor.component'
 export * from './visual-editor/visual-editor.component'
 export * from './custom-widget-editor/custom-widget-editor.component'
+export * from './visual-editor/components/custom-widget-icon/custom-widget-icon.component'

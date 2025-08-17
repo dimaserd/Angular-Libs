@@ -1,15 +1,14 @@
-import { JsonPipe } from '@angular/common';
-import { Component, ComponentRef, EventEmitter, Inject, Input, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
-import { HtmlBodyTag } from '../../../../../models';
+import { Component, ComponentRef, Inject, Input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { CrocoHtmlOptions } from '../../../../../options';
 import { CrocoHtmlOptionsToken } from '../../../../../consts';
 
 @Component({
-  selector: 'croco-html-defined-custom-editor-block',
-  imports: [JsonPipe],
-  templateUrl: './defined-custom-editor-block.component.html'
+  selector: 'croco-html-custom-widget-icon',
+  imports: [],
+  templateUrl: './custom-widget-icon.component.html'
 })
-export class DefinedCustomEditorBlockComponent implements OnInit {
+export class CustomWidgetIconComponent implements OnInit {
+
   @ViewChild('container', { read: ViewContainerRef, static: true })
   viewContainerRef!: ViewContainerRef;
 
@@ -17,19 +16,19 @@ export class DefinedCustomEditorBlockComponent implements OnInit {
 
   public dynamicContainerRef: ComponentRef<any>;
 
-  
   @Input({ required: true })
-  tag: HtmlBodyTag;
-
-  @Output()
-  onTagUpdated = new EventEmitter<HtmlBodyTag>();
-
-  constructor(@Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions) {
+  set tagName(tagName: string) {
+    this._tagName = tagName;
+    this._shortTagName = tagName.substring(0, 2);
   }
 
-  getCustomComponent() {
+  constructor(@Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions) {
+    
+  }
+
+  getIconComponent() {
     if (this._options.definedCustomTagViewRenderers.hasOwnProperty(this._tagName)) {
-      return this._options.definedCustomTagViewRenderers[this._tagName].editorComponent;
+      return this._options.definedCustomTagViewRenderers[this._tagName].iconComponent;
     }
 
     return null;
@@ -40,7 +39,7 @@ export class DefinedCustomEditorBlockComponent implements OnInit {
 
   ngOnInit(): void {
 
-    var component = this.getCustomComponent();
+    var component = this.getIconComponent();
 
     if (component) {
       this.useDynamicComponent = true;
