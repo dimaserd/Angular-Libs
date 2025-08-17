@@ -11,19 +11,20 @@ export class TsSimpleTypeMapper {
         .set("DateTime", "string")
         .set("Guid", "string");
 
-    static GetPropertyType(typeDescription: CrocoTypeDescription): string {
+    static getPropertyType(typeDescription: CrocoTypeDescription): string {
 
         if(typeDescription.isEnumeration && typeDescription.isNullable){
-            var name = TsSimpleTypeMapper.ExtractName(typeDescription.typeDisplayFullName.replace("?", ""));
+            var name = TsSimpleTypeMapper.extractName(typeDescription.typeDisplayFullName.replace("?", ""));
 
             return `${name} | null`;
         }
 
-        return TsSimpleTypeMapper.GetPropertyTypeByTypeDisplayName(typeDescription.typeDisplayFullName);
+        return TsSimpleTypeMapper.getPropertyTypeByTypeDisplayName(typeDescription.typeDisplayFullName);
     }
-    static GetPropertyTypeByTypeDisplayName(typeDisplayName: string): string {
 
-        let name = TsSimpleTypeMapper.ExtractName(typeDisplayName);
+    static getPropertyTypeByTypeDisplayName(typeDisplayName: string): string {
+
+        let name = TsSimpleTypeMapper.extractName(typeDisplayName);
 
         let isNullable = name.endsWith('?');
 
@@ -43,7 +44,7 @@ export class TsSimpleTypeMapper {
         return TsSimpleTypeMapper.typesDictionary.get(cSharpName);
     }
 
-    static ExtractName(name: string): string {
+    static extractName(name: string): string {
 
         const d = name.split('.');
 

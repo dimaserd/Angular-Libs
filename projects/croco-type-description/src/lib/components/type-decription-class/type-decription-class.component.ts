@@ -1,19 +1,22 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
-import { MatSelectChange } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
+import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ClipboardService } from 'ngx-clipboard';
 import { CrocoTypeDescription, CrocoTypeDescriptionResult } from '../../models';
 import { DartCodeClassGenerator } from '../../codeGenerators/dart/DartCodeClassGenerator';
 import { TSClassGenerator } from '../../codeGenerators/typescript/TSClassGenerator';
+import { MatInputModule } from "@angular/material/input";
+import { CommonModule } from '@angular/common';
+import { MatExpansionModule } from "@angular/material/expansion";
 
 @Component({
   selector: 'croco-type-decription-class',
   templateUrl: './type-decription-class.component.html',
-  styleUrls: ['./type-decription-class.component.css']
+  styleUrls: ['./type-decription-class.component.css'],
+  standalone: true,
+  imports: [MatInputModule, MatSelectModule, FormsModule, CommonModule, MatExpansionModule],
 })
-
-
 export class TypeDecriptionClassComponent implements OnInit {
 
   propNameAndLinks: PropNameWithLink[] = [];
@@ -26,9 +29,6 @@ export class TypeDecriptionClassComponent implements OnInit {
   constructor(private _clipboardService: ClipboardService, private _snackBar: MatSnackBar) {}
 
   codeGenerationType: string = "TypeScript";
-  myForm = new UntypedFormGroup({
-    "type": new UntypedFormControl(),
-  });
 
   ngOnInit() {
     this.propNameAndLinks = this.type.properties.map(x => ({
@@ -36,15 +36,15 @@ export class TypeDecriptionClassComponent implements OnInit {
       displayFullTypeNameReference: x.typeDisplayFullName.replace("[]", ""),
       propertyName: x.propertyDescription.propertyName
     }))
-    this.codeGenerationResult = new TSClassGenerator(true, false).GenerateClassesForType(this.wholeResult);
+    this.codeGenerationResult = new TSClassGenerator(true, false).generateClassesForType(this.wholeResult);
   }
 
   typeChanged(data:MatSelectChange){
     if(data.value === "TypeScript"){
-      this.codeGenerationResult = new TSClassGenerator(true, false).GenerateClassesForType(this.wholeResult);
+      this.codeGenerationResult = new TSClassGenerator(true, false).generateClassesForType(this.wholeResult);
     }
     else if(data.value === "Dart"){
-      this.codeGenerationResult = new DartCodeClassGenerator().GenerateClassesForType(this.wholeResult);
+      this.codeGenerationResult = new DartCodeClassGenerator().generateClassesForType(this.wholeResult);
     }
   }
 

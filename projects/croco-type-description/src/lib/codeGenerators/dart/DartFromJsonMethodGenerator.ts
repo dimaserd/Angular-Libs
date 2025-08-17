@@ -3,7 +3,7 @@ import { DartEnumTypeDescriptor } from "./DartEnumTypeDescriptor";
 import { DartTypeMapper } from "./DartTypeMapper";
 
 export class DartFromJsonMethodGenerator {
-    static GenerateFromJsonFactoryMethod(dartTypeName: string, propNames: string[],
+    static generateFromJsonFactoryMethod(dartTypeName: string, propNames: string[],
         props: CrocoPropertyReferenceDescription[],
         wholeModel: CrocoTypeDescriptionResult): string {
 
@@ -22,7 +22,7 @@ export class DartFromJsonMethodGenerator {
                 result += `\t\t${propNames[i]}: json["${propNames[i]}"] != null? ${propTypeDescription.typeName}?.fromJson(json["${propNames[i]}"]) : null,\n`
             }
             else if(propTypeDescription.isEnumeration) {
-                result += `\t\t${propNames[i]}: ` + DartEnumTypeDescriptor.GetGenerateFromVariableCall(propTypeDescription, `json["${propNames[i]}"]`) + ",\n";
+                result += `\t\t${propNames[i]}: ` + DartEnumTypeDescriptor.getGenerateFromVariableCall(propTypeDescription, `json["${propNames[i]}"]`) + ",\n";
             }
             else if(propTypeDescription.isPrimitive){
 
@@ -52,13 +52,13 @@ export class DartFromJsonMethodGenerator {
         var enumeratedType = wholeModel.types
             .find(x => x.typeDisplayFullName === enumeratedTypeDisplayFullName);
 
-        var typeName = DartTypeMapper.GetPropertyTypeDartName(enumeratedType);
+        var typeName = DartTypeMapper.getPropertyTypeDartName(enumeratedType);
 
         if (enumeratedType.isClass) {
             return `\t\t${propName}: List<${typeName}>.from(json["${propName}"].map((x) => ${typeName}.fromJson(x))),\n`;
         }
         else if(enumeratedType.isEnumeration){
-            return `\t\t${propName}: List<${typeName}>.from(json["${propName}"].map((x) => ${DartEnumTypeDescriptor.GetGenerateFromVariableCall(enumeratedType, "x")})),\n`;
+            return `\t\t${propName}: List<${typeName}>.from(json["${propName}"].map((x) => ${DartEnumTypeDescriptor.getGenerateFromVariableCall(enumeratedType, "x")})),\n`;
         }
         else if (enumeratedType.isPrimitive) {
 

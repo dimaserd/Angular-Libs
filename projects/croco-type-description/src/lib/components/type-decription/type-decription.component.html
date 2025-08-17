@@ -15,7 +15,10 @@
 
 </div>
 
-<div *ngIf="result">
+@if (result) {
+  <div>
   <h6>Главный тип данных</h6>
   <croco-type-decription-class *ngFor="let type of types" [type]="type" [wholeResult]="result"></croco-type-decription-class>
 </div>
+}
+

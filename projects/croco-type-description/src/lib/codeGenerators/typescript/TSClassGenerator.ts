@@ -15,7 +15,7 @@ export class TSClassGenerator {
         this._useGenerics = useGenerics;
     }
 
-    public static GetDescription(propReference: CrocoPropertyReferenceDescription): string {
+    public static getDescription(propReference: CrocoPropertyReferenceDescription): string {
 
         if (propReference.propertyDescription.descriptions.length > 0) {
             return `\t/* ${propReference.propertyDescription.descriptions[0]} */\n`;
@@ -24,18 +24,18 @@ export class TSClassGenerator {
         return "";
     }
 
-    static GetDeclarationDisplayName(typeDescription: CrocoTypeDescription){
+    static getDeclarationDisplayName(typeDescription: CrocoTypeDescription){
         if (typeDescription.isGeneric) {
             return TsGenericClassNameGenerator.generateName(typeDescription.genericDescription);
         }
 
-        return TsSimpleTypeMapper.ExtractName(typeDescription.typeDisplayFullName);
+        return TsSimpleTypeMapper.extractName(typeDescription.typeDisplayFullName);
     }
 
-    static GetTypeDisplayName(typeDescription: CrocoTypeDescription): string {
+    static getTypeDisplayName(typeDescription: CrocoTypeDescription): string {
 
         if(typeDescription.isGeneric && typeDescription.isEnumeration){
-            return TsSimpleTypeMapper.GetPropertyType(typeDescription);
+            return TsSimpleTypeMapper.getPropertyType(typeDescription);
         }
 
         if (typeDescription.isGeneric) {
@@ -44,7 +44,7 @@ export class TSClassGenerator {
 
             let genTypeTsNames = genDescr.genericArgumentTypeNames.map(x => {
                 if (CommonGeneratorLogic.isSimple(x)) {
-                    return TsSimpleTypeMapper.GetPropertyTypeByTypeDisplayName(x);
+                    return TsSimpleTypeMapper.getPropertyTypeByTypeDisplayName(x);
                 }
 
                 return x;
@@ -53,10 +53,10 @@ export class TSClassGenerator {
             return `${genDescr.typeNameWithoutGenericArgs}<${genTypeTsNames.join(',')}>`;
         }
 
-        return TsSimpleTypeMapper.ExtractName(typeDescription.typeDisplayFullName);
+        return TsSimpleTypeMapper.extractName(typeDescription.typeDisplayFullName);
     }
 
-    GetPropName(propName: string): string{
+    getPropName(propName: string): string{
         if(this._useJsNamingStyle){
             return propName[0].toLowerCase() + propName.substr(1);
         }
@@ -64,7 +64,7 @@ export class TSClassGenerator {
         return propName;
     }
 
-    GenerateTypeInterface(typeDescription: CrocoTypeDescription, wholeModel: CrocoTypeDescriptionResult): GeneratedData {
+    generateTypeInterface(typeDescription: CrocoTypeDescription, wholeModel: CrocoTypeDescriptionResult): GeneratedData {
 
         if(typeDescription.isEnumeration && typeDescription.isNullable){
             return {
@@ -76,7 +76,7 @@ export class TSClassGenerator {
         if (typeDescription.isEnumeration) {
             return {
                 IsGenerated: true,
-                GeneratedText: TsEnumTypeDescriptor.GetEnum(typeDescription)
+                GeneratedText: TsEnumTypeDescriptor.getEnum(typeDescription)
             }
         }
 
@@ -84,7 +84,7 @@ export class TSClassGenerator {
 
             let result: string = "";
 
-            result += `interface ${TSClassGenerator.GetDeclarationDisplayName(typeDescription)} {\n`;
+            result += `interface ${TSClassGenerator.getDeclarationDisplayName(typeDescription)} {\n`;
 
             for (let i = 0; i < typeDescription.properties.length; i++) {
 
@@ -94,30 +94,30 @@ export class TSClassGenerator {
                 if (propTypeDescription.arrayDescription.isArray) {
 
                     var enumeratedType = wholeModel.types.find(x => x.typeDisplayFullName === propTypeDescription.arrayDescription.elementDiplayFullTypeName)
-                    result += `${TSClassGenerator.GetDescription(prop)}\t ${this.GetPropName(prop.propertyDescription.propertyName)}: Array<${TSClassGenerator.GetEnumeratedDisplayTypeName(enumeratedType)}>; \n`;
+                    result += `${TSClassGenerator.getDescription(prop)}\t ${this.getPropName(prop.propertyDescription.propertyName)}: Array<${TSClassGenerator.getEnumeratedDisplayTypeName(enumeratedType)}>; \n`;
 
                     continue;
                 }
 
                 if(propTypeDescription.isEnumeration && propTypeDescription.isNullable){
-                    result += `${TSClassGenerator.GetDescription(prop)}\t ${this.GetPropName(prop.propertyDescription.propertyName)}: ${TSClassGenerator.GetTypeDisplayName(propTypeDescription)}; \n`;
+                    result += `${TSClassGenerator.getDescription(prop)}\t ${this.getPropName(prop.propertyDescription.propertyName)}: ${TSClassGenerator.getTypeDisplayName(propTypeDescription)}; \n`;
 
                     continue;
                 }
 
                 if(propTypeDescription.isEnumeration){
-                    result += `${TSClassGenerator.GetDescription(prop)}\t ${this.GetPropName(prop.propertyDescription.propertyName)}: ${TSClassGenerator.GetTypeDisplayName(propTypeDescription)}; \n`;
+                    result += `${TSClassGenerator.getDescription(prop)}\t ${this.getPropName(prop.propertyDescription.propertyName)}: ${TSClassGenerator.getTypeDisplayName(propTypeDescription)}; \n`;
 
                     continue;
                 }
 
                 if (propTypeDescription.isClass) {
-                    result += `${TSClassGenerator.GetDescription(prop)}\t ${this.GetPropName(prop.propertyDescription.propertyName)}: ${TSClassGenerator.GetTypeDisplayName(propTypeDescription)}; \n`;
+                    result += `${TSClassGenerator.getDescription(prop)}\t ${this.getPropName(prop.propertyDescription.propertyName)}: ${TSClassGenerator.getTypeDisplayName(propTypeDescription)}; \n`;
 
                     continue;
                 }
 
-                result += `${TSClassGenerator.GetDescription(prop)}\t ${this.GetPropName(prop.propertyDescription.propertyName)}: ${TsSimpleTypeMapper.GetPropertyType(propTypeDescription)}; \n`;
+                result += `${TSClassGenerator.getDescription(prop)}\t ${this.getPropName(prop.propertyDescription.propertyName)}: ${TsSimpleTypeMapper.getPropertyType(propTypeDescription)}; \n`;
             }
 
             result += "}";
@@ -128,18 +128,18 @@ export class TSClassGenerator {
         return { IsGenerated: false, GeneratedText: null};
     }
 
-    public static GetEnumeratedDisplayTypeName(typeDescription: CrocoTypeDescription) : string {
+    public static getEnumeratedDisplayTypeName(typeDescription: CrocoTypeDescription) : string {
         if (typeDescription.isClass || typeDescription.isEnumeration) {
-            return TsSimpleTypeMapper.ExtractName(typeDescription.typeDisplayFullName);
+            return TsSimpleTypeMapper.extractName(typeDescription.typeDisplayFullName);
         }
 
-        return TsSimpleTypeMapper.ExtractName(TsSimpleTypeMapper.GetPropertyType(typeDescription));
+        return TsSimpleTypeMapper.extractName(TsSimpleTypeMapper.getPropertyType(typeDescription));
     }
 
-    public GenerateClassesForType(typeDescriptionResult: CrocoTypeDescriptionResult): string {
+    public generateClassesForType(typeDescriptionResult: CrocoTypeDescriptionResult): string {
 
         return CommonGeneratorLogic.GetUniqueTypes(typeDescriptionResult)
-            .map(x => this.GenerateTypeInterface(x, typeDescriptionResult))
+            .map(x => this.generateTypeInterface(x, typeDescriptionResult))
             .filter(x => x.IsGenerated)
             .map(x => x.GeneratedText)
             .join("\n\n\n");

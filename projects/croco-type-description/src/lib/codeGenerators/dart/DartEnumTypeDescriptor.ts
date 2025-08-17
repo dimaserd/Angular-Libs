@@ -7,7 +7,7 @@ export class DartEnumTypeDescriptor{
         return typeDescription.typeName;
     }
 
-    public static GetEnum(typeDescription: CrocoTypeDescription): string {
+    public static getEnum(typeDescription: CrocoTypeDescription): string {
         if (!typeDescription.isEnumeration) {
             throw new Error("Данный тип не является перечислением");
         }
@@ -28,7 +28,7 @@ export class DartEnumTypeDescriptor{
     }
 
     static GetGeneratorClassName(typeDescription: CrocoTypeDescription): string{
-        return `${DartTypeMapper.GetPropertyTypeDartName(typeDescription).replace("?", "")}DartJsonGenerator`;
+        return `${DartTypeMapper.getPropertyTypeDartName(typeDescription).replace("?", "")}DartJsonGenerator`;
     }
 
     static GetGenerator(typeDescription: CrocoTypeDescription) : string{
@@ -61,7 +61,7 @@ export class DartEnumTypeDescriptor{
         return html;
     }
 
-    static GetGenerateFromVariableCall(typeDescription: CrocoTypeDescription, variableRef: string) : string{
+    static getGenerateFromVariableCall(typeDescription: CrocoTypeDescription, variableRef: string) : string{
         const generatorName = DartEnumTypeDescriptor.GetGeneratorClassName(typeDescription);
 
         if(typeDescription.isEnumeration && typeDescription.isNullable){

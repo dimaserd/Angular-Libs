@@ -1,7 +1,7 @@
 ﻿import { CrocoTypeDescription } from "../../models";
 
 export class TsEnumTypeDescriptor {
-    public static GetEnum(typeDescription: CrocoTypeDescription): string {
+    public static getEnum(typeDescription: CrocoTypeDescription): string {
         if (!typeDescription.isEnumeration) {
             throw new Error("Данный тип не является перечислением");
         }

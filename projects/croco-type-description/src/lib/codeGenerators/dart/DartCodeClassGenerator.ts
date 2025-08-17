@@ -7,20 +7,20 @@ import { DartFromJsonMethodGenerator } from "./DartFromJsonMethodGenerator";
 import { DartTypeMapper } from "./DartTypeMapper";
 import { DartToJsonMethodGenerator } from "./DartToJsonMethodGenerator";
 
-export class DartCodeClassGenerator{
+export class DartCodeClassGenerator {
 
-    public GenerateClassesForType(typeDescriptionResult: CrocoTypeDescriptionResult): string {
+    public generateClassesForType(typeDescriptionResult: CrocoTypeDescriptionResult): string {
 
         return CommonGeneratorLogic.GetUniqueTypes(typeDescriptionResult)
-            .map(x => this.GenerateTypeInterface(x, typeDescriptionResult))
+            .map(x => this.generateTypeInterface(x, typeDescriptionResult))
             .filter(x => x.IsGenerated)
             .map(x => x.GeneratedText)
             .join("\n\n\n");
     }
 
-    GenerateTypeInterface(typeDescription: CrocoTypeDescription, wholeModel: CrocoTypeDescriptionResult): GeneratedData {
+    generateTypeInterface(typeDescription: CrocoTypeDescription, wholeModel: CrocoTypeDescriptionResult): GeneratedData {
 
-        if(typeDescription.isEnumeration && typeDescription.isNullable){
+        if (typeDescription.isEnumeration && typeDescription.isNullable) {
             return {
                 IsGenerated: false,
                 GeneratedText: ""
@@ -29,7 +29,7 @@ export class DartCodeClassGenerator{
         if (typeDescription.isEnumeration) {
             return {
                 IsGenerated: true,
-                GeneratedText: DartEnumTypeDescriptor.GetEnum(typeDescription)
+                GeneratedText: DartEnumTypeDescriptor.getEnum(typeDescription)
             }
         }
 
@@ -37,64 +37,64 @@ export class DartCodeClassGenerator{
 
             let result: string = "";
 
-            var dartTypeName = TSClassGenerator.GetDeclarationDisplayName(typeDescription);
+            var dartTypeName = TSClassGenerator.getDeclarationDisplayName(typeDescription);
 
             result += `class ${dartTypeName}\n`;
             result += '{\n'
 
-            var propNames:string[] = []
+            var propNames: string[] = []
 
             for (let i = 0; i < typeDescription.properties.length; i++) {
 
                 const prop = typeDescription.properties[i];
 
                 result += '\tlate '
-                var propName = this.GetPropName(prop.propertyDescription.propertyName);
+                var propName = this.getPropName(prop.propertyDescription.propertyName);
                 propNames.push(propName);
 
                 var propTypeDescription = wholeModel.types.find(x => x.typeDisplayFullName === prop.typeDisplayFullName);
                 if (propTypeDescription.arrayDescription.isArray) {
 
                     var enumeratedType = wholeModel.types.find(x => x.typeDisplayFullName === propTypeDescription.arrayDescription.elementDiplayFullTypeName)
-                    result += `List<${DartCodeClassGenerator.GetTypeDisplayName(enumeratedType)}>? ${propName};\n`;
+                    result += `List<${DartCodeClassGenerator.getTypeDisplayName(enumeratedType)}>? ${propName};\n`;
 
                     continue;
                 }
 
                 if (propTypeDescription.isClass) {
-                    result += `${DartCodeClassGenerator.GetTypeDisplayName(propTypeDescription)}? ${propName};\n`;
+                    result += `${DartCodeClassGenerator.getTypeDisplayName(propTypeDescription)}? ${propName};\n`;
 
                     continue;
                 }
 
-                if( propTypeDescription.isEnumeration){
-                    result += `${DartCodeClassGenerator.GetTypeDisplayName(propTypeDescription)} ${propName};\n`;
+                if (propTypeDescription.isEnumeration) {
+                    result += `${DartCodeClassGenerator.getTypeDisplayName(propTypeDescription)} ${propName};\n`;
 
                     continue;
                 }
 
-                result += `${DartCodeClassGenerator.GetTypeDisplayName(propTypeDescription)} ${propName}; \n`;
+                result += `${DartCodeClassGenerator.getTypeDisplayName(propTypeDescription)} ${propName}; \n`;
             }
 
-            result+= "\n";
-            result += this.GenerateConstructor(dartTypeName, propNames);
-            result+= "\n";
-            result += DartFromJsonMethodGenerator.GenerateFromJsonFactoryMethod(dartTypeName, propNames, typeDescription.properties, wholeModel);
             result += "\n";
-            result += DartToJsonMethodGenerator.GenerateToJsonMethod(propNames, typeDescription.properties, wholeModel);
+            result += this.generateConstructor(dartTypeName, propNames);
+            result += "\n";
+            result += DartFromJsonMethodGenerator.generateFromJsonFactoryMethod(dartTypeName, propNames, typeDescription.properties, wholeModel);
+            result += "\n";
+            result += DartToJsonMethodGenerator.generateToJsonMethod(propNames, typeDescription.properties, wholeModel);
             result += "\n";
             result += "}";
 
             return { IsGenerated: true, GeneratedText: result };
         }
 
-        return { IsGenerated: false, GeneratedText: null};
+        return { IsGenerated: false, GeneratedText: null };
     }
 
-    GenerateConstructor(dartTypeName: string, propNames: string[]):string{
+    generateConstructor(dartTypeName: string, propNames: string[]): string {
         var result = `\t${dartTypeName}({\n`;
 
-        for(let i = 0; i < propNames.length; i++){
+        for (let i = 0; i < propNames.length; i++) {
             result += `\t\trequired this.${propNames[i]},\n`
         }
         result += `\t});\n`;
@@ -102,11 +102,11 @@ export class DartCodeClassGenerator{
         return result;
     }
 
-    GetPropName(propName: string): string{
+    getPropName(propName: string): string {
         return propName[0].toLowerCase() + propName.substr(1);
     }
 
-    static GetTypeDisplayName(data:CrocoTypeDescription){
-        return DartTypeMapper.GetPropertyTypeDartName(data);
+    static getTypeDisplayName(data: CrocoTypeDescription) {
+        return DartTypeMapper.getPropertyTypeDartName(data);
     }
 }

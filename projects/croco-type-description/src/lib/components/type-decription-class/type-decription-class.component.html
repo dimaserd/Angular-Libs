@@ -30,10 +30,10 @@
     </mat-panel-title>
   </mat-expansion-panel-header>
 
-  <form [formGroup]="myForm">
+  <form>
     <mat-form-field appearance="outline" class="w-100">
       <mat-label>Язык для кодогенерации</mat-label>
-      <mat-select [(ngModel)]="codeGenerationType" formControlName="type" (selectionChange)="typeChanged($event)">
+      <mat-select (selectionChange)="typeChanged($event)">
         <mat-option value="TypeScript">TypeScript</mat-option>
         <mat-option value="Dart">Dart</mat-option>
       </mat-select>

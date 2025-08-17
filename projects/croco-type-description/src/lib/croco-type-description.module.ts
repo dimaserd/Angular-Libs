@@ -19,11 +19,10 @@ const COMPONENTS = [TypeDecriptionComponent, TypeDecriptionClassComponent]
 const MATERIAL_MODULES = [MatSnackBarModule, MatFormFieldModule, MatExpansionModule, MatOptionModule, MatButtonModule, MatInputModule, MatListModule, MatSelectModule, ]
 
 @NgModule({
-  imports: [...MATERIAL_MODULES, CommonModule, ReactiveFormsModule, FormsModule, RouterModule.forChild([{
+  imports: [...MATERIAL_MODULES, ...COMPONENTS, CommonModule, ReactiveFormsModule, FormsModule, RouterModule.forChild([{
     path: '',
     component: TypeDecriptionComponent
   }])],
-  exports: COMPONENTS,
-  declarations: COMPONENTS,
+  exports: [...COMPONENTS],
 })
 export class TypeDescriptionModule { }

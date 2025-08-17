@@ -2,7 +2,7 @@ import { CrocoPropertyReferenceDescription, CrocoTypeDescriptionResult } from ".
 import { DartEnumTypeDescriptor } from "./DartEnumTypeDescriptor";
 
 export class DartToJsonMethodGenerator{
-    static GenerateToJsonMethod(propNames: string[],
+    static generateToJsonMethod(propNames: string[],
         props: CrocoPropertyReferenceDescription[],
         wholeModel: CrocoTypeDescriptionResult):string{
 

@@ -4,11 +4,14 @@ import { CrocoTypeDescriptionResult, CrocoTypeDescription } from '../../models';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
 import { CrocoTypeDescriptor } from '../../services/CrocoTypeDescriptor';
+import { MatInputModule } from "@angular/material/input";
+import { TypeDecriptionClassComponent } from '../type-decription-class/type-decription-class.component';
 
 @Component({
   selector: 'croco-type-decription',
   templateUrl: './type-decription.component.html',
-  styleUrls: ['./type-decription.component.css']
+  styleUrls: ['./type-decription.component.css'],
+  imports: [MatInputModule, TypeDecriptionClassComponent]
 })
 export class TypeDecriptionComponent implements OnInit {
 

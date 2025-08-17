@@ -11,10 +11,10 @@ export class DartTypeMapper {
         .set("System.DateTime", "DateTime")
         .set("System.Guid", "String");
 
-    static GetPropertyTypeDartName(typeDescription: CrocoTypeDescription): string {
+    static getPropertyTypeDartName(typeDescription: CrocoTypeDescription): string {
 
         if(typeDescription.isNullable && typeDescription.isEnumeration){
-            return DartTypeMapper.ExtractName(typeDescription.typeDisplayFullName);
+            return DartTypeMapper.extractName(typeDescription.typeDisplayFullName);
         }
 
         if(typeDescription.isClass || typeDescription.isEnumeration){
@@ -33,7 +33,7 @@ export class DartTypeMapper {
         return result;
     }
 
-    static ExtractName(name: string): string {
+    static extractName(name: string): string {
 
         const d = name.split('.');
 
