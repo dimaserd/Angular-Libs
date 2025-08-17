@@ -1,6 +1,6 @@
 import { JsonPipe } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { HtmlBodyTag } from 'projects/croco-html/src/lib/models';
+import { HtmlBodyTag } from '../../../../../models';
 
 @Component({
   selector: 'croco-html-defined-custom-editor-block',

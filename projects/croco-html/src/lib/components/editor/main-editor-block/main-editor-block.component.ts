@@ -42,7 +42,6 @@ export class MainEditorBlockComponent {
   onTagRemoved = new EventEmitter<HtmlBodyTag>();
 
   constructor(@Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions) {
-
   }
 
   tagUpdatedHandler(tag: HtmlBodyTag): void {
@@ -55,12 +54,12 @@ export class MainEditorBlockComponent {
 
   isDefinedCustomTag() {
 
-    console.log("isDefinedCustomTag()", this.tag, this._options);
-
     if (this._options.definedCustomTags.hasOwnProperty(this.tag.tagDescription.tag)) {
       return true;
     }
 
+    console.log("isDefinedCustomTag", this.tag);
+    
     return false;
   }
 
