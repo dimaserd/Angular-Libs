@@ -11,6 +11,8 @@ import { ButtonEditorComponent } from "../button-editor/button-editor.component"
 import { CustomWidgetEditorComponent } from "../custom-widget-editor/custom-widget-editor.component";
 import { CrocoHtmlOptionsToken } from '../../../consts';
 import { CrocoHtmlOptions } from '../../../options';
+import { JsonPipe } from '@angular/common';
+import { DefinedCustomEditorBlockComponent } from "./components/defined-custom-editor-block/defined-custom-editor-block.component";
 
 @Component({
   selector: 'croco-html-main-editor-block',
@@ -25,7 +27,9 @@ import { CrocoHtmlOptions } from '../../../options';
     MatIconButton,
     ExternalVideoEditorComponent,
     ButtonEditorComponent,
-    CustomWidgetEditorComponent
+    CustomWidgetEditorComponent,
+    JsonPipe,
+    DefinedCustomEditorBlockComponent
   ]
 })
 export class MainEditorBlockComponent {
@@ -54,7 +58,10 @@ export class MainEditorBlockComponent {
 
   isDefinedCustomTag() {
 
-    if (this._options.definedCustomTags.hasOwnProperty(this.tag.tagDescription.tag)) {
+    const tagName = this.tag.tagDescription.tag;
+    console.log("isDefinedCustomTag()", tagName, this._options.definedCustomTags.hasOwnProperty(tagName), this._options);
+
+    if (this._options.definedCustomTags.hasOwnProperty(tagName)) {
       return true;
     }
 
