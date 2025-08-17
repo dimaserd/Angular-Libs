@@ -13,6 +13,7 @@ import { XmlTagButtonComponent } from "../xml-tag-custom-button/xml-tag-button.c
 import { XmlTagCustomWidgetComponent } from "../xml-tag-custom-widget/xml-tag-custom-widget.component";
 import { CrocoHtmlOptionsToken } from '../../../consts';
 import { CrocoHtmlOptions } from '../../../options';
+import { DefinedCustomTagViewComponent } from '../defined-custom-tag-view/defined-custom-tag-view.component';
 
 @Component({
   selector: 'croco-html-xml-tag-view',
@@ -31,6 +32,7 @@ import { CrocoHtmlOptions } from '../../../options';
     XmlTagDownloadFileButtonComponent,
     XmlTagButtonComponent,
     XmlTagCustomWidgetComponent,
+    DefinedCustomTagViewComponent
   ],
 })
 export class XmlTagViewComponent {

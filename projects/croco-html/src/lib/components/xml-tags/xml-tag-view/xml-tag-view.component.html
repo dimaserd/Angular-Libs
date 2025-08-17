@@ -61,6 +61,7 @@
       <croco-html-xml-tag-button [data]="item"></croco-html-xml-tag-button>
     </div>
     }
+
     @if (item.tagName === 'unsupported-tag') {
     <div class="red" style="margin-top: 10px;">
       <h4>Данный тег не поддерживается</h4>
@@ -69,6 +70,13 @@
       </span>
     </div>
     }
+
+    @if (isDefinedCustomTag(item)) {
+      <div>
+        <croco-html-defined-custom-tag-view [data]="item"></croco-html-defined-custom-tag-view>
+      </div>
+    }
+
   </div>
   }
 </div>
