@@ -4,7 +4,7 @@ import { TextAlignment } from "../tag-services";
 export const TextTag = "text";
 
 export interface GenericTextTag {
-    type: string,
+    tagName: string,
     data: SimpleTextTagData
 }
 
@@ -35,7 +35,7 @@ export class TextSimpleMethods {
         };
 
         let result: GenericTextTag = {
-            type: data.textTagName,
+            tagName: data.textTagName,
             data: data
         };
 

@@ -4,7 +4,7 @@ export interface InterfaceBlock {
   /**
    * Название тега
    */
-  type: string;
+  tagName: string;
   data: any;
   validationResult?: BaseApiResponse | undefined;
   bootstrapHtml?: string | undefined

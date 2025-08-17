@@ -35,7 +35,7 @@ export class ButtonTagService implements IMarkUpTagService {
 
   extractBlockFromHtmlElement(elem: HTMLElement, options: CrocoHtmlOptions): InterfaceBlock {
     return {
-      type: ButtonTagDataConsts.TagName,
+      tagName: ButtonTagDataConsts.TagName,
       data: {
         text: elem.getAttribute(ButtonTagDataConsts.TextAttrName),
         type: elem.getAttribute(ButtonTagDataConsts.TypeAttrName),
@@ -51,7 +51,7 @@ export class ButtonTagService implements IMarkUpTagService {
     return {
       presentOrEdit: true,
       tagDescription: {
-        tag: data.type,
+        tag: data.tagName,
         displayValue: this.shortDescription,
         isCustom: false
       },

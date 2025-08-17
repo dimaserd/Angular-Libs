@@ -1,22 +1,13 @@
 import { Type } from "@angular/core";
-import { IMediaRequest } from "../models";
+import { IImageMediaRequest } from "../models";
 import { VisualEditorComponent } from "../components";
 
 export interface CrocoHtmlOptions {
 
   /**
-   * Формат сслыки для показа изображений из публичных файлов.
-   * Содержит переменные: {sizeType} - тип размера, {fileId} - идентификатор изображения.
+   * Опции для отображения изображений.
    */
-  publicImageResizedUrlFormat: string;
-
-  /**
-   * Формат сслыки для показа изображений из приватный файлов.
-   * Содержит переменные: {sizeType} - тип размера, {fileId} - идентификатор изображения.
-   */
-  privateImageResizedUrlFormat: string;
-
-  globalMediaRequests?: IMediaRequest[];
+  imageOptions: CrocoHtmlImageOptions;
 
   /**
    * Компонент для рендера кастомных виджетов
@@ -34,10 +25,34 @@ export interface CrocoHtmlOptions {
   showSettingsButton: boolean;
 
   /**
+   * Кастомные объявленные теги
+   */
+  definedCustomTags: string[];
+
+  /**
    * Обработчик нажатия на кнопку кастомных виджетов
    * @returns 
    */
   customWidgetClickHandler: (editor: VisualEditorComponent) => void;
+}
+
+export interface CrocoHtmlImageOptions {
+    /**
+   * Формат сслыки для показа изображений из публичных файлов.
+   * Содержит переменные: {sizeType} - тип размера, {fileId} - идентификатор изображения.
+   */
+  publicImageResizedUrlFormat: string;
+
+  /**
+   * Формат сслыки для показа изображений из приватный файлов.
+   * Содержит переменные: {sizeType} - тип размера, {fileId} - идентификатор изображения.
+   */
+  privateImageResizedUrlFormat: string;
+
+  /**
+   * Медиа запросы для изображений.
+   */
+  globalMediaRequests?: IImageMediaRequest[];
 }
 
 /**

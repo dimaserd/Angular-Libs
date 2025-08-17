@@ -23,7 +23,7 @@ export class ExternalVideoTagService implements IMarkUpTagService {
 
   extractBlockFromHtmlElement(elem: HTMLElement, options: CrocoHtmlOptions): InterfaceBlock {
     return {
-      type: ExternalVideoTagDataConsts.TagName,
+      tagName: ExternalVideoTagDataConsts.TagName,
       data: {
         type: elem.getAttribute(ExternalVideoTagDataConsts.VideoTypeAttrName),
         link: elem.getAttribute(ExternalVideoTagDataConsts.LinkAttrName),
@@ -40,7 +40,7 @@ export class ExternalVideoTagService implements IMarkUpTagService {
     return {
       presentOrEdit: true,
       tagDescription: {
-        tag: data.type,
+        tag: data.tagName,
         displayValue: this.shortDescription,
         isCustom: false
       },

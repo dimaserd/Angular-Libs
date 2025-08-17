@@ -61,11 +61,11 @@ export class BootstrapTableMethods {
     }
 
     static BuildInnerTag(data: InterfaceBlock): string {
-        if (data.type === FileImageTagDataConsts.TagName) {
+        if (data.tagName === FileImageTagDataConsts.TagName) {
             let fileImageTag = data as FileImageTag;
             return `<img src=${fileImageTag.data.src} class="mx-auto d-block img-fluid" />`;
         }
-        else if (data.type === TextTag) {
+        else if (data.tagName === TextTag) {
 
             let simpleTextTag = data as GenericTextTag;
 
@@ -82,7 +82,7 @@ export class BootstrapTableMethods {
             return `<div class="${map[simpleTextTag.data.horizontalAlignment]}"><span>${simpleTextTag.data.html}</span></div>`;
         }
         else {
-            return `<p>Тег ${data.type} не поддерживается</p>`;
+            return `<p>Тег ${data.tagName} не поддерживается</p>`;
         }
     }
 }

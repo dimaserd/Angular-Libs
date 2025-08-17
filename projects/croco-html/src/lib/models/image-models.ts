@@ -5,7 +5,7 @@ export interface ImageRestrictions {
 }
 
 export interface FileImageTag {
-  type: string;
+  tagName: string;
   data: FileImageTagData;
 }
 
@@ -15,7 +15,7 @@ export interface FileImageTagData {
   screenMediaRequest: string;
 }
 
-export interface IMediaRequest {
+export interface IImageMediaRequest {
   minScreenWidth: number;
   maxScreenWidth: number;
   maxImageHeight?: number;

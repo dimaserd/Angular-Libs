@@ -6,7 +6,7 @@ import { Subject, takeUntil } from "rxjs";
 import { NgStyle } from "@angular/common";
 import { CrocoHtmlOptions } from '../../../options';
 import { CrocoHtmlOptionsToken } from '../../../consts';
-import { FileImageTagData, IMediaRequest } from '../../../models';
+import { FileImageTagData, IImageMediaRequest } from '../../../models';
 
 @Component({
   selector: 'croco-html-file-image-tag-view',
@@ -25,7 +25,7 @@ export class FileImageTagViewComponent implements OnInit, OnDestroy {
   }
 
   imageSrc = "";
-  requests: IMediaRequest[] = []
+  requests: IImageMediaRequest[] = []
 
   private unsubscribe = new Subject<void>();
   public imageMaxHeight: number = null;
@@ -35,11 +35,11 @@ export class FileImageTagViewComponent implements OnInit, OnDestroy {
     @Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions
   ) { }
 
-  getMediaRequests(screenMediaRequest: string) : IMediaRequest[] {
+  getMediaRequests(screenMediaRequest: string) : IImageMediaRequest[] {
     let result = ImageMethods.mediaRequestStringToArrayParser(screenMediaRequest);
 
     if (result.length === 0) {
-      return this._options.globalMediaRequests ?? [];
+      return this._options.imageOptions.globalMediaRequests ?? [];
     }
 
     return result;

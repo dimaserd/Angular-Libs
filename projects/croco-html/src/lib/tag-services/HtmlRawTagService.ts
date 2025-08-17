@@ -16,7 +16,7 @@ export class HtmlRawTagService implements IMarkUpTagService {
 
   extractBlockFromHtmlElement(elem: HTMLElement, options: CrocoHtmlOptions): InterfaceBlock {
     return {
-      type: HtmlRawTagDataConsts.TagName,
+      tagName: HtmlRawTagDataConsts.TagName,
       data: {
         innerHTML: elem.innerHTML
       }

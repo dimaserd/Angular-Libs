@@ -29,7 +29,7 @@ export class HtmlExtractionMethods {
 
       if (!HtmlExtractionMethods.Extractors.hasOwnProperty(loweredTagName)) {
         data.push({
-          type: "unsupported-tag",
+          tagName: "unsupported-tag",
           data: {
             tagString: elem.outerHTML
           }

@@ -66,8 +66,8 @@ export class BodyTagsExtensions {
 
   static toBodyTag(data: InterfaceBlock): HtmlBodyTag {
 
-    if (this.tagServices.hasOwnProperty(data.type)) {
-      return this.tagServices[data.type].toBodyTag(data);
+    if (this.tagServices.hasOwnProperty(data.tagName)) {
+      return this.tagServices[data.tagName].toBodyTag(data);
     }
 
     return {

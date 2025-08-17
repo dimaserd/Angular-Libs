@@ -29,7 +29,7 @@ export class FileImageTagService implements IMarkUpTagService {
     let src = ImageMethods.buildMediumUrl(fileId, options);
 
     return {
-      type: FileImageTagDataConsts.TagName,
+      tagName: FileImageTagDataConsts.TagName,
       data: {
         src,
         fileId: fileId,

@@ -36,7 +36,7 @@ export class CustomWidgetTagService implements IMarkUpTagService {
 
   extractBlockFromHtmlElement(elem: HTMLElement, options: CrocoHtmlOptions): InterfaceBlock {
     return {
-      type: CustomWidgetTagDataConsts.TagName,
+      tagName: CustomWidgetTagDataConsts.TagName,
       data: {
         type: elem.getAttribute(CustomWidgetTagDataConsts.TypeAttrName),
         dataId: elem.getAttribute(CustomWidgetTagDataConsts.DataIdAttrName),
@@ -52,7 +52,7 @@ export class CustomWidgetTagService implements IMarkUpTagService {
     return {
       presentOrEdit: true,
       tagDescription: {
-        tag: data.type,
+        tag: data.tagName,
         displayValue: this.shortDescription,
         isCustom: false
       },

@@ -1,4 +1,4 @@
-import { ImageRestrictions, IMediaRequest } from "../models";
+import { ImageRestrictions, IImageMediaRequest } from "../models";
 import { CrocoHtmlOptions } from "../options";
 
 export class FileImageTagDataConsts {
@@ -23,8 +23,8 @@ export class ImageMethods {
     }
 
     const format = ImageMethods.isPrivateFileId(fileId)
-      ? options.publicImageResizedUrlFormat
-      : options.privateImageResizedUrlFormat;
+      ? options.imageOptions.publicImageResizedUrlFormat
+      : options.imageOptions.privateImageResizedUrlFormat;
 
     return format
       .replace("{sizeType}", sizeType)
@@ -52,7 +52,7 @@ export class ImageMethods {
       return []
     }
 
-    return data.split(';').reduce((requests: IMediaRequest[], currentValue: string) => {
+    return data.split(';').reduce((requests: IImageMediaRequest[], currentValue: string) => {
 
       const attrs = currentValue.split(',');
 
@@ -77,7 +77,7 @@ export class ImageMethods {
     return +elem.match(/\d+/g).join('');
   }
 
-  public static mediaRequestsArrayToString(data: IMediaRequest[]) {
+  public static mediaRequestsArrayToString(data: IImageMediaRequest[]) {
     if (!data.length) {
       return ''
     }
@@ -85,7 +85,7 @@ export class ImageMethods {
     return data.map(el => ImageMethods.mediaRequestToString(el)).join(';')
   }
 
-  public static mediaRequestToString(data: IMediaRequest) {
+  public static mediaRequestToString(data: IImageMediaRequest) {
     let result = `${FileImageTagDataConsts.MaxScreenWidth}:${data.maxScreenWidth},${FileImageTagDataConsts.MinScreenWidth}:${data.minScreenWidth}`;
 
     if (data.maxImageHeight) {
@@ -99,7 +99,7 @@ export class ImageMethods {
     return result;
   }
 
-  public static getImageRestrictionsByScreenSize(screenSize: number, requests: IMediaRequest[]): ImageRestrictions {
+  public static getImageRestrictionsByScreenSize(screenSize: number, requests: IImageMediaRequest[]): ImageRestrictions {
     let result = requests
       .sort((a, b) => b.maxScreenWidth - a.maxScreenWidth)
       .find(el => screenSize <= +el.maxScreenWidth && screenSize >= +el.minScreenWidth);

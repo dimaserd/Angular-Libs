@@ -32,7 +32,7 @@ export class DownloadButtonTagService implements IMarkUpTagService {
 
   extractBlockFromHtmlElement(elem: HTMLElement, options: CrocoHtmlOptions): InterfaceBlock {
     return {
-      type: DownloadButtonTagDataConsts.TagName,
+      tagName: DownloadButtonTagDataConsts.TagName,
       data: {
         title: elem.getAttribute(DownloadButtonTagDataConsts.TitleAttrName),
         link: elem.getAttribute(DownloadButtonTagDataConsts.LinkAttrName)
@@ -47,7 +47,7 @@ export class DownloadButtonTagService implements IMarkUpTagService {
     return {
       presentOrEdit: true,
       tagDescription: {
-        tag: data.type,
+        tag: data.tagName,
         displayValue: this.shortDescription,
         isCustom: false
       },

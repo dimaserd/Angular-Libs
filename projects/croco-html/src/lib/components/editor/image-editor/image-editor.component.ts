@@ -14,7 +14,7 @@ import { MatIconButton } from "@angular/material/button";
 import { MatSlideToggle } from "@angular/material/slide-toggle";
 import { Subject, takeUntil } from "rxjs";
 import { CrocoHtmlOptions } from '../../../options';
-import { IMediaRequest } from '../../../models';
+import { IImageMediaRequest } from '../../../models';
 
 @Component({
   selector: 'croco-html-image-editor',
@@ -39,7 +39,7 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
 
   hasImageError = false;
   searchOrEdit = "search";
-  requests: IMediaRequest[] = [];
+  requests: IImageMediaRequest[] = [];
   imageMaxHeight: number = null;
   imageMaxWidth: number = null;
   isShowMediaRequest = false;

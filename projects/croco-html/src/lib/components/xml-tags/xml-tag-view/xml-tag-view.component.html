@@ -2,13 +2,13 @@
   @for (item of data; track $index) {
   <div class="row">
 
-    @if (item.type === 'text') {
+    @if (item.tagName === 'text') {
     <div>
       <croco-html-xml-tag-text-view [item]="item"></croco-html-xml-tag-text-view>
     </div>
     }
 
-    @if (item.type === 'html-raw') {
+    @if (item.tagName === 'html-raw') {
     <div>
       <croco-html-raw-view [rawHtml]="item.data.innerHTML"></croco-html-raw-view>
     </div>
@@ -20,19 +20,19 @@
     </div>
     }
 
-    @if (item.type === 'file-image') {
+    @if (item.tagName === 'file-image') {
     <div>
       <croco-html-file-image-tag-view [item]="item"></croco-html-file-image-tag-view>
     </div>
     }
 
-    @if (item.type === 'custom-widget') {
+    @if (item.tagName === 'custom-widget') {
     <div>
       <croco-html-xml-tag-custom-widget [tagData]="item.data"></croco-html-xml-tag-custom-widget>
     </div>
     }
 
-    @if (item.type === 'table' && item.validationResult) {
+    @if (item.tagName === 'table' && item.validationResult) {
 
     @if (item.validationResult.isSucceeded){
     <croco-html-xml-tag-html-view [html]="item.bootstrapHtml">
@@ -44,24 +44,24 @@
     }
     }
 
-    @if (item.type === 'external-video') {
+    @if (item.tagName === 'external-video') {
     <div>
       <croco-html-xml-tag-external-video [data]="item"></croco-html-xml-tag-external-video>
     </div>
     }
 
-    @if (item.type === 'download-file-button') {
+    @if (item.tagName === 'download-file-button') {
     <div>
       <croco-html-xml-tag-download-file-button [data]="item"></croco-html-xml-tag-download-file-button>
     </div>
     }
 
-    @if (item.type === 'button') {
+    @if (item.tagName === 'button') {
     <div>
       <croco-html-xml-tag-button [data]="item"></croco-html-xml-tag-button>
     </div>
     }
-    @if (item.type === 'unsupported-tag') {
+    @if (item.tagName === 'unsupported-tag') {
     <div class="red" style="margin-top: 10px;">
       <h4>Данный тег не поддерживается</h4>
       <span>
