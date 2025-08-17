@@ -58,8 +58,6 @@ export class MainEditorBlockComponent {
       return true;
     }
 
-    console.log("isDefinedCustomTag", this.tag);
-    
     return false;
   }
 

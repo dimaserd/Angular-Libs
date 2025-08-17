@@ -1,4 +1,4 @@
-import { ImageEditorComponent } from "./components";
+import { DefinedCustomEditorBlockComponent, DefinedCustomTagViewComponent, ImageEditorComponent } from "./components";
 import { MainEditorBlockComponent } from "./components";
 import { MainEditorComponent } from "./components";
 import { TextEditorComponent } from "./components";
@@ -58,6 +58,7 @@ export const EditorComponents = [
   AddFilesBtnComponent,
   HtmlRawEditorComponent,
   CustomWidgetEditorComponent,
+  DefinedCustomEditorBlockComponent,
 ];
 
 export const XmlComponents = [
@@ -70,7 +71,8 @@ export const XmlComponents = [
   HtmlRawViewComponent,
   FileImageTagViewComponent,
   XmlTagCustomWidgetComponent,
-  HtmlViewComponent
+  HtmlViewComponent,
+  DefinedCustomTagViewComponent
 ];
 
 export const CrocoPipes = [

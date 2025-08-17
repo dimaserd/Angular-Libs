@@ -40,8 +40,7 @@ export class XmlTagViewComponent {
   @Input()
   data: InterfaceBlock[] = [];
 
-  constructor(@Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions){
-    
+  constructor(@Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions) {
   }
 
   isHeaderTextTag(item: InterfaceBlock) {
