@@ -52,18 +52,18 @@ export class BodyTagsExtensions {
     return options.definedCustomTags[tagName];
   }
 
-  static convertToHtmlString(bodyTag: HtmlBodyTag): string {
+  static convertToHtmlString(bodyTag: HtmlBodyTag, options: CrocoHtmlOptions): string {
     const tagName = bodyTag.tagDescription.tag;
 
-    if (this.tagServices.hasOwnProperty(tagName)) {
-      return this.tagServices[tagName].bodyTagToHtmlStringConverter(bodyTag);
+    if (this.hasTagService(tagName, options)) {
+      return this.getTagService(tagName, options).bodyTagToHtmlStringConverter(bodyTag);
     }
 
     return `<mapper-not-found>"${bodyTag.tagDescription.tag}" тег не найден.</mapper-not-found>`;
   }
 
-  static bodyTagsToHtml(bodyTags: HtmlBodyTag[]): string {
-    let htmls = bodyTags.map(bodyTag => (BodyTagsExtensions.convertToHtmlString(bodyTag)));
+  static bodyTagsToHtml(bodyTags: HtmlBodyTag[], options: CrocoHtmlOptions): string {
+    let htmls = bodyTags.map(bodyTag => (BodyTagsExtensions.convertToHtmlString(bodyTag, options)));
 
     let result = "";
 

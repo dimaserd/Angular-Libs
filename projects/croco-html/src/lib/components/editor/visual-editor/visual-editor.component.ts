@@ -249,7 +249,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   }
 
   recalculateHtml() {
-    let result = BodyTagsExtensions.bodyTagsToHtml(this.bodyTags);
+    let result = BodyTagsExtensions.bodyTagsToHtml(this.bodyTags, this._options);
     this.html = XmlExtensions.formatXml("<body>" + result + "</body>");
     this.onHtmlChanged.emit(this.html);
   }
