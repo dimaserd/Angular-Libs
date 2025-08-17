@@ -117,7 +117,7 @@
     <div [hidden]="searchOrEdit !== 'search'">
       <croco-html-file-id-select
         [labelText]="'Выбрать файл'"
-        [(fileId)]="fileId"
+        [fileId]="fileId"
         (onFileIdChanged)="onFileIdChanged($event)">
       </croco-html-file-id-select>
     </div>

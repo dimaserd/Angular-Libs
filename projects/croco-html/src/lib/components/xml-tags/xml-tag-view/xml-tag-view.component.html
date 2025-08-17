@@ -27,9 +27,9 @@
     }
 
     @if (item.type === 'custom-widget') {
-      <div>
-        <croco-html-xml-tag-custom-widget [tagData]="item.data"></croco-html-xml-tag-custom-widget>
-      </div>
+    <div>
+      <croco-html-xml-tag-custom-widget [tagData]="item.data"></croco-html-xml-tag-custom-widget>
+    </div>
     }
 
     @if (item.type === 'table' && item.validationResult) {
@@ -42,12 +42,6 @@
     <croco-html-error-banner [message]="item.validationResult.message">
     </croco-html-error-banner>
     }
-    }
-
-    @if (item.type === 'rich-text') {
-    <div>
-      <croco-html-xml-tag-text-view></croco-html-xml-tag-text-view>
-    </div>
     }
 
     @if (item.type === 'external-video') {

@@ -42,15 +42,22 @@ export class UploadFilesBtnComponent {
   onPrivateFilesUploaded = new EventEmitter<PrivateFilesCreatedResult>();
 
   constructor(
-    private _publicFileUploadService: PublicFileUploadService,
-    private _privateFileUploadService: PrivateFileUploadService,
-    private _htmlSettingsService: CrocoHtmlFileOptionsService,
+    private readonly _publicFileUploadService: PublicFileUploadService,
+    private readonly _privateFileUploadService: PrivateFileUploadService,
+    private readonly _htmlSettingsService: CrocoHtmlFileOptionsService,
   ) { }
 
-  handleFileInput(files: FileList) {
+  handleFileInput(e: Event) {
+
+    const files: FileList | undefined = e.target["files"];
+
     this.postFilesStarted.emit({
-      filesCount: files.length
+      filesCount: files?.length ?? 0
     });
+
+    if (files === null || files === undefined) {
+      return;
+    }
 
     if (this._htmlSettingsService.get().usePrivateFiles) {
       this._privateFileUploadService

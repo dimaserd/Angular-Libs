@@ -14,16 +14,16 @@ export class HtmlExtractionMethods {
     var data: InterfaceBlock[] = [];
 
     for (let i = 0; i < element.children.length; i++) {
-      
+
       var elem = element.children.item(i) as HTMLElement;
       var loweredTagName = elem.tagName.toLowerCase();
 
-      if (BodyTagsExtensions.tagServices.hasOwnProperty(loweredTagName)){
+      if (BodyTagsExtensions.tagServices.hasOwnProperty(loweredTagName)) {
         var tagService = BodyTagsExtensions.tagServices[loweredTagName];
 
         var resultBlock = tagService.extractBlockFromHtmlElement(elem, options);
         data.push(resultBlock);
-        
+
         continue;
       }
 

@@ -6,7 +6,6 @@ import { FileIdSelectComponent } from "./components";
 import { XmlTagHeaderInnerTextViewComponent } from "./components";
 import { XmlTagHeaderTextViewComponent } from "./components";
 import { XmlTagHtmlViewComponent } from "./components";
-import { XmlTagTableViewComponent } from "./components";
 import { XmlTagTextViewComponent } from "./components";
 import { XmlTagViewComponent } from "./components";
 import { CustomWidgetEditorComponent } from "./components";
@@ -62,7 +61,6 @@ export const EditorComponents = [
 ];
 
 export const XmlComponents = [
-  XmlTagTableViewComponent,
   XmlTagViewComponent,
   XmlTagHtmlViewComponent,
   XmlTagTextViewComponent,
