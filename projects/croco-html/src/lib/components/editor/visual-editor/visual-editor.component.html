@@ -170,7 +170,7 @@
                 </svg>
               </div>
               <div>
-                <div class="badge" [matTooltip]="tag.tagDescription.tag">
+                <div class="badge" [matTooltip]="tag.tagDescription.displayValue">
                   <span class="text-align-icon">
                     <ng-container [ngTemplateOutlet]="tagButtonIcons"
                                   [ngTemplateOutletContext]="{icon: tag.tagDescription.tag}">
