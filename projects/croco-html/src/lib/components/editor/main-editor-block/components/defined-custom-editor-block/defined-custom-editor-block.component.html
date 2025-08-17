@@ -1,7 +1,10 @@
 <ng-container #container>
     @if (!useDynamicComponent) {
     <div>
-        {{tag | json}}
+        Редактор разметки для {{_tag.tagDescription.tag}} не описан.
+    </div>
+    <div>
+        Установите CrocoHtmlOptions.definedCustomTagViewRenderers[{{_tag.tagDescription.tag}}].editorComponent
     </div>
     }
 </ng-container>

@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { ImageMethods, FileImageTagDataConsts } from '../../../extensions';
 import { HtmlBodyTag } from '../../../models/models';
-import { CrocoHtmlOptionsToken} from '../../../consts';
+import { CrocoHtmlOptionsToken } from '../../../consts';
 import { MatInput } from '@angular/material/input';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { FileIdSelectComponent } from '../../file-id-select/file-id-select.component';
@@ -45,18 +45,15 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
   isShowMediaRequest = false;
   private unsubscribe = new Subject<void>();
 
-  @Input({required: true})
+  @Input({ required: true })
   tag: HtmlBodyTag;
 
-  @Input({required: true})
+  @Input({ required: true })
   presentOrEdit = false;
 
   onErrorHandler() {
     this.hasImageError = true;
   }
-
-  @Output()
-  onTagUpdated = new EventEmitter<HtmlBodyTag>();
 
   public get fileId(): string {
     return this.tag.attributes[FileImageTagDataConsts.FileIdAttrName];

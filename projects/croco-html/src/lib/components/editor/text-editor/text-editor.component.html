@@ -2,15 +2,15 @@
   <div>
     <div style="height: 10px;">
     </div>
-    @if (tag.attributes['h-align'] === 'left') {
+    @if (_horizontalAlignment === TextAlignment.Left) {
       <div style="text-align: left;" [innerHtml]="getInnerHtml()">
       </div>
     }
-    @if (tag.attributes['h-align'] === 'right') {
+    @else if (_horizontalAlignment === TextAlignment.Right) {
       <div style="text-align: right;" [innerHtml]="getInnerHtml()">
       </div>
     }
-    @if (tag.attributes['h-align'] === 'center') {
+    @else if (_horizontalAlignment === TextAlignment.Center) {
       <div style="text-align: center;" [innerHtml]="getInnerHtml()">
       </div>
     }
@@ -19,7 +19,7 @@
 @else {
   <div>
     <div style="overflow-x: auto;">
-      <mat-button-toggle-group [(ngModel)]="tag.attributes['h-align']">
+      <mat-button-toggle-group [(ngModel)]="_horizontalAlignment" (ngModelChange)="changeData()">
         <mat-button-toggle value="center">
           По центру <mat-icon>format_align_center</mat-icon>
         </mat-button-toggle>
@@ -39,7 +39,7 @@
         <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
           cdkAutosizeMinRows="1"
           placeholder="Внутренняя разметка текстового тега"
-        [(ngModel)]="tag.innerHtml"></textarea>
+        [ngModel]="_tag.innerHtml" (ngModelChange)="changeData()"></textarea>
       </mat-form-field>
     </div>
   </div>

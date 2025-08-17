@@ -2,50 +2,49 @@
   <div class="editor-container">
     @if (textTags.includes(tag.tagDescription.tag)) {
     <div>
-      <croco-html-text-editor [presentOrEdit]="presentOrEdit" (onTagUpdated)="tagUpdatedHandler($event)" [tag]="_tag">
+      <croco-html-text-editor [presentOrEdit]="presentOrEdit" [tagStorage]="_tagStorage">
       </croco-html-text-editor>
     </div>
     }
     @else if (tag.tagDescription.tag === 'file-image') {
     <div>
-      <croco-html-image-editor [presentOrEdit]="presentOrEdit" (onTagUpdated)="tagUpdatedHandler($event)" [tag]="_tag">
+      <croco-html-image-editor [presentOrEdit]="presentOrEdit" [tag]="_tag">
       </croco-html-image-editor>
     </div>
     }
     @else if (tag.tagDescription.tag === 'custom-widget') {
     <div>
-      <croco-html-custom-widget-editor [presentOrEdit]="presentOrEdit" (onTagUpdated)="tagUpdatedHandler($event)" [tag]="_tag">
+      <croco-html-custom-widget-editor [presentOrEdit]="presentOrEdit" [tag]="_tag">
       </croco-html-custom-widget-editor>
     </div>
     }
     @else if (tag.tagDescription.tag === 'external-video') {
     <div>
-      <croco-html-external-video-editor [presentOrEdit]="presentOrEdit" (onTagUpdated)="tagUpdatedHandler($event)" [tag]="_tag">
+      <croco-html-external-video-editor [presentOrEdit]="presentOrEdit" [tag]="_tag">
       </croco-html-external-video-editor>
     </div>
     }
     @else if (tag.tagDescription.tag === 'download-file-button') {
     <div>
-      <croco-html-download-file-button-editor [presentOrEdit]="presentOrEdit" (onTagUpdated)="tagUpdatedHandler($event)" [tag]="_tag">
+      <croco-html-download-file-button-editor [presentOrEdit]="presentOrEdit" [tag]="_tag">
       </croco-html-download-file-button-editor>
     </div>
     }
     @else if (tag.tagDescription.tag === 'button') {
     <div>
-      <croco-html-button-editor (onTagUpdated)="tagUpdatedHandler($event)" [presentOrEdit]="presentOrEdit" [tag]="_tag">
+      <croco-html-button-editor [presentOrEdit]="presentOrEdit" [tag]="_tag">
       </croco-html-button-editor>
     </div>
     }
     @else if (tag.tagDescription.tag === 'html-raw') {
     <div>
-      <croco-html-html-raw-editor [presentOrEdit]="presentOrEdit" (onTagUpdated)="tagUpdatedHandler($event)" [tag]="_tag">
+      <croco-html-html-raw-editor [presentOrEdit]="presentOrEdit" [tag]="_tag">
       </croco-html-html-raw-editor>
     </div>
     }
     @else if (isDefinedCustomTag()) {
     <div>
-      <croco-html-defined-custom-editor-block [tag]="_tag" [editor]="_tagStorage"
-        (onTagUpdated)="tagUpdatedHandler($event)"></croco-html-defined-custom-editor-block>
+      <croco-html-defined-custom-editor-block [presentOrEdit]="presentOrEdit" [tagStorage]="_tagStorage"></croco-html-defined-custom-editor-block>
     </div>
     }
     @else {

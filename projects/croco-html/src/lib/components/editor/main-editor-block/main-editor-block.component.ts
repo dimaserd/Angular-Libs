@@ -60,13 +60,14 @@ export class MainEditorBlockComponent {
   }
 
   tagUpdatedHandler(tag: HtmlBodyTag): void {
+    this._tagStorage.set(tag);
   }
 
   save() {
 
     const tag = this._tagStorage.get();
 
-    this.onTagSaved.emit(this.tag);
+    this.onTagSaved.emit(tag);
     this.presentOrEdit = true;
   }
 

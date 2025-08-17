@@ -49,6 +49,7 @@ export interface ICustomTagViewRender {
    * Должен содержать инпуты
    * tag: HtmlBodyTag
    * tagEditor: ISingleTagVisualEditor
+   * presentOrEdit: boolean
    */
   editorComponent?: Type<any>;
 

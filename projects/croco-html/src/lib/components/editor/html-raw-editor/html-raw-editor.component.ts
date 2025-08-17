@@ -21,9 +21,6 @@ export class HtmlRawEditorComponent implements OnChanges {
   @Input({ required: true })
   presentOrEdit = false;
 
-  @Output()
-  onTagUpdated = new EventEmitter<HtmlBodyTag>();
-
   safeHtml: SafeHtml;
 
   constructor(private readonly _sanitizer: DomSanitizer) { }

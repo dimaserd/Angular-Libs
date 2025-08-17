@@ -40,7 +40,7 @@ import { NgTemplateOutlet } from "@angular/common";
 import { MatTooltip } from "@angular/material/tooltip";
 import { SpriteIconPathPipe } from "../../../pipes/sprite-icon-path.pipe";
 import { SpriteIdsType } from "../../../../sprites-ids.type";
-import { HtmlRawTagDataConsts, TextAlignment } from '../../../tag-services';
+import { HtmlRawTagDataConsts, TextAlignment, TextTagDataConsts } from '../../../tag-services';
 import { CustomWidgetIconComponent } from "./components/custom-widget-icon/custom-widget-icon.component";
 
 
@@ -208,7 +208,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
           tagDescription,
           innerHtml: line,
           attributes: {
-            "h-align": `${this.alignment}`
+            [TextTagDataConsts.HAlign]: `${this.alignment}`
           }
         });
         this.recalculateHtml();

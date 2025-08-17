@@ -31,9 +31,6 @@ export class ExternalVideoEditorComponent implements OnInit {
   @Input({required: true})
   presentOrEdit = false;
 
-  @Output()
-  onTagUpdated = new EventEmitter<HtmlBodyTag>();
-
   protected readonly ExternalVideoSupportedTypes = ExternalVideoSupportedTypes;
 
   tagData: ExternalVideoTagData = {

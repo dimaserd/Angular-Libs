@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { HtmlBodyTag } from "../../../models/models";
 import { FormsModule } from "@angular/forms";
 import { MatFormField, MatLabel } from "@angular/material/form-field";
@@ -24,9 +24,6 @@ export class ButtonEditorComponent {
 
   @Input({ required: true })
   presentOrEdit = false;
-
-  @Output()
-  onTagUpdated = new EventEmitter<HtmlBodyTag>();
 
   tagData: ButtonTagData = {
     type: '',

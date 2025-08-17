@@ -28,9 +28,6 @@ export class DownloadFileButtonEditorComponent {
   @Input({required: true})
   presentOrEdit = false;
 
-  @Output()
-  onTagUpdated = new EventEmitter<HtmlBodyTag>();
-
   tagData: DownloadButtonTagData = {
     link: '',
     title: ''
