@@ -1,5 +1,4 @@
 import { InterfaceBlock } from "./InterfaceBlock";
-import { TableMethods, TableTypes } from "./TableMethods";
 import { CrocoHtmlOptions } from "../options";
 import { BodyTagsExtensions } from "./BodyTagsExtensions";
 
@@ -13,8 +12,8 @@ export class HtmlExtractionMethods {
       const elem = element.children.item(i) as HTMLElement;
       const loweredTagName = elem.tagName.toLowerCase();
 
-      if (BodyTagsExtensions.tagServices.hasOwnProperty(loweredTagName)) {
-        const tagService = BodyTagsExtensions.tagServices[loweredTagName];
+      if (BodyTagsExtensions.hasTagService(loweredTagName, options)) {
+        const tagService = BodyTagsExtensions.getTagService(loweredTagName, options);
 
         const resultBlock = tagService.extractBlockFromHtmlElement(elem, options);
         data.push(resultBlock);

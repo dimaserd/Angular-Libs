@@ -16,7 +16,7 @@ import { TableTagService } from "../tag-services/TableTagService";
 
 export class BodyTagsExtensions {
 
-  public static tagServices: { [id: string]: IMarkUpTagService; } = {
+  private static tagServices: { [id: string]: IMarkUpTagService; } = {
     [TextTags.text]: new TextTagHtmlMarkupTagService("text", "T"),
     [TextTags.h1]: new TextTagHtmlMarkupTagService("h1", "H1"),
     [TextTags.h2]: new TextTagHtmlMarkupTagService("h2", "H2"),
@@ -30,6 +30,26 @@ export class BodyTagsExtensions {
     [DownloadButtonTagDataConsts.TagName]: new DownloadButtonTagService(),
     [ButtonTagDataConsts.TagName]: new ButtonTagService(),
     [TableTypes.Table]: new TableTagService()
+  }
+
+  public static hasTagService(tagName: string, options: CrocoHtmlOptions) {
+    if (this.tagServices.hasOwnProperty(tagName)) {
+      return true;
+    }
+
+    if (options.definedCustomTags.hasOwnProperty(tagName)){
+      return true;
+    }
+
+    return false;
+  }
+
+  public static getTagService(tagName: string, options: CrocoHtmlOptions) {
+    if (this.tagServices.hasOwnProperty(tagName)) {
+      return this.tagServices[tagName];
+    }
+
+    return options.definedCustomTags[tagName];
   }
 
   static convertToHtmlString(bodyTag: HtmlBodyTag): string {

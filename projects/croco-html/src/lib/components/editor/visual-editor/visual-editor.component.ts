@@ -157,9 +157,9 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    if (BodyTagsExtensions.tagServices.hasOwnProperty(tagName)) {
+    if (BodyTagsExtensions.hasTagService(tagName, this._options)) {
 
-      const tagService = BodyTagsExtensions.tagServices[tagName];
+      const tagService = BodyTagsExtensions.getTagService(tagName, this._options);
 
       let tag = tagService.getDefaultValue({
         htmlRaw: this.htmlRaw,

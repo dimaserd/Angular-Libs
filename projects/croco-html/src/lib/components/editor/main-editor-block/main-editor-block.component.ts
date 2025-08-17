@@ -54,7 +54,7 @@ export class MainEditorBlockComponent {
   }
 
   isDefinedCustomTag() {
-    if (this._options.definedCustomTags.includes(this.tag.tagDescription.tag)) {
+    if (this._options.definedCustomTags.hasOwnProperty(this.tag.tagDescription.tag)) {
       return true;
     }
 

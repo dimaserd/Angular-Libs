@@ -49,6 +49,6 @@ export class XmlTagViewComponent {
   }
 
   isDefinedCustomTag(item: InterfaceBlock) {
-    return this._options.definedCustomTags.includes(item.tagName);
+    return this._options.definedCustomTags.hasOwnProperty(item.tagName);
   }
 }

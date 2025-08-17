@@ -1,6 +1,7 @@
 import { Type } from "@angular/core";
 import { IImageMediaRequest } from "../models";
 import { VisualEditorComponent } from "../components";
+import { IMarkUpTagService } from "../tag-services";
 
 export interface CrocoHtmlOptions {
 
@@ -27,7 +28,7 @@ export interface CrocoHtmlOptions {
   /**
    * Кастомные объявленные теги
    */
-  definedCustomTags: string[];
+  definedCustomTags: { [id: string]: IMarkUpTagService; };
 
   /**
    * Обработчик нажатия на кнопку кастомных виджетов
