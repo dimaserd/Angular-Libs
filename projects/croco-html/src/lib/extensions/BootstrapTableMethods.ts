@@ -1,15 +1,15 @@
 import { InterfaceBlock } from "./InterfaceBlock";
 import { FileImageTagDataConsts } from './ImageMethods';
-import { TableData, TableHeaderData, TableRowData } from './TableMethods';
+import { TableHeaderData, TableRowData } from './TableMethods';
 import { GenericTextTag, TextTag } from './TextSimpleMethods';
 import { FileImageTag } from "../models/image-models";
 
 export class BootstrapTableMethods {
 
-    static BuildTable(data: TableData): string {
+    static BuildTable(header: TableHeaderData, rows: TableRowData[]): string {
         let result = `<table class="table table-bordered">`;
-        result += this.BuildHeader(data.header);
-        result += this.BuildBody(data.rows);
+        result += this.BuildHeader(header);
+        result += this.BuildBody(rows);
         result += "</table>";
 
         return result;

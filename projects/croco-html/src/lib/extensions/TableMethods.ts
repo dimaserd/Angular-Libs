@@ -25,8 +25,11 @@ export interface TableRowData {
 }
 
 export interface TableData {
-    header: TableHeaderData,
-    rows: TableRowData[]
+    header: TableHeaderData;
+    rows: TableRowData[];
+    bootstrapHtml: string;
+    html: string;
+    angularMaterialTableDataCheck?: BaseApiResponse;
 }
 
 export interface TableTagData {
@@ -47,38 +50,23 @@ export interface AngularMaterialTableData {
 
 export class TableMethods {
 
-    static getTableFromHtmlTag(tableTag: HTMLTableElement, options: CrocoHtmlOptions) {
+    static getTableFromHtmlTag(tableTag: HTMLTableElement, options: CrocoHtmlOptions): InterfaceBlock {
+
+        const tableHeader = TableMethods.getHeader(tableTag);
+        const tableRows = TableMethods.getTableRows(tableTag, options);
+
         let tableData: TableData = {
-            header: TableMethods.getHeader(tableTag),
-            rows: TableMethods.getTableRows(tableTag, options)
+            header: tableHeader,
+            rows: tableRows,
+            bootstrapHtml: BootstrapTableMethods.BuildTable(tableHeader, tableRows),
+            html: tableTag.outerHTML,
+            angularMaterialTableDataCheck: AngularMaterialTableMethods.checkAngularMaterialTableData(tableHeader, tableRows)
         };
 
-        var result = {
-            type: TableTypes.Table,
-            data: tableData,
-            validationResult: this.checkTable(tableData),
-            bootstrapHtml: ""
-        }
-
-        if (!result.validationResult) {
-            return result;
-        }
-        result.bootstrapHtml = BootstrapTableMethods.BuildTable(result.data);
-
-        var angularMaterialTableDataCheck = AngularMaterialTableMethods.checkAngularMaterialTableData(tableData);
-
-        if (!angularMaterialTableDataCheck.isSucceeded) {
-            return {
-                ...result,
-                angularMaterialTableDataCheck
-            };
-        }
-
         return {
-            ...result,
-            angularMaterialTableDataCheck,
-            html: tableTag.outerHTML,
-            angularMaterialTableData: AngularMaterialTableMethods.getAngularMaterialTableData(tableData.header.columns, tableData.rows),
+            tagName: TableTypes.Table,
+            data: tableData,
+            validationResult: this.checkTable(tableData)
         };
     }
 

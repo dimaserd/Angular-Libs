@@ -35,7 +35,7 @@
     @if (item.tagName === 'table' && item.validationResult) {
 
     @if (item.validationResult.isSucceeded){
-    <croco-html-xml-tag-html-view [html]="item.bootstrapHtml">
+    <croco-html-xml-tag-html-view [html]="item.data.bootstrapHtml">
     </croco-html-xml-tag-html-view>
     }
     @else {
@@ -72,9 +72,9 @@
     }
 
     @if (isDefinedCustomTag(item)) {
-      <div>
-        <croco-html-defined-custom-tag-view [data]="item"></croco-html-defined-custom-tag-view>
-      </div>
+    <div>
+      <croco-html-defined-custom-tag-view [data]="item"></croco-html-defined-custom-tag-view>
+    </div>
     }
 
   </div>

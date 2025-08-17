@@ -7,5 +7,4 @@ export interface InterfaceBlock {
   tagName: string;
   data: any;
   validationResult?: BaseApiResponse | undefined;
-  bootstrapHtml?: string | undefined
 }

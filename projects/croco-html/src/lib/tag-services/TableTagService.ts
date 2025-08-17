@@ -1,52 +1,34 @@
-import { BodyTagsExtensions } from "../extensions";
+import { TableData, TableMethods, TableTypes } from "../extensions";
 import { InterfaceBlock } from "../extensions/InterfaceBlock";
 import { HtmlBodyTag } from "../models";
 import { CrocoHtmlOptions } from "../options";
 import { IMarkUpTagService, IVisualEditorProps } from "./IMarkUpTagService";
 
-export class HtmlRawTagDataConsts {
-  static readonly TagName = "html-raw";
-}
-
-export interface ExtractHtmlRawTag {
-  type: string;
-  data: ExtractHtmlRawTagData;
-}
-
-export interface ExtractHtmlRawTagData {
-  innerHTML: string;
-}
-
-
-export class HtmlRawTagService implements IMarkUpTagService {
-
-  tagName: string = HtmlRawTagDataConsts.TagName;
-  shortDescription: string = "Разметка";
+export class TableTagService implements IMarkUpTagService {
+  tagName: string = TableTypes.Table;
+  shortDescription: string = "Таблица";
 
   bodyTagToHtmlStringConverter(bodyTag: HtmlBodyTag): string {
     return `<${this.tagName}>${bodyTag.innerHtml}</${this.tagName}>`
   }
 
   extractBlockFromHtmlElement(elem: HTMLElement, options: CrocoHtmlOptions): InterfaceBlock {
-    return {
-      tagName: HtmlRawTagDataConsts.TagName,
-      data: {
-        innerHTML: elem.innerHTML
-      }
-    };
+    return TableMethods.getTableFromHtmlTag(elem as HTMLTableElement, options);
   }
 
   toBodyTag(data: InterfaceBlock): HtmlBodyTag {
 
+    let tableData = data.data as TableData;
+
     return {
       presentOrEdit: true,
       tagDescription: {
-        tag: HtmlRawTagDataConsts.TagName,
+        tag: data.tagName,
         displayValue: this.shortDescription,
         isCustom: false
       },
-      attributes: {},
-      innerHtml: BodyTagsExtensions.sanitizeInnerHtml(data.data["innerHTML"])
+      attributes: tableData,
+      innerHtml: null
     };
   }
 

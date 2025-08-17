@@ -15,7 +15,6 @@ import {
   ExternalVideoSupportedTypes,
   TextTags
 } from '../../../extensions';
-import { FileImageTagDataConsts } from '../../../extensions';
 import {
   ExternalVideoTagDataConsts,
 } from '../../../extensions';
@@ -38,12 +37,10 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { CrocoHtmlOptions } from '../../../options';
 import { MatButtonToggle, MatButtonToggleGroup } from "@angular/material/button-toggle";
 import { NgTemplateOutlet } from "@angular/common";
-import { HtmlRawTagDataConsts } from "../../../extensions/HtmlRawTagDataConsts";
 import { MatTooltip } from "@angular/material/tooltip";
 import { SpriteIconPathPipe } from "../../../pipes/sprite-icon-path.pipe";
 import { SpriteIdsType } from "../../../../sprites-ids.type";
-import { CustomWidgetTagDataConsts, TextAlignment } from '../../../tag-services';
-import { ButtonTagDataConsts } from '../../../tag-services/ButtonTagService';
+import { HtmlRawTagDataConsts, TextAlignment } from '../../../tag-services';
 
 
 @Component({

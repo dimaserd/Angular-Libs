@@ -1,7 +1,6 @@
 import { HtmlBodyTag } from "../models/models";
 import { HtmlExtractionMethods } from "./HtmlExtractionMethods";
 import { InterfaceBlock } from "./InterfaceBlock";
-import { HtmlRawTagDataConsts } from "./HtmlRawTagDataConsts";
 import { FileImageTagDataConsts } from "./ImageMethods";
 import { Tags } from "./Tags";
 import { ExternalVideoTagDataConsts } from "./VideoMethods";
@@ -9,9 +8,11 @@ import { CrocoHtmlOptions } from "../options";
 import { IMarkUpTagService } from "../tag-services/IMarkUpTagService";
 import { DownloadButtonTagDataConsts, DownloadButtonTagService, FileImageTagService, TextTagHtmlMarkupTagService } from "../tag-services";
 import { ExternalVideoTagService } from "../tag-services/ExternalVideoTagService";
-import { HtmlRawTagService } from "../tag-services/HtmlRawTagService";
+import { HtmlRawTagDataConsts, HtmlRawTagService } from "../tag-services/HtmlRawTagService";
 import { ButtonTagDataConsts, ButtonTagService } from "../tag-services/ButtonTagService";
 import { TextTags } from "./TextMethods";
+import { TableTypes } from "./TableMethods";
+import { TableTagService } from "../tag-services/TableTagService";
 
 export class BodyTagsExtensions {
 
@@ -27,7 +28,8 @@ export class BodyTagsExtensions {
     [ExternalVideoTagDataConsts.TagName]: new ExternalVideoTagService(),
     [HtmlRawTagDataConsts.TagName]: new HtmlRawTagService(),
     [DownloadButtonTagDataConsts.TagName]: new DownloadButtonTagService(),
-    [ButtonTagDataConsts.TagName]: new ButtonTagService()
+    [ButtonTagDataConsts.TagName]: new ButtonTagService(),
+    [TableTypes.Table]: new TableTagService()
   }
 
   static convertToHtmlString(bodyTag: HtmlBodyTag): string {

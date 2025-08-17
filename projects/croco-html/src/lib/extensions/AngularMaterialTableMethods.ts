@@ -1,5 +1,5 @@
 import { BaseApiResponse } from '../models';
-import { AngularMaterialTableData, TableData, TableRowData } from './TableMethods';
+import { AngularMaterialTableData, TableHeaderData, TableRowData } from './TableMethods';
 
 export class AngularMaterialTableMethods {
     static getAngularMaterialTableData(columns: string[], rows: TableRowData[]): AngularMaterialTableData {
@@ -26,15 +26,15 @@ export class AngularMaterialTableMethods {
         };
     }
 
-    static checkHeaders(tableData: TableData): BaseApiResponse {
-        if (tableData.header === null) {
+    static checkHeaders(header: TableHeaderData): BaseApiResponse {
+        if (header === null) {
             return {
                 isSucceeded: false,
                 message: "Необходимо указать заголовок таблицы"
             };
         }
 
-        let columns: string[] = tableData.header.columns;
+        let columns: string[] = header.columns;
 
         var uniqueDislayedColumns = columns.filter((v, i, a) => a.indexOf(v) === i);
 
@@ -50,18 +50,17 @@ export class AngularMaterialTableMethods {
             message: "Ok"
         };
     }
-    static checkAngularMaterialTableData(tableData: TableData, checkHeaders: boolean = true): BaseApiResponse {
+    static checkAngularMaterialTableData(header: TableHeaderData, rows: TableRowData[], checkHeaders: boolean = true): BaseApiResponse {
 
         if (checkHeaders) {
-            var checkHeadersResult = this.checkHeaders(tableData);
+            var checkHeadersResult = this.checkHeaders(header);
 
             if (!checkHeadersResult.isSucceeded) {
                 return checkHeadersResult;
             }
         }
 
-        let rows: TableRowData[] = tableData.rows;
-        let columns: string[] = tableData.header.columns;
+        let columns: string[] = header.columns;
 
         for (let i = 0; i < rows.length; i++) {
             const row = rows[i];

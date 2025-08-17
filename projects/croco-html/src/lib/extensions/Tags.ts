@@ -1,5 +1,5 @@
+import { HtmlRawTagDataConsts } from "../tag-services";
 import { CustomWidgetTagDataConsts } from "../tag-services/CustomWidgetTagService";
-import { HtmlRawTagDataConsts } from "./HtmlRawTagDataConsts";
 import { FileImageTagDataConsts } from "./ImageMethods";
 import { TextTags } from "./TextMethods";
 import { ExternalVideoTagDataConsts } from "./VideoMethods";

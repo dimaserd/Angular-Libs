@@ -1,7 +1,6 @@
-import { HtmlRawTagDataConsts } from '../../../extensions/HtmlRawTagDataConsts';
 import { ExternalVideoTagDataConsts, FileImageTagDataConsts } from '../../../extensions';
 import { TagItem } from '../../../models/models';
-import { CustomWidgetTagDataConsts, DownloadButtonTagDataConsts } from '../../../tag-services';
+import { CustomWidgetTagDataConsts, DownloadButtonTagDataConsts, HtmlRawTagDataConsts } from '../../../tag-services';
 import { ButtonTagDataConsts } from '../../../tag-services/ButtonTagService';
 
 export class DefaultTags {
