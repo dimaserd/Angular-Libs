@@ -1,4 +1,4 @@
-import { InterfaceBlock } from "./InterfaceBlock";
+import { InterfaceBlock } from "../models/InterfaceBlock";
 import { FileImageTagDataConsts } from './ImageMethods';
 import { TableHeaderData, TableRowData } from './TableMethods';
 import { GenericTextTag, TextTag } from './TextSimpleMethods';

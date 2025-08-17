@@ -1,6 +1,6 @@
 import { Inject, Pipe, PipeTransform } from '@angular/core';
 import { HtmlExtractionMethods } from '../extensions/HtmlExtractionMethods';
-import { InterfaceBlock } from "../extensions/InterfaceBlock";
+import { InterfaceBlock } from "../models/InterfaceBlock";
 import { CrocoHtmlOptionsToken } from '../consts';
 import { CrocoHtmlOptions } from '../options';
 

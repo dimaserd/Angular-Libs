@@ -1,5 +1,5 @@
 import { Component, Inject, Input, ViewEncapsulation } from '@angular/core';
-import { InterfaceBlock } from "../../../extensions/InterfaceBlock";
+import { InterfaceBlock } from "../../../models/InterfaceBlock";
 import { TextTags } from '../../../extensions';
 import { XmlTagDownloadFileButtonComponent } from '../xml-tag-download-file-button/xml-tag-download-file-button.component';
 import { XmlTagExternalVideoComponent } from '../xml-tag-external-video/xml-tag-external-video.component';

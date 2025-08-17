@@ -3,7 +3,7 @@ import { CrocoHtmlOptions } from '../options';
 import { AngularMaterialTableMethods } from './AngularMaterialTableMethods';
 import { BootstrapTableMethods } from './BootstrapTableMethods';
 import { HtmlExtractionMethods } from './HtmlExtractionMethods';
-import { InterfaceBlock } from "./InterfaceBlock";
+import { InterfaceBlock } from "../models/InterfaceBlock";
 import { TextSimpleMethods } from './TextSimpleMethods';
 
 export interface TableHeaderData {

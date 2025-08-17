@@ -1,5 +1,5 @@
 import { FileImageTagDataConsts, ImageMethods } from "../extensions";
-import { InterfaceBlock } from "../extensions/InterfaceBlock";
+import { InterfaceBlock } from "../models/InterfaceBlock";
 import { HtmlBodyTag, FileImageTagData } from "../models";
 import { CrocoHtmlOptions } from "../options";
 import { IMarkUpTagService } from "../tag-services/IMarkUpTagService";

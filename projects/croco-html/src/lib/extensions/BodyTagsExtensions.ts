@@ -1,6 +1,6 @@
 import { HtmlBodyTag } from "../models/models";
 import { HtmlExtractionMethods } from "./HtmlExtractionMethods";
-import { InterfaceBlock } from "./InterfaceBlock";
+import { InterfaceBlock } from "../models/InterfaceBlock";
 import { FileImageTagDataConsts } from "./ImageMethods";
 import { Tags } from "./Tags";
 import { ExternalVideoTagDataConsts } from "./VideoMethods";

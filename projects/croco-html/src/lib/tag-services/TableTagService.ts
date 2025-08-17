@@ -1,5 +1,5 @@
 import { TableData, TableMethods, TableTypes } from "../extensions";
-import { InterfaceBlock } from "../extensions/InterfaceBlock";
+import { InterfaceBlock } from "../models/InterfaceBlock";
 import { HtmlBodyTag } from "../models";
 import { CrocoHtmlOptions } from "../options";
 import { IMarkUpTagService, IVisualEditorProps } from "./IMarkUpTagService";

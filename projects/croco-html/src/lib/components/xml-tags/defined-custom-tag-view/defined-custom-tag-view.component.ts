@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { InterfaceBlock } from '../../../extensions/InterfaceBlock';
+import { InterfaceBlock } from '../../../models/InterfaceBlock';
 import { JsonPipe } from '@angular/common';
 
 @Component({

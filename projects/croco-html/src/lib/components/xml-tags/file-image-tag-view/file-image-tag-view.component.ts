@@ -1,5 +1,5 @@
 import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
-import { InterfaceBlock } from '../../../extensions/InterfaceBlock';
+import { InterfaceBlock } from '../../../models/InterfaceBlock';
 import { ImageMethods } from '../../../extensions';
 import { ScreenWidthService } from "../../../services/screen-width.service";
 import { Subject, takeUntil } from "rxjs";

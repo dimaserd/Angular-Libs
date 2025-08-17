@@ -3,7 +3,7 @@ import {
   Component,
   Input,
 } from '@angular/core';
-import { InterfaceBlock } from "../../../extensions/InterfaceBlock";
+import { InterfaceBlock } from "../../../models/InterfaceBlock";
 import { ExternalVideoSupportedTypes, ExternalVideoTagData } from '../../../extensions';
 import { YoutubeVideoPlayerComponent } from '../../editor/external-video-editor/youtube-video-player/youtube-video-player.component';
 import { VkVideoPlayerComponent } from '../../editor/external-video-editor/vk-video-player/vk-video-player.component';

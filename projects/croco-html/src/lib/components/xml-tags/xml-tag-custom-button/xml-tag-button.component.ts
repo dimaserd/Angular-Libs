@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { InterfaceBlock } from "../../../extensions/InterfaceBlock";
+import { InterfaceBlock } from "../../../models/InterfaceBlock";
 import { MatButton } from "@angular/material/button";
 import { HtmlViewController } from '../../../services/HtmlViewController';
 import { ButtonTagData } from '../../../tag-services/ButtonTagService';

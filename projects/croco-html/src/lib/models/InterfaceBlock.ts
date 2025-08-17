@@ -1,4 +1,4 @@
-import { BaseApiResponse } from "../models";
+import { BaseApiResponse } from ".";
 
 export interface InterfaceBlock {
   /**

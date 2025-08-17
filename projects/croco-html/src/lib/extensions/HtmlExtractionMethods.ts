@@ -1,4 +1,4 @@
-import { InterfaceBlock } from "./InterfaceBlock";
+import { InterfaceBlock } from "../models/InterfaceBlock";
 import { CrocoHtmlOptions } from "../options";
 import { BodyTagsExtensions } from "./BodyTagsExtensions";
 

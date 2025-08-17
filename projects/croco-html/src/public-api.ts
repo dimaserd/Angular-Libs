@@ -10,3 +10,4 @@ export * from './lib/models';
 export * from './lib/consts';
 export * from './lib/services';
 export * from './lib/options'
+export * from './lib/tag-services'
