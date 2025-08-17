@@ -46,6 +46,9 @@ export interface ICustomTagViewRender {
 
   /**
    * Компонент для визуального редактора croco-html-custom-widget-editor
+   * Должен содержать инпуты
+   * tag: HtmlBodyTag
+   * tagEditor: ISingleTagVisualEditor
    */
   editorComponent?: Type<any>;
 
@@ -55,7 +58,8 @@ export interface ICustomTagViewRender {
   iconComponent?: Type<any>;
 
   /**
-   * Компонент для отрисовки на интерфейсе croco-html-defined-custom-tag-view
+   * Компонент для отрисовки на интерфейсе croco-html-defined-custom-tag-view.
+   * Должен содержать input({required: true}) data: InterfaceBlock
    */
   viewComponent?: Type<any>;
 }

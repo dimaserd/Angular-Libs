@@ -59,7 +59,6 @@ export class BodyTagsExtensions {
       return this.getTagService(tagName, options).bodyTagToHtmlStringConverter(bodyTag);
     }
 
-    console.log("convertToHtmlString", bodyTag, options);
     return `<mapper-not-found>"${tagName}" тег не найден.</mapper-not-found>`;
   }
 

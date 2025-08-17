@@ -59,8 +59,7 @@ export class MainEditorBlockComponent {
   isDefinedCustomTag() {
 
     const tagName = this.tag.tagDescription.tag;
-    console.log("isDefinedCustomTag()", tagName, this._options.definedCustomTags.hasOwnProperty(tagName), this._options);
-
+   
     if (this._options.definedCustomTags.hasOwnProperty(tagName)) {
       return true;
     }

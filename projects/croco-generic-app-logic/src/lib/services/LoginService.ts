@@ -94,9 +94,6 @@ export class LoginService {
   }
 
   private executeLatestLoginDataRequest(requestId: string):void {
-
-    console.log("LoginService.executeLatestLoginDataRequest", requestId);
-
     this.getLoginData().subscribe();
   }
 

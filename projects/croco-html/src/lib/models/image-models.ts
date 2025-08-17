@@ -1,3 +1,4 @@
+import { HtmlBodyTag } from "./models";
 
 export interface ImageRestrictions {
   maxWidth: number | undefined;

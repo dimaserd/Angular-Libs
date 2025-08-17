@@ -1,3 +1,7 @@
-<div>
-    {{_data | json}}
-</div>
+<ng-container #container>
+    @if (!useDynamicComponent) {
+    <div>
+        {{data | json}}
+    </div>
+    }
+</ng-container>
