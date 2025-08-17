@@ -16,7 +16,7 @@ import { TableTagService } from "../tag-services/TableTagService";
 
 export class BodyTagsExtensions {
 
-  private static tagServices: { [id: string]: IMarkUpTagService; } = {
+  private static readonly _tagServices: { [id: string]: IMarkUpTagService; } = {
     [TextTags.text]: new TextTagHtmlMarkupTagService("text", "T"),
     [TextTags.h1]: new TextTagHtmlMarkupTagService("h1", "H1"),
     [TextTags.h2]: new TextTagHtmlMarkupTagService("h2", "H2"),
@@ -33,7 +33,7 @@ export class BodyTagsExtensions {
   }
 
   public static hasTagService(tagName: string, options: CrocoHtmlOptions) {
-    if (this.tagServices.hasOwnProperty(tagName)) {
+    if (this._tagServices.hasOwnProperty(tagName)) {
       return true;
     }
 
@@ -45,8 +45,8 @@ export class BodyTagsExtensions {
   }
 
   public static getTagService(tagName: string, options: CrocoHtmlOptions) {
-    if (this.tagServices.hasOwnProperty(tagName)) {
-      return this.tagServices[tagName];
+    if (this._tagServices.hasOwnProperty(tagName)) {
+      return this._tagServices[tagName];
     }
 
     return options.definedCustomTags[tagName];
@@ -80,17 +80,19 @@ export class BodyTagsExtensions {
   static getBodyTags(html: string, options: CrocoHtmlOptions) {
     let result = HtmlExtractionMethods.transformHtmlStringToBlocks(html, options);
     
-    return result.map(x => BodyTagsExtensions.toBodyTag(x));
+    return result.map(x => BodyTagsExtensions.toBodyTag(x, options));
   }
 
   static sanitizeInnerHtml(html: string): string {
     return html.trim().replace('\n\t', '');
   }
 
-  static toBodyTag(data: InterfaceBlock): HtmlBodyTag {
+  static toBodyTag(data: InterfaceBlock, options: CrocoHtmlOptions): HtmlBodyTag {
 
-    if (this.tagServices.hasOwnProperty(data.tagName)) {
-      return this.tagServices[data.tagName].toBodyTag(data);
+    const tagName = data.tagName;
+
+    if (this.hasTagService(tagName, options)) {
+      return this.getTagService(tagName, options).toBodyTag(data);
     }
 
     return {
