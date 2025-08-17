@@ -17,8 +17,6 @@ export class HtmlExtractionMethods {
 
         const resultBlock = tagService.extractBlockFromHtmlElement(elem, options);
         data.push(resultBlock);
-
-        continue;
       }
       else {
         data.push({

@@ -1,56 +1,60 @@
 <div class="main-editor-block">
   <div class="editor-container">
     @if (textTags.includes(tag.tagDescription.tag)) {
-      <div>
-        <croco-html-text-editor (onTagUpdated)="tagUpdatedHandler($event)" [tag]="tag">
-        </croco-html-text-editor>
-      </div>
+    <div>
+      <croco-html-text-editor (onTagUpdated)="tagUpdatedHandler($event)" [tag]="tag">
+      </croco-html-text-editor>
+    </div>
     }
     @else if (tag.tagDescription.tag === 'file-image') {
-      <div>
-        <croco-html-image-editor (onTagUpdated)="tagUpdatedHandler($event)" [tag]="tag">
-        </croco-html-image-editor>
-      </div>
+    <div>
+      <croco-html-image-editor (onTagUpdated)="tagUpdatedHandler($event)" [tag]="tag">
+      </croco-html-image-editor>
+    </div>
     }
     @else if (tag.tagDescription.tag === 'custom-widget') {
-      <div>
-        <croco-html-custom-widget-editor (onTagUpdated)="tagUpdatedHandler($event)" [tag]="tag">
-        </croco-html-custom-widget-editor>
-      </div>
+    <div>
+      <croco-html-custom-widget-editor (onTagUpdated)="tagUpdatedHandler($event)" [tag]="tag">
+      </croco-html-custom-widget-editor>
+    </div>
     }
     @else if (tag.tagDescription.tag === 'external-video') {
-      <div>
-        <croco-html-external-video-editor (onTagUpdated)="tagUpdatedHandler($event)" [tag]="tag">
-        </croco-html-external-video-editor>
-      </div>
+    <div>
+      <croco-html-external-video-editor (onTagUpdated)="tagUpdatedHandler($event)" [tag]="tag">
+      </croco-html-external-video-editor>
+    </div>
     }
     @else if (tag.tagDescription.tag === 'download-file-button') {
-      <div>
-        <croco-html-download-file-button-editor (onTagUpdated)="tagUpdatedHandler($event)" [tag]="tag">
-        </croco-html-download-file-button-editor>
-      </div>
+    <div>
+      <croco-html-download-file-button-editor (onTagUpdated)="tagUpdatedHandler($event)" [tag]="tag">
+      </croco-html-download-file-button-editor>
+    </div>
     }
     @else if (tag.tagDescription.tag === 'button') {
-      <div>
-        <croco-html-button-editor (onTagUpdated)="tagUpdatedHandler($event)" [tag]="tag">
-        </croco-html-button-editor>
-      </div>
+    <div>
+      <croco-html-button-editor (onTagUpdated)="tagUpdatedHandler($event)" [tag]="tag">
+      </croco-html-button-editor>
+    </div>
     }
     @else if (tag.tagDescription.tag === 'html-raw') {
-      <div>
-        <croco-html-html-raw-editor (onTagUpdated)="tagUpdatedHandler($event)" [tag]="tag">
-        </croco-html-html-raw-editor>
-      </div>
+    <div>
+      <croco-html-html-raw-editor (onTagUpdated)="tagUpdatedHandler($event)" [tag]="tag">
+      </croco-html-html-raw-editor>
+    </div>
     }
     @else if (isDefinedCustomTag()) {
-      <div>
-        <croco-html-defined-custom-editor-block [tag]="tag" (onTagUpdated)="tagUpdatedHandler($event)"></croco-html-defined-custom-editor-block>
-      </div>
+    <div>
+      <croco-html-defined-custom-editor-block [tag]="tag"
+        (onTagUpdated)="tagUpdatedHandler($event)"></croco-html-defined-custom-editor-block>
+    </div>
     }
     @else {
-      <div>
-        {{tag.tagDescription.tag}} не показан
-      </div>
+    <div>
+      {{tag.tagDescription.tag}} не показан
+    </div>
+    <div>
+      {{tag | json}}
+    </div>
     }
 
   </div>
@@ -59,27 +63,32 @@
     <div class="d-flex justify-content-end align-self-center">
       <div style="margin-left: 16px;min-width: 96px">
         @if (tag.presentOrEdit) {
-          <button (click)="tag.presentOrEdit = false" mat-icon-button>
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M14.4374 0C15.0921 0 15.7197 0.261421 16.1781 0.723424L19.279 3.82432C19.7407 4.286 20.0001 4.91217 20.0001 5.56508C20.0001 6.21799 19.7407 6.84416 19.279 7.30584L7.95751 18.6238C7.25903 19.4295 6.2689 19.9245 5.1346 20.0023H0V19.0023L0.00324754 14.7873C0.0884381 13.7328 0.578667 12.7523 1.3265 12.0934L12.6954 0.72463C13.1564 0.260831 13.7834 0 14.4374 0ZM5.06401 18.0048C5.59823 17.967 6.09551 17.7184 6.49482 17.2616L14.0567 9.69971L10.3024 5.94518L2.69613 13.5496C2.29098 13.9079 2.04034 14.4092 2.00003 14.8678V18.0029L5.06401 18.0048ZM11.7167 4.53114L15.471 8.28549L17.8648 5.89162C17.9514 5.80502 18.0001 5.68756 18.0001 5.56508C18.0001 5.4426 17.9514 5.32514 17.8648 5.23854L14.7612 2.13486C14.6755 2.04855 14.559 2 14.4374 2C14.3158 2 14.1992 2.04855 14.1136 2.13486L11.7167 4.53114Z" fill="#323E8B"/>
-            </svg>
-          </button>
+        <button (click)="tag.presentOrEdit = false" mat-icon-button>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M14.4374 0C15.0921 0 15.7197 0.261421 16.1781 0.723424L19.279 3.82432C19.7407 4.286 20.0001 4.91217 20.0001 5.56508C20.0001 6.21799 19.7407 6.84416 19.279 7.30584L7.95751 18.6238C7.25903 19.4295 6.2689 19.9245 5.1346 20.0023H0V19.0023L0.00324754 14.7873C0.0884381 13.7328 0.578667 12.7523 1.3265 12.0934L12.6954 0.72463C13.1564 0.260831 13.7834 0 14.4374 0ZM5.06401 18.0048C5.59823 17.967 6.09551 17.7184 6.49482 17.2616L14.0567 9.69971L10.3024 5.94518L2.69613 13.5496C2.29098 13.9079 2.04034 14.4092 2.00003 14.8678V18.0029L5.06401 18.0048ZM11.7167 4.53114L15.471 8.28549L17.8648 5.89162C17.9514 5.80502 18.0001 5.68756 18.0001 5.56508C18.0001 5.4426 17.9514 5.32514 17.8648 5.23854L14.7612 2.13486C14.6755 2.04855 14.559 2 14.4374 2C14.3158 2 14.1992 2.04855 14.1136 2.13486L11.7167 4.53114Z"
+              fill="#323E8B" />
+          </svg>
+        </button>
         }
         @else {
-          <button (click)="save()" mat-icon-button>
-            <svg width="800px" height="800px" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg"
-                 aria-labelledby="saveIconTitle" stroke="#000000" stroke-width="1" stroke-linecap="square"
-                 stroke-linejoin="miter" fill="none" color="#000000"><title id="saveIconTitle">Save</title>
-              <path
-                d="M17.2928932,3.29289322 L21,7 L21,20 C21,20.5522847 20.5522847,21 20,21 L4,21 C3.44771525,21 3,20.5522847 3,20 L3,4 C3,3.44771525 3.44771525,3 4,3 L16.5857864,3 C16.8510029,3 17.1053568,3.10535684 17.2928932,3.29289322 Z"/>
-              <rect width="10" height="8" x="7" y="13"/>
-              <rect width="8" height="5" x="8" y="3"/>
-            </svg>
-          </button>
+        <button (click)="save()" mat-icon-button>
+          <svg width="800px" height="800px" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg"
+            aria-labelledby="saveIconTitle" stroke="#000000" stroke-width="1" stroke-linecap="square"
+            stroke-linejoin="miter" fill="none" color="#000000">
+            <title id="saveIconTitle">Save</title>
+            <path
+              d="M17.2928932,3.29289322 L21,7 L21,20 C21,20.5522847 20.5522847,21 20,21 L4,21 C3.44771525,21 3,20.5522847 3,20 L3,4 C3,3.44771525 3.44771525,3 4,3 L16.5857864,3 C16.8510029,3 17.1053568,3.10535684 17.2928932,3.29289322 Z" />
+            <rect width="10" height="8" x="7" y="13" />
+            <rect width="8" height="5" x="8" y="3" />
+          </svg>
+        </button>
         }
         <button (click)="deleteItem()" mat-icon-button color="warn">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.49988 0.833332H12.4999C13.4204 0.833332 14.1665 1.57952 14.1665 2.5V3.33333H16.6665C17.587 3.33333 18.3332 4.07952 18.3332 4.99999V6.66666C18.3332 7.58714 17.587 8.33333 16.6665 8.33333H16.5998L15.8332 17.5C15.8332 18.4205 15.087 19.1667 14.1665 19.1667H5.8332C4.91272 19.1667 4.16653 18.4205 4.16941 17.5692L3.39975 8.33333H3.33317C2.4127 8.33333 1.6665 7.58714 1.6665 6.66666V4.99999C1.6665 4.07952 2.4127 3.33333 3.33317 3.33333H5.83321V2.5C5.83321 1.57952 6.5794 0.833332 7.49988 0.833332ZM5.83321 5V4.99999H3.33317V6.66666H16.6665V4.99999L14.1665 5H5.83321ZM5.83324 17.5L5.07198 8.33333H14.9276L14.1695 17.4308L14.1666 17.5H5.83324ZM12.4999 2.5V3.33334H7.49992V2.5H12.4999Z" fill="#F96666"/>
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M7.49988 0.833332H12.4999C13.4204 0.833332 14.1665 1.57952 14.1665 2.5V3.33333H16.6665C17.587 3.33333 18.3332 4.07952 18.3332 4.99999V6.66666C18.3332 7.58714 17.587 8.33333 16.6665 8.33333H16.5998L15.8332 17.5C15.8332 18.4205 15.087 19.1667 14.1665 19.1667H5.8332C4.91272 19.1667 4.16653 18.4205 4.16941 17.5692L3.39975 8.33333H3.33317C2.4127 8.33333 1.6665 7.58714 1.6665 6.66666V4.99999C1.6665 4.07952 2.4127 3.33333 3.33317 3.33333H5.83321V2.5C5.83321 1.57952 6.5794 0.833332 7.49988 0.833332ZM5.83321 5V4.99999H3.33317V6.66666H16.6665V4.99999L14.1665 5H5.83321ZM5.83324 17.5L5.07198 8.33333H14.9276L14.1695 17.4308L14.1666 17.5H5.83324ZM12.4999 2.5V3.33334H7.49992V2.5H12.4999Z"
+              fill="#F96666" />
           </svg>
         </button>
       </div>
