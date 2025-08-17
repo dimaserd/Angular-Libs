@@ -95,7 +95,6 @@ export class BodyTagsExtensions {
     }
 
     return {
-      presentOrEdit: true,
       tagDescription: {
         tag: Tags.UnsupportedTag,
         displayValue: "Неподдерживаемый тег",

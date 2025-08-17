@@ -1,5 +1,7 @@
 import { HtmlBodyTag } from "./models";
 
-export interface ISingleTagVisualEditor {
-  tagUpdated(tag: HtmlBodyTag): void;
+export interface ISingleTagStorage {
+  set(tag: HtmlBodyTag): void;
+
+  get(): HtmlBodyTag;
 }

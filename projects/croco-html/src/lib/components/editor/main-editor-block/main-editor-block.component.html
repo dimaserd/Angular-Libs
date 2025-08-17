@@ -2,49 +2,49 @@
   <div class="editor-container">
     @if (textTags.includes(tag.tagDescription.tag)) {
     <div>
-      <croco-html-text-editor (onTagUpdated)="tagUpdatedHandler($event)" [tag]="tag">
+      <croco-html-text-editor [presentOrEdit]="presentOrEdit" (onTagUpdated)="tagUpdatedHandler($event)" [tag]="_tag">
       </croco-html-text-editor>
     </div>
     }
     @else if (tag.tagDescription.tag === 'file-image') {
     <div>
-      <croco-html-image-editor (onTagUpdated)="tagUpdatedHandler($event)" [tag]="tag">
+      <croco-html-image-editor [presentOrEdit]="presentOrEdit" (onTagUpdated)="tagUpdatedHandler($event)" [tag]="_tag">
       </croco-html-image-editor>
     </div>
     }
     @else if (tag.tagDescription.tag === 'custom-widget') {
     <div>
-      <croco-html-custom-widget-editor (onTagUpdated)="tagUpdatedHandler($event)" [tag]="tag">
+      <croco-html-custom-widget-editor [presentOrEdit]="presentOrEdit" (onTagUpdated)="tagUpdatedHandler($event)" [tag]="_tag">
       </croco-html-custom-widget-editor>
     </div>
     }
     @else if (tag.tagDescription.tag === 'external-video') {
     <div>
-      <croco-html-external-video-editor (onTagUpdated)="tagUpdatedHandler($event)" [tag]="tag">
+      <croco-html-external-video-editor [presentOrEdit]="presentOrEdit" (onTagUpdated)="tagUpdatedHandler($event)" [tag]="_tag">
       </croco-html-external-video-editor>
     </div>
     }
     @else if (tag.tagDescription.tag === 'download-file-button') {
     <div>
-      <croco-html-download-file-button-editor (onTagUpdated)="tagUpdatedHandler($event)" [tag]="tag">
+      <croco-html-download-file-button-editor [presentOrEdit]="presentOrEdit" (onTagUpdated)="tagUpdatedHandler($event)" [tag]="_tag">
       </croco-html-download-file-button-editor>
     </div>
     }
     @else if (tag.tagDescription.tag === 'button') {
     <div>
-      <croco-html-button-editor (onTagUpdated)="tagUpdatedHandler($event)" [tag]="tag">
+      <croco-html-button-editor (onTagUpdated)="tagUpdatedHandler($event)" [presentOrEdit]="presentOrEdit" [tag]="_tag">
       </croco-html-button-editor>
     </div>
     }
     @else if (tag.tagDescription.tag === 'html-raw') {
     <div>
-      <croco-html-html-raw-editor (onTagUpdated)="tagUpdatedHandler($event)" [tag]="tag">
+      <croco-html-html-raw-editor [presentOrEdit]="presentOrEdit" (onTagUpdated)="tagUpdatedHandler($event)" [tag]="_tag">
       </croco-html-html-raw-editor>
     </div>
     }
     @else if (isDefinedCustomTag()) {
     <div>
-      <croco-html-defined-custom-editor-block [tag]="tag"
+      <croco-html-defined-custom-editor-block [tag]="_tag" [editor]="_tagStorage"
         (onTagUpdated)="tagUpdatedHandler($event)"></croco-html-defined-custom-editor-block>
     </div>
     }
@@ -62,8 +62,8 @@
   <div class="d-flex justify-content-between">
     <div class="d-flex justify-content-end align-self-center">
       <div style="margin-left: 16px;min-width: 96px">
-        @if (tag.presentOrEdit) {
-        <button (click)="tag.presentOrEdit = false" mat-icon-button>
+        @if (presentOrEdit) {
+        <button (click)="presentOrEdit = false" mat-icon-button>
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd"
               d="M14.4374 0C15.0921 0 15.7197 0.261421 16.1781 0.723424L19.279 3.82432C19.7407 4.286 20.0001 4.91217 20.0001 5.56508C20.0001 6.21799 19.7407 6.84416 19.279 7.30584L7.95751 18.6238C7.25903 19.4295 6.2689 19.9245 5.1346 20.0023H0V19.0023L0.00324754 14.7873C0.0884381 13.7328 0.578667 12.7523 1.3265 12.0934L12.6954 0.72463C13.1564 0.260831 13.7834 0 14.4374 0ZM5.06401 18.0048C5.59823 17.967 6.09551 17.7184 6.49482 17.2616L14.0567 9.69971L10.3024 5.94518L2.69613 13.5496C2.29098 13.9079 2.04034 14.4092 2.00003 14.8678V18.0029L5.06401 18.0048ZM11.7167 4.53114L15.471 8.28549L17.8648 5.89162C17.9514 5.80502 18.0001 5.68756 18.0001 5.56508C18.0001 5.4426 17.9514 5.32514 17.8648 5.23854L14.7612 2.13486C14.6755 2.04855 14.559 2 14.4374 2C14.3158 2 14.1992 2.04855 14.1136 2.13486L11.7167 4.53114Z"

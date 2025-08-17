@@ -21,7 +21,6 @@ export class TableTagService implements IMarkUpTagService {
     let tableData = data.data as TableData;
 
     return {
-      presentOrEdit: true,
       tagDescription: {
         tag: data.tagName,
         displayValue: this.shortDescription,
@@ -41,7 +40,6 @@ export class TableTagService implements IMarkUpTagService {
       },
       attributes: {
       },
-      presentOrEdit: false,
       innerHtml: props.htmlRaw,
     };
   }

@@ -45,8 +45,11 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
   isShowMediaRequest = false;
   private unsubscribe = new Subject<void>();
 
-  @Input()
+  @Input({required: true})
   tag: HtmlBodyTag;
+
+  @Input({required: true})
+  presentOrEdit = false;
 
   onErrorHandler() {
     this.hasImageError = true;

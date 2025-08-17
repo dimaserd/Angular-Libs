@@ -1,4 +1,4 @@
-@if (tag.presentOrEdit) {
+@if (presentOrEdit) {
   <div>
     <div>
       @switch (tagData.type) {
@@ -19,8 +19,7 @@
     <croco-html-xml-tag-external-video [tagData]="tagData"></croco-html-xml-tag-external-video>
   </div>
 }
-
-@if (!tag.presentOrEdit) {
+@else {
   @if(tagData.type !== ExternalVideoSupportedTypes.Code) {
     <div>
       <mat-form-field class="w-100">

@@ -15,8 +15,11 @@ import { MatButtonToggleGroup, MatButtonToggle } from '@angular/material/button-
 })
 export class TextEditorComponent {
 
-  @Input()
+  @Input({required: true})
   tag: HtmlBodyTag;
+
+  @Input({required: true})
+  presentOrEdit = false;
 
   @Output()
   onTagUpdated = new EventEmitter<HtmlBodyTag>();

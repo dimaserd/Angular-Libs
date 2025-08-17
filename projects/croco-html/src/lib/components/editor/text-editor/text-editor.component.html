@@ -1,4 +1,4 @@
-@if (tag.presentOrEdit) {
+@if (presentOrEdit) {
   <div>
     <div style="height: 10px;">
     </div>
@@ -16,8 +16,7 @@
     }
   </div>
 }
-
-@if (!tag.presentOrEdit) {
+@else {
   <div>
     <div style="overflow-x: auto;">
       <mat-button-toggle-group [(ngModel)]="tag.attributes['h-align']">

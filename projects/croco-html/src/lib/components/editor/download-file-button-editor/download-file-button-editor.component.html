@@ -1,4 +1,4 @@
-@if (tag.presentOrEdit) {
+@if (presentOrEdit) {
   <div>
     <div>
       Ссылка для скачивания: {{tagData.link}}
@@ -11,8 +11,7 @@
     <croco-html-xml-tag-download-file-button [tagData]="tagData"></croco-html-xml-tag-download-file-button>
   </div>
 }
-
-@if (!tag.presentOrEdit) {
+@else {
       <div>
         <mat-form-field class="w-100">
           <mat-label>

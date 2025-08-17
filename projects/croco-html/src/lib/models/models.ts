@@ -11,7 +11,6 @@ export interface HtmlBodyTag {
   tagDescription: TagItem;
   innerHtml: string;
   attributes: Object;
-  presentOrEdit: boolean;
 }
 
 export interface BaseApiResponse {

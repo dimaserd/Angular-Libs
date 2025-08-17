@@ -38,7 +38,6 @@ export class ExternalVideoTagService implements IMarkUpTagService {
     let fileData = data.data as ExternalVideoTagDataConsts;
 
     return {
-      presentOrEdit: true,
       tagDescription: {
         tag: data.tagName,
         displayValue: this.shortDescription,
@@ -74,7 +73,6 @@ export class ExternalVideoTagService implements IMarkUpTagService {
         isCustom: false
       },
       attributes: attrs,
-      presentOrEdit: false,
       innerHtml: "",
     };
   }

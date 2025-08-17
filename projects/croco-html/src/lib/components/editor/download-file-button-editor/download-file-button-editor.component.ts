@@ -21,8 +21,12 @@ import { DownloadButtonTagData } from '../../../tag-services/DownloadButtonTagSe
 })
 export class DownloadFileButtonEditorComponent {
 
-  @Input()
+  @Input({required: true})
   tag: HtmlBodyTag;
+
+
+  @Input({required: true})
+  presentOrEdit = false;
 
   @Output()
   onTagUpdated = new EventEmitter<HtmlBodyTag>();

@@ -1,6 +1,6 @@
 import { JsonPipe } from '@angular/common';
 import { Component, ComponentRef, EventEmitter, Inject, Input, OnDestroy, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
-import { HtmlBodyTag, ISingleTagVisualEditor } from '../../../../../models';
+import { HtmlBodyTag, ISingleTagStorage } from '../../../../../models';
 import { CrocoHtmlOptions } from '../../../../../options';
 import { CrocoHtmlOptionsToken } from '../../../../../consts';
 
@@ -17,9 +17,10 @@ export class DefinedCustomEditorBlockComponent implements OnInit, OnDestroy {
 
   public dynamicContainerRef: ComponentRef<any>;
 
-  private editor: ISingleTagVisualEditor | null = null;
+  @Input({ required: true })
+  public editor: ISingleTagStorage;
 
-  
+
   @Input({ required: true })
   tag: HtmlBodyTag;
 
@@ -48,9 +49,8 @@ export class DefinedCustomEditorBlockComponent implements OnInit, OnDestroy {
       this.useDynamicComponent = true;
       this.viewContainerRef.remove();
       this.dynamicContainerRef = this.viewContainerRef.createComponent(component);
+      
       this.dynamicContainerRef.setInput("tag", this.tag);
-
-      this.editor = new SingleTagVisualEditor(this.onTagUpdated);
       this.dynamicContainerRef.setInput("tagEditor", this.editor);
     }
   }
@@ -60,12 +60,3 @@ export class DefinedCustomEditorBlockComponent implements OnInit, OnDestroy {
   }
 }
 
-export class SingleTagVisualEditor implements ISingleTagVisualEditor {
-  
-  constructor(private readonly _emitter: EventEmitter<HtmlBodyTag>){
-  }
-  
-  tagUpdated(tag: HtmlBodyTag): void {
-    this._emitter.emit(tag);
-  }
-}

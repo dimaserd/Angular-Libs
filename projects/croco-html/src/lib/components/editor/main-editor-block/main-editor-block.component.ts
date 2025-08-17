@@ -13,6 +13,7 @@ import { CrocoHtmlOptionsToken } from '../../../consts';
 import { CrocoHtmlOptions } from '../../../options';
 import { JsonPipe } from '@angular/common';
 import { DefinedCustomEditorBlockComponent } from "./components/defined-custom-editor-block/defined-custom-editor-block.component";
+import { ISingleTagStorage } from '../../../models/editor-models';
 
 @Component({
   selector: 'croco-html-main-editor-block',
@@ -37,7 +38,17 @@ export class MainEditorBlockComponent {
   textTags = TextTags.allTextTags;
 
   @Input({ required: true })
-  tag: HtmlBodyTag;
+  set tag(data: HtmlBodyTag) {
+    this._tag = data;
+    this._tagStorage = new SingleTagStorage();
+
+    this._tagStorage.set(this._tag);
+  }
+
+  public _tag: HtmlBodyTag;
+  public _tagStorage: SingleTagStorage;
+
+  public presentOrEdit = false;
 
   @Output()
   onTagSaved = new EventEmitter<HtmlBodyTag>();
@@ -52,14 +63,17 @@ export class MainEditorBlockComponent {
   }
 
   save() {
-    this.tag.presentOrEdit = true;
+
+    const tag = this._tagStorage.get();
+
     this.onTagSaved.emit(this.tag);
+    this.presentOrEdit = true;
   }
 
   isDefinedCustomTag() {
 
-    const tagName = this.tag.tagDescription.tag;
-   
+    const tagName = this._tag.tagDescription.tag;
+
     if (this._options.definedCustomTags.hasOwnProperty(tagName)) {
       return true;
     }
@@ -69,5 +83,17 @@ export class MainEditorBlockComponent {
 
   deleteItem() {
     this.onTagRemoved.emit(this.tag);
+  }
+}
+
+export class SingleTagStorage implements ISingleTagStorage {
+  private _tag: HtmlBodyTag;
+
+  set(tag: HtmlBodyTag): void {
+    this._tag = tag;
+  }
+
+  get(): HtmlBodyTag {
+    return this._tag;
   }
 }

@@ -19,8 +19,11 @@ import { ButtonTagData } from '../../../tag-services/ButtonTagService';
   templateUrl: './button-editor.component.html'
 })
 export class ButtonEditorComponent {
-  @Input()
+  @Input({ required: true })
   tag: HtmlBodyTag;
+
+  @Input({ required: true })
+  presentOrEdit = false;
 
   @Output()
   onTagUpdated = new EventEmitter<HtmlBodyTag>();

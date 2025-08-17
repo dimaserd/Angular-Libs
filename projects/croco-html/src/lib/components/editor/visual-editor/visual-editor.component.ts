@@ -209,8 +209,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
           innerHtml: line,
           attributes: {
             "h-align": `${this.alignment}`
-          },
-          presentOrEdit: true
+          }
         });
         this.recalculateHtml();
       }

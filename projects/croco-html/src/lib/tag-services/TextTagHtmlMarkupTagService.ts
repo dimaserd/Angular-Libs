@@ -37,7 +37,6 @@ export class TextTagHtmlMarkupTagService implements IMarkUpTagService {
     let textTagData = data.data as SimpleTextTagData;
 
     return {
-      presentOrEdit: true,
       tagDescription: {
         tag: this.tagName,
         displayValue: this.shortDescription,
@@ -57,7 +56,6 @@ export class TextTagHtmlMarkupTagService implements IMarkUpTagService {
       attributes: {
         [TextTagDataConsts.HAlign]: TextAlignment.Left
       },
-      presentOrEdit: false,
       innerHtml: "",
     }
   }

@@ -19,8 +19,11 @@ import { CustomWidgetTagData, CustomWidgetTagService } from '../../../tag-servic
   templateUrl: './custom-widget-editor.component.html'
 })
 export class CustomWidgetEditorComponent implements OnInit {
-  @Input()
+  @Input({ required: true })
   tag: HtmlBodyTag;
+
+  @Input({ required: true })
+  presentOrEdit = false;
 
   @Output()
   onTagUpdated = new EventEmitter<HtmlBodyTag>();

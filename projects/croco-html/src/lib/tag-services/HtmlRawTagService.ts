@@ -39,7 +39,6 @@ export class HtmlRawTagService implements IMarkUpTagService {
   toBodyTag(data: InterfaceBlock): HtmlBodyTag {
 
     return {
-      presentOrEdit: true,
       tagDescription: {
         tag: HtmlRawTagDataConsts.TagName,
         displayValue: this.shortDescription,
@@ -59,7 +58,6 @@ export class HtmlRawTagService implements IMarkUpTagService {
       },
       attributes: {
       },
-      presentOrEdit: false,
       innerHtml: props.htmlRaw,
     };
   }

@@ -50,7 +50,6 @@ export class CustomWidgetTagService implements IMarkUpTagService {
     let customWidgetTagData = data.data as CustomWidgetTagData;
 
     return {
-      presentOrEdit: true,
       tagDescription: {
         tag: data.tagName,
         displayValue: this.shortDescription,
@@ -73,7 +72,6 @@ export class CustomWidgetTagService implements IMarkUpTagService {
         [CustomWidgetTagDataConsts.DataIdAttrName]: 'example-data-id',
         [CustomWidgetTagDataConsts.WidgetIdAttrName]: 'example-widget-id'
       },
-      presentOrEdit: false,
       innerHtml: props.htmlRaw,
     };
   }

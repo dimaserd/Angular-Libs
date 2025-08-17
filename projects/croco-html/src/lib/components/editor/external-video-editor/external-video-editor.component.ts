@@ -25,8 +25,11 @@ import { MatCheckbox } from "@angular/material/checkbox";
 })
 export class ExternalVideoEditorComponent implements OnInit {
 
-  @Input()
+  @Input({required: true})
   tag: HtmlBodyTag;
+
+  @Input({required: true})
+  presentOrEdit = false;
 
   @Output()
   onTagUpdated = new EventEmitter<HtmlBodyTag>();

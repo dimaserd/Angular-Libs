@@ -45,7 +45,6 @@ export class DownloadButtonTagService implements IMarkUpTagService {
     let fileData = data.data as ButtonTagDataConsts;
 
     return {
-      presentOrEdit: true,
       tagDescription: {
         tag: data.tagName,
         displayValue: this.shortDescription,
@@ -67,7 +66,6 @@ export class DownloadButtonTagService implements IMarkUpTagService {
         [DownloadButtonTagDataConsts.LinkAttrName]: defaultLinkForDownload,
         [DownloadButtonTagDataConsts.TitleAttrName]: 'Скачать'
       },
-      presentOrEdit: false,
       innerHtml: props.htmlRaw,
     };
   }

@@ -49,7 +49,6 @@ export class ButtonTagService implements IMarkUpTagService {
     let fileData = data.data as ButtonTagDataConsts;
 
     return {
-      presentOrEdit: true,
       tagDescription: {
         tag: data.tagName,
         displayValue: this.shortDescription,
@@ -72,7 +71,6 @@ export class ButtonTagService implements IMarkUpTagService {
         [ButtonTagDataConsts.TypeAttrName]: 'button',
         [ButtonTagDataConsts.TextAttrName]: 'Кнопка'
       },
-      presentOrEdit: false,
       innerHtml: props.htmlRaw,
     };
   }

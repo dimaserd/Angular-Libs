@@ -53,7 +53,6 @@ export class FileImageTagService implements IMarkUpTagService {
     }
 
     return {
-      presentOrEdit: true,
       tagDescription: {
         tag: FileImageTagDataConsts.TagName,
         displayValue: this.shortDescription,
@@ -75,7 +74,6 @@ export class FileImageTagService implements IMarkUpTagService {
         [FileImageTagDataConsts.FileIdAttrName]: null,
         [FileImageTagDataConsts.ScreenMediaRequest]: FileImageTagDataConsts.DefaultValueForFileImage
       },
-      presentOrEdit: false,
       innerHtml: "",
     }
   }
