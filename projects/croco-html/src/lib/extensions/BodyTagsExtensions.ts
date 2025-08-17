@@ -53,13 +53,14 @@ export class BodyTagsExtensions {
   }
 
   static convertToHtmlString(bodyTag: HtmlBodyTag, options: CrocoHtmlOptions): string {
-    const tagName = bodyTag.tagDescription.tag;
+    const tagName = bodyTag.tagDescription.tag.toLowerCase();
 
     if (this.hasTagService(tagName, options)) {
       return this.getTagService(tagName, options).bodyTagToHtmlStringConverter(bodyTag);
     }
 
-    return `<mapper-not-found>"${bodyTag.tagDescription.tag}" тег не найден.</mapper-not-found>`;
+    console.log("convertToHtmlString", bodyTag, options);
+    return `<mapper-not-found>"${tagName}" тег не найден.</mapper-not-found>`;
   }
 
   static bodyTagsToHtml(bodyTags: HtmlBodyTag[], options: CrocoHtmlOptions): string {

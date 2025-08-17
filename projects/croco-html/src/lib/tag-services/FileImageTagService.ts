@@ -17,10 +17,10 @@ export class FileImageTagService implements IMarkUpTagService {
     }
 
     if (bodyTag.attributes.hasOwnProperty(FileImageTagDataConsts.ScreenMediaRequest) && bodyTag.attributes[FileImageTagDataConsts.ScreenMediaRequest]) {
-      screenMediaRequestAttr = `${FileImageTagDataConsts.ScreenMediaRequest}="${bodyTag.attributes[FileImageTagDataConsts.ScreenMediaRequest]}"`;
+      screenMediaRequestAttr = ` ${FileImageTagDataConsts.ScreenMediaRequest}="${bodyTag.attributes[FileImageTagDataConsts.ScreenMediaRequest]}"`;
     }
-
-    return `<${FileImageTagDataConsts.TagName} ${fileIdAttr} ${screenMediaRequestAttr}></${FileImageTagDataConsts.TagName}>`;
+    
+    return `<${FileImageTagDataConsts.TagName} ${fileIdAttr}${screenMediaRequestAttr}></${FileImageTagDataConsts.TagName}>`;
   }
 
   extractBlockFromHtmlElement(elem: HTMLElement, options: CrocoHtmlOptions): InterfaceBlock {
@@ -78,6 +78,5 @@ export class FileImageTagService implements IMarkUpTagService {
       presentOrEdit: false,
       innerHtml: "",
     }
-
   }
 }
