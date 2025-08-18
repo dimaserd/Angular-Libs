@@ -58,9 +58,6 @@ export class MainEditorBlockComponent {
   constructor(@Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions) {
   }
 
-  tagUpdatedHandler(tag: HtmlBodyTag): void {
-    this._tagStorage.set(tag);
-  }
 
   save() {
 

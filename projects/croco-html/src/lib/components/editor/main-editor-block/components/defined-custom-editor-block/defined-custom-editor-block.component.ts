@@ -53,7 +53,7 @@ export class DefinedCustomEditorBlockComponent implements OnInit, OnDestroy {
       this.viewContainerRef.remove();
       this.dynamicContainerRef = this.viewContainerRef.createComponent(component);
       
-      this.dynamicContainerRef.setInput("tagStorage", this.tagStorage);
+      this.dynamicContainerRef.setInput("tagStorage", this._tagStorage);
       this.dynamicContainerRef.setInput("presentOrEdit", this.presentOrEdit);
     }
   }
