@@ -41,7 +41,6 @@ export class MainEditorBlockComponent {
   set tag(data: HtmlBodyTag) {
     this._tag = data;
     this._tagStorage = new SingleTagStorage();
-
     this._tagStorage.set(this._tag);
   }
 

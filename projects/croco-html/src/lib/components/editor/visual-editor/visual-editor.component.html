@@ -180,7 +180,7 @@
               </div>
             </div>
             <div style="height: 15px;"></div>
-            <croco-html-main-editor-block [tag]="tag" (onTagSaved)="onTagSavedHandler($event)"
+            <croco-html-main-editor-block [tag]="tag" (onTagSaved)="onTagChangedHandler($event, i)"
               (onTagRemoved)="onTagRemovedHandler(i)">
             </croco-html-main-editor-block>
           </mat-card-content>

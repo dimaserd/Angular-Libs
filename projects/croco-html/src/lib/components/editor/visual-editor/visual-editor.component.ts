@@ -43,7 +43,6 @@ import { SpriteIdsType } from "../../../../sprites-ids.type";
 import { HtmlRawTagDataConsts, TextAlignment, TextTagDataConsts } from '../../../tag-services';
 import { CustomWidgetIconComponent } from "./components/custom-widget-icon/custom-widget-icon.component";
 
-
 @Component({
   selector: 'croco-visual-editor',
   templateUrl: './visual-editor.component.html',
@@ -234,12 +233,13 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     this.isLoading = false;
   }
 
-  drop(event: CdkDragDrop<object[]>) {
+  drop(event: CdkDragDrop<HtmlBodyTag[]>) {
     moveItemInArray(this.bodyTags, event.previousIndex, event.currentIndex);
     this.recalculateHtml();
   }
 
-  onTagSavedHandler(tag: HtmlBodyTag) {
+  onTagChangedHandler(data: HtmlBodyTag, index: number) {
+    this.bodyTags[index] = data;
     this.recalculateHtml();
   }
 
@@ -267,8 +267,8 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     this.startAddingText(data.tag);
   }
 
-  isDefinedCustomWidget(tagName: string):boolean {
-    if (this._options.definedCustomTags.hasOwnProperty(tagName)){
+  isDefinedCustomWidget(tagName: string): boolean {
+    if (this._options.definedCustomTags.hasOwnProperty(tagName)) {
       return true;
     }
 
