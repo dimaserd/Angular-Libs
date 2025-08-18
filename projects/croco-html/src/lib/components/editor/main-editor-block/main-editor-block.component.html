@@ -2,7 +2,7 @@
   <div class="editor-container">
     @if (textTags.includes(_tag.tagDescription.tag)) {
     <div>
-      <croco-html-text-editor [presentOrEdit]="presentOrEdit" [tagStorage]="_tagStorage">
+      <croco-html-text-editor [tagService]="_tagService">
       </croco-html-text-editor>
     </div>
     }
@@ -44,7 +44,7 @@
     }
     @else if (isDefinedCustomTag()) {
     <div>
-      <croco-html-defined-custom-editor-block [presentOrEdit]="presentOrEdit" [tagStorage]="_tagStorage"></croco-html-defined-custom-editor-block>
+      <croco-html-defined-custom-editor-block [tagService]="_tagService"></croco-html-defined-custom-editor-block>
     </div>
     }
     @else {

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnDestroy, Output } from '@angular/core';
 import { TextTags } from '../../../extensions/TextMethods';
 import { HtmlBodyTag } from '../../../models/models';
 import { MatIconButton } from '@angular/material/button';
@@ -13,7 +13,8 @@ import { CrocoHtmlOptionsToken } from '../../../consts';
 import { CrocoHtmlOptions } from '../../../options';
 import { JsonPipe } from '@angular/common';
 import { DefinedCustomEditorBlockComponent } from "./components/defined-custom-editor-block/defined-custom-editor-block.component";
-import { ISingleTagStorage } from '../../../models/editor-models';
+import { TagEditorService } from '../../../models/editor-models';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'croco-html-main-editor-block',
@@ -33,19 +34,27 @@ import { ISingleTagStorage } from '../../../models/editor-models';
     DefinedCustomEditorBlockComponent
   ]
 })
-export class MainEditorBlockComponent {
+export class MainEditorBlockComponent implements OnDestroy {
 
   textTags = TextTags.allTextTags;
+
+  private unsubscribe = new Subject<void>();
 
   @Input({ required: true })
   set tag(data: HtmlBodyTag) {
     this._tag = data;
-    this._tagStorage = new SingleTagStorage();
-    this._tagStorage.set(this._tag);
+    this._tagService = new TagEditorService();
+
+    this._tagService.tag$.next(this._tag);
+    this._tagService.presentOrEdit$
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe(val => {
+        this.presentOrEdit = val;
+      });
   }
 
   public _tag: HtmlBodyTag;
-  public _tagStorage: SingleTagStorage;
+  public _tagService: TagEditorService;
 
   public presentOrEdit = true;
 
@@ -58,13 +67,16 @@ export class MainEditorBlockComponent {
   constructor(@Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions) {
   }
 
-
   save() {
 
-    const tag = this._tagStorage.get();
+    const tag = this._tagService.tag$.value;;
 
     this.onTagSaved.emit(tag);
-    this.presentOrEdit = true;
+    this._tagService.presentOrEdit$.next(true);
+  }
+
+  cancelSave() {
+    this._tagService.presentOrEdit$.next(false);
   }
 
   isDefinedCustomTag() {
@@ -81,16 +93,9 @@ export class MainEditorBlockComponent {
   deleteItem() {
     this.onTagRemoved.emit(this.tag);
   }
-}
 
-export class SingleTagStorage implements ISingleTagStorage {
-  private _tag: HtmlBodyTag;
-
-  set(tag: HtmlBodyTag): void {
-    this._tag = tag;
-  }
-
-  get(): HtmlBodyTag {
-    return this._tag;
+  ngOnDestroy(): void {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 }

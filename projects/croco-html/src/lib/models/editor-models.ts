@@ -1,7 +1,7 @@
+import { BehaviorSubject } from "rxjs";
 import { HtmlBodyTag } from "./models";
 
-export interface ISingleTagStorage {
-  set(tag: HtmlBodyTag): void;
-
-  get(): HtmlBodyTag;
+export class TagEditorService {
+  public readonly tag$ = new BehaviorSubject<HtmlBodyTag>(null);
+  public readonly presentOrEdit$ = new BehaviorSubject<boolean>(true);
 }

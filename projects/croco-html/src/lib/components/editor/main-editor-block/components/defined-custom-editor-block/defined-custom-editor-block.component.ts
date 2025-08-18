@@ -1,7 +1,8 @@
-import { Component, ComponentRef, EventEmitter, Inject, Input, OnDestroy, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
-import { HtmlBodyTag, ISingleTagStorage } from '../../../../../models';
+import { Component, ComponentRef, Inject, Input, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { HtmlBodyTag, TagEditorService } from '../../../../../models';
 import { CrocoHtmlOptions } from '../../../../../options';
 import { CrocoHtmlOptionsToken } from '../../../../../consts';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'croco-html-defined-custom-editor-block',
@@ -9,6 +10,9 @@ import { CrocoHtmlOptionsToken } from '../../../../../consts';
   templateUrl: './defined-custom-editor-block.component.html'
 })
 export class DefinedCustomEditorBlockComponent implements OnInit, OnDestroy {
+
+  private unsubscribe = new Subject<void>();
+
   @ViewChild('container', { read: ViewContainerRef, static: true })
   viewContainerRef!: ViewContainerRef;
 
@@ -16,26 +20,25 @@ export class DefinedCustomEditorBlockComponent implements OnInit, OnDestroy {
 
   public dynamicContainerRef: ComponentRef<any>;
 
-  public _tagStorage: ISingleTagStorage;
+  public _tagService: TagEditorService;
   public _tag: HtmlBodyTag;
 
   @Input({ required: true })
-  set tagStorage(data: ISingleTagStorage) {
-    this._tagStorage = data;
-    this._tag = this._tagStorage.get();
-  }
+  set tagService(data: TagEditorService) {
+    this._tagService = data;
 
-  @Input({ required: true })
-  public presentOrEdit = true;
+    this._tagService.tag$
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe(tag => {
+        this._tag = tag;
+      });
+  }
 
   constructor(@Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions) {
   }
 
   getCustomComponent() {
-
-    const tag = this._tagStorage.get();
-
-    const tagName = tag.tagDescription.tag;
+    const tagName = this._tag.tagDescription.tag;
 
     if (this._options.definedCustomTagViewRenderers.hasOwnProperty(tagName)) {
       return this._options.definedCustomTagViewRenderers[tagName].editorComponent;
@@ -52,14 +55,16 @@ export class DefinedCustomEditorBlockComponent implements OnInit, OnDestroy {
       this.useDynamicComponent = true;
       this.viewContainerRef.remove();
       this.dynamicContainerRef = this.viewContainerRef.createComponent(component);
-      
-      this.dynamicContainerRef.setInput("tagStorage", this._tagStorage);
-      this.dynamicContainerRef.setInput("presentOrEdit", this.presentOrEdit);
+
+      this.dynamicContainerRef.setInput("tagService", this._tagService);
     }
   }
 
   ngOnDestroy(): void {
     this.dynamicContainerRef.destroy();
+
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 }
 
