@@ -19,7 +19,7 @@ export class HtmlRawEditorComponent implements OnChanges {
   tag: HtmlBodyTag;
 
   @Input({ required: true })
-  presentOrEdit = false;
+  presentOrEdit = true;
 
   safeHtml: SafeHtml;
 

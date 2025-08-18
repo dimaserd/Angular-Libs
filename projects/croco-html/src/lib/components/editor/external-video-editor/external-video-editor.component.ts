@@ -29,7 +29,7 @@ export class ExternalVideoEditorComponent implements OnInit {
   tag: HtmlBodyTag;
 
   @Input({required: true})
-  presentOrEdit = false;
+  presentOrEdit = true;
 
   protected readonly ExternalVideoSupportedTypes = ExternalVideoSupportedTypes;
 

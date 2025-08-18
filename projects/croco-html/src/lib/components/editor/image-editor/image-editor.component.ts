@@ -49,7 +49,7 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
   tag: HtmlBodyTag;
 
   @Input({ required: true })
-  presentOrEdit = false;
+  presentOrEdit = true;
 
   onErrorHandler() {
     this.hasImageError = true;

@@ -48,7 +48,7 @@ export class MainEditorBlockComponent {
   public _tag: HtmlBodyTag;
   public _tagStorage: SingleTagStorage;
 
-  public presentOrEdit = false;
+  public presentOrEdit = true;
 
   @Output()
   onTagSaved = new EventEmitter<HtmlBodyTag>();

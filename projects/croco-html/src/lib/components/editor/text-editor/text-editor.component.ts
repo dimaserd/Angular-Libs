@@ -39,7 +39,7 @@ export class TextEditorComponent {
   }
 
   @Input({ required: true })
-  presentOrEdit = false;
+  presentOrEdit = true;
 
   public TextAlignment = TextAlignment;
 

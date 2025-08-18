@@ -23,7 +23,7 @@ export class ButtonEditorComponent {
   tag: HtmlBodyTag;
 
   @Input({ required: true })
-  presentOrEdit = false;
+  presentOrEdit = true;
 
   tagData: ButtonTagData = {
     type: '',

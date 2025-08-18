@@ -26,7 +26,7 @@ export class DefinedCustomEditorBlockComponent implements OnInit, OnDestroy {
   }
 
   @Input({ required: true })
-  public presentOrEdit = false;
+  public presentOrEdit = true;
 
   constructor(@Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions) {
   }

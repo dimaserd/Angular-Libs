@@ -26,7 +26,7 @@ export class DownloadFileButtonEditorComponent {
 
 
   @Input({required: true})
-  presentOrEdit = false;
+  presentOrEdit = true;
 
   tagData: DownloadButtonTagData = {
     link: '',
