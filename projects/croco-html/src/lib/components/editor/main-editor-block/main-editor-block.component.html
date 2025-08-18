@@ -1,42 +1,42 @@
 <div class="main-editor-block">
   <div class="editor-container">
-    @if (textTags.includes(tag.tagDescription.tag)) {
+    @if (textTags.includes(_tag.tagDescription.tag)) {
     <div>
       <croco-html-text-editor [presentOrEdit]="presentOrEdit" [tagStorage]="_tagStorage">
       </croco-html-text-editor>
     </div>
     }
-    @else if (tag.tagDescription.tag === 'file-image') {
+    @else if (_tag.tagDescription.tag === 'file-image') {
     <div>
       <croco-html-image-editor [presentOrEdit]="presentOrEdit" [tag]="_tag">
       </croco-html-image-editor>
     </div>
     }
-    @else if (tag.tagDescription.tag === 'custom-widget') {
+    @else if (_tag.tagDescription.tag === 'custom-widget') {
     <div>
       <croco-html-custom-widget-editor [presentOrEdit]="presentOrEdit" [tag]="_tag">
       </croco-html-custom-widget-editor>
     </div>
     }
-    @else if (tag.tagDescription.tag === 'external-video') {
+    @else if (_tag.tagDescription.tag === 'external-video') {
     <div>
       <croco-html-external-video-editor [presentOrEdit]="presentOrEdit" [tag]="_tag">
       </croco-html-external-video-editor>
     </div>
     }
-    @else if (tag.tagDescription.tag === 'download-file-button') {
+    @else if (_tag.tagDescription.tag === 'download-file-button') {
     <div>
       <croco-html-download-file-button-editor [presentOrEdit]="presentOrEdit" [tag]="_tag">
       </croco-html-download-file-button-editor>
     </div>
     }
-    @else if (tag.tagDescription.tag === 'button') {
+    @else if (_tag.tagDescription.tag === 'button') {
     <div>
       <croco-html-button-editor [presentOrEdit]="presentOrEdit" [tag]="_tag">
       </croco-html-button-editor>
     </div>
     }
-    @else if (tag.tagDescription.tag === 'html-raw') {
+    @else if (_tag.tagDescription.tag === 'html-raw') {
     <div>
       <croco-html-html-raw-editor [presentOrEdit]="presentOrEdit" [tag]="_tag">
       </croco-html-html-raw-editor>
@@ -49,10 +49,10 @@
     }
     @else {
     <div>
-      {{tag.tagDescription.tag}} не показан
+      {{_tag.tagDescription.tag}} не показан
     </div>
     <div>
-      {{tag | json}}
+      {{_tag | json}}
     </div>
     }
 
