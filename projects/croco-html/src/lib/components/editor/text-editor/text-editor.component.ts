@@ -42,6 +42,12 @@ export class TextEditorComponent implements OnDestroy {
         this._tag = tag;
       });
 
+    this._tagService.presentOrEdit$
+     .pipe(takeUntil(this.unsubscribe))
+     .subscribe(val => {
+      this.presentOrEdit = val;
+     });
+
     this._horizontalAlignment = this._tag.attributes.hasOwnProperty(TextTagDataConsts.HAlign)
       ? this._tag.attributes[TextTagDataConsts.HAlign]
       : TextAlignment.Left
