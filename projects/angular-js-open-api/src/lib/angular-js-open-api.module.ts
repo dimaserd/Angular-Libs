@@ -15,27 +15,20 @@ import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
-    JsOpenApiMainComponent,
-    JsWorkerExpansionPanelComponent,
-    JsWorkerMethodComponent,
-    JsOpenApiConsoleComponent,
-    JsOpenApiRemoteDocsComponent,
-    JsOpenApiRemoteExpansionPanelComponent,
-    JsOpenApiLoggedVariableComponent,
-    JsOpenApiExecutionLogComponent,
-    JsOpenApiScriptResultComponent
+  ],
+  exports: [
   ],
   imports: [
     CommonModule,
     [MatFormFieldModule,
-    MatTableModule,
-    MatExpansionModule,
-    MatFormFieldModule,
-    MatSnackBarModule,
-    MatTabsModule,
-    MatListModule,
-    MatButtonModule,
-    MatInputModule],
+      MatTableModule,
+      MatExpansionModule,
+      MatFormFieldModule,
+      MatSnackBarModule,
+      MatTabsModule,
+      MatListModule,
+      MatButtonModule,
+      MatInputModule],
     RouterModule.forChild([
       {
         path: '',

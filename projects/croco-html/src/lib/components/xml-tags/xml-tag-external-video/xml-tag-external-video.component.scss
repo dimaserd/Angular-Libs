@@ -1,4 +1,4 @@
-@import "../../../styles/screen_sizes";
+@use "../../../styles/screen_sizes" as *;
 
 @media only screen and (min-width: $media-m) {
     .y-video {

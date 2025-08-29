@@ -1,6 +1,6 @@
 {
   "name": "angular-js-open-api",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "peerDependencies": {
     "@angular/common": "^19.2.14",
     "@angular/core": "^19.2.14",

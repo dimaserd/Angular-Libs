@@ -13,7 +13,7 @@
         <div *ngIf="scriptResult.errorMessage">
           <h6>Ошибка: {{scriptResult.errorMessage}}</h6>
         </div>
-        
+
     </div>
 
     <div *ngIf="scriptResult">
@@ -36,7 +36,7 @@
         <div>
           <h5>Логи времени выполнения</h5>
           <div>
-             <app-js-open-api-execution-log *ngFor="let log of scriptResult.executionLogs" [log]="log"></app-js-open-api-execution-log>
+             <croco-js-open-api-execution-log *ngFor="let log of scriptResult.executionLogs" [log]="log"></croco-js-open-api-execution-log>
           </div>
       </div>
     </div>
