@@ -149,7 +149,6 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     let tagDescription = this.tags
       .find(x => x.tag === this.selectedValue);
 
-
     const tagName = tagDescription.tag;
 
     if (TextTags.allTextTags.includes(tagName)) {
