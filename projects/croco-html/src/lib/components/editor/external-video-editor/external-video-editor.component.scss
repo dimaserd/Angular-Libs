@@ -1,4 +1,4 @@
-@import "../../../styles/screen_sizes";
+@use "../../../styles/screen_sizes" as *;
 
 .code-view {
   &.video-player {

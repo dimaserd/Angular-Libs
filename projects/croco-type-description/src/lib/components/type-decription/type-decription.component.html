@@ -1,7 +1,7 @@
 <form class="example-form example-full-width">
     <mat-form-field class="example-full-width">
       <mat-label>Название типа</mat-label>
-      <input (input)="typeDisplayFullName = $event.target.value" matInput placeholder="Название типа" value="{{typeDisplayFullName}}">
+      <input (input)="setValue($event)" matInput placeholder="Название типа" value="{{typeDisplayFullName}}">
     </mat-form-field>
 </form>
 

@@ -1,4 +1,4 @@
-@import "../../../styles/screen_sizes";
+@use  "../../../styles/screen_sizes" as *;
 
 :host {
   --mat-standard-button-toggle-selected-state-background-color: #323E8B;

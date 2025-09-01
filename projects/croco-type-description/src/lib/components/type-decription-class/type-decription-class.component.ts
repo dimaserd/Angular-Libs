@@ -3,30 +3,33 @@ import { FormsModule } from '@angular/forms';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ClipboardService } from 'ngx-clipboard';
-import { CrocoTypeDescription, CrocoTypeDescriptionResult } from '../../models';
+import {CrocoPropNameWithLink, CrocoTypeDescription, CrocoTypeDescriptionResult} from '../../models';
 import { DartCodeClassGenerator } from '../../codeGenerators/dart/DartCodeClassGenerator';
 import { TSClassGenerator } from '../../codeGenerators/typescript/TSClassGenerator';
 import { MatInputModule } from "@angular/material/input";
 import { CommonModule } from '@angular/common';
 import { MatExpansionModule } from "@angular/material/expansion";
+import {MatNavList} from "@angular/material/list";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'croco-type-decription-class',
   templateUrl: './type-decription-class.component.html',
   styleUrls: ['./type-decription-class.component.css'],
   standalone: true,
-  imports: [MatInputModule, MatSelectModule, FormsModule, CommonModule, MatExpansionModule],
+  imports: [MatInputModule, MatSelectModule, FormsModule, CommonModule, MatExpansionModule, MatNavList, RouterLink],
 })
 export class TypeDecriptionClassComponent implements OnInit {
 
-  propNameAndLinks: PropNameWithLink[] = [];
+  propNameAndLinks: CrocoPropNameWithLink[] = [];
   codeGenerationResult: string;
   panelOpenState = false;
 
   @Input() type: CrocoTypeDescription;
   @Input() wholeResult: CrocoTypeDescriptionResult;
 
-  constructor(private _clipboardService: ClipboardService, private _snackBar: MatSnackBar) {}
+  constructor(private _clipboardService: ClipboardService, private _snackBar: MatSnackBar) {
+  }
 
   codeGenerationType: string = "TypeScript";
 
@@ -39,23 +42,15 @@ export class TypeDecriptionClassComponent implements OnInit {
     this.codeGenerationResult = new TSClassGenerator(true, false).generateClassesForType(this.wholeResult);
   }
 
-  typeChanged(data:MatSelectChange){
-    if(data.value === "TypeScript"){
+  typeChanged(data: MatSelectChange) {
+    if (data.value === "TypeScript") {
       this.codeGenerationResult = new TSClassGenerator(true, false).generateClassesForType(this.wholeResult);
-    }
-    else if(data.value === "Dart"){
+    } else if (data.value === "Dart") {
       this.codeGenerationResult = new DartCodeClassGenerator().generateClassesForType(this.wholeResult);
     }
   }
 
-  copyCode(){
+  copyCode() {
     this._snackBar.open("Результат кодогенерации скопирован в буфер обмена", "Закрыть", {duration: 1500});
-    this._clipboardService.copy(this.codeGenerationResult);
   }
-}
-
-interface PropNameWithLink {
-  displayFullTypeName: string;
-  displayFullTypeNameReference: string;
-  propertyName: string;
 }

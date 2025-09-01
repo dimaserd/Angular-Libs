@@ -1,6 +1,6 @@
 <mat-form-field class="w-100">
-    <textarea 
-        (input)="script = $event.target.value" 
+    <textarea
+        (input)="setValue($event)"
         matInput
         cdkTextareaAutosize
         placeholder="Пишите свой js код здесь...">{{script}}</textarea>

@@ -2,11 +2,28 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ClipboardService } from 'ngx-clipboard';
 import { JsExecutionLog } from '../../models';
+import {
+  MatExpansionPanel,
+  MatExpansionPanelDescription,
+  MatExpansionPanelHeader,
+  MatExpansionPanelTitle
+} from "@angular/material/expansion";
+import {NgIf} from "@angular/common";
+import {MatButton} from "@angular/material/button";
 
 @Component({
   selector: 'croco-js-open-api-execution-log',
   templateUrl: './js-open-api-execution-log.component.html',
-  styleUrls: ['./js-open-api-execution-log.component.css']
+  styleUrls: ['./js-open-api-execution-log.component.css'],
+  standalone: true,
+  imports: [
+    MatExpansionPanel,
+    MatExpansionPanelTitle,
+    MatExpansionPanelDescription,
+    MatExpansionPanelHeader,
+    NgIf,
+    MatButton
+  ]
 })
 export class JsOpenApiExecutionLogComponent implements OnInit {
 
