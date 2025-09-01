@@ -7,32 +7,27 @@
       <croco-html-xml-tag-text-view [item]="item"></croco-html-xml-tag-text-view>
     </div>
     }
-
-    @if (item.tagName === 'html-raw') {
+    @else if (item.tagName === 'html-raw') {
     <div>
       <croco-html-raw-view [rawHtml]="item.data.innerHTML"></croco-html-raw-view>
     </div>
     }
-
-    @if (isHeaderTextTag(item)) {
+    @else if (isHeaderTextTag(item)) {
     <div>
       <croco-html-xml-tag-header-text-view [item]="item"></croco-html-xml-tag-header-text-view>
     </div>
     }
-
-    @if (item.tagName === 'file-image') {
+    @else if (item.tagName === 'file-image') {
     <div>
       <croco-html-file-image-tag-view [item]="item"></croco-html-file-image-tag-view>
     </div>
     }
-
-    @if (item.tagName === 'custom-widget') {
+    @else if (item.tagName === 'custom-widget') {
     <div>
       <croco-html-xml-tag-custom-widget [tagData]="item.data"></croco-html-xml-tag-custom-widget>
     </div>
     }
-
-    @if (item.tagName === 'table' && item.validationResult) {
+    @else if (item.tagName === 'table' && item.validationResult) {
 
     @if (item.validationResult.isSucceeded){
     <croco-html-xml-tag-html-view [html]="item.data.bootstrapHtml">
@@ -43,26 +38,22 @@
     </croco-html-error-banner>
     }
     }
-
-    @if (item.tagName === 'external-video') {
+    @else if (item.tagName === 'external-video') {
     <div>
       <croco-html-xml-tag-external-video [data]="item"></croco-html-xml-tag-external-video>
     </div>
     }
-
-    @if (item.tagName === 'download-file-button') {
+    @else if (item.tagName === 'download-file-button') {
     <div>
       <croco-html-xml-tag-download-file-button [data]="item"></croco-html-xml-tag-download-file-button>
     </div>
     }
-
-    @if (item.tagName === 'button') {
+    @else if (item.tagName === 'button') {
     <div>
       <croco-html-xml-tag-button [data]="item"></croco-html-xml-tag-button>
     </div>
     }
-
-    @if (item.tagName === 'unsupported-tag') {
+    @else if (item.tagName === 'unsupported-tag') {
     <div class="red" style="margin-top: 10px;">
       <h4>Данный тег не поддерживается</h4>
       <span>
@@ -70,10 +61,10 @@
       </span>
     </div>
     }
-
-    @if (isDefinedCustomTag(item)) {
+    @else if (isDefinedCustomTag(item)) {
     <div>
-      <croco-html-defined-custom-tag-view [data]="item"></croco-html-defined-custom-tag-view>
+      <croco-html-defined-custom-tag-view [data]="item"
+        [dataController]="dataController"></croco-html-defined-custom-tag-view>
     </div>
     }
 

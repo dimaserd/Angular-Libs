@@ -14,6 +14,7 @@ import { XmlTagCustomWidgetComponent } from "../xml-tag-custom-widget/xml-tag-cu
 import { CrocoHtmlOptionsToken } from '../../../consts';
 import { CrocoHtmlOptions } from '../../../options';
 import { DefinedCustomTagViewComponent } from '../defined-custom-tag-view/defined-custom-tag-view.component';
+import { HtmlPageDataController } from '../../../services';
 
 @Component({
   selector: 'croco-html-xml-tag-view',
@@ -37,8 +38,11 @@ import { DefinedCustomTagViewComponent } from '../defined-custom-tag-view/define
 })
 export class XmlTagViewComponent {
 
-  @Input()
+  @Input({ required: true })
   data: InterfaceBlock[] = [];
+
+  @Input({ required: true })
+  dataController: HtmlPageDataController = new HtmlPageDataController();
 
   constructor(@Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions) {
   }
