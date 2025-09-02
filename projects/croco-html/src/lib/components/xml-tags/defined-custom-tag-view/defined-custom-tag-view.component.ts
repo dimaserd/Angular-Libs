@@ -8,7 +8,8 @@ import { HtmlPageDataController } from '../../../services';
 @Component({
   selector: 'croco-html-defined-custom-tag-view',
   imports: [JsonPipe],
-  templateUrl: './defined-custom-tag-view.component.html'
+  templateUrl: './defined-custom-tag-view.component.html',
+  standalone: true
 })
 export class DefinedCustomTagViewComponent implements OnInit, OnDestroy {
 
@@ -21,6 +22,9 @@ export class DefinedCustomTagViewComponent implements OnInit, OnDestroy {
 
   @Input({ required: true }) public set data(value: InterfaceBlock) {
     this._data = value;
+    if(this.dynamicContainerRef) {
+      this.dynamicContainerRef.setInput("data", this._data);
+    }
   };
 
 
