@@ -15,4 +15,3 @@ export class HtmlViewController {
 
     scriptCalled = new Subject<string>();
 }
-
