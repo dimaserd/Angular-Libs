@@ -135,7 +135,7 @@ export class TableMethods {
                 let children = HtmlExtractionMethods.transformHtmlElementToBlocks(jElement, options);
 
                 if (children.length === 0) {
-                    var textTag = document.createElement("p");
+                    var textTag = document.createElement("text");
                     textTag.innerHTML = jElement.innerHTML;
 
                     var textElem = TextSimpleMethods.ExtractTextTag(textTag);
