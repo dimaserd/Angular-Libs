@@ -29,7 +29,7 @@ export class TextTagHtmlMarkupTagService implements IMarkUpTagService {
   }
 
   extractBlockFromHtmlElement(elem: HTMLElement, options: CrocoHtmlOptions): InterfaceBlock {
-    return TextSimpleMethods.ExtractTextTag(elem);
+    return TextSimpleMethods.extractTextTag(elem);
   }
 
   toBodyTag(data: InterfaceBlock): HtmlBodyTag {

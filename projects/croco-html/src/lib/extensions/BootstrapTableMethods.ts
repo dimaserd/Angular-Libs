@@ -6,16 +6,16 @@ import { FileImageTag } from "../models/image-models";
 
 export class BootstrapTableMethods {
 
-    static BuildTable(header: TableHeaderData, rows: TableRowData[]): string {
+    static buildTable(header: TableHeaderData, rows: TableRowData[]): string {
         let result = `<table class="table table-bordered">`;
-        result += this.BuildHeader(header);
-        result += this.BuildBody(rows);
+        result += this.buildHeader(header);
+        result += this.buildBody(rows);
         result += "</table>";
 
         return result;
     }
 
-    static BuildHeader(data: TableHeaderData) {
+    static buildHeader(data: TableHeaderData) {
         if (data === null) {
             return "";
         }
@@ -32,7 +32,7 @@ export class BootstrapTableMethods {
         return result;
     }
 
-    static BuildBody(rows: TableRowData[]) {
+    static buildBody(rows: TableRowData[]) {
         let result = "<tbody>";
 
         for (let i = 0; i < rows.length; i++) {
@@ -42,7 +42,7 @@ export class BootstrapTableMethods {
             for (let j = 0; j < row.columns.length; j++) {
                 const col = row.columns[j];
 
-                result += `<td class="align-middle">${this.BuildInnerTags(col.data.children)}</td>`;
+                result += `<td class="align-middle">${this.buildInnerTags(col.data.children)}</td>`;
             }
             result += "</tr>";
         }
@@ -51,16 +51,16 @@ export class BootstrapTableMethods {
         return result;
     }
 
-    static BuildInnerTags(tags: InterfaceBlock[]) {
+    static buildInnerTags(tags: InterfaceBlock[]) {
         let result = "";
         for (let i = 0; i < tags.length; i++) {
-            result += this.BuildInnerTag(tags[i]);
+            result += this.buildInnerTag(tags[i]);
         }
 
         return result;
     }
 
-    static BuildInnerTag(data: InterfaceBlock): string {
+    static buildInnerTag(data: InterfaceBlock): string {
         if (data.tagName === FileImageTagDataConsts.TagName) {
             let fileImageTag = data as FileImageTag;
             return `<img src=${fileImageTag.data.src} class="mx-auto d-block img-fluid" />`;

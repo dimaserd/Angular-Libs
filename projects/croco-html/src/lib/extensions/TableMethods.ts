@@ -5,6 +5,7 @@ import { BootstrapTableMethods } from './BootstrapTableMethods';
 import { HtmlExtractionMethods } from './HtmlExtractionMethods';
 import { InterfaceBlock } from "../models/InterfaceBlock";
 import { TextSimpleMethods } from './TextSimpleMethods';
+import { TextTags } from './TextMethods';
 
 export interface TableHeaderData {
     type: "table-header";
@@ -58,7 +59,7 @@ export class TableMethods {
         let tableData: TableData = {
             header: tableHeader,
             rows: tableRows,
-            bootstrapHtml: BootstrapTableMethods.BuildTable(tableHeader, tableRows),
+            bootstrapHtml: BootstrapTableMethods.buildTable(tableHeader, tableRows),
             html: tableTag.outerHTML,
             angularMaterialTableDataCheck: AngularMaterialTableMethods.checkAngularMaterialTableData(tableHeader, tableRows)
         };
@@ -135,10 +136,10 @@ export class TableMethods {
                 let children = HtmlExtractionMethods.transformHtmlElementToBlocks(jElement, options);
 
                 if (children.length === 0) {
-                    var textTag = document.createElement("text");
+                    var textTag = document.createElement(TextTags.text);
                     textTag.innerHTML = jElement.innerHTML;
 
-                    var textElem = TextSimpleMethods.ExtractTextTag(textTag);
+                    var textElem = TextSimpleMethods.extractTextTag(textTag);
 
                     children.push(textElem);
                 }

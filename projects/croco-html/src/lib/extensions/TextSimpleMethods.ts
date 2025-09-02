@@ -1,3 +1,4 @@
+import { da, tr } from "date-fns/locale";
 import { BaseApiResponse } from "../models";
 import { TextAlignment } from "../tag-services";
 
@@ -6,6 +7,12 @@ export const TextTag = "text";
 export interface GenericTextTag {
     tagName: string,
     data: SimpleTextTagData
+}
+
+export interface IHorizontalAlignmentExtractionResult {
+    succeeded: boolean;
+    result: TextAlignment;
+    errorMessage: string;
 }
 
 export interface SimpleTextTagData {
@@ -20,45 +27,33 @@ export class TextSimpleMethods {
 
     static supportedTags = ["sup", "sub", "strong", "b", "i", "u"];
 
-    static ExtractTextTag(elem: HTMLElement): GenericTextTag {
-        var hAlignValue = elem.getAttribute("h-align") ?? TextAlignment.Left as any;
+    static extractTextTag(elem: HTMLElement): GenericTextTag {
+
+        const hAlignExtractResult = this.extractHorizontalAlignment(elem);
 
         var data: SimpleTextTagData = {
             textTagName: elem.tagName.toLowerCase(),
-            text: elem.innerText.trim().replace('\n\t', ''),
-            html: elem.innerHTML.trim().replace('\n\t', ''),
-            horizontalAlignment: hAlignValue,
+            text: this.prepareText(elem.innerText),
+            html: this.prepareText(elem.innerHTML),
+            horizontalAlignment: hAlignExtractResult.result,
             validationResult: {
                 isSucceeded: true,
                 message: "Ok"
             }
         };
 
+        if (!hAlignExtractResult.succeeded) {
+            data.validationResult.isSucceeded = false;
+            data.validationResult.message = hAlignExtractResult.errorMessage;
+        }
+
         let result: GenericTextTag = {
             tagName: data.textTagName,
             data: data
         };
 
-        if (result.data.text === '\n') {
-            result.data.text = '';
-        }
-        if (result.data.html === '\n') {
-            result.data.html = '';
-        }
-
-        var alignmentVals = [TextAlignment.Left, TextAlignment.Right, TextAlignment.Center];
-
-        if (alignmentVals.indexOf(hAlignValue) < 0) {
-
-            result.data.validationResult = {
-                isSucceeded: false,
-                message: `Недопустимое значение атрибута h-align. Допустимые значения: ${alignmentVals.join(', ')}. `
-                    + 'Данный тег можно не указывать, по-умолчанию будет применено выравнивание слева.'
-            };
-        }
-
         var html = result.data.html;
-        var htmlValidation = this.ValidateTextHtml(html);
+        var htmlValidation = this.validateTextHtml(html);
 
         if (!htmlValidation.isSucceeded) {
             result.data.validationResult = htmlValidation;
@@ -67,7 +62,39 @@ export class TextSimpleMethods {
         return result;
     }
 
-    static ValidateTextHtml(html: string): BaseApiResponse {
+    static prepareText(s: string): string {
+        s = s.trim().replace('\n\t', '');
+
+        if (s === '\n') {
+            s = '';
+        }
+
+        return s;
+    }
+
+    static extractHorizontalAlignment(elem: HTMLElement): IHorizontalAlignmentExtractionResult {
+        const hAlignValue = elem.getAttribute("h-align") ?? TextAlignment.Left;
+
+        const alignmentVals: string[] = [TextAlignment.Left, TextAlignment.Right, TextAlignment.Center];
+
+        if (alignmentVals.indexOf(hAlignValue) < 0) {
+
+            return {
+                result: TextAlignment.Left,
+                succeeded: false,
+                errorMessage: `Недопустимое значение атрибута h-align. Допустимые значения: ${alignmentVals.join(', ')}. `
+                    + 'Данный тег можно не указывать, по-умолчанию будет применено выравнивание слева.'
+            };
+        }
+
+        return {
+            result: hAlignValue as TextAlignment,
+            succeeded: true,
+            errorMessage: ""
+        };
+    }
+
+    static validateTextHtml(html: string): BaseApiResponse {
 
         var p = document.createElement("p");
         p.innerHTML = html;
@@ -75,7 +102,7 @@ export class TextSimpleMethods {
         for (let i = 0; i < p.children.length; i++) {
             const element = p.children.item(i);
 
-            var validationResult = this.ValidateTag(element);
+            var validationResult = this.validateTag(element);
 
             if (!validationResult.isSucceeded) {
                 return validationResult;
@@ -88,7 +115,7 @@ export class TextSimpleMethods {
         }
     }
 
-    static ValidateTag(element: Element): BaseApiResponse {
+    static validateTag(element: Element): BaseApiResponse {
         let lowerTag = element.tagName.toLowerCase();
 
         if (!this.supportedTags.includes(lowerTag)) {
@@ -101,7 +128,7 @@ export class TextSimpleMethods {
         for (let i = 0; i < element.children.length; i++) {
             const nElement = element.children.item(i);
 
-            var innerValidationResult = this.ValidateTag(nElement);
+            var innerValidationResult = this.validateTag(nElement);
 
             if (!innerValidationResult.isSucceeded) {
                 return innerValidationResult;
