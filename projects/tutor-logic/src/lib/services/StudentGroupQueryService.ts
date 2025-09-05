@@ -3,7 +3,7 @@ import { Inject } from "@angular/core";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { GetListResult, StudentGroupSimpleModel } from "../models";
-import { SearchStudentGroups, StudentGroupDetailedModel, SearchStudentsInGroup, StudentInGroupSimpleModel, SearchStudentGroupsByStudentRequest, StudentGroupWithCourseProgressModel } from "../models/group-models";
+import { SearchStudentGroupsRequest, StudentGroupDetailedModel, SearchStudentsInGroup, StudentInGroupSimpleModel, SearchStudentGroupsByStudentRequest, StudentGroupWithCourseProgressModel } from "../models/group-models";
 
 /**
 * Методы контроллера StudentGroupQueryController
@@ -22,9 +22,9 @@ export class StudentGroupQueryService {
     }
 
     /**
-     * Поиск групп студентов
+     * Поиск групп учеников
      */
-    public search(model: SearchStudentGroups): Observable<GetListResult<StudentGroupSimpleModel>> {
+    public search(model: SearchStudentGroupsRequest): Observable<GetListResult<StudentGroupSimpleModel>> {
         return this._httpClient.post<GetListResult<StudentGroupSimpleModel>>(`${this.getBaseUrl()}/query/search`, model);
     }
 

@@ -1,8 +1,9 @@
 import { IconSimpleModel } from "./icon-models";
 import { StudentSimpleModel } from "./student-models";
 
-export interface SearchStudentGroups {
+export interface SearchStudentGroupsRequest {
     q: string;
+    schoolId: string;
     count: number | null;
     offSet: number;
 }
