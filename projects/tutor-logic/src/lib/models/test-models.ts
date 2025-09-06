@@ -22,6 +22,7 @@ export interface SearchTestsRequest {
   useSourceType: boolean;
   sourceType: string;
   isGlobal: boolean | null;
+  schoolId: string;
   count: number | null;
   offSet: number;
 }
