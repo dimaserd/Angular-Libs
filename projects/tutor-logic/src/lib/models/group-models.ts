@@ -17,6 +17,8 @@ export interface StudentGroupSimpleModel {
     useCourse: boolean;
     nameHtml: string;
     isFreeOfCharge: boolean;
+    schoolId: string;
+    courseShopWindowId: string;
 }
 
 export interface StudentGroupDetailedModel {
