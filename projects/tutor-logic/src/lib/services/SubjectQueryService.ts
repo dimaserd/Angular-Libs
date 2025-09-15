@@ -1,13 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import {
   SubjectCountsModel,
   SubjectModel,
-  SubjectWithIconModel
+  SubjectWithIconModel,
+  SubjectWithClarificationsModel
 } from '../models/subject.models';
-
-
 
 /**
  * Методы контроллера Tutor.Api.Controllers.Subjects.SubjectQueryController
@@ -29,31 +27,31 @@ export class SubjectQueryService {
     this._baseControllerUrl = `${baseUrl}api/tutor/subject/query`;
   }
 
-  public getAll(): Observable<SubjectModel[]> {
+  public getAll() {
     return this._httpClient.get<SubjectModel[]>(`${this._baseControllerUrl}/get-all`);
   }
 
-  public getAllCached(): Observable<SubjectModel[]> {
+  public getAllCached() {
     return this._httpClient.get<SubjectModel[]>(`${this._baseControllerUrl}/get-all/cached`);
   }
 
-  public getAllWithClarifications(): Observable<SubjectModel[]> {
-    return this._httpClient.get<SubjectModel[]>(`${this._baseControllerUrl}/get-all/with-clarifications`);
+  public getAllWithClarifications() {
+    return this._httpClient.get<SubjectWithClarificationsModel[]>(`${this._baseControllerUrl}/get-all/with-clarifications`);
   }
 
-  public getAllWithClarificationsCached(): Observable<SubjectModel[]> {
-    return this._httpClient.get<SubjectModel[]>(`${this._baseControllerUrl}/get-all/with-clarifications/cached`);
+  public getAllWithClarificationsCached() {
+    return this._httpClient.get<SubjectWithClarificationsModel[]>(`${this._baseControllerUrl}/get-all/with-clarifications/cached`);
   }
 
-  public getAllWithIconsCached(iconSetId: string): Observable<SubjectWithIconModel[]> {
+  public getAllWithIconsCached(iconSetId: string) {
     return this._httpClient.get<SubjectWithIconModel[]>(`${this._baseControllerUrl}/get-all/with-icons/Cached?iconSetId=${iconSetId}`);
   }
 
-  public getByAliasOrId(id: string): Observable<SubjectCountsModel> {
+  public getByAliasOrId(id: string) {
     return this._httpClient.get<SubjectCountsModel>(`${this._baseControllerUrl}/GetByAliasOrId?idOrAlias=${id}`);
   }
 
-  public getByAliasOrIdCached(idOrAlias: string): Observable<SubjectCountsModel> {
+  public getByAliasOrIdCached(idOrAlias: string) {
     return this._httpClient.get<SubjectCountsModel>(`${this._baseControllerUrl}/GetByAliasOrId/Cached?idOrAlias=${idOrAlias}`);
   }
 }
