@@ -7,6 +7,8 @@ import {
   SubjectWithIconModel
 } from '../models/subject.models';
 
+
+
 /**
  * Методы контроллера Tutor.Api.Controllers.Subjects.SubjectQueryController
  * 
@@ -28,15 +30,23 @@ export class SubjectQueryService {
   }
 
   public getAll(): Observable<SubjectModel[]> {
-    return this._httpClient.get<SubjectModel[]>(`${this._baseControllerUrl}/GetAll`);
+    return this._httpClient.get<SubjectModel[]>(`${this._baseControllerUrl}/get-all`);
   }
 
   public getAllCached(): Observable<SubjectModel[]> {
-    return this._httpClient.get<SubjectModel[]>(`${this._baseControllerUrl}/GetAll/Cached`);
+    return this._httpClient.get<SubjectModel[]>(`${this._baseControllerUrl}/get-all/cached`);
+  }
+
+  public getAllWithClarifications(): Observable<SubjectModel[]> {
+    return this._httpClient.get<SubjectModel[]>(`${this._baseControllerUrl}/get-all/with-clarifications`);
+  }
+
+  public getAllWithClarificationsCached(): Observable<SubjectModel[]> {
+    return this._httpClient.get<SubjectModel[]>(`${this._baseControllerUrl}/get-all/with-clarifications/cached`);
   }
 
   public getAllWithIconsCached(iconSetId: string): Observable<SubjectWithIconModel[]> {
-    return this._httpClient.get<SubjectWithIconModel[]>(`${this._baseControllerUrl}/GetAll/with-icons/Cached?iconSetId=${iconSetId}`);
+    return this._httpClient.get<SubjectWithIconModel[]>(`${this._baseControllerUrl}/get-all/with-icons/Cached?iconSetId=${iconSetId}`);
   }
 
   public getByAliasOrId(id: string): Observable<SubjectCountsModel> {

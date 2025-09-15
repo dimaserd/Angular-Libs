@@ -53,3 +53,10 @@ export interface SubjectTestSimpleModel {
   id: string;
   name: string;
 }
+
+export interface SubjectWithClarificationsModel {
+  id: string;
+  name: string;
+  alias: string;
+  clarificationValues: Array<string>;
+}
