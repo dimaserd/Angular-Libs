@@ -3,7 +3,6 @@ import { Inject, Injectable } from '@angular/core';
 import {
   SubjectCountsModel,
   SubjectModel,
-  SubjectWithIconModel,
   SubjectWithClarificationsModel
 } from '../models/subject.models';
 
@@ -41,10 +40,6 @@ export class SubjectQueryService {
 
   public getAllWithClarificationsCached() {
     return this._httpClient.get<SubjectWithClarificationsModel[]>(`${this._baseControllerUrl}/get-all/with-clarifications/cached`);
-  }
-
-  public getAllWithIconsCached(iconSetId: string) {
-    return this._httpClient.get<SubjectWithIconModel[]>(`${this._baseControllerUrl}/get-all/with-icons/Cached?iconSetId=${iconSetId}`);
   }
 
   public getByAliasOrId(id: string) {

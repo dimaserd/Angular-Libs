@@ -1,4 +1,4 @@
-import { SubjectMenuWithIconsModel } from "./subject-menu-models";
+import { SubjectMenuWithIconsModel } from "./subject.models";
 
 export interface SettingModel {
   name: string;

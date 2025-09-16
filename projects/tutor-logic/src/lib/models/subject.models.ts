@@ -1,6 +1,3 @@
-import { IconSimpleModel } from "./icon-models";
-import { SubjectMenu } from "./subject-menu-models";
-
 export interface SubjectModel {
   id: string;
   name: string;
@@ -26,13 +23,15 @@ export interface SubjectCountsModel {
   testsCount: number;
 }
 
-export interface ChangeSubjectConfiguration {
-  id: string;
-  configuration: SubjectMenu;
-}
-
 export interface OrderSubjectsRequest {
   ids: Array<string>;
+}
+
+export interface SubjectWithClarificationsModel {
+  id: string;
+  name: string;
+  alias: string;
+  clarificationValues: Array<string>;
 }
 
 export interface SubjectWithIconModel {
@@ -42,21 +41,16 @@ export interface SubjectWithIconModel {
   icon: IconSimpleModel;
 }
 
-export interface SubjectForStudentDetailedViewModel {
-  icon: IconSimpleModel;
-  subject: SubjectModel;
-  menu: SubjectMenu;
-  globalTests: Array<SubjectTestSimpleModel>;
+export interface IconSimpleModel {
+  id: string;
+  setId: string;
+  name: string;
+  fileId: number;
 }
 
-export interface SubjectTestSimpleModel {
+export interface SubjectMenuWithIconsModel {
   id: string;
-  name: string;
-}
-
-export interface SubjectWithClarificationsModel {
-  id: string;
-  name: string;
-  alias: string;
-  clarificationValues: Array<string>;
+  isMain: boolean;
+  iconSetId: string;
+  subjects: Array<SubjectWithIconModel>;
 }
