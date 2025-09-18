@@ -54,3 +54,16 @@ export interface SubjectMenuWithIconsModel {
   iconSetId: string;
   subjects: Array<SubjectWithIconModel>;
 }
+
+export interface CreateSubjectMenuRequest {
+  isMain: boolean;
+  name: string;
+  iconSetId: string;
+}
+
+export interface SubjectMenuSimpleModel {
+  id: string;
+  name: string;
+  isMain: boolean;
+  iconSetId: string;
+}

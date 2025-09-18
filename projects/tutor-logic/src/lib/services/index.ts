@@ -37,3 +37,4 @@ export { DefaultCourseLandingPageQueryService } from './DefaultCourseLandingPage
 export { StudentGroupInfoPageService } from './StudentGroupInfoPageService'
 export { StudentAggregatedStatisticSnapshotService } from './StudentAggregatedStatisticSnapshotService'
 export { GroupStatisticSnapshotStudentService } from './GroupStatisticSnapshotStudentService'
+export { SubjectMenuService } from './SubjectMenuService'
