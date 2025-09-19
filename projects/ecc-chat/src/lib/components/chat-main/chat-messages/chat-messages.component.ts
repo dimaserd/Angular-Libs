@@ -9,6 +9,7 @@ import {
   QueryList,
   ViewChild,
   ViewChildren,
+  HostListener,
 } from '@angular/core';
 import { AsyncPipe, DatePipe, NgForOf, NgIf } from '@angular/common';
 import { NgScrollbar, NgScrollbarModule } from 'ngx-scrollbar';
@@ -80,6 +81,8 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit {
   public scrolled = new Subject<void>();
 
   public takeUntilDestroyed: OperatorFunction<unknown, unknown>;
+  private longPressTimer: any = null;
+  private longPressDelay = 500;
 
   constructor(
     private dialog: Dialog,
@@ -101,6 +104,49 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit {
 
   public getTextForAvatar(user: EccUserModel | undefined): string | undefined {
     return user?.email?.[0]?.toUpperCase();
+  }
+
+  @HostListener('touchstart', ['$event'])
+  onTouchStart(event: TouchEvent): void {
+    const messageElement = (event.target as HTMLElement).closest('app-message');
+    if (messageElement) {
+      this.longPressTimer = setTimeout(() => {
+        this.showContextMenu(event, messageElement);
+      }, this.longPressDelay);
+    }
+  }
+
+  @HostListener('touchend', ['$event'])
+  onTouchEnd(): void {
+    if (this.longPressTimer) {
+      clearTimeout(this.longPressTimer);
+      this.longPressTimer = null;
+    }
+  }
+
+  @HostListener('touchmove', ['$event'])
+  onTouchMove(): void {
+    if (this.longPressTimer) {
+      clearTimeout(this.longPressTimer);
+      this.longPressTimer = null;
+    }
+  }
+
+  private showContextMenu(event: TouchEvent, messageElement: any): void {
+    const messageComponent = this.messagesElements?.find(
+      (comp) => comp.elementRef.nativeElement === messageElement
+    );
+
+    if (messageComponent?.message) {
+      const contextMenuEvent = new MouseEvent('contextmenu', {
+        bubbles: true,
+        cancelable: true,
+        clientX: event.touches[0].clientX,
+        clientY: event.touches[0].clientY,
+        button: 2,
+      });
+      messageElement.dispatchEvent(contextMenuEvent);
+    }
   }
 
   ngAfterViewInit(): void {

@@ -16,7 +16,7 @@
     <span class="sender-name">{{ sender?.name }} {{ sender?.surname }}</span>
   }
 
-  {{ message.message.message }}
+  <span class="message">{{ message.message.message }}</span>
   <span class="time-inner" title="Отправлено: {{ message.date | date: 'dd MMMM yyyy, HH:mm:ss' }}{{
       message.message.sentOnUtcTicks !== message.message.lastUpdateUtcTicks
         ? '\nИзменено: ' + (message.message.lastUpdateUtcTicks | ticksToDate | date: 'dd MMMM yyyy, HH:mm:ss')
