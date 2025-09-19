@@ -4,6 +4,16 @@
 }
 
 :host {
-  -webkit-touch-callout: none;
-  user-select: none;
+
+  .message,
+  .sender-name,
+  .time-inner,
+  .message-tail-filled,
+  .message-status-icon {
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
 }
