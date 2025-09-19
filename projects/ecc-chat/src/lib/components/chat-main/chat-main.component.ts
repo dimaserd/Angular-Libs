@@ -29,32 +29,43 @@ import { InputMessage } from '../../models/input-message.interface';
     PipeMapperPipe,
     ChatMessagesComponent,
     ChatInputBoxComponent,
-    ChatHeaderComponent
+    ChatHeaderComponent,
   ],
 })
 export class ChatMainComponent implements OnDestroy {
   @Output()
   public closeChat = new EventEmitter<void>();
 
+  @Output()
+  public onFullscreen = new EventEmitter<void>();
+
+  @Output() public draftMessageEvent = new EventEmitter<InputMessage>();
+
   @Input()
   public showCloseChatButton = false;
+
+  @Input()
+  public showFullscreenButton = false;
 
   public newMessage: InputMessage;
 
   @Input()
+  public draftMessage: InputMessage | null = null;
+
+  @Input()
   public set chatId(value: number | undefined) {
-    this.initChat(value)
+    this.initChat(value);
   }
 
-  constructor(readonly _chatLogicService: ChatLogicService) { }
+  constructor(readonly _chatLogicService: ChatLogicService) {}
 
   ngOnDestroy(): void {
     this._chatLogicService.closeChatLogic();
   }
 
   public initChat(id: number): void {
-    if(id !== undefined && id !== null) {
-      this._chatLogicService.initChatLogic(id)
+    if (id !== undefined && id !== null) {
+      this._chatLogicService.initChatLogic(id);
     }
   }
 

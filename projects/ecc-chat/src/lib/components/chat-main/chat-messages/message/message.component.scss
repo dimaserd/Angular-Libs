@@ -2,3 +2,8 @@
   display: block;
   font-weight: bold;
 }
+
+:host {
+  -webkit-touch-callout: none;
+  user-select: none;
+}

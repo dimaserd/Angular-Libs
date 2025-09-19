@@ -10,7 +10,7 @@
 
 .messages-wrapper {
   min-width: unset;
-  max-width: 728px;;
+  max-width: 728px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -43,10 +43,10 @@
   justify-content: center;
   border: none;
   align-items: center;
-  filter: drop-shadow(0px 2px 10px rgba(0, 0, 0, 0.04)) drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.05))
-    drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.2));
+  filter: drop-shadow(0px 2px 10px rgba(0, 0, 0, 0.04)) drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.05)) drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.2));
   background-color: #fff;
   border-radius: 50%;
+
   svg {
     color: #868686;
   }
@@ -75,6 +75,7 @@
 
 :host {
   position: relative;
+
   ::ng-deep {
     .files-wrapper {
       display: flex;
@@ -184,9 +185,11 @@
               border-width: 0;
             }
           }
+
           .file-ext {
             opacity: 0;
           }
+
           .file-download-icon {
             opacity: 1;
           }
@@ -266,9 +269,11 @@
         --current-file-size-color: rgb(79, 174, 78);
         --current-message-background-color: rgb(223, 255, 223);
         --file-icon-background-color: rgb(79, 174, 78);
+
         .message-wrapper {
           background-color: var(--app-message-outgoing-background-color);
           border-radius: 15px 15px 5px 15px;
+
           .message-tail-filled {
             color: var(--app-message-outgoing-background-color);
             inset-inline-end: -8.4px;
@@ -279,6 +284,7 @@
           &:last-child {
             border-bottom-right-radius: 0;
           }
+
           .time-inner {
             color: #5ca853;
           }
@@ -287,6 +293,7 @@
 
       &:not(.is-outgoing-group) {
         padding-left: 40px;
+
         .message-wrapper {
           &:last-child {
             border-bottom-left-radius: 0;
@@ -321,6 +328,7 @@
         position: relative;
         user-select: text;
         padding: 4px 8px 5px;
+
         .message-tail-filled {
           display: block;
           position: absolute;
@@ -331,6 +339,7 @@
           bottom: 0;
           transform: translateY(1px);
         }
+
         .time-inner {
           font-size: 12px;
           visibility: hidden;
@@ -343,13 +352,16 @@
           white-space: nowrap;
           height: 12px;
           color: #707579;
+
           .time-edited {
             margin-right: 6px;
           }
+
           .message-status-icon {
             width: 18px;
             height: 18px;
           }
+
           .time {
             position: absolute;
             display: inline-flex;
@@ -410,9 +422,14 @@
     background-color: rgba(112, 117, 121, 0.08);
   }
 
-  svg {
+  svg,
+  mat-icon {
     height: 23px;
     width: 23px;
     margin-right: 17px;
+  }
+
+  .copy-icon {
+    font-size: 20px;
   }
 }
