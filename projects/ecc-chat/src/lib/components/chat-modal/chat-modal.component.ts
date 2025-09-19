@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { AsyncPipe } from '@angular/common';
 import { ChatMainComponent } from '../chat-main/chat-main.component';
@@ -6,10 +11,12 @@ import { PipeMapperPipe } from '../../pipes/pipe-mapper.pipe';
 import { ChatSettings } from '../../models/chat-settings';
 import { ChatLogicService } from '../../services/ChatLogicService';
 import { ChatSymbolSpritePipe } from '../../pipes/chat-symbol-sprite.pipe';
+import { InputMessage } from '../../models';
 
 export interface ChatModalComponentData {
   chatId: number;
   chatName: string;
+  draftMessage?: InputMessage | null;
   settings?: ChatSettings;
 }
 
@@ -19,7 +26,7 @@ export interface ChatModalComponentData {
   styleUrls: ['./chat-modal.component.scss'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [AsyncPipe, ChatMainComponent, PipeMapperPipe, ChatSymbolSpritePipe]
+  imports: [AsyncPipe, ChatMainComponent, PipeMapperPipe, ChatSymbolSpritePipe],
 })
 export class ChatModalComponent implements OnInit {
   public dialogRef: DialogRef = inject(DialogRef);

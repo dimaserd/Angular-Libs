@@ -1,7 +1,16 @@
 <div class="chat-background"></div>
 
 @if (_chatLogicService.chatIdSubject$ | async | pipeMapper: hasChatId) {
-  <ecc-chat-header (closeChat)="closeChat.emit()"></ecc-chat-header>
-  <ecc-chat-messages [newMessage]="newMessage"></ecc-chat-messages>
-  <ecc-chat-input-box (sendNewMessageEvent)="newMessage = $event"></ecc-chat-input-box>
+<ecc-chat-header
+  (closeChat)="closeChat.emit()"
+  (openFullscreen)="onFullscreen.emit()"
+  [showCloseChatButton]="showCloseChatButton"
+  [showFullscreenButton]="showFullscreenButton"
+></ecc-chat-header>
+<ecc-chat-messages [newMessage]="newMessage"></ecc-chat-messages>
+<ecc-chat-input-box
+  [draftMessage]="draftMessage"
+  (sendNewMessageEvent)="newMessage = $event"
+  (draftMessageEvent)="draftMessageEvent.emit($event)"
+></ecc-chat-input-box>
 }

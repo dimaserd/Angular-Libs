@@ -2,14 +2,17 @@
   <div scrollViewport>
     <div class="messages-wrapper">
       <ng-container *ngFor="let day of messagesByDays; let isLastDay = last">
-        <div class="day-title">{{ day.date | date: 'dd MMMM' }}</div>
+        <div class="day-title">{{ day.date | date : 'dd MMMM' }}</div>
         <div
           [class.is-outgoing-group]="messagesGroup.isOutgoing"
           class="messages-by-sender-group"
-          *ngFor="let messagesGroup of day.messagesGroups; let isLastGroupInDay = last"
+          *ngFor="
+            let messagesGroup of day.messagesGroups;
+            let isLastGroupInDay = last
+          "
         >
           <div class="message-avatar" *ngIf="!messagesGroup.isOutgoing">
-            {{ messagesGroup.sender | pipeMapper: getTextForAvatar }}
+            {{ messagesGroup.sender | pipeMapper : getTextForAvatar }}
           </div>
           <ng-container
             *ngFor="
@@ -27,7 +30,10 @@
               [isOutgoing]="messagesGroup.isOutgoing"
               [interlocutorVisitTime$]="interlocutorVisitTime$"
               [isLastMessage]="
-                isLastInGroupMessage && isLastGroupInDay && isLastDay && !(uploadingMessages$ | async)?.length
+                isLastInGroupMessage &&
+                isLastGroupInDay &&
+                isLastDay &&
+                !(uploadingMessages$ | async)?.length
               "
               class="message-wrapper"
               [class.outgoing]="messagesGroup.isOutgoing"
@@ -43,7 +49,9 @@
                 [interlocutorVisitTime$]="interlocutorVisitTime$"
                 [isFirstInGroupMessage]="isFirstInGroupMessage"
                 [sender]="messagesGroup.sender"
-                [isLastMessage]="isLastInGroupMessage && isLastGroupInDay && isLastDay"
+                [isLastMessage]="
+                  isLastInGroupMessage && isLastGroupInDay && isLastDay
+                "
                 class="message-wrapper"
                 [class.outgoing]="messagesGroup.isOutgoing"
               >
@@ -52,15 +60,38 @@
 
             <ng-template #contextMenuRef>
               <div class="context-menu-wrapper" cdkMenu>
-                <button class="context-menu-item" (click)="editMessage(message)" cdkMenuItem>
+                <button
+                  class="context-menu-item"
+                  (click)="editMessage(message)"
+                  cdkMenuItem
+                >
                   <svg>
-                    <use [attr.xlink:href]="'telegram-pencil' | chatSymbolSprite"></use>
+                    <use
+                      [attr.xlink:href]="'telegram-pencil' | chatSymbolSprite"
+                    ></use>
                   </svg>
                   <span>Изменить</span>
                 </button>
-                <button class="context-menu-item danger" (click)="deleteMessage(message)" cdkMenuItem>
+                <button
+                  class="context-menu-item"
+                  (click)="copyToClipboard(message)"
+                  cdkMenuItem
+                >
+                  <mat-icon
+                    class="copy-icon"
+                    fontIcon="content_copy"
+                  ></mat-icon>
+                  <span>Скопировать</span>
+                </button>
+                <button
+                  class="context-menu-item danger"
+                  (click)="deleteMessage(message)"
+                  cdkMenuItem
+                >
                   <svg>
-                    <use [attr.xlink:href]="'telegram-trash' | chatSymbolSprite"></use>
+                    <use
+                      [attr.xlink:href]="'telegram-trash' | chatSymbolSprite"
+                    ></use>
                   </svg>
                   <span>Удалить</span>
                 </button>
@@ -71,9 +102,16 @@
       </ng-container>
       <ng-container *ngIf="uploadingMessages$ | async as uploadingMessages">
         <ng-container *ngIf="uploadingMessages.length">
-          <div *ngIf="!hasSentMessagesToday()" class="day-title">{{ today | date: 'dd MMMM' }}</div>
+          <div *ngIf="!hasSentMessagesToday()" class="day-title">
+            {{ today | date : 'dd MMMM' }}
+          </div>
           <div class="messages-by-sender-group is-outgoing-group">
-            <ng-container *ngFor="let message of uploadingMessages; let isLastInGroupMessage = last">
+            <ng-container
+              *ngFor="
+                let message of uploadingMessages;
+                let isLastInGroupMessage = last
+              "
+            >
               <app-message
                 #messageRef
                 [cdkContextMenuTriggerFor]="contextMenuRef"
@@ -87,9 +125,15 @@
               </app-message>
               <ng-template #contextMenuRef>
                 <div class="context-menu-wrapper" cdkMenu>
-                  <button class="context-menu-item danger" (click)="deleteMessage(message)" cdkMenuItem>
+                  <button
+                    class="context-menu-item danger"
+                    (click)="deleteMessage(message)"
+                    cdkMenuItem
+                  >
                     <svg>
-                      <use [attr.xlink:href]="'telegram-trash' | chatSymbolSprite"></use>
+                      <use
+                        [attr.xlink:href]="'telegram-trash' | chatSymbolSprite"
+                      ></use>
                     </svg>
                     <span>Удалить</span>
                   </button>
@@ -107,8 +151,14 @@
     <svg width="22" height="22">
       <use [attr.xlink:href]="'arrow-to-bottom' | chatSymbolSprite"></use>
     </svg>
-    <span class="not-read-count" *ngIf="_chatLogicService.notReadMessages.length">{{
-      _chatLogicService.notReadMessages.length > 99 ? '99+' : _chatLogicService.notReadMessages.length
-    }}</span>
+    <span
+      class="not-read-count"
+      *ngIf="_chatLogicService.notReadMessages.length"
+      >{{
+        _chatLogicService.notReadMessages.length > 99
+          ? '99+'
+          : _chatLogicService.notReadMessages.length
+      }}</span
+    >
   </button>
 </div>

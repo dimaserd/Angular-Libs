@@ -33,6 +33,9 @@ import { isFile } from '../../../utils/is-file';
 import { getNextId } from '../../../utils/base/get-next-id';
 import { dateToTicks } from '../../../utils/base/date-to-ticks';
 import { ChatSymbolSpritePipe } from '../../../pipes/chat-symbol-sprite.pipe';
+import { Clipboard } from '@angular/cdk/clipboard';
+import { MatIconModule } from '@angular/material/icon';
+
 @Component({
   selector: 'ecc-chat-messages',
   templateUrl: './chat-messages.component.html',
@@ -48,13 +51,16 @@ import { ChatSymbolSpritePipe } from '../../../pipes/chat-symbol-sprite.pipe';
     CdkMenuModule,
     AsyncPipe,
     PipeMapperPipe,
-    ChatSymbolSpritePipe
+    ChatSymbolSpritePipe,
+    MatIconModule,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChatMessagesComponent implements OnInit, AfterViewInit {
-  @ViewChild(NgScrollbar, { read: NgScrollbar }) public scrollbarRef?: NgScrollbar;
-  @ViewChildren('messageRef', { read: MessageComponent }) public messagesElements?: QueryList<MessageComponent>;
+  @ViewChild(NgScrollbar, { read: NgScrollbar })
+  public scrollbarRef?: NgScrollbar;
+  @ViewChildren('messageRef', { read: MessageComponent })
+  public messagesElements?: QueryList<MessageComponent>;
 
   @Input()
   set newMessage(value: InputMessage) {
@@ -79,8 +85,9 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit {
     private dialog: Dialog,
     private element: ElementRef,
     private cdr: ChangeDetectorRef,
+    private readonly clipboard: Clipboard,
     public readonly _chatLogicService: ChatLogicService,
-    private readonly _chatMessagingService: ChatMessagingService,
+    private readonly _chatMessagingService: ChatMessagingService
   ) {
     this.takeUntilDestroyed = takeUntilDestroyed();
     resizeObservable(this.element.nativeElement)
@@ -102,15 +109,18 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit {
         this.takeUntilDestroyed,
         debounceTime(100),
         switchMap((data) => {
-          return this._chatLogicService.getMessagesAfterScroll(this.messagesByDays);
-        }),
+          return this._chatLogicService.getMessagesAfterScroll(
+            this.messagesByDays
+          );
+        })
       )
       .subscribe((data) => {
         this.messagesByDays = data.messages;
-        this.scrollPositionBottom = this._chatLogicService.getFirstAndLastVisibleMessages(
-          this.element,
-          this.messagesElements,
-        );
+        this.scrollPositionBottom =
+          this._chatLogicService.getFirstAndLastVisibleMessages(
+            this.element,
+            this.messagesElements
+          );
         this.cdr.detectChanges();
       });
   }
@@ -126,7 +136,9 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit {
       this.messagesByDays = messages;
 
       let uploadingMessages = this.uploadingMessages$.value;
-      uploadingMessages = uploadingMessages.filter((message) => !message.onServerId);
+      uploadingMessages = uploadingMessages.filter(
+        (message) => !message.onServerId
+      );
       this.uploadingMessages$.next(uploadingMessages);
 
       setTimeout(() => {
@@ -141,16 +153,22 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit {
     this._chatLogicService.editMessage(message);
   }
 
+  public copyToClipboard(message: MessageView): void {
+    this.clipboard.copy(message?.message?.message);
+  }
+
   public deleteMessage(message: MessageView): void {
     this.dialog
       .open(ChatConfirmDeleteModalComponent, { data: message })
       .closed.pipe(
         take(1),
         filter((confirm) => Boolean(confirm)),
-        switchMap(() => this._chatMessagingService.delete(message.message.id)),
+        switchMap(() => this._chatMessagingService.delete(message.message.id))
       )
       .subscribe(() => {
-        let elem = this.messagesElements?.find((element) => element.message?.message.id === message.message.id);
+        let elem = this.messagesElements?.find(
+          (element) => element.message?.message.id === message.message.id
+        );
 
         if (elem) {
           elem.elementRef.nativeElement.remove();
@@ -162,10 +180,14 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit {
     this.scrollPositionBottom = true;
     if (this._chatLogicService.notReadMessages.length) {
       const firstNotReadMessageElement = this.messagesElements?.find(
-        (element) => element.message?.message.id === this._chatLogicService.notReadMessages[0].message.id,
+        (element) =>
+          element.message?.message.id ===
+          this._chatLogicService.notReadMessages[0].message.id
       );
       if (firstNotReadMessageElement) {
-        this.scrollbarRef?.scrollToElement(firstNotReadMessageElement.elementRef.nativeElement);
+        this.scrollbarRef?.scrollToElement(
+          firstNotReadMessageElement.elementRef.nativeElement
+        );
         return;
       }
     }
@@ -189,11 +211,15 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit {
 
   private sendNewMessage(message: InputMessage): void {
     const attachments = message.files?.map((file) =>
-      isFile(file) ? { fileId: `${getNextId()}`, fileName: file.name, size: file.size } : file,
+      isFile(file)
+        ? { fileId: `${getNextId()}`, fileName: file.name, size: file.size }
+        : file
     );
     const date = new Date();
     const sentOnUtcTicks = dateToTicks(date);
-    const filesUploadingProgress = new BehaviorSubject<{ uploadingLoaded?: number; uploadingTotal?: number }[]>([]);
+    const filesUploadingProgress = new BehaviorSubject<
+      { uploadingLoaded?: number; uploadingTotal?: number }[]
+    >([]);
     const uploadingMessageId = `${getNextId()}`;
     const uploadingMessage: MessageView = {
       dayId: format(date, 'yyyy.MM.dd'),
@@ -217,7 +243,9 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit {
     const uploadingMessages = this.uploadingMessages$.value;
     this.uploadingMessages$.next([...uploadingMessages, uploadingMessage]);
 
-    const filesToSend = message.files?.map((x) => (x instanceof File ? x : null)).filter((x) => x !== null);
+    const filesToSend = message.files
+      ?.map((x) => (x instanceof File ? x : null))
+      .filter((x) => x !== null);
 
     const request = !message.files
       ? this._chatLogicService.sendMessageToServer(message.text, null)
@@ -225,7 +253,7 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit {
           message.text,
           filesToSend,
           filesUploadingProgress,
-          uploadingMessage,
+          uploadingMessage
         );
 
     request.subscribe({
