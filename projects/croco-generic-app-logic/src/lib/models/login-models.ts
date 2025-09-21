@@ -53,7 +53,6 @@ export interface CurrentLoginData {
     noEmail: boolean;
     phoneNumber: string;
     noPhoneNumber: boolean;
-    applicationId: string;
 }
 
 export interface LoginModel {
