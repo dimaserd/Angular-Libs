@@ -2,7 +2,9 @@
   <div scrollViewport>
     <div class="messages-wrapper">
       <ng-container *ngFor="let day of messagesByDays; let isLastDay = last">
+        @if(day.messagesGroups.length) {
         <div class="day-title">{{ day.date | date : 'dd MMMM' }}</div>
+        }
         <div
           [class.is-outgoing-group]="messagesGroup.isOutgoing"
           class="messages-by-sender-group"
@@ -77,10 +79,9 @@
                   (click)="copyToClipboard(message)"
                   cdkMenuItem
                 >
-                  <mat-icon
-                    class="copy-icon"
-                    fontIcon="content_copy"
-                  ></mat-icon>
+                  <svg>
+                    <use [attr.xlink:href]="'copy' | chatSymbolSprite"></use>
+                  </svg>
                   <span>Скопировать</span>
                 </button>
                 <button
@@ -149,7 +150,7 @@
 <div *ngIf="!scrollPositionBottom" class="to-bottom-button-wrapper">
   <button class="to-bottom-button" (click)="scrollToFirstNotReadOrBottom()">
     <svg width="22" height="22">
-      <use [attr.xlink:href]="'arrow-to-bottom' | chatSymbolSprite"></use>
+      <use [attr.xlink:href]="'arrow-bold' | chatSymbolSprite"></use>
     </svg>
     <span
       class="not-read-count"

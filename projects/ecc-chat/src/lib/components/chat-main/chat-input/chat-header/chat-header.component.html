@@ -1,13 +1,18 @@
-@if (_chatLogicService.chatChanges$ | async; as chatInfo) {
+@if(showCloseChatButton || showFullscreenButton) { @if
+(_chatLogicService.chatChanges$ | async; as chatInfo) {
 <div class="chat-info">
+  @if(showChatInfo) {
   <button class="chat-info-button" (click)="openChatInfo(chatInfo)">
     <ecc-chat-short-info [chatInfo]="chatInfo"></ecc-chat-short-info>
   </button>
+  }
 
   <div class="controls">
     @if (showFullscreenButton) {
     <button class="fullscreen-button" (click)="openFullscreen.emit()">
-      <mat-icon fontIcon="fullscreen"></mat-icon>
+      <svg>
+        <use [attr.xlink:href]="'fullscreen' | chatSymbolSprite"></use>
+      </svg>
     </button>
     } @if (showCloseChatButton) {
     <button class="close-chat-button" (click)="closeChat.emit()">
@@ -18,4 +23,4 @@
     }
   </div>
 </div>
-}
+} }

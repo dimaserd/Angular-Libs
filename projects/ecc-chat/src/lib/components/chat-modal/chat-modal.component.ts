@@ -17,6 +17,7 @@ export interface ChatModalComponentData {
   chatId: number;
   chatName: string;
   draftMessage?: InputMessage | null;
+  showChatInfo?: boolean;
   settings?: ChatSettings;
 }
 

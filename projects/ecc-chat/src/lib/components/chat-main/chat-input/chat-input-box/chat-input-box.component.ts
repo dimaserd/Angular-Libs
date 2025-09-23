@@ -81,7 +81,10 @@ export class ChatInputBoxComponent implements AfterViewInit {
   }
 
   public sendMessage(): void {
-    if (!this.chatControlForm.valid) {
+    if (
+      !this.chatControlForm.valid ||
+      (this.chatControlForm.value?.message?.text || '').trim().length === 0
+    ) {
       return;
     }
     const { message } = this.chatControlForm.value;
