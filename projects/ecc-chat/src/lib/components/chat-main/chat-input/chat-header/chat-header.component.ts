@@ -33,6 +33,9 @@ export class ChatHeaderComponent {
   @Input()
   public showFullscreenButton = false;
 
+  @Input()
+  public showChatInfo = false;
+
   constructor(
     readonly _chatLogicService: ChatLogicService,
     private dialog: Dialog

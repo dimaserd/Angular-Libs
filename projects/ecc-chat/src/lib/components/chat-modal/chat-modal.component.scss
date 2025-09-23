@@ -1,13 +1,11 @@
 :host {
-  padding: 24px;
-  height: 800px;
-  width: 1600px;
+  height: 100dvh;
+  width: 100dvw;
   display: flex;
   max-height: 100dvh;
   max-width: 100dvw;
   background-color: #fff;
   flex-direction: column;
-  border-radius: 10px;
 }
 
 .chat-modal-header {
@@ -15,6 +13,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-left: 12px;
 }
 
 ecc-chat-main {

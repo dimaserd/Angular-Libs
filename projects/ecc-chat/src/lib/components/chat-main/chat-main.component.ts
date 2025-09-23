@@ -5,6 +5,7 @@ import {
   Input,
   LOCALE_ID,
   OnDestroy,
+  OnInit,
   Output,
 } from '@angular/core';
 import { ChatMessagesComponent } from './chat-messages/chat-messages.component';
@@ -15,6 +16,7 @@ import { ChatLogicService } from '../../services/ChatLogicService';
 import { ChatInputBoxComponent } from './chat-input/chat-input-box/chat-input-box.component';
 import { ChatHeaderComponent } from './chat-input/chat-header/chat-header.component';
 import { InputMessage } from '../../models/input-message.interface';
+import { ChatSettings } from '../../models';
 
 @Component({
   selector: 'ecc-chat-main',
@@ -32,7 +34,7 @@ import { InputMessage } from '../../models/input-message.interface';
     ChatHeaderComponent,
   ],
 })
-export class ChatMainComponent implements OnDestroy {
+export class ChatMainComponent implements OnDestroy, OnInit {
   @Output()
   public closeChat = new EventEmitter<void>();
 
@@ -46,6 +48,12 @@ export class ChatMainComponent implements OnDestroy {
 
   @Input()
   public showFullscreenButton = false;
+
+  @Input()
+  public showChatInfo = false;
+
+  @Input()
+  public settings: ChatSettings | null = null;
 
   public newMessage: InputMessage;
 
@@ -61,6 +69,12 @@ export class ChatMainComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     this._chatLogicService.closeChatLogic();
+  }
+
+  ngOnInit(): void {
+    if (this.settings) {
+      this._chatLogicService.setChatSettings(this.settings);
+    }
   }
 
   public initChat(id: number): void {

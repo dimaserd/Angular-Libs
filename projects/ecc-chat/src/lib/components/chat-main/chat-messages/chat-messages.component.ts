@@ -11,7 +11,13 @@ import {
   ViewChildren,
   HostListener,
 } from '@angular/core';
-import { AsyncPipe, DatePipe, NgForOf, NgIf } from '@angular/common';
+import {
+  AsyncPipe,
+  CommonModule,
+  DatePipe,
+  NgForOf,
+  NgIf,
+} from '@angular/common';
 import { NgScrollbar, NgScrollbarModule } from 'ngx-scrollbar';
 import { BehaviorSubject, Observable, OperatorFunction, Subject } from 'rxjs';
 import { debounceTime, filter, switchMap, take } from 'rxjs/operators';
@@ -54,6 +60,7 @@ import { MatIconModule } from '@angular/material/icon';
     PipeMapperPipe,
     ChatSymbolSpritePipe,
     MatIconModule,
+    CommonModule,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
