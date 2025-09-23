@@ -3,9 +3,11 @@ import { TestQuestionModel, TestQuestionType } from "./question-models";
 import { QuestionValidationSourceType } from "./solution-validation-models";
 import { TestQuestionErrorsStatisticOrderType } from "./student-statistic-models";
 
-export interface SearchStudentTestSolutions {
+export interface SearchStudentTestSolutionsRequest {
     isFinished: boolean | null;
     studentId: string;
+    testId: string;
+    withUnreadMessages: boolean;
     count: number | null;
     offSet: number;
 }
@@ -55,11 +57,11 @@ export interface StartSolutionFromDirectory {
 }
 
 export interface CreateTestForStudentErrorsRequest {
-    testName: string; 
-    questionsCount: number; 
-    questionTypes: Array<TestQuestionType>; 
-    orderType: TestQuestionErrorsStatisticOrderType; 
-    canCheckSingleQuestion: boolean; 
+    testName: string;
+    questionsCount: number;
+    questionTypes: Array<TestQuestionType>;
+    orderType: TestQuestionErrorsStatisticOrderType;
+    canCheckSingleQuestion: boolean;
 }
 
 export interface TestSolutionCreatedResult {
@@ -78,9 +80,10 @@ export interface StartTestSolutionByTestId {
     canCheckSingleQuestion: boolean;
 }
 
-export interface SearchMyTestSolutions {
+export interface SearchMyTestSolutionsRequest {
     isFinished: boolean | null;
     testId: string;
+    withUnreadMessages: boolean;
     count: number | null;
     offSet: number;
 }
