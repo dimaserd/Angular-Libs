@@ -1,6 +1,5 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, Inject } from "@angular/core";
-import { Observable } from "rxjs";
 import { RegisterModel, RegisterStudentRequest, StudentRegistrationResult } from "../models/student-models";
 
 @Injectable({ providedIn: 'root' })
@@ -14,15 +13,15 @@ export class StudentRegistrationService {
         this._baseControllerUrl = baseUrl + 'api/tutor/student';
     }
 
-    register(model: RegisterModel): Observable<StudentRegistrationResult> {
+    register(model: RegisterModel) {
         return this._httpClient.post<StudentRegistrationResult>(`${this._baseControllerUrl}/register`, model);
     }
 
-    registerV2(model: RegisterStudentRequest): Observable<StudentRegistrationResult> {
+    registerV2(model: RegisterStudentRequest) {
         return this._httpClient.post<StudentRegistrationResult>(`${this._baseControllerUrl}/register/v2`, model);
     }
 
-    demoRegistration(): Observable<StudentRegistrationResult> {
+    demoRegistration() {
         return this._httpClient.post<StudentRegistrationResult>(`${this._baseControllerUrl}/register/demo`, {});
     }
 }
