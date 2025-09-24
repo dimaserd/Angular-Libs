@@ -1,6 +1,6 @@
 {
   "name": "ecc-chat",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "peerDependencies": {
     "@angular/animations": "^19.2.14",
     "@angular/cdk": "^19.2.14",

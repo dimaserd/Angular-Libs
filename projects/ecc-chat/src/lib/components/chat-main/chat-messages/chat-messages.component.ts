@@ -219,13 +219,34 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit {
         switchMap(() => this._chatMessagingService.delete(message.message.id))
       )
       .subscribe(() => {
-        let elem = this.messagesElements?.find(
-          (element) => element.message?.message.id === message.message.id
-        );
+        // Удаляем сообщение в messagesByDays
+        for (let day of this.messagesByDays) {
+          // Проходим по всем группам сообщений в дне
+          for (let group of day.messagesGroups) {
+            // Ищем индекс сообщения с нужным ID
+            const messageIndex = group.messages.findIndex(
+              (msg) => msg.message.id === message.message.id
+            );
 
-        if (elem) {
-          elem.elementRef.nativeElement.remove();
+            // Если нашли сообщение - удаляем его
+            if (messageIndex !== -1) {
+              group.messages.splice(messageIndex, 1);
+
+              // Если группа сообщений стала пустой, можно удалить и её
+              if (group.messages.length === 0) {
+                const groupIndex = day.messagesGroups.indexOf(group);
+                day.messagesGroups.splice(groupIndex, 1);
+              }
+
+              // Если день стал пустым, можно удалить и день
+              if (day.messagesGroups.length === 0) {
+                const dayIndex = this.messagesByDays.indexOf(day);
+                this.messagesByDays.splice(dayIndex, 1);
+              }
+            }
+          }
         }
+        this.cdr.markForCheck();
       });
   }
 
