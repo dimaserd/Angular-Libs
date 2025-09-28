@@ -4,15 +4,17 @@ export interface SubjectModel {
   alias: string;
 }
 
-export interface CreateSubject {
+export interface CreateSubjectRequest {
   name: string;
   alias: string;
+  clarificationValues: Array<string>;
 }
 
 export interface UpdateSubjectRequest {
   id: string;
   name: string;
   alias: string;
+  clarificationValues: Array<string>;
 }
 
 export interface SubjectCountsModel {
