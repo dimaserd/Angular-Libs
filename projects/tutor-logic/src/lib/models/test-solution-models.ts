@@ -48,7 +48,7 @@ export interface TestSolutionSystemValidationModel {
     hasRightAnswerQuestionsCount: number;
 }
 
-export interface StartSolutionFromDirectory {
+export interface StartSolutionFromDirectoryRequest {
     workSpaceId: string;
     directoryId: string;
     useFilter: boolean;
@@ -74,10 +74,10 @@ export interface QuestionsFilter {
     types: Array<TestQuestionType>;
 }
 
-export interface StartTestSolutionByTestId {
-    testId: string;
-    studentGroupId: string;
-    canCheckSingleQuestion: boolean;
+export interface StartTestSolutionByTestIdRequest {
+	 testId: string; 
+	 studentGroupId: string; 
+	 canCheckSingleQuestion: boolean; 
 }
 
 export interface SearchMyTestSolutionsRequest {
