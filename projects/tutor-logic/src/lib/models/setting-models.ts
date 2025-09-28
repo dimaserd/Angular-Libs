@@ -20,8 +20,14 @@ export interface TutorFullApplicationPublicOptions {
   icon: IconApplicationSettings;
   webAppRoutes: WebAppRoutes;
   telephoneInputOptions: TelephoneInputOptions;
+  userAgreements: UserAgreementsOptions;
   serverAppVersion: string;
   dataOnUtc: string;
+}
+
+export interface UserAgreementsOptions {
+  userAgreementUrl: string | null;
+  personalDataProcessingPolicyUrl: string | null;
 }
 
 
