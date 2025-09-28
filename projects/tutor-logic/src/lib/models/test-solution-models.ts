@@ -111,13 +111,13 @@ export interface SolutionWithAnswersModel {
 }
 
 export interface StudentTestSolutionModel {
-    studentId: string;
     solutionId: string;
-    studentGroupId: string;
     hasCuratorValidation: boolean;
     canCheckSingleQuestion: boolean;
-    startedOnUtc: string; /* Date */
-    finishedOnUtc: string | null; /* Date */
+    studentId: string;
+    startedOnUtc: string;
+    studentGroupId: string;
+    finishedOnUtc: string | null;
     isFinished: boolean;
     solution: StudentTestSolutionDataModel;
     test: TestModel;
@@ -173,6 +173,7 @@ export interface StudentTestSolutionDetailedModel {
     startedOnUtc: string;
     finishedOnUtc: string | null;
     isFinished: boolean;
+    studentGroupId: string;
     marketingOptions: SolutionMarketingOptions;
     test: StudentTestSolutionDetailedTestModel;
 }

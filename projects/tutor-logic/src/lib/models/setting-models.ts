@@ -1,11 +1,5 @@
 import { SubjectMenuWithIconsModel } from "./subject.models";
 
-export interface SettingModel {
-  name: string;
-  description: string;
-  data: string;
-}
-
 export interface TutorFullApplicationPublicOptions {
   applicationName: string;
   applicationUrl: string;
