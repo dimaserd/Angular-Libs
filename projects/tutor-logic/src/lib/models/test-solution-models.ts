@@ -169,12 +169,17 @@ export interface StudentTestSolutionDetailedModel {
     hasAnswersInProcess: boolean;
     hasCuratorValidation: boolean;
     canCheckSingleQuestion: boolean;
-    studentGroupId: string;
     studentId: string;
-    startedOnUtc: Date;
-    finishedOnUtc: Date | null;
+    startedOnUtc: string;
+    finishedOnUtc: string | null;
     isFinished: boolean;
+    marketingOptions: SolutionMarketingOptions;
     test: StudentTestSolutionDetailedTestModel;
+}
+
+export interface SolutionMarketingOptions {
+    showAfterSolutionMarkUp: boolean;
+    afterSolutionMarkUp: string;
 }
 
 export interface StudentTestSolutionDetailedTestModel {
