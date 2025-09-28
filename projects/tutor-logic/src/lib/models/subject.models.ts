@@ -19,10 +19,11 @@ export interface UpdateSubjectRequest {
 
 export interface SubjectCountsModel {
   id: string;
-  name: string;
   alias: string;
+  name: string;
   questionsCount: number;
   testsCount: number;
+  clarificationValues: Array<string>;
 }
 
 export interface OrderSubjectsRequest {
