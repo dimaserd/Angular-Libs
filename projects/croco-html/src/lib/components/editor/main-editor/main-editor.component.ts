@@ -8,6 +8,7 @@ import {
   Input,
   OnInit,
   Output,
+  SimpleChanges,
   ViewChild
 } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -78,6 +79,12 @@ export class MainEditorComponent implements OnInit, AfterContentChecked, AfterVi
     private readonly _htmlSettingsService: CrocoHtmlFileOptionsService,
     @Inject(CrocoHtmlOptionsToken) options: CrocoHtmlOptions) {
     this.showSettingsButton = options.showSettingsButton;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes['html'].currentValue !== changes['html'].previousValue) {
+      this.recalculateBodyTags();
+    }
   }
 
   ngAfterViewInit(): void {

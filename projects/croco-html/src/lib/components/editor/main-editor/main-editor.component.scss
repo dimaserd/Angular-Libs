@@ -23,16 +23,23 @@
 }
 
 :host ::ng-deep div.mat-mdc-tab-labels {
-    justify-content: center;
+  justify-content: center;
 }
 
 :host {
   position: relative;
+  width: 100%;
+  display: block;
+  overflow-x: hidden;
 }
 
 :host {
   ::ng-deep {
-    .mat-expansion-panel, .mat-mdc-tab-body-content,   .mat-mdc-tab-body,  .mat-mdc-tab-body-wrapper  {
+
+    .mat-expansion-panel,
+    .mat-mdc-tab-body-content,
+    .mat-mdc-tab-body,
+    .mat-mdc-tab-body-wrapper {
       overflow: visible;
     }
   }
