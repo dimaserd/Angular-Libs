@@ -20,8 +20,10 @@ export interface TutorFullApplicationPublicOptions {
 }
 
 export interface UserAgreementsOptions {
-  userAgreementUrl: string | null;
-  personalDataProcessingPolicyUrl: string | null;
+  useRegistrationCheckBox: boolean;
+  registrationCheckBoxHtml: string;
+  userAgreementUrl: string;
+  personalDataProcessingPolicyUrl: string;
 }
 
 
