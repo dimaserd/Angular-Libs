@@ -44,7 +44,7 @@ export class ExternalVideoTagService implements IMarkUpTagService {
         isCustom: false
       },
       attributes: fileData,
-      innerHtml: ""
+      innerHtml: data.data.type === ExternalVideoSupportedTypes.Code ? data.data.innerHtml : ''
     };
   }
 
@@ -73,7 +73,7 @@ export class ExternalVideoTagService implements IMarkUpTagService {
         isCustom: false
       },
       attributes: attrs,
-      innerHtml: "",
+      innerHtml: innerHtml,
     };
   }
 }

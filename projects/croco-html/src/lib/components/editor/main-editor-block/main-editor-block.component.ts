@@ -68,8 +68,7 @@ export class MainEditorBlockComponent implements OnDestroy {
   }
 
   save() {
-
-    const tag = this._tagService.tag$.value;;
+    const tag = this._tagService.tag$.value;
 
     this.onTagSaved.emit(tag);
     this._tagService.presentOrEdit$.next(true);
