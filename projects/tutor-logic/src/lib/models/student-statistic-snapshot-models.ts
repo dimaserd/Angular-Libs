@@ -33,3 +33,14 @@ export interface StudentInGroupStatisticByTagSnapshotValueModel {
     studentsWithSameResultCount: number;
     statistic: ComputedStatisticPresentationModel;
 }
+
+export interface StudentGroupStatisticSnapshotInfoModel {
+    snapshotId: string;
+    isComputed: boolean;
+    studentGroupId: string;
+    studentGroupName: string;
+    uniqueStudentsWithTagCount: number;
+    uniqueStudentsWithSubjectCount: number;
+    studentsInGroupCount: number;
+    studentsInGroupWithSolutionsCount: number;
+}

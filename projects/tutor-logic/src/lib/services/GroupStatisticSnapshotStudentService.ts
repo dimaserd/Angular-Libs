@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, Inject } from "@angular/core";
-import { GetStudentInGroupStatisticSnapshotRequest, StudentInGroupStatisticSnapshotModel } from "../models";
+import { GetStudentInGroupStatisticSnapshotRequest, StudentGroupStatisticSnapshotInfoModel, StudentInGroupStatisticSnapshotModel } from "../models";
 
 @Injectable({
     providedIn: 'root',
@@ -20,5 +20,14 @@ export class GroupStatisticSnapshotStudentService {
      */
     get(model: GetStudentInGroupStatisticSnapshotRequest) {
         return this._httpClient.post<StudentInGroupStatisticSnapshotModel | null>(`${this.baseControllerUrl}/get`, model);
+    }
+
+    /**
+     * Получить информацию о снапшоте.
+     * @param id идентификатор снепшота
+     * @returns 
+     */
+    getSnapshotInfo(id: string) {
+        return this._httpClient.get<StudentGroupStatisticSnapshotInfoModel | null>(`${this.baseControllerUrl}/snapshot-info/${id}`);
     }
 }
