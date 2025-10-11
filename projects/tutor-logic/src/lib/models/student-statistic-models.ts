@@ -37,6 +37,7 @@ export interface StudentStatisticSnapshotValueModel {
     dataOnUtc: string;
     computedOnUtc: string;
     recomputingRequired: boolean;
+    checkedQuestionsCount: number;
     tags: Array<StudentStatisticSnapshotTagValueModel>;
     subjects: Array<StudentStatisticSnapshotSubjectValueModel>;
 }
