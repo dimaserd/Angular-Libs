@@ -42,6 +42,17 @@ export interface StudentStatisticSnapshotValueModel {
     subjects: Array<StudentStatisticSnapshotSubjectValueModel>;
 }
 
+export interface StudentStatisticSnapshotValueDebugInfoModel {
+    hasSnapshot: boolean;
+    studentId: string;
+    dataOnUtc: string;
+    computedOnUtc: string;
+    recomputingRequired: boolean;
+    checkedQuestionsCount: number;
+    lastQuestionAnsweredOnUtc: string;
+    lastQuestionAggregateComputedOnUtc: string;
+}
+
 export interface StudentStatisticSnapshotTagValueModel {
     tagId: string;
     tagDisplayName: string;
