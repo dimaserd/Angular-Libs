@@ -42,5 +42,6 @@ export interface StudentGroupStatisticSnapshotInfoModel {
     uniqueStudentsWithTagCount: number;
     uniqueStudentsWithSubjectCount: number;
     studentsInGroupCount: number;
-    studentsInGroupWithSolutionsCount: number;
+    studentsInGroupWithCheckedQuestionsCount: number;
+    studentIdsWithoutStatistic: Array<string>;
 }
