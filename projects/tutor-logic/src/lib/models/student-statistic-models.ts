@@ -48,6 +48,7 @@ export interface StudentStatisticSnapshotValueDebugInfoModel {
     dataOnUtc: string;
     computedOnUtc: string;
     recomputingRequired: boolean;
+    lastRecomputingRequiredSetOnUtc: string;
     checkedQuestionsCount: number;
     lastQuestionAnsweredOnUtc: string;
     lastQuestionAggregateComputedOnUtc: string;
