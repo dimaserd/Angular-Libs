@@ -107,6 +107,12 @@ export interface ClientModel {
     avatarFileId: number | null;
 }
 
+export interface LastUserActivityModel {
+	 id: string; 
+	 lastActivityOnUtc: string; 
+	 lastLoginOnUtc: string; 
+}
+
 export interface EditApplicationUser {
     id: string;
     name: string;
