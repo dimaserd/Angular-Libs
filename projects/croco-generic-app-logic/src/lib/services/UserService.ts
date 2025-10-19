@@ -17,7 +17,7 @@ export class UserService {
   }
 
   public getUserById(id: string): Observable<ClientModel> {
-    return this._http.get<ClientModel>(`${this.baseUrl}api/user/GetById?id=${id}`);
+    return this._http.get<ClientModel>(`${this.baseUrl}api/user/query/get-by-id/${id}`);
   }
 
   public createUser(data: RegisterModel): Observable<RegistrationResult> {
