@@ -4,8 +4,15 @@ import { StudentSimpleModel } from "./student-models";
 export interface SearchStudentGroupsRequest {
     q: string;
     schoolId: string;
+    types: Array<StudentGroupType>;
     count: number | null;
     offSet: number;
+}
+
+export enum StudentGroupType {
+    Course = 'Course',
+    ClassRoom = 'ClassRoom',
+    ExternalProduct = 'ExternalProduct'
 }
 
 export interface StudentGroupSimpleModel {
@@ -15,6 +22,7 @@ export interface StudentGroupSimpleModel {
     isDeleting: boolean;
     useHtmlForName: boolean;
     useCourse: boolean;
+    type: StudentGroupType;
     nameHtml: string;
     isFreeOfCharge: boolean;
     schoolId: string;
@@ -29,6 +37,8 @@ export interface StudentGroupDetailedModel {
     useCourse: boolean;
     studentsCount: number;
     isDeleting: boolean;
+    type: StudentGroupType;
+    courseTemplateId: string;
     useHtmlForName: boolean;
     nameHtml: string;
     useSchedule: boolean;

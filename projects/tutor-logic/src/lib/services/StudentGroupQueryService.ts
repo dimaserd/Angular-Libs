@@ -17,7 +17,7 @@ export class StudentGroupQueryService {
         return this._baseUrl + 'api/tutor/student-group';
     }
 
-    constructor(private _httpClient: HttpClient,
+    constructor(private readonly _httpClient: HttpClient,
         @Inject('BASE_URL') private _baseUrl: string) {
     }
 
