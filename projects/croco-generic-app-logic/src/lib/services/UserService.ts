@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
-import { BaseApiResponse, ClientModel, EditApplicationUser, GetListResult, RegisterModel, RegistrationResult, UserSearch, UserWithNameAndEmailAvatarModel } from "../models";
+import { BaseApiResponse, ClientModel, EditApplicationUser, GetListResult, RegisterModel, RegistrationResult, UserSearch, UserWithNameAndEmailAvatarModel, LastUserActivityModel } from "../models";
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -20,7 +20,7 @@ export class UserService {
   }
 
   public getLastUserActivityById(id: string) {
-    return this._http.get<ClientModel>(`${this.baseUrl}api/user/query/get-by-id/${id}/last-activity`);
+    return this._http.get<LastUserActivityModel>(`${this.baseUrl}api/user/query/get-by-id/${id}/last-activity`);
   }
 
   public createUser(data: RegisterModel) {
