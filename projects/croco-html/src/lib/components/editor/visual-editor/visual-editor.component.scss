@@ -111,6 +111,27 @@
   flex-wrap: wrap;
 }
 
+// Mobile layout - grid with 3 columns
+@media (max-width: $media-m) {
+  .tags {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    padding: 16px;
+    background-color: #f5f5f5;
+    border-radius: 12px;
+  }
+}
+
+// 2 columns for smaller mobile screens
+@media (max-width: $media-ms) {
+  .tags {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 12px;
+  }
+}
+
 .tag-item {
   display: flex;
   align-items: center;
@@ -122,6 +143,51 @@
   background-color: white;
   color: #23262A;
   transition: 0.2s ease-in-out;
+  
+  // Mobile layout - vertical orientation
+  @media (max-width: $media-m) {
+    flex-direction: column;
+    justify-content: center;
+    padding: 16px 8px;
+    border-radius: 12px;
+    min-height: 80px;
+    gap: 8px;
+  }
+}
+
+.tag-icon {
+  color: #323E8B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+  
+  // Mobile layout - larger icons
+  @media (max-width: $media-m) {
+    font-size: 24px;
+    margin-bottom: 0;
+    
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+.tag-text {
+  color: #323E8B;
+  
+  // Mobile layout - smaller text
+  @media (max-width: $media-m) {
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+    line-height: 1.2;
+  }
 }
 
 .text-align-icon {
@@ -132,6 +198,11 @@
   background-color: #323E8B;
   color: white;
 
+  .tag-icon,
+  .tag-text {
+    color: white;
+  }
+
   svg {
     color: white;
   }
@@ -140,6 +211,11 @@
 .tag-item:hover {
   color: #747EBF;
   box-shadow: 0 0 4px 0 #747EBF;
+
+  .tag-icon,
+  .tag-text {
+    color: #747EBF;
+  }
 
   svg {
     color: #747EBF;
@@ -164,6 +240,7 @@
   .tag-item:active svg {
     color: #747EBF;
   }
+  
 }
 
 .move-icon:hover {
