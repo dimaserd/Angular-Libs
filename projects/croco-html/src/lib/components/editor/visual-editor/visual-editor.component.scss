@@ -111,7 +111,6 @@
   flex-wrap: wrap;
 }
 
-// Mobile layout - grid with 3 columns
 @media (max-width: $media-m) {
   .tags {
     display: grid;
@@ -123,7 +122,6 @@
   }
 }
 
-// 2 columns for smaller mobile screens
 @media (max-width: $media-ms) {
   .tags {
     grid-template-columns: repeat(2, 1fr);
@@ -143,8 +141,7 @@
   background-color: white;
   color: #23262A;
   transition: 0.2s ease-in-out;
-  
-  // Mobile layout - vertical orientation
+
   @media (max-width: $media-m) {
     flex-direction: column;
     justify-content: center;
@@ -160,17 +157,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   svg {
     width: 20px;
     height: 20px;
   }
-  
-  // Mobile layout - larger icons
+
   @media (max-width: $media-m) {
     font-size: 24px;
     margin-bottom: 0;
-    
+
     svg {
       width: 24px;
       height: 24px;
@@ -180,8 +176,7 @@
 
 .tag-text {
   color: #323E8B;
-  
-  // Mobile layout - smaller text
+
   @media (max-width: $media-m) {
     font-size: 12px;
     font-weight: 500;
@@ -240,7 +235,7 @@
   .tag-item:active svg {
     color: #747EBF;
   }
-  
+
 }
 
 .move-icon:hover {
