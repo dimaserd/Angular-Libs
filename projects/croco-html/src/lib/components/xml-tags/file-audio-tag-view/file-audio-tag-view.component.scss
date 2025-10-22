@@ -6,7 +6,6 @@
   margin: 0 auto;
 }
 
-/* Блок ошибки */
 .error-block {
   display: flex;
   align-items: center;
@@ -23,7 +22,6 @@
   }
 }
 
-/* Контейнер плеера */
 .audio-player-container {
   background: white;
   border-radius: 12px;
@@ -32,7 +30,6 @@
   margin-bottom: 16px;
 }
 
-/* Индикатор загрузки */
 .loading-indicator {
   display: flex;
   flex-direction: column;
@@ -68,7 +65,6 @@
   }
 }
 
-/* Информация о файле */
 .file-info {
   display: flex;
   align-items: center;
@@ -88,14 +84,12 @@
   }
 }
 
-/* Элементы управления плеером */
 .player-controls {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-/* Кнопки управления */
 .control-buttons {
   display: flex;
   justify-content: center;
@@ -107,7 +101,7 @@
     color: white;
     width: 48px;
     height: 48px;
-    
+
     &:hover {
       background-color: #1565c0;
     }
@@ -127,7 +121,6 @@
   }
 }
 
-/* Секция прогресса */
 .progress-section {
   display: flex;
   align-items: center;
@@ -182,7 +175,6 @@
   }
 }
 
-/* Управление громкостью */
 .volume-controls {
   display: flex;
   align-items: center;
@@ -230,7 +222,6 @@
   }
 }
 
-/* Сообщение об отсутствии файла */
 .no-file-message {
   text-align: center;
   padding: 40px 20px;
@@ -250,7 +241,6 @@
   }
 }
 
-/* Адаптивность */
 @media screen and (max-width: $media-m) {
   .audio-view {
     padding: 0 12px;
@@ -283,7 +273,6 @@
   }
 }
 
-/* Стили для input[type="range"] */
 input[type="range"] {
   &.progress-slider,
   &.volume-slider {
