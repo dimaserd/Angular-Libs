@@ -12,13 +12,14 @@ export interface StudentTestQuestionStatisticDetailedModel {
 }
 
 export interface SearchTestQuestionErrorsStatisticRequest {
+    isLastAnswerCorrect: boolean | null;
+    isActualQuestionVersion: boolean | null;
     studentId: string;
     questionTypes: Array<TestQuestionType>;
     orderType: TestQuestionErrorsStatisticOrderType;
     count: number | null;
     offSet: number;
 }
-
 
 export enum TestQuestionErrorsStatisticOrderType {
     MostErrors = 'MostErrors',
@@ -27,6 +28,7 @@ export enum TestQuestionErrorsStatisticOrderType {
 
 export interface QuestionStatisticComputingState {
     toComputeQuestionReportsCount: number;
+    notActualQuestionVersionReportsCount: number;
     toComputeStudentSnapshotsCount: number;
     toComputeStudentGroupSnapshotsCount: number;
     toComputeAggregatedSnapshotRequestsCount: number;
