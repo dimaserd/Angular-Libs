@@ -7,6 +7,7 @@ export class FileAudioTagDataConsts {
 export class AudioMethods {
 
   public static buildUrl(fileId: string, fileName: string): string {
+    //TODO заглушка, пока юзаем статичный фапйл
     if (fileId && fileId !== '') {
       if (!isNaN(Number(fileId))) {
         return `/api/PrivateFiles/GetFile?fileId=${fileId}`;
