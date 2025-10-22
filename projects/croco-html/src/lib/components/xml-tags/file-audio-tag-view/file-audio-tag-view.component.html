@@ -1,0 +1,98 @@
+<div class="audio-view">
+  @if (hasAudioError) {
+    <div class="error-block">
+      <mat-icon>error</mat-icon>
+      <span>Аудио-файл не найден по указанному идентификатору</span>
+    </div>
+  }
+
+  @if (hasFileId() && !hasAudioError) {
+    <div class="audio-player-container">
+      <audio
+        #audioPlayer
+        [src]="getSrc()"
+        (error)="onErrorHandler()"
+        (loadedmetadata)="onLoadedMetadata()"
+        (timeupdate)="onTimeUpdate()"
+        (ended)="onEnded()"
+        (canplay)="onCanPlay()"
+        preload="metadata">
+      </audio>
+
+      @if (isLoading) {
+        <div class="loading-indicator">
+          <div class="progress-bar">
+            <div class="progress-bar-fill"></div>
+          </div>
+          <span>Загрузка аудио...</span>
+        </div>
+      }
+
+      <div class="file-info">
+        <mat-icon>audiotrack</mat-icon>
+        <span class="file-name">{{ fileName || 'Аудио-файл' }}</span>
+      </div>
+
+      <div class="player-controls">
+        <div class="control-buttons">
+          <button (click)="restart()" [disabled]="!hasFileId()" mat-icon-button>
+            <mat-icon>replay</mat-icon>
+          </button>
+
+          <button (click)="rewind()" [disabled]="!hasFileId()" mat-icon-button>
+            <mat-icon>replay_10</mat-icon>
+          </button>
+
+          <button
+            (click)="togglePlayPause()"
+            [disabled]="!hasFileId() || isLoading"
+            class="play-pause-btn" mat-icon-button>
+            <mat-icon>{{ isPlaying ? 'pause' : 'play_arrow' }}</mat-icon>
+          </button>
+
+          <button (click)="forward()" [disabled]="!hasFileId()" mat-icon-button>
+            <mat-icon>forward_10</mat-icon>
+          </button>
+        </div>
+
+        <div class="progress-section">
+          <span class="time-display">{{ formatTime(currentTime) }}</span>
+
+          <input
+            type="range"
+            min="0"
+            max="100"
+            [value]="getProgress()"
+            (input)="onSeekChange($event)"
+            [disabled]="!hasFileId() || duration === 0"
+            class="progress-slider">
+
+          <span class="time-display">{{ formatTime(duration) }}</span>
+        </div>
+
+        <div class="volume-controls">
+          <button (click)="toggleMute()" [disabled]="!hasFileId()" mat-icon-button>
+            <mat-icon>{{ isMuted ? 'volume_off' : 'volume_up' }}</mat-icon>
+          </button>
+
+          <input
+            type="range"
+            min="0"
+            max="100"
+            [value]="volume * 100"
+            (input)="onVolumeChange($event)"
+            [disabled]="!hasFileId()"
+            class="volume-slider">
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- Сообщение об отсутствии файла -->
+  @if (!hasFileId()) {
+    <div class="no-file-message">
+      <mat-icon>music_off</mat-icon>
+      <h5>Аудио-файл не выбран</h5>
+    </div>
+  }
+</div>

@@ -37,7 +37,7 @@ export interface CrocoHtmlOptions {
 
   /**
    * Обработчик нажатия на кнопку кастомных виджетов
-   * @returns 
+   * @returns
    */
   customWidgetClickHandler: (editor: VisualEditorComponent) => void;
 }

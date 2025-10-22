@@ -1,0 +1,183 @@
+<div class="audio-editor">
+  @if (hasAudioError) {
+    <div class="error-block">
+      <mat-icon>error</mat-icon>
+      <span>Аудио-файл не найден по указанному идентификатору, возможно файл не существует или отсутствует на сервере.</span>
+    </div>
+  }
+
+  @if (hasFileId() && !hasAudioError) {
+    <div class="audio-player-container">
+      <audio
+        #audioPlayer
+        [src]="getSrc()"
+        (error)="onErrorHandler()"
+        (loadedmetadata)="onLoadedMetadata()"
+        (timeupdate)="onTimeUpdate()"
+        (ended)="onEnded()"
+        (canplay)="onCanPlay()"
+        preload="metadata">
+      </audio>
+
+      @if (isLoading) {
+        <div class="loading-indicator">
+          <div class="progress-bar">
+            <div class="progress-bar-fill"></div>
+          </div>
+          <span>Загрузка аудио...</span>
+        </div>
+      }
+
+      <div class="player-controls">
+        <div class="control-buttons">
+          <button (click)="restart()" [disabled]="!hasFileId()" mat-icon-button>
+            <mat-icon>replay</mat-icon>
+          </button>
+
+          <button (click)="rewind()" [disabled]="!hasFileId()" mat-icon-button>
+            <mat-icon>replay_10</mat-icon>
+          </button>
+
+          <button
+            (click)="togglePlayPause()"
+            [disabled]="!hasFileId() || isLoading"
+            class="play-pause-btn" mat-icon-button>
+            <mat-icon>{{ isPlaying ? 'pause' : 'play_arrow' }}</mat-icon>
+          </button>
+
+          <button (click)="forward()" [disabled]="!hasFileId()" mat-icon-button>
+            <mat-icon>forward_10</mat-icon>
+          </button>
+
+          @if (!presentOrEdit) {
+            <button (click)="removeAudio()" [disabled]="!hasFileId()" color="warn" mat-icon-button>
+              <mat-icon>delete</mat-icon>
+            </button>
+          }
+        </div>
+
+        <div class="progress-section">
+          <span class="time-display">{{ formatTime(currentTime) }}</span>
+
+          <input
+            type="range"
+            min="0"
+            max="100"
+            [value]="getProgress()"
+            (input)="onSeekChange($event)"
+            [disabled]="!hasFileId() || duration === 0"
+            class="progress-slider">
+
+          <span class="time-display">{{ formatTime(duration) }}</span>
+        </div>
+
+        <div class="volume-controls">
+          <button (click)="toggleMute()" [disabled]="!hasFileId()" mat-icon-button>
+            <mat-icon>{{ isMuted ? 'volume_off' : 'volume_up' }}</mat-icon>
+          </button>
+
+          <input
+            type="range"
+            min="0"
+            max="100"
+            [value]="volume * 100"
+            (input)="onVolumeChange($event)"
+            [disabled]="!hasFileId()"
+            class="volume-slider">
+        </div>
+      </div>
+    </div>
+  }
+
+  @if (!hasFileId()) {
+    <div class="no-file-message">
+      <mat-icon>music_off</mat-icon>
+      <h5>Аудио-файл не выбран</h5>
+      @if (!presentOrEdit) {
+        <p>Нажмите кнопку редактирования для выбора или загрузки аудио-файла</p>
+      }
+    </div>
+  }
+  @if (!presentOrEdit) {
+    <div class="edit-panel">
+      <div class="edit-header">
+        <h6>Настройки аудио-файла</h6>
+      </div>
+
+      <div class="mode-toggle">
+        <mat-button-toggle-group [(ngModel)]="searchOrEdit">
+          <mat-button-toggle value="search">
+            <mat-icon>search</mat-icon>
+            Искать файл
+          </mat-button-toggle>
+          <mat-button-toggle value="edit">
+            <mat-icon>settings</mat-icon>
+            Указать по ID
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+
+      @if (searchOrEdit === 'search') {
+        <div class="file-selection">
+          <div class="existing-files">
+            <h6>Выбрать из существующих файлов:</h6>
+            <ng-select
+              [(ngModel)]="fileId"
+              (ngModelChange)="onFileSelected($event)"
+              [items]="files"
+              bindLabel="fileName"
+              bindValue="fileId"
+              (search)="onSearchChanged($event)"
+              [loading]="loading"
+              [loadingText]="'Загружаю файлы'"
+              placeholder="Выберите аудио-файл"
+              [clearable]="true">
+              <ng-template ng-option-tmp let-item="item">
+                <div class="file-option">
+                  <mat-icon>audiotrack</mat-icon>
+                  <span>{{ item.fileName }}</span>
+                  <small>ID: {{ item.fileId }}</small>
+                </div>
+              </ng-template>
+            </ng-select>
+          </div>
+
+          <div class="upload-section">
+            <h6>Загрузить новый файл:</h6>
+            <croco-app-upload-files-btn
+              extAccepts="audio/*"
+              [isMultiple]="false"
+              btnText="Загрузить аудио-файл"
+              (onPublicFilesUploaded)="onFilesUploaded($event.fileIds)"
+              (onPrivateFilesUploaded)="onFilesUploaded($event.fileIds)">
+            </croco-app-upload-files-btn>
+          </div>
+        </div>
+      }
+
+      @if (searchOrEdit === 'edit') {
+        <div class="manual-input">
+          <mat-form-field class="w-100">
+            <mat-label>Идентификатор файла</mat-label>
+            <input
+              matInput
+              placeholder="Введите ID аудио-файла"
+              autocomplete="off"
+              [(ngModel)]="fileId"
+              (ngModelChange)="onFileIdChanged($event)">
+          </mat-form-field>
+
+          <mat-form-field class="w-100">
+            <mat-label>Имя файла</mat-label>
+            <input
+              matInput
+              placeholder="Введите имя файла"
+              autocomplete="off"
+              [(ngModel)]="fileNameAttr"
+              (ngModelChange)="onFileNameChanged($event)">
+          </mat-form-field>
+        </div>
+      }
+    </div>
+  }
+</div>

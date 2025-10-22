@@ -7,7 +7,8 @@ import { Subject, takeUntil } from 'rxjs';
 @Component({
   selector: 'croco-html-defined-custom-editor-block',
   imports: [],
-  templateUrl: './defined-custom-editor-block.component.html'
+  templateUrl: './defined-custom-editor-block.component.html',
+  standalone: true
 })
 export class DefinedCustomEditorBlockComponent implements OnInit, OnDestroy {
 
