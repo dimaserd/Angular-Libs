@@ -153,9 +153,7 @@
             </croco-app-upload-files-btn>
           </div>
         </div>
-      }
-
-      @if (searchOrEdit === 'edit') {
+      } @else if (searchOrEdit === 'edit') {
         <div class="manual-input">
           <mat-form-field class="w-100">
             <mat-label>Идентификатор файла</mat-label>
