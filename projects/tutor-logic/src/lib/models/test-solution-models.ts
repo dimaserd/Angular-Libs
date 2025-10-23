@@ -57,11 +57,13 @@ export interface StartSolutionFromDirectoryRequest {
 }
 
 export interface CreateTestForStudentErrorsRequest {
-    testName: string;
-    questionsCount: number;
-    questionTypes: Array<TestQuestionType>;
-    orderType: TestQuestionErrorsStatisticOrderType;
-    canCheckSingleQuestion: boolean;
+	 testName: string; 
+	 questionsCount: number; 
+	 questionTypes: Array<TestQuestionType>; 
+	 orderType: TestQuestionErrorsStatisticOrderType; 
+	 canCheckSingleQuestion: boolean; 
+	 isLastAnswerCorrect: boolean | null; 
+	 isActualQuestionVersion: boolean | null; 
 }
 
 export interface TestSolutionCreatedResult {
