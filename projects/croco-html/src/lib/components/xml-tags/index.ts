@@ -1,4 +1,4 @@
-export * from './file-audio-tag-view/file-audio-tag-view.component'
+export * from './audio-player-tag-view/audio-player-tag-view.component'
 export * from './xml-tag-external-video/xml-tag-external-video.component'
 export * from './xml-tag-header-inner-text-view/xml-tag-header-inner-text-view.component'
 export * from './xml-tag-header-text-view/xml-tag-header-text-view.component'

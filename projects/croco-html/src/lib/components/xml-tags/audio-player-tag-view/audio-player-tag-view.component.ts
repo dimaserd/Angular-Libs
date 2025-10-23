@@ -8,16 +8,16 @@ import { CrocoHtmlOptions } from '../../../options';
 import {MatIconButton} from "@angular/material/button";
 
 @Component({
-  selector: 'croco-html-file-audio-tag-view',
-  templateUrl: './file-audio-tag-view.component.html',
-  styleUrls: ['./file-audio-tag-view.component.scss'],
+  selector: 'croco-html-audio-player-tag-view',
+  templateUrl: './audio-player-tag-view.component.html',
+  styleUrls: ['./audio-player-tag-view.component.scss'],
   standalone: true,
   imports: [
     MatIcon,
     MatIconButton
   ]
 })
-export class FileAudioTagViewComponent implements OnInit, OnDestroy {
+export class AudioPlayerTagViewComponent implements OnInit, OnDestroy {
 
   hasAudioError = false;
   isPlaying = false;

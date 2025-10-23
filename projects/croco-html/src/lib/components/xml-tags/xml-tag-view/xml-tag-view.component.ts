@@ -6,7 +6,7 @@ import { XmlTagExternalVideoComponent } from '../xml-tag-external-video/xml-tag-
 import { ErrorBannerComponent } from '../../error-banner/error-banner.component';
 import { XmlTagHtmlViewComponent } from '../xml-tag-html-view/xml-tag-html-view.component';
 import { FileImageTagViewComponent } from '../file-image-tag-view/file-image-tag-view.component';
-import { FileAudioTagViewComponent } from '../file-audio-tag-view/file-audio-tag-view.component';
+import { AudioPlayerTagViewComponent } from '../audio-player-tag-view/audio-player-tag-view.component';
 import { XmlTagHeaderTextViewComponent } from '../xml-tag-header-text-view/xml-tag-header-text-view.component';
 import { HtmlRawViewComponent } from '../html-raw-view/html-raw-view.component';
 import { XmlTagTextViewComponent } from '../xml-tag-text-view/xml-tag-text-view.component';
@@ -28,7 +28,7 @@ import { HtmlPageDataController } from '../../../services';
     HtmlRawViewComponent,
     XmlTagHeaderTextViewComponent,
     FileImageTagViewComponent,
-    FileAudioTagViewComponent,
+    AudioPlayerTagViewComponent,
     XmlTagHtmlViewComponent,
     ErrorBannerComponent,
     XmlTagExternalVideoComponent,
