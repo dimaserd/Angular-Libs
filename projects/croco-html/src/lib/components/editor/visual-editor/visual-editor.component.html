@@ -14,7 +14,7 @@
         <div class="col-12">
           <div class="w-100" style="margin-bottom: 22px">
             <div class="tags">
-              @for (tag of tags; track tag) {
+              @for (tag of tags; track tag.displayValue) {
                 <div class="tag-item"
                      (click)="selectTag(tag)"
                      [class.active]="selectedValue === tag.tag"
