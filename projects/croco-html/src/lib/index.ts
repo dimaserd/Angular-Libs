@@ -43,7 +43,7 @@ import { MatTreeModule } from '@angular/material/tree';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { TagToSpanPipe, ToHtmlBodyTagsPipe, ToPreviewHtmlPipe, ToPreviewPipe } from "./pipes";
-import { FileImageTagViewComponent, FileAudioTagViewComponent, UploadFilesBtnComponent } from "./components";
+import { FileImageTagViewComponent, AudioPlayerTagViewComponent, UploadFilesBtnComponent } from "./components";
 import { HtmlRawViewComponent } from "./components";
 import { HtmlViewComponent } from "./components";
 import { XmlTagCustomWidgetComponent } from "./components";
@@ -71,7 +71,7 @@ export const XmlComponents = [
   XmlTagExternalVideoComponent,
   HtmlRawViewComponent,
   FileImageTagViewComponent,
-  FileAudioTagViewComponent,
+  AudioPlayerTagViewComponent,
   XmlTagCustomWidgetComponent,
   HtmlViewComponent,
   DefinedCustomTagViewComponent

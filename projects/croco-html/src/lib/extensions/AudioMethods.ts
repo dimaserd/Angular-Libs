@@ -1,5 +1,5 @@
 export class FileAudioTagDataConsts {
-  static readonly TagName = "file-audio";
+  static readonly TagName = "audio-player";
   static readonly FileIdAttrName = "file-id";
   static readonly FileNameAttrName = "file-name";
 }
