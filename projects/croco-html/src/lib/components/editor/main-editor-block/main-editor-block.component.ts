@@ -5,6 +5,7 @@ import { MatIconButton } from '@angular/material/button';
 import { HtmlRawEditorComponent } from '../html-raw-editor/html-raw-editor.component';
 import { DownloadFileButtonEditorComponent } from '../download-file-button-editor/download-file-button-editor.component';
 import { ImageEditorComponent } from '../image-editor/image-editor.component';
+import { AudioEditorComponent } from '../audio-editor/audio-editor.component';
 import { TextEditorComponent } from '../text-editor/text-editor.component';
 import { ExternalVideoEditorComponent } from '../external-video-editor/external-video-editor.component';
 import { ButtonEditorComponent } from "../button-editor/button-editor.component";
@@ -12,9 +13,11 @@ import { CustomWidgetEditorComponent } from "../custom-widget-editor/custom-widg
 import { CrocoHtmlOptionsToken } from '../../../consts';
 import { CrocoHtmlOptions } from '../../../options';
 import { JsonPipe } from '@angular/common';
-import { DefinedCustomEditorBlockComponent } from "./components/defined-custom-editor-block/defined-custom-editor-block.component";
 import { TagEditorService } from '../../../models/editor-models';
 import { Subject, takeUntil } from 'rxjs';
+import {
+  DefinedCustomEditorBlockComponent
+} from "./components/defined-custom-editor-block/defined-custom-editor-block.component";
 
 @Component({
   selector: 'croco-html-main-editor-block',
@@ -24,6 +27,7 @@ import { Subject, takeUntil } from 'rxjs';
   imports: [
     TextEditorComponent,
     ImageEditorComponent,
+    AudioEditorComponent,
     DownloadFileButtonEditorComponent,
     HtmlRawEditorComponent,
     MatIconButton,
@@ -31,7 +35,7 @@ import { Subject, takeUntil } from 'rxjs';
     ButtonEditorComponent,
     CustomWidgetEditorComponent,
     JsonPipe,
-    DefinedCustomEditorBlockComponent
+    DefinedCustomEditorBlockComponent,
   ]
 })
 export class MainEditorBlockComponent implements OnDestroy {

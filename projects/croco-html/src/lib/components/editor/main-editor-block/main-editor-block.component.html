@@ -12,6 +12,12 @@
       </croco-html-image-editor>
     </div>
     }
+    @else if (_tag.tagDescription.tag === 'file-audio') {
+    <div>
+      <croco-html-audio-editor [presentOrEdit]="presentOrEdit" [tag]="_tag">
+      </croco-html-audio-editor>
+    </div>
+    }
     @else if (_tag.tagDescription.tag === 'custom-widget') {
     <div>
       <croco-html-custom-widget-editor [presentOrEdit]="presentOrEdit" [tag]="_tag">

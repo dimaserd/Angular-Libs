@@ -1,3 +1,4 @@
+export * from './audio-editor/audio-editor.component'
 export * from './external-video-editor/external-video-editor.component'
 export * from './html-raw-editor/html-raw-editor.component'
 export * from './image-editor/image-editor.component'

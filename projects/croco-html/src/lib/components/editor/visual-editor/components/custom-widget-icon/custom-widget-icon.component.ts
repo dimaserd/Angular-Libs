@@ -5,7 +5,8 @@ import { CrocoHtmlOptionsToken } from '../../../../../consts';
 @Component({
   selector: 'croco-html-custom-widget-icon',
   imports: [],
-  templateUrl: './custom-widget-icon.component.html'
+  templateUrl: './custom-widget-icon.component.html',
+  standalone: true
 })
 export class CustomWidgetIconComponent implements OnInit {
 
@@ -23,7 +24,7 @@ export class CustomWidgetIconComponent implements OnInit {
   }
 
   constructor(@Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions) {
-    
+
   }
 
   getIconComponent() {

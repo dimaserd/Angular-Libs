@@ -22,6 +22,11 @@
       <croco-html-file-image-tag-view [item]="item"></croco-html-file-image-tag-view>
     </div>
     }
+    @else if (item.tagName === 'file-audio') {
+    <div>
+      <croco-html-file-audio-tag-view [data]="item"></croco-html-file-audio-tag-view>
+    </div>
+    }
     @else if (item.tagName === 'custom-widget') {
     <div>
       <croco-html-xml-tag-custom-widget [tagData]="item.data"></croco-html-xml-tag-custom-widget>

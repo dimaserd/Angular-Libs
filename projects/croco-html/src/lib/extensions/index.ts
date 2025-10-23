@@ -1,4 +1,5 @@
 export * from './AngularMaterialTableMethods'
+export * from './AudioMethods'
 export * from './BodyTagsExtensions'
 export * from './BootstrapTableMethods'
 export * from './ImageMethods'

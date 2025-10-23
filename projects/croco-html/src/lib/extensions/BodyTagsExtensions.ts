@@ -2,11 +2,13 @@ import { HtmlBodyTag } from "../models/models";
 import { HtmlExtractionMethods } from "./HtmlExtractionMethods";
 import { InterfaceBlock } from "../models/InterfaceBlock";
 import { FileImageTagDataConsts } from "./ImageMethods";
+import { FileAudioTagDataConsts } from "./AudioMethods";
 import { Tags } from "./Tags";
 import { ExternalVideoTagDataConsts } from "./VideoMethods";
 import { CrocoHtmlOptions } from "../options";
 import { IMarkUpTagService } from "../tag-services/IMarkUpTagService";
 import { DownloadButtonTagDataConsts, DownloadButtonTagService, FileImageTagService, TextTagHtmlMarkupTagService } from "../tag-services";
+import { FileAudioTagService } from "../tag-services/FileAudioTagService";
 import { ExternalVideoTagService } from "../tag-services/ExternalVideoTagService";
 import { HtmlRawTagDataConsts, HtmlRawTagService } from "../tag-services/HtmlRawTagService";
 import { ButtonTagDataConsts, ButtonTagService } from "../tag-services/ButtonTagService";
@@ -25,6 +27,7 @@ export class BodyTagsExtensions {
     [TextTags.h5]: new TextTagHtmlMarkupTagService("h5", "H5"),
     [TextTags.h6]: new TextTagHtmlMarkupTagService("h6", "H6"),
     [FileImageTagDataConsts.TagName]: new FileImageTagService(),
+    [FileAudioTagDataConsts.TagName]: new FileAudioTagService(),
     [ExternalVideoTagDataConsts.TagName]: new ExternalVideoTagService(),
     [HtmlRawTagDataConsts.TagName]: new HtmlRawTagService(),
     [DownloadButtonTagDataConsts.TagName]: new DownloadButtonTagService(),
