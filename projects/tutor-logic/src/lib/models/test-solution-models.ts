@@ -57,13 +57,13 @@ export interface StartSolutionFromDirectoryRequest {
 }
 
 export interface CreateTestForStudentErrorsRequest {
-	 testName: string; 
-	 questionsCount: number; 
-	 questionTypes: Array<TestQuestionType>; 
-	 orderType: TestQuestionErrorsStatisticOrderType; 
-	 canCheckSingleQuestion: boolean; 
-	 isLastAnswerCorrect: boolean | null; 
-	 isActualQuestionVersion: boolean | null; 
+    testName: string;
+    questionsCount: number;
+    questionTypes: Array<TestQuestionType>;
+    orderType: TestQuestionErrorsStatisticOrderType;
+    canCheckSingleQuestion: boolean;
+    isLastAnswerCorrect: boolean | null;
+    isActualQuestionVersion: boolean | null;
 }
 
 export interface TestSolutionCreatedResult {
@@ -77,9 +77,9 @@ export interface QuestionsFilter {
 }
 
 export interface StartTestSolutionByTestIdRequest {
-	 testId: string; 
-	 studentGroupId: string; 
-	 canCheckSingleQuestion: boolean; 
+    testId: string;
+    studentGroupId: string;
+    canCheckSingleQuestion: boolean;
 }
 
 export interface SearchMyTestSolutionsRequest {
