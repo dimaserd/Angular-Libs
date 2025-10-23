@@ -32,6 +32,7 @@ export interface QuestionStatisticComputingState {
     toComputeStudentSnapshotsCount: number;
     toComputeStudentGroupSnapshotsCount: number;
     toComputeAggregatedSnapshotRequestsCount: number;
+    toRecomputeIsActualVersionPropertyCount: number;
     dataOnUtc: string;
 }
 
