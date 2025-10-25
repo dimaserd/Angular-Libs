@@ -10,6 +10,7 @@ export interface TutorFullApplicationPublicOptions {
   mainMenu: SubjectMenuWithIconsModel;
   publicImageUrlFormat: string;
   privateImageUrlFormat: string;
+  fileIdAndNamePathUrlFormat: string;
   imagesPack: TutorImagesPackSettings;
   icon: IconApplicationSettings;
   webAppRoutes: WebAppRoutes;
