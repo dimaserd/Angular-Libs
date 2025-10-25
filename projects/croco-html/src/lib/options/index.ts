@@ -11,6 +11,11 @@ export interface CrocoHtmlOptions {
   imageOptions: CrocoHtmlImageOptions;
 
   /**
+   * Формат адреса до оригиналов файлов по идентификатору и имени
+   */
+  fileIdAndNamePathUrlFormat: string;
+
+  /**
    * Компонент для рендера кастомных виджетов
    */
   customWidgetRendererComponent?: Type<any>;

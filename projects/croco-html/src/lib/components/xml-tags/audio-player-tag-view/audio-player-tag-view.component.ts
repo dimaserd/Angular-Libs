@@ -1,11 +1,11 @@
 import { Component, Inject, Input, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
-import { AudioMethods, FileAudioTagDataConsts } from '../../../extensions/AudioMethods';
+import { AudioMethods } from '../../../extensions/AudioMethods';
 import { InterfaceBlock } from '../../../models/InterfaceBlock';
 import { CrocoHtmlOptionsToken } from '../../../consts';
 import { MatIcon } from '@angular/material/icon';
-import { Subject, takeUntil } from "rxjs";
+import { Subject } from "rxjs";
 import { CrocoHtmlOptions } from '../../../options';
-import {MatIconButton} from "@angular/material/button";
+import { MatIconButton } from "@angular/material/button";
 
 @Component({
   selector: 'croco-html-audio-player-tag-view',
@@ -48,6 +48,8 @@ export class AudioPlayerTagViewComponent implements OnInit, OnDestroy {
   }
 
   getSrc() {
+    //this._options.fileIdAndNamePathUrlFormat;
+    // TODO если fileId указан то нужно
     // return AudioMethods.buildUrl(this.fileId, this.fileName);
     return this.fileId
   }
