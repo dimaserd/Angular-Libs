@@ -3,16 +3,16 @@ export class ImageSrcExtensions {
     /**
      * Вовзращает полный путь к изображению по идентификатору файла и типу размера изображения 
      * @param publicImageUrlFormat Форматированная строка содержащая {fileId} и {sizeType} для замены
-     * @param imageId Идентификатор изображения
+     * @param imageFileId Идентификатор изображения
      * @param imageType Тип изображения
      * @returns 
      */
-    static createImagePath(publicImageUrlFormat: string, imageId: number, imageType = 'Medium'): string | null {
+    static createImagePath(publicImageUrlFormat: string, imageFileId: number | string, sizeType = 'Medium'): string | null {
         
-        if (imageId === null || imageId === undefined) {
+        if (imageFileId === null || imageFileId === undefined) {
             return null;
         }
 
-        return publicImageUrlFormat.replace('{sizeType}', imageType).replace('{fileId}', imageId.toString())
+        return publicImageUrlFormat.replace('{sizeType}', sizeType).replace('{fileId}', imageFileId.toString())
     }
 }
