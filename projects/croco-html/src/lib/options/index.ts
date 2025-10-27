@@ -70,16 +70,10 @@ export interface ICustomTagViewRender {
 
 export interface CrocoHtmlImageOptions {
     /**
-   * Формат сслыки для показа изображений из публичных файлов.
+   * Формат сслыки для показа изображений из файлов.
    * Содержит переменные: {sizeType} - тип размера, {fileId} - идентификатор изображения.
    */
-  publicImageResizedUrlFormat: string;
-
-  /**
-   * Формат сслыки для показа изображений из приватный файлов.
-   * Содержит переменные: {sizeType} - тип размера, {fileId} - идентификатор изображения.
-   */
-  privateImageResizedUrlFormat: string;
+  sizeTypeAndFileIdImageUrlFormat: string;
 
   /**
    * Медиа запросы для изображений.

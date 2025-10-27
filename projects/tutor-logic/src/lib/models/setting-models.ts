@@ -8,8 +8,7 @@ export interface TutorFullApplicationPublicOptions {
   telegramBotSettings: MainTelegramBotSettings;
   studentDemo: StudentDemoSettings;
   mainMenu: SubjectMenuWithIconsModel;
-  publicImageUrlFormat: string;
-  privateImageUrlFormat: string;
+  sizeTypeAndFileIdImageUrlFormat: string;
   fileIdAndNamePathUrlFormat: string;
   imagesPack: TutorImagesPackSettings;
   icon: IconApplicationSettings;

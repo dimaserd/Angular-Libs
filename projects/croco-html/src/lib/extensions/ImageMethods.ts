@@ -22,11 +22,7 @@ export class ImageMethods {
       return null;
     }
 
-    const format = ImageMethods.isPrivateFileId(fileId)
-      ? options.imageOptions.publicImageResizedUrlFormat
-      : options.imageOptions.privateImageResizedUrlFormat;
-
-    return format
+    return options.imageOptions.sizeTypeAndFileIdImageUrlFormat
       .replace("{sizeType}", sizeType)
       .replace("{fileId}", fileId);
   }

@@ -51,3 +51,15 @@ export interface FileSimpleModel {
     type: FileType;
     downloadUrl: string;
 }
+
+export interface FileInfoModel {
+    type: FileType;
+    name: string;
+    downloadUrl: string;
+}
+
+export interface CommonFileInfoResultModel {
+    id: string;
+    isPrivateId: boolean;
+    fileInfo: FileInfoModel;
+}

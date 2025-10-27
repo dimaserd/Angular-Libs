@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { FileSimpleModel, GetListResult, SearchFilesRequest } from "./file-models";
+import { CommonFileInfoResultModel, FileSimpleModel, GetListResult, SearchFilesRequest } from "./file-models";
 
 @Injectable({
     providedIn: 'root'
