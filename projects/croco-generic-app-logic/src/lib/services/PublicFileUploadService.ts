@@ -11,10 +11,10 @@ export class PublicFileUploadService {
     @Inject('BASE_URL') private readonly baseUrl: string,
   ) {}
 
-  public postFiles(files: FileList, makeLocalCopiesNow: boolean, applicationId: string | null): Observable<PublicFilesUploadResponse> {
+  public postFiles(files: FileList, executeHandlersNow: boolean, applicationId: string | null): Observable<PublicFilesUploadResponse> {
     const formData = PrivateFileUploadService.getFormData(files);
 
-    return this.postFilesInner(formData, makeLocalCopiesNow, applicationId);
+    return this.postFilesInner(formData, executeHandlersNow, applicationId);
   }
 
   public postFilesInner(
