@@ -11,15 +11,14 @@ export class PublicFileUploadService {
     @Inject('BASE_URL') private readonly baseUrl: string,
   ) {}
 
-  public postFiles(files: FileList, makeLocalCopiesNow: boolean, executeHandlersNow: boolean, applicationId: string | null): Observable<PublicFilesUploadResponse> {
+  public postFiles(files: FileList, makeLocalCopiesNow: boolean, applicationId: string | null): Observable<PublicFilesUploadResponse> {
     const formData = PrivateFileUploadService.getFormData(files);
 
-    return this.postFilesInner(formData, makeLocalCopiesNow, executeHandlersNow, applicationId);
+    return this.postFilesInner(formData, makeLocalCopiesNow, applicationId);
   }
 
   public postFilesInner(
     formData: FormData,
-    makeLocalCopiesNow: boolean,
     executeHandlersNow: boolean,
     applicationId: string | null,
     withProgress: true,
@@ -27,7 +26,6 @@ export class PublicFileUploadService {
 
   public postFilesInner(
     formData: FormData,
-    makeLocalCopiesNow: boolean,
     executeHandlersNow: boolean,
     applicationId: string | null,
     withProgress?: false,
@@ -35,20 +33,18 @@ export class PublicFileUploadService {
   
   public postFilesInner(
     formData: FormData,
-    makeLocalCopiesNow: boolean,
     executeHandlersNow: boolean,
     applicationId: string | null,
     withProgress: boolean,
   ): Observable<PublicFilesUploadResponse> | Observable<HttpEvent<PublicFilesUploadResponse>>;
   public postFilesInner(
     formData: FormData,
-    makeLocalCopiesNow: boolean,
     executeHandlersNow: boolean,
     applicationId: string | null,
     withProgress = false,
   ): Observable<PublicFilesUploadResponse> | Observable<HttpEvent<PublicFilesUploadResponse>> {
     
-    let endpoint = this.baseUrl + `api/files/upload?makeLocalCopiesNow=${makeLocalCopiesNow.toString()}&executeHandlersNow=${executeHandlersNow.toString()}`;
+    let endpoint = this.baseUrl + `api/files/upload?executeHandlersNow=${executeHandlersNow.toString()}`;
 
     if (applicationId) {
       endpoint += `&applicationId=${applicationId}`;

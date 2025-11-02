@@ -24,9 +24,9 @@ export class PrivateFileUploadService {
      * @param files Файлы для загрузки
      * @returns
      */
-    public upload(files: FileList, createCopiesNow: boolean, applicationId: string = null) {
+    public upload(files: FileList, executeHandlersNow: boolean, applicationId: string = null) {
         const formData = PrivateFileUploadService.getFormData(files);
-        return this.postFiles(formData, createCopiesNow, applicationId);
+        return this.postFiles(formData, executeHandlersNow, applicationId);
     }
 
     /**
@@ -34,7 +34,7 @@ export class PrivateFileUploadService {
      * @param files Файлы для загрузки
      * @returns
      */
-    public uploadWithProgress(files: FileList, createCopiesNow: boolean, applicationId: string): Observable<UploadPrivateFilesWithProgressResult> {
+    public uploadWithProgress(files: FileList, executeHandlersNow: boolean, applicationId: string): Observable<UploadPrivateFilesWithProgressResult> {
         if (!files) {
             return of();
         }
@@ -43,7 +43,7 @@ export class PrivateFileUploadService {
 
         let uploadingLoaded: number;
         let uploadingTotal: number;
-        return this.postFilesWithProgress(formData, createCopiesNow, applicationId).pipe(
+        return this.postFilesWithProgress(formData, executeHandlersNow, applicationId).pipe(
             filter((event): event is HttpUploadProgressEvent | HttpResponse<PrivateFilesCreatedResult> => {
                 return event.type === HttpEventType.UploadProgress || event.hasOwnProperty('body');
             }),
@@ -71,18 +71,18 @@ export class PrivateFileUploadService {
         );
     }
 
-    private postFiles(formData: FormData, createCopiesNow: boolean, applicationId: string): Observable<PrivateFilesCreatedResult> {
-        const url = this.buildUrl(createCopiesNow, applicationId);
+    private postFiles(formData: FormData, executeHandlersNow: boolean, applicationId: string): Observable<PrivateFilesCreatedResult> {
+        const url = this.buildUrl(executeHandlersNow, applicationId);
         return this._httpClient.post<PrivateFilesCreatedResult>(url, formData);
     }
 
-    private postFilesWithProgress(formData: FormData, createCopiesNow: boolean, applicationId: string): Observable<HttpEvent<PrivateFilesCreatedResult>> {
-        const url = this.buildUrl(createCopiesNow, applicationId);
+    private postFilesWithProgress(formData: FormData, executeHandlersNow: boolean, applicationId: string): Observable<HttpEvent<PrivateFilesCreatedResult>> {
+        const url = this.buildUrl(executeHandlersNow, applicationId);
         return this._httpClient.post<PrivateFilesCreatedResult>(url, formData, { reportProgress: true, observe: 'events' });
     }
 
-    private buildUrl(createCopiesNow: boolean, applicationId: string) {
-        let url = `${this._baseControllerUrl}/upload?createCopiesNow=${createCopiesNow.toString().toLowerCase()}`;
+    private buildUrl(executeHandlersNow: boolean, applicationId: string) {
+        let url = `${this._baseControllerUrl}/upload?executeHandlersNow=${executeHandlersNow.toString().toLowerCase()}`;
 
         if (applicationId) {
             url += `&applicationId=${applicationId}`;

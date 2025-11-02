@@ -56,7 +56,7 @@ export class PrivateFileUploadService {
     applicationId: string | null,
     withProgress = false,
   ): Observable<PrivateFilesCreatedResult> | Observable<HttpEvent<PrivateFilesCreatedResult>> {
-    let endpoint = this.baseUrl + `api/private-files/upload?createCopiesNow=true`;
+    let endpoint = this.baseUrl + `api/private-files/upload?executeHandlersNow=true`;
 
     if (applicationId) {
       endpoint += `&applicationId=${applicationId}`;
