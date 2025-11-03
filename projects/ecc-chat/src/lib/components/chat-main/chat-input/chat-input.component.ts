@@ -69,7 +69,6 @@ export class ChatInputComponent implements ControlValueAccessor, OnChanges {
     if ('editableMessage' in changes && this.editData$.getValue() !== undefined) {
       this.message = {
         text: this.editData$.getValue().message.message,
-        // files:this.editData$.getValue().message.attachments,
       };
       this.onChange?.(this.message);
     }

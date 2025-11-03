@@ -14,7 +14,6 @@ import {
 } from '@angular/forms';
 import { ChatInputComponent } from '../chat-input.component';
 import { ChatLogicService } from '../../../../services/ChatLogicService';
-import { PipeMapperPipe } from '../../../../pipes/pipe-mapper.pipe';
 import { InputMessage } from '../../../../models/input-message.interface';
 import { ChatSymbolSpritePipe } from '../../../../pipes/chat-symbol-sprite.pipe';
 import { debounceTime } from 'rxjs';
@@ -25,7 +24,6 @@ import { debounceTime } from 'rxjs';
   imports: [
     ReactiveFormsModule,
     ChatInputComponent,
-    PipeMapperPipe,
     ChatSymbolSpritePipe,
   ],
   templateUrl: './chat-input-box.component.html',
@@ -48,14 +46,17 @@ export class ChatInputBoxComponent implements AfterViewInit {
   @Output() public draftMessageEvent = new EventEmitter<InputMessage>();
 
   ngAfterViewInit(): void {
+
+    const messageControl = this.chatControlForm.controls['message'];
+
     if (this.draftMessage) {
-      this.chatControlForm.controls['message'].patchValue(this.draftMessage, {
+      messageControl.patchValue(this.draftMessage, {
         emitEvent: false,
       });
     }
     this._chatLogicService.editableMessage$.subscribe((message) => {
       if (message?.message?.message) {
-        this.chatControlForm.controls['message'].patchValue(
+        messageControl.patchValue(
           { text: message?.message?.message, files: undefined },
           {
             emitEvent: false,
@@ -63,7 +64,7 @@ export class ChatInputBoxComponent implements AfterViewInit {
         );
       }
     });
-    this.chatControlForm.controls['message'].valueChanges
+    messageControl.valueChanges
       .pipe(debounceTime(400))
       .subscribe((message) => {
         this.draftMessageEvent.emit(message);
