@@ -92,10 +92,6 @@ export class AudioEditorComponent implements OnInit, OnDestroy {
     return this.tag.attributes.hasOwnProperty(FileAudioTagDataConsts.FileIdAttrName) && this.fileId && this.fileId !== '';
   }
 
-  getSrc() {
-    return this.audioSrc;
-  }
-
   private get audioElement(): HTMLAudioElement | null {
     return this.audioPlayer?.nativeElement || null;
   }

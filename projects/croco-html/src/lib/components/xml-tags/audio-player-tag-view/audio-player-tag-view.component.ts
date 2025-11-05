@@ -58,10 +58,6 @@ export class AudioPlayerTagViewComponent implements OnInit, OnDestroy, OnChanges
     return this.data.data.fileId;
   }
 
-  getSrc() {
-    return this.audioSrc;
-  }
-
   private get audioElement(): HTMLAudioElement | null {
     return this.audioPlayer?.nativeElement || null;
   }
@@ -216,7 +212,6 @@ export class AudioPlayerTagViewComponent implements OnInit, OnDestroy, OnChanges
       .pipe(takeUntil(this.unsubscribe))
       .subscribe({
         next: (result) => {
-          console.log(result,'result')
           if (!result.fileInfo) {
             this.setError(`Файл с идентификатором ${fileIdValue} не найден на сервере.`);
             return;

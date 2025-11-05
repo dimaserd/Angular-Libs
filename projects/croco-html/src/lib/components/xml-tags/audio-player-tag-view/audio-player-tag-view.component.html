@@ -2,7 +2,7 @@
   @if (hasAudioError) {
     <div class="error-block">
       <mat-icon>error</mat-icon>
-      <span>{{ errorMessage || 'Аудио-файл не найден по указанному идентификатору' }}</span>
+      <span>{{ errorMessage }}</span>
     </div>
   }
 
@@ -10,7 +10,7 @@
     <div class="audio-player-container">
       <audio
         #audioPlayer
-        [src]="getSrc()"
+        [src]="audioSrc"
         (error)="onErrorHandler()"
         (loadedmetadata)="onLoadedMetadata()"
         (timeupdate)="onTimeUpdate()"
