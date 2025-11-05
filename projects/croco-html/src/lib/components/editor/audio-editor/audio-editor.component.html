@@ -2,7 +2,7 @@
   @if (hasAudioError) {
     <div class="error-block">
       <mat-icon>error</mat-icon>
-      <span>Аудио-файл не найден по указанному идентификатору, возможно файл не существует или отсутствует на сервере.</span>
+      <span>{{ errorMessage || 'Аудио-файл не найден по указанному идентификатору, возможно файл не существует или отсутствует на сервере.' }}</span>
     </div>
   }
 
@@ -163,16 +163,6 @@
               autocomplete="off"
               [(ngModel)]="fileId"
               (ngModelChange)="onFileIdChanged($event)">
-          </mat-form-field>
-
-          <mat-form-field class="w-100">
-            <mat-label>Имя файла</mat-label>
-            <input
-              matInput
-              placeholder="Введите имя файла"
-              autocomplete="off"
-              [(ngModel)]="fileNameAttr"
-              (ngModelChange)="onFileNameChanged($event)">
           </mat-form-field>
         </div>
       }

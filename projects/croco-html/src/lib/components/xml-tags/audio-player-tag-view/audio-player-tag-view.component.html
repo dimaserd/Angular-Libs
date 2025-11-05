@@ -2,7 +2,7 @@
   @if (hasAudioError) {
     <div class="error-block">
       <mat-icon>error</mat-icon>
-      <span>Аудио-файл не найден по указанному идентификатору</span>
+      <span>{{ errorMessage || 'Аудио-файл не найден по указанному идентификатору' }}</span>
     </div>
   }
 
@@ -30,7 +30,7 @@
 
       <div class="file-info">
         <mat-icon>audiotrack</mat-icon>
-        <span class="file-name">{{ fileName || 'Аудио-файл' }}</span>
+        <span class="file-name">Аудио-файл</span>
       </div>
 
       <div class="player-controls">

@@ -24,6 +24,7 @@ import { FileType } from '../../../services/file-models';
 import { UploadFilesBtnComponent } from '../../upload-files-btn/upload-files-btn.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import {MatIconButton} from "@angular/material/button";
+import { CommonFileInfoQueryService } from '../../../services/CommonFileInfoQueryService';
 
 @Component({
   selector: 'croco-html-audio-editor',
@@ -46,16 +47,16 @@ import {MatIconButton} from "@angular/material/button";
 export class AudioEditorComponent implements OnInit, OnDestroy {
 
   hasAudioError = false;
+  errorMessage = '';
   isPlaying = false;
   isLoading = false;
   currentTime = 0;
   duration = 0;
   volume = 1;
   isMuted = false;
+  audioSrc = '';
 
   searchOrEdit = "search";
-
-  fileName = '';
 
   files: Array<{ fileId: string; fileName: string }> = [];
   loading = false;
@@ -76,6 +77,7 @@ export class AudioEditorComponent implements OnInit, OnDestroy {
     private readonly _publicFileService: PublicFilesQueryService,
     private readonly _privateFileService: PrivateFilesQueryService,
     private readonly _htmlSettingsService: CrocoHtmlFileOptionsService,
+    private readonly _commonFileInfoService: CommonFileInfoQueryService,
   ) { }
 
   public get fileId(): string {
@@ -86,21 +88,12 @@ export class AudioEditorComponent implements OnInit, OnDestroy {
     this.tag.attributes[FileAudioTagDataConsts.FileIdAttrName] = value;
   }
 
-  public get fileNameAttr(): string {
-    return this.tag.attributes[FileAudioTagDataConsts.FileNameAttrName];
-  }
-
-  public set fileNameAttr(value: string) {
-    this.tag.attributes[FileAudioTagDataConsts.FileNameAttrName] = value;
-  }
-
   hasFileId() {
     return this.tag.attributes.hasOwnProperty(FileAudioTagDataConsts.FileIdAttrName) && this.fileId && this.fileId !== '';
   }
 
   getSrc() {
-    // return AudioMethods.buildUrl(this.fileId, this.fileNameAttr);
-    return this.fileId
+    return this.audioSrc;
   }
 
   private get audioElement(): HTMLAudioElement | null {
@@ -110,24 +103,63 @@ export class AudioEditorComponent implements OnInit, OnDestroy {
   onErrorHandler() {
     this.hasAudioError = true;
     this.isLoading = false;
+    if (!this.errorMessage) {
+      this.errorMessage = 'Аудио-файл не найден по указанному идентификатору, возможно файл не существует или отсутствует на сервере.';
+    }
   }
 
   removeAudioError() {
     this.hasAudioError = false;
+    this.errorMessage = '';
+  }
+
+  setError(message: string) {
+    this.hasAudioError = true;
+    this.errorMessage = message;
+    this.isLoading = false;
   }
 
   onFileIdChanged(fileId: string) {
     this.fileId = fileId;
     this.removeAudioError();
-    this.loadAudioFile();
+    this.checkAndLoadAudioFile();
   }
 
-  onFileNameChanged(fileName: string) {
-    this.fileNameAttr = fileName;
+  checkAndLoadAudioFile() {
+    if (!this.hasFileId()) {
+      return;
+    }
+
+    this.isLoading = true;
+    this.hasAudioError = false;
+    this.errorMessage = '';
+
+    const fileIdValue = this.fileId;
+    this._commonFileInfoService.getInfo(fileIdValue)
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe({
+        next: (result) => {
+          if (!result.fileInfo) {
+            this.setError(`Файл с идентификатором ${fileIdValue} не найден на сервере.`);
+            return;
+          }
+
+          if (result.fileInfo.type !== FileType.Audio) {
+            this.setError(`Файл с идентификатором ${fileIdValue} должен быть c типом Audio, а получено ${result.fileInfo.type}.`);
+            return;
+          }
+
+          this.audioSrc = result.fileInfo.downloadUrl;
+          this.loadAudioFile();
+        },
+        error: (error) => {
+          this.setError(`Ошибка при получении информации о файле: ${error.message || 'Неизвестная ошибка'}`);
+        }
+      });
   }
 
   loadAudioFile() {
-    if (!this.hasFileId()) {
+    if (!this.hasFileId() || !this.audioSrc) {
       return;
     }
 
@@ -282,24 +314,23 @@ export class AudioEditorComponent implements OnInit, OnDestroy {
   onFileSelected(fileId: string) {
     const selectedFile = this.files.find(f => f.fileId === fileId);
     if (selectedFile) {
-      //TODO заглушка
-      this.fileId = "./ona_ne_tvoya.mp3";
-      this.fileNameAttr = selectedFile.fileName;
-      this.loadAudioFile();
+      this.fileId = fileId;
+      this.checkAndLoadAudioFile();
     }
   }
 
   onFilesUploaded(fileIds: string[] | number[]) {
     if (fileIds && fileIds.length > 0) {
-      //TODO заглушка
-      this.fileId = '"./ona_ne_tvoya.mp3"';
+      const firstFileId = fileIds[0];
+      this.fileId = typeof firstFileId === 'number' ? firstFileId.toString() : firstFileId;
       this.loadFiles();
+      this.checkAndLoadAudioFile();
     }
   }
 
   removeAudio() {
     this.fileId = '';
-    this.fileNameAttr = '';
+    this.audioSrc = '';
     this.isPlaying = false;
     this.currentTime = 0;
     this.duration = 0;
@@ -310,10 +341,10 @@ export class AudioEditorComponent implements OnInit, OnDestroy {
     if (this.audioPlayer?.nativeElement) {
       const audio = this.audioPlayer.nativeElement;
       audio.volume = this.volume;
+    }
 
-      if (this.hasFileId()) {
-        this.loadAudioFile();
-      }
+    if (this.hasFileId()) {
+      this.checkAndLoadAudioFile();
     }
 
     this.loadFiles();

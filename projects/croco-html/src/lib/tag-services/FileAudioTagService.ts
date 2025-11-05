@@ -10,33 +10,22 @@ export class FileAudioTagService implements IMarkUpTagService {
 
   bodyTagToHtmlStringConverter(bodyTag: HtmlBodyTag): string {
     let fileIdAttr = "";
-    let fileNameAttr = "";
 
     if (bodyTag.attributes.hasOwnProperty(FileAudioTagDataConsts.FileIdAttrName) &&
         bodyTag.attributes[FileAudioTagDataConsts.FileIdAttrName]) {
       fileIdAttr = `${FileAudioTagDataConsts.FileIdAttrName}="${bodyTag.attributes[FileAudioTagDataConsts.FileIdAttrName]}"`;
     }
 
-    if (bodyTag.attributes.hasOwnProperty(FileAudioTagDataConsts.FileNameAttrName) &&
-        bodyTag.attributes[FileAudioTagDataConsts.FileNameAttrName]) {
-      fileNameAttr = ` ${FileAudioTagDataConsts.FileNameAttrName}="${bodyTag.attributes[FileAudioTagDataConsts.FileNameAttrName]}"`;
-    }
-
-    return `<${FileAudioTagDataConsts.TagName} ${fileIdAttr}${fileNameAttr}></${FileAudioTagDataConsts.TagName}>`;
+    return `<${FileAudioTagDataConsts.TagName} ${fileIdAttr}></${FileAudioTagDataConsts.TagName}>`;
   }
 
   extractBlockFromHtmlElement(elem: HTMLElement, options: CrocoHtmlOptions): InterfaceBlock {
     let fileId = elem.getAttribute(FileAudioTagDataConsts.FileIdAttrName);
-    let fileName = elem.getAttribute(FileAudioTagDataConsts.FileNameAttrName);
-
-    let src = AudioMethods.buildUrl(fileId, fileName);
 
     return {
       tagName: FileAudioTagDataConsts.TagName,
       data: {
-        src,
-        fileId: fileId,
-        fileName: fileName
+        fileId: fileId
       }
     };
   }
@@ -48,10 +37,6 @@ export class FileAudioTagService implements IMarkUpTagService {
 
     if (fileData.fileId) {
       attrs[FileAudioTagDataConsts.FileIdAttrName] = fileData.fileId;
-    }
-
-    if (fileData.fileName) {
-      attrs[FileAudioTagDataConsts.FileNameAttrName] = fileData.fileName;
     }
 
     return {
@@ -73,8 +58,7 @@ export class FileAudioTagService implements IMarkUpTagService {
         isCustom: false
       },
       attributes: {
-        [FileAudioTagDataConsts.FileIdAttrName]: '',
-        [FileAudioTagDataConsts.FileNameAttrName]: ''
+        [FileAudioTagDataConsts.FileIdAttrName]: ''
       },
       innerHtml: "",
     }
