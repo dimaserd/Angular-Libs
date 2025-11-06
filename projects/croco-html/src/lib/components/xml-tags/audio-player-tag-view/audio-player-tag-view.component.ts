@@ -1,11 +1,23 @@
-import { Component, Inject, Input, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  Inject,
+  Input,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+  ElementRef,
+  OnChanges,
+  SimpleChanges
+} from '@angular/core';
 import { AudioMethods } from '../../../extensions/AudioMethods';
 import { InterfaceBlock } from '../../../models/InterfaceBlock';
 import { CrocoHtmlOptionsToken } from '../../../consts';
 import { MatIcon } from '@angular/material/icon';
-import { Subject } from "rxjs";
+import { Subject, takeUntil } from "rxjs";
 import { CrocoHtmlOptions } from '../../../options';
 import { MatIconButton } from "@angular/material/button";
+import { CommonFileInfoQueryService } from '../../../services/CommonFileInfoQueryService';
+import { FileType } from '../../../services/file-models';
 
 @Component({
   selector: 'croco-html-audio-player-tag-view',
@@ -17,15 +29,17 @@ import { MatIconButton } from "@angular/material/button";
     MatIconButton
   ]
 })
-export class AudioPlayerTagViewComponent implements OnInit, OnDestroy {
+export class AudioPlayerTagViewComponent implements OnInit, OnDestroy, OnChanges {
 
   hasAudioError = false;
+  errorMessage = '';
   isPlaying = false;
   isLoading = false;
   currentTime = 0;
   duration = 0;
   volume = 1;
   isMuted = false;
+  audioSrc = '';
 
   private unsubscribe = new Subject<void>();
 
@@ -37,21 +51,11 @@ export class AudioPlayerTagViewComponent implements OnInit, OnDestroy {
 
   constructor(
     @Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions,
+    private readonly _commonFileInfoService: CommonFileInfoQueryService,
   ) { }
 
   get fileId(): string {
     return this.data.data.fileId;
-  }
-
-  get fileName(): string {
-    return this.data.data.fileName;
-  }
-
-  getSrc() {
-    //this._options.fileIdAndNamePathUrlFormat;
-    // TODO если fileId указан то нужно
-    // return AudioMethods.buildUrl(this.fileId, this.fileName);
-    return this.fileId
   }
 
   private get audioElement(): HTMLAudioElement | null {
@@ -64,6 +68,15 @@ export class AudioPlayerTagViewComponent implements OnInit, OnDestroy {
 
   onErrorHandler() {
     this.hasAudioError = true;
+    this.isLoading = false;
+    if (!this.errorMessage) {
+      this.errorMessage = 'Аудио-файл не найден по указанному идентификатору.';
+    }
+  }
+
+  setError(message: string) {
+    this.hasAudioError = true;
+    this.errorMessage = message;
     this.isLoading = false;
   }
 
@@ -176,17 +189,72 @@ export class AudioPlayerTagViewComponent implements OnInit, OnDestroy {
       const audio = this.audioElement;
       if (audio) {
         audio.volume = this.volume;
-
-        if (this.hasFileId()) {
-          this.isLoading = true;
-          audio.load();
-        }
       }
+    }
+
+    if (this.hasFileId()) {
+      this.checkAndLoadAudioFile();
+    }
+  }
+
+  checkAndLoadAudioFile() {
+    if (!this.hasFileId()) {
+      return;
+    }
+
+    this.isLoading = true;
+    this.hasAudioError = false;
+    this.errorMessage = '';
+
+    const fileIdValue = this.fileId;
+
+    this._commonFileInfoService.getInfo(fileIdValue)
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe({
+        next: (result) => {
+          if (!result.fileInfo) {
+            this.setError(`Файл с идентификатором ${fileIdValue} не найден на сервере.`);
+            return;
+          }
+
+          if (result.fileInfo.type !== FileType.Audio) {
+            this.setError(`Файл с идентификатором ${fileIdValue} должен быть c типом Audio, а получено ${result.fileInfo.type}.`);
+            return;
+          }
+
+          this.audioSrc = result.fileInfo.downloadUrl;
+          this.loadAudioFile();
+        },
+        error: (error) => {
+          this.setError(`Ошибка при получении информации о файле: ${error.message || 'Неизвестная ошибка'}`);
+        }
+      });
+  }
+
+  loadAudioFile() {
+    if (!this.hasFileId() || !this.audioSrc) {
+      return;
+    }
+
+    this.isLoading = true;
+    this.hasAudioError = false;
+
+    const audio = this.audioElement;
+    if (audio) {
+      audio.load();
     }
   }
 
   ngOnDestroy(): void {
     this.unsubscribe.next();
     this.unsubscribe.complete();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['data'] && !changes['data'].firstChange) {
+      if (this.hasFileId()) {
+        this.checkAndLoadAudioFile();
+      }
+    }
   }
 }
