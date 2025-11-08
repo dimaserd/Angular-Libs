@@ -3,7 +3,24 @@ export enum TestQuestionType {
     TypeRightAnswer = 'TypeRightAnswer',
     DetailedAnswer = 'DetailedAnswer',
     TypeAnswerWithErrors = 'TypeAnswerWithErrors',
-    ManyAnswersBoxes = 'ManyAnswersBoxes'
+    ManyAnswersBoxes = 'ManyAnswersBoxes',
+    FillGaps = 'FillGaps'
+}
+
+export enum GapType {
+    Select = 'Select',
+    Input = 'Input'
+}
+
+export interface GapModel {
+    type: GapType;
+    correctAnswers: Array<string>;
+    answersToSelect: Array<string>;
+}
+
+export interface GapsQuestionData {
+    gapText: string;
+    gaps: Array<GapModel>;
 }
 
 export interface TestQuestionModel {
@@ -18,6 +35,7 @@ export interface TestQuestionModel {
     typeRightAnswerQuestionData: TypeRightAnswerQuestionData;
     typeAnswerWithErrorsData: TypeAnswerWithErrorsQuestionData;
     manyAnswersBoxesData: ManyAnswersBoxesQuestionData;
+    gapsData: GapsQuestionData;
 }
 
 export interface ManyAnswersBoxesQuestionData {
@@ -33,7 +51,6 @@ export interface TypeAnswerWithErrorsQuestionData {
     rightAnswer: string;
     ignoreTextOrder: boolean;
 }
-
 
 export interface SelectRightAnswerOrAnswersQuestionData {
     selectRightAnswerTitle: string;
