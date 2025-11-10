@@ -19,10 +19,10 @@ export class FileAudioTagService implements IMarkUpTagService {
 
     if (bodyTag.attributes.hasOwnProperty(FileAudioTagDataConsts.TitleAttrName) &&
         bodyTag.attributes[FileAudioTagDataConsts.TitleAttrName]) {
-      titleAttr = ` ${FileAudioTagDataConsts.TitleAttrName}="${bodyTag.attributes[FileAudioTagDataConsts.TitleAttrName]}"`;
+      titleAttr = `${FileAudioTagDataConsts.TitleAttrName}="${bodyTag.attributes[FileAudioTagDataConsts.TitleAttrName]}"`;
     }
 
-    return `<${FileAudioTagDataConsts.TagName} ${fileIdAttr}${titleAttr}></${FileAudioTagDataConsts.TagName}>`;
+    return `<${FileAudioTagDataConsts.TagName} ${fileIdAttr} ${titleAttr}></${FileAudioTagDataConsts.TagName}>`;
   }
 
   extractBlockFromHtmlElement(elem: HTMLElement, options: CrocoHtmlOptions): InterfaceBlock {
