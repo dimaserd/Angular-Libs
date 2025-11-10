@@ -1,5 +1,6 @@
 export interface FileAudioTagData {
   fileId: string;
+  title?: string;
 }
 
 export interface FileAudioTag {

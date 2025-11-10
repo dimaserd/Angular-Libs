@@ -20,11 +20,13 @@ export class FileImageTagViewComponent implements OnInit, OnDestroy {
 
   @Input() set item(item: InterfaceBlock) {
     let data = item.data as FileImageTagData;
+    this.imageData = data;
     this.imageSrc = data.src;
     this.requests = this.getMediaRequests(data.screenMediaRequest);
   }
 
   imageSrc = "";
+  imageData: FileImageTagData | null = null;
   requests: IImageMediaRequest[] = []
 
   private unsubscribe = new Subject<void>();
@@ -59,5 +61,11 @@ export class FileImageTagViewComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.unsubscribe.next();
     this.unsubscribe.complete();
+  }
+
+  onImageClick(): void {
+    if (this.imageData && this._options.imageOptions.onImageClick) {
+      this._options.imageOptions.onImageClick(this.imageData);
+    }
   }
 }
