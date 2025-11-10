@@ -1,4 +1,9 @@
-.red{
+.red {
     background-color: rgb(201, 68, 68);
     color: white;
+}
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
 }

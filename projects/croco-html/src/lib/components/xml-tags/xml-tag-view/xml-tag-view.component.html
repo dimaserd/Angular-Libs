@@ -34,14 +34,16 @@
     }
     @else if (item.tagName === 'table' && item.validationResult) {
 
-    @if (item.validationResult.isSucceeded){
-    <croco-html-xml-tag-html-view [html]="item.data.bootstrapHtml">
-    </croco-html-xml-tag-html-view>
-    }
-    @else {
-    <croco-html-error-banner [message]="item.validationResult.message">
-    </croco-html-error-banner>
-    }
+      @if (item.validationResult.isSucceeded){
+        <div class="table-container">
+          <croco-html-xml-tag-html-view [html]="item.data.bootstrapHtml">
+          </croco-html-xml-tag-html-view>
+        </div>
+      }
+      @else {
+      <croco-html-error-banner [message]="item.validationResult.message">
+      </croco-html-error-banner>
+      }
     }
     @else if (item.tagName === 'external-video') {
     <div>
