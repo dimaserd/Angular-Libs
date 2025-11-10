@@ -58,6 +58,10 @@ export class AudioPlayerTagViewComponent implements OnInit, OnDestroy, OnChanges
     return this.data.data.fileId;
   }
 
+  get title(): string {
+    return this.data.data.title || 'Аудио-файл';
+  }
+
   private get audioElement(): HTMLAudioElement | null {
     return this.audioPlayer?.nativeElement || null;
   }

@@ -88,6 +88,14 @@ export class AudioEditorComponent implements OnInit, OnDestroy {
     this.tag.attributes[FileAudioTagDataConsts.FileIdAttrName] = value;
   }
 
+  public get title(): string {
+    return this.tag.attributes[FileAudioTagDataConsts.TitleAttrName] || '';
+  }
+
+  public set title(value: string) {
+    this.tag.attributes[FileAudioTagDataConsts.TitleAttrName] = value;
+  }
+
   hasFileId() {
     return this.tag.attributes.hasOwnProperty(FileAudioTagDataConsts.FileIdAttrName) && this.fileId && this.fileId !== '';
   }
@@ -326,6 +334,7 @@ export class AudioEditorComponent implements OnInit, OnDestroy {
 
   removeAudio() {
     this.fileId = '';
+    this.title = '';
     this.audioSrc = '';
     this.isPlaying = false;
     this.currentTime = 0;

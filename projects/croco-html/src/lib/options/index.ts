@@ -1,5 +1,5 @@
 import { Type } from "@angular/core";
-import { IImageMediaRequest } from "../models";
+import { IImageMediaRequest, FileImageTagData } from "../models";
 import { VisualEditorComponent } from "../components";
 import { IMarkUpTagService } from "../tag-services";
 
@@ -79,6 +79,12 @@ export interface CrocoHtmlImageOptions {
    * Медиа запросы для изображений.
    */
   globalMediaRequests?: IImageMediaRequest[];
+
+  /**
+   * Обработчик клика на изображение в теге file-image.
+   * @param imageData - данные изображения
+   */
+  onImageClick?: (imageData: FileImageTagData) => void;
 }
 
 /**

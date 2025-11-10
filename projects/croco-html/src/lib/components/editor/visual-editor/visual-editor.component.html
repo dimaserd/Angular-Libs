@@ -8,6 +8,39 @@
   </div>
 }
 <div [hidden]="isLoading">
+  <div cdkDropList (cdkDropListDropped)="drop($event)">
+    @for (tag of bodyTags; track tag; let i = $index) {
+      <div cdkDrag>
+        <mat-card style="margin: 2px;" class="mat-card special">
+          <mat-card-content>
+            <div class="d-flex justify-content-between">
+              <div class="example-handle" cdkDragHandle>
+                <svg width="24" height="24" class="move-icon">
+                  <use [attr.xlink:href]="'move-icon' | spriteIconPath"></use>
+                </svg>
+              </div>
+              <div>
+                <div class="badge" [matTooltip]="tag.tagDescription.displayValue">
+                  <span class="text-align-icon">
+                    <ng-container [ngTemplateOutlet]="tagButtonIcons"
+                                  [ngTemplateOutletContext]="{icon: tag.tagDescription.tag}">
+                  </ng-container>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div style="height: 15px;"></div>
+            <croco-html-main-editor-block [tag]="tag" (onTagSaved)="onTagChangedHandler($event, i)"
+              (onTagRemoved)="onTagRemovedHandler(i)">
+            </croco-html-main-editor-block>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    }
+  </div>
+</div>
+<div style="height: 10px;"></div>
+<div [hidden]="isLoading">
   <mat-card style="margin: 2px;" class="mat-card">
     <mat-card-content>
       <div class="row d-flex align-items-center">
@@ -71,18 +104,18 @@
         }
         @if (selectedValue === HtmlRawTagDataConsts.TagName) {
           <div class="col-12">
-              <mat-form-field class="w-100">
-                <mat-label>Разметка</mat-label>
-                <textarea
-                  #autosize="cdkTextareaAutosize"
-                  matInput
-                  cdkTextareaAutosize
-                  cdkAutosizeMinRows="1"
-                  cdkAutosizeMaxRows="5"
-                  placeholder="Разметка"
-                  #textArea
-                  [(ngModel)]="htmlRaw"
-                ></textarea>
+            <mat-form-field class="w-100">
+              <mat-label>Разметка</mat-label>
+              <textarea
+                #autosize="cdkTextareaAutosize"
+                matInput
+                cdkTextareaAutosize
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="5"
+                placeholder="Разметка"
+                #textArea
+                [(ngModel)]="htmlRaw"
+              ></textarea>
             </mat-form-field>
           </div>
         }
@@ -135,15 +168,14 @@
 
         <div class="col-12">
           <button (click)="addTagClickHandler()" class="w-100" mat-stroked-button>
-            Добавить тег
+            Добавить
           </button>
         </div>
       </div>
     </mat-card-content>
   </mat-card>
 
-  <div style="height: 10px;">
-  </div>
+  <div style="height: 10px;"></div>
 </div>
 <div [hidden]="isLoading">
   <mat-card style="margin: 2px;" class="mat-card">
@@ -151,7 +183,7 @@
       <div class="row d-flex align-items-center">
         <div class="col-12">
           <croco-html-add-files-btn (filesTagsReady)="filesTagsReadyHandler($event)"
-            (postFilesStarted)="postFilesStartedEventHandler()" class="w-100">
+                                    (postFilesStarted)="postFilesStartedEventHandler()" class="w-100">
           </croco-html-add-files-btn>
         </div>
       </div>
@@ -159,38 +191,6 @@
   </mat-card>
 
   <div style="height: 10px;">
-  </div>
-</div>
-<div [hidden]="isLoading">
-  <div cdkDropList (cdkDropListDropped)="drop($event)">
-    @for (tag of bodyTags; track tag; let i = $index) {
-      <div cdkDrag>
-        <mat-card style="margin: 2px;" class="mat-card special">
-          <mat-card-content>
-            <div class="d-flex justify-content-between">
-              <div class="example-handle" cdkDragHandle>
-                <svg width="24" height="24" class="move-icon">
-                  <use [attr.xlink:href]="'move-icon' | spriteIconPath"></use>
-                </svg>
-              </div>
-              <div>
-                <div class="badge" [matTooltip]="tag.tagDescription.displayValue">
-                  <span class="text-align-icon">
-                    <ng-container [ngTemplateOutlet]="tagButtonIcons"
-                                  [ngTemplateOutletContext]="{icon: tag.tagDescription.tag}">
-                  </ng-container>
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div style="height: 15px;"></div>
-            <croco-html-main-editor-block [tag]="tag" (onTagSaved)="onTagChangedHandler($event, i)"
-              (onTagRemoved)="onTagRemovedHandler(i)">
-            </croco-html-main-editor-block>
-          </mat-card-content>
-        </mat-card>
-      </div>
-    }
   </div>
 </div>
 

@@ -10,22 +10,30 @@ export class FileAudioTagService implements IMarkUpTagService {
 
   bodyTagToHtmlStringConverter(bodyTag: HtmlBodyTag): string {
     let fileIdAttr = "";
+    let titleAttr = "";
 
     if (bodyTag.attributes.hasOwnProperty(FileAudioTagDataConsts.FileIdAttrName) &&
         bodyTag.attributes[FileAudioTagDataConsts.FileIdAttrName]) {
       fileIdAttr = `${FileAudioTagDataConsts.FileIdAttrName}="${bodyTag.attributes[FileAudioTagDataConsts.FileIdAttrName]}"`;
     }
 
-    return `<${FileAudioTagDataConsts.TagName} ${fileIdAttr}></${FileAudioTagDataConsts.TagName}>`;
+    if (bodyTag.attributes.hasOwnProperty(FileAudioTagDataConsts.TitleAttrName) &&
+        bodyTag.attributes[FileAudioTagDataConsts.TitleAttrName]) {
+      titleAttr = `${FileAudioTagDataConsts.TitleAttrName}="${bodyTag.attributes[FileAudioTagDataConsts.TitleAttrName]}"`;
+    }
+
+    return `<${FileAudioTagDataConsts.TagName} ${fileIdAttr} ${titleAttr}></${FileAudioTagDataConsts.TagName}>`;
   }
 
   extractBlockFromHtmlElement(elem: HTMLElement, options: CrocoHtmlOptions): InterfaceBlock {
     let fileId = elem.getAttribute(FileAudioTagDataConsts.FileIdAttrName);
+    let title = elem.getAttribute(FileAudioTagDataConsts.TitleAttrName);
 
     return {
       tagName: FileAudioTagDataConsts.TagName,
       data: {
-        fileId: fileId
+        fileId: fileId,
+        title: title
       }
     };
   }
@@ -37,6 +45,10 @@ export class FileAudioTagService implements IMarkUpTagService {
 
     if (fileData.fileId) {
       attrs[FileAudioTagDataConsts.FileIdAttrName] = fileData.fileId;
+    }
+
+    if (fileData.title) {
+      attrs[FileAudioTagDataConsts.TitleAttrName] = fileData.title;
     }
 
     return {
@@ -58,7 +70,8 @@ export class FileAudioTagService implements IMarkUpTagService {
         isCustom: false
       },
       attributes: {
-        [FileAudioTagDataConsts.FileIdAttrName]: ''
+        [FileAudioTagDataConsts.FileIdAttrName]: '',
+        [FileAudioTagDataConsts.TitleAttrName]: ''
       },
       innerHtml: "",
     }
