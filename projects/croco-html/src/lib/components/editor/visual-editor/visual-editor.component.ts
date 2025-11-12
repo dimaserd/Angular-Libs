@@ -85,6 +85,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   textTag = DefaultTags.textTags[0].tag;
   textTagOptions = DefaultTags.textTags
   alignmentOptions = AlignmentsData
+  isTagAdditionStarted = false
 
   @Input()
   showMarkUp = true;
@@ -146,34 +147,15 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   }
 
   addTagClickHandler(): void {
-    let tagDescription = this.tags
-      .find(x => x.tag === this.selectedValue);
-
-    const tagName = tagDescription.tag;
-
-    if (TextTags.allTextTags.includes(tagName)) {
-      this.addTextTags();
-      this.startAddingText();
+    if (!this.selectedValue) {
       return;
     }
 
-    if (BodyTagsExtensions.hasTagService(tagName, this._options)) {
-
-      const tagService = BodyTagsExtensions.getTagService(tagName, this._options);
-
-      let tag = tagService.getDefaultValue({
-        htmlRaw: this.htmlRaw,
-        selectedVideoPlayer: this.selectedVideoPlayer
-      });
-
-      this.bodyTags.push(tag);
-
-      this.htmlRaw = '';
-      this.recalculateHtml();
+    if (this.isTagRequiringForm()) {
       return;
     }
 
-    alert(`Сервис для тега ${tagName} не зарегистрирован.`)
+    this.addRegularTag();
   }
 
   startAddingText(tag = ''): void {
@@ -192,27 +174,6 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     this.textTag = DefaultTags.textTags[0].tag;
   }
 
-  addTextTags() {
-    let lines = this.text.split('\n');
-    this.bodyTags = [...this.saveBodyTags];
-    let tagDescription = this.textTagOptions?.find(x => x.tag === this.textTag);
-
-    for (let i = 0; i < lines.length; i++) {
-
-      const line = lines[i];
-
-      if (line.length > 0) {
-        this.bodyTags.push({
-          tagDescription,
-          innerHtml: line,
-          attributes: {
-            [TextTagDataConsts.HAlign]: `${this.alignment}`
-          }
-        });
-        this.recalculateHtml();
-      }
-    }
-  }
 
   postFilesStartedEventHandler() {
     this.loadingText = "Файлы загружаются на сервер";
@@ -261,9 +222,124 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
 
   selectTag(data: TagItem) {
     this.htmlRaw = '';
-
     this.selectedValue = data.tag;
-    this.startAddingText(data.tag);
+    
+    if (this.isTagRequiringForm()) {
+      if (data.tag === 'text') {
+        this.resetTextStyle();
+      } else if (data.tag === ExternalVideoTagDataConsts.TagName) {
+        this.selectedVideoPlayer = this.videoPlayers[0].type;
+      }
+      return;
+    }
+    
+    this.addRegularTag();
+  }
+
+  isTagRequiringForm(): boolean {
+    return this.selectedValue === 'text' || 
+           this.selectedValue === ExternalVideoTagDataConsts.TagName || 
+           this.selectedValue === HtmlRawTagDataConsts.TagName;
+  }
+
+  addTagWithForm(): void {
+    if (!this.selectedValue) {
+      return;
+    }
+
+    if (this.selectedValue === 'text') {
+      this.addTextTag();
+    } else if (this.selectedValue === ExternalVideoTagDataConsts.TagName) {
+      this.addExternalVideoTag();
+    } else     if (this.selectedValue === HtmlRawTagDataConsts.TagName) {
+      this.addHtmlRawTag();
+    }
+
+    this.resetTagForm();
+  }
+
+  addTextTag(): void {
+    if (!this.text || this.text.trim().length === 0) {
+      return;
+    }
+
+    let lines = this.text.split('\n');
+    let tagDescription = this.textTagOptions?.find(x => x.tag === this.textTag);
+
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      if (line.length > 0) {
+        this.bodyTags.push({
+          tagDescription,
+          innerHtml: line,
+          attributes: {
+            [TextTagDataConsts.HAlign]: `${this.alignment}`
+          }
+        });
+      }
+    }
+
+    this.recalculateHtml();
+  }
+
+  addExternalVideoTag(): void {
+    const tagName = ExternalVideoTagDataConsts.TagName;
+    
+    if (BodyTagsExtensions.hasTagService(tagName, this._options)) {
+      const tagService = BodyTagsExtensions.getTagService(tagName, this._options);
+      let tag = tagService.getDefaultValue({
+        htmlRaw: this.htmlRaw,
+        selectedVideoPlayer: this.selectedVideoPlayer
+      });
+
+      this.bodyTags.push(tag);
+      this.recalculateHtml();
+    }
+  }
+
+  addHtmlRawTag(): void {
+    const tagName = HtmlRawTagDataConsts.TagName;
+    
+    if (BodyTagsExtensions.hasTagService(tagName, this._options)) {
+      const tagService = BodyTagsExtensions.getTagService(tagName, this._options);
+      let tag = tagService.getDefaultValue({
+        htmlRaw: this.htmlRaw,
+        selectedVideoPlayer: null
+      });
+
+      this.bodyTags.push(tag);
+      this.recalculateHtml();
+    }
+  }
+
+  resetTagForm(): void {
+    this.selectedValue = null;
+    this.htmlRaw = '';
+    this.text = '';
+    this.resetTextStyle();
+    this.isTagAdditionStarted = false;
+  }
+
+  addRegularTag(): void {
+    if (!this.selectedValue) {
+      return;
+    }
+
+    const tagName = this.selectedValue;
+    
+    if (BodyTagsExtensions.hasTagService(tagName, this._options)) {
+      const tagService = BodyTagsExtensions.getTagService(tagName, this._options);
+      let tag = tagService.getDefaultValue({
+        htmlRaw: '',
+        selectedVideoPlayer: null
+      });
+
+      this.bodyTags.push(tag);
+      this.recalculateHtml();
+      this.resetTagForm();
+    } else {
+      alert(`Сервис для тега ${tagName} не зарегистрирован.`);
+    }
   }
 
   isDefinedCustomWidget(tagName: string): boolean {
@@ -282,7 +358,6 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     this.recalculateBodyTags();
 
     this.tags = DefaultTags.getTags();
-    this.selectedValue = this.tags[0].tag;
     this.selectedVideoPlayer = this.videoPlayers[0].type;
   }
 
