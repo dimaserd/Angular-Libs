@@ -54,13 +54,22 @@ export interface TypeAnswerWithErrorsQuestionData {
 
 export interface SelectRightAnswerOrAnswersQuestionData {
     selectRightAnswerTitle: string;
-    rightAnswersCount: number;
+    useRadio: boolean;
+    itemType: SelectRightAnswerOrAnswersQuestionDataItemType | null;
     answers: Array<Answer>;
 }
 
+
 export interface Answer {
     text: string;
+    data: string;
     isRightAnswer: boolean;
+}
+
+
+export enum SelectRightAnswerOrAnswersQuestionDataItemType {
+    FileId = 'FileId',
+    MarkUp = 'MarkUp'
 }
 
 export interface TypeRightAnswerQuestionData {
