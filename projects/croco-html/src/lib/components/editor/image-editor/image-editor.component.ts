@@ -15,6 +15,7 @@ import { MatSlideToggle } from "@angular/material/slide-toggle";
 import { Subject, takeUntil } from "rxjs";
 import { CrocoHtmlOptions } from '../../../options';
 import { IImageMediaRequest } from '../../../models';
+import { UploadFilesBtnComponent } from '../../upload-files-btn/upload-files-btn.component';
 
 @Component({
   selector: 'croco-html-image-editor',
@@ -32,7 +33,8 @@ import { IImageMediaRequest } from '../../../models';
     MatInput,
     NgStyle,
     MatIconButton,
-    MatSlideToggle
+    MatSlideToggle,
+    UploadFilesBtnComponent
   ]
 })
 export class ImageEditorComponent implements OnInit, OnDestroy {
@@ -115,6 +117,14 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
   deleteMediaRequest(index: number) {
     this.requests.splice(index, 1);
     this.requestChanged();
+  }
+
+  onFilesUploaded(fileIds: string[] | number[]) {
+    if (fileIds && fileIds.length > 0) {
+      const firstFileId = fileIds[0];
+      this.fileId = typeof firstFileId === 'number' ? firstFileId.toString() : firstFileId;
+      this.removeImageError();
+    }
   }
 
   ngOnDestroy(): void {

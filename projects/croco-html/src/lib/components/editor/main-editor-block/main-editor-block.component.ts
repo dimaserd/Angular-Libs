@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, Input, OnDestroy, Output } from '@angular/core';
+import {Component, EventEmitter, Inject, Input, OnDestroy, Output} from '@angular/core';
 import { TextTags } from '../../../extensions/TextMethods';
 import { HtmlBodyTag } from '../../../models/models';
 import { MatIconButton } from '@angular/material/button';
