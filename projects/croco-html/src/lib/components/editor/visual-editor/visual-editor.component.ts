@@ -13,7 +13,6 @@ import {
 import {
   BodyTagsExtensions, ExternalVideoPlayers,
   ExternalVideoSupportedTypes,
-  TextTags
 } from '../../../extensions';
 import {
   ExternalVideoTagDataConsts,
@@ -142,32 +141,6 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     this.rendered.emit(true);
   }
 
-  ngAfterContentChecked(): void {
-    this._cdref.detectChanges();
-  }
-
-  addTagClickHandler(): void {
-    if (!this.selectedValue) {
-      return;
-    }
-
-    if (this.isTagRequiringForm()) {
-      return;
-    }
-
-    this.addRegularTag();
-  }
-
-  startAddingText(tag = ''): void {
-    this.saveBodyTags = [...this.bodyTags];
-    if (tag === 'text') {
-      setTimeout(() => {
-        this.textArea.nativeElement.focus();
-      })
-    }
-    this.resetTextStyle();
-  }
-
   resetTextStyle(): void {
     this.text = '';
     this.alignment = TextAlignment.Left;
@@ -223,7 +196,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   selectTag(data: TagItem) {
     this.htmlRaw = '';
     this.selectedValue = data.tag;
-    
+
     if (this.isTagRequiringForm()) {
       if (data.tag === 'text') {
         this.resetTextStyle();
@@ -232,13 +205,13 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
       }
       return;
     }
-    
+
     this.addRegularTag();
   }
 
   isTagRequiringForm(): boolean {
-    return this.selectedValue === 'text' || 
-           this.selectedValue === ExternalVideoTagDataConsts.TagName || 
+    return this.selectedValue === 'text' ||
+           this.selectedValue === ExternalVideoTagDataConsts.TagName ||
            this.selectedValue === HtmlRawTagDataConsts.TagName;
   }
 
@@ -284,7 +257,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
 
   addExternalVideoTag(): void {
     const tagName = ExternalVideoTagDataConsts.TagName;
-    
+
     if (BodyTagsExtensions.hasTagService(tagName, this._options)) {
       const tagService = BodyTagsExtensions.getTagService(tagName, this._options);
       let tag = tagService.getDefaultValue({
@@ -299,7 +272,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
 
   addHtmlRawTag(): void {
     const tagName = HtmlRawTagDataConsts.TagName;
-    
+
     if (BodyTagsExtensions.hasTagService(tagName, this._options)) {
       const tagService = BodyTagsExtensions.getTagService(tagName, this._options);
       let tag = tagService.getDefaultValue({
@@ -326,7 +299,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     }
 
     const tagName = this.selectedValue;
-    
+
     if (BodyTagsExtensions.hasTagService(tagName, this._options)) {
       const tagService = BodyTagsExtensions.getTagService(tagName, this._options);
       let tag = tagService.getDefaultValue({
