@@ -107,6 +107,20 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   @Output()
   html: string = "";
 
+  isHtmlSet() {
+    return this.html.startsWith("<body>");
+  }
+
+  clearHtml() {
+    this.html = "";
+    this.recalculateBodyTags();
+  }
+
+  getHtml() {
+    this.recalculateHtml();
+    return this.html;
+  }
+
   @Output()
   onHtmlChanged = new EventEmitter<string>();
 
@@ -137,6 +151,11 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
 
   drop(event: CdkDragDrop<HtmlBodyTag[]>) {
     moveItemInArray(this.bodyTags, event.previousIndex, event.currentIndex);
+    this.recalculateHtml();
+  }
+
+  addTag(tag: HtmlBodyTag) {
+    this.bodyTags.push(tag);
     this.recalculateHtml();
   }
 
