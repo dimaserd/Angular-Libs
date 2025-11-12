@@ -217,6 +217,36 @@
   }
 }
 
+.add-tag-button {
+  width: 100%;
+  justify-content: center;
+
+  .tag-icon {
+    mat-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+      line-height: 20px;
+      color: inherit;
+    }
+
+    @media (max-width: $media-m) {
+      mat-icon {
+        font-size: 24px;
+        width: 24px;
+        height: 24px;
+        line-height: 24px;
+      }
+    }
+  }
+
+  &:hover {
+    .tag-icon mat-icon {
+      color: #747EBF;
+    }
+  }
+}
+
 @media (max-width: $media-m) {
   .tag-item:hover {
     color: inherit;

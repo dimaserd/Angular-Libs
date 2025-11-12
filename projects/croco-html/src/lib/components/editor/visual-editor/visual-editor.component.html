@@ -45,9 +45,12 @@
     <mat-card-content>
       @if (!isTagAdditionStarted) {
         <div class="col-12">
-          <button (click)="isTagAdditionStarted = true" class="w-100" mat-stroked-button>
-            Добавить тег
-          </button>
+          <div class="tag-item add-tag-button" (click)="isTagAdditionStarted = true">
+            <div class="tag-icon">
+              <mat-icon>add</mat-icon>
+            </div>
+            <div class="tag-text">Добавить тег</div>
+          </div>
         </div>
       } @else {
         <div class="row d-flex align-items-center">
@@ -193,22 +196,6 @@
   </mat-card>
 
   <div style="height: 10px;"></div>
-</div>
-<div [hidden]="isLoading">
-  <mat-card style="margin: 2px;" class="mat-card">
-    <mat-card-content>
-      <div class="row d-flex align-items-center">
-        <div class="col-12">
-          <croco-html-add-files-btn (filesTagsReady)="filesTagsReadyHandler($event)"
-                                    (postFilesStarted)="postFilesStartedEventHandler()" class="w-100">
-          </croco-html-add-files-btn>
-        </div>
-      </div>
-    </mat-card-content>
-  </mat-card>
-
-  <div style="height: 10px;">
-  </div>
 </div>
 
 <ng-template #textAlignToggleIcons let-icon="icon">

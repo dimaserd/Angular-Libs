@@ -33,6 +33,7 @@ import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatButton } from '@angular/material/button';
 import { MatCard, MatCardContent } from '@angular/material/card';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { MatIcon } from '@angular/material/icon';
 import { CrocoHtmlOptions } from '../../../options';
 import { MatButtonToggle, MatButtonToggleGroup } from "@angular/material/button-toggle";
 import { NgTemplateOutlet } from "@angular/common";
@@ -69,7 +70,8 @@ import { CustomWidgetIconComponent } from "./components/custom-widget-icon/custo
     NgTemplateOutlet,
     MatTooltip,
     SpriteIconPathPipe,
-    CustomWidgetIconComponent
+    CustomWidgetIconComponent,
+    MatIcon
   ]
 })
 export class VisualEditorComponent implements OnInit, AfterViewInit {
@@ -105,20 +107,6 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   @Output()
   html: string = "";
 
-  isHtmlSet() {
-    return this.html.startsWith("<body>");
-  }
-
-  clearHtml() {
-    this.html = "";
-    this.recalculateBodyTags();
-  }
-
-  getHtml() {
-    this.recalculateHtml();
-    return this.html;
-  }
-
   @Output()
   onHtmlChanged = new EventEmitter<string>();
 
@@ -145,25 +133,6 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     this.text = '';
     this.alignment = TextAlignment.Left;
     this.textTag = DefaultTags.textTags[0].tag;
-  }
-
-
-  postFilesStartedEventHandler() {
-    this.loadingText = "Файлы загружаются на сервер";
-    this.isLoading = true;
-  }
-
-  addTag(tag: HtmlBodyTag) {
-    this.bodyTags.push(tag);
-    this.recalculateHtml();
-  }
-
-  filesTagsReadyHandler(tags: HtmlBodyTag[]) {
-    for (let i = 0; i < tags.length; i++) {
-      this.bodyTags.push(tags[i]);
-    }
-    this.recalculateHtml();
-    this.isLoading = false;
   }
 
   drop(event: CdkDragDrop<HtmlBodyTag[]>) {

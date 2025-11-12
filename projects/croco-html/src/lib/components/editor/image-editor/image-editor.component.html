@@ -114,11 +114,27 @@
     </div>
     <div style="height: 10px;"></div>
     <div [hidden]="searchOrEdit !== 'search'">
-      <croco-html-file-id-select
-        [labelText]="'Выбрать файл'"
-        [fileId]="fileId"
-        (onFileIdChanged)="onFileIdChanged($event)">
-      </croco-html-file-id-select>
+      <div class="file-selection">
+        <div class="existing-files">
+          <h6>Выбрать из существующих файлов:</h6>
+          <croco-html-file-id-select
+            [labelText]="'Выбрать файл'"
+            [fileId]="fileId"
+            (onFileIdChanged)="onFileIdChanged($event)">
+          </croco-html-file-id-select>
+        </div>
+
+        <div class="upload-section">
+          <h6>Загрузить новый файл:</h6>
+          <croco-app-upload-files-btn
+            extAccepts="image/*"
+            [isMultiple]="false"
+            btnText="Загрузить изображение"
+            (onPublicFilesUploaded)="onFilesUploaded($event.fileIds)"
+            (onPrivateFilesUploaded)="onFilesUploaded($event.fileIds)">
+          </croco-app-upload-files-btn>
+        </div>
+      </div>
     </div>
     <div [hidden]="searchOrEdit !== 'edit'">
       <div>
