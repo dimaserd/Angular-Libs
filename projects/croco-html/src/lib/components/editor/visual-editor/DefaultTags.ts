@@ -21,7 +21,7 @@ export class DefaultTags {
     { tag: ExternalVideoTagDataConsts.TagName, displayValue: 'Видео', isCustom: false },
     { tag: DownloadButtonTagDataConsts.TagName, displayValue: 'Кнопка для скачивания', isCustom: false },
     { tag: ButtonTagDataConsts.TagName, displayValue: 'Кнопка', isCustom: false },
-    { tag: CustomWidgetTagDataConsts.TagName, displayValue: 'Виджет', isCustom: false },
+    // { tag: CustomWidgetTagDataConsts.TagName, displayValue: 'Виджет', isCustom: false },
     { tag: HtmlRawTagDataConsts.TagName, displayValue: 'Разметка', isCustom: false },
     { tag: 'text', displayValue: 'Текст', isCustom: false },
   ];
