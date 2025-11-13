@@ -42,6 +42,8 @@ import { SpriteIconPathPipe } from "../../../pipes/sprite-icon-path.pipe";
 import { SpriteIdsType } from "../../../../sprites-ids.type";
 import { HtmlRawTagDataConsts, TextAlignment, TextTagDataConsts } from '../../../tag-services';
 import { CustomWidgetIconComponent } from "./components/custom-widget-icon/custom-widget-icon.component";
+import { FileImageTagDataConsts } from '../../../extensions';
+import { UploadFilesBtnComponent } from '../../upload-files-btn/upload-files-btn.component';
 
 @Component({
   selector: 'croco-visual-editor',
@@ -71,11 +73,13 @@ import { CustomWidgetIconComponent } from "./components/custom-widget-icon/custo
     MatTooltip,
     SpriteIconPathPipe,
     CustomWidgetIconComponent,
-    MatIcon
+    MatIcon,
+    UploadFilesBtnComponent
   ]
 })
 export class VisualEditorComponent implements OnInit, AfterViewInit {
   @ViewChild('textArea') textArea: ElementRef;
+  @ViewChild('imageUploadBtn') imageUploadBtn: UploadFilesBtnComponent;
 
   isLoading = false;
   loadingText = "Идёт загрузка";
@@ -95,10 +99,12 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   videoPlayers = ExternalVideoPlayers
   selectedValue: string = null;
   selectedVideoPlayer: string;
+  imageMode: 'select' | 'upload' | null = null;
 
   protected readonly ExternalVideoTagDataConsts = ExternalVideoTagDataConsts;
   protected readonly HtmlRawTagDataConsts = HtmlRawTagDataConsts;
   protected readonly ExternalVideoSupportedTypes = ExternalVideoSupportedTypes;
+  protected readonly FileImageTagDataConsts = FileImageTagDataConsts;
 
   @Input()
   useHtmlRaw = true;
@@ -184,12 +190,15 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   selectTag(data: TagItem) {
     this.htmlRaw = '';
     this.selectedValue = data.tag;
+    this.imageMode = null;
 
     if (this.isTagRequiringForm()) {
       if (data.tag === 'text') {
         this.resetTextStyle();
       } else if (data.tag === ExternalVideoTagDataConsts.TagName) {
         this.selectedVideoPlayer = this.videoPlayers[0].type;
+      } else if (data.tag === FileImageTagDataConsts.TagName) {
+        return;
       }
       return;
     }
@@ -200,7 +209,8 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   isTagRequiringForm(): boolean {
     return this.selectedValue === 'text' ||
            this.selectedValue === ExternalVideoTagDataConsts.TagName ||
-           this.selectedValue === HtmlRawTagDataConsts.TagName;
+           this.selectedValue === HtmlRawTagDataConsts.TagName ||
+           this.selectedValue === FileImageTagDataConsts.TagName;
   }
 
   addTagWithForm(): void {
@@ -212,11 +222,65 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
       this.addTextTag();
     } else if (this.selectedValue === ExternalVideoTagDataConsts.TagName) {
       this.addExternalVideoTag();
-    } else     if (this.selectedValue === HtmlRawTagDataConsts.TagName) {
+    } else if (this.selectedValue === HtmlRawTagDataConsts.TagName) {
       this.addHtmlRawTag();
+    } else if (this.selectedValue === FileImageTagDataConsts.TagName) {
+      if (this.imageMode === 'select') {
+        this.selectExistingImage();
+      } else if (this.imageMode === 'upload') {
+        return;
+      }
     }
 
     this.resetTagForm();
+  }
+
+  selectExistingImage(): void {
+    const tagName = FileImageTagDataConsts.TagName;
+
+    if (BodyTagsExtensions.hasTagService(tagName, this._options)) {
+      const tagService = BodyTagsExtensions.getTagService(tagName, this._options);
+      let tag = tagService.getDefaultValue({
+        htmlRaw: '',
+        selectedVideoPlayer: null
+      });
+
+      this.bodyTags.push(tag);
+      this.recalculateHtml();
+      this.resetTagForm();
+    }
+  }
+
+  uploadNewImages(): void {
+    if (this.imageUploadBtn) {
+      this.imageUploadBtn.clickFileInput();
+    }
+  }
+
+  onImageFilesUploaded(fileIds: string[] | number[]): void {
+    if (fileIds && fileIds.length > 0) {
+      const fileIdsString = fileIds.map(id => typeof id === 'number' ? id.toString() : id);
+
+      fileIdsString.forEach(fileId => {
+        const tag: HtmlBodyTag = {
+          tagDescription: {
+            tag: FileImageTagDataConsts.TagName,
+            displayValue: "Изображение",
+            isCustom: false
+          },
+          attributes: {
+            [FileImageTagDataConsts.FileIdAttrName]: fileId,
+            [FileImageTagDataConsts.ScreenMediaRequest]: FileImageTagDataConsts.DefaultValueForFileImage
+          },
+          innerHtml: ""
+        };
+
+        this.bodyTags.push(tag);
+      });
+
+      this.recalculateHtml();
+      this.resetTagForm();
+    }
   }
 
   addTextTag(): void {
@@ -277,6 +341,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     this.selectedValue = null;
     this.htmlRaw = '';
     this.text = '';
+    this.imageMode = null;
     this.resetTextStyle();
     this.isTagAdditionStarted = false;
   }
