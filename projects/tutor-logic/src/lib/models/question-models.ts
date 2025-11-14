@@ -44,7 +44,7 @@ export interface ManyAnswersBoxesQuestionData {
 
 export interface QuestionAnswerBox {
     label: string;
-    rightAnswer: string;
+    correctAnswer: string;
 }
 
 export interface TypeAnswerWithErrorsQuestionData {
