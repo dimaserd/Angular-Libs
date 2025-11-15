@@ -24,6 +24,7 @@ export interface SearchStudentsRequest {
 export interface RegisterStudentRequest {
     registrationRequest: RegisterModel;
     schoolId: string;
+    invitationId: string;
 }
 
 export interface StudentRegistrationResult {
