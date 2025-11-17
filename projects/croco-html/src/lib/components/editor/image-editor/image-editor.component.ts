@@ -96,6 +96,13 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
 
         this.imageMaxHeight = imageRestrictions.maxHeight;
         this.imageMaxWidth = imageRestrictions.maxWidth;
+
+        if (this._options.imageOptions.visualEditorMaxHeight) {
+          const visualMaxHeight = this._options.imageOptions.visualEditorMaxHeight;
+          if (this.imageMaxHeight === null || this.imageMaxHeight === undefined || visualMaxHeight < this.imageMaxHeight) {
+            this.imageMaxHeight = visualMaxHeight;
+          }
+        }
       });
   }
 
