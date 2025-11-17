@@ -30,8 +30,26 @@ export class HtmlRawViewComponent implements OnChanges {
     const href = target.getAttribute('href');
     if (!href) return;
 
+    const targetAttr = target.getAttribute('target');
+
+    if (targetAttr === '_blank') {
+      return;
+    }
+
+    const isExternal =
+      href.startsWith('http://') ||
+      href.startsWith('https://') ||
+      href.startsWith('www.') ||
+      href.match(/^[a-zA-Z]+:\/\//);
+
+    if (isExternal) {
+      return;
+    }
     event.preventDefault();
 
-    this.router.navigate([href]);
+    const path = href.startsWith('/') ? href : `/${href}`;
+
+    this.router.navigate([path]);
   }
+
 }
