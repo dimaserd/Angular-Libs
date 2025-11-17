@@ -1,5 +1,8 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';;
+import {Component, Input, OnChanges, Renderer2, SimpleChanges} from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import {Router} from "@angular/router";
+
+;
 
 @Component({
   selector: 'croco-html-raw-view',
@@ -12,11 +15,23 @@ export class HtmlRawViewComponent implements OnChanges {
 
   safeHtml: SafeHtml;
 
-  constructor(private readonly _sanitizer: DomSanitizer) { }
+  constructor(private readonly _sanitizer: DomSanitizer, private readonly router: Router) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['rawHtml'] && changes['rawHtml'].currentValue !== changes['rawHtml'].previousValue) {
       this.safeHtml = this._sanitizer.bypassSecurityTrustHtml(this.rawHtml);
     }
+  }
+
+  handleLink(event: MouseEvent) {
+    const target = (event.target as HTMLElement).closest('a');
+    if (!target) return;
+
+    const href = target.getAttribute('href');
+    if (!href) return;
+
+    event.preventDefault();
+
+    this.router.navigate([href]);
   }
 }
