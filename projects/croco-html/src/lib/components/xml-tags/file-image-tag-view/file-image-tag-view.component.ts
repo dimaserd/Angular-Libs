@@ -55,6 +55,13 @@ export class FileImageTagViewComponent implements OnInit, OnDestroy {
         
         this.imageMaxHeight = restrictions.maxHeight;
         this.imageMaxWidth = restrictions.maxWidth;
+
+        if (this._options.imageOptions.visualViewMaxHeight) {
+          const visualMaxHeight = this._options.imageOptions.visualViewMaxHeight;
+          if (this.imageMaxHeight === null || this.imageMaxHeight === undefined || visualMaxHeight < this.imageMaxHeight) {
+            this.imageMaxHeight = visualMaxHeight;
+          }
+        }
       })
   }
 
