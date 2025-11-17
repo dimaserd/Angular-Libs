@@ -25,10 +25,14 @@ export class HtmlRawViewComponent implements OnChanges {
 
   handleLink(event: MouseEvent) {
     const target = (event.target as HTMLElement).closest('a');
-    if (!target) return;
+    if (!target) {
+      return;
+    }
 
     const href = target.getAttribute('href');
-    if (!href) return;
+    if (!href) {
+      return;
+    }
 
     const targetAttr = target.getAttribute('target');
 
