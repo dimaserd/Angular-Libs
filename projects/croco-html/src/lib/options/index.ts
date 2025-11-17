@@ -85,6 +85,23 @@ export interface CrocoHtmlImageOptions {
    * @param imageData - данные изображения
    */
   onImageClick?: (imageData: FileImageTagData) => void;
+
+  /**
+   * Опции для визуального редактора изображений.
+   */
+  visualEditorOptions?: {
+    /**
+     * Максимальная высота изображения в режиме редактора в пикселях (например, 200).
+     * Если указано, изображения в ImageEditorComponent не будут превышать эту высоту.
+     */
+    editorModeImageMaxHeight?: number;
+
+    /**
+     * Максимальная высота изображения в режиме предпросмотра в пикселях (например, 200).
+     * Если указано, изображения в FileImageTagViewComponent не будут превышать эту высоту.
+     */
+    previewModeImageMaxHeight?: number;
+  };
 }
 
 /**

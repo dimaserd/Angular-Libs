@@ -102,7 +102,7 @@
 @if (!presentOrEdit) {
   <div>
     <div style="height: 10px;"></div>
-    <div style="overflow-x:auto;">
+    <div style="overflow-x:auto;" class="mode-toggle-container">
       <mat-button-toggle-group [(ngModel)]="searchOrEdit">
         <mat-button-toggle value="search">
           Искать файл <mat-icon>search</mat-icon>
@@ -112,7 +112,6 @@
         </mat-button-toggle>
       </mat-button-toggle-group>
     </div>
-    <div style="height: 10px;"></div>
     <div [hidden]="searchOrEdit !== 'search'">
       <div class="file-selection">
         <div class="existing-files">
