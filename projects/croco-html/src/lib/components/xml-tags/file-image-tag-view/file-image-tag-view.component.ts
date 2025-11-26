@@ -25,7 +25,7 @@ export class FileImageTagViewComponent implements OnInit, OnDestroy {
     this.requests = this.getMediaRequests(data.screenMediaRequest);
   }
 
-  @Input()
+  @Input({ required: true })
   isEditor = false
 
   imageSrc = "";

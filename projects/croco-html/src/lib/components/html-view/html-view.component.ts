@@ -14,7 +14,7 @@ export class HtmlViewComponent {
   @Input({ required: true })
   html: string = "<body></body>";
 
-  @Input()
+  @Input({ required: false })
   isEditor = false
 
   @Input({ required: false })
