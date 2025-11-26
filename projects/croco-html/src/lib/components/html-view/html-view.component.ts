@@ -10,9 +10,12 @@ import { HtmlPageDataController } from '../../services';
   imports: [XmlTagViewComponent, ToPreviewPipe]
 })
 export class HtmlViewComponent {
-  
+
   @Input({ required: true })
   html: string = "<body></body>";
+
+  @Input()
+  isEditor = false
 
   @Input({ required: false })
   dataController: HtmlPageDataController = new HtmlPageDataController();

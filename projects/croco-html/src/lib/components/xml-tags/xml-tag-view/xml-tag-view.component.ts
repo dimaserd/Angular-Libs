@@ -46,6 +46,9 @@ export class XmlTagViewComponent {
   @Input({ required: true })
   dataController: HtmlPageDataController = new HtmlPageDataController();
 
+  @Input()
+  isEditor = false
+
   constructor(@Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions) {
   }
 

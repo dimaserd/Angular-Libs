@@ -25,6 +25,9 @@ export class FileImageTagViewComponent implements OnInit, OnDestroy {
     this.requests = this.getMediaRequests(data.screenMediaRequest);
   }
 
+  @Input()
+  isEditor = false
+
   imageSrc = "";
   imageData: FileImageTagData | null = null;
   requests: IImageMediaRequest[] = []
@@ -52,11 +55,11 @@ export class FileImageTagViewComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe))
       .subscribe(screenWidth => {
         let restrictions = ImageMethods.getImageRestrictionsByScreenSize(screenWidth, this.requests);
-        
+
         this.imageMaxHeight = restrictions.maxHeight;
         this.imageMaxWidth = restrictions.maxWidth;
 
-        if (this._options.imageOptions.visualEditorOptions?.previewModeImageMaxHeight) {
+        if (this._options.imageOptions.visualEditorOptions?.previewModeImageMaxHeight && this.isEditor) {
           const visualMaxHeight = this._options.imageOptions.visualEditorOptions.previewModeImageMaxHeight;
           if (this.imageMaxHeight === null || this.imageMaxHeight === undefined || visualMaxHeight < this.imageMaxHeight) {
             this.imageMaxHeight = visualMaxHeight;
