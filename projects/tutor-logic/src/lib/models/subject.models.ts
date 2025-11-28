@@ -7,6 +7,7 @@ export interface SubjectModel {
 export interface CreateSubjectRequest {
   name: string;
   alias: string;
+  iconAlias: string;
   clarificationValues: Array<string>;
 }
 
@@ -14,6 +15,7 @@ export interface UpdateSubjectRequest {
   id: string;
   name: string;
   alias: string;
+  iconAlias: string;
   clarificationValues: Array<string>;
 }
 
@@ -34,6 +36,7 @@ export interface SubjectWithClarificationsModel {
   id: string;
   name: string;
   alias: string;
+  iconAlias: string;
   clarificationValues: Array<string>;
 }
 
@@ -41,6 +44,7 @@ export interface SubjectWithIconModel {
   id: string;
   name: string;
   alias: string;
+  iconAlias: string;
   icon: IconSimpleModel;
 }
 
