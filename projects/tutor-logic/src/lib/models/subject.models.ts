@@ -22,6 +22,7 @@ export interface UpdateSubjectRequest {
 export interface SubjectCountsModel {
   id: string;
   alias: string;
+  iconAlias: string;
   name: string;
   questionsCount: number;
   testsCount: number;
