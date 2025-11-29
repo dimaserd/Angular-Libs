@@ -31,6 +31,16 @@ export interface StudentRegistrationResult {
     succeeded: boolean;
     message: string;
     studentId: string;
+    alreadyExistingUserId: string;
+    registeredUser: RegisteredUser;
+}
+
+export interface RegisteredUser {
+    id: string;
+    noPhoneNumber: boolean;
+    phoneNumber: string;
+    noEmail: boolean;
+    email: string;
 }
 
 export interface RegisterModel {
