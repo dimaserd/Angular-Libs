@@ -25,6 +25,7 @@ export interface RegisterStudentRequest {
     registrationRequest: RegisterModel;
     schoolId: string;
     invitationId: string;
+    setRandomPassword: boolean;
 }
 
 export interface StudentRegistrationResult {
