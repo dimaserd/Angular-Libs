@@ -1,8 +1,8 @@
 <form class="example-form example-full-width">
-    <mat-form-field class="example-full-width">
-      <mat-label>Название типа</mat-label>
-      <input (input)="setValue($event)" matInput placeholder="Название типа" value="{{typeDisplayFullName}}">
-    </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Название типа</mat-label>
+    <input (input)="setValue($event)" matInput placeholder="Название типа" value="{{typeDisplayFullName}}">
+  </mat-form-field>
 </form>
 
 <section>
@@ -17,8 +17,10 @@
 
 @if (result) {
   <div>
-  <h6>Главный тип данных</h6>
-  <croco-type-decription-class *ngFor="let type of types" [type]="type" [wholeResult]="result"></croco-type-decription-class>
-</div>
+    <h6>Главный тип данных</h6>
+    @for (type of types; track type) {
+      <croco-type-decription-class [type]="type" [wholeResult]="result"></croco-type-decription-class>
+    }
+  </div>
 }
 

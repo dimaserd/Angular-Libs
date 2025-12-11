@@ -7,7 +7,7 @@ import {CrocoPropNameWithLink, CrocoTypeDescription, CrocoTypeDescriptionResult}
 import { DartCodeClassGenerator } from '../../codeGenerators/dart/DartCodeClassGenerator';
 import { TSClassGenerator } from '../../codeGenerators/typescript/TSClassGenerator';
 import { MatInputModule } from "@angular/material/input";
-import { CommonModule } from '@angular/common';
+
 import { MatExpansionModule } from "@angular/material/expansion";
 import {MatNavList} from "@angular/material/list";
 import {RouterLink} from "@angular/router";
@@ -17,7 +17,7 @@ import {RouterLink} from "@angular/router";
   templateUrl: './type-decription-class.component.html',
   styleUrls: ['./type-decription-class.component.css'],
   standalone: true,
-  imports: [MatInputModule, MatSelectModule, FormsModule, CommonModule, MatExpansionModule, MatNavList, RouterLink],
+  imports: [MatInputModule, MatSelectModule, FormsModule, MatExpansionModule, MatNavList, RouterLink],
 })
 export class TypeDecriptionClassComponent implements OnInit {
 

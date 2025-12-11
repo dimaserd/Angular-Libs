@@ -6,7 +6,7 @@ import { JsScriptExecutor } from '../../services';
 import { JsOpenApiServiceDocumentation } from '../../models';
 import {MatTab, MatTabGroup} from "@angular/material/tabs";
 import {AngularJsOpenApiModule} from "../../angular-js-open-api.module";
-import {NgForOf} from "@angular/common";
+
 import {JsWorkerExpansionPanelComponent} from "../js-worker-expansion-panel/js-worker-expansion-panel.component";
 import {JsOpenApiConsoleComponent} from "../js-open-api-console/js-open-api-console.component";
 import {JsOpenApiRemoteDocsComponent} from "../js-open-api-remote-docs/js-open-api-remote-docs.component";
@@ -19,11 +19,10 @@ import {JsOpenApiRemoteDocsComponent} from "../js-open-api-remote-docs/js-open-a
     MatTabGroup,
     AngularJsOpenApiModule,
     MatTab,
-    NgForOf,
     JsWorkerExpansionPanelComponent,
     JsOpenApiConsoleComponent,
     JsOpenApiRemoteDocsComponent
-  ],
+],
   standalone: true
 })
 

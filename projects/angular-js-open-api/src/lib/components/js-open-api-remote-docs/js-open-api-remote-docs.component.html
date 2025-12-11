@@ -1,3 +1,5 @@
-<div *ngFor="let remoteDoc of remoteDocs">
+@for (remoteDoc of remoteDocs; track remoteDoc) {
+  <div>
     <croco-js-open-api-remote-expansion-panel (onGetScript)="onGetScriptHandler($event)" [remoteDoc]="remoteDoc"></croco-js-open-api-remote-expansion-panel>
-</div>
+  </div>
+}

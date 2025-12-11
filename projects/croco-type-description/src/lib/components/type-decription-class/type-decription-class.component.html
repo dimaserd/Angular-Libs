@@ -10,17 +10,21 @@
     <p>Является классом (составной тип): {{type.isClass}}</p>
   </div>
 
-  <div *ngIf="type.isClass">
-    <h5>Свойства класса</h5>
-    <mat-nav-list>
-      <div *ngFor="let prop of propNameAndLinks">
-        <h6 mat-list-item>
-          {{prop.propertyName}} : <a
+  @if (type.isClass) {
+    <div>
+      <h5>Свойства класса</h5>
+      <mat-nav-list>
+        @for (prop of propNameAndLinks; track prop) {
+          <div>
+            <h6 mat-list-item>
+              {{prop.propertyName}} : <a
             [routerLink]="['/type-description', prop.displayFullTypeNameReference]">{{prop.displayFullTypeName}}</a>
-        </h6>
-      </div>
+          </h6>
+        </div>
+      }
     </mat-nav-list>
   </div>
+}
 </mat-expansion-panel>
 
 <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">

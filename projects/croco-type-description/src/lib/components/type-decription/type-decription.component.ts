@@ -6,15 +6,13 @@ import { Title } from '@angular/platform-browser';
 import { CrocoTypeDescriptor } from '../../services/CrocoTypeDescriptor';
 import { MatInputModule } from "@angular/material/input";
 import { TypeDecriptionClassComponent } from '../type-decription-class/type-decription-class.component';
-import {NgForOf} from "@angular/common";
-import {v} from "@angular/cdk/scrolling-module.d-ud2XrbF8";
 
 @Component({
   selector: 'croco-type-decription',
   templateUrl: './type-decription.component.html',
   styleUrls: ['./type-decription.component.css'],
   standalone: true,
-  imports: [MatInputModule, TypeDecriptionClassComponent, NgForOf]
+  imports: [MatInputModule, TypeDecriptionClassComponent]
 })
 export class TypeDecriptionComponent implements OnInit {
 

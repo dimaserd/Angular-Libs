@@ -8,7 +8,7 @@ import {
   MatExpansionPanelTitle
 } from "@angular/material/expansion";
 import {MatListItem, MatNavList} from "@angular/material/list";
-import {NgForOf, NgIf} from "@angular/common";
+
 import {RouterLink} from "@angular/router";
 import {MatButton} from "@angular/material/button";
 
@@ -22,12 +22,10 @@ import {MatButton} from "@angular/material/button";
     MatExpansionPanelDescription,
     MatExpansionPanelHeader,
     MatNavList,
-    NgForOf,
     RouterLink,
-    NgIf,
     MatListItem,
     MatButton
-  ],
+],
   standalone: true
 })
 export class JsWorkerMethodComponent implements OnInit {

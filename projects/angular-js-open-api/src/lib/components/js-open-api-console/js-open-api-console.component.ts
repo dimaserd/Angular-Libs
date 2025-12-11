@@ -6,8 +6,6 @@ import {CdkTextareaAutosize} from "@angular/cdk/text-field";
 import {MatFormField, MatInput} from "@angular/material/input";
 import {MatButton} from "@angular/material/button";
 import {JsOpenApiScriptResultComponent} from "../js-open-api-script-result/js-open-api-script-result.component";
-import {v} from "@angular/cdk/scrolling-module.d-ud2XrbF8";
-
 
 @Component({
   selector: 'croco-js-open-api-console',

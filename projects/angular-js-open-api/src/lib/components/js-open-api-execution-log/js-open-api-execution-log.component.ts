@@ -8,7 +8,7 @@ import {
   MatExpansionPanelHeader,
   MatExpansionPanelTitle
 } from "@angular/material/expansion";
-import {NgIf} from "@angular/common";
+
 import {MatButton} from "@angular/material/button";
 
 @Component({
@@ -21,9 +21,8 @@ import {MatButton} from "@angular/material/button";
     MatExpansionPanelTitle,
     MatExpansionPanelDescription,
     MatExpansionPanelHeader,
-    NgIf,
     MatButton
-  ]
+]
 })
 export class JsOpenApiExecutionLogComponent implements OnInit {
 
