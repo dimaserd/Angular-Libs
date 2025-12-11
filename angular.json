@@ -13,7 +13,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "builder": "@angular/build:ng-packagr",
           "options": {
             "project": "projects/angular-js-open-api/ng-package.json"
           },
@@ -28,7 +28,7 @@
           "defaultConfiguration": "production"
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:karma",
           "options": {
             "main": "projects/angular-js-open-api/src/test.ts",
             "tsConfig": "projects/angular-js-open-api/tsconfig.spec.json",
@@ -44,7 +44,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "builder": "@angular/build:ng-packagr",
           "options": {
             "project": "projects/croco-html/ng-package.json"
           },
@@ -59,7 +59,7 @@
           "defaultConfiguration": "production"
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:karma",
           "options": {
             "main": "projects/croco-html/src/test.ts",
             "tsConfig": "projects/croco-html/tsconfig.spec.json",
@@ -75,7 +75,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "builder": "@angular/build:ng-packagr",
           "options": {
             "project": "projects/ecc-chat/ng-package.json"
           },
@@ -90,7 +90,7 @@
           "defaultConfiguration": "production"
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:karma",
           "options": {
             "main": "projects/ecc-chat/src/test.ts",
             "tsConfig": "projects/ecc-chat/tsconfig.spec.json",
@@ -106,7 +106,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "builder": "@angular/build:ng-packagr",
           "options": {
             "project": "projects/croco-type-description/ng-package.json"
           },
@@ -121,7 +121,7 @@
           "defaultConfiguration": "production"
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:karma",
           "options": {
             "main": "projects/croco-type-description/src/test.ts",
             "tsConfig": "projects/croco-type-description/tsconfig.spec.json",
@@ -137,7 +137,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "builder": "@angular/build:ng-packagr",
           "options": {
             "project": "projects/croco-generic-app-logic/ng-package.json"
           },
@@ -152,7 +152,7 @@
           "defaultConfiguration": "production"
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:karma",
           "options": {
             "tsConfig": "projects/croco-generic-app-logic/tsconfig.spec.json",
             "polyfills": [
@@ -170,7 +170,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "builder": "@angular/build:ng-packagr",
           "options": {
             "project": "projects/tutor-logic/ng-package.json"
           },
@@ -185,7 +185,7 @@
           "defaultConfiguration": "production"
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:karma",
           "options": {
             "tsConfig": "projects/tutor-logic/tsconfig.spec.json",
             "polyfills": [
@@ -196,38 +196,31 @@
         }
       }
     },
-    "croco-generic-interface-components": {
-      "projectType": "library",
-      "root": "projects/croco-generic-interface-components",
-      "sourceRoot": "projects/croco-generic-interface-components/src",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "project": "projects/croco-generic-interface-components/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/croco-generic-interface-components/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "projects/croco-generic-interface-components/tsconfig.lib.json"
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "tsConfig": "projects/croco-generic-interface-components/tsconfig.spec.json",
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ]
-          }
-        }
-      }
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "type": "component"
+    },
+    "@schematics/angular:directive": {
+      "type": "directive"
+    },
+    "@schematics/angular:service": {
+      "type": "service"
+    },
+    "@schematics/angular:guard": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:interceptor": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:module": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:pipe": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:resolver": {
+      "typeSeparator": "."
     }
   }
 }

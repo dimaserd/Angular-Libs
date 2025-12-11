@@ -6,7 +6,7 @@ import {
   MatExpansionPanelHeader,
   MatExpansionPanelTitle
 } from "@angular/material/expansion";
-import {NgForOf} from "@angular/common";
+
 import {JsWorkerMethodComponent} from "../js-worker-method/js-worker-method.component";
 
 @Component({
@@ -17,10 +17,9 @@ import {JsWorkerMethodComponent} from "../js-worker-method/js-worker-method.comp
     MatExpansionPanel,
     MatExpansionPanelTitle,
     MatExpansionPanelDescription,
-    NgForOf,
     JsWorkerMethodComponent,
     MatExpansionPanelHeader
-  ],
+],
   standalone: true
 })
 export class JsWorkerExpansionPanelComponent {

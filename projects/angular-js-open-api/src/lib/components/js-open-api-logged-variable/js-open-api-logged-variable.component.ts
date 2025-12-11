@@ -17,7 +17,7 @@ import {
   MatRow, MatRowDef,
   MatTable
 } from "@angular/material/table";
-import {MatButton} from "@angular/material/button";
+import { MatButton } from "@angular/material/button";
 
 @Component({
   selector: 'croco-js-open-api-logged-variable',
@@ -57,18 +57,18 @@ export class JsOpenApiLoggedVariableComponent implements OnInit {
     this.varaibles = this.log.serializedVariables.map(x => ({
       typeFullName: x.typeFullName,
       dataJson: x.dataJson,
-      dataJsonShort: x.dataJson.length > 20? `${x.dataJson.substr(0, 15)}...` : x.dataJson
+      dataJsonShort: x.dataJson.length > 20 ? `${x.dataJson.substr(0, 15)}...` : x.dataJson
     }));
   }
 
-  copyDataJson(log: JsSerializedVariableViewModel){
-    this._snackBar.open("Cкопировано в буфер обмена", "Закрыть", {duration: 1500});
+  copyDataJson(log: JsSerializedVariableViewModel) {
+    this._snackBar.open("Cкопировано в буфер обмена", "Закрыть", { duration: 1500 });
     this._clipboardService.copy(log.dataJson);
   }
 
 }
 
-interface JsSerializedVariableViewModel{
+interface JsSerializedVariableViewModel {
   typeFullName: string;
   dataJsonShort: string;
   dataJson: string;

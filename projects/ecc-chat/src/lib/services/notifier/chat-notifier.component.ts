@@ -15,7 +15,7 @@ import { Subscription } from 'rxjs';
 import { Notifier, NOTIFIER_DEFAULT_SETTING, NotifierSetting, NotifierType } from './chat-notifier.model';
 import { ChatNotifierService } from './chat-notifier.service';
 import { animate, AnimationBuilder, style } from '@angular/animations';
-import { NgIf, NgFor, NgStyle } from '@angular/common';
+import { NgStyle } from '@angular/common';
 
 const ANIMATION_TIME = 200;
 
@@ -26,10 +26,8 @@ const ANIMATION_TIME = 200;
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    NgIf,
-    NgFor,
-    NgStyle,
-  ],
+    NgStyle
+],
 })
 export class ChatNotifierComponent implements OnInit, OnDestroy {
   @Input() public id: string;

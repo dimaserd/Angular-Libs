@@ -7,7 +7,7 @@ import {
   MatExpansionPanelTitle
 } from "@angular/material/expansion";
 import {JsWorkerExpansionPanelComponent} from "../js-worker-expansion-panel/js-worker-expansion-panel.component";
-import {NgForOf, NgIf} from "@angular/common";
+
 
 @Component({
   selector: 'croco-js-open-api-remote-expansion-panel',
@@ -19,10 +19,8 @@ import {NgForOf, NgIf} from "@angular/common";
     MatExpansionPanelTitle,
     MatExpansionPanelDescription,
     MatExpansionPanelHeader,
-    JsWorkerExpansionPanelComponent,
-    NgForOf,
-    NgIf
-  ]
+    JsWorkerExpansionPanelComponent
+]
 })
 export class JsOpenApiRemoteExpansionPanelComponent implements OnInit {
 

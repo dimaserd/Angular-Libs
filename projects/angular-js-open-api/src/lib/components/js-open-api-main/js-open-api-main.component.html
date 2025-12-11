@@ -1,8 +1,10 @@
 <mat-tab-group>
   <mat-tab label="OPEN-API">
     <div style="margin: 2px;">
-      <croco-js-worker-expansion-panel *ngFor="let element of workers" (onGetScript)="onGetScriptHandler($event)" [worker]="element">
-      </croco-js-worker-expansion-panel>
+      @for (element of workers; track element) {
+        <croco-js-worker-expansion-panel (onGetScript)="onGetScriptHandler($event)" [worker]="element">
+        </croco-js-worker-expansion-panel>
+      }
     </div>
   </mat-tab>
   <mat-tab label="Консоль">

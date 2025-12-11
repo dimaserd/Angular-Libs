@@ -8,8 +8,7 @@ import {
   MatExpansionPanelHeader,
   MatExpansionPanelTitle
 } from "@angular/material/expansion";
-import {NgIf} from "@angular/common";
-import {MatButton} from "@angular/material/button";
+import { MatButton } from "@angular/material/button";
 
 @Component({
   selector: 'croco-js-open-api-execution-log',
@@ -21,7 +20,6 @@ import {MatButton} from "@angular/material/button";
     MatExpansionPanelTitle,
     MatExpansionPanelDescription,
     MatExpansionPanelHeader,
-    NgIf,
     MatButton
   ]
 })
@@ -31,14 +29,14 @@ export class JsOpenApiExecutionLogComponent implements OnInit {
 
   panelOpenState: boolean = false;
 
-  viewModel:JsExecutionLogViewModel;
+  viewModel: JsExecutionLogViewModel;
 
   constructor(private _clipboardService: ClipboardService, private _snackBar: MatSnackBar) {
 
   }
 
-  copyDataJson(){
-    this._snackBar.open("Cкопировано в буфер обмена", "Закрыть", {duration: 1500});
+  copyDataJson() {
+    this._snackBar.open("Cкопировано в буфер обмена", "Закрыть", { duration: 1500 });
     this._clipboardService.copy(this.log.dataJson);
   }
 
@@ -48,7 +46,7 @@ export class JsOpenApiExecutionLogComponent implements OnInit {
       eventIdName: this.log.eventIdName,
       message: this.log.message,
       dataJson: this.log.dataJson,
-      dataJsonShort: this.log.dataJson != null && this.log.dataJson.length > 15? `${this.log.dataJson.substring(0, 10)}...` : this.log.dataJson
+      dataJsonShort: this.log.dataJson != null && this.log.dataJson.length > 15 ? `${this.log.dataJson.substring(0, 10)}...` : this.log.dataJson
     }
   }
 }

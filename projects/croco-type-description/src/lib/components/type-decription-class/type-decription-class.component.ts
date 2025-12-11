@@ -3,21 +3,20 @@ import { FormsModule } from '@angular/forms';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ClipboardService } from 'ngx-clipboard';
-import {CrocoPropNameWithLink, CrocoTypeDescription, CrocoTypeDescriptionResult} from '../../models';
+import { CrocoPropNameWithLink, CrocoTypeDescription, CrocoTypeDescriptionResult } from '../../models';
 import { DartCodeClassGenerator } from '../../codeGenerators/dart/DartCodeClassGenerator';
 import { TSClassGenerator } from '../../codeGenerators/typescript/TSClassGenerator';
 import { MatInputModule } from "@angular/material/input";
-import { CommonModule } from '@angular/common';
 import { MatExpansionModule } from "@angular/material/expansion";
-import {MatNavList} from "@angular/material/list";
-import {RouterLink} from "@angular/router";
+import { MatNavList } from "@angular/material/list";
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'croco-type-decription-class',
   templateUrl: './type-decription-class.component.html',
   styleUrls: ['./type-decription-class.component.css'],
   standalone: true,
-  imports: [MatInputModule, MatSelectModule, FormsModule, CommonModule, MatExpansionModule, MatNavList, RouterLink],
+  imports: [MatInputModule, MatSelectModule, FormsModule, MatExpansionModule, MatNavList, RouterLink],
 })
 export class TypeDecriptionClassComponent implements OnInit {
 
@@ -28,7 +27,7 @@ export class TypeDecriptionClassComponent implements OnInit {
   @Input() type: CrocoTypeDescription;
   @Input() wholeResult: CrocoTypeDescriptionResult;
 
-  constructor(private _clipboardService: ClipboardService, private _snackBar: MatSnackBar) {
+  constructor(private _snackBar: MatSnackBar) {
   }
 
   codeGenerationType: string = "TypeScript";
@@ -51,6 +50,6 @@ export class TypeDecriptionClassComponent implements OnInit {
   }
 
   copyCode() {
-    this._snackBar.open("Результат кодогенерации скопирован в буфер обмена", "Закрыть", {duration: 1500});
+    this._snackBar.open("Результат кодогенерации скопирован в буфер обмена", "Закрыть", { duration: 1500 });
   }
 }

@@ -7,7 +7,7 @@ import {
   MatExpansionPanelTitle
 } from "@angular/material/expansion";
 import {JsOpenApiLoggedVariableComponent} from "../js-open-api-logged-variable/js-open-api-logged-variable.component";
-import {NgForOf, NgIf} from "@angular/common";
+
 import {JsOpenApiExecutionLogComponent} from "../js-open-api-execution-log/js-open-api-execution-log.component";
 
 @Component({
@@ -20,11 +20,9 @@ import {JsOpenApiExecutionLogComponent} from "../js-open-api-execution-log/js-op
     MatExpansionPanelTitle,
     MatExpansionPanelDescription,
     JsOpenApiLoggedVariableComponent,
-    NgForOf,
-    NgIf,
     JsOpenApiExecutionLogComponent,
-    MatExpansionPanelHeader,
-  ]
+    MatExpansionPanelHeader
+]
 })
 export class JsOpenApiScriptResultComponent implements OnInit {
 

@@ -2,12 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { JsScriptExecutedResult } from '../../models';
 import { JsScriptExecutor } from '../../services';
-import {CdkTextareaAutosize} from "@angular/cdk/text-field";
-import {MatFormField, MatInput} from "@angular/material/input";
-import {MatButton} from "@angular/material/button";
-import {JsOpenApiScriptResultComponent} from "../js-open-api-script-result/js-open-api-script-result.component";
-import {v} from "@angular/cdk/scrolling-module.d-ud2XrbF8";
-
+import { CdkTextareaAutosize } from "@angular/cdk/text-field";
+import { MatFormField, MatInput } from "@angular/material/input";
+import { MatButton } from "@angular/material/button";
+import { JsOpenApiScriptResultComponent } from "../js-open-api-script-result/js-open-api-script-result.component";
 
 @Component({
   selector: 'croco-js-open-api-console',
@@ -36,12 +34,12 @@ export class JsOpenApiConsoleComponent implements OnInit {
   ngOnInit() {
   }
 
-  executeScript(){
+  executeScript() {
 
     this._executor.ExecuteScript(this.script).subscribe(res => {
 
-      let text = res.isSucceeded? "Скрипт выполнен успешно" : res.errorMessage;
-      this._snackBar.open(text, "Закрыть", {duration: 1500});
+      let text = res.isSucceeded ? "Скрипт выполнен успешно" : res.errorMessage;
+      this._snackBar.open(text, "Закрыть", { duration: 1500 });
 
       this.result = res;
     });

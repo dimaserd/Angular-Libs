@@ -5,7 +5,7 @@ import { JsScriptExecutor } from '../../services';
 import {
   JsOpenApiRemoteExpansionPanelComponent
 } from "../js-open-api-remote-expansion-panel/js-open-api-remote-expansion-panel.component";
-import {NgForOf} from "@angular/common";
+
 
 @Component({
   selector: 'croco-js-open-api-remote-docs',
@@ -13,9 +13,8 @@ import {NgForOf} from "@angular/common";
   styleUrls: ['./js-open-api-remote-docs.component.css'],
   standalone: true,
   imports: [
-    JsOpenApiRemoteExpansionPanelComponent,
-    NgForOf
-  ]
+    JsOpenApiRemoteExpansionPanelComponent
+]
 })
 export class JsOpenApiRemoteDocsComponent {
 
