@@ -8,7 +8,7 @@
     "@angular/youtube-player": "^20.2.12",
     "@angular/material": "^20.2.14",
     "ngx-clipboard": "^16.0.0",
-    "@ng-select/ng-select": "^14.9.0"
+    "@ng-select/ng-select": "^20.0.1"
   },
   "dependencies": {
     "tslib": ">=2.2.0"
