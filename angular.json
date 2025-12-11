@@ -196,39 +196,6 @@
         }
       }
     },
-    "croco-generic-interface-components": {
-      "projectType": "library",
-      "root": "projects/croco-generic-interface-components",
-      "sourceRoot": "projects/croco-generic-interface-components/src",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular/build:ng-packagr",
-          "options": {
-            "project": "projects/croco-generic-interface-components/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/croco-generic-interface-components/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "projects/croco-generic-interface-components/tsconfig.lib.json"
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "test": {
-          "builder": "@angular/build:karma",
-          "options": {
-            "tsConfig": "projects/croco-generic-interface-components/tsconfig.spec.json",
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ]
-          }
-        }
-      }
-    }
   },
   "schematics": {
     "@schematics/angular:component": {
