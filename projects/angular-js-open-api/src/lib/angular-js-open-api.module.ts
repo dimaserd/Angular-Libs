@@ -1,7 +1,4 @@
 import { NgModule } from '@angular/core';
-import { JsOpenApiMainComponent,
-   JsWorkerExpansionPanelComponent, JsWorkerMethodComponent, JsOpenApiConsoleComponent, JsOpenApiRemoteDocsComponent,
-    JsOpenApiRemoteExpansionPanelComponent, JsOpenApiLoggedVariableComponent, JsOpenApiExecutionLogComponent, JsOpenApiScriptResultComponent } from './components';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -12,6 +9,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { RouterModule } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
+import { JsOpenApiMainComponent } from './components';
 
 @NgModule({
   declarations: [
@@ -20,7 +18,8 @@ import { CommonModule } from '@angular/common';
   ],
   imports: [
     CommonModule,
-    [MatFormFieldModule,
+    [
+      MatFormFieldModule,
       MatTableModule,
       MatExpansionModule,
       MatFormFieldModule,
@@ -28,7 +27,8 @@ import { CommonModule } from '@angular/common';
       MatTabsModule,
       MatListModule,
       MatButtonModule,
-      MatInputModule],
+      MatInputModule
+    ],
     RouterModule.forChild([
       {
         path: '',

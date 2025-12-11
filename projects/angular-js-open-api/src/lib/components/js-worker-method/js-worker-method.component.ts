@@ -7,10 +7,9 @@ import {
   MatExpansionPanelHeader,
   MatExpansionPanelTitle
 } from "@angular/material/expansion";
-import {MatListItem, MatNavList} from "@angular/material/list";
-
-import {RouterLink} from "@angular/router";
-import {MatButton} from "@angular/material/button";
+import { MatListItem, MatNavList } from "@angular/material/list";
+import { RouterLink } from "@angular/router";
+import { MatButton } from "@angular/material/button";
 
 @Component({
   selector: 'croco-js-worker-method',
@@ -25,7 +24,7 @@ import {MatButton} from "@angular/material/button";
     RouterLink,
     MatListItem,
     MatButton
-],
+  ],
   standalone: true
 })
 export class JsWorkerMethodComponent implements OnInit {
@@ -48,7 +47,7 @@ export class JsWorkerMethodComponent implements OnInit {
 
     var paramsCall = "";
 
-    if(this.method.parameters != null){
+    if (this.method.parameters != null) {
 
       paramsCall += ", ";
 
@@ -63,18 +62,18 @@ export class JsWorkerMethodComponent implements OnInit {
 
     var apiCallStr = "";
 
-    if(!!this.remoteName){
+    if (!!this.remoteName) {
       apiCallStr = `api.CallRemoteWorkerMethod("${this.remoteName}", "${this.workerName}", "${this.method.methodName}"${paramsCall});\n`;
     }
-    else{
+    else {
       apiCallStr = `api.Call("${this.workerName}", "${this.method.methodName}"${paramsCall});\n`;
     }
 
-    if(this.method.response != null){
+    if (this.method.response != null) {
       script += `var result = ${apiCallStr}`;
       script += `console.log(result);\n`;
     }
-    else{
+    else {
       script += apiCallStr;
     }
 
