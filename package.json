@@ -14,7 +14,7 @@
     "watch": "ng build croco-html --watch --configuration development",
     "watch:croco-generic-interface-components": "ng build croco-generic-interface-components --watch --configuration development",
     "test": "ng test",
-    "build-all": "npm run build:angular-js-open-api && npm run build:croco-generic-app-logic && npm run build:croco-html && npm run build:croco-type-description && npm run build:croco-generic-interface-components && npm run build:tutor-logic"
+    "build-all": "npm run build:angular-js-open-api && npm run build:croco-generic-app-logic && npm run build:croco-html && npm run build:croco-type-description  && npm run build:tutor-logic"
   },
   "private": true,
   "dependencies": {

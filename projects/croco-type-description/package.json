@@ -1,10 +1,10 @@
 {
   "name": "croco-type-description",
-  "version": "4.0.1",
+  "version": "20.0.0",
   "peerDependencies": {
-    "@angular/common": "^19.2.14",
-    "@angular/core": "^19.2.14",
-    "@angular/material": "^19.2.19",
+    "@angular/common": "^20.3.15",
+    "@angular/core": "^20.3.15",
+    "@angular/material": "^20.3.14",
     "ngx-clipboard": "^16.0.0"
   },
   "dependencies": {
