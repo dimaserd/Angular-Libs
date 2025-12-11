@@ -14,7 +14,7 @@
     <div>
       <h5>Свойства класса</h5>
       <mat-nav-list>
-        @for (prop of propNameAndLinks; track prop) {
+        @for (prop of propNameAndLinks; track prop.propertyName) {
           <div>
             <h6 mat-list-item>
               {{prop.propertyName}} : <a

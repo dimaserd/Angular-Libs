@@ -11,7 +11,7 @@
     "ngx-scrollbar": "16.1.1",
     "ngx-skeleton-loader": "^7.0.0",
     "date-fns": "^2.21.1",
-    "croco-generic-app-logic": "^4.1.0"
+    "croco-generic-app-logic": "^20.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
