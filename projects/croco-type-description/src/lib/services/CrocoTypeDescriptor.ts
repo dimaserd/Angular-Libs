@@ -12,10 +12,10 @@ export class CrocoTypeDescriptor {
     }
 
     public getTypeDescription(typeDisplayFullName: string): Observable<CrocoTypeDescriptionResult> {
-        return this._httpClient.post<CrocoTypeDescriptionResult>(this._baseUrl + `Documentation/Type?typeName=${typeDisplayFullName}`, {})
+        return this._httpClient.post<CrocoTypeDescriptionResult>(`${this._baseUrl}api/documentation/Type?typeName=${typeDisplayFullName}`, {})
     }
 
     public getEnumTypeDescription(typeDisplayFullName: string): Observable<CrocoEnumTypeDescription> {
-        return this._httpClient.post<CrocoEnumTypeDescription>(this._baseUrl + `Documentation/EnumType?typeName=${typeDisplayFullName}`, {})
+        return this._httpClient.post<CrocoEnumTypeDescription>(`${this._baseUrl}api/documentation/EnumType?typeName=${typeDisplayFullName}`, {})
     }
 }
