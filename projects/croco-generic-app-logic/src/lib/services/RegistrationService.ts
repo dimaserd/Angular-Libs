@@ -12,10 +12,10 @@ export class RegistrationService {
     }
 
     public register(data: RegisterModel): Observable<RegistrationResult> {
-        return this._httpClient.post<RegistrationResult>(this.baseUrl + 'Api/Account/Register', data);
+        return this._httpClient.post<RegistrationResult>(this.baseUrl + 'api/Account/Register', data);
     }
 
     public registerAndSignIn(data: RegisterModel): Observable<RegisterAndSignInResult> {
-        return this._httpClient.post<RegisterAndSignInResult>(this.baseUrl + 'Api/Account/RegisterAndSignIn', data);
+        return this._httpClient.post<RegisterAndSignInResult>(this.baseUrl + 'api/Account/RegisterAndSignIn', data);
     }
 }

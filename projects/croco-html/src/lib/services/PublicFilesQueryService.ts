@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { CommonFileInfoResultModel, FileSimpleModel, GetListResult, SearchFilesRequest } from "./file-models";
+import { FileSimpleModel, GetListResult, SearchFilesRequest } from "./file-models";
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +12,7 @@ export class PublicFilesQueryService {
 
     constructor(private readonly _httpClient: HttpClient,
         @Inject('BASE_URL') baseUrl: string) {
-        this._baseControllerUrl = `${baseUrl}Api/Files`;
+        this._baseControllerUrl = `${baseUrl}api/Files`;
     }
 
     public search(model: SearchFilesRequest): Observable<GetListResult<FileSimpleModel>> {

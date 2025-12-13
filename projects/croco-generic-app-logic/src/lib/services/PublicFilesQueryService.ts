@@ -13,7 +13,7 @@ export class PublicFilesQueryService {
 
     constructor(private readonly _httpClient: HttpClient,
         @Inject('BASE_URL') baseUrl: string) {
-        this._baseControllerUrl = `${baseUrl}Api/Files`;
+        this._baseControllerUrl = `${baseUrl}api/files`;
     }
 
     public getFilesWithRelations(model: SearchFilesRequest): Observable<GetListResult<DbFileNoDataWithRelations>> {

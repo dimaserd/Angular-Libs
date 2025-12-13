@@ -8,7 +8,7 @@ export class FilePathProvider {
       return null;
     }
 
-    return `/Api/Files/Download?fileId=${fileId}`;
+    return `/api/Files/Download?fileId=${fileId}`;
   }
 
   getMediumImageFilePath(fileId: number): string {

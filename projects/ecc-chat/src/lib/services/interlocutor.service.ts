@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { UserInChatModel } from './ChatService';
 import { Observable, of } from 'rxjs';
 import { map, shareReplay, switchMap } from 'rxjs/operators';
-
 import { LoginService } from 'croco-generic-app-logic';
 import { FilePathProvider } from './FilePathProvider';
 
