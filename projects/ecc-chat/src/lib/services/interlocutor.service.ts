@@ -1,21 +1,33 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { UserInChatModel } from './ChatService';
 import { Observable, of } from 'rxjs';
 import { map, shareReplay, switchMap } from 'rxjs/operators';
 import { LoginService } from 'croco-generic-app-logic';
-import { FilePathProvider } from './FilePathProvider';
+import { EccChatOptions, EccChatOptionsToken } from '../options';
+
+function createImagePath(format: string, fileId: number, sizeType: string = 'Small'): string | null {
+  if (fileId === null || fileId === undefined) {
+    return null;
+  }
+
+  return format
+    .replace('{sizeType}', sizeType)
+    .replace('{fileId}', fileId.toString());
+}
 
 @Injectable({ providedIn: 'root' })
 export class InterlocutorService {
-  private currentUserId$ = this.loginService.getLoginDataCached().pipe(
+  private currentUserId$ = this._loginService.getLoginDataCached().pipe(
     map((loginData) => loginData?.userId),
     shareReplay(1),
   );
 
+
   constructor(
-    private filePathProvider: FilePathProvider,
-    private loginService: LoginService,
-  ) { }
+    @Inject(EccChatOptionsToken) private readonly _options: EccChatOptions,
+    private readonly _loginService: LoginService,
+  ) {
+  }
 
   public getChatName(users: UserInChatModel[], chatName: string | undefined): Observable<string | undefined> {
     return chatName
@@ -30,11 +42,11 @@ export class InterlocutorService {
   public getInterlocutorAvatar(users: UserInChatModel[]): Observable<string | null> {
     return this.getInterlocutor(users).pipe(
       switchMap((interlocutor) => {
-        let avatarFileId = interlocutor?.user?.avatarFileId;
+        const avatarFileId = interlocutor?.user?.avatarFileId;
 
         return avatarFileId !== null && avatarFileId !== undefined
-          ? this.filePathProvider.getSmallImageFilePath(avatarFileId)
-          : [null];
+          ? of(createImagePath(this._options.fileIdAndSizeImageFormat, avatarFileId, 'Small'))
+          : of(null);
       }),
     );
   }

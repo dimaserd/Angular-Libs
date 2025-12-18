@@ -12,3 +12,5 @@ export * from './lib/services/ChatService';
 export * from './lib/services/ChatMessagingService';
 export * from './lib/services/EccChatGroupService';
 export * from './lib/services/ChatLogicService';
+
+export * from './lib/options';
