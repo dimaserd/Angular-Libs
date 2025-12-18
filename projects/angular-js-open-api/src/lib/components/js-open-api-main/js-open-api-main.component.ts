@@ -5,7 +5,6 @@ import { Title } from '@angular/platform-browser';
 import { JsScriptExecutor } from '../../services';
 import { JsOpenApiServiceDocumentation } from '../../models';
 import { MatTab, MatTabGroup } from "@angular/material/tabs";
-import { AngularJsOpenApiModule } from "../../angular-js-open-api.module";
 import { JsWorkerExpansionPanelComponent } from "../js-worker-expansion-panel/js-worker-expansion-panel.component";
 import { JsOpenApiConsoleComponent } from "../js-open-api-console/js-open-api-console.component";
 import { JsOpenApiRemoteDocsComponent } from "../js-open-api-remote-docs/js-open-api-remote-docs.component";
@@ -16,7 +15,6 @@ import { JsOpenApiRemoteDocsComponent } from "../js-open-api-remote-docs/js-open
   styleUrls: ['./js-open-api-main.component.css'],
   imports: [
     MatTabGroup,
-    AngularJsOpenApiModule,
     MatTab,
     JsWorkerExpansionPanelComponent,
     JsOpenApiConsoleComponent,
