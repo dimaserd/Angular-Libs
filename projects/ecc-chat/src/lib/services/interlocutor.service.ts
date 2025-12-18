@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, Optional } from '@angular/core';
 import { UserInChatModel } from './ChatService';
 import { Observable, of } from 'rxjs';
 import { map, shareReplay, switchMap } from 'rxjs/operators';
 import { LoginService } from 'croco-generic-app-logic';
-import { FilePathProvider } from './FilePathProvider';
+import { EccChatOptions, EccChatOptionsToken } from '../options';
 
 @Injectable({ providedIn: 'root' })
 export class InterlocutorService {
@@ -12,10 +12,30 @@ export class InterlocutorService {
     shareReplay(1),
   );
 
+  private readonly options: EccChatOptions;
+
   constructor(
-    private filePathProvider: FilePathProvider,
+    @Optional() @Inject(EccChatOptionsToken) options: EccChatOptions | null,
     private loginService: LoginService,
-  ) { }
+  ) {
+
+    if (options) {
+      this.options = options;
+    } else {
+      const getSizedImageFilePath = (fileId: number, sizeName: string): string | null => {
+        if (!fileId) {
+          return null;
+        }
+
+        return `/FileCopies/Images/${sizeName}/${fileId}.png`;
+      };
+
+      this.options = {
+        ...this.options,
+        getSizedImageFilePath,
+      };
+    }
+  }
 
   public getChatName(users: UserInChatModel[], chatName: string | undefined): Observable<string | undefined> {
     return chatName
@@ -30,11 +50,11 @@ export class InterlocutorService {
   public getInterlocutorAvatar(users: UserInChatModel[]): Observable<string | null> {
     return this.getInterlocutor(users).pipe(
       switchMap((interlocutor) => {
-        let avatarFileId = interlocutor?.user?.avatarFileId;
+        const avatarFileId = interlocutor?.user?.avatarFileId;
 
         return avatarFileId !== null && avatarFileId !== undefined
-          ? this.filePathProvider.getSmallImageFilePath(avatarFileId)
-          : [null];
+          ? of(this.options.getSmallImageFilePath(avatarFileId))
+          : of(null);
       }),
     );
   }
