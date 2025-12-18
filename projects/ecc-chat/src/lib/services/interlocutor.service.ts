@@ -5,6 +5,16 @@ import { map, shareReplay, switchMap } from 'rxjs/operators';
 import { LoginService } from 'croco-generic-app-logic';
 import { EccChatOptions, EccChatOptionsToken } from '../options';
 
+function createImagePath(format: string, fileId: number, sizeType: string = 'Small'): string | null {
+  if (fileId === null || fileId === undefined) {
+    return null;
+  }
+
+  return format
+    .replace('{sizeType}', sizeType)
+    .replace('{fileId}', fileId.toString());
+}
+
 @Injectable({ providedIn: 'root' })
 export class InterlocutorService {
   private currentUserId$ = this.loginService.getLoginDataCached().pipe(
@@ -18,23 +28,9 @@ export class InterlocutorService {
     @Optional() @Inject(EccChatOptionsToken) options: EccChatOptions | null,
     private loginService: LoginService,
   ) {
-
-    if (options) {
-      this.options = options;
-    } else {
-      const getSizedImageFilePath = (fileId: number, sizeName: string): string | null => {
-        if (!fileId) {
-          return null;
-        }
-
-        return `/FileCopies/Images/${sizeName}/${fileId}.png`;
-      };
-
-      this.options = {
-        ...this.options,
-        getSizedImageFilePath,
-      };
-    }
+    this.options = options ?? {
+      fileIdAndSizeImageFormat: '/FileCopies/Images/{sizeType}/{fileId}.png',
+    };
   }
 
   public getChatName(users: UserInChatModel[], chatName: string | undefined): Observable<string | undefined> {
@@ -53,7 +49,7 @@ export class InterlocutorService {
         const avatarFileId = interlocutor?.user?.avatarFileId;
 
         return avatarFileId !== null && avatarFileId !== undefined
-          ? of(this.options.getSmallImageFilePath(avatarFileId))
+          ? of(createImagePath(this.options.fileIdAndSizeImageFormat, avatarFileId, 'Small'))
           : of(null);
       }),
     );
