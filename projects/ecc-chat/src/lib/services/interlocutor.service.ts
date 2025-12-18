@@ -1,4 +1,4 @@
-import { Inject, Injectable, Optional } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { UserInChatModel } from './ChatService';
 import { Observable, of } from 'rxjs';
 import { map, shareReplay, switchMap } from 'rxjs/operators';
@@ -17,20 +17,16 @@ function createImagePath(format: string, fileId: number, sizeType: string = 'Sma
 
 @Injectable({ providedIn: 'root' })
 export class InterlocutorService {
-  private currentUserId$ = this.loginService.getLoginDataCached().pipe(
+  private currentUserId$ = this._loginService.getLoginDataCached().pipe(
     map((loginData) => loginData?.userId),
     shareReplay(1),
   );
 
-  private readonly options: EccChatOptions;
 
   constructor(
-    @Optional() @Inject(EccChatOptionsToken) options: EccChatOptions | null,
-    private loginService: LoginService,
+    @Inject(EccChatOptionsToken) private readonly _options: EccChatOptions,
+    private readonly _loginService: LoginService,
   ) {
-    this.options = options ?? {
-      fileIdAndSizeImageFormat: '/FileCopies/Images/{sizeType}/{fileId}.png',
-    };
   }
 
   public getChatName(users: UserInChatModel[], chatName: string | undefined): Observable<string | undefined> {
@@ -49,7 +45,7 @@ export class InterlocutorService {
         const avatarFileId = interlocutor?.user?.avatarFileId;
 
         return avatarFileId !== null && avatarFileId !== undefined
-          ? of(createImagePath(this.options.fileIdAndSizeImageFormat, avatarFileId, 'Small'))
+          ? of(createImagePath(this._options.fileIdAndSizeImageFormat, avatarFileId, 'Small'))
           : of(null);
       }),
     );
