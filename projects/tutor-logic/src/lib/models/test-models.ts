@@ -4,6 +4,8 @@ export interface CreateTestRequest {
   subjectId: string;
   sourceType: string;
   description: string;
+  isActive: boolean;
+  questionIds: Array<string>;
 }
 
 export interface EditTestRequest {

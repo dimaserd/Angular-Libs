@@ -3,6 +3,5 @@
  */
 
 export * from './lib/components';
-export * from './lib/croco-type-description.module';
 export * from './lib/models'
 export * from './lib/services';

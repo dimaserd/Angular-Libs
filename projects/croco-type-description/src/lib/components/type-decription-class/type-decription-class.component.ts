@@ -10,13 +10,14 @@ import { MatInputModule } from "@angular/material/input";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatNavList } from "@angular/material/list";
 import { RouterLink } from "@angular/router";
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'croco-type-decription-class',
   templateUrl: './type-decription-class.component.html',
   styleUrls: ['./type-decription-class.component.css'],
   standalone: true,
-  imports: [MatInputModule, MatSelectModule, FormsModule, MatExpansionModule, MatNavList, RouterLink],
+  imports: [MatInputModule, MatSelectModule, FormsModule, MatExpansionModule, MatNavList, RouterLink, MatButtonModule],
 })
 export class TypeDecriptionClassComponent implements OnInit {
 
@@ -27,7 +28,7 @@ export class TypeDecriptionClassComponent implements OnInit {
   @Input() type: CrocoTypeDescription;
   @Input() wholeResult: CrocoTypeDescriptionResult;
 
-  constructor(private _snackBar: MatSnackBar) {
+  constructor(private _snackBar: MatSnackBar, private readonly _clipBoardService: ClipboardService) {
   }
 
   codeGenerationType: string = "TypeScript";
@@ -50,6 +51,7 @@ export class TypeDecriptionClassComponent implements OnInit {
   }
 
   copyCode() {
+    this._clipBoardService.copy(this.codeGenerationResult);
     this._snackBar.open("Результат кодогенерации скопирован в буфер обмена", "Закрыть", { duration: 1500 });
   }
 }

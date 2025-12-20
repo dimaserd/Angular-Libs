@@ -6,13 +6,14 @@ import { Title } from '@angular/platform-browser';
 import { CrocoTypeDescriptor } from '../../services/CrocoTypeDescriptor';
 import { MatInputModule } from "@angular/material/input";
 import { TypeDecriptionClassComponent } from '../type-decription-class/type-decription-class.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'croco-type-decription',
   templateUrl: './type-decription.component.html',
   styleUrls: ['./type-decription.component.css'],
   standalone: true,
-  imports: [MatInputModule, TypeDecriptionClassComponent]
+  imports: [MatInputModule, TypeDecriptionClassComponent, MatButtonModule]
 })
 export class TypeDecriptionComponent implements OnInit {
 
