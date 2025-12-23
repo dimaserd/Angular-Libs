@@ -11,7 +11,7 @@ export class TutorUserTelegramService {
     private readonly _httpClient: HttpClient,
     @Inject('BASE_URL') baseUrl: string,
   ) {
-    this.baseControllerUrl = `${baseUrl}api/tutor/student/telegram`;
+    this.baseControllerUrl = `${baseUrl}api/tutor/user-telegram`;
   }
 
   createLink() {
