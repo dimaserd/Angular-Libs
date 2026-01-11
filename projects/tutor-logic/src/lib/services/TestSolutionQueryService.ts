@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
-import { SearchStudentTestSolutionsRequest, GetListResult, TestSolutionCourseData, StudentTestSolutionWithChatInfo, StudentTestSolutionModel } from "../models";
+import { SearchStudentTestSolutionsRequest, GetListResult, TestSolutionCourseData, StudentTestSolutionWithChatInfo, StudentTestSolutionModel, StudentTestSolutionWithStudentAndChatInfo } from "../models";
 
 @Injectable({
     providedIn: 'root',
@@ -21,7 +21,7 @@ export class TestSolutionQueryService {
     }
 
     public searchDetailed(model: SearchStudentTestSolutionsRequest) {
-        return this._httpClient.post<GetListResult<StudentTestSolutionWithChatInfo>>(`${this._baseUrl}/search-detailed`, model);
+        return this._httpClient.post<GetListResult<StudentTestSolutionWithStudentAndChatInfo>>(`${this._baseUrl}/search-detailed`, model);
     }
 
     public getCourseData(id: string) {
