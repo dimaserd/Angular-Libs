@@ -16,8 +16,12 @@ export class TestSolutionQueryService {
         this._baseUrl = `${baseUrl}api/tutor/test-solution/query`;
     }
 
-    public searchByStudent(model: SearchStudentTestSolutionsRequest) {
-        return this._httpClient.post<GetListResult<StudentTestSolutionWithChatInfo>>(`${this._baseUrl}/Search/By/Student`, model);
+    public search(model: SearchStudentTestSolutionsRequest) {
+        return this._httpClient.post<GetListResult<StudentTestSolutionWithChatInfo>>(`${this._baseUrl}/search`, model);
+    }
+
+    public searchDetailed(model: SearchStudentTestSolutionsRequest) {
+        return this._httpClient.post<GetListResult<StudentTestSolutionWithChatInfo>>(`${this._baseUrl}/search-detailed`, model);
     }
 
     public getCourseData(id: string) {

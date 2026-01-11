@@ -1,6 +1,7 @@
 import { CourseThemeItemModel } from "./course-models";
 import { TestQuestionModel, TestQuestionType } from "./question-models";
 import { QuestionValidationSourceType } from "./solution-validation-models";
+import { StudentSimpleModel } from "./student-models";
 import { TestQuestionErrorsStatisticOrderType } from "./student-statistic-models";
 
 export interface SearchStudentTestSolutionsRequest {
@@ -35,6 +36,13 @@ export interface QuestionAnswer {
 
 export interface StudentTestSolutionWithChatInfo {
     solution: StudentTestSolutionSimpleModel;
+    systemValidation: TestSolutionSystemValidationModel;
+    unreadMessagesCount: number;
+}
+
+export interface StudentTestSolutionWithStudentAndChatInfo {
+    solution: StudentTestSolutionSimpleModel;
+    student: StudentSimpleModel;
     systemValidation: TestSolutionSystemValidationModel;
     unreadMessagesCount: number;
 }
