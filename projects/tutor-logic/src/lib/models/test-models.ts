@@ -1,6 +1,5 @@
 export interface CreateTestRequest {
   name: string;
-  isGlobal: boolean;
   subjectId: string;
   sourceType: string;
   description: string;
@@ -14,7 +13,6 @@ export interface EditTestRequest {
   subjectId: string;
   description: string;
   isActive: boolean;
-  isGlobal: boolean;
 }
 
 export interface SearchTestsRequest {
@@ -23,7 +21,6 @@ export interface SearchTestsRequest {
   isActive: boolean | null;
   useSourceType: boolean;
   sourceType: string;
-  isGlobal: boolean | null;
   schoolId: string;
   count: number | null;
   offSet: number;
