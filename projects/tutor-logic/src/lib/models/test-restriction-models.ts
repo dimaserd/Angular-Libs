@@ -13,12 +13,14 @@ export interface TestRestrictionModel {
 export interface SearchStudentThemeItemTestRestrictionsRequest {
     q: string;
     courseThemeItemId: string;
+    isIndividual: boolean | null;
     count: number | null;
     offSet: number;
 }
 
 export interface ThemeItemTestStudentRestrictionModel {
     restriction: TestRestrictionModel;
+    isIndividual: boolean;
     student: StudentSimpleModel;
 }
 
