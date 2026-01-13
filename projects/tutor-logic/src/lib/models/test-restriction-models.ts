@@ -26,6 +26,7 @@ export interface ThemeItemTestStudentRestrictionModel {
 
 export interface CourseItemStudentTestRestrictionModel {
     courseThemeItemId: string;
+    isIndividual: boolean;
     studentId: string;
     testRestriction: TestRestrictionModel;
 }
