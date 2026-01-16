@@ -38,3 +38,4 @@ export { StudentAggregatedStatisticSnapshotService } from './StudentAggregatedSt
 export { GroupStatisticSnapshotStudentService } from './GroupStatisticSnapshotStudentService'
 export { SubjectMenuService } from './SubjectMenuService'
 export { TutorUserTelegramService } from './TutorUserTelegramService'
+export { StudentGroupBlockService } from './StudentGroupBlockService'
