@@ -30,4 +30,8 @@ export class PrivateFileService {
     public search(model: SearchFilesRequest) {
         return this._httpClient.post<GetListResult<PrivateFileNameModel>>(`${this._baseControllerUrl}/query/search`, model);
     }
+
+    public getFilesBySetId(setId: string) {
+        return this._httpClient.get<PrivateFileNameModel[]>(`${this._baseControllerUrl}/query/by-set/${setId}`);
+    }
 }
