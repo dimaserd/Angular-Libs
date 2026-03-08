@@ -15,6 +15,10 @@ export enum StudentGroupType {
     ExternalProduct = 'ExternalProduct'
 }
 
+export enum StudentGroupTaskType {
+    LinkCourseTemplate = 'LinkCourseTemplate'
+}
+
 export interface StudentGroupSimpleModel {
     id: string;
     alias: string;
@@ -27,6 +31,7 @@ export interface StudentGroupSimpleModel {
     isFreeOfCharge: boolean;
     schoolId: string;
     courseShopWindowId: string;
+    hasNotProcessedTask: boolean;
 }
 
 export interface StudentGroupDetailedModel {
@@ -52,6 +57,7 @@ export interface StudentGroupDetailedModel {
     schoolId: string;
     courseShopWindowId: string;
     computedDataOnUtc: string;
+    task: StudentGroupTaskType | null;
 }
 
 export interface StudentInGroupSimpleModel {
