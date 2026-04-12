@@ -20,7 +20,6 @@ export enum StudentGroupTaskType {
     ClearSolutions = 'ClearSolutions'
 }
 
-
 export interface StudentGroupSimpleModel {
     id: string;
     alias: string;
@@ -60,6 +59,12 @@ export interface StudentGroupDetailedModel {
     courseShopWindowId: string;
     computedDataOnUtc: string;
     task: StudentGroupTaskType | null;
+    taskInfo: StudentGroupTaskInfo;
+}
+
+export interface StudentGroupTaskInfo {
+    title: string;
+    description: string;
 }
 
 export interface StudentInGroupSimpleModel {
