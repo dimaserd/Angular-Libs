@@ -16,8 +16,10 @@ export enum StudentGroupType {
 }
 
 export enum StudentGroupTaskType {
-    LinkCourseTemplate = 'LinkCourseTemplate'
+    LinkCourseTemplate = 'LinkCourseTemplate',
+    ClearSolutions = 'ClearSolutions'
 }
+
 
 export interface StudentGroupSimpleModel {
     id: string;
