@@ -27,6 +27,11 @@ export interface FinishStudentCourseThemeProgressRequest {
     themeId: string;
 }
 
+export interface ThemeItemFinishedLogModel {
+    themeItemId: string;
+    loggedOnUtc: string;
+}
+
 export interface UpdateStudentCourseThemeProgressResult {
     succeeded: boolean;
     errorMessage: string;
@@ -43,20 +48,21 @@ export interface StudentCourseProgressModel {
     currentProgressPercents: number;
     themes: Array<StudentCourseThemeProgressModel>;
     lastTheme: StudentCourseThemeProgressModel;
+    logs: Array<ThemeItemFinishedLogModel>;
 }
 
 export interface StudentCourseThemeProgressModel {
-	 id: string; 
-	 themeId: string; 
-	 isStarted: boolean; 
-	 isRestricted: boolean; 
-	 currentProgress: number; 
-	 currentItemIndex: number; 
-	 themeTotalWeight: number; 
-	 currentProgressPercents: number; 
-	 isFinished: boolean; 
-	 finishedOnUtc: string; 
-	 updatedOnUtc: string; 
+    id: string;
+    themeId: string;
+    isStarted: boolean;
+    isRestricted: boolean;
+    currentProgress: number;
+    currentItemIndex: number;
+    themeTotalWeight: number;
+    currentProgressPercents: number;
+    isFinished: boolean;
+    finishedOnUtc: string;
+    updatedOnUtc: string;
 }
 
 export interface SearchCourseProgressesRequest {
