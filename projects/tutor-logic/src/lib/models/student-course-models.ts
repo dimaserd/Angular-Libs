@@ -4,11 +4,17 @@ export interface StartCourseThemeRequest {
     themeProgressId: string;
 }
 
+export interface SetCourseThemeItemAsFinishedRequest {
+    courseId: string;
+    themeItemIds: Array<string>;
+}
+
 export interface UpdateStudentCourseThemeProgressRequest {
     studentProgressId: string;
     themeId: string;
     currentItemIndex: number;
     currentProgress: number;
+    logBlocksRequest: SetCourseThemeItemAsFinishedRequest;
 }
 
 export interface StartCourseThemeItemTestRequest {
@@ -25,6 +31,7 @@ export interface StartCourseThemeItemTestResult {
 export interface FinishStudentCourseThemeProgressRequest {
     studentProgressId: string;
     themeId: string;
+    logBlocksRequest: SetCourseThemeItemAsFinishedRequest;
 }
 
 export interface ThemeItemFinishedLogModel {
@@ -35,6 +42,7 @@ export interface ThemeItemFinishedLogModel {
 export interface UpdateStudentCourseThemeProgressResult {
     succeeded: boolean;
     errorMessage: string;
+    finishedThemeItemIds: string[];
     progress: StudentCourseProgressModel;
 }
 
