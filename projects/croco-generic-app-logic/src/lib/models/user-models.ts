@@ -52,7 +52,8 @@ export enum RegistrationErrorResultType {
     UserManagerError = 'UserManagerError',
     ClientAddingError = 'ClientAddingError',
     UnAcceptablePassword = 'UnAcceptablePassword',
-    NoRights = 'NoRights'
+    NoRights = 'NoRights',
+    EmailNotValid = 'EmailNotValid'
 }
 
 export interface RegisteredUser {
@@ -108,9 +109,9 @@ export interface ClientModel {
 }
 
 export interface LastUserActivityModel {
-	 id: string; 
-	 lastActivityOnUtc: string; 
-	 lastLoginOnUtc: string; 
+    id: string;
+    lastActivityOnUtc: string;
+    lastLoginOnUtc: string;
 }
 
 export interface EditApplicationUser {
