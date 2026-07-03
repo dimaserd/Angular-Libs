@@ -70,6 +70,7 @@ export interface StudentGroupPaymentPlanSimpleModel {
     description: string;
     daysLength: number;
     amount: number;
+    paymentsCountForUnlimitedAccess: number | null;
 }
 
 export interface StudentGroupPaymentPlansModel {
