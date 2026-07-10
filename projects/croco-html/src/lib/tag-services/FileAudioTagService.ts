@@ -25,7 +25,7 @@ export class FileAudioTagService implements IMarkUpTagService {
     return `<${FileAudioTagDataConsts.TagName} ${fileIdAttr} ${titleAttr}></${FileAudioTagDataConsts.TagName}>`;
   }
 
-  extractBlockFromHtmlElement(elem: HTMLElement, options: CrocoHtmlOptions): InterfaceBlock {
+  extractBlockFromHtmlElement(elem: HTMLElement, _: CrocoHtmlOptions): InterfaceBlock {
     let fileId = elem.getAttribute(FileAudioTagDataConsts.FileIdAttrName);
     let title = elem.getAttribute(FileAudioTagDataConsts.TitleAttrName);
 
