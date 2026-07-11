@@ -49,7 +49,7 @@ export interface CrocoHtmlOptions {
   /**
    * Кастомные кнопки для добавления тега
    */
-  editorCustomAddTagButtons: TagItem[] | null | undefined;
+  editorCustomAddTagButtons?: TagItem[] | null | undefined;
 }
 
 export interface ICustomTagViewRender {
