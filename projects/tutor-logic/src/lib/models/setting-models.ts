@@ -15,8 +15,17 @@ export interface TutorFullApplicationPublicOptions {
   webAppRoutes: WebAppRoutes;
   telephoneInputOptions: TelephoneInputOptions;
   userAgreements: UserAgreementsOptions;
+  crocoHtmlLinkTagCustomFileIconOptions: CrocoHtmlLinkTagCustomIconOptions;
   serverAppVersion: string;
   dataOnUtc: string;
+}
+
+export interface CrocoHtmlLinkTagCustomIconOptions {
+  iconRenderUrlFormat: string;
+  allowedTypes: Array<string>;
+  defaultIcon: string;
+  iconWidth: number;
+  iconHeight: number;
 }
 
 export interface UserAgreementsOptions {
