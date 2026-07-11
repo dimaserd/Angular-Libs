@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Inject, Input, OnDestroy, Output} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, inject, Inject, Input, OnDestroy, Output} from '@angular/core';
 import { TextTags } from '../../../extensions/TextMethods';
 import { HtmlBodyTag } from '../../../models/models';
 import { MatIconButton } from '@angular/material/button';
@@ -24,6 +24,7 @@ import {
   templateUrl: './main-editor-block.component.html',
   styleUrls: ['./main-editor-block.component.css'],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     TextEditorComponent,
     ImageEditorComponent,
@@ -44,6 +45,8 @@ export class MainEditorBlockComponent implements OnDestroy {
 
   private unsubscribe = new Subject<void>();
 
+  private readonly _cdr = inject(ChangeDetectorRef);
+
   @Input({ required: true })
   set tag(data: HtmlBodyTag) {
     this._tag = data;
@@ -54,6 +57,7 @@ export class MainEditorBlockComponent implements OnDestroy {
       .pipe(takeUntil(this.unsubscribe))
       .subscribe(val => {
         this.presentOrEdit = val;
+        this._cdr.markForCheck();
       });
   }
 

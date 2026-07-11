@@ -1,6 +1,7 @@
 import {
   AfterContentChecked,
   AfterViewInit,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   EventEmitter,
@@ -35,6 +36,7 @@ import { CrocoHtmlOptionsToken } from '../../../consts';
   templateUrl: './main-editor.component.html',
   styleUrls: ['./main-editor.component.scss'],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     MatTabsModule,
     VisualEditorComponent,
@@ -85,6 +87,7 @@ export class MainEditorComponent implements OnInit, AfterContentChecked, AfterVi
     if(changes['html'].currentValue !== changes['html'].previousValue) {
       this.recalculateBodyTags();
     }
+    this._cdref.markForCheck();
   }
 
   ngAfterViewInit(): void {
@@ -103,6 +106,7 @@ export class MainEditorComponent implements OnInit, AfterContentChecked, AfterVi
   onHtmlChangedHandler(html: string) {
     this.html = html;
     this.onHtmlChanged.emit(html);
+    this._cdref.markForCheck();
   }
 
   textAreaModelChangedHandler() {

@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { InterfaceBlock } from '../../../models/InterfaceBlock';
 import { ImageMethods } from '../../../extensions';
 import { ScreenWidthService } from "../../../services/screen-width.service";
@@ -14,15 +14,20 @@ import { FileImageTagData, IImageMediaRequest } from '../../../models';
   imports: [
     NgStyle
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true
 })
 export class FileImageTagViewComponent implements OnInit, OnDestroy {
+
+  private readonly _cdr = inject(ChangeDetectorRef);
 
   @Input() set item(item: InterfaceBlock) {
     let data = item.data as FileImageTagData;
     this.imageData = data;
     this.imageSrc = data.src;
     this.requests = this.getMediaRequests(data.screenMediaRequest);
+
+    this._cdr.markForCheck();
   }
 
   @Input({ required: true })
@@ -65,6 +70,8 @@ export class FileImageTagViewComponent implements OnInit, OnDestroy {
             this.imageMaxHeight = visualMaxHeight;
           }
         }
+
+        this._cdr.markForCheck();
       })
   }
 

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import {
   ExternalVideoTagData,
   ExternalVideoSupportedTypes,
@@ -15,6 +15,7 @@ import { MatCheckbox } from "@angular/material/checkbox";
   templateUrl: './external-video-editor.component.html',
   styleUrls: ['./external-video-editor.component.scss'],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     MatFormFieldModule,
     MatInputModule,
@@ -24,6 +25,8 @@ import { MatCheckbox } from "@angular/material/checkbox";
   ]
 })
 export class ExternalVideoEditorComponent implements OnInit {
+
+  private readonly _cdr = inject(ChangeDetectorRef);
 
   @Input({required: true})
   tag: HtmlBodyTag;
@@ -66,6 +69,8 @@ export class ExternalVideoEditorComponent implements OnInit {
         break;
       }
     }
+
+    this._cdr.markForCheck();
   }
 
   linkChanged() {
@@ -75,7 +80,9 @@ export class ExternalVideoEditorComponent implements OnInit {
 
     const { innerHtml, ...tagData } = this.tagData;
     this.tag.attributes = tagData;
-    this.tag.innerHtml = innerHtml
+    this.tag.innerHtml = innerHtml;
+
+    this._cdr.markForCheck();
   }
 
   onCheck(checked: boolean): void {
@@ -89,5 +96,7 @@ export class ExternalVideoEditorComponent implements OnInit {
     const elem = document.body.children[0];
     const src = elem.getAttribute("src");
     this.tagData.link = src;
+
+    this._cdr.markForCheck();
   }
 }

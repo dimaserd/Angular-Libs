@@ -22,8 +22,6 @@ export class AddFilesBtnComponent {
 
   fileIds: number[] = [];
 
-  constructor() { }
-
   @Output()
   filesTagsReady = new EventEmitter<HtmlBodyTag[]>();
 

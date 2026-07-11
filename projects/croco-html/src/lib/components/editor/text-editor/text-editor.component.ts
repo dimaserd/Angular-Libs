@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, OnDestroy } from '@angular/core';
 import { HtmlBodyTag } from '../../../models/models';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { MatInput } from '@angular/material/input';
@@ -14,6 +14,7 @@ import { Subject, takeUntil } from 'rxjs';
   selector: 'croco-html-text-editor',
   templateUrl: './text-editor.component.html',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     MatButtonToggleGroup,
     FormsModule,
@@ -32,6 +33,8 @@ export class TextEditorComponent implements OnDestroy {
   _tag: HtmlBodyTag;
   _tagService: TagEditorService;
 
+  private readonly _cdr = inject(ChangeDetectorRef);
+
   @Input({ required: true })
   set tagService(data: TagEditorService) {
     this._tagService = data;
@@ -40,17 +43,21 @@ export class TextEditorComponent implements OnDestroy {
       .pipe(takeUntil(this.unsubscribe))
       .subscribe(tag => {
         this._tag = tag;
+        this._cdr.markForCheck();
       });
 
     this._tagService.presentOrEdit$
       .pipe(takeUntil(this.unsubscribe))
       .subscribe(val => {
         this.presentOrEdit = val;
+        this._cdr.markForCheck();
       });
 
     this._horizontalAlignment = this._tag.attributes.hasOwnProperty(TextTagDataConsts.HAlign)
       ? this._tag.attributes[TextTagDataConsts.HAlign]
       : TextAlignment.Left
+
+     this._cdr.markForCheck();
   }
 
   presentOrEdit = true;
@@ -63,6 +70,7 @@ export class TextEditorComponent implements OnDestroy {
     this._tag.attributes[TextTagDataConsts.HAlign] = this._horizontalAlignment;
 
     this._tagService.tag$.next(this._tag);
+     this._cdr.markForCheck();
   }
 
   getInnerHtml() {

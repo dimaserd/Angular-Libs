@@ -183,7 +183,7 @@
                   [(ngModel)]="alignment"
                   [hideSingleSelectionIndicator]="true"
                 >
-                  @for (option of alignmentOptions; track option) {
+                  @for (option of alignmentOptions; track option.value) {
                     <mat-button-toggle value="{{ option.value }}">
                     <span class="text-align-icon">
                       <ng-container [ngTemplateOutlet]="textAlignToggleIcons"

@@ -1,13 +1,10 @@
 import {
   Component,
-  Inject,
   Input,
   OnDestroy,
   OnInit,
   ViewChild,
   ElementRef,
-  OnChanges,
-  SimpleChanges
 } from '@angular/core';
 import { AudioMethods, FileAudioTagDataConsts } from '../../../extensions/AudioMethods';
 import { HtmlBodyTag } from '../../../models/models';

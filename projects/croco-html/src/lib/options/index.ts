@@ -1,5 +1,5 @@
 import { Type } from "@angular/core";
-import { IImageMediaRequest, FileImageTagData } from "../models";
+import { IImageMediaRequest, FileImageTagData, TagItem } from "../models";
 import { VisualEditorComponent } from "../components";
 import { IMarkUpTagService } from "../tag-services";
 
@@ -45,6 +45,11 @@ export interface CrocoHtmlOptions {
    * @returns
    */
   customWidgetClickHandler: (editor: VisualEditorComponent) => void;
+
+  /**
+   * Кастомные кнопки для добавления тега
+   */
+  editorCustomAddTagButtons: TagItem[] | null | undefined;
 }
 
 export interface ICustomTagViewRender {

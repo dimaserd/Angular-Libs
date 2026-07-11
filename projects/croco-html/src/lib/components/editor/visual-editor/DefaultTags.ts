@@ -1,6 +1,7 @@
 import { ExternalVideoTagDataConsts, FileImageTagDataConsts, FileAudioTagDataConsts } from '../../../extensions';
 import { TagItem } from '../../../models/models';
-import { CustomWidgetTagDataConsts, DownloadButtonTagDataConsts, HtmlRawTagDataConsts } from '../../../tag-services';
+import { CrocoHtmlOptions } from '../../../options';
+import { DownloadButtonTagDataConsts, HtmlRawTagDataConsts } from '../../../tag-services';
 import { ButtonTagDataConsts } from '../../../tag-services/ButtonTagService';
 
 export class DefaultTags {
@@ -21,12 +22,16 @@ export class DefaultTags {
     { tag: ExternalVideoTagDataConsts.TagName, displayValue: 'Видео', isCustom: false },
     { tag: DownloadButtonTagDataConsts.TagName, displayValue: 'Кнопка для скачивания', isCustom: false },
     { tag: ButtonTagDataConsts.TagName, displayValue: 'Кнопка', isCustom: false },
-    // { tag: CustomWidgetTagDataConsts.TagName, displayValue: 'Виджет', isCustom: false },
     { tag: HtmlRawTagDataConsts.TagName, displayValue: 'Разметка', isCustom: false },
     { tag: 'text', displayValue: 'Текст', isCustom: false },
   ];
 
-  static getTags(): TagItem[] {
+  static getTags(options: CrocoHtmlOptions): TagItem[] {
+
+    if (options.editorCustomAddTagButtons) {
+      return [...options.editorCustomAddTagButtons];
+    }
+
     return [...DefaultTags.tags];
   }
 }

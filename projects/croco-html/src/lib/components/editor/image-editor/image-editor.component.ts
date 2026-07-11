@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { ImageMethods, FileImageTagDataConsts } from '../../../extensions';
 import { HtmlBodyTag } from '../../../models/models';
 import { CrocoHtmlOptionsToken } from '../../../consts';
@@ -33,7 +33,8 @@ import { IImageMediaRequest } from '../../../models';
     NgStyle,
     MatIconButton,
     MatSlideToggle
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ImageEditorComponent implements OnInit, OnDestroy {
 
@@ -44,6 +45,8 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
   imageMaxWidth: number = null;
   isShowMediaRequest = false;
   private unsubscribe = new Subject<void>();
+
+  private readonly _cdr = inject(ChangeDetectorRef);
 
   @Input({ required: true })
   tag: HtmlBodyTag;
@@ -83,6 +86,7 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
 
   removeImageError() {
     this.hasImageError = false;
+    this._cdr.markForCheck();
   }
 
   ngOnInit(): void {
@@ -103,6 +107,8 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
             this.imageMaxHeight = visualMaxHeight;
           }
         }
+
+        this._cdr.markForCheck();
       });
   }
 
@@ -116,12 +122,16 @@ export class ImageEditorComponent implements OnInit, OnDestroy {
       minScreenWidth: 0,
       maxImageHeight: 0,
       maxImageWidth: 0
-    })
+    });
+
+    this._cdr.markForCheck();
   }
 
   deleteMediaRequest(index: number) {
     this.requests.splice(index, 1);
     this.requestChanged();
+
+    this._cdr.markForCheck();
   }
 
 

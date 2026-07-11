@@ -1,4 +1,4 @@
-import { Component, ComponentRef, Inject, Input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ComponentRef, inject, Inject, Input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { CrocoHtmlOptions } from '../../../../../options';
 import { CrocoHtmlOptionsToken } from '../../../../../consts';
 
@@ -6,7 +6,8 @@ import { CrocoHtmlOptionsToken } from '../../../../../consts';
   selector: 'croco-html-custom-widget-icon',
   imports: [],
   templateUrl: './custom-widget-icon.component.html',
-  standalone: true
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CustomWidgetIconComponent implements OnInit {
 
@@ -17,10 +18,14 @@ export class CustomWidgetIconComponent implements OnInit {
 
   public dynamicContainerRef: ComponentRef<any>;
 
+  private readonly _cdr = inject(ChangeDetectorRef);
+
   @Input({ required: true })
   set tagName(tagName: string) {
     this._tagName = tagName;
     this._shortTagName = tagName.substring(0, 2);
+
+    this._cdr.markForCheck();
   }
 
   constructor(@Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions) {
@@ -47,5 +52,7 @@ export class CustomWidgetIconComponent implements OnInit {
       this.viewContainerRef.remove();
       this.dynamicContainerRef = this.viewContainerRef.createComponent(component);
     }
+
+    this._cdr.markForCheck();
   }
 }

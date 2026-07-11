@@ -1,6 +1,7 @@
 import { CdkDragDrop, moveItemInArray, CdkDropList, CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component, ElementRef,
   EventEmitter,
@@ -62,7 +63,6 @@ import { UploadFilesBtnComponent } from '../../upload-files-btn/upload-files-btn
     FormsModule,
     MatSelect,
     MatOption,
-    AddFilesBtnComponent,
     CdkDropList,
     CdkDrag,
     CdkDragHandle,
@@ -75,7 +75,8 @@ import { UploadFilesBtnComponent } from '../../upload-files-btn/upload-files-btn
     CustomWidgetIconComponent,
     MatIcon,
     UploadFilesBtnComponent
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VisualEditorComponent implements OnInit, AfterViewInit {
   @ViewChild('textArea') textArea: ElementRef;
@@ -139,7 +140,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   useCustomWidgetsButton = false;
 
   constructor(
-    private readonly _cdref: ChangeDetectorRef,
+    private readonly _cdr: ChangeDetectorRef,
     @Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions) {
 
     this.useCustomWidgetsButton = this._options.useCustomWidgetsButton;
@@ -153,6 +154,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     this.text = '';
     this.alignment = TextAlignment.Left;
     this.textTag = DefaultTags.textTags[0].tag;
+    this._cdr.markForCheck();
   }
 
   drop(event: CdkDragDrop<HtmlBodyTag[]>) {
@@ -180,11 +182,14 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     let result = BodyTagsExtensions.bodyTagsToHtml(this.bodyTags, this._options);
     this.html = XmlExtensions.formatXml("<body>" + result + "</body>");
     this.onHtmlChanged.emit(this.html);
+
+    this._cdr.markForCheck();
   }
 
   recalculateBodyTags() {
     this.bodyTags = BodyTagsExtensions.getBodyTags(this.html, this._options);
     this.saveBodyTags = [...this.bodyTags];
+    this._cdr.markForCheck();
   }
 
   selectTag(data: TagItem) {
@@ -195,11 +200,11 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     if (this.isTagRequiringForm()) {
       if (data.tag === 'text') {
         this.resetTextStyle();
-      } else if (data.tag === ExternalVideoTagDataConsts.TagName) {
+      } 
+      else if (data.tag === ExternalVideoTagDataConsts.TagName) {
         this.selectedVideoPlayer = this.videoPlayers[0].type;
-      } else if (data.tag === FileImageTagDataConsts.TagName) {
-        return;
       }
+      this._cdr.markForCheck();
       return;
     }
 
@@ -208,9 +213,9 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
 
   isTagRequiringForm(): boolean {
     return this.selectedValue === 'text' ||
-           this.selectedValue === ExternalVideoTagDataConsts.TagName ||
-           this.selectedValue === HtmlRawTagDataConsts.TagName ||
-           this.selectedValue === FileImageTagDataConsts.TagName;
+      this.selectedValue === ExternalVideoTagDataConsts.TagName ||
+      this.selectedValue === HtmlRawTagDataConsts.TagName ||
+      this.selectedValue === FileImageTagDataConsts.TagName;
   }
 
   addTagWithForm(): void {
@@ -344,6 +349,8 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     this.imageMode = null;
     this.resetTextStyle();
     this.isTagAdditionStarted = false;
+
+    this._cdr.markForCheck();
   }
 
   addRegularTag(): void {
@@ -383,8 +390,10 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.recalculateBodyTags();
 
-    this.tags = DefaultTags.getTags();
+    this.tags = DefaultTags.getTags(this._options);
     this.selectedVideoPlayer = this.videoPlayers[0].type;
+
+    this._cdr.markForCheck();
   }
 
   setTagButton(tagName: string): SpriteIdsType {
