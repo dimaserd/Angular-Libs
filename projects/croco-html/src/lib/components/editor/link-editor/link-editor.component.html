@@ -1,0 +1,31 @@
+@if (presentOrEdit) {
+
+  @if (isValid){
+    <div>
+      <a target="_blank" [attr.href]="linkData.url">{{linkData.title}}</a>
+    </div>
+  }
+  @else {
+    <div class="alert alert-danger">
+      {{errorMessage}}
+    </div>
+  }
+}
+@else {
+<div>
+  <mat-form-field class="w-100">
+    <mat-label>Название</mat-label>
+    <input type="text" matInput [(ngModel)]="linkData.title" (ngModelChange)="saveTag()" />
+  </mat-form-field>
+
+  <mat-form-field class="w-100">
+    <mat-label>Ссылка</mat-label>
+    <input type="text" matInput [(ngModel)]="linkData.url" (ngModelChange)="saveTag()" />
+  </mat-form-field>
+
+  <mat-form-field class="w-100">
+    <mat-label>Тип ссылки</mat-label>
+    <input type="text" matInput [(ngModel)]="linkData.type" (ngModelChange)="saveTag()" />
+  </mat-form-field>
+</div>
+}

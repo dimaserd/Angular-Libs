@@ -3,6 +3,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Router } from "@angular/router";
 import { HtmlRawTagData } from '../../../tag-services';
 import { InterfaceBlock } from '../../../models';
+import { HtmlPageDataController } from '../../../services';
 
 
 @Component({
@@ -19,6 +20,13 @@ export class HtmlRawViewComponent {
     const data = item.data as HtmlRawTagData;
 
     this.safeHtml = this._sanitizer.bypassSecurityTrustHtml(data.innerHTML);
+    this._cdr.markForCheck();
+  }
+
+  public _dataController: HtmlPageDataController;
+
+  @Input({ required: true }) set dataController(controller: HtmlPageDataController) {
+    this._dataController = controller;
     this._cdr.markForCheck();
   }
 
