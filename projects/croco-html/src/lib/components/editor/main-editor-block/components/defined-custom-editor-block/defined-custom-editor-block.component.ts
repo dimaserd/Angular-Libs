@@ -41,8 +41,8 @@ export class DefinedCustomEditorBlockComponent implements OnInit, OnDestroy {
   getCustomComponent() {
     const tagName = this._tag.tagDescription.tag;
 
-    if (this._options.definedCustomTagViewRenderers.hasOwnProperty(tagName)) {
-      return this._options.definedCustomTagViewRenderers[tagName].editorComponent;
+    if (this._options.definedEditorViewRenderers.hasOwnProperty(tagName)) {
+      return this._options.definedEditorViewRenderers[tagName].editorComponent;
     }
 
     return null;

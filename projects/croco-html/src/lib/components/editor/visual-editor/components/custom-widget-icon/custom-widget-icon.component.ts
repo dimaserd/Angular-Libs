@@ -33,8 +33,8 @@ export class CustomWidgetIconComponent implements OnInit {
   }
 
   getIconComponent() {
-    if (this._options.definedCustomTagViewRenderers.hasOwnProperty(this._tagName)) {
-      return this._options.definedCustomTagViewRenderers[this._tagName].iconComponent;
+    if (this._options.definedEditorViewRenderers.hasOwnProperty(this._tagName)) {
+      return this._options.definedEditorViewRenderers[this._tagName].iconComponent;
     }
 
     return null;

@@ -36,9 +36,14 @@ export interface CrocoHtmlOptions {
   definedCustomTags: { [id: string]: IMarkUpTagService; };
 
   /**
-   * Рендеры для кастомных тегов.
+   * Рендеры для кастомных тегов внутри редактора.
    */
-  definedCustomTagViewRenderers: { [id: string] : ICustomTagViewRender }
+  definedEditorViewRenderers: { [id: string] : ITagEditorViewRender }
+
+  /**
+   * Рендеры для тегов внутри просмотра.
+   */
+  definedViewRenderers: { [id: string]: ITagViewViewRender}
 
   /**
    * Обработчик нажатия на кнопку кастомных виджетов
@@ -52,7 +57,7 @@ export interface CrocoHtmlOptions {
   editorCustomAddTagButtons?: TagItem[] | null | undefined;
 }
 
-export interface ICustomTagViewRender {
+export interface ITagEditorViewRender {
 
   /**
    * Компонент для визуального редактора croco-html-custom-widget-editor
@@ -65,7 +70,9 @@ export interface ICustomTagViewRender {
    * Иконка в визуальном редакторе croco-html-custom-widget-icon
    */
   iconComponent?: Type<any>;
+}
 
+export interface ITagViewViewRender {
   /**
    * Компонент для отрисовки на интерфейсе croco-html-defined-custom-tag-view.
    * Должен содержать input({required: true}) data: InterfaceBlock

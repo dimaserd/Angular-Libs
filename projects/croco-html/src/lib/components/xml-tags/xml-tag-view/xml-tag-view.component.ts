@@ -16,6 +16,7 @@ import { CrocoHtmlOptionsToken } from '../../../consts';
 import { CrocoHtmlOptions } from '../../../options';
 import { DefinedCustomTagViewComponent } from '../defined-custom-tag-view/defined-custom-tag-view.component';
 import { HtmlPageDataController } from '../../../services';
+import { DefaultTags } from '../../editor/visual-editor/DefaultTags';
 
 @Component({
   selector: 'croco-html-xml-tag-view',
@@ -47,13 +48,17 @@ export class XmlTagViewComponent {
   dataController: HtmlPageDataController = new HtmlPageDataController();
 
   @Input({ required: true })
-  isEditor = false
+  isEditor = false;
 
   constructor(@Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions) {
   }
 
   isHeaderTextTag(item: InterfaceBlock) {
     return TextTags.headerTextTags.includes(item.tagName);
+  }
+
+  isViewDefined(item: InterfaceBlock): boolean {
+    return DefaultTags.isViewDefined(item, this._options);
   }
 
   isDefinedCustomTag(item: InterfaceBlock) {

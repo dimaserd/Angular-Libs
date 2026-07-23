@@ -4,6 +4,7 @@ import { JsonPipe } from '@angular/common';
 import { CrocoHtmlOptionsToken } from '../../../consts';
 import { CrocoHtmlOptions } from '../../../options';
 import { HtmlPageDataController } from '../../../services';
+import { DefaultTags } from '../../editor/visual-editor/DefaultTags';
 
 @Component({
   selector: 'croco-html-defined-custom-tag-view',
@@ -34,15 +35,18 @@ export class DefinedCustomTagViewComponent implements OnInit, OnDestroy {
   public _data: InterfaceBlock;
 
   constructor(@Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions) {
-
   }
 
   getCustomComponent() {
 
     const tagName = this._data.tagName;
 
-    if (this._options.definedCustomTagViewRenderers.hasOwnProperty(tagName)) {
-      return this._options.definedCustomTagViewRenderers[tagName].viewComponent;
+    if (this._options.definedViewRenderers.hasOwnProperty(tagName)) {
+      return this._options.definedViewRenderers[tagName].viewComponent;
+    }
+
+    if (DefaultTags.tagRenderers.hasOwnProperty(tagName)) {
+      return DefaultTags.tagRenderers[tagName].viewComponent;
     }
 
     return null;

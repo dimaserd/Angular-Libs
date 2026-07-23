@@ -1,7 +1,15 @@
 <ng-container #container>
     @if (!useDynamicComponent) {
     <div>
-        {{data | json}}
+        <div>
+            Название тега: {{data.tagName}}
+        </div>
+        <div>
+            Данные:
+        </div>
+        <div>
+            {{data.data | json}}
+        </div>
     </div>
     }
 </ng-container>

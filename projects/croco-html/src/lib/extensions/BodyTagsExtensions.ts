@@ -15,6 +15,7 @@ import { ButtonTagDataConsts, ButtonTagService } from "../tag-services/ButtonTag
 import { TextTags } from "./TextMethods";
 import { TableTypes } from "./TableMethods";
 import { TableTagService } from "../tag-services/TableTagService";
+import { LinkTagConsts, LinkTagService } from "../tag-services/LinkTagService";
 
 export class BodyTagsExtensions {
 
@@ -32,7 +33,8 @@ export class BodyTagsExtensions {
     [HtmlRawTagDataConsts.TagName]: new HtmlRawTagService(),
     [DownloadButtonTagDataConsts.TagName]: new DownloadButtonTagService(),
     [ButtonTagDataConsts.TagName]: new ButtonTagService(),
-    [TableTypes.Table]: new TableTagService()
+    [TableTypes.Table]: new TableTagService(),
+    [LinkTagConsts.TagName]: new LinkTagService()
   }
 
   public static hasTagService(tagName: string, options: CrocoHtmlOptions) {

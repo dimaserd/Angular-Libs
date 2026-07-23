@@ -1,8 +1,11 @@
 import { ExternalVideoTagDataConsts, FileImageTagDataConsts, FileAudioTagDataConsts } from '../../../extensions';
+import { InterfaceBlock } from '../../../models';
 import { TagItem } from '../../../models/models';
-import { CrocoHtmlOptions } from '../../../options';
+import { CrocoHtmlOptions, ITagViewViewRender } from '../../../options';
 import { DownloadButtonTagDataConsts, HtmlRawTagDataConsts } from '../../../tag-services';
 import { ButtonTagDataConsts } from '../../../tag-services/ButtonTagService';
+import { LinkTagConsts } from '../../../tag-services/LinkTagService';
+import { HtmlRawViewComponent } from '../../xml-tags';
 
 export class DefaultTags {
 
@@ -20,11 +23,27 @@ export class DefaultTags {
     { tag: FileImageTagDataConsts.TagName, displayValue: 'Изображение', isCustom: false },
     { tag: FileAudioTagDataConsts.TagName, displayValue: 'Аудио', isCustom: false },
     { tag: ExternalVideoTagDataConsts.TagName, displayValue: 'Видео', isCustom: false },
+    { tag: LinkTagConsts.TagName, displayValue: 'Ссылка', isCustom: false },
     { tag: DownloadButtonTagDataConsts.TagName, displayValue: 'Кнопка для скачивания', isCustom: false },
     { tag: ButtonTagDataConsts.TagName, displayValue: 'Кнопка', isCustom: false },
     { tag: HtmlRawTagDataConsts.TagName, displayValue: 'Разметка', isCustom: false },
     { tag: 'text', displayValue: 'Текст', isCustom: false },
   ];
+
+  static tagRenderers: { [tagName: string]: ITagViewViewRender } = {
+    [HtmlRawTagDataConsts.TagName]: { viewComponent: HtmlRawViewComponent }
+  }
+
+  static isViewDefined(item: InterfaceBlock, options: CrocoHtmlOptions) {
+
+    const tagName = item.tagName;
+
+    if (options.definedViewRenderers.hasOwnProperty(tagName)) {
+      return true;
+    }
+
+    return DefaultTags.tagRenderers.hasOwnProperty(item.tagName);
+  }
 
   static getTags(options: CrocoHtmlOptions): TagItem[] {
 

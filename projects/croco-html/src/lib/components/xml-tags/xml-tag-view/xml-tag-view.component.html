@@ -7,11 +7,6 @@
       <croco-html-xml-tag-text-view [item]="item"></croco-html-xml-tag-text-view>
     </div>
     }
-    @else if (item.tagName === 'html-raw') {
-    <div>
-      <croco-html-raw-view [rawHtml]="item.data.innerHTML"></croco-html-raw-view>
-    </div>
-    }
     @else if (isHeaderTextTag(item)) {
     <div>
       <croco-html-xml-tag-header-text-view [item]="item"></croco-html-xml-tag-header-text-view>
@@ -66,6 +61,12 @@
       <span>
         {{item.data.tagString}}
       </span>
+    </div>
+    }
+    @else if (isViewDefined(item)){
+      <div>
+      <croco-html-defined-custom-tag-view [data]="item"
+        [dataController]="dataController"></croco-html-defined-custom-tag-view>
     </div>
     }
     @else if (isDefinedCustomTag(item)) {

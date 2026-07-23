@@ -8,12 +8,12 @@ export class HtmlRawTagDataConsts {
   static readonly TagName = "html-raw";
 }
 
-export interface ExtractHtmlRawTag {
+export interface HtmlRawTag {
   type: string;
-  data: ExtractHtmlRawTagData;
+  data: HtmlRawTagData;
 }
 
-export interface ExtractHtmlRawTagData {
+export interface HtmlRawTagData {
   innerHTML: string;
 }
 

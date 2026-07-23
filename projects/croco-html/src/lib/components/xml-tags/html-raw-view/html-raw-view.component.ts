@@ -1,27 +1,32 @@
-import {Component, Input, OnChanges, Renderer2, SimpleChanges} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, OnChanges, Renderer2, SimpleChanges } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import {Router} from "@angular/router";
+import { Router } from "@angular/router";
+import { HtmlRawTagData } from '../../../tag-services';
+import { InterfaceBlock } from '../../../models';
 
-;
 
 @Component({
   selector: 'croco-html-raw-view',
   templateUrl: './html-raw-view.component.html',
-  standalone: true
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HtmlRawViewComponent implements OnChanges {
+export class HtmlRawViewComponent {
 
-  @Input() rawHtml = "";
+  private readonly _cdr = inject(ChangeDetectorRef)
 
-  safeHtml: SafeHtml;
+  @Input({ required: true }) set data(item: InterfaceBlock) {
+    const data = item.data as HtmlRawTagData;
 
-  constructor(private readonly _sanitizer: DomSanitizer, private readonly router: Router) { }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['rawHtml'] && changes['rawHtml'].currentValue !== changes['rawHtml'].previousValue) {
-      this.safeHtml = this._sanitizer.bypassSecurityTrustHtml(this.rawHtml);
-    }
+    this.safeHtml = this._sanitizer.bypassSecurityTrustHtml(data.innerHTML);
+    this._cdr.markForCheck();
   }
+
+  safeHtml: SafeHtml | null = null;
+
+  constructor(
+    private readonly _sanitizer: DomSanitizer, 
+    private readonly router: Router) { }
 
   handleLink(event: MouseEvent) {
     const target = (event.target as HTMLElement).closest('a');
