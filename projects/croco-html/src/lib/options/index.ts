@@ -1,5 +1,5 @@
 import { Type } from "@angular/core";
-import { IImageMediaRequest, FileImageTagData, TagItem } from "../models";
+import { IImageMediaRequest, FileImageTagData, TagItem, HtmlBodyTag } from "../models";
 import { VisualEditorComponent } from "../components";
 import { IMarkUpTagService } from "../tag-services";
 
@@ -55,6 +55,12 @@ export interface CrocoHtmlOptions {
    * Кастомные кнопки для добавления тега
    */
   editorCustomAddTagButtons?: TagItem[] | null | undefined;
+
+  /**
+   * Функция обратного вызова когда теги в редакторе перерасчитаны. 
+   * @returns 
+   */
+  onBodyTagsRecalculated?: (data: HtmlBodyTag[]) => void;
 }
 
 export interface ITagEditorViewRender {

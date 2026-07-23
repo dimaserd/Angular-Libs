@@ -189,6 +189,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   recalculateBodyTags() {
     this.bodyTags = BodyTagsExtensions.getBodyTags(this.html, this._options);
     this.saveBodyTags = [...this.bodyTags];
+    this._options.onBodyTagsRecalculated?.(this.saveBodyTags)
     this._cdr.markForCheck();
   }
 
