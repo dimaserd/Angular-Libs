@@ -86,11 +86,11 @@ export class MainEditorBlockComponent implements OnDestroy {
     this._tagService.presentOrEdit$.next(false);
   }
 
-  isDefinedCustomTag() {
+  isEditorDefined() {
 
     const tagName = this._tag.tagDescription.tag;
 
-    if (this._options.definedCustomTags.hasOwnProperty(tagName)) {
+    if (this._options.definedEditorViewRenderers.hasOwnProperty(tagName)) {
       return true;
     }
 
