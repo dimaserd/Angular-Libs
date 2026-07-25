@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, inject, Inject, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ImageMethods } from '../../extensions/ImageMethods';
 import { PublicFilesQueryService } from '../../services/PublicFilesQueryService';
 import { CrocoHtmlOptionsToken } from '../../consts';
@@ -23,10 +23,13 @@ export interface FileUnifiedModel {
   templateUrl: './file-id-select.component.html',
   styleUrls: ['./file-id-select.component.scss'],
   standalone: true,
-  imports: [NgSelectModule, FormsModule]
+  imports: [NgSelectModule, FormsModule],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FileIdSelectComponent implements OnInit, OnChanges {
 
+  private readonly _cdr = inject(ChangeDetectorRef);
+  
   q: string;
 
   @Input()
@@ -80,17 +83,23 @@ export class FileIdSelectComponent implements OnInit, OnChanges {
       q: this.q
     };
 
+    this._cdr.markForCheck();
+
     if (isPrivate) {
       this._privateFileService.search(searchParams)
         .subscribe(data => {
           this.files = data.list.map(el => ({ fileId: el.id, fileName: el.fileName }));
           this.loading = false;
+
+          this._cdr.markForCheck();
         });
     } else {
       this._publicFileService.search(searchParams)
         .subscribe(data => {
           this.files = data.list.map(el => ({ fileId: el.fileId.toString(), fileName: el.fileName }));
           this.loading = false;
+
+          this._cdr.markForCheck();
         })
     }
   }
@@ -98,6 +107,8 @@ export class FileIdSelectComponent implements OnInit, OnChanges {
   onSearchChanged(q: { term: string, items: object[] }) {
     this.q = q.term;
     this.loadFiles();
+
+    this._cdr.markForCheck();
   }
 
   ngOnChanges(changes: SimpleChanges) {

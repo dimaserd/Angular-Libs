@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, Input } from '@angular/core';
 import { HtmlBodyTag } from "../../../models/models";
 import { FormsModule } from "@angular/forms";
 import { MatFormField, MatLabel } from "@angular/material/form-field";
@@ -19,6 +19,8 @@ import { ButtonTagData } from '../../../tag-services/ButtonTagService';
   templateUrl: './button-editor.component.html'
 })
 export class ButtonEditorComponent {
+  private readonly _cdr = inject(ChangeDetectorRef);
+  
   @Input({ required: true })
   tag: HtmlBodyTag;
 
@@ -36,9 +38,13 @@ export class ButtonEditorComponent {
     this.tagData.type = data.type;
     this.tagData.text = data.text;
     this.tagData.click = data.click;
+
+    this._cdr.markForCheck();
   }
 
   linkChanged() {
     this.tag.attributes = this.tagData;
+
+    this._cdr.markForCheck();
   }
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { MatFormField, MatFormFieldModule } from "@angular/material/form-field";
 import { MatInput } from "@angular/material/input";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -9,6 +9,7 @@ import { DownloadButtonTagData } from '../../../tag-services/DownloadButtonTagSe
 @Component({
   selector: 'croco-html-download-file-button-editor',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     MatFormField,
     MatInput,
@@ -20,6 +21,8 @@ import { DownloadButtonTagData } from '../../../tag-services/DownloadButtonTagSe
   templateUrl: './download-file-button-editor.component.html'
 })
 export class DownloadFileButtonEditorComponent {
+
+  private readonly _cdr = inject(ChangeDetectorRef);
 
   @Input({required: true})
   tag: HtmlBodyTag;
@@ -36,9 +39,13 @@ export class DownloadFileButtonEditorComponent {
   ngOnInit(): void {
     this.tagData.link = (this.tag.attributes as DownloadButtonTagData).link;
     this.tagData.title = (this.tag.attributes as DownloadButtonTagData).title;
+
+    this._cdr.markForCheck();
   }
 
   linkChanged() {
     this.tag.attributes = this.tagData;
+
+    this._cdr.markForCheck();
   }
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, OnInit } from '@angular/core';
 import { HtmlBodyTag } from "../../../models/models";
 import { FormsModule } from "@angular/forms";
 import { MatFormField, MatLabel } from "@angular/material/form-field";
@@ -16,9 +16,12 @@ import { CustomWidgetTagData, CustomWidgetTagService } from '../../../tag-servic
     MatLabel,
     XmlTagCustomWidgetComponent,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './custom-widget-editor.component.html'
 })
 export class CustomWidgetEditorComponent implements OnInit {
+  private readonly _cdr = inject(ChangeDetectorRef);
+  
   @Input({ required: true })
   tag: HtmlBodyTag;
 
@@ -33,9 +36,11 @@ export class CustomWidgetEditorComponent implements OnInit {
 
   ngOnInit(): void {
     this.tagData = CustomWidgetTagService.ExtractCustomWidgetTagData(this.tag.attributes);
+    this._cdr.markForCheck();
   }
 
   dataChanged() {
     this.tag.attributes = CustomWidgetTagService.ExtractCustomWidgetAttributes(this.tagData);
+    this._cdr.markForCheck();
   }
 }

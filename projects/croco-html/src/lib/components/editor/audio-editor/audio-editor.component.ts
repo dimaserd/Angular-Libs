@@ -5,6 +5,9 @@ import {
   OnInit,
   ViewChild,
   ElementRef,
+  ChangeDetectionStrategy,
+  inject,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { AudioMethods, FileAudioTagDataConsts } from '../../../extensions/AudioMethods';
 import { HtmlBodyTag } from '../../../models/models';
@@ -20,7 +23,7 @@ import { CrocoHtmlFileOptionsService } from '../../../services/CrocoHtmlFileOpti
 import { FileType } from '../../../services/file-models';
 import { UploadFilesBtnComponent } from '../../upload-files-btn/upload-files-btn.component';
 import { NgSelectModule } from '@ng-select/ng-select';
-import {MatIconButton} from "@angular/material/button";
+import { MatIconButton } from "@angular/material/button";
 import { CommonFileInfoQueryService } from '../../../services/CommonFileInfoQueryService';
 
 @Component({
@@ -39,9 +42,12 @@ import { CommonFileInfoQueryService } from '../../../services/CommonFileInfoQuer
     UploadFilesBtnComponent,
     NgSelectModule,
     MatIconButton
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AudioEditorComponent implements OnInit, OnDestroy {
+
+  private readonly _cdr = inject(ChangeDetectorRef);
 
   hasAudioError = false;
   errorMessage = '';
@@ -107,23 +113,30 @@ export class AudioEditorComponent implements OnInit, OnDestroy {
     if (!this.errorMessage) {
       this.errorMessage = 'Аудио-файл не найден по указанному идентификатору, возможно файл не существует или отсутствует на сервере.';
     }
+    this._cdr.markForCheck();
   }
 
   removeAudioError() {
     this.hasAudioError = false;
     this.errorMessage = '';
+
+    this._cdr.markForCheck();
   }
 
   setError(message: string) {
     this.hasAudioError = true;
     this.errorMessage = message;
     this.isLoading = false;
+
+    this._cdr.markForCheck();
   }
 
   onFileIdChanged(fileId: string) {
     this.fileId = fileId;
     this.removeAudioError();
     this.checkAndLoadAudioFile();
+
+    this._cdr.markForCheck();
   }
 
   checkAndLoadAudioFile() {
@@ -136,6 +149,9 @@ export class AudioEditorComponent implements OnInit, OnDestroy {
     this.errorMessage = '';
 
     const fileIdValue = this.fileId;
+
+    this._cdr.markForCheck();
+
     this._commonFileInfoService.getInfo(fileIdValue)
       .pipe(takeUntil(this.unsubscribe))
       .subscribe({
@@ -171,6 +187,8 @@ export class AudioEditorComponent implements OnInit, OnDestroy {
     if (audio) {
       audio.load();
     }
+
+    this._cdr.markForCheck();
   }
 
   onLoadedMetadata() {
@@ -178,6 +196,8 @@ export class AudioEditorComponent implements OnInit, OnDestroy {
     if (audio) {
       this.duration = audio.duration;
       this.isLoading = false;
+
+      this._cdr.markForCheck();
     }
   }
 
@@ -187,20 +207,28 @@ export class AudioEditorComponent implements OnInit, OnDestroy {
       this.currentTime = audio.currentTime;
       this.duration = audio.duration;
     }
+
+    this._cdr.markForCheck();
   }
 
   onEnded() {
     this.isPlaying = false;
     this.currentTime = 0;
+
+    this._cdr.markForCheck();
   }
 
   onCanPlay() {
     this.isLoading = false;
+
+    this._cdr.markForCheck();
   }
 
   togglePlayPause() {
     const audio = this.audioElement;
-    if (!audio) return;
+    if (!audio) {
+      return;
+    }
 
     if (this.isPlaying) {
       audio.pause();
@@ -208,8 +236,10 @@ export class AudioEditorComponent implements OnInit, OnDestroy {
     } else {
       audio.play().then(() => {
         this.isPlaying = true;
+        this._cdr.markForCheck();
       }).catch(() => {
         this.hasAudioError = true;
+        this._cdr.markForCheck();
       });
     }
   }
@@ -219,6 +249,8 @@ export class AudioEditorComponent implements OnInit, OnDestroy {
     if (audio) {
       audio.currentTime = 0;
       this.currentTime = 0;
+
+      this._cdr.markForCheck();
     }
   }
 
@@ -226,6 +258,8 @@ export class AudioEditorComponent implements OnInit, OnDestroy {
     const audio = this.audioElement;
     if (audio) {
       audio.currentTime = Math.max(0, audio.currentTime - 10);
+
+      this._cdr.markForCheck();
     }
   }
 
@@ -233,6 +267,8 @@ export class AudioEditorComponent implements OnInit, OnDestroy {
     const audio = this.audioElement;
     if (audio) {
       audio.currentTime = Math.min(audio.duration, audio.currentTime + 10);
+
+      this._cdr.markForCheck();
     }
   }
 
@@ -245,11 +281,15 @@ export class AudioEditorComponent implements OnInit, OnDestroy {
       audio.volume = value;
     }
     this.isMuted = value === 0;
+
+    this._cdr.markForCheck();
   }
 
   toggleMute() {
     const audio = this.audioElement;
-    if (!audio) return;
+    if (!audio) {
+      return;
+    }
 
     if (this.isMuted) {
       audio.volume = this.volume;
@@ -258,6 +298,8 @@ export class AudioEditorComponent implements OnInit, OnDestroy {
       audio.volume = 0;
       this.isMuted = true;
     }
+
+    this._cdr.markForCheck();
   }
 
   onSeekChange(event: Event) {
@@ -267,6 +309,7 @@ export class AudioEditorComponent implements OnInit, OnDestroy {
     if (audio) {
       audio.currentTime = (value / 100) * audio.duration;
     }
+    this._cdr.markForCheck();
   }
 
   formatTime(seconds: number): string {
@@ -290,12 +333,15 @@ export class AudioEditorComponent implements OnInit, OnDestroy {
       q: this.q
     };
 
+    this._cdr.markForCheck();
+
     if (isPrivate) {
       this._privateFileService.search(searchParams)
         .pipe(takeUntil(this.unsubscribe))
         .subscribe(data => {
           this.files = data.list.map(el => ({ fileId: el.id, fileName: el.fileName }));
           this.loading = false;
+          this._cdr.markForCheck();
         });
     } else {
       this._publicFileService.search(searchParams)
@@ -303,6 +349,7 @@ export class AudioEditorComponent implements OnInit, OnDestroy {
         .subscribe(data => {
           this.files = data.list.map(el => ({ fileId: el.fileId.toString(), fileName: el.fileName }));
           this.loading = false;
+          this._cdr.markForCheck();
         });
     }
   }
@@ -310,6 +357,8 @@ export class AudioEditorComponent implements OnInit, OnDestroy {
   onSearchChanged(q: { term: string, items: object[] }) {
     this.q = q.term;
     this.loadFiles();
+
+    this._cdr.markForCheck();
   }
 
   onFileSelected(fileId: string) {
@@ -317,6 +366,8 @@ export class AudioEditorComponent implements OnInit, OnDestroy {
     if (selectedFile) {
       this.fileId = fileId;
       this.checkAndLoadAudioFile();
+
+      this._cdr.markForCheck();
     }
   }
 
@@ -326,6 +377,8 @@ export class AudioEditorComponent implements OnInit, OnDestroy {
       this.fileId = typeof firstFileId === 'number' ? firstFileId.toString() : firstFileId;
       this.loadFiles();
       this.checkAndLoadAudioFile();
+
+      this._cdr.markForCheck();
     }
   }
 
@@ -337,6 +390,8 @@ export class AudioEditorComponent implements OnInit, OnDestroy {
     this.currentTime = 0;
     this.duration = 0;
     this.removeAudioError();
+
+    this._cdr.markForCheck();
   }
 
   ngOnInit(): void {
@@ -350,6 +405,8 @@ export class AudioEditorComponent implements OnInit, OnDestroy {
     }
 
     this.loadFiles();
+
+    this._cdr.markForCheck();
   }
 
   ngOnDestroy(): void {
