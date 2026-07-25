@@ -53,6 +53,11 @@ export class DefaultTags {
   }
 
   static isEditorDefined(tag: HtmlBodyTag, options: CrocoHtmlOptions) {
+    
+    if (tag === null || tag === undefined) {
+      return false;
+    }
+
     const tagName = tag.tagDescription.tag;
 
     if (options.definedEditorViewRenderers.hasOwnProperty(tagName)) {

@@ -60,7 +60,7 @@ export class MainEditorBlockComponent implements OnDestroy {
       });
   }
 
-  public _tag: HtmlBodyTag;
+  public _tag: HtmlBodyTag | null = null;
   public _tagService: TagEditorService;
 
   public presentOrEdit = true;
@@ -86,6 +86,11 @@ export class MainEditorBlockComponent implements OnDestroy {
   }
 
   isEditorDefined() {
+
+    if (this.tag === null || this.tag === undefined) {
+      return false;
+    }
+
     return DefaultTags.isEditorDefined(this.tag, this._options);
   }
 
