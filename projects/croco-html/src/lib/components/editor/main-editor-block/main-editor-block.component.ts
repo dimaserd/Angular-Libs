@@ -86,16 +86,11 @@ export class MainEditorBlockComponent implements OnDestroy {
   }
 
   isEditorDefined() {
-
-    if (this.tag === null || this.tag === undefined) {
-      return false;
-    }
-
-    return DefaultTags.isEditorDefined(this.tag, this._options);
+    return DefaultTags.isEditorDefined(this._tag, this._options);
   }
 
   deleteItem() {
-    this.onTagRemoved.emit(this.tag);
+    this.onTagRemoved.emit(this._tag);
   }
 
   ngOnDestroy(): void {
