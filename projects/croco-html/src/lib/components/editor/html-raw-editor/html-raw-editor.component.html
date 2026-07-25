@@ -14,8 +14,8 @@
         <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
           cdkAutosizeMinRows="1"
           placeholder="Внутренняя разметка тега"
-          [(ngModel)]="tag.innerHtml"
-          (ngModelChange)="onSafeHtmlChange()"
+          [(ngModel)]="_tag.innerHtml"
+          (ngModelChange)="onHtmlChanged()"
         ></textarea>
       </mat-form-field>
     </div>

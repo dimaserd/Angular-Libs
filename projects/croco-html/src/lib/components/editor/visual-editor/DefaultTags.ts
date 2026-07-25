@@ -1,11 +1,13 @@
 import { ExternalVideoTagDataConsts, FileImageTagDataConsts, FileAudioTagDataConsts } from '../../../extensions';
 import { InterfaceBlock } from '../../../models';
-import { TagItem } from '../../../models/models';
-import { CrocoHtmlOptions, ITagViewViewRender } from '../../../options';
+import { HtmlBodyTag, TagItem } from '../../../models/models';
+import { CrocoHtmlOptions, ITagEditorViewRender, ITagViewViewRender } from '../../../options';
 import { DownloadButtonTagDataConsts, HtmlRawTagDataConsts } from '../../../tag-services';
 import { ButtonTagDataConsts } from '../../../tag-services/ButtonTagService';
 import { LinkTagConsts } from '../../../tag-services/LinkTagService';
 import { HtmlRawViewComponent } from '../../xml-tags';
+import { LinkEditorComponent } from '../link-editor/link-editor.component';
+import { HtmlRawEditorComponent } from '../html-raw-editor/html-raw-editor.component';
 
 export class DefaultTags {
 
@@ -34,6 +36,11 @@ export class DefaultTags {
     [HtmlRawTagDataConsts.TagName]: { viewComponent: HtmlRawViewComponent }
   }
 
+  static tagEditors: { [tagName: string]: ITagEditorViewRender } = {
+    [HtmlRawTagDataConsts.TagName]: { editorComponent: HtmlRawEditorComponent },
+    [LinkTagConsts.TagName]: { editorComponent: LinkEditorComponent }
+  }
+
   static isViewDefined(item: InterfaceBlock, options: CrocoHtmlOptions) {
 
     const tagName = item.tagName;
@@ -43,6 +50,34 @@ export class DefaultTags {
     }
 
     return DefaultTags.tagRenderers.hasOwnProperty(item.tagName);
+  }
+
+  static isEditorDefined(tag: HtmlBodyTag, options: CrocoHtmlOptions) {
+    const tagName = tag.tagDescription.tag;
+
+    if (options.definedEditorViewRenderers.hasOwnProperty(tagName)) {
+      return true;
+    }
+
+    if (DefaultTags.tagEditors.hasOwnProperty(tagName)){
+      return true;
+    }
+    
+    return false;
+  }
+
+  static getEditor(tag: HtmlBodyTag, options: CrocoHtmlOptions) {
+    const tagName = tag.tagDescription.tag;
+
+    if (options.definedEditorViewRenderers.hasOwnProperty(tagName)) {
+      return options.definedEditorViewRenderers[tagName].editorComponent;
+    }
+
+    if (DefaultTags.tagEditors.hasOwnProperty(tagName)){
+      return DefaultTags.tagEditors[tagName].editorComponent;
+    }
+
+    return null;
   }
 
   static getTags(options: CrocoHtmlOptions): TagItem[] {

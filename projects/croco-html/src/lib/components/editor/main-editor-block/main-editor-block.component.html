@@ -42,12 +42,6 @@
       </croco-html-button-editor>
     </div>
     }
-    @else if (_tag.tagDescription.tag === 'html-raw') {
-    <div>
-      <croco-html-html-raw-editor [presentOrEdit]="presentOrEdit" [tag]="_tag">
-      </croco-html-html-raw-editor>
-    </div>
-    }
     @else if (isEditorDefined()) {
     <div>
       <croco-html-defined-custom-editor-block [tagService]="_tagService"></croco-html-defined-custom-editor-block>

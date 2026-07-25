@@ -1,10 +1,12 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, Input } from '@angular/core';
 import { HtmlBodyTag } from '../../../models/models';
 import { FormsModule } from '@angular/forms';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { MatInput } from '@angular/material/input';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
+import { TagEditorService } from '../../../models';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'croco-html-html-raw-editor',
@@ -12,31 +14,52 @@ import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
   styleUrls: ['../external-video-editor/external-video-editor.component.scss'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [MatFormField, MatLabel, MatInput, CdkTextareaAutosize, FormsModule]
+  imports: [
+    MatFormField,
+    MatLabel,
+    MatInput,
+    CdkTextareaAutosize,
+    FormsModule
+  ]
 })
-export class HtmlRawEditorComponent implements OnChanges {
+export class HtmlRawEditorComponent {
 
   private readonly _cdr = inject(ChangeDetectorRef);
+  private readonly _destroyRef = inject(DestroyRef);
+  private readonly _sanitizer = inject(DomSanitizer);
+
+
+  public _data: HtmlBodyTag;
+  public _tagService: TagEditorService;
+
+  public presentOrEdit = true;
+  public safeHtml: SafeHtml | null = null;
+
+
+  _tag: HtmlBodyTag;
 
   @Input({ required: true })
-  tag: HtmlBodyTag;
+  set tagService(data: TagEditorService) {
+    this._tagService = data;
 
-  @Input({ required: true })
-  presentOrEdit = true;
+    this._tagService.tag$
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe(tag => {
+        this._tag = tag;
 
-  safeHtml: SafeHtml;
+        this.onHtmlChanged();
+      });
 
-  constructor(private readonly _sanitizer: DomSanitizer) { }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['tag'] && changes['tag'].currentValue !== changes['tag'].previousValue) {
-      this.safeHtml = this._sanitizer.bypassSecurityTrustHtml(this.tag.innerHtml);
-      this._cdr.markForCheck();
-    }
+    this._tagService.presentOrEdit$
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe(val => {
+        this.presentOrEdit = val;
+        this._cdr.markForCheck();
+      })
   }
 
-  onSafeHtmlChange(): void {
-    this.safeHtml = this._sanitizer.bypassSecurityTrustHtml(this.tag.innerHtml);
+  onHtmlChanged() {
+    this.safeHtml = this._sanitizer.bypassSecurityTrustHtml(this._tag.innerHtml);
     this._cdr.markForCheck();
   }
 }

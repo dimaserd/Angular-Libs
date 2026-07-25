@@ -2,7 +2,6 @@ import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, inj
 import { TextTags } from '../../../extensions/TextMethods';
 import { HtmlBodyTag } from '../../../models/models';
 import { MatIconButton } from '@angular/material/button';
-import { HtmlRawEditorComponent } from '../html-raw-editor/html-raw-editor.component';
 import { DownloadFileButtonEditorComponent } from '../download-file-button-editor/download-file-button-editor.component';
 import { ImageEditorComponent } from '../image-editor/image-editor.component';
 import { AudioEditorComponent } from '../audio-editor/audio-editor.component';
@@ -18,6 +17,7 @@ import { Subject, takeUntil } from 'rxjs';
 import {
   DefinedCustomEditorBlockComponent
 } from "./components/defined-custom-editor-block/defined-custom-editor-block.component";
+import { DefaultTags } from '../visual-editor/DefaultTags';
 
 @Component({
   selector: 'croco-html-main-editor-block',
@@ -30,7 +30,6 @@ import {
     ImageEditorComponent,
     AudioEditorComponent,
     DownloadFileButtonEditorComponent,
-    HtmlRawEditorComponent,
     MatIconButton,
     ExternalVideoEditorComponent,
     ButtonEditorComponent,
@@ -87,14 +86,7 @@ export class MainEditorBlockComponent implements OnDestroy {
   }
 
   isEditorDefined() {
-
-    const tagName = this._tag.tagDescription.tag;
-
-    if (this._options.definedEditorViewRenderers.hasOwnProperty(tagName)) {
-      return true;
-    }
-
-    return false;
+    return DefaultTags.isEditorDefined(this.tag, this._options);
   }
 
   deleteItem() {

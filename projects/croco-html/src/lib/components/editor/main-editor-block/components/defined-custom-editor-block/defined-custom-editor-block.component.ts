@@ -1,18 +1,21 @@
-import { Component, ComponentRef, Inject, Input, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ComponentRef, DestroyRef, inject, Inject, Input, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { HtmlBodyTag, TagEditorService } from '../../../../../models';
 import { CrocoHtmlOptions } from '../../../../../options';
 import { CrocoHtmlOptionsToken } from '../../../../../consts';
-import { Subject, takeUntil } from 'rxjs';
+import { DefaultTags } from '../../../visual-editor/DefaultTags';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'croco-html-defined-custom-editor-block',
   imports: [],
   templateUrl: './defined-custom-editor-block.component.html',
-  standalone: true
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DefinedCustomEditorBlockComponent implements OnInit, OnDestroy {
 
-  private unsubscribe = new Subject<void>();
+  private readonly _cdr = inject(ChangeDetectorRef);
+  private readonly _destroyRef = inject(DestroyRef);
 
   @ViewChild('container', { read: ViewContainerRef, static: true })
   viewContainerRef!: ViewContainerRef;
@@ -29,28 +32,21 @@ export class DefinedCustomEditorBlockComponent implements OnInit, OnDestroy {
     this._tagService = data;
 
     this._tagService.tag$
-      .pipe(takeUntil(this.unsubscribe))
+      .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe(tag => {
         this._tag = tag;
+        this._cdr.markForCheck();
       });
+    
+    this._cdr.markForCheck();
   }
 
   constructor(@Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions) {
   }
 
-  getCustomComponent() {
-    const tagName = this._tag.tagDescription.tag;
-
-    if (this._options.definedEditorViewRenderers.hasOwnProperty(tagName)) {
-      return this._options.definedEditorViewRenderers[tagName].editorComponent;
-    }
-
-    return null;
-  }
-
   ngOnInit(): void {
 
-    var component = this.getCustomComponent();
+    var component = DefaultTags.getEditor(this._tag, this._options);
 
     if (component) {
       this.useDynamicComponent = true;
@@ -59,13 +55,12 @@ export class DefinedCustomEditorBlockComponent implements OnInit, OnDestroy {
 
       this.dynamicContainerRef.setInput("tagService", this._tagService);
     }
+
+    this._cdr.markForCheck();
   }
 
   ngOnDestroy(): void {
     this.dynamicContainerRef.destroy();
-
-    this.unsubscribe.next();
-    this.unsubscribe.complete();
   }
 }
 

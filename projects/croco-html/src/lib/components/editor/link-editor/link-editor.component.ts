@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, Input } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { HtmlBodyTag, TagEditorService } from 'croco-html';
-import { LinkTagAttrs, LinkTagData } from 'croco-html';
 import { MatInputModule } from "@angular/material/input";
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { LinkTagAttrs, LinkTagData } from '../../../tag-services';
+import { HtmlBodyTag, TagEditorService } from '../../../models';
 
 @Component({
   selector: 'croco-html-file-link-editor',
