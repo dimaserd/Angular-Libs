@@ -1,6 +1,7 @@
 import { HtmlBodyTag, InterfaceBlock } from "../models"
 import { CrocoHtmlOptions } from "../options"
 import { IMarkUpTagService, IVisualEditorProps } from "./IMarkUpTagService"
+import { TagBuildExtensions } from "./TagBuildExtensions"
 
 export class LinkTagConsts {
   static readonly TagName = "croco-link"
@@ -30,21 +31,11 @@ export class LinkTagService implements IMarkUpTagService {
 
   bodyTagToHtmlStringConverter(bodyTag: HtmlBodyTag): string {
 
-    const urlVal = bodyTag.attributes[LinkTagAttrs.Url] ?? "";
-
-    const urlValStr = `${LinkTagAttrs.Url}="${urlVal}"`;
-
-    const titleVal = bodyTag.attributes[LinkTagAttrs.Title] ?? "";
-
-    const titleValStr = `${LinkTagAttrs.Title}="${titleVal}"`;
-
-    const typeVal = bodyTag.attributes[LinkTagAttrs.Type] ?? "";
-
-    const typeValStr = typeVal.length > 0 ? `${LinkTagAttrs.Type}="${typeVal}"` : "";
-
-    const attrStr = [urlValStr, titleValStr, typeValStr].join(" ");
-
-    return `<${this.tagName} ${attrStr}></${this.tagName}>`;
+    return TagBuildExtensions.buildTagString(bodyTag, {
+      [LinkTagAttrs.Url]: { defaultValue: "" },
+      [LinkTagAttrs.Title]: { defaultValue: "" },
+      [LinkTagAttrs.Type]: { defaultValue: null }
+    })
   }
 
   extractBlockFromHtmlElement(elem: HTMLElement, _: CrocoHtmlOptions): InterfaceBlock {
@@ -100,3 +91,4 @@ export class LinkTagService implements IMarkUpTagService {
     };
   }
 }
+
