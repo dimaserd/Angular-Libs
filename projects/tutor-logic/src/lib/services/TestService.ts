@@ -8,12 +8,12 @@ import { SearchTestsRequest, CreateTestRequest, EditTestRequest } from "../model
 @Injectable({
     providedIn: 'root',
 })
-export class TestsService {
+export class TestService {
     baseControllerUrl:string;
     
     constructor(private readonly _httpClient: HttpClient,
         @Inject('BASE_URL') baseUrl: string){
-        const adding = 'api/tutor/tests';
+        const adding = 'api/tutor/test';
         this.baseControllerUrl = baseUrl + adding;
     }
 

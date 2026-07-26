@@ -1,4 +1,4 @@
-export { TestsService } from './TestsService'
+export { TestService } from './TestService'
 export { StudentGroupQueryService } from './StudentGroupQueryService'
 export { StudentQueryService } from './StudentQueryService'
 export { StudentGroupEnterService } from './StudentGroupEnterService'
