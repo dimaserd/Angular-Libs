@@ -23,7 +23,7 @@ export class TagBuildExtensions {
     });
 
     const attrStr = attrValStrs.length > 0
-      ? " " + [attrValStrs].join(" ")
+      ? " " + attrValStrs.join(" ")
       : "";
 
     return `<${tagName}${attrStr}></${tagName}>`;
