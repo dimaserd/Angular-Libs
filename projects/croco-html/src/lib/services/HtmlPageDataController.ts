@@ -2,29 +2,28 @@
  * Сервис для прокидывания предрасчитанных данных для виджетов Html разметки.
  * Используется для оптимизации Http запросов за данными.
  */
-
 export class HtmlPageDataController {
 
-    data: object | null = null;
+    public readonly _data = new Map<string, object>();
 
     /**
      * Получить данные.
      * @returns
      */
-    get<T>(): T | null {
+    get<T>(name: string): T | null {
 
-        if (!this.data) {
+        if (!this._data.has(name)) {
             return null;
         }
 
-        return this.data as T;
+        return this._data.get(name) as T;
     }
 
     /**
      * Установить данные.
      * @param data
      */
-    set(data: object) {
-        this.data = data;
+    set(name: string, data: object) {
+        this._data.set(name, data);
     }
 }
