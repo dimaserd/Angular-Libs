@@ -21,13 +21,16 @@ export interface SearchStudentThemeItemTestRestrictionsRequest {
 export interface ThemeItemTestStudentRestrictionModel {
     restriction: TestRestrictionModel;
     isIndividual: boolean;
+    testId: string;
+    testName: string;
     student: StudentSimpleModel;
 }
 
 export interface CourseItemStudentTestRestrictionModel {
     courseThemeItemId: string;
-    isIndividual: boolean;
     studentId: string;
+    testId: string;
+    isIndividual: boolean;
     testRestriction: TestRestrictionModel;
 }
 
@@ -47,6 +50,7 @@ export enum TestRestrictionValidationResultRuleType {
 
 export interface GetCourseThemeItemStudentTestRestrictionRequest {
     courseThemeItemId: string;
+    testId: string;
     studentId: string;
 }
 

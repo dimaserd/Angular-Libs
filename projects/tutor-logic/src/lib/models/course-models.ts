@@ -1,6 +1,7 @@
 export interface CourseDetailedModel {
     id: string;
     name: string;
+    schoolId: string;
     templateId: string;
     weight: number;
     versionId: string;
@@ -29,13 +30,13 @@ export interface CourseThemeItemModel {
     id: string;
     name: string;
     html: string;
-    type: CourseThemeItemType;
     weight: number;
     templateItemId: string;
-    test: CourseThemeItemTestModel;
     userInterfaceSettings: CourseThemeItemUISettingsModel;
     computedThemeProgress: ProgressModel;
+    tests: Array<CourseThemeItemTestModel>;
 }
+
 
 export interface ProgressModel {
     weight: number;
@@ -45,11 +46,6 @@ export interface ProgressModel {
 export interface CourseThemeItemUISettingsModel {
     previousSlideBtnText: string;
     nextSlideBtnText: string;
-}
-
-export enum CourseThemeItemType {
-    JustHtml = 'JustHtml',
-    Test = 'Test'
 }
 
 export interface CourseThemeItemTestModel {
