@@ -1,11 +1,11 @@
 import { TestRestrictionValidationWithDeadLineWarningResult } from "./test-restriction-models";
 
 export interface StudentCourseItemTestSolution {
-    solutionId: string; 
-    startedOnUtc: string; 
-    isFinished: boolean; 
-    validation: StudentCourseItemTestSolutionValidationModel; 
-    totalPointsToPass: number; 
+    solutionId: string;
+    startedOnUtc: string;
+    isFinished: boolean;
+    validation: StudentCourseItemTestSolutionValidationModel;
+    totalPointsToPass: number;
 }
 
 export interface StudentCourseItemTestSolutionValidationModel {
@@ -14,7 +14,8 @@ export interface StudentCourseItemTestSolutionValidationModel {
     pointsPercentage: number;
 }
 
-export interface CourseThemeSolutionsWithTestRestrictionsViewModel {
-    solutions: Array<StudentCourseItemTestSolution>; 
-    restrictionResult: TestRestrictionValidationWithDeadLineWarningResult; 
+export interface CourseThemeItemsTestSolutionsRestrictionsModel {
+    testId: string;
+    solutions: StudentCourseItemTestSolution[];
+    restrictionResult: TestRestrictionValidationWithDeadLineWarningResult;
 }
