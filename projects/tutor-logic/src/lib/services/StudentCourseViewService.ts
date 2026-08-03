@@ -32,6 +32,6 @@ export class StudentCourseViewService {
 
         const paramsStr = `courseId=${courseId}&studentProgressId=${studentProgressId}&themeItemId=${themeItemId}&solutionsCount=${solutionsCount}`;``
 
-        return this._httpClient.get<CourseThemeItemsTestSolutionsRestrictionsModel[]>(`${this.baseControllerUrl}/load-theme-solutions-and-restriction?${paramsStr}`);
+        return this._httpClient.get<CourseThemeItemsTestSolutionsRestrictionsModel[]>(`${this.baseControllerUrl}/load-theme-item-solutions-and-restriction?${paramsStr}`);
     }
 }
