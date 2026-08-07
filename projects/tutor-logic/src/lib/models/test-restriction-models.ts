@@ -2,6 +2,7 @@ import { StudentSimpleModel } from "./student-models";
 
 export interface CourseItemGlobalTestRestrictionModel {
     courseThemeItemId: string;
+    testId: string;
     testRestriction: TestRestrictionModel;
 }
 
