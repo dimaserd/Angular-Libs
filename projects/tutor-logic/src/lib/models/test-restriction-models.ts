@@ -14,6 +14,7 @@ export interface TestRestrictionModel {
 export interface SearchStudentThemeItemTestRestrictionsRequest {
     q: string;
     courseThemeItemId: string;
+    testId: string;
     isIndividual: boolean | null;
     count: number | null;
     offSet: number;

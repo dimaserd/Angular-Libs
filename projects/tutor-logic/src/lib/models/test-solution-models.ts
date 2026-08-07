@@ -1,4 +1,3 @@
-import { CourseThemeItemModel } from "./course-models";
 import { TestQuestionModel, TestQuestionType } from "./question-models";
 import { QuestionValidationSourceType } from "./solution-validation-models";
 import { StudentSimpleModel } from "./student-models";
@@ -21,7 +20,6 @@ export interface TestSolutionCourseData {
     courseThemeName: string;
     courseName: string;
     courseId: string;
-    nextItem: CourseThemeItemModel;
 }
 
 export interface SolutionWithAnswerModel {

@@ -4,7 +4,7 @@ export interface TestSolutionWithPointsValidation {
     solutionId: string;
     isFinished: boolean;
     hasPointsResult: boolean;
-    questions: Array<QuestionAnswerWithResult>;
+    questions: QuestionAnswerWithResult[];
     studentTotalPoints: number;
     maxTotalPoints: number;
     questionsCount: number;
@@ -21,7 +21,7 @@ export enum QuestionValidationSourceType {
 
 export interface TestQuestionWithModifiers {
     questionId: string;
-    modifiers: Array<TestQuestionModiferModel>;
+    modifiers: TestQuestionModiferModel[];
 }
 
 export interface TestQuestionModiferModel {
