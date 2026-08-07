@@ -20,6 +20,7 @@ export interface TestSolutionCourseData {
     courseThemeName: string;
     courseName: string;
     courseId: string;
+    testId: string;
 }
 
 export interface SolutionWithAnswerModel {
