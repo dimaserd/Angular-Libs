@@ -20,6 +20,7 @@ export interface UpdateStudentCourseThemeProgressRequest {
 export interface StartCourseThemeItemTestRequest {
     studentProgressId: string;
     itemId: string;
+    testId: string;
 }
 
 export interface StartCourseThemeItemTestResult {
