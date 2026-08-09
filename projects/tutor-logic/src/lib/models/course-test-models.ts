@@ -16,6 +16,8 @@ export interface StudentCourseItemTestSolutionValidationModel {
 
 export interface CourseThemeItemsTestSolutionsRestrictionsModel {
     testId: string;
+    testName: string;
+    finished: boolean;
     solutions: StudentCourseItemTestSolution[];
     restrictionResult: TestRestrictionValidationWithDeadLineWarningResult;
 }
