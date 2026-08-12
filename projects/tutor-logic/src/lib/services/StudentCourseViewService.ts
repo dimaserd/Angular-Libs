@@ -26,11 +26,12 @@ export class StudentCourseViewService {
      * @param studentProgressId - идентификатор прогресса ученика
      * @param themeItemId - идентификатор блока тема внутри курса
      * @param solutionsCount - количество решений тестов
+     * @param key - ключ для сброса кеширования
      * @returns 
      */
-    public loadThemeItemSolutionsAndTestRestriction(courseId: string, studentProgressId: string, themeItemId: string, solutionsCount: number): Observable<CourseThemeItemsTestSolutionsRestrictionsModel[]> {
+    public loadThemeItemSolutionsAndTestRestriction(courseId: string, studentProgressId: string, themeItemId: string, solutionsCount: number, key: string): Observable<CourseThemeItemsTestSolutionsRestrictionsModel[]> {
 
-        const paramsStr = `courseId=${courseId}&studentProgressId=${studentProgressId}&themeItemId=${themeItemId}&solutionsCount=${solutionsCount}`;``
+        const paramsStr = `courseId=${courseId}&studentProgressId=${studentProgressId}&themeItemId=${themeItemId}&solutionsCount=${solutionsCount}&key=${key}`;``
 
         return this._httpClient.get<CourseThemeItemsTestSolutionsRestrictionsModel[]>(`${this.baseControllerUrl}/load-theme-item-solutions-and-restriction?${paramsStr}`);
     }
