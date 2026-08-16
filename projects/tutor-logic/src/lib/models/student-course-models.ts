@@ -1,3 +1,4 @@
+import { BaseApiResponse } from "./models";
 import { StudentSimpleModel } from "./student-models";
 
 export interface StartCourseThemeRequest {
@@ -5,11 +6,12 @@ export interface StartCourseThemeRequest {
 }
 
 export interface UpdateStudentCourseThemeProgressRequest {
-	 studentProgressId: string; 
-	 themeId: string; 
-	 currentItemIndex: number; 
-	 currentProgress: number; 
-	 finishThemeItemId: string; 
+    studentProgressId: string;
+    themeId: string;
+    currentItemIndex: number;
+    currentProgress: number;
+    finishThemeItemId: string | null;
+    returnProgress: boolean;
 }
 
 export interface StartCourseThemeItemTestRequest {
@@ -28,13 +30,14 @@ export interface FinishStudentCourseThemeProgressRequest {
     studentProgressId: string;
     themeId: string;
     finishThemeItemId: string | null;
+    returnProgress: boolean;
 }
 
 export interface UpdateStudentCourseThemeProgressResult {
     succeeded: boolean;
     errorMessage: string;
-    finishedThemeItemIds: string[];
-    progress: StudentCourseProgressModel;
+    finishedThemeItemResponse: BaseApiResponse | null;
+    progress: StudentCourseProgressModel | null;
 }
 
 export interface StudentCourseProgressModel {
