@@ -2,6 +2,7 @@ import { StudentSimpleModel } from "./student-models";
 
 export interface CourseItemGlobalTestRestrictionModel {
     courseThemeItemId: string;
+    testId: string;
     testRestriction: TestRestrictionModel;
 }
 
@@ -13,6 +14,7 @@ export interface TestRestrictionModel {
 export interface SearchStudentThemeItemTestRestrictionsRequest {
     q: string;
     courseThemeItemId: string;
+    testId: string;
     isIndividual: boolean | null;
     count: number | null;
     offSet: number;
@@ -21,13 +23,16 @@ export interface SearchStudentThemeItemTestRestrictionsRequest {
 export interface ThemeItemTestStudentRestrictionModel {
     restriction: TestRestrictionModel;
     isIndividual: boolean;
+    testId: string;
+    testName: string;
     student: StudentSimpleModel;
 }
 
 export interface CourseItemStudentTestRestrictionModel {
     courseThemeItemId: string;
-    isIndividual: boolean;
     studentId: string;
+    testId: string;
+    isIndividual: boolean;
     testRestriction: TestRestrictionModel;
 }
 
@@ -47,6 +52,7 @@ export enum TestRestrictionValidationResultRuleType {
 
 export interface GetCourseThemeItemStudentTestRestrictionRequest {
     courseThemeItemId: string;
+    testId: string;
     studentId: string;
 }
 

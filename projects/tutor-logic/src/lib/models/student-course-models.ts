@@ -4,22 +4,18 @@ export interface StartCourseThemeRequest {
     themeProgressId: string;
 }
 
-export interface SetCourseThemeItemAsFinishedRequest {
-    courseId: string;
-    themeItemIds: Array<string>;
-}
-
 export interface UpdateStudentCourseThemeProgressRequest {
-    studentProgressId: string;
-    themeId: string;
-    currentItemIndex: number;
-    currentProgress: number;
-    logBlocksRequest: SetCourseThemeItemAsFinishedRequest;
+	 studentProgressId: string; 
+	 themeId: string; 
+	 currentItemIndex: number; 
+	 currentProgress: number; 
+	 finishThemeItemId: string; 
 }
 
 export interface StartCourseThemeItemTestRequest {
     studentProgressId: string;
     itemId: string;
+    testId: string;
 }
 
 export interface StartCourseThemeItemTestResult {
@@ -31,12 +27,7 @@ export interface StartCourseThemeItemTestResult {
 export interface FinishStudentCourseThemeProgressRequest {
     studentProgressId: string;
     themeId: string;
-    logBlocksRequest: SetCourseThemeItemAsFinishedRequest;
-}
-
-export interface ThemeItemFinishedLogModel {
-    themeItemId: string;
-    loggedOnUtc: string;
+    finishThemeItemId: string | null;
 }
 
 export interface UpdateStudentCourseThemeProgressResult {
@@ -54,9 +45,8 @@ export interface StudentCourseProgressModel {
     courseTotalWeight: number;
     currentThemeIndex: number;
     currentProgressPercents: number;
-    themes: Array<StudentCourseThemeProgressModel>;
-    lastTheme: StudentCourseThemeProgressModel;
-    logs: Array<ThemeItemFinishedLogModel>;
+    themes: StudentCourseThemeProgressModel[];
+    lastTheme: StudentCourseThemeProgressModel | null;
 }
 
 export interface StudentCourseThemeProgressModel {
@@ -71,6 +61,13 @@ export interface StudentCourseThemeProgressModel {
     isFinished: boolean;
     finishedOnUtc: string;
     updatedOnUtc: string;
+    items: StudentCourseThemeProgressItemModel[];
+}
+
+
+export interface StudentCourseThemeProgressItemModel {
+    id: string;
+    isFinished: boolean;
 }
 
 export interface SearchCourseProgressesRequest {

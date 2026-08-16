@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Inject } from "@angular/core";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { CourseThemeSolutionsWithTestRestrictionsViewModel } from "../models";
+import { CourseThemeItemsTestSolutionsRestrictionsModel } from "../models";
 
 /**
  * Предоставляет методы контроллера Tutor.Api.Controllers.Courses.StudentCourseViewController
@@ -17,16 +17,22 @@ export class StudentCourseViewService {
 
     constructor(private readonly _httpClient: HttpClient,
         @Inject('BASE_URL') baseUrl: string) {
-        this.baseControllerUrl = baseUrl + 'api/tutor/student-course-view/';
+        this.baseControllerUrl = `${baseUrl}api/tutor/student-course-view`;
     }
 
     /**
-     * 
-     * @param studentProgressId Запрос для получения решений тестов по блоку в теме курса и ограничения по количеству попыток и дедлайну. Метод кешируется на 30 секунд. 
-     * @param themeItemId 
+     * Запрос для получения решений тестов по блоку в теме курса и ограничения по количеству попыток и дедлайну. Метод кешируется на 30 секунд. 
+     * @param courseId - идентификатор курса
+     * @param studentProgressId - идентификатор прогресса ученика
+     * @param themeItemId - идентификатор блока тема внутри курса
+     * @param solutionsCount - количество решений тестов
+     * @param key - ключ для сброса кеширования
      * @returns 
      */
-    public loadThemeSolutionsAndTestRestriction(studentProgressId: string, themeItemId: string): Observable<CourseThemeSolutionsWithTestRestrictionsViewModel> {
-        return this._httpClient.get<CourseThemeSolutionsWithTestRestrictionsViewModel>(this.baseControllerUrl + `load-theme-solutions-and-restriction?studentProgressId=${studentProgressId}&themeItemId=${themeItemId}`);
+    public loadThemeItemSolutionsAndTestRestriction(courseId: string, studentProgressId: string, themeItemId: string, solutionsCount: number, key: string): Observable<CourseThemeItemsTestSolutionsRestrictionsModel[]> {
+
+        const paramsStr = `courseId=${courseId}&studentProgressId=${studentProgressId}&themeItemId=${themeItemId}&solutionsCount=${solutionsCount}&key=${key}`;``
+
+        return this._httpClient.get<CourseThemeItemsTestSolutionsRestrictionsModel[]>(`${this.baseControllerUrl}/load-theme-item-solutions-and-restriction?${paramsStr}`);
     }
 }

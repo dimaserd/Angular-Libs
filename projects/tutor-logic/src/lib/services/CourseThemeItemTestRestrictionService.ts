@@ -21,7 +21,7 @@ export class CourseThemeItemTestRestrictionService {
         private readonly _http: HttpClient,
         @Inject('BASE_URL') baseUrl: string
     ) {
-        this.baseControllerUrl = baseUrl + 'api/tutor/course-theme-item/test-restriction';
+        this.baseControllerUrl = `${baseUrl}api/tutor/course-theme-item/test-restriction`;
     }
 
     setGlobal(model: CourseItemGlobalTestRestrictionModel) {
