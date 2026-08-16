@@ -9,7 +9,6 @@ export interface UpdateStudentCourseThemeProgressRequest {
     studentProgressId: string;
     themeId: string;
     currentItemIndex: number;
-    currentProgress: number;
     finishThemeItemId: string | null;
 }
 
@@ -34,6 +33,8 @@ export interface FinishStudentCourseThemeProgressRequest {
 export interface UpdateStudentCourseThemeProgressResult {
     succeeded: boolean;
     errorMessage: string;
+    themeProgress: number;
+    themeFinished: boolean;
     finishedThemeItemResponse: BaseApiResponse | null;
 }
 
