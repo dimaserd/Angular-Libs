@@ -8,7 +8,7 @@ export interface StartCourseThemeRequest {
 export interface UpdateStudentCourseThemeProgressRequest {
     studentProgressId: string;
     themeId: string;
-    currentItemIndex: number;
+    currentItemIndex: number | null;
     finishThemeItemId: string | null;
 }
 
