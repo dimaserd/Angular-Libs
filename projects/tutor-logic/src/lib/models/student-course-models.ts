@@ -11,7 +11,6 @@ export interface UpdateStudentCourseThemeProgressRequest {
     currentItemIndex: number;
     currentProgress: number;
     finishThemeItemId: string | null;
-    returnProgress: boolean;
 }
 
 export interface StartCourseThemeItemTestRequest {
@@ -30,14 +29,12 @@ export interface FinishStudentCourseThemeProgressRequest {
     studentProgressId: string;
     themeId: string;
     finishThemeItemId: string | null;
-    returnProgress: boolean;
 }
 
 export interface UpdateStudentCourseThemeProgressResult {
     succeeded: boolean;
     errorMessage: string;
     finishedThemeItemResponse: BaseApiResponse | null;
-    progress: StudentCourseProgressModel | null;
 }
 
 export interface StudentCourseProgressModel {
@@ -49,7 +46,7 @@ export interface StudentCourseProgressModel {
     currentThemeIndex: number;
     currentProgressPercents: number;
     themes: StudentCourseThemeProgressModel[];
-    lastTheme: StudentCourseThemeProgressModel | null;
+    lastThemeId: string | null;
 }
 
 export interface StudentCourseThemeProgressModel {
