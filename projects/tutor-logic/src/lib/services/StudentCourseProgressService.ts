@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { BaseApiResponse } from '../models';
-import { FinishStudentCourseThemeProgressRequest, StartCourseThemeItemTestRequest, StartCourseThemeItemTestResult, StartCourseThemeRequest, UpdateStudentCourseThemeProgressRequest, UpdateStudentCourseThemeProgressResult } from '../models/student-course-models';
+import { StartCourseThemeItemTestRequest, StartCourseThemeItemTestResult, StartCourseThemeRequest, UpdateStudentCourseThemeProgressRequest, UpdateStudentCourseThemeProgressResult } from '../models/student-course-models';
 
 /**
- * Сервис для прохождения курса студентом
+ * Сервис для прохождения курса учеником.
  */
 @Injectable({
   providedIn: 'root',
@@ -25,10 +25,6 @@ export class StudentCourseProgressService {
 
   updateThemeProgress(model: UpdateStudentCourseThemeProgressRequest) {
     return this._httpClient.post<UpdateStudentCourseThemeProgressResult>(`${this.baseControllerUrl}/theme/update`, model);
-  }
-
-  finishTheme(model: FinishStudentCourseThemeProgressRequest) {
-    return this._httpClient.post<UpdateStudentCourseThemeProgressResult>(`${this.baseControllerUrl}/theme/finish`, model);
   }
 
   startTestForItemBlock(model: StartCourseThemeItemTestRequest) {

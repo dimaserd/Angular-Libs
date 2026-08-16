@@ -24,12 +24,6 @@ export interface StartCourseThemeItemTestResult {
     errorMessage: string;
 }
 
-export interface FinishStudentCourseThemeProgressRequest {
-    studentProgressId: string;
-    themeId: string;
-    finishThemeItemId: string | null;
-}
-
 export interface UpdateStudentCourseThemeProgressResult {
     succeeded: boolean;
     errorMessage: string;
