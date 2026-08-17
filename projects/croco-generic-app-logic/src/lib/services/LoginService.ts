@@ -9,12 +9,12 @@ import { CurrentLoginData, LoginModel, LoginResultModel, LoginByEmailOrPhoneNumb
   providedIn: 'root',
 })
 export class LoginService {
-  private loginData$ = new BehaviorSubject<CurrentLoginData>(null);
+  private readonly loginDataInternal$ = new BehaviorSubject<CurrentLoginData>(null);
 
   private hasRequestToLoginDataRequest$ = new BehaviorSubject<boolean>(false);
 
   // Отрабатываю только изменения, а не null который является значением по-умолчанию.
-  private loginDataCached$ = this.loginData$.pipe(filter(data => data !== null && data !== undefined));
+  private readonly loginDataCached$ = this.loginDataInternal$.pipe(filter(data => data !== null && data !== undefined));
 
   constructor(
     private readonly _httpClient: HttpClient,
@@ -23,7 +23,7 @@ export class LoginService {
   }
 
   clearLoginDataCacheAndGetLoginData() {
-    this.loginData$.next(null);
+    this.loginDataInternal$.next(null);
     this.getLoginData().subscribe();
   }
 
@@ -71,29 +71,28 @@ export class LoginService {
 
   public getLoginData(): Observable<CurrentLoginData> {
     return this.getLoginDataApi().pipe(tap(data => {
-      this.loginData$.next(data);
+      this.loginDataInternal$.next(data);
     }));
   }
 
+  /**
+   * Подписаться на изменение авторизации пользователя.
+   * @returns
+   */
   getLoginDataCached(): Observable<CurrentLoginData> {
 
     const hasRequestForLoginData = this.hasRequestToLoginDataRequest$.getValue()
     
     if (!hasRequestForLoginData) {
       
-      const requestId = this.getUniqueRequestId();
       this.hasRequestToLoginDataRequest$.next(true);
-      this.executeLatestLoginDataRequest(requestId);
+      this.executeLatestLoginDataRequest();
     }
 
     return this.loginDataCached$;
   }
 
-  getUniqueRequestId(): string {
-    return `Date:${new Date().getTime().toString()}+Hash:${Math.random().toString(16).slice(2)}`
-  }
-
-  private executeLatestLoginDataRequest(requestId: string):void {
+  private executeLatestLoginDataRequest():void {
     this.getLoginData().subscribe();
   }
 
