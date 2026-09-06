@@ -11,7 +11,11 @@ export class TagBuildExtensions {
     Object.keys(attrs).forEach(attributeName => {
       const attrDescription = attrs[attributeName];
 
-      const attrVal = bodyTag.attributes[attributeName] ?? attrDescription.defaultValue;
+      let attrVal = bodyTag.attributes[attributeName];
+
+      if (attrVal === undefined) {
+        attrVal = attrDescription.defaultValue;
+      }
 
       const attrValStr = (attrVal === undefined || attrVal === null)
         ? null
