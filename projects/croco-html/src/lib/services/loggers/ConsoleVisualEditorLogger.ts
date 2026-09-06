@@ -3,7 +3,9 @@ import { IVisualEditorLogger } from "./IVisualEditorLogger";
 
 export class ConsoleVisualEditorLogger implements IVisualEditorLogger {
   onAdd(tag: HtmlBodyTag): void {
-    console.log("onAdd", tag);
+    const tagCopy = JSON.parse(JSON.stringify(tag));
+    
+    console.log("onAdd", tagCopy);
   }
 
   onChange(tag: HtmlBodyTag, index: number): void {
