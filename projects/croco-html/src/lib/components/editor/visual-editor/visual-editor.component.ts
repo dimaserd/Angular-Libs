@@ -45,6 +45,8 @@ import { HtmlRawTagDataConsts, TextAlignment, TextTagDataConsts } from '../../..
 import { CustomWidgetIconComponent } from "./components/custom-widget-icon/custom-widget-icon.component";
 import { FileImageTagDataConsts } from '../../../extensions';
 import { UploadFilesBtnComponent } from '../../upload-files-btn/upload-files-btn.component';
+import { IVisualEditorLogger } from '../../../services/loggers/IVisualEditorLogger';
+import { NullVisualEditorLogger } from '../../../services/loggers/NullVisualEditorLogger';
 
 @Component({
   selector: 'croco-visual-editor',
@@ -95,6 +97,9 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
 
   @Input()
   showMarkUp = true;
+
+  @Input({required: false})
+  logger: IVisualEditorLogger = new NullVisualEditorLogger();
 
   tags: TagItem[] = [];
   videoPlayers = ExternalVideoPlayers
@@ -165,11 +170,15 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   addTag(tag: HtmlBodyTag) {
     this.bodyTags.push(tag);
     this.recalculateHtml();
+
+    this.logger.onAdd(tag);
   }
 
   onTagChangedHandler(data: HtmlBodyTag, index: number) {
     this.bodyTags[index] = data;
     this.recalculateHtml();
+
+    this.logger.onChange(data, index);
   }
 
   onTagRemovedHandler(index: number) {
