@@ -4,11 +4,11 @@ import { IVisualEditorLogger } from "./IVisualEditorLogger";
 
 export class NullVisualEditorLogger implements IVisualEditorLogger {
 
-  onAdd(tag: HtmlBodyTag): void {
+  onAdd(_: HtmlBodyTag): void {
   }
-  onChange(tag: HtmlBodyTag, index: number): void {
+  onChange(_: HtmlBodyTag, _2: number): void {
   }
 
-  onRemove(index: number): void {
+  onRemove(_: number): void {
   }
 }
