@@ -8,7 +8,7 @@
 
     <div style="height: 20px;"></div>
 
-    <croco-visual-editor #visualEditor [useHtmlRaw]="true" [html]="html" (onHtmlChanged)="onHtmlChangedHandler($event)"
+    <croco-visual-editor #visualEditor [useHtmlRaw]="true" [logger]="logger" [html]="html" (onHtmlChanged)="onHtmlChangedHandler($event)"
       (rendered)="visualEditorRenderedHandler()">
     </croco-visual-editor>
   </mat-tab>

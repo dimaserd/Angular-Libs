@@ -30,6 +30,7 @@ import { CrocoHtmlEditorFileOptions, CrocoHtmlOptions } from "../../../options";
 import { MatIcon } from "@angular/material/icon";
 import { CrocoHtmlFileOptionsService } from "../../../services/CrocoHtmlFileOptionsService";
 import { CrocoHtmlOptionsToken } from '../../../consts';
+import { IVisualEditorLogger, NullVisualEditorLogger } from '../../../services';
 
 @Component({
   selector: 'croco-html-main-editor',
@@ -59,11 +60,14 @@ export class MainEditorComponent implements OnInit, AfterContentChecked, AfterVi
   @ViewChild("visualEditor", { static: true })
   visualEditor: VisualEditorComponent;
 
-  @Input()
+  @Input({ required: false })
   showMarkUp = true;
 
-  @Input()
+  @Input({ required: false })
   useHtmlRaw = false;
+
+  @Input({ required: false })
+  public logger: IVisualEditorLogger = new NullVisualEditorLogger();
 
   @Input()
   @Output()
@@ -84,7 +88,7 @@ export class MainEditorComponent implements OnInit, AfterContentChecked, AfterVi
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes['html'].currentValue !== changes['html'].previousValue) {
+    if (changes['html'].currentValue !== changes['html'].previousValue) {
       this.recalculateBodyTags();
     }
     this._cdref.markForCheck();

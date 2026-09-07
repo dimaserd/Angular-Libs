@@ -95,10 +95,10 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   alignmentOptions = AlignmentsData
   isTagAdditionStarted = false
 
-  @Input()
+  @Input({ required: false })
   showMarkUp = true;
 
-  @Input({required: false})
+  @Input({ required: false })
   logger: IVisualEditorLogger = new NullVisualEditorLogger();
 
   tags: TagItem[] = [];
@@ -178,7 +178,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
 
       this.bodyTags.push(tag);
     }
-    
+
     this.recalculateHtml();
 
     this.logger.onAdd(tags);
@@ -220,7 +220,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     if (this.isTagRequiringForm()) {
       if (data.tag === 'text') {
         this.resetTextStyle();
-      } 
+      }
       else if (data.tag === ExternalVideoTagDataConsts.TagName) {
         this.selectedVideoPlayer = this.videoPlayers[0].type;
       }
