@@ -1,7 +1,7 @@
 import { HtmlBodyTag } from "../../models";
 
 export interface IVisualEditorLogger {
-  onAdd(tag: HtmlBodyTag): void;
+  onAdd(tags: HtmlBodyTag[]): void;
 
   onChange(tag: HtmlBodyTag, index: number): void;
 

@@ -2,8 +2,8 @@ import { HtmlBodyTag } from "../../models";
 import { IVisualEditorLogger } from "./IVisualEditorLogger";
 
 export class ConsoleVisualEditorLogger implements IVisualEditorLogger {
-  onAdd(tag: HtmlBodyTag): void {
-    const tagCopy = JSON.parse(JSON.stringify(tag));
+  onAdd(tags: HtmlBodyTag[]): void {
+    const tagCopy = JSON.parse(JSON.stringify(tags));
     
     console.log("onAdd", tagCopy);
   }

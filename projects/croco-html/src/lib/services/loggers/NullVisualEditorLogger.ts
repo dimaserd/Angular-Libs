@@ -4,7 +4,7 @@ import { IVisualEditorLogger } from "./IVisualEditorLogger";
 
 export class NullVisualEditorLogger implements IVisualEditorLogger {
 
-  onAdd(_: HtmlBodyTag): void {
+  onAdd(_: HtmlBodyTag[]): void {
   }
   onChange(_: HtmlBodyTag, _2: number): void {
   }

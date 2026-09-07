@@ -168,10 +168,20 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   }
 
   addTag(tag: HtmlBodyTag) {
-    this.bodyTags.push(tag);
+    this.addTags([tag]);
+  }
+
+  addTags(tags: HtmlBodyTag[]) {
+
+    for (let index = 0; index < tags.length; index++) {
+      const tag = tags[index];
+
+      this.bodyTags.push(tag);
+    }
+    
     this.recalculateHtml();
 
-    this.logger.onAdd(tag);
+    this.logger.onAdd(tags);
   }
 
   onTagChangedHandler(data: HtmlBodyTag, index: number) {
@@ -260,8 +270,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
         selectedVideoPlayer: null
       });
 
-      this.bodyTags.push(tag);
-      this.recalculateHtml();
+      this.addTag(tag);
       this.resetTagForm();
     }
   }
@@ -275,6 +284,8 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   onImageFilesUploaded(fileIds: string[] | number[]): void {
     if (fileIds && fileIds.length > 0) {
       const fileIdsString = fileIds.map(id => typeof id === 'number' ? id.toString() : id);
+
+      const tags: HtmlBodyTag[] = [];
 
       fileIdsString.forEach(fileId => {
         const tag: HtmlBodyTag = {
@@ -290,10 +301,10 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
           innerHtml: ""
         };
 
-        this.bodyTags.push(tag);
+        tags.push(tag);
       });
 
-      this.recalculateHtml();
+      this.addTags(tags);
       this.resetTagForm();
     }
   }
@@ -306,10 +317,12 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
     let lines = this.text.split('\n');
     let tagDescription = this.textTagOptions?.find(x => x.tag === this.textTag);
 
+    const tags: HtmlBodyTag[] = [];
+
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i];
       if (line.length > 0) {
-        this.bodyTags.push({
+        tags.push({
           tagDescription,
           innerHtml: line,
           attributes: {
@@ -319,7 +332,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
       }
     }
 
-    this.recalculateHtml();
+    this.addTags(tags);
   }
 
   addExternalVideoTag(): void {
@@ -327,13 +340,12 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
 
     if (BodyTagsExtensions.hasTagService(tagName, this._options)) {
       const tagService = BodyTagsExtensions.getTagService(tagName, this._options);
-      let tag = tagService.getDefaultValue({
+      const tag = tagService.getDefaultValue({
         htmlRaw: this.htmlRaw,
         selectedVideoPlayer: this.selectedVideoPlayer
       });
 
-      this.bodyTags.push(tag);
-      this.recalculateHtml();
+      this.addTag(tag);
     }
   }
 
@@ -347,8 +359,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
         selectedVideoPlayer: null
       });
 
-      this.bodyTags.push(tag);
-      this.recalculateHtml();
+      this.addTag(tag);
     }
   }
 
@@ -370,6 +381,8 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
 
     const tagName = this.selectedValue;
 
+    const tags: HtmlBodyTag[] = [];
+
     if (BodyTagsExtensions.hasTagService(tagName, this._options)) {
       const tagService = BodyTagsExtensions.getTagService(tagName, this._options);
       let tag = tagService.getDefaultValue({
@@ -377,12 +390,13 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
         selectedVideoPlayer: null
       });
 
-      this.bodyTags.push(tag);
-      this.recalculateHtml();
+      tags.push(tag);
       this.resetTagForm();
     } else {
       alert(`Сервис для тега ${tagName} не зарегистрирован.`);
     }
+
+    this.addTags(tags);
   }
 
   isDefinedCustomWidget(tagName: string): boolean {
