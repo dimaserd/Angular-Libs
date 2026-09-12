@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Inject } from "@angular/core";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { CourseThemeItemsTestSolutionsRestrictionsModel } from "../models";
+import { CourseModulePageTestSolutionRestrictionsModel } from "../models";
 
 /**
  * Предоставляет методы контроллера Tutor.Api.Controllers.Courses.StudentCourseViewController
@@ -21,18 +21,18 @@ export class StudentCourseViewService {
     }
 
     /**
-     * Запрос для получения решений тестов по блоку в теме курса и ограничения по количеству попыток и дедлайну. Метод кешируется на 30 секунд. 
+     * Запрос для получения решений тестов по странице модуля курса и ограничения по количеству попыток и дедлайну. Метод кешируется на 30 секунд. 
      * @param courseId - идентификатор курса
      * @param studentProgressId - идентификатор прогресса ученика
-     * @param themeItemId - идентификатор блока тема внутри курса
+     * @param modulePageId - идентификатор страницы модуля внутри курса
      * @param solutionsCount - количество решений тестов
      * @param key - ключ для сброса кеширования
      * @returns 
      */
-    public loadThemeItemSolutionsAndTestRestriction(courseId: string, studentProgressId: string, themeItemId: string, solutionsCount: number, key: string): Observable<CourseThemeItemsTestSolutionsRestrictionsModel[]> {
+    public loadModulePageSolutionsAndTestRestriction(courseId: string, studentProgressId: string, modulePageId: string, solutionsCount: number, key: string): Observable<CourseModulePageTestSolutionRestrictionsModel[]> {
 
-        const paramsStr = `courseId=${courseId}&studentProgressId=${studentProgressId}&themeItemId=${themeItemId}&solutionsCount=${solutionsCount}&key=${key}`;``
+        const paramsStr = `courseId=${courseId}&studentProgressId=${studentProgressId}&modulePageId=${modulePageId}&solutionsCount=${solutionsCount}&key=${key}`;``
 
-        return this._httpClient.get<CourseThemeItemsTestSolutionsRestrictionsModel[]>(`${this.baseControllerUrl}/load-theme-item-solutions-and-restriction?${paramsStr}`);
+        return this._httpClient.get<CourseModulePageTestSolutionRestrictionsModel[]>(`${this.baseControllerUrl}/load-module-page-solutions-and-restriction?${paramsStr}`);
     }
 }

@@ -4,7 +4,8 @@ export interface TestSolutionWithPointsValidation {
     solutionId: string;
     isFinished: boolean;
     hasPointsResult: boolean;
-    questions: QuestionAnswerWithResult[];
+    isCompleted: boolean;
+    questions: Array<QuestionAnswerWithResult>;
     studentTotalPoints: number;
     maxTotalPoints: number;
     questionsCount: number;

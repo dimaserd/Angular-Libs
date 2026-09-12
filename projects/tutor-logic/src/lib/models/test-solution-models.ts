@@ -128,6 +128,7 @@ export interface StudentTestSolutionModel {
     studentGroupId: string;
     finishedOnUtc: string | null;
     isFinished: boolean;
+    isCompleted: boolean;
     solution: StudentTestSolutionDataModel;
     test: TestModel;
 }
