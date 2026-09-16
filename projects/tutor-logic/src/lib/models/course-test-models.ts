@@ -22,6 +22,7 @@ export interface CourseModulePageTestSolutionRestrictionsModel {
     testId: string;
     testName: string;
     finished: boolean;
+    completed: boolean;
     solutions: Array<StudentCourseModulePageTestSolution>;
     restrictionResult: TestRestrictionValidationWithDeadLineWarningResult;
 }
