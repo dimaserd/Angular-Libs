@@ -6,4 +6,6 @@ export interface IVisualEditorLogger {
   onChange(tag: HtmlBodyTag, index: number): void;
 
   onRemove(index: number): void;
+
+  onHtmlChanged(html:string): void;
 }

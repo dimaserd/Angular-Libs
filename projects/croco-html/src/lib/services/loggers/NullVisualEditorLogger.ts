@@ -3,6 +3,7 @@ import { IVisualEditorLogger } from "./IVisualEditorLogger";
 
 
 export class NullVisualEditorLogger implements IVisualEditorLogger {
+  
 
   onAdd(_: HtmlBodyTag[]): void {
   }
@@ -10,5 +11,8 @@ export class NullVisualEditorLogger implements IVisualEditorLogger {
   }
 
   onRemove(_: number): void {
+  }
+
+  onHtmlChanged(html: string): void {
   }
 }

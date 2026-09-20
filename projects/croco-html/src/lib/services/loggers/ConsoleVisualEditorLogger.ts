@@ -2,6 +2,7 @@ import { HtmlBodyTag } from "../../models";
 import { IVisualEditorLogger } from "./IVisualEditorLogger";
 
 export class ConsoleVisualEditorLogger implements IVisualEditorLogger {
+  
   onAdd(tags: HtmlBodyTag[]): void {
     const tagCopy = JSON.parse(JSON.stringify(tags));
     
@@ -17,5 +18,9 @@ export class ConsoleVisualEditorLogger implements IVisualEditorLogger {
 
   onRemove(index: number): void {
     console.log("onRemove", index);
+  }
+
+  onHtmlChanged(html: string): void {
+    console.log("onHtmlChanged", html);
   }
 }

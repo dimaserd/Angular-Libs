@@ -110,7 +110,10 @@ export class MainEditorComponent implements OnInit, AfterContentChecked, AfterVi
   onHtmlChangedHandler(html: string) {
     this.html = html;
     this.onHtmlChanged.emit(html);
+    
     this._cdref.markForCheck();
+
+    this.logger.onHtmlChanged(html);
   }
 
   textAreaModelChangedHandler() {
