@@ -52,6 +52,7 @@ export class FileAudioTagService implements IMarkUpTagService {
     }
 
     return {
+      trackingId: crypto.randomUUID(),
       tagDescription: {
         tag: FileAudioTagDataConsts.TagName,
         displayValue: this.shortDescription,
@@ -64,6 +65,7 @@ export class FileAudioTagService implements IMarkUpTagService {
 
   getDefaultValue(): HtmlBodyTag {
     return {
+      trackingId: crypto.randomUUID(),
       tagDescription: {
         tag: this.tagName,
         displayValue: this.shortDescription,

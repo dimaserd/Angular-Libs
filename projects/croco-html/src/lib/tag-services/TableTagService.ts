@@ -21,6 +21,7 @@ export class TableTagService implements IMarkUpTagService {
     let tableData = data.data as TableData;
 
     return {
+      trackingId: crypto.randomUUID(),
       tagDescription: {
         tag: data.tagName,
         displayValue: this.shortDescription,
@@ -33,6 +34,7 @@ export class TableTagService implements IMarkUpTagService {
 
   getDefaultValue(props: IVisualEditorProps): HtmlBodyTag {
     return {
+      trackingId: crypto.randomUUID(),
       tagDescription: {
         tag: this.tagName,
         displayValue: this.shortDescription,

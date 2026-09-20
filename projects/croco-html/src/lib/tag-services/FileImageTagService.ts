@@ -53,6 +53,7 @@ export class FileImageTagService implements IMarkUpTagService {
     }
 
     return {
+      trackingId: crypto.randomUUID(),
       tagDescription: {
         tag: FileImageTagDataConsts.TagName,
         displayValue: this.shortDescription,
@@ -65,6 +66,7 @@ export class FileImageTagService implements IMarkUpTagService {
 
   getDefaultValue(): HtmlBodyTag {
     return {
+      trackingId: crypto.randomUUID(),
       tagDescription: {
         tag: this.tagName,
         displayValue: this.shortDescription,

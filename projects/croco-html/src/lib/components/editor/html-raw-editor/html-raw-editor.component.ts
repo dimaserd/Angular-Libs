@@ -35,7 +35,6 @@ export class HtmlRawEditorComponent {
   public presentOrEdit = true;
   public safeHtml: SafeHtml | null = null;
 
-
   _tag: HtmlBodyTag;
 
   @Input({ required: true })
@@ -45,6 +44,11 @@ export class HtmlRawEditorComponent {
     this._tagService.tag$
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe(tag => {
+
+        if (this._tag.trackingId === tag.trackingId) {
+          return;
+        }
+
         this._tag = tag;
 
         this.onHtmlChanged();

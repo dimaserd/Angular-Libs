@@ -8,6 +8,10 @@ export interface TagItem {
 }
 
 export interface HtmlBodyTag {
+  /**
+   * Уникальный идентификатор для отслеживания изменений.
+   */
+  trackingId: string;
   tagDescription: TagItem;
   innerHtml: string;
   attributes: Object;

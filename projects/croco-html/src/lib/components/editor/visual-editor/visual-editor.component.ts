@@ -289,6 +289,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
 
       fileIdsString.forEach(fileId => {
         const tag: HtmlBodyTag = {
+          trackingId: crypto.randomUUID(),
           tagDescription: {
             tag: FileImageTagDataConsts.TagName,
             displayValue: "Изображение",
@@ -323,6 +324,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
       const line = lines[i];
       if (line.length > 0) {
         tags.push({
+          trackingId: crypto.randomUUID(),
           tagDescription,
           innerHtml: line,
           attributes: {

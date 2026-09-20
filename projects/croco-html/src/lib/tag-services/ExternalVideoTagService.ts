@@ -38,6 +38,7 @@ export class ExternalVideoTagService implements IMarkUpTagService {
     let fileData = data.data as ExternalVideoTagDataConsts;
 
     return {
+      trackingId: crypto.randomUUID(),
       tagDescription: {
         tag: data.tagName,
         displayValue: this.shortDescription,
@@ -67,6 +68,7 @@ export class ExternalVideoTagService implements IMarkUpTagService {
     }
 
     return {
+      trackingId: crypto.randomUUID(),
       tagDescription: {
         tag: this.tagName,
         displayValue: this.shortDescription,

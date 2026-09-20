@@ -50,6 +50,7 @@ export class CustomWidgetTagService implements IMarkUpTagService {
     let customWidgetTagData = data.data as CustomWidgetTagData;
 
     return {
+      trackingId: crypto.randomUUID(),
       tagDescription: {
         tag: data.tagName,
         displayValue: this.shortDescription,
@@ -62,6 +63,7 @@ export class CustomWidgetTagService implements IMarkUpTagService {
 
   getDefaultValue(props: IVisualEditorProps): HtmlBodyTag {
     return {
+      trackingId: crypto.randomUUID(),
       tagDescription: {
         tag: this.tagName,
         displayValue: this.shortDescription,

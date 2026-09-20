@@ -65,6 +65,7 @@ export class LinkTagService implements IMarkUpTagService {
     };
 
     return {
+      trackingId: crypto.randomUUID(),
       tagDescription: {
         tag: data.tagName,
         displayValue: this.shortDescription,
@@ -77,6 +78,7 @@ export class LinkTagService implements IMarkUpTagService {
 
   getDefaultValue(props: IVisualEditorProps): HtmlBodyTag {
     return {
+      trackingId: crypto.randomUUID(),
       tagDescription: {
         tag: this.tagName,
         displayValue: this.shortDescription,

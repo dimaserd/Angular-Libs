@@ -41,6 +41,7 @@ export class AddFilesBtnComponent {
 
   private buildFileTags(fileIds: string[]): HtmlBodyTag[] {
     return fileIds.map(fileId => ({
+      trackingId: crypto.randomUUID(),
       presentOrEdit: true,
       tagDescription: {
         tag: FileImageTagDataConsts.TagName,

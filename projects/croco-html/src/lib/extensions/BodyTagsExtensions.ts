@@ -100,6 +100,7 @@ export class BodyTagsExtensions {
     }
 
     return {
+      trackingId: crypto.randomUUID(),
       tagDescription: {
         tag: Tags.UnsupportedTag,
         displayValue: "Неподдерживаемый тег",

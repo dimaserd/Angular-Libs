@@ -45,6 +45,7 @@ export class DownloadButtonTagService implements IMarkUpTagService {
     let fileData = data.data as ButtonTagDataConsts;
 
     return {
+      trackingId: crypto.randomUUID(),
       tagDescription: {
         tag: data.tagName,
         displayValue: this.shortDescription,
@@ -57,6 +58,7 @@ export class DownloadButtonTagService implements IMarkUpTagService {
 
   getDefaultValue(props: IVisualEditorProps): HtmlBodyTag {
     return {
+      trackingId: crypto.randomUUID(),
       tagDescription: {
         tag: this.tagName,
         displayValue: this.shortDescription,

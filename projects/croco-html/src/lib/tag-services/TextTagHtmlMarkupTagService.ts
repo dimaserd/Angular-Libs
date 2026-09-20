@@ -37,6 +37,7 @@ export class TextTagHtmlMarkupTagService implements IMarkUpTagService {
     let textTagData = data.data as SimpleTextTagData;
 
     return {
+      trackingId: crypto.randomUUID(),
       tagDescription: {
         tag: this.tagName,
         displayValue: this.shortDescription,
@@ -46,8 +47,9 @@ export class TextTagHtmlMarkupTagService implements IMarkUpTagService {
       innerHtml: BodyTagsExtensions.sanitizeInnerHtml(textTagData.html)
     };
   }
-  getDefaultValue(props: IVisualEditorProps): HtmlBodyTag {
+  getDefaultValue(_: IVisualEditorProps): HtmlBodyTag {
     return {
+      trackingId: crypto.randomUUID(),
       tagDescription: {
         tag: this.tagName,
         displayValue: this.shortDescription,

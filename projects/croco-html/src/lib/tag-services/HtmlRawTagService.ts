@@ -39,6 +39,7 @@ export class HtmlRawTagService implements IMarkUpTagService {
   toBodyTag(data: InterfaceBlock): HtmlBodyTag {
 
     return {
+      trackingId: crypto.randomUUID(),
       tagDescription: {
         tag: HtmlRawTagDataConsts.TagName,
         displayValue: this.shortDescription,
@@ -51,6 +52,7 @@ export class HtmlRawTagService implements IMarkUpTagService {
 
   getDefaultValue(props: IVisualEditorProps): HtmlBodyTag {
     return {
+      trackingId: crypto.randomUUID(),
       tagDescription: {
         tag: this.tagName,
         displayValue: this.shortDescription,
