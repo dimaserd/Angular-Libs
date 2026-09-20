@@ -39,3 +39,4 @@ export { GroupStatisticSnapshotStudentService } from './GroupStatisticSnapshotSt
 export { SubjectMenuService } from './SubjectMenuService'
 export { TutorUserTelegramService } from './TutorUserTelegramService'
 export { StudentGroupBlockService } from './StudentGroupBlockService'
+export { TestQueryService } from './TestQueryService'
