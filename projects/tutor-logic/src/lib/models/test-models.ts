@@ -1,3 +1,5 @@
+import { SubjectModel } from "./subject.models";
+
 export interface CreateTestRequest {
   name: string;
   subjectId: string;
@@ -24,4 +26,29 @@ export interface SearchTestsRequest {
   schoolId: string;
   count: number | null;
   offSet: number;
+}
+
+
+export interface TestSimpleModel {
+  id: string;
+  name: string;
+  description: string;
+  isActive: boolean;
+  subject: SubjectModel;
+  questionsCount: number;
+  maxTotalPoints: number;
+}
+
+export interface TestDetailedModel {
+  id: string;
+  name: string;
+  description: string;
+  isActive: boolean;
+  subject: SubjectModel;
+  questions: Array<TestQuestionSimpleModel>;
+}
+
+export interface TestQuestionSimpleModel {
+  id: string;
+  title: string;
 }
