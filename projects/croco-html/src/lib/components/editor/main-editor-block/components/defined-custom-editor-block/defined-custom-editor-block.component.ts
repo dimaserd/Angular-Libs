@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ComponentRef, DestroyRef, inject, Inject, Input, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ComponentRef, inject, Inject, Input, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { HtmlBodyTag, TagEditorService } from '../../../../../models';
 import { CrocoHtmlOptions } from '../../../../../options';
 import { CrocoHtmlOptionsToken } from '../../../../../consts';
 import { DefaultTags } from '../../../visual-editor/DefaultTags';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'croco-html-defined-custom-editor-block',
@@ -15,7 +15,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class DefinedCustomEditorBlockComponent implements OnInit, OnDestroy {
 
   private readonly _cdr = inject(ChangeDetectorRef);
-  private readonly _destroyRef = inject(DestroyRef);
+
+  private readonly _destroy$ = new Subject<void>();
+  private _tagServiceSub$ = new Subject<void>();
 
   @ViewChild('container', { read: ViewContainerRef, static: true })
   viewContainerRef!: ViewContainerRef;
@@ -29,10 +31,12 @@ export class DefinedCustomEditorBlockComponent implements OnInit, OnDestroy {
 
   @Input({ required: true })
   set tagService(data: TagEditorService) {
+    this._tagServiceSub$.next();
+
     this._tagService = data;
 
     this._tagService.tag$
-      .pipe(takeUntilDestroyed(this._destroyRef))
+      .pipe(takeUntil(this._tagServiceSub$))
       .subscribe(tag => {
         this._tag = tag;
         this._cdr.markForCheck();
@@ -64,7 +68,11 @@ export class DefinedCustomEditorBlockComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.dynamicContainerRef.destroy();
+    this._tagServiceSub$.next();
+    this._tagServiceSub$.complete();
+    this._destroy$.next();
+    this._destroy$.complete();
+    this.dynamicContainerRef?.destroy();
   }
 }
 

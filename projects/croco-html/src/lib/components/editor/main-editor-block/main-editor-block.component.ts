@@ -43,17 +43,20 @@ export class MainEditorBlockComponent implements OnDestroy {
   textTags = TextTags.allTextTags;
 
   private unsubscribe = new Subject<void>();
+  private _tagSub$ = new Subject<void>();
 
   private readonly _cdr = inject(ChangeDetectorRef);
 
   @Input({ required: true })
   set tag(data: HtmlBodyTag) {
+    this._tagSub$.next();
+
     this._tag = data;
     this._tagService = new TagEditorService();
 
     this._tagService.tag$.next(this._tag);
     this._tagService.presentOrEdit$
-      .pipe(takeUntil(this.unsubscribe))
+      .pipe(takeUntil(this._tagSub$))
       .subscribe(val => {
         this.presentOrEdit = val;
         this._cdr.markForCheck();
@@ -94,6 +97,8 @@ export class MainEditorBlockComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this._tagSub$.next();
+    this._tagSub$.complete();
     this.unsubscribe.next();
     this.unsubscribe.complete();
   }
