@@ -14,7 +14,6 @@ import {
 import { Subscription } from 'rxjs';
 import { Notifier, NOTIFIER_DEFAULT_SETTING, NotifierSetting, NotifierType } from './chat-notifier.model';
 import { ChatNotifierService } from './chat-notifier.service';
-import { animate, AnimationBuilder, style } from '@angular/animations';
 import { NgStyle } from '@angular/common';
 
 const ANIMATION_TIME = 200;
@@ -42,7 +41,6 @@ export class ChatNotifierComponent implements OnInit, OnDestroy {
   constructor(
     @Inject('notifierSetting') public setting: NotifierSetting,
     private notifierService: ChatNotifierService,
-    private animationBuilder: AnimationBuilder,
     private renderer: Renderer2,
     private changeDetection: ChangeDetectorRef,
   ) { }
@@ -68,31 +66,18 @@ export class ChatNotifierComponent implements OnInit, OnDestroy {
         const animation = (): void => {
           this.animationInProgress = true;
           this.changeDetection.detectChanges();
+          const list = this.notifiersList.nativeElement;
+          const heightBefore = list.offsetHeight;
           this.notifiers.push(notifier);
-          const containerTop = this.notifiersList.nativeElement.getBoundingClientRect().top;
-          this.renderer.setStyle(this.notifiersList.nativeElement, 'top', `${containerTop}px`);
           this.changeDetection.detectChanges();
-          const notifications = this.notifiersList.nativeElement.children;
-          const notificationHeight = (notifications[0] as HTMLElement).offsetHeight;
-          // TODO: false проверка мобилка или нет
-          const margin = this.notifiers.length === 1 ? 0 : 8;
-          const animationPlayer = this.animationBuilder
-            .build([
-              style({ top: `${containerTop}px` }),
-              animate(ANIMATION_TIME, style({ top: `${containerTop - notificationHeight - margin}px` })),
-            ])
-            .create(this.notifiersList.nativeElement);
-          animationPlayer.onDone(() => {
+          this.playEnterTransition(list.offsetHeight - heightBefore, () => {
             this.animationInProgress = false;
             this.animationQueue = this.animationQueue.filter((animationInQueue) => animationInQueue !== animation);
-            animationPlayer.destroy();
-            this.renderer.setStyle(this.notifiersList.nativeElement, 'top', null);
             handleDone();
             if (this.animationQueue.length) {
               this.animationQueue.shift()();
             }
           });
-          animationPlayer.play();
         };
         this.animationQueue.push(animation);
         if (!this.animationInProgress) {
@@ -119,6 +104,29 @@ export class ChatNotifierComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  /**
+   * Сдвигает список вниз на высоту добавленного уведомления и плавно возвращает его на место.
+   * Так новые уведомления «выезжают» снизу, а существующие сдвигаются вверх.
+   */
+  private playEnterTransition(offset: number, onDone: () => void): void {
+    const list = this.notifiersList.nativeElement;
+    this.renderer.addClass(list, 'notifier-enter');
+    this.renderer.setStyle(list, 'transform', `translateY(${offset}px)`);
+    // принудительно применяем стартовое положение до включения перехода
+    void list.offsetHeight;
+    this.renderer.removeClass(list, 'notifier-enter');
+    this.renderer.removeStyle(list, 'transform');
+    setTimeout(onDone, ANIMATION_TIME);
+  }
+
+  private playLeaveTransition(notification: HTMLElement, onDone: () => void): void {
+    this.renderer.addClass(notification, 'notifier-leave');
+    setTimeout(() => {
+      this.renderer.setStyle(notification, 'visibility', 'hidden');
+      onDone();
+    }, ANIMATION_TIME);
+  }
+
   public removeNotifier(notifierToRemove: Notifier, immediate = true): void {
     const index = this.notifiers.findIndex((notifier) => notifier === notifierToRemove);
     if (index === -1) {
@@ -135,16 +143,8 @@ export class ChatNotifierComponent implements OnInit, OnDestroy {
     } else {
       const closeAllShown = this.setting.showCloseAllCount && this.notifiers.length >= this.setting.showCloseAllCount;
       const notificationPosition = closeAllShown ? index + 1 : index;
-      const notification = this.notifiersList.nativeElement.children[notificationPosition];
-      const animationPlayer = this.animationBuilder
-        .build([style({ opacity: 1 }), animate(ANIMATION_TIME, style({ opacity: 0 }))])
-        .create(notification);
-      animationPlayer.onDone(() => {
-        animationPlayer.destroy();
-        this.renderer.setStyle(notification, 'visibility', 'hidden');
-        handleDone();
-      });
-      animationPlayer.play();
+      const notification = this.notifiersList.nativeElement.children[notificationPosition] as HTMLElement;
+      this.playLeaveTransition(notification, handleDone);
     }
   }
 

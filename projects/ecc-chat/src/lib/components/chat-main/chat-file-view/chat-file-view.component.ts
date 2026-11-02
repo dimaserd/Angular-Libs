@@ -8,7 +8,6 @@ import { ChatSymbolSpritePipe } from '../../../pipes/chat-symbol-sprite.pipe';
 @Component({
   selector: 'ecc-chat-file-view',
   templateUrl: './chat-file-view.component.html',
-  styleUrls: ['./chat-file-view.component.scss'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [PipeMapperPipe, ChatSymbolSpritePipe]

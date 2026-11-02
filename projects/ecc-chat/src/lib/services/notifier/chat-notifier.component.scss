@@ -1,5 +1,8 @@
 @import "/src/styles/screen_sizes.scss";
 
+// keep in sync with ANIMATION_TIME in chat-notifier.component.ts
+$notifier-animation-time: 200ms;
+
 .notifiers-list {
   position: fixed;
   z-index: 2147473650;
@@ -9,6 +12,12 @@
   left: 32px;
   right: unset;
   bottom: 24px;
+  transition: transform $notifier-animation-time ease-out;
+
+  // стартовое положение для появления: переход отключён, список сдвинут вниз
+  &.notifier-enter {
+    transition: none;
+  }
 
   .notifier {
     position: relative;
@@ -20,6 +29,11 @@
     padding: 16px 48px 16px 16px;
     margin-bottom: 8px;
     width: 500px;
+
+    &.notifier-leave {
+      opacity: 0;
+      transition: opacity $notifier-animation-time ease-out;
+    }
 
     &.animate-bg-success {
       background: linear-gradient(to left, #1d5deb 50%, #4d83fa 0);
