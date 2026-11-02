@@ -37,7 +37,11 @@ export class DefinedCustomEditorBlockComponent implements OnInit, OnDestroy {
         this._tag = tag;
         this._cdr.markForCheck();
       });
-    
+
+    if (this.dynamicContainerRef) {
+      this.dynamicContainerRef.setInput("tagService", this._tagService);
+    }
+
     this._cdr.markForCheck();
   }
 
