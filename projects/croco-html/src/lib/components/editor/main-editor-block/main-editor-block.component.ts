@@ -53,9 +53,8 @@ export class MainEditorBlockComponent implements OnDestroy {
   set tag(data: HtmlBodyTag) {
     this._tagSub$.next();
 
-    this._originalSnapshot = MainEditorBlockComponent.copyTag(this._tag);
-
     this._tag = data;
+    this._originalSnapshot = MainEditorBlockComponent.copyTag(data);
     this._tagService = new TagEditorService();
 
     this._tagService.tag$.next(this._tag);

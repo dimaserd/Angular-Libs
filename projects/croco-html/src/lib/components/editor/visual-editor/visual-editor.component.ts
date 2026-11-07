@@ -264,11 +264,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   }
 
   onTagChangedHandler(data: HtmlBodyTag, index: number) {
-    // Optimisation: skip if tags are actually identical
     const existingTag = this.bodyTags[index];
-    if (this._changeDetector.tagsAreEqual(existingTag, data)) {
-      return;
-    }
 
     // Save state before mutation for undo
     this._undoRedo.pushState(this.bodyTags, this.html, `Update tag #${index}`);
