@@ -48,7 +48,7 @@ export class TextEditorComponent implements OnDestroy {
   readonly previewHtml = computed(() => {
     const t = this.tag();
     if (!t) return '';
-    return `<${t.tagDescription.tag}>${t.innerHtml}<${t.tagDescription.tag}/>`;
+    return `<${t.tagDescription.tag}>${t.innerHtml}</${t.tagDescription.tag}>`;
   });
 
   @Input({ required: true })
@@ -73,18 +73,21 @@ export class TextEditorComponent implements OnDestroy {
 
   public readonly TextAlignment = TextAlignment;
 
-  onInnerHtmlChange(): void {
+  onInnerHtmlChange(newInnerHtml: string): void {
     const tag = this.tag();
     if (tag) {
-      this._currentService.tag$.next(tag);
+      const updated = { ...tag, innerHtml: newInnerHtml, attributes: { ...tag.attributes } };
+      this.tag.set(updated);
+      this._currentService.tag$.next(updated);
     }
   }
 
   onAlignmentChange(): void {
     const tag = this.tag();
     if (tag && tag.attributes) {
-      tag.attributes[TextTagDataConsts.HAlign] = this.horizontalAlignment();
-      this._currentService.tag$.next(tag);
+      const updated = { ...tag, attributes: { ...tag.attributes, [TextTagDataConsts.HAlign]: this.horizontalAlignment() } };
+      this.tag.set(updated);
+      this._currentService.tag$.next(updated);
     }
   }
 
