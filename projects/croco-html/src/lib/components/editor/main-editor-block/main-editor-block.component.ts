@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, inject, Inject, Input, OnDestroy, Output} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, inject, Inject, Input, OnDestroy, Output } from '@angular/core';
 import { TextTags } from '../../../extensions/TextMethods';
 import { HtmlBodyTag } from '../../../models/models';
 import { MatIconButton } from '@angular/material/button';
@@ -53,8 +53,7 @@ export class MainEditorBlockComponent implements OnDestroy {
   set tag(data: HtmlBodyTag) {
     this._tagSub$.next();
 
-    // Capture the original tag before the new one is set (for diff tracking)
-    this._originalTagBeforeSet = this._tag;
+    this._originalSnapshot = MainEditorBlockComponent.copyTag(this._tag);
 
     this._tag = data;
     this._tagService = new TagEditorService();
@@ -70,7 +69,7 @@ export class MainEditorBlockComponent implements OnDestroy {
 
   public _tag: HtmlBodyTag | null = null;
   public _tagService: TagEditorService;
-  private _originalTagBeforeSet: HtmlBodyTag | null = null;
+  private _originalSnapshot: HtmlBodyTag | null = null;
 
   public presentOrEdit = true;
 
@@ -85,18 +84,20 @@ export class MainEditorBlockComponent implements OnDestroy {
 
   save() {
     const tag = this._tagService.tag$.value;
-    
-    // Optimisation: skip if nothing actually changed
-    if (this._originalTagBeforeSet && this._changeDetector.tagsAreEqual(this._originalTagBeforeSet, tag)) {
+
+    if (this._originalSnapshot && this._changeDetector.tagsAreEqual(this._originalSnapshot, tag)) {
       this._tagService.presentOrEdit$.next(true);
       return;
     }
 
     this.onTagSaved.emit(tag);
     this._tagService.presentOrEdit$.next(true);
-    
-    // Reset original for next edit cycle
-    this._originalTagBeforeSet = tag;
+
+    this._originalSnapshot = MainEditorBlockComponent.copyTag(tag);
+  }
+
+  static copyTag(tag: HtmlBodyTag): HtmlBodyTag {
+    return JSON.parse(JSON.stringify(tag)) as HtmlBodyTag
   }
 
   cancelSave() {
