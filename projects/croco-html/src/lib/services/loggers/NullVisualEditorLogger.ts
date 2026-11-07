@@ -3,7 +3,7 @@ import { IVisualEditorLogger } from "./IVisualEditorLogger";
 
 
 export class NullVisualEditorLogger implements IVisualEditorLogger {
-  
+
 
   onAdd(_: HtmlBodyTag[]): void {
   }

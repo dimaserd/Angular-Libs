@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, inject, Inject, Input, OnDestroy, Output} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, inject, Inject, Input, OnDestroy, Output } from '@angular/core';
 import { TextTags } from '../../../extensions/TextMethods';
 import { HtmlBodyTag } from '../../../models/models';
 import { MatIconButton } from '@angular/material/button';
@@ -18,6 +18,7 @@ import {
   DefinedCustomEditorBlockComponent
 } from "./components/defined-custom-editor-block/defined-custom-editor-block.component";
 import { DefaultTags } from '../visual-editor/DefaultTags';
+import { TagChangeDetector } from '../../../services/optimized-change-tracker.service';
 
 @Component({
   selector: 'croco-html-main-editor-block',
@@ -46,12 +47,14 @@ export class MainEditorBlockComponent implements OnDestroy {
   private _tagSub$ = new Subject<void>();
 
   private readonly _cdr = inject(ChangeDetectorRef);
+  private readonly _changeDetector = inject(TagChangeDetector);
 
   @Input({ required: true })
   set tag(data: HtmlBodyTag) {
     this._tagSub$.next();
 
     this._tag = data;
+    this._originalSnapshot = MainEditorBlockComponent.copyTag(data);
     this._tagService = new TagEditorService();
 
     this._tagService.tag$.next(this._tag);
@@ -65,6 +68,7 @@ export class MainEditorBlockComponent implements OnDestroy {
 
   public _tag: HtmlBodyTag | null = null;
   public _tagService: TagEditorService;
+  private _originalSnapshot: HtmlBodyTag | null = null;
 
   public presentOrEdit = true;
 
@@ -80,8 +84,19 @@ export class MainEditorBlockComponent implements OnDestroy {
   save() {
     const tag = this._tagService.tag$.value;
 
+    if (this._originalSnapshot && this._changeDetector.tagsAreEqual(this._originalSnapshot, tag)) {
+      this._tagService.presentOrEdit$.next(true);
+      return;
+    }
+
     this.onTagSaved.emit(tag);
     this._tagService.presentOrEdit$.next(true);
+
+    this._originalSnapshot = MainEditorBlockComponent.copyTag(tag);
+  }
+
+  static copyTag(tag: HtmlBodyTag): HtmlBodyTag {
+    return JSON.parse(JSON.stringify(tag)) as HtmlBodyTag
   }
 
   cancelSave() {

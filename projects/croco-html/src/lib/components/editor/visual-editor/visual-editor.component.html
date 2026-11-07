@@ -7,9 +7,9 @@
     <div style="height: 10px;"></div>
   </div>
 }
-<div [hidden]="isLoading">
+<div [hidden]="isLoading" (keydown)="onKeyDown($event)">
   <div cdkDropList (cdkDropListDropped)="drop($event)">
-    @for (tag of bodyTags; track tag; let i = $index) {
+    @for (tag of bodyTags; track trackByTrackingId($index, tag); let i = $index) {
       <div cdkDrag>
         <mat-card style="margin: 2px;" class="mat-card special">
           <mat-card-content>

@@ -1,17 +1,17 @@
-@if (presentOrEdit) {
+@if (presentOrEdit()) {
   <div>
     <div style="height: 10px;">
     </div>
-    @if (_horizontalAlignment === TextAlignment.Left) {
-      <div style="text-align: left;" [innerHtml]="getInnerHtml()">
+    @if (horizontalAlignment() === TextAlignment.Left) {
+      <div style="text-align: left;" [innerHtml]="previewHtml()">
       </div>
     }
-    @else if (_horizontalAlignment === TextAlignment.Right) {
-      <div style="text-align: right;" [innerHtml]="getInnerHtml()">
+    @else if (horizontalAlignment() === TextAlignment.Right) {
+      <div style="text-align: right;" [innerHtml]="previewHtml()">
       </div>
     }
-    @else if (_horizontalAlignment === TextAlignment.Center) {
-      <div style="text-align: center;" [innerHtml]="getInnerHtml()">
+    @else if (horizontalAlignment() === TextAlignment.Center) {
+      <div style="text-align: center;" [innerHtml]="previewHtml()">
       </div>
     }
   </div>
@@ -19,7 +19,7 @@
 @else {
   <div>
     <div style="overflow-x: auto;">
-      <mat-button-toggle-group [(ngModel)]="_horizontalAlignment" (ngModelChange)="changeData()">
+      <mat-button-toggle-group [(ngModel)]="horizontalAlignment" (ngModelChange)="onAlignmentChange()">
         <mat-button-toggle value="center">
           По центру <mat-icon>format_align_center</mat-icon>
         </mat-button-toggle>
@@ -39,7 +39,7 @@
         <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
           cdkAutosizeMinRows="1"
           placeholder="Внутренняя разметка текстового тега"
-        [(ngModel)]="_tag.innerHtml" (ngModelChange)="changeData()"></textarea>
+          [ngModel]="tag()!.innerHtml" (ngModelChange)="onInnerHtmlChange($event)"></textarea>
       </mat-form-field>
     </div>
   </div>

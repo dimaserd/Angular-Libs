@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, OnDestroy } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  Input,
+  OnDestroy,
+  signal
+} from '@angular/core';
 import { HtmlBodyTag } from '../../../models/models';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { MatInput } from '@angular/material/input';
@@ -8,7 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonToggleGroup, MatButtonToggle } from '@angular/material/button-toggle';
 import { TagEditorService } from '../../../models';
 import { TextAlignment, TextTagDataConsts } from '../../../tag-services';
-import { Subject, takeUntil } from 'rxjs';
+import { takeUntil, Subject } from 'rxjs';
 
 @Component({
   selector: 'croco-html-text-editor',
@@ -28,57 +35,64 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class TextEditorComponent implements OnDestroy {
 
-  private unsubscribe = new Subject<void>();
+  private readonly _destroy$ = new Subject<void>();
 
-  _tag: HtmlBodyTag;
-  _tagService: TagEditorService;
+  private _currentService!: TagEditorService;
 
-  private readonly _cdr = inject(ChangeDetectorRef);
+  readonly tag = signal<HtmlBodyTag | null>(null);
+
+  readonly presentOrEdit = signal(true);
+
+  readonly horizontalAlignment = signal<TextAlignment>(TextAlignment.Left);
+
+  readonly previewHtml = computed(() => {
+    const t = this.tag();
+    if (!t) return '';
+    return `<${t.tagDescription.tag}>${t.innerHtml}</${t.tagDescription.tag}>`;
+  });
 
   @Input({ required: true })
   set tagService(data: TagEditorService) {
-    this._tagService = data;
+    this._currentService = data;
 
-    this._tagService.tag$
-      .pipe(takeUntil(this.unsubscribe))
-      .subscribe(tag => {
-        this._tag = tag;
-        this._cdr.markForCheck();
-      });
+    data.tag$.pipe(takeUntil(this._destroy$)).subscribe(t => {
+      this.tag.set(t);
 
-    this._tagService.presentOrEdit$
-      .pipe(takeUntil(this.unsubscribe))
-      .subscribe(val => {
-        this.presentOrEdit = val;
-        this._cdr.markForCheck();
-      });
+      if (t) {
+        const align: TextAlignment = t.attributes.hasOwnProperty(TextTagDataConsts.HAlign)
+          ? t.attributes[TextTagDataConsts.HAlign] as TextAlignment
+          : TextAlignment.Left;
+        this.horizontalAlignment.set(align);
+      }
+    });
 
-    this._horizontalAlignment = this._tag.attributes.hasOwnProperty(TextTagDataConsts.HAlign)
-      ? this._tag.attributes[TextTagDataConsts.HAlign]
-      : TextAlignment.Left
-
-     this._cdr.markForCheck();
+    data.presentOrEdit$.pipe(takeUntil(this._destroy$)).subscribe(val => {
+      this.presentOrEdit.set(val);
+    });
   }
 
-  presentOrEdit = true;
+  public readonly TextAlignment = TextAlignment;
 
-  public TextAlignment = TextAlignment;
-
-  public _horizontalAlignment: TextAlignment = TextAlignment.Left;
-
-  changeData() {
-    this._tag.attributes[TextTagDataConsts.HAlign] = this._horizontalAlignment;
-
-    this._tagService.tag$.next(this._tag);
-     this._cdr.markForCheck();
+  onInnerHtmlChange(newInnerHtml: string): void {
+    const tag = this.tag();
+    if (tag) {
+      const updated = { ...tag, innerHtml: newInnerHtml, attributes: { ...tag.attributes } };
+      this.tag.set(updated);
+      this._currentService.tag$.next(updated);
+    }
   }
 
-  getInnerHtml() {
-    return `<${this._tag.tagDescription.tag}>${this._tag.innerHtml}<${this._tag.tagDescription.tag}/>`;
+  onAlignmentChange(): void {
+    const tag = this.tag();
+    if (tag && tag.attributes) {
+      const updated = { ...tag, attributes: { ...tag.attributes, [TextTagDataConsts.HAlign]: this.horizontalAlignment() } };
+      this.tag.set(updated);
+      this._currentService.tag$.next(updated);
+    }
   }
 
   ngOnDestroy(): void {
-    this.unsubscribe.next();
-    this.unsubscribe.complete();
+    this._destroy$.next();
+    this._destroy$.complete();
   }
 }
