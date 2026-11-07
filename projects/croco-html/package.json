@@ -1,14 +1,14 @@
 {
   "name": "croco-html",
-  "version": "20.4.6",
+  "version": "21.0.0",
   "peerDependencies": {
-    "@angular/common": "^20.3.15",
-    "@angular/core": "^20.3.15",
-    "@angular/cdk": "^20.2.14",
-    "@angular/youtube-player": "^20.2.12",
-    "@angular/material": "^20.2.14",
+    "@angular/common": "^21.2.26",
+    "@angular/core": "^21.2.26",
+    "@angular/cdk": "^21.2.14",
+    "@angular/youtube-player": "^21.2.26",
+    "@angular/material": "^21.2.14",
     "ngx-clipboard": "^16.0.0",
-    "@ng-select/ng-select": "^20.0.1"
+    "@ng-select/ng-select": "^21.8.2"
   },
   "dependencies": {
     "tslib": ">=2.2.0"
