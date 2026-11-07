@@ -123,7 +123,7 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit {
     }
   }
 
-  @HostListener('touchend', ['$event'])
+  @HostListener('touchend')
   onTouchEnd(): void {
     if (this.longPressTimer) {
       clearTimeout(this.longPressTimer);
@@ -131,7 +131,7 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit {
     }
   }
 
-  @HostListener('touchmove', ['$event'])
+  @HostListener('touchmove')
   onTouchMove(): void {
     if (this.longPressTimer) {
       clearTimeout(this.longPressTimer);
