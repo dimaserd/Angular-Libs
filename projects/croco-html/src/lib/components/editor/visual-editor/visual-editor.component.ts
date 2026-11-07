@@ -7,6 +7,7 @@ import {
   EventEmitter,
   Inject,
   Input,
+  OnDestroy,
   OnInit,
   Output,
   ViewChild
@@ -47,6 +48,10 @@ import { FileImageTagDataConsts } from '../../../extensions';
 import { UploadFilesBtnComponent } from '../../upload-files-btn/upload-files-btn.component';
 import { IVisualEditorLogger } from '../../../services/loggers/IVisualEditorLogger';
 import { NullVisualEditorLogger } from '../../../services/loggers/NullVisualEditorLogger';
+import { TagChangeDetector } from '../../../services/optimized-change-tracker.service';
+import { TagDiff, ChangeType, ChangeSnapshot } from '../../../models/change-tracking-models';
+import { EditorUndoRedoService } from '../../../services/editor-undo-redo.service';
+import { takeUntil } from 'rxjs';
 
 @Component({
   selector: 'croco-visual-editor',
@@ -144,15 +149,63 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
 
   useCustomWidgetsButton = false;
 
+  /** History of change snapshots for diff tracking */
+  private historySnapshots: ChangeSnapshot[] = [];
+  private maxHistorySize = 100;
+
+  /** Cached last-known bodyTags for diff comparison */
+  private lastKnownTags: HtmlBodyTag[] = [];
+
+  /** Destroyed state */
+  private destroyed = new EventEmitter<void>();
+
   constructor(
     private readonly _cdr: ChangeDetectorRef,
+    private readonly _changeDetector: TagChangeDetector,
+    private readonly _undoRedo: EditorUndoRedoService,
     @Inject(CrocoHtmlOptionsToken) private readonly _options: CrocoHtmlOptions) {
 
     this.useCustomWidgetsButton = this._options.useCustomWidgetsButton;
+
+    // Wire up keyboard shortcuts for undo/redo
+    this._undoRedo.canUndoChanged.pipe(
+      takeUntil(this.destroyed)
+    ).subscribe(() => this._cdr.markForCheck());
+    
+    this._undoRedo.canRedoChanged.pipe(
+      takeUntil(this.destroyed)
+    ).subscribe(() => this._cdr.markForCheck());
   }
 
   ngAfterViewInit(): void {
     this.rendered.emit(true);
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed.emit();
+    this.destroyed.complete();
+  }
+
+  /**
+   * Handle keyboard shortcuts for undo/redo:
+   * - Ctrl+Z / Cmd+Z: Undo
+   * - Ctrl+Y / Cmd+Y: Redo
+   * - Ctrl+Shift+Z / Cmd+Shift+Z: Redo (alternative)
+   */
+  onKeyDown(event: KeyboardEvent): void {
+    const isCtrl = event.ctrlKey || event.metaKey; // metaKey = Cmd on Mac
+    
+    if (!isCtrl) return;
+    
+    if (event.key === 'z' && !event.shiftKey) {
+      // Ctrl+Z or Cmd+Z: Undo
+      event.preventDefault();
+      this.undo();
+    } else if (event.key === 'y' || (event.key === 'z' && event.shiftKey)) {
+      // Ctrl+Y or Ctrl+Shift+Z or Cmd+Shift+Z: Redo
+      event.preventDefault();
+      this.redo();
+    }
   }
 
   resetTextStyle(): void {
@@ -163,8 +216,24 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   }
 
   drop(event: CdkDragDrop<HtmlBodyTag[]>) {
-    moveItemInArray(this.bodyTags, event.previousIndex, event.currentIndex);
-    this.recalculateHtml();
+    // Save state before mutation for undo
+    this._undoRedo.pushState(this.bodyTags, this.html, `Move tag #${event.previousIndex} → #${event.currentIndex}`);
+    
+    const oldIndex = event.previousIndex;
+    const newIndex = event.currentIndex;
+    
+    moveItemInArray(this.bodyTags, oldIndex, newIndex);
+    
+    // Detect the move diff
+    const movedTag = this.bodyTags[newIndex];
+    const diff = this._changeDetector.detectDiff(
+      this._undoRedo.getUndoStack()[this._undoRedo.getUndoStack().length - 1]?.bodyTags[oldIndex],
+      movedTag,
+      newIndex,
+      ChangeType.Moved
+    );
+    
+    this.recalculateHtml(diff);
   }
 
   addTag(tag: HtmlBodyTag) {
@@ -172,44 +241,212 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   }
 
   addTags(tags: HtmlBodyTag[]) {
+    // Save state before mutation for undo
+    const tagCount = this.bodyTags.length;
+    this._undoRedo.pushState(this.bodyTags, this.html, `Add ${tags.length} tag(s)`);
 
     for (let index = 0; index < tags.length; index++) {
       const tag = tags[index];
-
       this.bodyTags.push(tag);
     }
 
-    this.recalculateHtml();
+    const indices: number[] = tags.map((_, i) => tagCount + i);
 
+    // Generate diffs for all added tags
+    const diffs: TagDiff[] = tags.map((tag, i) => 
+      this._changeDetector.detectDiff(
+        null, tag, indices[i], ChangeType.Added
+      )
+    ).filter(Boolean) as TagDiff[];
+
+    this.recalculateHtml(diffs.length === 1 ? diffs[0] : null);
     this.logger.onAdd(tags);
   }
 
   onTagChangedHandler(data: HtmlBodyTag, index: number) {
-    this.bodyTags[index] = data;
-    this.recalculateHtml();
+    // Optimisation: skip if tags are actually identical
+    const existingTag = this.bodyTags[index];
+    if (this._changeDetector.tagsAreEqual(existingTag, data)) {
+      return;
+    }
 
+    // Save state before mutation for undo
+    this._undoRedo.pushState(this.bodyTags, this.html, `Update tag #${index}`);
+
+    // Record old tag before mutation
+    const oldTag = { ...existingTag, attributes: { ...existingTag.attributes } };
+    this.bodyTags[index] = data;
+
+    // Detect structured diff
+    const diff = this._changeDetector.detectDiff(
+      oldTag, data, index, ChangeType.Updated
+    );
+
+    this.recalculateHtml(diff);
     this.logger.onChange(data, index);
+
+    if (diff && this.logger.onTagDiff) {
+      this.logger.onTagDiff(diff);
+    }
   }
 
   onTagRemovedHandler(index: number) {
+    // Save state before mutation for undo
+    this._undoRedo.pushState(this.bodyTags, this.html, `Remove tag #${index}`);
+
+    const removedTag = this.bodyTags[index];
     this.bodyTags.splice(index, 1);
     this.saveBodyTags = [...this.bodyTags];
-    this.recalculateHtml();
+    
+    // Detect removal diff
+    const diff = this._changeDetector.detectDiff(
+      removedTag, null, index, ChangeType.Removed
+    );
+
+    this.recalculateHtml(diff);
+    
+    // Fix: wire up logger.onRemove (was previously not called)
+    this.logger.onRemove(index);
+
+    if (diff && this.logger.onTagDiff) {
+      this.logger.onTagDiff(diff);
+    }
   }
 
-  recalculateHtml() {
+  /**
+   * Recalculates HTML from bodyTags and emits the result.
+   * @param diff Optional structured diff of what changed (enables downstream consumers to apply incremental updates)
+   */
+  recalculateHtml(diff?: TagDiff | TagDiff[] | null): void {
     let result = BodyTagsExtensions.bodyTagsToHtml(this.bodyTags, this._options);
     this.html = XmlExtensions.formatXml("<body>" + result + "</body>");
     this.onHtmlChanged.emit(this.html);
 
+    // Optimisation: update lastKnownTags only for changed indices
+    if (diff) {
+      const diffs = Array.isArray(diff) ? diff : [diff];
+      for (const d of diffs) {
+        if (d?.changeType === ChangeType.Added || d?.changeType === ChangeType.Updated) {
+          this.lastKnownTags[d.index] = d.newTag;
+        } else if (d?.changeType === ChangeType.Removed) {
+          this.lastKnownTags.splice(d.index, 1);
+        } else if (d?.changeType === ChangeType.Moved) {
+          this.rebuildLastKnownTags();
+          break;
+        }
+      }
+    } else {
+      this.rebuildLastKnownTags();
+    }
+
     this._cdr.markForCheck();
+  }
+
+  /**
+   * Rebuilds the entire lastKnownTags cache from current bodyTags.
+   * Used for moves or when diff tracking is unreliable.
+   */
+  private rebuildLastKnownTags(): void {
+    this.lastKnownTags = [...this.bodyTags];
   }
 
   recalculateBodyTags() {
     this.bodyTags = BodyTagsExtensions.getBodyTags(this.html, this._options);
     this.saveBodyTags = [...this.bodyTags];
+    this.lastKnownTags = [...this.bodyTags];
+    
+    // Clear undo state on full reload
+    this._undoRedo.clear();
+    
     this._options.onBodyTagsRecalculated?.(this.saveBodyTags)
     this._cdr.markForCheck();
+  }
+
+  /**
+   * Undo the last editor action (Ctrl+Z).
+   * Restores bodyTags and html from the previous state.
+   */
+  undo(): boolean {
+    const undoStackBefore = this._undoRedo.getUndoStack().length;
+    if (undoStackBefore === 0) return false;
+
+    const snapshot = this._undoRedo.undo();
+    
+    // Apply the snapshot state
+    const prevState = this._undoRedo.getUndoStack().length > 0
+      ? this._undoRedo.getUndoStack()[this._undoRedo.getUndoStack().length - 1]
+      : null;
+
+    if (prevState) {
+      this.bodyTags = prevState.bodyTags;
+      this.html = prevState.html;
+      this.saveBodyTags = [...this.bodyTags];
+      this.lastKnownTags = [...this.bodyTags];
+      this.onHtmlChanged.emit(this.html);
+      this.logger.onUndo?.(prevState);
+      this._cdr.markForCheck();
+      return true;
+    }
+
+    return false;
+  }
+
+  /**
+   * Redo the last undone action (Ctrl+Y or Ctrl+Shift+Z).
+   * Restores bodyTags and html from the next state.
+   */
+  redo(): boolean {
+    const redoStack = this._undoRedo.getRedoStack();
+    if (redoStack.length === 0) return false;
+
+    const snapshot = this._undoRedo.redo();
+    
+    // Apply the redo state
+    const nextState = this._undoRedo.getUndoStack().length > 0
+      ? this._undoRedo.getUndoStack()[this._undoRedo.getUndoStack().length - 1]
+      : null;
+
+    if (nextState) {
+      this.bodyTags = nextState.bodyTags;
+      this.html = nextState.html;
+      this.saveBodyTags = [...this.bodyTags];
+      this.lastKnownTags = [...this.bodyTags];
+      this.onHtmlChanged.emit(this.html);
+      this.logger.onRedo?.(nextState);
+      this._cdr.markForCheck();
+      return true;
+    }
+
+    return false;
+  }
+
+  /**
+   * Check if undo is currently available.
+   */
+  isUndoAvailable(): boolean {
+    return this._undoRedo.canUndo();
+  }
+
+  /**
+   * Check if redo is currently available.
+   */
+  isRedoAvailable(): boolean {
+    return this._undoRedo.canRedo();
+  }
+
+  /**
+   * Returns the current change history snapshot for debugging.
+   */
+  getChangeHistory(): ChangeSnapshot[] {
+    return this._undoRedo.getUndoStack();
+  }
+
+  /**
+   * trackBy function for ngFor to use trackingId instead of object reference.
+   * Prevents DOM re-rendering when tags haven't actually moved.
+   */
+  trackByTrackingId(index: number, tag: HtmlBodyTag): string {
+    return tag.trackingId;
   }
 
   selectTag(data: TagItem) {

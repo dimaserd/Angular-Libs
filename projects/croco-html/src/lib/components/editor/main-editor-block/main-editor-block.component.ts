@@ -18,6 +18,7 @@ import {
   DefinedCustomEditorBlockComponent
 } from "./components/defined-custom-editor-block/defined-custom-editor-block.component";
 import { DefaultTags } from '../visual-editor/DefaultTags';
+import { TagChangeDetector } from '../../../services/optimized-change-tracker.service';
 
 @Component({
   selector: 'croco-html-main-editor-block',
@@ -46,10 +47,14 @@ export class MainEditorBlockComponent implements OnDestroy {
   private _tagSub$ = new Subject<void>();
 
   private readonly _cdr = inject(ChangeDetectorRef);
+  private readonly _changeDetector = inject(TagChangeDetector);
 
   @Input({ required: true })
   set tag(data: HtmlBodyTag) {
     this._tagSub$.next();
+
+    // Capture the original tag before the new one is set (for diff tracking)
+    this._originalTagBeforeSet = this._tag;
 
     this._tag = data;
     this._tagService = new TagEditorService();
@@ -65,6 +70,7 @@ export class MainEditorBlockComponent implements OnDestroy {
 
   public _tag: HtmlBodyTag | null = null;
   public _tagService: TagEditorService;
+  private _originalTagBeforeSet: HtmlBodyTag | null = null;
 
   public presentOrEdit = true;
 
@@ -79,9 +85,18 @@ export class MainEditorBlockComponent implements OnDestroy {
 
   save() {
     const tag = this._tagService.tag$.value;
+    
+    // Optimisation: skip if nothing actually changed
+    if (this._originalTagBeforeSet && this._changeDetector.tagsAreEqual(this._originalTagBeforeSet, tag)) {
+      this._tagService.presentOrEdit$.next(true);
+      return;
+    }
 
     this.onTagSaved.emit(tag);
     this._tagService.presentOrEdit$.next(true);
+    
+    // Reset original for next edit cycle
+    this._originalTagBeforeSet = tag;
   }
 
   cancelSave() {
