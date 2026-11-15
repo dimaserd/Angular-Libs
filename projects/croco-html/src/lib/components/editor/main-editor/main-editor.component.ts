@@ -69,6 +69,9 @@ export class MainEditorComponent implements OnInit, AfterContentChecked, AfterVi
   @Input({ required: false })
   public logger: IVisualEditorLogger = new NullVisualEditorLogger();
 
+  @Input({ required: false })
+  customProperties: object | null = {};
+
   @Input()
   @Output()
   html: string = "";

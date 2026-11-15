@@ -102,7 +102,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   showMarkUp = true;
 
   @Input({ required: false })
-  customProperties: object = {};
+  customProperties: object | null = {};
 
   @Input({ required: false })
   logger: IVisualEditorLogger = new NullVisualEditorLogger();
