@@ -49,7 +49,7 @@ export interface CrocoHtmlOptions {
    * Обработчик нажатия на кнопку кастомных виджетов
    * @returns
    */
-  customWidgetClickHandler: (editor: VisualEditorComponent) => void;
+  customWidgetClickHandler: (editor: VisualEditorComponent, customProperties: object) => void;
 
   /**
    * Кастомные кнопки для добавления тега

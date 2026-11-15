@@ -7,7 +7,6 @@ import {
   EventEmitter,
   Inject,
   Input,
-  OnDestroy,
   OnInit,
   Output,
   ViewChild
@@ -25,7 +24,6 @@ import { DefaultTags } from './DefaultTags';
 import { AlignmentsData } from "./DefaultAligments";
 import { CrocoHtmlOptionsToken } from '../../../consts';
 import { MainEditorBlockComponent } from '../main-editor-block/main-editor-block.component';
-import { AddFilesBtnComponent } from '../../add-files-btn/add-files-btn.component';
 import { MatOption } from '@angular/material/core';
 import { MatSelect } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
@@ -104,6 +102,9 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   showMarkUp = true;
 
   @Input({ required: false })
+  customProperties: object = {};
+
+  @Input({ required: false })
   logger: IVisualEditorLogger = new NullVisualEditorLogger();
 
   tags: TagItem[] = [];
@@ -148,10 +149,6 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   saveBodyTags: HtmlBodyTag[] = [];
 
   useCustomWidgetsButton = false;
-
-  /** History of change snapshots for diff tracking */
-  private historySnapshots: ChangeSnapshot[] = [];
-  private maxHistorySize = 100;
 
   /** Cached last-known bodyTags for diff comparison */
   private lastKnownTags: HtmlBodyTag[] = [];
@@ -643,7 +640,7 @@ export class VisualEditorComponent implements OnInit, AfterViewInit {
   }
 
   customWidgetsClickHandler() {
-    this._options.customWidgetClickHandler(this);
+    this._options.customWidgetClickHandler(this, this.customProperties);
   }
 
   ngOnInit(): void {

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { FileImageTagDataConsts } from '../../extensions';
 import { HtmlBodyTag } from '../../models/models';
 import { FilePostingStarted, UploadFilesBtnComponent } from '../upload-files-btn/upload-files-btn.component';
@@ -10,7 +10,8 @@ import { PrivateFilesCreatedResult } from "../../services/PrivateFileUploadServi
   selector: 'croco-html-add-files-btn',
   templateUrl: './add-files-btn.component.html',
   standalone: true,
-  imports: [UploadFilesBtnComponent, MatButton]
+  imports: [UploadFilesBtnComponent, MatButton],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddFilesBtnComponent {
 

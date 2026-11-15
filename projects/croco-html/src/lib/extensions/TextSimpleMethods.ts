@@ -1,4 +1,3 @@
-import { da, tr } from "date-fns/locale";
 import { BaseApiResponse } from "../models";
 import { TextAlignment } from "../tag-services";
 
